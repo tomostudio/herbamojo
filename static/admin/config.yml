@@ -1,6 +1,6 @@
 backend:
-  name: gitlab
-  repo: hendhyhutomo/gatsbyv2
+  name: git-gateway
+  # repo: hendhyhutomo/gatsbyv2
 
 media_folder: static/assets
 public_folder: assets
