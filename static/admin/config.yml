@@ -9,7 +9,7 @@ public_folder: assets
 collections:
   - name: blog
     label: Blog
-    folder: pages/blog
+    folder: blog
     create: true
     fields:
       - { name: slug, label: Slug }
