@@ -30,6 +30,7 @@ import Layout from "components/layout"
 export default class BlogTemp extends React.Component {
     componentDidMount(){
         console.log('Blog mount',  this.props.location.pathname);
+        document.body.classList.remove('preloading');
     }
     render() {
         const post = this.props.data.content
@@ -37,6 +38,7 @@ export default class BlogTemp extends React.Component {
         const prev_slug = this.props.pageContext.prev_slug
         return (
             <Layout headerText={post.frontmatter.title}>
+            <img src={post.frontmatter.coverimage} alt="testimage"/>
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
             <div>
                 {next_slug &&
@@ -94,6 +96,7 @@ export const query = graphql`
       html
       frontmatter {
         title
+        coverimage
       }
     }
   }

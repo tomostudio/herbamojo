@@ -1,7 +1,9 @@
 ---
+slug: panda2
 index: 2
 title: "Panda Bear Eating Sweets"
 date: "2017-08-10"
+coverimage: "/assets/ss.png"
 ---
 
 Pandas are really sweet.

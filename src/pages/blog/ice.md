@@ -1,7 +1,9 @@
 ---
+slug: ice2
 index: 1
 title: "Ice Bear Killing it"
 date: "2017-08-10"
+coverimage: "assets/ss.png"
 ---
 
 Pandas are really sweet.
