@@ -5,14 +5,18 @@ backend:
 
 media_folder: static/assets
 public_folder: assets
-
 collections:
   - name: blog
     label: Blog
     folder: src/pages/blog
     create: true
+    slug:
+      encoding: "ascii"
+      clean_accents: true
+      sanitize_replacement: "_"
     fields:
       - { name: slug, label: Slug }
+      - { name: index, label: Index, widget: "number", default: 0 }
       - { name: date, label: Date, widget: date }
       - { name: title, label: Title }
       - { name: "coverimage", label: "Cover Image", widget: "image"}
