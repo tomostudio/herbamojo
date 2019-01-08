@@ -13,6 +13,7 @@ exports.onCreateNode = ({
 }) => {
   const { createRedirect } = actions
   createRedirect({ fromPath: '/google', toPath: '/admin/', isPermanent: true });
+  createRedirect({ fromPath: '/home', toPath: 'https://google.com/', isPermanent: true });
 
   fmImagesToRelative(node);
   const {
