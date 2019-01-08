@@ -15,13 +15,3 @@ exports.onPreRouteUpdate = ({
     console.log("Preroute Update", location.pathname)
     document.body.classList.add('preloading');
 }
-
-
-exports.onCreateNode = ({
-    node,
-    getNode,
-    actions
-}) => {
-    const {createRedirect} = actions;
-    createRedirect({ fromPath: '/google', toPath: 'https://google.com', isPermanent: true });
-}

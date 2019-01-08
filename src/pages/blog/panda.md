@@ -1,7 +1,7 @@
 ---
 slug: panda2
 index: 2
-date: '2017-08-10'
+date: "2017-08-10"
 title: Panda Bear Eating Sweets
 coverimage: /assets/ss2.png
 ---

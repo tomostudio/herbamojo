@@ -10,12 +10,8 @@ collections:
     label: Blog
     folder: src/pages/blog
     create: true
-    slug:
-      encoding: "ascii"
-      clean_accents: true
-      sanitize_replacement: "_"
     fields:
-      - { name: slug, label: Slug }
+      - { name: slug, label: Slug, widget: "string", pattern: [ "([a-z0-9]){3,}","Lowercase and Numerical Only, Minimum Characters = 3"] }
       - { name: index, label: Index, widget: "number", default: 0 }
       - { name: date, label: Date, widget: date }
       - { name: title, label: Title }

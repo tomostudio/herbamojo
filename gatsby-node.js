@@ -1,25 +1,46 @@
-
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
+const {
+  fmImagesToRelative
+} = require('gatsby-remark-relative-images');
 const path = require(`path`);
-const { createFilePath } = require(`gatsby-source-filesystem`);
+const {
+  createFilePath
+} = require(`gatsby-source-filesystem`);
 
-exports.onCreateNode = ({ node, getNode , actions}) => {
+exports.onCreateNode = ({
+  node,
+  getNode,
+  actions
+}) => {
+  const { createRedirect } = actions
+  createRedirect({ fromPath: '/google', toPath: '/admin/', isPermanent: true });
+
   fmImagesToRelative(node);
-    const { createNodeField } = actions
-    if (node.internal.type === `MarkdownRemark`) {
-      const filepath = createFilePath({ node, getNode, basePath: `pages` })
-      let slug = node.frontmatter.slug
-      if(filepath.includes("blog/")) slug = "blog/" + node.frontmatter.slug
-      createNodeField({
-        node,
-        name: `slug`,
-        value: slug,
-      })
-    }
+  const {
+    createNodeField
+  } = actions
+  if (node.internal.type === `MarkdownRemark`) {
+    const filepath = createFilePath({
+      node,
+      getNode,
+      basePath: `pages`
+    })
+    let slug = node.frontmatter.slug
+    if (filepath.includes("blog/")) slug = "blog/" + node.frontmatter.slug
+    createNodeField({
+      node,
+      name: `slug`,
+      value: slug,
+    })
   }
-  exports.createPages = ({ graphql, actions }) => {
-    const { createPage } = actions
-    return graphql(`
+}
+exports.createPages = ({
+  graphql,
+  actions
+}) => {
+  const {
+    createPage
+  } = actions
+  return graphql(`
       {
         allMarkdownRemark {
           edges {
@@ -31,26 +52,30 @@ exports.onCreateNode = ({ node, getNode , actions}) => {
           }
         }
       }
-    `
-  ).then(result => {
-      // console.log(JSON.stringify(result, null, 4))
-      const results = result.data.allMarkdownRemark.edges;
-      results.forEach(({ node }, index) => {
-        createPage({
-          path: node.fields.slug,
-          component: path.resolve(`./src/templates/blog-temp.js`),
-          context: {
-            slug: node.fields.slug,
-            prev_slug: index === 0 ? null : results[index - 1].node.fields.slug,
-            next_slug: index === results.length - 1 ? null : results[index + 1].node.fields.slug,
-            start_node: results[0].node,
-          },
-        })
+    `).then(result => {
+    // console.log(JSON.stringify(result, null, 4))
+    const results = result.data.allMarkdownRemark.edges;
+    results.forEach(({
+      node
+    }, index) => {
+      createPage({
+        path: node.fields.slug,
+        component: path.resolve(`./src/templates/blog-temp.js`),
+        context: {
+          slug: node.fields.slug,
+          prev_slug: index === 0 ? null : results[index - 1].node.fields.slug,
+          next_slug: index === results.length - 1 ? null : results[index + 1].node.fields.slug,
+          start_node: results[0].node,
+        },
       })
     })
-  }
+  })
+}
 
-exports.onCreateWebpackConfig = ({ stage, actions }) => {
+exports.onCreateWebpackConfig = ({
+  stage,
+  actions
+}) => {
   actions.setWebpackConfig({
     resolve: {
       modules: [path.resolve(__dirname, "src"), "node_modules"],
