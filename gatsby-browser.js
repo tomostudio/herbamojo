@@ -8,6 +8,7 @@ exports.onRouteUpdate = ({
 }
 exports.onClientEntry = () => {
     console.log("First Time Site is loaded")
+    document.body.classList.add('preloading');
 }
 exports.onPreRouteUpdate = ({
     location
