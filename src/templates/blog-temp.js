@@ -1,6 +1,7 @@
 import React from "react"
 import {Link, graphql } from "gatsby"
 import Layout from "components/layout"
+import Img from 'gatsby-image'
 
 // export default ({data}) => {
 //     const post = data.content
@@ -38,7 +39,8 @@ export default class BlogTemp extends React.Component {
         const prev_slug = this.props.pageContext.prev_slug
         return (
             <Layout headerText={post.frontmatter.title}>
-            <img src={post.frontmatter.coverimage} alt="testimage"/>
+            <img src={post.frontmatter.coverimage.childImageSharp.fluid.src} alt="testimage"/>
+            <Img className="image_class" fluid={post.frontmatter.coverimage.childImageSharp.fluid} backgroundColor="#000" />
             <div dangerouslySetInnerHTML={{ __html: post.html }} />
             <div>
                 {next_slug &&
@@ -96,7 +98,13 @@ export const query = graphql`
       html
       frontmatter {
         title
-        coverimage
+        coverimage{
+            childImageSharp {
+                fluid(maxWidth: 250) {
+                    ...GatsbyImageSharpFluid_noBase64
+                }
+            }
+        }
       }
     }
   }
