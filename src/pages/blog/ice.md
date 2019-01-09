@@ -1,4 +1,5 @@
 ---
+_issetting : false
 slug: ice2
 index: 1
 title: "Ice Bear Killing it"

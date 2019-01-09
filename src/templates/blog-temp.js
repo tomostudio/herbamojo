@@ -77,7 +77,10 @@ export default class BlogTemp extends React.Component {
 
 export const query = graphql`
   query($slug: String!) {
-    all: allMarkdownRemark(sort: { fields: [frontmatter___index], order: ASC }){
+    all: allMarkdownRemark(
+        filter: { frontmatter: { _issetting: { eq: false } } }
+        sort:{fields: [frontmatter___index], order: ASC}
+      ){
         totalCount
         edges {
           node {

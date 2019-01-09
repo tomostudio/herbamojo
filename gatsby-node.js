@@ -11,6 +11,8 @@ exports.onCreateNode = ({
   getNode,
   actions
 }) => {
+
+
   const { createRedirect } = actions
   createRedirect({ fromPath: '/google', toPath: '/admin/', isPermanent: true });
   createRedirect({ fromPath: '/home', toPath: 'https://google.com/', isPermanent: true });
@@ -23,10 +25,11 @@ exports.onCreateNode = ({
     const filepath = createFilePath({
       node,
       getNode,
-      basePath: `pages`
+      basePath: `src`
     })
     let slug = node.frontmatter.slug
-    if (filepath.includes("blog/")) slug = "blog/" + node.frontmatter.slug
+
+    if (filepath.includes("pages/blog/")) slug = "blog/" + node.frontmatter.slug
     createNodeField({
       node,
       name: `slug`,
@@ -43,7 +46,10 @@ exports.createPages = ({
   } = actions
   return graphql(`
       {
-        allMarkdownRemark {
+        allMarkdownRemark (
+          filter: { frontmatter: { _issetting: { eq: false } } }
+          sort:{fields: [frontmatter___index], order: ASC}
+        ){
           edges {
             node {
               fields {
@@ -54,7 +60,6 @@ exports.createPages = ({
         }
       }
     `).then(result => {
-    // console.log(JSON.stringify(result, null, 4))
     const results = result.data.allMarkdownRemark.edges;
     results.forEach(({
       node

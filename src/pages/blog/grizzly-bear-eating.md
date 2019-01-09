@@ -1,5 +1,7 @@
 ---
+_issetting : false
 slug: grizzly
+index: 3
 date: 2019-01-08T07:12:31.009Z
 title: Grizzly Bear Eating
 coverimage: /assets/ss3.png

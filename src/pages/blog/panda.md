@@ -1,4 +1,5 @@
 ---
+_issetting : false
 slug: panda2
 index: 2
 date: "2017-08-10"

@@ -11,9 +11,55 @@ collections:
     folder: src/pages/blog
     create: true
     fields:
-      - { name: slug, label: Slug, widget: "string", pattern: [ "([a-z0-9]){3,}","Lowercase and Numerical Only, Minimum Characters = 3"] }
+      - {
+          name: is_setting,
+          label: _issetting,
+          widget: "hidden",
+          default: false,
+        }
+      - {
+          name: slug,
+          label: Slug,
+          widget: "string",
+          pattern:
+            [
+              "([a-z0-9]){3,}",
+              "Lowercase and Numerical Only, Minimum Characters = 3",
+            ],
+        }
       - { name: index, label: Index, widget: "number", default: 0 }
       - { name: date, label: Date, widget: date }
       - { name: title, label: Title }
-      - { name: "coverimage", label: "Cover Image", widget: "image"}
+      - { name: "coverimage", label: "Cover Image", widget: "image" }
       - { name: body, label: Body, widget: markdown }
+  - label: "Settings"
+    name: "settings"
+    files:
+      - label: "General Setting"
+        name: "general"
+        file: "src/settings/general.md"
+        fields:
+          - {
+              name: is_setting,
+              label: _issetting,
+              widget: "hidden",
+              default: true,
+            }
+          - { label: Title, name: title, widget: string }
+          - { label: Intro, name: intro, widget: number }
+      - label: "URL Redirect"
+        name: "slug"
+        file: "src/settings/slug.md"
+        fields:
+          - {
+              name: is_setting,
+              label: _issetting,
+              widget: "hidden",
+              default: true,
+            }
+          - label: URL
+            name: URL
+            widget: list
+            fields:
+              - { label: URL 1, name: name, widget: string }
+              - { label: URL 2, name: address, widget: string }
