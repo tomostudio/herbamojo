@@ -1,5 +1,6 @@
 ---
-_issetting : false
+_issetting: false
+contenttype: blog
 slug: grizzly
 index: 3
 date: 2019-01-08T07:12:31.009Z

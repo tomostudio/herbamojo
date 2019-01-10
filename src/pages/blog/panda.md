@@ -1,5 +1,6 @@
 ---
 issetting: false
+contenttype: blog
 slug: panda
 index: 2
 date: '2017-08-10'

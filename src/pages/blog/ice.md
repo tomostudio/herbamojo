@@ -1,5 +1,6 @@
 ---
-_issetting : false
+_issetting: false
+contenttype: blog
 slug: ice2
 index: 1
 title: "Ice Bear Killing it"

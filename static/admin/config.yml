@@ -12,6 +12,7 @@ collections:
     create: true
     fields:
       - { name: "issetting", label: "issetting", widget: "hidden", default: "true", required: true}
+      - { name: "contenttype", label: "contenttype", widget: "hidden", default: "blog", required: true }
       - {
           name: "slug",
           label: "Slug",
@@ -37,9 +38,9 @@ collections:
         file: "src/settings/general.md"
         identifier_field: title
         fields:
-          - { label: "Title", name: "title", widget: "hidden", default: "General Setting", required: true}
           - { name: "issetting", label: "issetting", widget: "hidden", default: true, required: true }
           - { name: "contenttype", label: "contenttype", widget: "hidden", default: "general_setting", required: true }
+          - { label: "Title", name: "title", widget: "hidden", default: "General Setting", required: true}
           - { label: "Body", name: "body", widget: "markdown" }
       - label: "URL Redirect"
         name: "slug"
