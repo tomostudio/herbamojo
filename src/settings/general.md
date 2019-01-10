@@ -1,7 +1,6 @@
 ---
-issetting : true
-contenttype: general_setting
 title: General Setting
+issetting: true
+contenttype: general_setting
 ---
-
-testing
+testing2
