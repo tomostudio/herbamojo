@@ -11,7 +11,7 @@ collections:
     folder: src/pages/blog
     create: true
     fields:
-      - { name: "_issetting", label: "issetting", widget: "hidden", default: true }
+      - { name: "issetting", label: "issetting", widget: "hidden", default: true }
       - {
           name: "slug",
           label: "Slug",
@@ -37,8 +37,8 @@ collections:
         file: "src/settings/general.md"
         identifier_field: title
         fields:
-          - { name: "_issetting", label: "issetting", widget: "hidden", default: true }
-          - { name: "_contenttype", label: "contenttype", widget: "hidden", default: "general_setting" }
+          - { name: "issetting", label: "issetting", widget: "hidden", default: true }
+          - { name: "contenttype", label: "contenttype", widget: "hidden", default: "general_setting" }
           - { label: Title, name: "title", widget: "hidden", default: "General Setting"}
           - { label: "Intro", name: "intro", widget: "markdown" }
       - label: "URL Redirect"
@@ -46,8 +46,8 @@ collections:
         file: "src/settings/slug.md"
         identifier_field: title
         fields:
-          - { name: "_issetting", label: "issetting", widget: "hidden", default: true }
-          - { name: "_contenttype", label: "contenttype", widget: "hidden", default: "slug_setting" }
+          - { name: "issetting", label: "issetting", widget: "hidden", default: true }
+          - { name: "contenttype", label: "contenttype", widget: "hidden", default: "slug_setting" }
           - { label: "Title", name: "title", widget: "hidden", default: "URL Redirect"}
           - label: "Redirect"
             name: "redirect"
