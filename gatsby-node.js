@@ -1,21 +1,23 @@
 const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
-
+let checkstatus = false;
 exports.onCreateNode = ({ node, getNode, actions }) => {
 	const { createRedirect } = actions;
 
-	createRedirect({
-		fromPath: '/google',
-		toPath: '/admin/',
-		isPermanent: true
-	});
-	createRedirect({
-		fromPath: '/home',
-		toPath: 'https://google.com/',
-		isPermanent: true
-	});
-
+	if(checkstatus){
+		createRedirect({
+			fromPath: '/google',
+			toPath: '/admin/',
+			isPermanent: true
+		});
+		createRedirect({
+			fromPath: '/home',
+			toPath: 'https://google.com/',
+			isPermanent: true
+		});
+	}
+	
 	fmImagesToRelative(node);
 	const { createNodeField } = actions;
 	if (node.internal.type === `MarkdownRemark`) {
@@ -36,6 +38,8 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 };
 exports.createPages = ({ graphql, actions }) => {
 	const { createPage } = actions;
+	console.log('create pages');
+	checkstatus = true;
 	return graphql(`
       {
         allMarkdownRemark (
