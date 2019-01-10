@@ -1,6 +1,7 @@
 ---
 _issetting : true
-_title: slug_setting
+_contenttype: slug_setting
+title: URL Redirect
 ---
 
 this is slug
