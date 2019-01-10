@@ -1,5 +1,8 @@
 ---
 issetting: true
-redirect: []
+redirect:
+  - from: /google
+    status: true
+    to: googl
 ---
 
