@@ -1,5 +1,5 @@
 ---
-_issetting: false
+issetting: false
 contenttype: blog
 slug: grizzly
 index: 3
