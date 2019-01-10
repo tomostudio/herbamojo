@@ -11,7 +11,6 @@ collections:
     folder: src/pages/blog
     create: true
     fields:
-      - { name: "issetting", label: "issetting", widget: "hidden", default: "true" }
       - {
           name: "slug",
           label: "Slug",
@@ -25,6 +24,7 @@ collections:
       - { name: "index", label: "Index", widget: "number", default: 0 }
       - { name: "date", label: "Date", widget: "date" }
       - { name: "title", label: "Title" }
+      - { name: "issetting", label: "issetting", widget: "hidden", default: "true", required: true}
       - { name: "coverimage", label: "Cover Image", widget: "image" }
       - { name: "body", label: "Body", widget: "markdown" }
   - label: "Settings"
@@ -37,18 +37,15 @@ collections:
         file: "src/settings/general.md"
         identifier_field: title
         fields:
-          - { name: "issetting", label: "issetting", widget: "hidden", default: true }
-          - { name: "contenttype", label: "contenttype", widget: "hidden", default: "general_setting" }
-          - { label: Title, name: "title", widget: "hidden", default: "General Setting"}
           - { label: "Intro", name: "intro", widget: "markdown" }
+          - { label: Title, name: "title", widget: "hidden", default: "General Setting", required: true}
+          - { name: "issetting", label: "issetting", widget: "hidden", default: true, required: true }
+          - { name: "contenttype", label: "contenttype", widget: "hidden", default: "general_setting", required: true }
       - label: "URL Redirect"
         name: "slug"
         file: "src/settings/slug.md"
         identifier_field: title
         fields:
-          - { name: "issetting", label: "issetting", widget: "hidden", default: true }
-          - { name: "contenttype", label: "contenttype", widget: "hidden", default: "slug_setting" }
-          - { label: "Title", name: "title", widget: "hidden", default: "URL Redirect"}
           - label: "Redirect"
             name: "redirect"
             widget: "list"
@@ -58,3 +55,6 @@ collections:
               - { label: "From", name: "name", widget: "string" }
               - { label: "To", name: "address", widget: "string" }
               - { label: "Active", name: "status", widget: "boolean", default: false }
+          - { name: "issetting", label: "issetting", widget: "hidden", default: true, required: true }
+          - { name: "contenttype", label: "contenttype", widget: "hidden", default: "slug_setting", required: true }
+          - { label: "Title", name: "title", widget: "hidden", default: "URL Redirect", required: true}
