@@ -1,7 +1,7 @@
 ---
 issetting: false
 contenttype: blog
-slug: aaaa
+slug: \aaaa
 index: 2
 date: '2017-08-10'
 title: Panda Bear Eating Sweets
