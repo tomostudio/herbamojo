@@ -38,7 +38,7 @@ exports.createPages = ({ graphql, actions }) => {
 	return graphql(`
       {
         allMarkdownRemark (
-          filter: { frontmatter: { _issetting: { eq: false } } }
+          filter: { frontmatter: { issetting: { eq: false } } }
           sort:{fields: [frontmatter___index], order: ASC}
         ){
           edges {

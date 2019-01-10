@@ -46,6 +46,9 @@ collections:
         file: "src/settings/slug.md"
         identifier_field: title
         fields:
+          - { name: "issetting", label: "issetting", widget: "hidden", default: true, required: true }
+          - { name: "contenttype", label: "contenttype", widget: "hidden", default: "slug_setting", required: true }
+          - { label: "Title", name: "title", widget: "hidden", default: "URL Redirect", required: true}
           - label: "Redirect"
             name: "redirect"
             widget: "list"
@@ -55,6 +58,3 @@ collections:
               - { label: "From", name: "name", widget: "string", pattern: [ "([a-z0-9]){3,}", "Lowercase and Numerical Only, Minimum Characters = 3",] }
               - { label: "To", name: "address", widget: "string" }
               - { label: "Active", name: "status", widget: "boolean", default: false }
-          - { name: "issetting", label: "issetting", widget: "hidden", default: true, required: true }
-          - { name: "contenttype", label: "contenttype", widget: "hidden", default: "slug_setting", required: true }
-          - { label: "Title", name: "title", widget: "hidden", default: "URL Redirect", required: true}
