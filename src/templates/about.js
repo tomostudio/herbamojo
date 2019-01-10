@@ -1,4 +1,5 @@
 import React from "react"
+import {graphql } from 'gatsby';
 import Layout from "components/layout"
 
 export default class About extends React.Component {
@@ -6,8 +7,9 @@ export default class About extends React.Component {
         console.log('about mount');
     }
     render() {
+		const post = this.props.data.content;
         return (
-        <Layout headerText="About">
+        <Layout headerText={post.frontmatter.title}>
             <p>Such wow. Very React.</p>
         </Layout>
         )
@@ -19,3 +21,15 @@ export default class About extends React.Component {
 //     <p>Such wow. Very React.</p>
 //   </Layout>
 // )
+
+
+export const query = graphql`
+	query($slug: String!) {
+		content: markdownRemark(fields: { slug: { eq: $slug } }) {
+			html
+			frontmatter {
+				title
+			}
+		}
+	}
+`;

@@ -17,10 +17,11 @@ collections:
           name: 'slug',
           label: 'Slug',
           widget: 'string',
+          hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: "project-slug"',
           pattern:
             [
-              '([a-z0-9]){3,}',
-              'Lowercase and Numerical Only, Minimum Characters = 3',
+              '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+              'Invalid Characters'
             ],
         }
       - { name: 'index', label: 'Index', widget: 'number', default: 0, }
@@ -28,6 +29,30 @@ collections:
       - { name: 'title', label: 'Title', }
       - { name: 'coverimage', label: 'Cover Image', widget: 'image', }
       - { name: 'body', label: 'Body', widget: 'markdown', }
+  - label: 'Pages'
+    name: 'page'
+    delete: false
+    files:
+      - file: 'src/pages/single/about.md'
+        label: 'About '
+        name: 'about'
+        delete: false
+        fields:
+          - { name: 'issetting', label: 'issetting', widget: 'hidden', default: false, required: true, }
+          - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'about', required: true, }
+          - {
+              name: 'slug',
+              label: 'Slug',
+              widget: 'string',
+              hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: "project-slug"',
+              pattern:
+                [
+                  '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+                  'Invalid Characters'
+                ],
+            }
+          - { name: 'title', label: 'Title', }
+          - { name: 'body', label: 'Body', widget: 'markdown', }
   - label: 'Settings'
     name: 'settings'
     delete: false
@@ -58,8 +83,20 @@ collections:
             widget: 'list'
             label_singular: 'Redirect'
             required: false
-            hint: 'EG: from "/google" to "https://google.com" set active "on"'
             fields:
-              - { label: 'From', name: 'from', widget: 'string', pattern: [ '([a-z0-9]){3,}', 'Lowercase and Numerical Only, Minimum Characters = 3',] }
-              - { label: 'To', name: 'to', widget: 'string' }
+              - { label: 'From (Internal Slug)', name: 'from', widget: 'string',
+                  hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: "redirect-to-google"',
+                  pattern: [
+                    [
+                      '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+                      'Invalid Characters'
+                    ],]
+                  }
+              - { label: 'To', name: 'to', widget: 'string',
+                  hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: External URL "https://google.com", Internal: "/google"',
+                  pattern: [
+                  [
+                    '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+                      'Invalid Characters'
+                  ],] }
               - { label: 'Active', name: 'status', widget: 'boolean', default: false }

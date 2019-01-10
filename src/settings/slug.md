@@ -7,4 +7,3 @@ redirect:
     status: true
     to: /google
 ---
-

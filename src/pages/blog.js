@@ -23,7 +23,7 @@ export default ({ data }) => (
 						fluid={node.frontmatter.coverimage.childImageSharp.fluid}
 						backgroundColor="#000"
 					/>{' '}
-					{/* <p>{node.excerpt}</p> */} <br />
+					<br />
 				</Link>
 			))}{' '}
 		</div>{' '}
@@ -33,7 +33,7 @@ export default ({ data }) => (
 export const query = graphql`
 	query {
 		allMarkdownRemark(
-			filter: { frontmatter: { issetting: { eq: false } } }
+			filter: { frontmatter: { issetting: { eq: false }, contenttype: {eq: "blog"}} }
 			sort: { fields: [frontmatter___index], order: ASC }
 		) {
 			totalCount
@@ -47,7 +47,7 @@ export const query = graphql`
 						slug
 						coverimage {
 							childImageSharp {
-								fluid(maxWidth: 250) {
+								fluid(maxWidth: 500) {
 									...GatsbyImageSharpFluid_noBase64
 								}
 							}
