@@ -45,14 +45,14 @@ collections:
           preview: false
         fields:
           - {
-              name: is_setting,
-              label: _issetting,
+              name: _issetting,
+              label: issetting,
               widget: "hidden",
               default: true,
             }
           - {
-              name: contenttype,
-              label: _contenttype,
+              name: _contenttype,
+              label: contenttype,
               widget: "hidden",
               default: "general_setting",
             }
@@ -66,14 +66,14 @@ collections:
           preview: false
         fields:
           - {
-              name: is_setting,
-              label: _issetting,
+              name: _issetting,
+              label: issetting,
               widget: "hidden",
               default: true,
             }
           - {
-              name: contenttype,
-              label: _contenttype,
+              name: _contenttype,
+              label: contenttype,
               widget: "hidden",
               default: "slug_setting",
             }
