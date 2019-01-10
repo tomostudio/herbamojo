@@ -12,7 +12,7 @@ collections:
     create: true
     fields:
       - {
-          name: is_setting,
+          name: issetting,
           label: _issetting,
           widget: "hidden",
           default: false,
