@@ -39,8 +39,8 @@ collections:
         fields:
           - { label: "Intro", name: "intro", widget: "markdown" }
           - { label: Title, name: "title", widget: "hidden", default: "General Setting", required: true}
-          - { name: "issetting", label: "issetting", widget: "hidden", default: true, required: true }
-          - { name: "contenttype", label: "contenttype", widget: "hidden", default: "general_setting", required: true }
+          - { name: "_issetting", label: "issetting", widget: "hidden", default: true, required: true }
+          - { name: "_contenttype", label: "contenttype", widget: "hidden", default: "general_setting", required: true }
       - label: "URL Redirect"
         name: "slug"
         file: "src/settings/slug.md"
