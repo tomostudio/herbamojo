@@ -1,7 +1,7 @@
 ---
-_issetting : true
-_contenttype: slug_setting
-title: URL Redirect
+redirect:
+  - address: 'https://google.com'
+    name: /google
+    status: true
 ---
 
-this is slug

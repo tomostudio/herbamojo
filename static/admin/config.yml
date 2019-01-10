@@ -47,16 +47,16 @@ collections:
           - {
               name: is_setting,
               label: _issetting,
-              widget: hidden,
+              widget: "hidden",
               default: true,
             }
           - {
               name: contenttype,
               label: _contenttype,
-              widget: hidden,
+              widget: "hidden",
               default: "general_setting",
             }
-          - { label: Title, name: title, widget: hidden, default: "General Setting"}
+          - { label: Title, name: title, widget: "hidden", default: "General Setting"}
           - { label: Intro, name: intro, widget: number }
       - label: "URL Redirect"
         name: "slug"
@@ -74,13 +74,14 @@ collections:
           - {
               name: contenttype,
               label: _contenttype,
-              widget: hidden,
+              widget: "hidden",
               default: "slug_setting",
             }
-          - { label: Title, name: title, widget: hidden, default: "URL Redirect"}
+          - { label: Title, name: title, widget: "hidden", default: "URL Redirect"}
           - label: Redirect
             name: redirect
             widget: list
+            required: false
             hint: "EG: from '/google' to 'https://google.com' set active 'on'"
             fields:
               - { label: From, name: name, widget: string }
