@@ -25,6 +25,7 @@ exports.onCreateNode = ({
 					toPath: redirectRequest.to,
 					isPermanent: true
 				});
+				console.table(redirectRequest);
 			}
 		});
 	}
