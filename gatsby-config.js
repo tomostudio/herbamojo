@@ -2,8 +2,7 @@ module.exports = {
     siteMetadata: {
         title: `Web Title`,
     },
-    plugins: [
-        {
+    plugins: [{
             resolve: 'gatsby-source-filesystem',
             options: {
                 path: `${__dirname}/static/assets`,
@@ -29,7 +28,7 @@ module.exports = {
                 name: `src`,
                 path: `${__dirname}/src/`,
             },
-        },{
+        }, {
             resolve: `gatsby-plugin-typography`,
             options: {
                 pathToConfigModule: `src/utils/typography.js`,
@@ -61,7 +60,11 @@ module.exports = {
                     },
                 ],
             },
+        }, {
+            resolve: `gatsby-plugin-netlify`,
+            options: {
+                generateMatchPathRewrites: false, // boolean to turn off automatic creation of redirect rules for client only paths
+            },
         },
-        `gatsby-plugin-netlify`,
     ],
 }

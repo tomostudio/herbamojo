@@ -37,8 +37,8 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 };
 exports.createPages = ({ graphql, actions }) => {
 	const { createPage } = actions;
-	console.log('create pages');
 	checkstatus = true;
+	console.log('create pages',checkstatus);
 	return graphql(`
       {
         allMarkdownRemark (
