@@ -6,13 +6,13 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 	const { createRedirect } = actions;
 
 	if(checkstatus){
+		// createRedirect({
+		// 	fromPath: '/google',
+		// 	toPath: '/admin/',
+		// 	isPermanent: true
+		// });
 		createRedirect({
-			fromPath: '/google',
-			toPath: '/admin/',
-			isPermanent: true
-		});
-		createRedirect({
-			fromPath: '/home',
+			fromPath: '/home2',
 			toPath: 'https://google.com/',
 			isPermanent: true
 		});
@@ -38,7 +38,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 exports.createPages = ({ graphql, actions }) => {
 	const { createPage } = actions;
 	console.log('create pages');
-	// checkstatus = true;
+	checkstatus = true;
 	return graphql(`
       {
         allMarkdownRemark (
