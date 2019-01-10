@@ -7,7 +7,7 @@ export default ({data}) => (
         <div>
             <h1>Pages List</h1>
             <h4>{data.allMarkdownRemark.totalCount} Pages</h4>
-            {data.allMarkdownRemark.edges.map(({ node }) => (
+            {/* {data.allMarkdownRemark.edges.map(({ node }) => (
             <Link to={node.fields.slug} key={node.id} >
                 <h3>
                     {node.frontmatter.index}{" "}
@@ -18,7 +18,7 @@ export default ({data}) => (
                 </h3>
                 <p>{node.excerpt}</p>
             </Link>
-            ))}
+            ))} */}
         </div>
     </Layout>
 )

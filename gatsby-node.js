@@ -21,7 +21,7 @@ exports.onCreateNode = ({
 		redirectObject.redirect.forEach((redirectRequest) => {
 			if (redirectRequest.status) {
 				createRedirect({
-					fromPath: redirectRequest.from,
+					fromPath: '/'+redirectRequest.from,
 					toPath: redirectRequest.to,
 					isPermanent: true
 				});
