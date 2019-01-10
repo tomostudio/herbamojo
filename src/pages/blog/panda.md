@@ -1,5 +1,5 @@
 ---
-slug: panda2
+slug: panda
 index: 2
 date: '2017-08-10'
 title: Panda Bear Eating Sweets
