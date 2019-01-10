@@ -11,15 +11,10 @@ collections:
     folder: src/pages/blog
     create: true
     fields:
+      - { name: "_issetting", label: "issetting", widget: "hidden", default: true }
       - {
-          name: issetting,
-          label: _issetting,
-          widget: "hidden",
-          default: false,
-        }
-      - {
-          name: slug,
-          label: Slug,
+          name: "slug",
+          label: "Slug",
           widget: "string",
           pattern:
             [
@@ -27,11 +22,11 @@ collections:
               "Lowercase and Numerical Only, Minimum Characters = 3",
             ],
         }
-      - { name: index, label: Index, widget: "number", default: 0 }
-      - { name: date, label: Date, widget: date }
-      - { name: title, label: Title }
+      - { name: "index", label: "Index", widget: "number", default: 0 }
+      - { name: "date", label: "Date", widget: "date" }
+      - { name: "title", label: "Title" }
       - { name: "coverimage", label: "Cover Image", widget: "image" }
-      - { name: body, label: Body, widget: markdown }
+      - { name: "body", label: "Body", widget: "markdown" }
   - label: "Settings"
     name: "settings"
     editor:
@@ -41,49 +36,25 @@ collections:
         name: "general"
         file: "src/settings/general.md"
         identifier_field: title
-        editor:
-          preview: false
         fields:
-          - {
-              name: _issetting,
-              label: issetting,
-              widget: "hidden",
-              default: true,
-            }
-          - {
-              name: _contenttype,
-              label: contenttype,
-              widget: "hidden",
-              default: "general_setting",
-            }
-          - { label: Title, name: title, widget: "hidden", default: "General Setting"}
-          - { label: Intro, name: intro, widget: number }
+          - { name: "_issetting", label: "issetting", widget: "hidden", default: true }
+          - { name: "_contenttype", label: "contenttype", widget: "hidden", default: "general_setting" }
+          - { label: Title, name: "title", widget: "hidden", default: "General Setting"}
+          - { label: "Intro", name: "intro", widget: "markdown" }
       - label: "URL Redirect"
         name: "slug"
         file: "src/settings/slug.md"
         identifier_field: title
-        editor:
-          preview: false
         fields:
-          - {
-              name: _issetting,
-              label: issetting,
-              widget: "hidden",
-              default: true,
-            }
-          - {
-              name: _contenttype,
-              label: contenttype,
-              widget: "hidden",
-              default: "slug_setting",
-            }
-          - { label: Title, name: title, widget: "hidden", default: "URL Redirect"}
-          - label: Redirect
-            name: redirect
-            widget: list
+          - { name: "_issetting", label: "issetting", widget: "hidden", default: true }
+          - { name: "_contenttype", label: "contenttype", widget: "hidden", default: "slug_setting" }
+          - { label: "Title", name: "title", widget: "hidden", default: "URL Redirect"}
+          - label: "Redirect"
+            name: "redirect"
+            widget: "list"
             required: false
             hint: "EG: from '/google' to 'https://google.com' set active 'on'"
             fields:
-              - { label: From, name: name, widget: string }
-              - { label: To, name: address, widget: string }
-              - { label: Active, name: status, widget: boolean, default: false }
+              - { label: "From", name: "name", widget: "string" }
+              - { label: "To", name: "address", widget: "string" }
+              - { label: "Active", name: "status", widget: "boolean", default: false }
