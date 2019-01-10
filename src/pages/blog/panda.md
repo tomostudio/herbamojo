@@ -1,7 +1,7 @@
 ---
 issetting: false
 contenttype: blog
-slug: pan23/
+slug: pan23/*&
 index: 2
 date: '2017-08-10'
 title: Panda Bear Eating Sweets
