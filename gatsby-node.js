@@ -19,13 +19,13 @@ exports.onCreateNode = ({
 
 	if (checkstatus) {
 		redirectObject.redirect.forEach((redirectRequest) => {
+			console.table(redirectRequest);
 			if (redirectRequest.status) {
 				createRedirect({
 					fromPath: '/'+redirectRequest.from,
 					toPath: redirectRequest.to,
 					isPermanent: true
 				});
-				console.table(redirectRequest);
 			}
 		});
 	}
