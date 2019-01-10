@@ -1,24 +1,38 @@
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
+const {
+	fmImagesToRelative
+} = require('gatsby-remark-relative-images');
 const path = require(`path`);
-const { createFilePath } = require(`gatsby-source-filesystem`);
+const {
+	createFilePath
+} = require(`gatsby-source-filesystem`);
 let checkstatus = false;
-exports.onCreateNode = ({ node, getNode, actions }) => {
-	const { createRedirect } = actions;
+let redirectObject;
+exports.onCreateNode = ({
+	graphql,
+	node,
+	getNode,
+	actions
+}) => {
+	const {
+		createRedirect
+	} = actions;
 
-	if(checkstatus){
-		// createRedirect({
-		// 	fromPath: '/google',
-		// 	toPath: '/admin/',
-		// 	isPermanent: true
-		// });
-		createRedirect({
-			fromPath: '/home2',
-			toPath: 'https://google.com/',
-			isPermanent: true
+	if (checkstatus) {
+		redirectObject.redirect.forEach((redirectRequest) => {
+			if (redirectRequest.status) {
+				createRedirect({
+					fromPath: redirectRequest.from,
+					toPath: redirectRequest.to,
+					isPermanent: true
+				});
+			}
 		});
 	}
+
 	fmImagesToRelative(node);
-	const { createNodeField } = actions;
+	const {
+		createNodeField
+	} = actions;
 	if (node.internal.type === `MarkdownRemark`) {
 		const filepath = createFilePath({
 			node,
@@ -34,15 +48,23 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 			value: slug
 		});
 	}
+
+
 };
-exports.createPages = ({ graphql, actions }) => {
-	const { createPage } = actions;
-	checkstatus = true;
-	console.log('create pages',checkstatus);
-	return graphql(`
+
+exports.createPages = ({
+	graphql,
+	actions
+}) => {
+	const {
+		createPage
+	} = actions;
+	return new Promise((resolve, reject) => {
+		resolve(
+			graphql(`
       {
-        allMarkdownRemark (
-          filter: { frontmatter: { issetting: { eq: false }} }
+        all: allMarkdownRemark (
+					filter: { frontmatter: { issetting: { eq: false }} }
           sort:{fields: [frontmatter___index], order: ASC}
         ){
           edges {
@@ -51,44 +73,73 @@ exports.createPages = ({ graphql, actions }) => {
                 slug
 							}
 							frontmatter{
+								issetting
 								contenttype
 							}
             }
           }
-        }
+				}
+				slug_setting: markdownRemark(frontmatter: {issetting: {eq: true}, contenttype: {eq: "slug_setting"}}) {
+					frontmatter {
+						title
+						issetting
+						redirect {
+							from
+							to
+							status
+						}
+					}
+			}
       }
     `).then((result) => {
-		const results = result.data.allMarkdownRemark.edges;
-		results.forEach(({ node }, index) => {
-			if(node.frontmatter.contenttype == 'blog'){
-				createPage({
-					path: node.fields.slug,
-					component: path.resolve(`./src/templates/blog-temp.js`),
-					context: {
-						slug: node.fields.slug,
-						prev_slug: index === 0 ? null : results[index - 1].node.fields.slug,
-						next_slug: index === results.length - 1 ? null : results[index + 1].node.fields.slug,
-						start_node: results[0].node
+				const results = result.data.all.edges;
+				results.forEach(({
+					node
+				}, index) => {
+					if (node.frontmatter.contenttype == 'blog') {
+						createPage({
+							path: node.fields.slug,
+							component: path.resolve(`./src/templates/blog-temp.js`),
+							context: {
+								slug: node.fields.slug,
+								prev_slug: index === 0 ? null : results[index - 1].node.fields.slug,
+								next_slug: index === results.length - 1 ? null : results[index + 1].node.fields.slug,
+								start_node: results[0].node
+							}
+						});
+					} else if (node.frontmatter.contenttype == 'about') {
+						createPage({
+							path: node.fields.slug,
+							component: path.resolve(`./src/templates/about.js`),
+							context: {
+								slug: node.fields.slug,
+							}
+						});
+					} else if (node.frontmatter.issetting && node.frontmatter.contenttype == 'slug_setting') {
+						// redirectObject = node.frontmatter;
+						// checkstatus = true;
+						// console.log('create pages', checkstatus);
+						// console.log(redirectObject);
+						// console.log('\n');
 					}
-				});
-			}
-			else if(node.frontmatter.contenttype == 'about'){
-				createPage({
-					path: node.fields.slug,
-					component: path.resolve(`./src/templates/about.js`),
-					context: {
-						slug: node.fields.slug,
-					}
-				});
-			}
-		});
+				})
+
+				if (result.data.slug_setting) {
+					redirectObject = result.data.slug_setting.frontmatter;
+					checkstatus = true;
+				}
+			})
+		)
 	});
 };
 
-exports.onCreateWebpackConfig = ({ stage, actions }) => {
+exports.onCreateWebpackConfig = ({
+	stage,
+	actions
+}) => {
 	actions.setWebpackConfig({
 		resolve: {
-			modules: [ path.resolve(__dirname, 'src'), 'node_modules' ]
+			modules: [path.resolve(__dirname, 'src'), 'node_modules']
 		}
 	});
 };
