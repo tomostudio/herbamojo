@@ -19,7 +19,7 @@ exports.onCreateNode = ({
 
 	if (checkstatus) {
 		redirectObject.redirect.forEach((redirectRequest) => {
-			console.table(redirectRequest);
+			// console.table(redirectRequest);
 			if (redirectRequest.status) {
 				const __from = redirectRequest.from;
 				createRedirect({

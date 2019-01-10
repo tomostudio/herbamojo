@@ -4,7 +4,7 @@ contenttype: slug_setting
 title: URL Redirect
 redirect:
   - from: home
-    status: true
+    status: false
     to: /admin
   - from: google2
     status: true

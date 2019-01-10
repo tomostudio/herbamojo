@@ -3,7 +3,7 @@ import { graphql } from "gatsby"
 import Layout from "components/layout"
 
 export default ({data}) => (
-    <Layout headerText="404"> 
+    <Layout headerText="404">
         <div>
             <h1>Pages List</h1>
             <h4>{data.allMarkdownRemark.totalCount} Pages</h4>
