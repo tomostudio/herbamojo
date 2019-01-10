@@ -1,6 +1,6 @@
 backend:
-  # name: test-repo
   name: git-gateway
+  # name: test-repo
   # repo: hendhyhutomo/gatsbyv2
 
 media_folder: static/assets
@@ -11,7 +11,7 @@ collections:
     folder: src/pages/blog
     create: true
     fields:
-      - { name: "issetting", label: "issetting", widget: "hidden", default: true }
+      - { name: "issetting", label: "issetting", widget: "hidden", default: "true" }
       - {
           name: "slug",
           label: "Slug",
