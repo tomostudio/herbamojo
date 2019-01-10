@@ -1,6 +1,6 @@
 ---
-title: General Setting
 issetting: true
 contenttype: general_setting
+title: General Setting
 ---
-testing2
+testing3
