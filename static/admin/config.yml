@@ -36,6 +36,8 @@ collections:
         name: "general"
         file: "src/settings/general.md"
         identifier_field: title
+        editor:
+          preview: true
         fields:
           - { label: "Intro", name: "intro", widget: "markdown" }
           - { label: Title, name: "title", widget: "hidden", default: "General Setting", required: true}
@@ -45,6 +47,8 @@ collections:
         name: "slug"
         file: "src/settings/slug.md"
         identifier_field: title
+        editor:
+          preview: false
         fields:
           - label: "Redirect"
             name: "redirect"
