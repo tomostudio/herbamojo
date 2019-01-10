@@ -7,7 +7,7 @@ redirect:
     status: true
     to: 'https://google.com'
   - from: google2
-    status: true
+    status: false
     to: 'https://google.com'
 ---
 
