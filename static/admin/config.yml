@@ -30,7 +30,6 @@ collections:
       - { name: 'body', label: 'Body', widget: 'markdown', }
   - label: 'Settings'
     name: 'settings'
-    extension: 'md'
     delete: false
     editor:
       preview: false
@@ -38,18 +37,16 @@ collections:
       - file: 'src/settings/general.md'
         label: 'General Setting'
         name: 'general'
-        identifier_field: title
         delete: false
         description: 'General Site Settings'
         fields:
           - { name: 'issetting', label: 'issetting', widget: 'hidden', default: true, required: true, }
           - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'general_setting', required: true, }
           - { label: 'Title', name: 'title', widget: 'hidden', default: 'General Setting', required: true, }
-          - { label: 'Body', name: 'body', widget: 'markdown' }
+          - { label: 'Body', name: 'body', widget: 'string' }
       - file: 'src/settings/slug.md'
         label: 'URL Redirect'
         name: 'slug'
-        identifier_field: title
         delete: false
         description: 'Creates URL Redirector'
         fields:
