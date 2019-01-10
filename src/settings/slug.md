@@ -3,11 +3,8 @@ issetting: true
 contenttype: slug_setting
 title: URL Redirect
 redirect:
-  - from: google
-    status: true
-    to: /google
   - from: home
-    status: true
+    status: false
     to: /admin
   - from: google2
     status: true
