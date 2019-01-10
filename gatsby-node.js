@@ -17,7 +17,6 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 			isPermanent: true
 		});
 	}
-	
 	fmImagesToRelative(node);
 	const { createNodeField } = actions;
 	if (node.internal.type === `MarkdownRemark`) {
@@ -39,7 +38,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
 exports.createPages = ({ graphql, actions }) => {
 	const { createPage } = actions;
 	console.log('create pages');
-	checkstatus = true;
+	// checkstatus = true;
 	return graphql(`
       {
         allMarkdownRemark (
