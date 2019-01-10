@@ -57,6 +57,6 @@ collections:
             required: false
             hint: "EG: from '/google' to 'https://google.com' set active 'on'"
             fields:
-              - { label: "From", name: "name", widget: "string", pattern: [ "([a-z0-9]){3,}", "Lowercase and Numerical Only, Minimum Characters = 3",] }
-              - { label: "To", name: "address", widget: "string" }
+              - { label: "From", name: "from", widget: "string", pattern: [ "([a-z0-9]){3,}", "Lowercase and Numerical Only, Minimum Characters = 3",] }
+              - { label: "To", name: "to", widget: "string" }
               - { label: "Active", name: "status", widget: "boolean", default: false }
