@@ -1,8 +1,5 @@
 ---
-redirect:
-  - address: 'https://google.com'
-    name: /google new
-    status: true
+redirect: []
 issetting: false
 ---
 
