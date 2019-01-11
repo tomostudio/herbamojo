@@ -32,6 +32,7 @@ exports.onCreateNode = ({
 	}
 
 	fmImagesToRelative(node);
+	
 	const {
 		createNodeField
 	} = actions;

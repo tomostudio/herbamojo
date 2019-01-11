@@ -1,6 +1,7 @@
 module.exports = {
     siteMetadata: {
         title: `Web Title`,
+        siteUrl: `https://gatsbyv2.netlify.com`,
     },
     plugins: [{
             resolve: 'gatsby-source-filesystem',
@@ -40,6 +41,14 @@ module.exports = {
         `gatsby-plugin-netlify-cms`,
         `gatsby-transformer-sharp`,
         `gatsby-plugin-sharp`,
+        `gatsby-plugin-sitemap`,
+        {
+            resolve: `gatsby-plugin-google-analytics`,
+            options: {
+                // replace "UA-XXXXXXXXX-X" with your own Tracking ID
+                trackingId: "UA-XXXXXXXXX-X",
+            }
+        },
         {
             resolve: `gatsby-transformer-remark`,
             options: {
@@ -60,7 +69,8 @@ module.exports = {
                     },
                 ],
             },
-        }, {
+        },
+        {
             resolve: `gatsby-plugin-netlify`,
             options: {
                 generateMatchPathRewrites: false, // boolean to turn off automatic creation of redirect rules for client only paths
