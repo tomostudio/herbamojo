@@ -9,7 +9,7 @@ export default class About extends React.Component {
     render() {
 		const post = this.props.data.content;
         return (
-        <Layout headerText={post.frontmatter.title}>
+        <Layout headerText={post.frontmatter.title} location={this.props.location}>
             <p>Such wow. Very React.</p>
         </Layout>
         )

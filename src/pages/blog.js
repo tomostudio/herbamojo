@@ -3,8 +3,8 @@ import { Link, graphql } from 'gatsby';
 import Layout from 'components/layout';
 import Img from 'gatsby-image';
 
-export default ({ data }) => (
-	<Layout headerText="List">
+export default ({ location, data }) => (
+	<Layout headerText="List" location={location}>
 		<div>
 			<h1> Pages List </h1>{' '}
 			<h4>

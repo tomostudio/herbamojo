@@ -38,7 +38,7 @@ export default class BlogTemp extends React.Component {
 		const next_slug = this.props.pageContext.next_slug;
 		const prev_slug = this.props.pageContext.prev_slug;
 		return (
-			<Layout headerText={post.frontmatter.title}>
+			<Layout headerText={post.frontmatter.title} location={this.props.location}>
 				<img src={post.frontmatter.coverimage.childImageSharp.fluid.src} alt="testimage" />
 				<Img
 					className="image_class"
