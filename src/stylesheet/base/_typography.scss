@@ -1,0 +1,47 @@
+// ==========================================================================
+// FONT SIZES
+
+$font-size-small: 8pt;
+$font-size-header: 10pt;
+$font-size-body: 10px;
+$font-size-button: 12px;
+$line-height-body: 20px;
+$line-height-body-mobile: 18px;
+
+
+// ==========================================================================
+
+// %font_normal_black {
+//     font-family: 'TitlingGothicFB', Helvetica, sans-serif;
+//     font-weight: 900;
+// }
+
+// %font_normal_standard {
+//     font-family: 'TitlingGothicFB', Helvetica, sans-serif;
+//     font-weight: 600;
+// }
+
+// %font_normal_light {
+//     font-family: 'TitlingGothicFB', Helvetica, sans-serif;
+//     font-weight: 100;
+// }
+
+// %font_comp_light {
+//     font-family: 'TitlingGothicFB Comp', Helvetica, sans-serif;
+//     font-weight: normal;
+// }
+
+// ==========================================================================
+
+
+// NORMAL
+@font-face {
+    font-family: 'UniversNextPro';
+    src: url('../fonts/UniversNextPro-UltLt.eot');
+    src: url('../fonts/UniversNextPro-UltLt.woff2') format('woff2'),
+        url('../fonts/UniversNextPro-UltLt.woff') format('woff'),
+        url('../fonts/UniversNextPro-UltLt.ttf') format('truetype'),
+        url('../fonts/UniversNextPro-UltLt.eot?#iefix') format('embedded-opentype');
+    font-weight: 100;
+    font-style: normal;
+}

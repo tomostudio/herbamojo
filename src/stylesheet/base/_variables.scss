@@ -1,0 +1,39 @@
+// ==========================================================================
+// COLOR
+
+$color_orange: #fd664b;
+$color_blue: #0193d7;
+$color_cream: #f7ece4;
+$color_cream2: #ffa990;
+$color_purple_blue: #3943ac;
+
+// ==========================================================================
+// TRANSITION
+$global-transition: .4s;
+$page-transition: .4s;
+
+// ==========================================================================
+// COMMON VAR
+
+$half-column-max-width: 450px;
+$global-padding: 50px;
+$global-padding-m: 25px;
+$header-height: 100px;
+$header-height-m: 75px;
+
+$global-minheight: 500px;
+$global-minheight-m: 350px;
+$global-minheight-menuopen: 250px;
+
+
+// ==========================================================================
+// REPONSIVE SIZES
+
+// WIDTH
+$break-smaller: 450px; // MOBILE
+$break-small: 750px; // MOBILE
+$break-medium: 1024px; // TABLET
+$break-large: 1240px; // DESKTOP M
+
+// HEIGHT
+$height-break: 350px;
