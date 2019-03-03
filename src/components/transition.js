@@ -12,7 +12,6 @@ const getTransitionStyles = {
     entering: {
         position: 'absolute',
         opacity: 0,
-        background: 'red'
 
     },
     entered: {
