@@ -29,6 +29,8 @@ module.exports = {
             },
         },
         `gatsby-plugin-offline`,
+        // `gatsby-plugin-remove-serviceworker`,
+        `gatsby-plugin-netlify-cache`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-sass`,
         `gatsby-plugin-netlify-cms`,
@@ -47,10 +49,9 @@ module.exports = {
             resolve: `gatsby-transformer-remark`,
             options: {
                 plugins: [
-                    // netlifyCmsPaths, // Including in your Remark plugins will transform any paths in your markdown body
-                    {
-                        resolve: `gatsby-remark-relative-images`,
-                    },
+                    `gatsby-remark-static-images`,
+                    `gatsby-remark-unwrap-images`,
+                    `gatsby-remark-relative-images`,
                     {
                         resolve: `gatsby-remark-images`,
                         options: {
