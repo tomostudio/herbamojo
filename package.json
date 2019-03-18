@@ -36,11 +36,13 @@
     "gatsby-source-filesystem": "^2.0.23",
     "gatsby-transformer-remark": "^2.3.1",
     "gatsby-transformer-sharp": "^2.1.15",
+    "lottie-web": "^5.4.4",
     "netlify-cms": "^2.5.1",
     "node-sass": "^4.11.0",
     "react": "^16.8.4",
     "react-dom": "^16.8.4",
     "react-helmet": "^5.2.0",
+    "react-lottie": "^1.2.3",
     "react-transition-group": "^2.6.0",
     "react-typography": "^0.16.18",
     "typography": "^0.16.18"
