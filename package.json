@@ -1,15 +1,14 @@
 {
-  "name": "gatsby-netlify",
+  "name": "herbamojo",
   "private": true,
-  "description": "A simplified bare-bones starter for Gatsby",
-  "version": "0.1.0",
+  "description": "Herbamojo Company Profile Website ",
+  "version": "1.0.0",
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",
     "start": "npm run develop",
     "build": "gatsby build",
     "serve": "gatsby serve",
-    "test": "echo \"Write tests! -> https://gatsby.app/unit-testing\""
   },
   "dependencies": {
     "gatsby": "^2.3.1",
@@ -49,12 +48,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/gatsbyjs/gatsby-starter-hello-world.git"
+    "url": "git+https://gitlab.com/hendhyhutomo/herbamojo.git"
   },
-  "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
-  },
-  "homepage": "https://github.com/gatsbyjs/gatsby-starter-hello-world#readme",
+  "homepage": "https://herbamojo.id",
   "main": "index.js",
   "devDependencies": {},
   "author": "Hendhy Hutomo"
