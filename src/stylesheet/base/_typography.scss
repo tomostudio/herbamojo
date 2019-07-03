@@ -1,12 +1,12 @@
 // ==========================================================================
 // FONT SIZES
 
-$font-size-small: 8pt;
-$font-size-header: 10pt;
-$font-size-body: 10px;
-$font-size-button: 12px;
-$line-height-body: 20px;
-$line-height-body-mobile: 18px;
+$font-size-title: 90px;
+$font-size-heading1: 48px;
+$font-size-heading2: 30px;
+$font-size-button: 36px;
+$font-size-body: 24px;
+$font-size-subbody: 20px;
 
 
 // ==========================================================================
@@ -33,15 +33,57 @@ $line-height-body-mobile: 18px;
 
 // ==========================================================================
 
+@font-face {
+    font-family: 'Amarillo';
+    src: url('../fonts/AmarilloUSAF.eot');
+    src: url('../fonts/AmarilloUSAF.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/AmarilloUSAF.woff2') format('woff2'),
+        url('../fonts/AmarilloUSAF.woff') format('woff'),
+        url('../fonts/AmarilloUSAF.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
 
-// NORMAL
-// @font-face {
-//     font-family: 'UniversNextPro';
-//     src: url('../fonts/UniversNextPro-UltLt.eot');
-//     src: url('../fonts/UniversNextPro-UltLt.woff2') format('woff2'),
-//         url('../fonts/UniversNextPro-UltLt.woff') format('woff'),
-//         url('../fonts/UniversNextPro-UltLt.ttf') format('truetype'),
-//         url('../fonts/UniversNextPro-UltLt.eot?#iefix') format('embedded-opentype');
-//     font-weight: 100;
-//     font-style: normal;
-// }
+@font-face {
+    font-family: 'Maison Mono';
+    src: url('../fonts/MaisonMono-Bold.eot');
+    src: url('../fonts/MaisonMono-Bold.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/MaisonMono-Bold.woff2') format('woff2'),
+        url('../fonts/MaisonMono-Bold.woff') format('woff'),
+        url('../fonts/MaisonMono-Bold.ttf') format('truetype');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Maison Mono';
+    src: url('../fonts/MaisonMono-Italic.eot');
+    src: url('../fonts/MaisonMono-Italic.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/MaisonMono-Italic.woff2') format('woff2'),
+        url('../fonts/MaisonMono-Italic.woff') format('woff'),
+        url('../fonts/MaisonMono-Italic.ttf') format('truetype');
+    font-weight: normal;
+    font-style: italic;
+}
+
+@font-face {
+    font-family: 'Maison Mono';
+    src: url('../fonts/MaisonMono-Light.eot');
+    src: url('../fonts/MaisonMono-Light.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/MaisonMono-Light.woff2') format('woff2'),
+        url('../fonts/MaisonMono-Light.woff') format('woff'),
+        url('../fonts/MaisonMono-Light.ttf') format('truetype');
+    font-weight: 300;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Maison Mono';
+    src: url('../fonts/MaisonMono.eot');
+    src: url('../fonts/MaisonMono.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/MaisonMono.woff2') format('woff2'),
+        url('../fonts/MaisonMono.woff') format('woff'),
+        url('../fonts/MaisonMono.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}

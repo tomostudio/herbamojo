@@ -1,7 +1,7 @@
 module.exports = {
     siteMetadata: {
-        title: `Gatsby Starter`,
-        siteUrl: `https://gatsbyv2.netlify.com`,
+        title: `Herbamojo Website`,
+        siteUrl: `https://herbamojo.id`,
     },
     plugins: [{
             resolve: 'gatsby-source-filesystem',
@@ -15,8 +15,8 @@ module.exports = {
                 name: "Gatsby Starter",
                 short_name: "gatsbyStarter",
                 start_url: "/",
-                background_color: "#6b37bf",
-                theme_color: "#6b37bf",
+                background_color: "#000000",
+                theme_color: "#15C87F",
                 display: "standalone",
                 icon: "src/images/icon/icon.png",
             },
@@ -34,8 +34,8 @@ module.exports = {
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-sass`,
         `gatsby-plugin-netlify-cms`,
-        `gatsby-transformer-sharp`,
-        `gatsby-plugin-sharp`,
+        // `gatsby-transformer-sharp`,
+        // `gatsby-plugin-sharp`,
         `gatsby-plugin-layout`,
         `gatsby-plugin-sitemap`,
         {
@@ -50,18 +50,7 @@ module.exports = {
             options: {
                 plugins: [
                     `gatsby-remark-static-images`,
-                    `gatsby-remark-unwrap-images`,
-                    `gatsby-remark-relative-images`,
-                    {
-                        resolve: `gatsby-remark-images`,
-                        options: {
-                            // It's important to specify the maxWidth (in pixels) of
-                            // the content container as this plugin uses this as the
-                            // base for generating different widths of each image.
-                            maxWidth: 1280,
-                            backgroundColor: 'transparent', // required to display blurred image first
-                        },
-                    },
+                    `gatsby-remark-unwrap-images`
                 ],
             },
         },
