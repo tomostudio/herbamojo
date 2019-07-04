@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from 'components/layout';
 import Footer from 'components/footer';
-// import { ScrollSnap } from 'utils/scrollsnap';
+import { ScrollSnap } from 'utils/scrollsnap';
 import { Link } from 'gatsby';
 import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
 
@@ -10,15 +10,15 @@ export default class Home extends React.Component {
 		if (typeof document !== `undefined`) {
 			document.body.classList.add('home');
 		}
-		// ScrollSnap.init({
-		// 	sections_identifier: 'main.home > section',
-		// 	snap_identifier: 'div.overlay .snap_nav',
-		// 	duration: 250,
-		// 	responsive_width: 0
-		// });
+		ScrollSnap.init({
+			sections_identifier: 'main.home > section',
+			snap_identifier: 'div.overlay .snap_nav',
+			duration: 250,
+			responsive_width: 0
+		});
 	}
 	componentWillUnmount() {
-		// ScrollSnap.kill();
+		ScrollSnap.kill();
 		if (typeof document !== `undefined`) {
 			document.body.classList.remove('home');
 		}
