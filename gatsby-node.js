@@ -66,6 +66,20 @@ exports.createPages = ({
 	} = actions;
 	return new Promise((resolve, reject) => {
 		resolve( graphql(`{
+			all: allMarkdownRemark (
+				filter: { frontmatter: { issetting: { eq: false }} } sort:{fields: [frontmatter___index], order: ASC} ){
+				edges {
+					node {
+						fields {
+							slug
+						}
+						frontmatter{
+							issetting
+							contenttype
+						}
+					}
+				}
+			}
 			slug_setting: markdownRemark(frontmatter: {issetting: {eq: true}, contenttype: {eq: "slug_setting"}}) {
 				frontmatter {
 					title
@@ -106,21 +120,6 @@ exports.createPages = ({
 		)
 	});
 };
-
-// all: allMarkdownRemark (
-// 	filter: { frontmatter: { issetting: { eq: false }} } sort:{fields: [frontmatter___index], order: ASC} ){
-// 	edges {
-// 		node {
-// 			fields {
-// 				slug
-// 			}
-// 			frontmatter{
-// 				issetting
-// 				contenttype
-// 			}
-// 		}
-// 	}
-// }
 
 exports.onCreateWebpackConfig = ({
 	stage,
