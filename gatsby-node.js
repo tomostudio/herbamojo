@@ -1,6 +1,3 @@
-const {
-	fmImagesToRelative
-} = require('gatsby-remark-relative-images');
 const path = require(`path`);
 const {
 	createFilePath
@@ -31,8 +28,6 @@ exports.onCreateNode = ({
 			}
 		});
 	}
-
-	fmImagesToRelative(node);
 
 	const {
 		createNodeField
