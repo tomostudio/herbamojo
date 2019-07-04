@@ -6,7 +6,8 @@ const {
 	createFilePath
 } = require(`gatsby-source-filesystem`);
 let checkstatus = false;
-let redirectObject;
+let redirectObject = null;
+
 exports.onCreateNode = ({
 	graphql,
 	node,
@@ -17,7 +18,7 @@ exports.onCreateNode = ({
 		createRedirect
 	} = actions;
 
-	if (checkstatus) {
+	if (checkstatus && redirectObject !== null) {
 		redirectObject.redirect.forEach((redirectRequest) => {
 			// console.table(redirectRequest);
 			if (redirectRequest.status) {
@@ -55,6 +56,7 @@ exports.onCreateNode = ({
 
 };
 
+
 exports.createPages = ({
 	graphql,
 	actions
@@ -64,20 +66,6 @@ exports.createPages = ({
 	} = actions;
 	return new Promise((resolve, reject) => {
 		resolve( graphql(`{
-			all: allMarkdownRemark (
-				filter: { frontmatter: { issetting: { eq: false }} } sort:{fields: [frontmatter___index], order: ASC} ){
-				edges {
-					node {
-						fields {
-							slug
-						}
-						frontmatter{
-							issetting
-							contenttype
-						}
-					}
-				}
-			}
 			slug_setting: markdownRemark(frontmatter: {issetting: {eq: true}, contenttype: {eq: "slug_setting"}}) {
 				frontmatter {
 					title
@@ -90,34 +78,49 @@ exports.createPages = ({
 				}
 			}
 		}`).then((result) => {
-				if (result.data.all) {
-					const results = result.data.all.edges;
-					// results.forEach(({
-					// 	node
-					// }, index) => {
-					// 	// if (node.frontmatter.contenttype == 'blog') {
-					// 	// 	createPage({
-					// 	// 		path: node.fields.slug,
-					// 	// 		component: path.resolve(`./src/templates/blog-temp.js`),
-					// 	// 		context: {
-					// 	// 			slug: node.fields.slug,
-					// 	// 			prev_slug: index === 0 ? null : results[index - 1].node.fields.slug,
-					// 	// 			next_slug: index === results.length - 1 ? null : results[index + 1].node.fields.slug,
-					// 	// 			start_node: results[0].node
-					// 	// 		}
-					// 	// 	});
-					// 	// }
-					// })
+				// if (result.data.all) {
+				// 	const results = result.data.all.edges;
+				// 	// results.forEach(({
+				// 	// 	node
+				// 	// }, index) => {
+				// 	// 	// if (node.frontmatter.contenttype == 'blog') {
+				// 	// 	// 	createPage({
+				// 	// 	// 		path: node.fields.slug,
+				// 	// 	// 		component: path.resolve(`./src/templates/blog-temp.js`),
+				// 	// 	// 		context: {
+				// 	// 	// 			slug: node.fields.slug,
+				// 	// 	// 			prev_slug: index === 0 ? null : results[index - 1].node.fields.slug,
+				// 	// 	// 			next_slug: index === results.length - 1 ? null : results[index + 1].node.fields.slug,
+				// 	// 	// 			start_node: results[0].node
+				// 	// 	// 		}
+				// 	// 	// 	});
+				// 	// 	// }
+				// 	// })
+				// }
 
 					if (result.data.slug_setting) {
 						redirectObject = result.data.slug_setting.frontmatter;
 						checkstatus = true;
 					}
-				}
 			})
 		)
 	});
 };
+
+// all: allMarkdownRemark (
+// 	filter: { frontmatter: { issetting: { eq: false }} } sort:{fields: [frontmatter___index], order: ASC} ){
+// 	edges {
+// 		node {
+// 			fields {
+// 				slug
+// 			}
+// 			frontmatter{
+// 				issetting
+// 				contenttype
+// 			}
+// 		}
+// 	}
+// }
 
 exports.onCreateWebpackConfig = ({
 	stage,
