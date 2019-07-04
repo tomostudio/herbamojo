@@ -5,4 +5,3 @@ contenttype: journal
 index: 1
 title: Journal Entry
 ---
-test

@@ -10,4 +10,3 @@ redirect:
     status: false
     to: 'https://google.com'
 ---
-
