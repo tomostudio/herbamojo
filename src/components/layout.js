@@ -20,10 +20,7 @@ export default class Layout extends React.Component {
 								seo {
 									seo_keywords
 									seo_shortdesc
-									seo_image{
-										relativePath
-										publicURL
-									}
+									seo_image
 								}
 							}
 						}
@@ -35,7 +32,7 @@ export default class Layout extends React.Component {
 
 					let seo_image = '';
 					if(fm_data.seo.seo_image){
-						seo_image = `${fm_data.seo.seo_image.publicURL}`;
+						seo_image = `${fm_data.seo.seo_image}`;
 					}
 
 					const seo = {
