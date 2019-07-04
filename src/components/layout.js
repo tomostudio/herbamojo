@@ -46,7 +46,7 @@ export default class Layout extends React.Component {
 					};
 
 					return (
-						<div>
+						<main className={props.mainClass}>
 							<Helmet>
 								<meta charSet="utf-8" />
 								<title>{props.titleText ? `${props.titleText} | ${web_name}` : web_name}</title>
@@ -73,7 +73,7 @@ export default class Layout extends React.Component {
 								{seo.image && <meta name="twitter:image" content={seo.image} />}
 							</Helmet>
 							{props.children}
-						</div>
+						</main>
 					);
 				}}
 			/>

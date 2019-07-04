@@ -1,31 +1,19 @@
 // ==========================================================================
 // COLOR
 
-$color_orange: #fd664b;
-$color_blue: #0193d7;
-$color_cream: #f7ece4;
-$color_cream2: #ffa990;
-$color_purple_blue: #3943ac;
+$color_green: #29CB7E;
 
 // ==========================================================================
 // TRANSITION
-$global-transition: .4s;
-$page-transition: .4s;
+$global-transition: .25s;
+$page-transition: .25s;
 
 // ==========================================================================
 // COMMON VAR
 
-$half-column-max-width: 450px;
-$global-padding: 50px;
-$global-padding-m: 25px;
-$header-height: 100px;
-$header-height-m: 75px;
-
-$global-minheight: 500px;
-$global-minheight-m: 350px;
-$global-minheight-menuopen: 250px;
-
-
+$global-padding: 40px;
+$global-maxwidth: 1280px;
+$global_opacity: .5;
 // ==========================================================================
 // REPONSIVE SIZES
 
@@ -36,4 +24,19 @@ $break-medium: 1024px; // TABLET
 $break-large: 1240px; // DESKTOP M
 
 // HEIGHT
-$height-break: 350px;
+$height-break: 500px;
+
+// ==========================================================================
+// FONT SIZES
+
+$font-size-title: 90px;
+$lineheight-title: 60px;
+
+$font-size-heading1: 48px;
+$font-size-heading2: 30px;
+
+$font-size-button: 36px;
+$lineheight-button: 22px;
+
+$font-size-body: 24px;
+$font-size-subbody: 20px;

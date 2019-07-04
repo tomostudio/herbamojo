@@ -1,15 +1,27 @@
-import React from "react"
-import { Link } from "gatsby"
+import React from 'react';
+import { Link } from 'gatsby';
+import InstagramImg from 'images/symbols/instagram.svg';
+import WhatsAppImg from 'images/symbols/whatsapp.svg';
+import EmailImg from 'images/symbols/email.svg';
 
-const ListLink = props => (
-    <li style={{ display: `inline-block`, marginRight: `1rem` }}>
-      <Link to={props.to}>{props.children}</Link>
-    </li>
-  )
-
-export default props => (
-    <div>
-        <h1 >{props.headerText}</h1>
-        <ListLink to="/">Home</ListLink>
-    </div>
-)
+export default (props) => (
+	<section className="footer">
+		<div className="wrapper">
+			<div className="hidden">
+				<Link to="/">HOME</Link>
+				<Link to="/">JOURNAL</Link>
+			</div>
+			<div>
+				<a href="https://instagram.com/herbamojo">
+					<img src={InstagramImg} alt="herbamojo" />
+				</a>
+				<a href="https://instagram.com/herbamojo">
+					<img src={WhatsAppImg} alt="herbamojo" />
+				</a>
+				<a href="https://instagram.com/herbamojo">
+					<img src={EmailImg} alt="herbamojo" />
+				</a>
+			</div>
+		</div>
+	</section>
+);

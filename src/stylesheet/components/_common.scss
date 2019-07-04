@@ -1,3 +1,143 @@
-body{
-    border: solid red;
+main.home,
+body.home {
+    // scroll-snap-type: mandatory;
+    // scroll-snap-points-y: repeat(100vh);
+    // scroll-snap-type: y mandatory;
+}
+
+body {
+    background: black;
+}
+
+body.snap_on {
+    &::-webkit-scrollbar {
+        width: 0 !important;
+        display: none;
+    }
+
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}
+
+.hidden {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+}
+
+main {
+    display: block;
+    position: relative;
+    touch-action: none;
+
+    & .overlay {
+        position: fixed;
+        width: 100vw;
+        height: 100vh;
+        top: 0px;
+        left: 0px;
+        pointer-events: none;
+        padding: $global-padding;
+
+        &>.wrapper {
+            position: relative;
+            margin: 0px auto;
+            width: 100%;
+            border: solid thin rgba(255, 255, 255, 0.25);
+            max-width: $global-maxwidth - 100px;
+
+            &>*:first-child {
+                display: block;
+
+                &>a {
+                    pointer-events: auto;
+                    font-family: 'Amarillo';
+                    font-size: $font-size-button;
+                    line-height: $lineheight-button;
+                    vertical-align: top;
+                    color: white;
+                    @include transition(color $global-transition);
+                    display: inline-block;
+
+                    body.onhover &:hover,
+                    &.disable {
+                        color: $color_green;
+                    }
+
+                    &:first-child {
+                        margin-right: 10px;
+                    }
+                }
+            }
+        }
+    }
+
+    & section {
+        width: 100%;
+        padding: $global-padding (110px + $global-padding);
+        border-bottom: solid thin yellow;
+
+        &>.wrapper {
+            margin: 0px auto;
+            width: 100%;
+            max-width: $global-maxwidth - 200px;
+        }
+    }
+
+    & section.footer {
+        height: 150px;
+        background: $color_green;
+
+        &>.wrapper {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            grid-template-rows: 1fr;
+            grid-template-areas: "left right";
+            &>*:first-child {
+                font-family: 'Amarillo';
+                font-size: 24px;
+                line-height: 100%;
+                grid-area: left;
+                justify-self: start;
+                @include setflex(column, nowrap, center, center, flex-start);
+
+                &>a {
+                    height: 30px;
+                    line-height: 30px;
+                    display: inline-block;
+                    color: black;
+                    @include transition(color $global-transition);
+
+                    body.onhover &:hover {
+                        color: white;
+                    }
+                }
+            }
+
+            &>*:last-child {
+                @include setflex(row, nowrap, flex-end, center,center);
+                grid-area: right;
+                justify-self: end;
+                &>a {
+                    height: 60px;
+                    margin-left: 12px;
+                    display:block;
+                    @include transition(opacity $global-transition);
+                    & > img{
+                        height: 100%;
+                    }
+                    body.onhover &:hover {
+                        opacity: $global_opacity;
+                    }
+                }
+            }
+        }
+    }
+}
+
+.wrapper {
+    min-height: 100%;
 }

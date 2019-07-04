@@ -1,24 +1,25 @@
 exports.onRouteUpdate = ({
     location
 }) => {
-    console.log('Route Updated', location.pathname)
-    if (location.pathname.includes("blog")) {
-        // document.body.classList.remove('preloading');
-    }
 }
 exports.onClientEntry = () => {
-    console.log("First Time Site is loaded")
-    document.body.classList.add('preloading');
+    // console.log("First Time Site is loaded")
 }
-exports.onPreRouteUpdate = ({
-    location
-}) => {
-    console.log("Preroute Update", location.pathname)
-    document.body.classList.add('preloading');
-}
+
+exports.onPreRouteUpdate = ({ location }) => {
+    //DETECT TOUCH EVENT AND IOS
+	if (!('ontouchstart' in document.documentElement)) {
+		document.body.classList.add('onhover');
+	}
+
+    const isSafari = !!navigator.userAgent.match(/Version\/[\d]+.*Safari/);
+	const iOS = /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+	if(isSafari && iOS){
+		document.body.classList.add('iOSsafari');
+	}
+};
 
 // DELAY SCROLL UPDATE
-
 const transitionDelay = 2000
 
 exports.shouldUpdateScroll = ({
