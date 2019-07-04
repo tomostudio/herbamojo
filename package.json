@@ -24,6 +24,7 @@
     "gatsby-plugin-sass": "^2.1.0",
     "gatsby-plugin-sitemap": "^2.2.1",
     "gatsby-plugin-slug": "^1.0.1",
+    "gatsby-remark-static-images": "^1.1.0",
     "gatsby-remark-unwrap-images": "^1.0.1",
     "gatsby-source-filesystem": "^2.1.2",
     "gatsby-transformer-remark": "^2.6.0",

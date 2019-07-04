@@ -60,7 +60,7 @@ exports.createPages = ({
 		createPage
 	} = actions;
 	return new Promise((resolve, reject) => {
-		resolve( graphql(`{
+		resolve(graphql(`{
 			all: allMarkdownRemark (
 				filter: { frontmatter: { issetting: { eq: false }} } sort:{fields: [frontmatter___index], order: ASC} ){
 				edges {
@@ -87,32 +87,31 @@ exports.createPages = ({
 				}
 			}
 		}`).then((result) => {
-				// if (result.data.all) {
-				// 	const results = result.data.all.edges;
-				// 	// results.forEach(({
-				// 	// 	node
-				// 	// }, index) => {
-				// 	// 	// if (node.frontmatter.contenttype == 'blog') {
-				// 	// 	// 	createPage({
-				// 	// 	// 		path: node.fields.slug,
-				// 	// 	// 		component: path.resolve(`./src/templates/blog-temp.js`),
-				// 	// 	// 		context: {
-				// 	// 	// 			slug: node.fields.slug,
-				// 	// 	// 			prev_slug: index === 0 ? null : results[index - 1].node.fields.slug,
-				// 	// 	// 			next_slug: index === results.length - 1 ? null : results[index + 1].node.fields.slug,
-				// 	// 	// 			start_node: results[0].node
-				// 	// 	// 		}
-				// 	// 	// 	});
-				// 	// 	// }
-				// 	// })
-				// }
+			// if (result.data.all) {
+			// 	const results = result.data.all.edges;
+			// 	// results.forEach(({
+			// 	// 	node
+			// 	// }, index) => {
+			// 	// 	// if (node.frontmatter.contenttype == 'blog') {
+			// 	// 	// 	createPage({
+			// 	// 	// 		path: node.fields.slug,
+			// 	// 	// 		component: path.resolve(`./src/templates/blog-temp.js`),
+			// 	// 	// 		context: {
+			// 	// 	// 			slug: node.fields.slug,
+			// 	// 	// 			prev_slug: index === 0 ? null : results[index - 1].node.fields.slug,
+			// 	// 	// 			next_slug: index === results.length - 1 ? null : results[index + 1].node.fields.slug,
+			// 	// 	// 			start_node: results[0].node
+			// 	// 	// 		}
+			// 	// 	// 	});
+			// 	// 	// }
+			// 	// })
+			// }
 
-					if (result.data.slug_setting) {
-						redirectObject = result.data.slug_setting.frontmatter;
-						checkstatus = true;
-					}
-			})
-		)
+			if (result.data.slug_setting) {
+				redirectObject = result.data.slug_setting.frontmatter;
+				checkstatus = true;
+			}
+		}))
 	});
 };
 
