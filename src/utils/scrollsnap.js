@@ -92,56 +92,12 @@ export const ScrollSnap = {
         ScrollSnap.snap.setup();
 
         //EVENT LISTENER
-        ScrollSnap.reset();
-    },
-    reset: () => {
-        if (!ScrollSnap.v.listener.init) {
-            if (ScrollSnap.v.listener.inittriggered) ScrollSnap.kill();
-
-            ScrollSnap.v.listener.inittriggered = true;
-            ScrollSnap.v.listener.init = true;
-
-            if (window.addEventListener) {
-                window.addEventListener('DOMMouseScroll', ScrollSnap.event.scroll, false);
-                window.addEventListener('wheel', ScrollSnap.event.scroll, {
-                    passive: false
-                });
-                window.addEventListener('mousewheel', ScrollSnap.event.scroll, {
-                    passive: false
-                });
-                window.addEventListener('keydown', ScrollSnap.event.keydown, false);
-            }
-
-            if ('ontouchstart' in document.documentElement) {
-                document.addEventListener('touchstart', ScrollSnap.event.touchstart, false);
-                document.addEventListener('touchmove', ScrollSnap.event.touchmove, false);
-            }
-
-            document.addEventListener('resize', ScrollSnap.event.resize);
-
-            ScrollSnap.v.snap.pause = false;
-        }
+        ScrollSnap.event.init();
     },
     kill: () => {
-        if (ScrollSnap.v.listener.init) {
-            if (window.addEventListener) {
-                window.removeEventListener('DOMMouseScroll', ScrollSnap.event.scroll, false);
-                window.removeEventListener('wheel', ScrollSnap.event.scroll, {
-                    passive: false
-                });
-                window.removeEventListener('mousewheel', ScrollSnap.event.scroll, {
-                    passive: false
-                });
-                window.removeEventListener('keydown', ScrollSnap.event.keydown, false);
-            }
-
-            if ('ontouchstart' in document.documentElement) {
-                document.removeEventListener('touchstart', ScrollSnap.event.touchstart, false);
-                document.removeEventListener('touchmove', ScrollSnap.event.touchmove, false);
-            }
-            document.removeEventListener('resize', ScrollSnap.event.resize);
-            ScrollSnap.v.listener.init = false;
-        }
+        ScrollSnap.pause();
+        ScrollSnap.v.snap.enable = false;
+        ScrollSnap.event.remove();
     },
     pause: () => {
         ScrollSnap.v.snap.pause = true;
@@ -153,6 +109,8 @@ export const ScrollSnap = {
     snap: {
         setup: () => {
             let checkheight = false;
+            ScrollSnap.v.snap.pause = false;
+            ScrollSnap.v.snap.enable = true;
 
             ScrollSnap.v.sections.all = document.querySelectorAll(ScrollSnap.v.sections.identifier);
 
@@ -206,11 +164,11 @@ export const ScrollSnap = {
                 ScrollSnap.v.nav.children = document.querySelectorAll(`${ScrollSnap.v.nav.identifier} ${ScrollSnap.v.nav.childIdentifier}`);
 
                 ScrollSnap.v.nav.children.forEach((child, index) => {
-                    child.classList.remove(ScrollSnap.v.nav.activeClass);
+                    // child.classList.remove(ScrollSnap.v.nav.activeClass);
 
                     child.onclick = null;
                     child.onclick = () => {
-                        if (ScrollSnap.v.snap.enable) {
+                        if (ScrollSnap.v.snap.enable && !ScrollSnap.v.snap.pause) {
                             if (!ScrollSnap.v.nav.customnav) {
                                 ScrollSnap.snap.to(index);
                             } else {
@@ -245,9 +203,9 @@ export const ScrollSnap = {
                 document.body.classList.remove('snap_on');
             }
 
-            console.log(`SETUP: scrollposition ${ScrollSnap.common.scrollPosition()},current_section ${ScrollSnap.v.sections.current}, total ${ScrollSnap.v.sections.length}, `);
+            // console.log(`SETUP: scrollposition ${ScrollSnap.common.scrollPosition()},current_section ${ScrollSnap.v.sections.current}, total ${ScrollSnap.v.sections.length}, `);
 
-            console.log(`ScrollSnapping: ${ScrollSnap.v.scroll.snapping}\n Scrollit Scrolling: ${ScrollSnap.scrollit.scrolling}\n Snap Pause ${ScrollSnap.v.snap.pause}\n Snap Enable ${ScrollSnap.v.snap.enable}`)
+            // console.log(`ScrollSnapping: ${ScrollSnap.v.scroll.snapping}\n Scrollit Scrolling: ${ScrollSnap.scrollit.scrolling}\n Snap Pause ${ScrollSnap.v.snap.pause}\n Snap Enable ${ScrollSnap.v.snap.enable}`)
         },
 
         setuptargets: () => {
@@ -267,7 +225,7 @@ export const ScrollSnap = {
                     ScrollSnap.v.sections.targets.push(ScrollSnap.v.sections.targets[index] + footeroffset);
                 }
             });
-            console.log(`Targets: ${ScrollSnap.v.sections.targets}`);
+            // console.log(`Targets: ${ScrollSnap.v.sections.targets}`);
         },
 
         down: () => {
@@ -337,7 +295,57 @@ export const ScrollSnap = {
         },
     },
     event: {
+        init: () => {
+            if (!ScrollSnap.v.listener.init) {
+                if (ScrollSnap.v.listener.inittriggered) ScrollSnap.event.remove();
+
+                ScrollSnap.v.listener.inittriggered = true;
+                ScrollSnap.v.listener.init = true;
+
+                if (window.addEventListener) {
+                    window.addEventListener('DOMMouseScroll', ScrollSnap.event.scroll, false);
+                    window.addEventListener('wheel', ScrollSnap.event.scroll, {
+                        passive: false
+                    });
+                    window.addEventListener('mousewheel', ScrollSnap.event.scroll, {
+                        passive: false
+                    });
+                    window.addEventListener('keydown', ScrollSnap.event.keydown, false);
+                }
+
+                if ('ontouchstart' in document.documentElement) {
+                    document.addEventListener('touchstart', ScrollSnap.event.touchstart, false);
+                    document.addEventListener('touchmove', ScrollSnap.event.touchmove, false);
+                }
+
+                window.addEventListener('resize', ScrollSnap.event.resize);
+
+                ScrollSnap.v.snap.pause = false;
+            }
+        },
+        remove: () => {
+            if (ScrollSnap.v.listener.init) {
+                if (window.addEventListener) {
+                    window.removeEventListener('DOMMouseScroll', ScrollSnap.event.scroll, false);
+                    window.removeEventListener('wheel', ScrollSnap.event.scroll, {
+                        passive: false
+                    });
+                    window.removeEventListener('mousewheel', ScrollSnap.event.scroll, {
+                        passive: false
+                    });
+                    window.removeEventListener('keydown', ScrollSnap.event.keydown, false);
+                }
+
+                if ('ontouchstart' in document.documentElement) {
+                    document.removeEventListener('touchstart', ScrollSnap.event.touchstart, false);
+                    document.removeEventListener('touchmove', ScrollSnap.event.touchmove, false);
+                }
+                window.removeEventListener('resize', ScrollSnap.event.resize);
+                ScrollSnap.v.listener.init = false;
+            }
+        },
         resize: () => {
+            console.log('resize event check');
             ScrollSnap.snap.setup();
         },
         scroll: (e) => {
@@ -414,14 +422,15 @@ export const ScrollSnap = {
                 ScrollSnap.v.nav.current = nav;
                 ScrollSnap.v.nav.children = document.querySelectorAll(`${ScrollSnap.v.nav.identifier} ${ScrollSnap.v.nav.childIdentifier}`);
 
-                console.log(`setnav ${nav}`);
+                // console.log(`setnav ${nav}`);
 
                 if (ScrollSnap.v.nav.children.length > 0) {
                     ScrollSnap.v.nav.children.forEach((each, index) => {
-                        each.classList.remove(ScrollSnap.v.nav.activeClass);
-                        let target = index;
-                        if (target === ScrollSnap.v.nav.current) {
+                        if (index === ScrollSnap.v.nav.current) {
                             each.classList.add(ScrollSnap.v.nav.activeClass);
+                        }
+                        else{
+                            each.classList.remove(ScrollSnap.v.nav.activeClass);
                         }
                     });
 

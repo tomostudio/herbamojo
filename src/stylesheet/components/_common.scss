@@ -96,6 +96,7 @@ main {
             grid-template-columns: 1fr 1fr;
             grid-template-rows: 1fr;
             grid-template-areas: "left right";
+
             &>*:first-child {
                 font-family: 'Amarillo';
                 font-size: 24px;
@@ -118,17 +119,20 @@ main {
             }
 
             &>*:last-child {
-                @include setflex(row, nowrap, flex-end, center,center);
+                @include setflex(row, nowrap, flex-end, center, center);
                 grid-area: right;
                 justify-self: end;
+
                 &>a {
                     height: 60px;
                     margin-left: 12px;
-                    display:block;
+                    display: block;
                     @include transition(opacity $global-transition);
-                    & > img{
+
+                    &>img {
                         height: 100%;
                     }
+
                     body.onhover &:hover {
                         opacity: $global_opacity;
                     }
@@ -140,4 +144,10 @@ main {
 
 .wrapper {
     min-height: 100%;
+}
+
+div.inview {
+    width: 100px;
+    height: 50px;
+    border: solid thin red;
 }
