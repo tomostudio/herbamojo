@@ -1,31 +1,6 @@
-// export const InView = {
-//     v: {
-//         margin: {
-//             top: 0,
-//             right: 0,
-//             bottom: 0,
-//             left: 0,
-//         }
-//     },
-//     init: (obj) => {
-//         window.addEventListener('scroll', InView.scrollevent, false);
-//     },
-//     scrollevent: () => {},
-//     detect: (target) => {
-//         let distance = target.getBoundingClientRect();
-//         return (
-//             distance.top >= InView.v.margin.top &&
-//             distance.left >= InView.v.margin.left &&
-//             distance.bottom <= ((window.innerHeight || document.documentElement.clientHeight) - InView.v.margin.bottom) &&
-//             distance.right <= ((window.innerWidth || document.documentElement.clientWidth) - InView.v.margin.right)
-//         );
-//     },
-//     kill: () => {
-//         window.removeEventListener('scroll', InView.scrollevent, false);
-//     }
-// }
+// new InViewportClass({target: 'div.inview', visibility: 0});
 
-export class InViewClass {
+export class InViewportClass {
     margin = {
         top: 0,
         right: 0,
@@ -56,14 +31,14 @@ export class InViewClass {
     }
     scrollevent(e) {
         if (this.scrolltarget !== null) {
-            if (InViewDetect(this.scrolltarget, this.margin.top, this.margin.right, this.margin.bottom, this.margin.left, this.visibility)) {
+            if (InViewportDetect(this.scrolltarget, this.margin.top, this.margin.right, this.margin.bottom, this.margin.left, this.visibility)) {
                 // console.log('detected', window.pageYOffset || document.documentElement.scrollTop);
             } else {}
         }
     }
 }
 
-export const InViewDetect = (target = null, top = 0, right = 0, bottom = 0, left = 0, visibility = .5) => {
+export const InViewportDetect = (target = null, top = 0, right = 0, bottom = 0, left = 0, visibility = .5) => {
     if (target !== null) {
         if (visibility > 1) {
             visibility = 1;

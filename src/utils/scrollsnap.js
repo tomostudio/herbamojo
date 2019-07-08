@@ -133,8 +133,7 @@ export const ScrollSnap = {
 
             if (checkheight) {
                 ScrollSnap.v.snap.enable = false;
-            } else {
-                ScrollSnap.v.snap.enable = true;
+                console.log('snap disable');
             }
 
             if (navAtrCheck) {
@@ -164,8 +163,6 @@ export const ScrollSnap = {
                 ScrollSnap.v.nav.children = document.querySelectorAll(`${ScrollSnap.v.nav.identifier} ${ScrollSnap.v.nav.childIdentifier}`);
 
                 ScrollSnap.v.nav.children.forEach((child, index) => {
-                    // child.classList.remove(ScrollSnap.v.nav.activeClass);
-
                     child.onclick = null;
                     child.onclick = () => {
                         if (ScrollSnap.v.snap.enable && !ScrollSnap.v.snap.pause) {
@@ -184,12 +181,13 @@ export const ScrollSnap = {
 
             if (ScrollSnap.common.windowWidth() < ScrollSnap.v.responsiveWidth.treshold) {
                 ScrollSnap.v.snap.enable = false;
+                console.log('snap disable');
             }
 
             if (ScrollSnap.v.snap.enable) {
                 //CHECK CURRENT POSITION AND ADJUST
                 let checkcur = Math.floor(ScrollSnap.common.scrollPosition() / ScrollSnap.common.windowHeight());
-
+                console.log('check current: ', checkcur);
                 if (checkcur >= ScrollSnap.v.sections.length) {
                     ScrollSnap.v.sections.current = ScrollSnap.v.sections.length - 1;
                 } else {
@@ -344,44 +342,57 @@ export const ScrollSnap = {
                 ScrollSnap.v.listener.init = false;
             }
         },
+        resizeTimeout: null,
+        resizePause: false,
         resize: () => {
-            console.log('resize event check');
-            ScrollSnap.snap.setup();
+            ScrollSnap.event.resizePause = true;
+            if (ScrollSnap.event.resizeTimeout != null) {
+                clearTimeout(ScrollSnap.event.resizeTimeout);
+            }
+            //SET DELAY AND DISABLE SCROLL ONLY AFTER THE RESIZE EVENT IS RESOLVE
+            ScrollSnap.event.resizeTimeout = setTimeout(() => {
+                console.log('resize event check');
+                ScrollSnap.event.resizePause = false;
+                ScrollSnap.snap.setup();
+            }, 250);
         },
         scroll: (e) => {
+            console.log('trigger scroll', ScrollSnap.v.sections.current)
             if (ScrollSnap.v.snap.enable) {
                 e = e || window.event;
                 if (e.preventDefault) e.preventDefault();
                 e.returnValue = false;
                 if (e.deltaY < -ScrollSnap.v.scroll.sensitivity) {
-                    if (!ScrollSnap.v.snap.pause) ScrollSnap.snap.up();
+                    if (!ScrollSnap.v.snap.pause && !ScrollSnap.event.resizePause) ScrollSnap.snap.up();
                 }
                 if (e.deltaY > ScrollSnap.v.scroll.sensitivity) {
-                    if (!ScrollSnap.v.snap.pause) ScrollSnap.snap.down();
+                    if (!ScrollSnap.v.snap.pause && !ScrollSnap.event.resizePause) ScrollSnap.snap.down();
                 }
             }
         },
         keydown: (e) => {
-            if (e.which === 38 || e.which === 40 || e.which === 32) {
-                e = e || window.event;
-                if (e.preventDefault) e.preventDefault();
-                e.returnValue = false;
-            }
-            switch (e.which) {
-                case 38:
-                    if (!ScrollSnap.v.snap.pause) ScrollSnap.snap.up();
-                    break;
+            if (ScrollSnap.v.snap.enable) {
+                if (e.which === 38 || e.which === 40 || e.which === 32) {
+                    e = e || window.event;
+                    if (e.preventDefault) e.preventDefault();
+                    e.returnValue = false;
+                }
+                switch (e.which) {
+                    case 38:
+                        if (!ScrollSnap.v.snap.pause && !ScrollSnap.event.resizePause) ScrollSnap.snap.up();
+                        break;
 
-                case 40:
-                case 32:
-                    if (!ScrollSnap.v.snap.pause) ScrollSnap.snap.down();
-                    break;
-                default:
-                    break;
+                    case 40:
+                    case 32:
+                        if (!ScrollSnap.v.snap.pause && !ScrollSnap.event.resizePause) ScrollSnap.snap.down();
+                        break;
+                    default:
+                        break;
+                }
             }
         },
         touchstart: (evt) => {
-            if (ScrollSnap.v.snap.enable && !ScrollSnap.v.snap.pause) {
+            if (ScrollSnap.v.snap.enable) {
                 ScrollSnap.v.xDown = evt.touches[0].clientX;
                 ScrollSnap.v.yDown = evt.touches[0].clientY;
             }
@@ -398,7 +409,7 @@ export const ScrollSnap = {
                 let xDiff = ScrollSnap.v.xDown - xUp;
                 let yDiff = ScrollSnap.v.yDown - yUp;
 
-                if (!ScrollSnap.v.snap.pause) {
+                if (!ScrollSnap.v.snap.pause && !ScrollSnap.event.resizePause) {
                     if (Math.abs(xDiff) > Math.abs(yDiff)) {
                         /*most significant*/
                         if (xDiff > 0) {} else {}
@@ -428,8 +439,7 @@ export const ScrollSnap = {
                     ScrollSnap.v.nav.children.forEach((each, index) => {
                         if (index === ScrollSnap.v.nav.current) {
                             each.classList.add(ScrollSnap.v.nav.activeClass);
-                        }
-                        else{
+                        } else {
                             each.classList.remove(ScrollSnap.v.nav.activeClass);
                         }
                     });
@@ -547,6 +557,7 @@ export const ScrollSnap = {
                 if (window.pageYOffset === destinationOffsetToScroll) {
                     ScrollSnap.scrollit.scrolling = false;
                     window.scroll(0, destinationOffsetToScroll);
+                    ScrollSnap.snap.scrolling();
                     ScrollSnap.scrollEvent.after();
                     if (callback) {
                         callback();

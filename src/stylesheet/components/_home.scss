@@ -1,5 +1,14 @@
 main.home {
+    & .overlay_wrapper{
+        position: relative;
+    }
     & .overlay {
+        &.stuck{
+            position: absolute;
+            top: auto;
+            bottom: 0px;
+            left: 0px;
+        }
         .wrapper {
             display: grid;
             grid-template-columns: 1fr 1fr;
@@ -47,7 +56,7 @@ main.home {
             &>h1 {
                 margin: 0px;
                 font-size: $font-size-title;
-                letter-spacing: 2px;
+                letter-spacing: $letterspacing-title;
                 font-family: 'Amarillo';
                 line-height: $lineheight-title;
             }
@@ -55,9 +64,14 @@ main.home {
 
         &:nth-child(2) {
             &>.wrapper {
+                position: relative;
+                @include setflex(row, nowrap, flex-start, center, center);
                 & .logo{
+                    position: absolute;
+                    top: 0px;
+                    left: 0px;
                     display: inline-block;
-                    width: 200px;
+                    width: 140px;
                     & > img{
                         width: 100%;
                     }
@@ -66,6 +80,35 @@ main.home {
                     @include transition(opacity $global-transition);
                     body.onhover &:hover {
                         opacity: $global_opacity;
+                    }
+                }
+                & > .content{
+                    width: 100%;
+                    position: relative;
+                    & > span{
+                        display: inline-block;
+                        font-family: 'Amarillo';
+                        margin-right: 10px;
+                        font-size: 120px;
+                        line-height: 90%;
+                    }
+                    & a#GetButton{
+                        font-family: 'Amarillo';
+                        position: absolute;
+                        left: 0px;
+                        bottom: -20px;
+                        @include transform(translate(0%, 100%));
+                        border: solid 3px $color_green;
+                        padding: 8px 40px;
+                        display: inline-block;
+                        color: $color_green;
+                        font-size: 30px;
+                        line-height: 28px;
+                        @include transition(color $global-transition, background $global-transition);
+                        body.onhover &:hover{
+                            background: $color_green;
+                            color: white;
+                        }
                     }
                 }
             }

@@ -27,6 +27,7 @@
     "gatsby-remark-unwrap-images": "^1.0.1",
     "gatsby-source-filesystem": "^2.1.2",
     "gatsby-transformer-remark": "^2.6.0",
+    "in-view": "^0.6.1",
     "lottie-web": "^5.5.5",
     "netlify-cms": "^2.9.5",
     "node-sass": "^4.12.0",
