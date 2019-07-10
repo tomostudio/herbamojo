@@ -1,22 +1,15 @@
-main.home,
-body.home {
-    // scroll-snap-type: mandatory;
-    // scroll-snap-points-y: repeat(100vh);
-    // scroll-snap-type: y mandatory;
-}
-
 body {
     background: black;
 }
 
-body.snap_on {
-    &::-webkit-scrollbar {
-        width: 0 !important;
-        display: none;
-    }
-
-    -ms-overflow-style: none;
-    overflow: -moz-scrollbars-none;
+body:not(.loaded){
+    opacity: 0;
+    height: 100vh;
+    overflow: hidden;
+    @include transition(all 0s);
+}
+body.loaded{
+    @include transition(opacity .5s);
 }
 
 .hidden {
@@ -76,14 +69,15 @@ main {
     }
 
     & section {
+        position: relative;
         width: 100%;
         padding: $global-padding (100px + $global-padding);
         border-bottom: solid thin yellow;
-        max-width: $global-maxwidth;
         margin: 0px auto;
         &>.wrapper {
             margin: 0px auto;
             width: 100%;
+            max-width: $global-maxwidth - ( (100px + $global-padding) * 2 );
         }
     }
 

@@ -36,10 +36,10 @@ export const ScrollSnap = {
             initdelay: 0,
             direction: true,
             speed: 500,
-            minspeed: 300,
-            duration: 500,
             delay: 400,
-            sensitivity: 10
+            sensitivity: 10,
+            minduration: 300,
+            maxduration: 1500,
         },
         listener: {
             init: false,
@@ -65,16 +65,17 @@ export const ScrollSnap = {
         ScrollSnap.v.sections.identifier = obj.sections_identifier || 'section.snap';
         ScrollSnap.v.scroll.delay = obj.delay || 200;
         ScrollSnap.v.scroll.initdelay = obj.init_delay || 500;
-        ScrollSnap.v.scroll.duration = obj.duration || 500;
         ScrollSnap.v.scroll.sensitivity = obj.sensitivity || 10;
         ScrollSnap.v.scroll.speed = obj.speed || 500;
-        ScrollSnap.v.scroll.minspeed = obj.minimum_speed || 300;
-        ScrollSnap.v.hasfooter = obj.hasfooter || true;
-        ScrollSnap.v.nav.hideoncover = obj.hide_nav_oncover || false;
-        ScrollSnap.v.nav.hideonfooter = obj.hide_nav_onfooter || true;
+        ScrollSnap.v.scroll.minduration = obj.minimum_speed || 300;
+        ScrollSnap.v.scroll.maxduration = obj.maxduration || 1500;
+
+        ScrollSnap.v.hasfooter = obj.hasfooter !== undefined ? obj.hasfooter : true;
+        ScrollSnap.v.nav.hideoncover = obj.hide_nav_oncover !== undefined ? obj.hide_nav_oncover : false;
+        ScrollSnap.v.nav.hideonfooter = obj.hide_nav_onfooter !== undefined ? obj.hide_nav_onfooter : true;
         ScrollSnap.v.responsiveWidth.treshold = obj.responsive_width || 0;
-        ScrollSnap.v.nav.identifier = obj.snap_identifier || '';
-        ScrollSnap.v.nav.childClass = obj.snap_child_identifier || '> *';
+        ScrollSnap.v.nav.identifier = obj.snap_identifier !== undefined ? obj.snap_identifier : '';
+        ScrollSnap.v.nav.childClass = obj.snap_child_identifier !== undefined ? obj.snap_child_identifier : '> *';
         ScrollSnap.v.nav.activeClass = obj.snap_active_class || 'active';
 
         ScrollSnap.v.sections.all = document.querySelectorAll(ScrollSnap.v.sections.identifier);
@@ -98,6 +99,7 @@ export const ScrollSnap = {
         ScrollSnap.pause();
         ScrollSnap.v.snap.enable = false;
         ScrollSnap.event.remove();
+        document.body.classList.remove('snapon');
     },
     pause: () => {
         ScrollSnap.v.snap.pause = true;
@@ -117,7 +119,7 @@ export const ScrollSnap = {
             //CHECK ALL SECTIONS AND DISABLE SNAP IF ANY OF THE SECTIONS HAS HEIGHT BIGGER THAN THE WINDOW
             let navAtrCheck = true;
             ScrollSnap.v.sections.all.forEach((each) => {
-                // console.log(`Check Height: ${each.clientHeight} and ${ScrollSnap.common.windowHeight()}`);
+                // 
                 if (each.clientHeight > ScrollSnap.common.windowHeight()) {
                     checkheight = true;
                 }
@@ -133,7 +135,7 @@ export const ScrollSnap = {
 
             if (checkheight) {
                 ScrollSnap.v.snap.enable = false;
-                console.log('snap disable');
+
             }
 
             if (navAtrCheck) {
@@ -177,17 +179,17 @@ export const ScrollSnap = {
             }
 
             //CHECK WIDTH AND DISABLE SNAP IF WIDTH IS LESS THAN THE TRESHOLD SET
-            // console.log(`Check Width: ${ScrollSnap.v.responsiveWidth.treshold} and ${ScrollSnap.common.windowWidth()}`);
+            // 
 
             if (ScrollSnap.common.windowWidth() < ScrollSnap.v.responsiveWidth.treshold) {
                 ScrollSnap.v.snap.enable = false;
-                console.log('snap disable');
+
             }
 
             if (ScrollSnap.v.snap.enable) {
                 //CHECK CURRENT POSITION AND ADJUST
                 let checkcur = Math.floor(ScrollSnap.common.scrollPosition() / ScrollSnap.common.windowHeight());
-                console.log('check current: ', checkcur);
+                // 
                 if (checkcur >= ScrollSnap.v.sections.length) {
                     ScrollSnap.v.sections.current = ScrollSnap.v.sections.length - 1;
                 } else {
@@ -195,15 +197,15 @@ export const ScrollSnap = {
                 }
                 ScrollSnap.snap.scrolling();
                 // TURN ON CLASS
-                document.body.classList.add('snap_on');
+                document.body.classList.add('snapon');
             } else {
                 // TURN OFF CLASS
-                document.body.classList.remove('snap_on');
+                document.body.classList.remove('snapon');
             }
 
-            // console.log(`SETUP: scrollposition ${ScrollSnap.common.scrollPosition()},current_section ${ScrollSnap.v.sections.current}, total ${ScrollSnap.v.sections.length}, `);
+            // 
 
-            // console.log(`ScrollSnapping: ${ScrollSnap.v.scroll.snapping}\n Scrollit Scrolling: ${ScrollSnap.scrollit.scrolling}\n Snap Pause ${ScrollSnap.v.snap.pause}\n Snap Enable ${ScrollSnap.v.snap.enable}`)
+            // 
         },
 
         setuptargets: () => {
@@ -223,13 +225,13 @@ export const ScrollSnap = {
                     ScrollSnap.v.sections.targets.push(ScrollSnap.v.sections.targets[index] + footeroffset);
                 }
             });
-            // console.log(`Targets: ${ScrollSnap.v.sections.targets}`);
+            // 
         },
 
         down: () => {
             if (ScrollSnap.v.snap.enable && !ScrollSnap.v.scroll.snapping && !ScrollSnap.scrollit.scrolling && !ScrollSnap.v.snap.pause) {
-                // console.log('goingdown', ScrollSnap.v.sections.current);
-                // console.log(`ScrollSnapping: ${ScrollSnap.v.scroll.snapping}, Scrollit Scrolling: ${ScrollSnap.scrollit.scrolling}, Snap Pause ${ScrollSnap.v.snap.pause}, Snap Enable ${ScrollSnap.v.snap.enable}`)
+                // 
+                // 
                 ScrollSnap.v.sections.current++;
                 if (ScrollSnap.v.sections.current > ScrollSnap.v.sections.length - 1) {
                     ScrollSnap.v.sections.current = ScrollSnap.v.sections.length - 1;
@@ -248,7 +250,7 @@ export const ScrollSnap = {
         },
         up: () => {
             if (ScrollSnap.v.snap.enable && !ScrollSnap.v.scroll.snapping && !ScrollSnap.scrollit.scrolling && !ScrollSnap.v.snap.pause) {
-                // console.log(`ScrollSnapping: ${ScrollSnap.v.scroll.snapping}, Scrollit Scrolling: ${ScrollSnap.scrollit.scrolling}, Snap Pause ${ScrollSnap.v.snap.pause}, Snap Enable ${ScrollSnap.v.snap.enable}`)
+                // 
                 ScrollSnap.v.sections.current--;
                 if (ScrollSnap.v.sections.current < 0) {
                     ScrollSnap.v.sections.current = 0;
@@ -260,9 +262,6 @@ export const ScrollSnap = {
         scrolling: () => {
             if (!ScrollSnap.v.scroll.snapping && !ScrollSnap.scrollit.scrolling && !ScrollSnap.v.snap.pause) {
                 ScrollSnap.v.scroll.snapping = true;
-                setTimeout(() => {
-                    ScrollSnap.v.scroll.snapping = false;
-                }, (ScrollSnap.v.scroll.duration + ScrollSnap.v.scroll.delay));
 
                 // ADJUST NAVIGATION
                 if (ScrollSnap.v.snap.enable && !ScrollSnap.v.snap.pause && ScrollSnap.v.nav.identifier !== '') {
@@ -282,13 +281,18 @@ export const ScrollSnap = {
                 }
 
                 const topval = ScrollSnap.common.windowHeight() * ScrollSnap.v.sections.current;
-                // console.log('Scrolling', topval, ScrollSnap.v.sections.current);
+
                 const dist = Math.abs(topval - ScrollSnap.common.scrollPosition());
-                let speed = dist / ScrollSnap.common.windowHeight() * ScrollSnap.v.scroll.speed;
-                if (speed < ScrollSnap.v.scroll.minspeed) speed = ScrollSnap.v.scroll.minspeed;
+                let duration = dist / ScrollSnap.common.windowHeight() * ScrollSnap.v.scroll.speed;
+                if (duration < ScrollSnap.v.scroll.minduration) duration = ScrollSnap.v.scroll.minduration;
+                if (duration > ScrollSnap.v.scroll.maxduration) duration = ScrollSnap.v.scroll.maxduration;
 
                 ScrollSnap.scrollEvent.before();
-                ScrollSnap.scrollit.go(topval, speed);
+                ScrollSnap.scrollit.go(topval, duration);
+
+                setTimeout(() => {
+                    ScrollSnap.v.scroll.snapping = false;
+                }, (duration + ScrollSnap.v.scroll.delay));
             }
         },
     },
@@ -351,13 +355,13 @@ export const ScrollSnap = {
             }
             //SET DELAY AND DISABLE SCROLL ONLY AFTER THE RESIZE EVENT IS RESOLVE
             ScrollSnap.event.resizeTimeout = setTimeout(() => {
-                console.log('resize event check');
+
                 ScrollSnap.event.resizePause = false;
                 ScrollSnap.snap.setup();
             }, 250);
         },
         scroll: (e) => {
-            console.log('trigger scroll', ScrollSnap.v.sections.current)
+
             if (ScrollSnap.v.snap.enable) {
                 e = e || window.event;
                 if (e.preventDefault) e.preventDefault();
@@ -433,7 +437,7 @@ export const ScrollSnap = {
                 ScrollSnap.v.nav.current = nav;
                 ScrollSnap.v.nav.children = document.querySelectorAll(`${ScrollSnap.v.nav.identifier} ${ScrollSnap.v.nav.childIdentifier}`);
 
-                // console.log(`setnav ${nav}`);
+                // 
 
                 if (ScrollSnap.v.nav.children.length > 0) {
                     ScrollSnap.v.nav.children.forEach((each, index) => {

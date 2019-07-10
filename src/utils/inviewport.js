@@ -8,32 +8,41 @@ export class InViewportClass {
         left: 0,
     };
     scrolltarget = null;
-    visibility = .5;
+    visibility = .1;
     constructor(obj, scrolltarget, margin) {
         this.margin.top = obj.margin_top || 0;
         this.margin.right = obj.margin_right || 0;
         this.margin.bottom = obj.margin_bottom || 0;
         this.margin.left = obj.margin_left || 0;
-        this.visibility = obj.visibility !== undefined ? obj.visibility : 0.5;
+        this.visibility = obj.visibility !== undefined ? obj.visibility : 0.1;
 
         this.scrolltarget = obj.target || null;
         if (typeof this.scrolltarget === 'string') {
             const targetelem = document.querySelector(this.scrolltarget);
             this.scrolltarget = targetelem;
         }
+
+        if (obj.enter !== null && obj.enter !== undefined && typeof obj.enter === 'function') this.enter = obj.enter;
+        if (obj.exit !== null && obj.exit !== undefined && typeof obj.exit === 'function') this.exit = obj.exit;
+
         this.init();
     }
     init() {
         window.addEventListener('scroll', this.scrollevent.bind(this), false);
+        this.scrollevent();
     }
     kill() {
         window.removeEventListener('scroll', this.scrollevent.bind(this), false);
     }
-    scrollevent(e) {
+    enter() {}
+    exit() {}
+    scrollevent() {
         if (this.scrolltarget !== null) {
             if (InViewportDetect(this.scrolltarget, this.margin.top, this.margin.right, this.margin.bottom, this.margin.left, this.visibility)) {
-                // console.log('detected', window.pageYOffset || document.documentElement.scrollTop);
-            } else {}
+                this.enter();
+            } else {
+                this.exit();
+            }
         }
     }
 }
@@ -57,15 +66,17 @@ export const InViewportDetect = (target = null, top = 0, right = 0, bottom = 0, 
             distance.right <= ((window.innerWidth || document.documentElement.clientWidth) + distance.width * visibleMultipler - right)) {
             detected = true;
 
+            /*
             //CALCULATE VISIBLE FROM
             let visibleLeft = Math.max(Math.min((distance.width - (left) + distance.left) / distance.width, 1), 0);
-            let visibleRight = Math.max(Math.min((distance.width + (((window.innerWidth || document.documentElement.clientWidth) - right) - distance.right)) / distance.width, 1), 0) ;
-            let visibleTop =  Math.max(Math.min((distance.height - (top) + distance.top) / distance.height, 1), 0);
-            let visibleBottom = Math.max(Math.min((distance.height + (((window.innerHeight || document.documentElement.clientHeight) - bottom) - distance.bottom)) / distance.height, 1) , 0) ;
+            let visibleRight = Math.max(Math.min((distance.width + (((window.innerWidth || document.documentElement.clientWidth) - right) - distance.right)) / distance.width, 1), 0);
+            let visibleTop = Math.max(Math.min((distance.height - (top) + distance.top) / distance.height, 1), 0);
+            let visibleBottom = Math.max(Math.min((distance.height + (((window.innerHeight || document.documentElement.clientHeight) - bottom) - distance.bottom)) / distance.height, 1), 0);
 
             //CALCULATE GET THE OVERALL MINIMUM VISIBLITY
             const visible = Math.min(visibleLeft, visibleRight, visibleTop, visibleBottom);
-            console.log('detected', visible);
+            // console.log('detected visiblity', visible);
+            */
         }
         return detected;
     } else {
