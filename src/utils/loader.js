@@ -49,6 +49,7 @@ export class LoaderClass {
     }
     load() {
         this.intervalcheck();
+        console.log(this.loadcheck);
         if (this.loadcheck.time && this.loadcheck.data && this.loadcheck.reload && this.loadcheck.images && !this.loadcheck.page) {
             if (this.delay.firstload > 0) {
                 if (firstload) {
