@@ -44,6 +44,7 @@ export default class Home extends React.Component {
 		postload: () => {
 			if (typeof document !== `undefined`) {
 				document.body.classList.add('loaded');
+				window.scroll(0,0);
 			}
 
 			this.scrollsnap = ScrollSnap.init({
@@ -53,8 +54,6 @@ export default class Home extends React.Component {
 				maxduration: 1000,
 				responsive_width: 300
 			});
-
-			ScrollSnap.kill();
 
 			this.inview.footer = new InViewportClass({
 				target: 'section.footer',
@@ -202,7 +201,6 @@ export default class Home extends React.Component {
 				}
 			]
 		};
-		console.log(homeData);
 		return (
 			<Layout titleText="Home" mainClass="home" mainID="homeEN">
 				<div className="overlay_wrapper">

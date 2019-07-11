@@ -2,15 +2,92 @@ body {
     background: black;
 }
 
-body:not(.loaded){
-    opacity: 0;
+body:not(.loaded) {
     height: 100vh;
     overflow: hidden;
-    @include transition(all 0s);
-    border: solid red;
+
+    & main {
+        opacity: 0;
+        @include transition(all 0s);
+    }
 }
-body.loaded{
-    @include transition(opacity .5s);
+
+#LoaderWrapper {
+    pointer-events: none;
+    opacity: 0;
+    position: fixed;
+    top: 0px;
+    left: 0px;
+    width: 100vw;
+    height: 100vh;
+    background: black;
+    padding: $global-padding;
+    z-index: 100;
+    @include transition(opacity $loading-transition);
+
+    &>div:first-child {
+        position: absolute;
+        width: 100%;
+        bottom: 0px;
+        left: 0px;
+        height: 5px;
+
+        &::after,
+        &::before {
+            @include pseudo();
+            position: absolute;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+        }
+
+        &::before {
+            background: $color_green;
+        }
+
+        &::after {
+            background: white;
+        }
+    }
+
+    &>div:last-child {
+        position: absolute;
+        bottom: $global-padding;
+        left: auto;
+        top: auto;
+        font-family: 'Amarillo';
+        color: $color_green;
+        font-size: $font-size-title;
+        line-height: $lineheight-title;
+        @include transition(all $loading-transition);
+        right: -20px;
+    }
+
+    body:not(.loaded) & {
+        opacity: 1;
+        @include transition(opacity $loading-transition);
+
+        &>div:last-child {
+            right: $global-padding;
+            @include transition(all 0s);
+        }
+
+        &>div:first-child {
+
+            &::before {
+                @include animation(loadingbefore 3s ease-out infinite forwards);
+            }
+
+            &::after {
+                @include animation(loadingafter 3s ease-out infinite forwards);
+            }
+        }
+    }
+}
+
+body.loaded main {
+    @include transition(opacity $loading-transition);
 }
 
 .hidden {
@@ -40,7 +117,7 @@ main {
             position: relative;
             margin: 0px auto;
             width: 100%;
-            border: solid thin rgba(255, 255, 255, 0.25);
+            // border: solid thin rgba(255, 255, 255, 0.25);
             max-width: $global-maxwidth - ($global-padding * 2);
 
             &>*:first-child {
@@ -59,6 +136,10 @@ main {
                     body.onhover &:hover,
                     &.disable {
                         color: $color_green;
+                        cursor: pointer;
+                    }
+                    &.disable {
+                        pointer-events: none;
                     }
 
                     &:first-child {
@@ -74,10 +155,11 @@ main {
         width: 100%;
         padding: $global-padding (100px + $global-padding);
         margin: 0px auto;
+
         &>.wrapper {
             margin: 0px auto;
             width: 100%;
-            max-width: $global-maxwidth - ( (100px + $global-padding) * 2 );
+            max-width: $global-maxwidth - ((100px + $global-padding) * 2);
         }
     }
 
@@ -122,7 +204,8 @@ main {
                     margin-left: 15px;
                     display: block;
                     @include transition(opacity $global-transition);
-                    &.svg > svg {
+
+                    &.svg>svg {
                         height: 100%;
                         width: auto;
                     }
@@ -134,8 +217,10 @@ main {
                     body.onhover &:hover {
                         opacity: $global_opacity;
                     }
-                    &.svg{
+
+                    &.svg {
                         @include transition(opacity 0s);
+
                         body.onhover &:hover {
                             opacity: 1;
                         }
@@ -162,9 +247,11 @@ a.svg {
     & svg {
         width: 100%;
         height: 100%;
+
         & .fill {
             @include transition(fill $global-transition);
         }
+
         & .stroke {
             @include transition(stroke $global-transition);
         }
@@ -172,9 +259,11 @@ a.svg {
 
     body.onhover &:hover {
         opacity: 1;
+
         & svg .fill {
             fill: white;
         }
+
         & svg .stroke {
             stroke: white;
         }

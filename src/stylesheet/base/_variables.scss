@@ -8,6 +8,8 @@ $color_green: #29CB7E;
 $global-transition: .25s;
 $page-transition: .25s;
 
+$loading-transition: .5s;
+
 // ==========================================================================
 // COMMON VAR
 
@@ -50,7 +52,9 @@ $font-size-subbody: 20px;
 // ANIMATION
 
 @include keyframes(ingbg_transitionout) {
-    0%, 1% {
+
+    0%,
+    1% {
         @include transform(translate(100px, -50%));
         opacity: 1;
     }
@@ -64,7 +68,9 @@ $font-size-subbody: 20px;
 
 
 @include keyframes(ingbg_transitionin) {
-    0%, 25% {
+
+    0%,
+    25% {
         @include transform(translate(200px, -50%));
         opacity: 0;
     }
@@ -73,5 +79,89 @@ $font-size-subbody: 20px;
     100% {
         @include transform(translate(100px, -50%));
         opacity: 1;
+    }
+}
+
+@include keyframes(loadingbefore) {
+    0% {
+        width: 0%;
+        left: 0px;
+        right: auto;
+    }
+
+    33% {
+        width: 100%;
+        left: 0px;
+        right: auto;
+    }
+
+    66% {
+        width: 100%;
+        left: 0px;
+        right: auto;
+    }
+
+    99%,
+    100% {
+        width: 0%;
+        left: 0px;
+        right: auto;
+    }
+
+    66.5% {
+        width: 100%;
+        right: 0px;
+        left: auto;
+    }
+
+    90% {
+        width: 0%;
+        right: 0px;
+        left: auto;
+    }
+
+    100% {
+        width: 0%;
+        left: 0px;
+        right: auto;
+    }
+}
+
+
+@include keyframes(loadingafter) {
+    0% {
+        width: 0%;
+        left: 0px;
+        right: auto;
+    }
+
+    33% {
+        width: 0%;
+        left: 0px;
+        right: auto;
+    }
+
+    66% {
+        width: 100%;
+        left: 0px;
+        right: auto;
+    }
+
+    66.5% {
+        width: 100%;
+        right: 0px;
+        left: auto;
+    }
+
+    90% {
+        width: 0%;
+        right: 0px;
+        left: auto;
+    }
+
+    100% {
+        width: 0%;
+        left: 0px;
+        right: auto;
     }
 }
