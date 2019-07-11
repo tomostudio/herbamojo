@@ -27,7 +27,7 @@ import CertBPOM from 'images/symbols/bpom.svg';
 import CertNatural from 'images/symbols/natural.svg';
 import CertQuality from 'images/symbols/quality.svg';
 import CertResearch from 'images/symbols/research.svg';
-import CertQuadra from 'images/symbols/Quadra.svg';
+import CertQuadra from 'images/symbols/quadra.svg';
 import CertHalal from 'images/symbols/halal.svg';
 
 //SVG BENEFITS
