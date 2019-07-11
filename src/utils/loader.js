@@ -89,9 +89,11 @@ export class LoaderClass {
     }
     imageload() {
         if (this.images.check) {
+            console.log(this.images.list);
             if (this.images.list && this.images.list.length > 0) {
                 this.images.list.forEach((image) => {
                     const eachimageloaded = (e) => {
+                        console.log('loaded', e.target );
                         e.target.removeEventListener("load", eachimageloaded.bind(this), false);
                         this.images.loaded++;
                         this.imageloadfinish();
