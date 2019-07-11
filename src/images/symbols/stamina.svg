@@ -1,1 +1,25 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 529.22 529.22"><defs><style>.cls-1,.cls-2,.cls-3{fill:none;}.cls-1{stroke:#fff;}.cls-1,.cls-2{stroke-linecap:round;stroke-linejoin:round;stroke-width:5px;}.cls-2{stroke:#15c87f;}</style></defs><title>stamina</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><circle class="cls-1" cx="264.61" cy="352.65" r="28.15"/><line class="cls-2" x1="86.65" y1="221.06" x2="160.33" y2="291.21"/><line class="cls-2" x1="172.99" y1="165.43" x2="211.13" y2="256.13"/><line class="cls-2" x1="264.61" y1="148.42" x2="264.61" y2="250.05"/><line class="cls-2" x1="362.65" y1="168.01" x2="322.07" y2="261.23"/><line class="cls-2" x1="367.84" y1="290.23" x2="444.77" y2="223.24"/><path class="cls-1" d="M118.73,357.47a152.76,152.76,0,0,1,291.75,0l90.78-48.05c-37.21-94.29-129.14-161-236.65-161S65.17,215.13,28,309.42Z"/><line class="cls-2" x1="264.61" y1="352.65" x2="423.96" y2="287.37"/><rect class="cls-3" width="529.22" height="529.22"/></g></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 529.2 529.2" style="enable-background:new 0 0 529.2 529.2;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#FFFFFF;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:#15C87F;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;}
+	.st2{fill:none;}
+</style>
+<title>stamina</title>
+<g>
+	<g id="Layer_1-2">
+		<circle class="st0" cx="264.6" cy="359" r="30.2"/>
+		<line class="st1" x1="73.8" y1="217.9" x2="152.8" y2="293.1"/>
+		<line class="st1" x1="166.3" y1="158.2" x2="207.3" y2="255.5"/>
+		<line class="st1" x1="264.6" y1="140" x2="264.6" y2="249"/>
+		<line class="st1" x1="369.8" y1="161" x2="326.2" y2="261"/>
+		<line class="st1" x1="375.3" y1="292.1" x2="457.8" y2="220.2"/>
+		<path class="st0" d="M108.2,364.2c26.9-86.4,118.7-134.7,205.1-107.8c51.5,16,91.8,56.3,107.8,107.8l97.4-51.5
+			C478.5,211.5,379.9,140,264.6,140S50.7,211.5,10.9,312.7L108.2,364.2z"/>
+		<line class="st1" x1="264.6" y1="359" x2="435.5" y2="289"/>
+		<rect class="st2" width="529.2" height="529.2"/>
+	</g>
+</g>
+</svg>

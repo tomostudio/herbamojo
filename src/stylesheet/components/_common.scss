@@ -7,6 +7,7 @@ body:not(.loaded){
     height: 100vh;
     overflow: hidden;
     @include transition(all 0s);
+    border: solid red;
 }
 body.loaded{
     @include transition(opacity .5s);
@@ -72,7 +73,6 @@ main {
         position: relative;
         width: 100%;
         padding: $global-padding (100px + $global-padding);
-        border-bottom: solid thin yellow;
         margin: 0px auto;
         &>.wrapper {
             margin: 0px auto;

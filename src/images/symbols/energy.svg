@@ -1,1 +1,23 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 529.22 529.22"><defs><style>.cls-1,.cls-2,.cls-3{fill:none;}.cls-1{stroke:#fff;}.cls-1,.cls-2{stroke-linecap:round;stroke-linejoin:round;stroke-width:5px;}.cls-2{stroke:#15c87f;}</style></defs><title>energy</title><g id="Layer_2" data-name="Layer 2"><g id="Layer_1-2" data-name="Layer 1"><circle class="cls-1" cx="418.13" cy="171.85" r="28.89"/><polygon class="cls-1" points="328.27 184.01 311.71 160.83 238.84 147.03 324.95 131.02 395 212.38 412.17 259.09 475.66 270.13 395 287.24 369.67 245.84 313.36 287.24 372.43 368.39 225.59 389.92 301.77 347.41 241.36 266.86 328.27 184.01"/><polygon class="cls-1" points="229.46 277.86 103.04 398.2 252.64 310.43 229.46 277.86"/><line class="cls-2" x1="146.1" y1="206.09" x2="252.64" y2="206.09"/><line class="cls-2" x1="92.83" y1="260.47" x2="199.37" y2="260.47"/><line class="cls-2" x1="53.56" y1="312.08" x2="148.58" y2="312.08"/><rect class="cls-3" width="529.22" height="529.22"/></g></g></svg>
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.1, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 529.2 529.2" style="enable-background:new 0 0 529.2 529.2;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:none;stroke:#FFFFFF;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;}
+	.st1{fill:none;stroke:#15C87F;stroke-width:7;stroke-linecap:round;stroke-linejoin:round;}
+	.st2{fill:none;}
+</style>
+<title>energy</title>
+<g>
+	<g id="Layer_1-2">
+		<circle class="st0" cx="418.1" cy="171.9" r="28.9"/>
+		<polygon class="st0" points="328.3,184 311.7,160.8 238.8,147 325,131 395,212.4 412.2,259.1 475.7,270.1 395,287.2 369.7,245.8 
+			313.4,287.2 372.4,368.4 225.6,389.9 301.8,347.4 241.4,266.9 		"/>
+		<polygon class="st0" points="229.5,277.9 103,398.2 252.6,310.4 		"/>
+		<line class="st1" x1="146.1" y1="206.1" x2="252.6" y2="206.1"/>
+		<line class="st1" x1="92.8" y1="260.5" x2="199.4" y2="260.5"/>
+		<line class="st1" x1="53.6" y1="312.1" x2="148.6" y2="312.1"/>
+		<rect class="st2" width="529.2" height="529.2"/>
+	</g>
+</g>
+</svg>

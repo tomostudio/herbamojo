@@ -62,6 +62,7 @@ export const ScrollSnap = {
         after: () => {},
     },
     init: (obj) => {
+        ScrollSnap.kill();
         ScrollSnap.v.sections.identifier = obj.sections_identifier || 'section.snap';
         ScrollSnap.v.scroll.delay = obj.delay || 200;
         ScrollSnap.v.scroll.initdelay = obj.init_delay || 500;

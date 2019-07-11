@@ -45,3 +45,33 @@ $lineheight-button: 16px;
 
 $font-size-body: 24px;
 $font-size-subbody: 20px;
+
+// ==========================================================================
+// ANIMATION
+
+@include keyframes(ingbg_transitionout) {
+    0%, 1% {
+        @include transform(translate(100px, -50%));
+        opacity: 1;
+    }
+
+    75%,
+    100% {
+        @include transform(translate(0px, -50%));
+        opacity: 0;
+    }
+}
+
+
+@include keyframes(ingbg_transitionin) {
+    0%, 25% {
+        @include transform(translate(200px, -50%));
+        opacity: 0;
+    }
+
+    90%,
+    100% {
+        @include transform(translate(100px, -50%));
+        opacity: 1;
+    }
+}

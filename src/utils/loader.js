@@ -6,7 +6,7 @@ export class LoaderClass {
         data: false,
         page: false,
         reload: false,
-        image: false
+        images: false
     }
     delay = {
         firstload: 0,
@@ -16,7 +16,7 @@ export class LoaderClass {
     timeout = {
         time: null
     }
-    images ={
+    images = {
         check: true,
         init: false,
         list: null,
@@ -30,12 +30,17 @@ export class LoaderClass {
         this.loadcheck.images = false;
         this.images.check = obj.checkimage !== undefined ? obj.checkimage : true;
 
-        if (obj.intervalcheck !== null && obj.intervalcheck !==  undefined && typeof obj.intervalcheck === 'function') this.intervalcheck = obj.intervalcheck_function;
-        if (obj.postload !== null && obj.postload !==  undefined && typeof obj.postload === 'function') this.postload = obj.postload;
+        this.parent = obj.parent !== null ? obj.parent : null;
 
-        this.delay.firstload = obj.firstload_delay;
+        if (obj.intervalcheck !== null && obj.intervalcheck !== undefined && typeof obj.intervalcheck === 'function') this.intervalcheck = obj.intervalcheck_function;
+        if (obj.postload !== null && obj.postload !== undefined && typeof obj.postload === 'function') this.postload = obj.postload;
 
-        if(!this.images.check)this.loadcheck.images = true;
+        if(obj.firstload_delay)this.delay.firstload = obj.firstload_delay;
+        if(obj.default_delay)this.delay.default = obj.default_delay;
+        if(obj.reload_delay)this.delay.reload = obj.reload_delay;
+
+        if (!this.images.check) this.loadcheck.images = true;
+
     }
     intervalcheck() {}
     postload() {}
@@ -45,37 +50,46 @@ export class LoaderClass {
     load() {
         this.intervalcheck();
         if (this.loadcheck.time && this.loadcheck.data && this.loadcheck.reload && this.loadcheck.images && !this.loadcheck.page) {
-            if(this.delay.firstload > 0){
+            if (this.delay.firstload > 0) {
                 if (firstload) {
+                    this.loadcheck.page = true;
+
                     firstload = true;
                     setTimeout(this.loadfinish, this.delay.firstload);
                 } else {
                     this.loadcheck.page = true;
+
                     this.loadfinish();
                 }
-            }
-            else{
+            } else {
                 this.loadcheck.page = true;
+
                 this.loadfinish();
             }
         }
     }
-    loadfinish(){
-        if (this.loadcheck.time && this.loadcheck.data && this.loadcheck.reload && this.loadcheck.images && this.loadcheck.page)  this.postload();
+    loadfinish() {
+        if (this.loadcheck.time && this.loadcheck.data && this.loadcheck.reload && this.loadcheck.images && this.loadcheck.page) this.postload();
     }
     mountload() {
         this.loadcheck.data = true;
+
         this.load();
-        if(!this.images.init && this.images.check){
+        if (!this.images.init && this.images.check) {
+            this.loadcheck.images = false;
             this.images.init = true;
-            this.images.list = document.querySelectorAll('img');
+            if (this.parent !== null) {
+                this.images.list = document.querySelector(this.parent).querySelectorAll('img');
+            } else {
+                this.images.list = document.querySelectorAll('img');
+            }
+
             this.imageload();
         }
     }
-    imageload(){
-        
-        if(this.images.check){
-            this.images.list.forEach((image)=>{
+    imageload() {
+        if (this.images.check) {
+            this.images.list.forEach((image) => {
                 const eachimageloaded = (e) => {
                     e.target.removeEventListener("load", eachimageloaded.bind(this), false);
                     this.images.loaded++;
@@ -85,36 +99,38 @@ export class LoaderClass {
             });
         }
     }
-    imageloadfinish(){
-        
-        if( this.images.loaded >= this.images.list.length){
+    imageloadfinish() {
+        if (this.images.loaded >= this.images.list.length) {
             this.loadcheck.images = true;
             this.images.init = false;
+
             this.load();
         }
     }
     renderload() {
-        if(firstload){
+        if (firstload) {
             if (!this.loadcheck.time) {
                 if (this.timeout.time != null) clearTimeout(this.timeout.time);
                 this.timeout.time = setTimeout(() => {
                     this.loadcheck.time = true;
                     this.loadcheck.reload = true;
+
                     this.load();
                 }, this.delay.default);
             } else {
                 if (this.timeout.time != null) clearTimeout(this.timeout.time);
                 this.timeout.time = setTimeout(() => {
                     this.loadcheck.reload = true;
+
                     this.load();
-                }, this.minReloadTime);
+                }, this.delay.reload);
             }
-        }
-        else{
+        } else {
             if (this.timeout.time != null) clearTimeout(this.timeout.time);
             this.timeout.time = setTimeout(() => {
                 this.loadcheck.time = true;
                 this.loadcheck.reload = true;
+
                 this.load();
                 firstload = true;
             }, this.delay.firstload);
