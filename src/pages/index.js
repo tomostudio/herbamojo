@@ -9,14 +9,17 @@ import { InViewportClass } from 'utils/inviewport';
 import { Link } from 'gatsby';
 import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
 
+// SLICK
+import Slider from 'react-slick';
+
 //JS SVG
 import InstagramSVG from 'svg/instagram.js';
 import EmailSVG from 'svg/email.js';
 import WhatsappSVG from 'svg/whatsapp.js';
+import { Arrow } from 'svg/symbols.js';
 
 import FirstBG from 'images/static/herbamojo-bg2.jpg';
 import SecondBG from 'images/static/herbamojo-bg1.jpg';
-
 import BottleImg from 'images/static/herbamojo_productshot.png';
 
 //SVG CERT
@@ -139,8 +142,11 @@ export default class Home extends React.Component {
 	ingredientToggle(target) {
 		if (target != null) {
 			const delay = 500;
+			let child = target;
+			let index = 1;
+			while ((child = child.previousSibling) != null) index++;
 			let change = {
-				number: target.dataset.number,
+				number: index,
 				desc: target.dataset.desc
 			};
 
@@ -182,7 +188,28 @@ export default class Home extends React.Component {
 		}
 	}
 	render() {
-		this.IndexLoader.renderload();
+    this.IndexLoader.renderload();
+    
+		const sliderSettings = {
+			infinite: true,
+			speed: 500,
+			autoplay: false,
+			arrows: false,
+			slidesToShow: 2,
+			slidesToScroll: 1,
+			responsive: [
+				{
+					breakpoint: 750,
+					settings: {
+            slidesToShow: 1,
+            slidesToScroll: 1,
+					}
+				}
+			],
+			beforeChange: (current, next) => {
+        console.log('changing',current, next);
+			}
+		};
 		return (
 			<Layout titleText="Home" mainClass="home english">
 				<div className="overlay_wrapper">
@@ -367,7 +394,6 @@ export default class Home extends React.Component {
 									<span
 										className="active"
 										onClick={(e) => this.ingredientClick(e)}
-										data-number={1}
 										data-desc="Maca works to increase energy and stamina. Also works as an aphrodisiac"
 									>
 										<span>MACA</span>
@@ -375,7 +401,6 @@ export default class Home extends React.Component {
 									</span>
 									<span
 										onClick={(e) => this.ingredientClick(e)}
-										data-number={2}
 										data-desc="
 										Ginseng works to increase energy and stamina and support immune function. Also works as an aphrodisiac."
 									>
@@ -384,7 +409,6 @@ export default class Home extends React.Component {
 									</span>
 									<span
 										onClick={(e) => this.ingredientClick(e)}
-										data-number={3}
 										data-desc="Red Ginger works to improve blood circulation and increase energy."
 									>
 										<span>RED GINGER</span>
@@ -392,7 +416,6 @@ export default class Home extends React.Component {
 									</span>
 									<span
 										onClick={(e) => this.ingredientClick(e)}
-										data-number={4}
 										data-desc="Tribulus works to increase male stamina."
 									>
 										<span>TRIBULUS</span>
@@ -400,7 +423,6 @@ export default class Home extends React.Component {
 									</span>
 									<span
 										onClick={(e) => this.ingredientClick(e)}
-										data-number={5}
 										data-desc="Long Jack works to increase stamina and as an aphrodisiac."
 									>
 										<span>LONG JACK</span>
@@ -408,7 +430,6 @@ export default class Home extends React.Component {
 									</span>
 									<span
 										onClick={(e) => this.ingredientClick(e)}
-										data-number={6}
 										data-desc="Purwoceng works to increase stamina and as an aphrodisiac."
 									>
 										<span>PURWOCENG</span>
@@ -416,7 +437,6 @@ export default class Home extends React.Component {
 									</span>
 									<span
 										onClick={(e) => this.ingredientClick(e)}
-										data-number={7}
 										data-desc="Javanese Long Pepper works to improve blood circulation."
 									>
 										<span>JAVANESE LONG PEPPER</span>
@@ -446,6 +466,54 @@ export default class Home extends React.Component {
 					<section id="shop">
 						<div className="wrapper">
 							<h1>SHOP</h1>
+							<div className="content">
+								<div>
+									<h2>ONLINE</h2>
+									<div id="onlineshop" className="shopSlider noslider">
+										<div className="arrow">
+											<Arrow/>
+										</div>
+										<div className="wrapper">
+                        <div className="shop">
+                        <div>1</div>
+                        </div>
+										</div>
+										<div className="arrow">
+											<Arrow/>
+										</div>
+									</div>
+								</div>
+								<div>
+									<h2>OFFLINE</h2>
+									<div id="offlineshop" className="shopSlider">
+										<div className="arrow" 
+												onClick={() => {
+													this.slider.slickPrev();
+												}}>
+											<Arrow/>
+										</div>
+
+                    <Slider {...sliderSettings} ref={(c) => (this.slider = c)} className="wrapper">
+                        
+                    <div className="shop">
+                        <div>1</div>
+                        </div>
+                        <div className="shop">
+                        <div>2</div>
+                        </div>
+                        <div className="shop">
+                        <div>3</div>
+                        </div>
+                    </Slider>
+										<div className="arrow" 
+												onClick={() => {
+													this.slider.slickNext();
+												}}>
+											<Arrow/>
+										</div>
+									</div>
+								</div>
+							</div>
 						</div>
 					</section>
 					{/* <section id="journal">

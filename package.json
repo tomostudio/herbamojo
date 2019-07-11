@@ -35,7 +35,9 @@
     "react-dom": "^16.8.6",
     "react-helmet": "^5.2.1",
     "react-lottie": "^1.2.3",
-    "react-transition-group": "^2.9.0"
+    "react-slick": "^0.24.0",
+    "react-transition-group": "^2.9.0",
+    "slick-carousel": "^1.8.1"
   },
   "repository": {
     "type": "git",
