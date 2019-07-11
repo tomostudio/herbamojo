@@ -13,7 +13,7 @@ seo:
     being in a wrong career path can feel demoralizing and frustrating.   There
     is no one size fits all when it comes to job search.
 footer:
-  fb_link: 'https://www.facebook.com/herbamojo'
-  ig_link: 'https://www.instagram.com/herbamojo'
-  wa_link: '+628135747474'
+  email: ''
+  ig_link: https://www.instagram.com/herbamojo
+  wa_no: +6281312345678
 ---

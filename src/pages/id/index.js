@@ -20,7 +20,7 @@ import BottleImg from 'images/static/herbamojo_productshot.png';
 
 export default class Home extends React.Component {
 	IndexLoader = new LoaderClass({
-		parent: '.home.indo',
+		parent: '#homeID',
 		default_delay: 500,
 		postload: () => {
 			
@@ -106,7 +106,7 @@ export default class Home extends React.Component {
 	render() {
 		this.IndexLoader.renderload();
 		return (
-			<Layout titleText="Home" mainClass="home indo">
+			<Layout titleText="Home" mainClass="home indo" mainID="homeID">
 				<div className="overlay_wrapper">
 					<div className="overlay">
 						<div className="wrapper">

@@ -192,6 +192,9 @@ main.home {
         -webkit-scroll-snap-coordinate: 0% 0%;
         color: white;
 
+        body.snap_on &{
+            overflow: hidden;
+        }
         &>.wrapper {
             & h1 {
                 margin: 0px;
@@ -660,7 +663,7 @@ main.home {
                                 }
                             }
 
-                            &>div.wrapper {
+                            & div.wrapper {
                                 width: calc(100% - 70px - #{$global-padding});
                                 position: relative;
                                 & *:focus {
@@ -673,11 +676,24 @@ main.home {
                                     @include flex-grow(0);
                                     position: relative;
                                     padding: 0px #{$global-padding / 2}; 
-                                     & > div{
+                                     & > *{
                                         width: 100%;
-                                        height: 100%;
                                         height: 150px;
-                                        background: blue;
+                                        display: block;
+                                        & > img{
+                                            object-fit:scale-down;
+                                            width: 80%;
+                                            margin: auto;
+                                            display: block;
+                                            height: 100%;
+                                        }
+                                     }
+                                     & > a{
+                                         @include transition(opacity $global-transition);
+                                         body.onhover &:hover{
+                                            opacity: $global_opacity;
+                                            cursor: pointer;
+                                         }
                                      }
                                 }
                             }
@@ -687,7 +703,7 @@ main.home {
                                     opacity: .25;
                                     pointer-events: none;
                                 }
-                                &>div.wrapper {
+                                & div.wrapper {
                                     display: grid;
                                     grid-template: auto / 1fr 1fr ;
                                     & .shop{

@@ -6,7 +6,7 @@ import { Scrollax } from 'utils/scrollax';
 import { LoaderClass } from 'utils/loader';
 import { InViewportClass } from 'utils/inviewport';
 // import { MediaCheck } from 'utils/mediacheck';
-import { Link } from 'gatsby';
+import { Link, graphql } from 'gatsby';
 import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
 
 // SLICK
@@ -36,18 +36,10 @@ import BenefitEnergy from 'images/symbols/energy.svg';
 import BenefitImmune from 'images/symbols/immune.svg';
 import BenefitExercise from 'images/symbols/exercise.svg';
 
-//INGREDIENTS IMAGES
-import IngCabe from 'images/static/ingredients/cabe.png';
-import IngGinseng from 'images/static/ingredients/ginseng.png';
-import IngJahe from 'images/static/ingredients/jahe_merah.png';
-import IngMaca from 'images/static/ingredients/maca.png';
-import IngPasakBumi from 'images/static/ingredients/pasak_bumi.png';
-import IngPurwaceng from 'images/static/ingredients/purwaceng.png';
-import IngTribulus from 'images/static/ingredients/tribulus.png';
 
 export default class Home extends React.Component {
 	IndexLoader = new LoaderClass({
-		parent: '.home.english',
+		parent: '#homeEN',
 		default_delay: 500,
 		postload: () => {
 			if (typeof document !== `undefined`) {
@@ -188,8 +180,11 @@ export default class Home extends React.Component {
 		}
 	}
 	render() {
-    this.IndexLoader.renderload();
-    
+		this.IndexLoader.renderload();
+		const generalData = this.props.data.general.frontmatter;
+		const homeData = this.props.data.home.frontmatter;
+		const footerData = generalData.footer;
+
 		const sliderSettings = {
 			infinite: true,
 			speed: 500,
@@ -201,17 +196,15 @@ export default class Home extends React.Component {
 				{
 					breakpoint: 750,
 					settings: {
-            slidesToShow: 1,
-            slidesToScroll: 1,
+						slidesToShow: 1,
+						slidesToScroll: 1
 					}
 				}
-			],
-			beforeChange: (current, next) => {
-        console.log('changing',current, next);
-			}
+			]
 		};
+		console.log(homeData);
 		return (
-			<Layout titleText="Home" mainClass="home english">
+			<Layout titleText="Home" mainClass="home" mainID="homeEN">
 				<div className="overlay_wrapper">
 					<div className="overlay">
 						<div className="wrapper">
@@ -244,30 +237,37 @@ export default class Home extends React.Component {
 									</span> */}
 								</div>
 								<div className="social_ctn">
-									<a
-										className="svg"
-										target="_blank"
-										rel="noopener noreferrer"
-										href="https://instagram.com/herbamojo"
-									>
-										<InstagramSVG />
-									</a>
-									<a
-										className="svg"
-										target="_blank"
-										rel="noopener noreferrer"
-										href="https://instagram.com/herbamojo"
-									>
-										<WhatsappSVG />
-									</a>
-									<a
-										className="svg"
-										target="_blank"
-										rel="noopener noreferrer"
-										href="https://instagram.com/herbamojo"
-									>
-										<EmailSVG />
-									</a>
+									{footerData.ig_link !== '' && (
+										<a
+											className="svg"
+											target="_blank"
+											rel="noopener noreferrer"
+											href={footerData.ig_link}
+										>
+											<InstagramSVG />
+										</a>
+									)}
+
+									{footerData.wa_no !== '' && (
+										<a
+											className="svg"
+											target="_blank"
+											rel="noopener noreferrer"
+											href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
+										>
+											<WhatsappSVG />
+										</a>
+									)}
+									{footerData.email !== '' && (
+										<a
+											className="svg"
+											target="_blank"
+											rel="noopener noreferrer"
+											href={`mailto:${footerData.email}`}
+										>
+											<EmailSVG />
+										</a>
+									)}
 								</div>
 							</div>
 						</div>
@@ -283,7 +283,7 @@ export default class Home extends React.Component {
 						</div>
 						<section id="home">
 							<div className="wrapper">
-								<h1 className="hidden">Herbamojo</h1>
+								<h1 className="hidden">{generalData.web_name}</h1>
 								<span className="logo">
 									<img src={HerbamojoLogo} alt="herbamojo" />
 								</span>
@@ -391,57 +391,19 @@ export default class Home extends React.Component {
 							<h1>Ingredients</h1>
 							<div className="content">
 								<div id="ing_sel">
-									<span
-										className="active"
-										onClick={(e) => this.ingredientClick(e)}
-										data-desc="Maca works to increase energy and stamina. Also works as an aphrodisiac"
-									>
-										<span>MACA</span>
-										<span>MACA</span>
-									</span>
-									<span
-										onClick={(e) => this.ingredientClick(e)}
-										data-desc="
-										Ginseng works to increase energy and stamina and support immune function. Also works as an aphrodisiac."
-									>
-										<span>GINSENG</span>
-										<span>GINSENG</span>
-									</span>
-									<span
-										onClick={(e) => this.ingredientClick(e)}
-										data-desc="Red Ginger works to improve blood circulation and increase energy."
-									>
-										<span>RED GINGER</span>
-										<span>RED GINGER</span>
-									</span>
-									<span
-										onClick={(e) => this.ingredientClick(e)}
-										data-desc="Tribulus works to increase male stamina."
-									>
-										<span>TRIBULUS</span>
-										<span>TRIBULUS</span>
-									</span>
-									<span
-										onClick={(e) => this.ingredientClick(e)}
-										data-desc="Long Jack works to increase stamina and as an aphrodisiac."
-									>
-										<span>LONG JACK</span>
-										<span>LONG JACK</span>
-									</span>
-									<span
-										onClick={(e) => this.ingredientClick(e)}
-										data-desc="Purwoceng works to increase stamina and as an aphrodisiac."
-									>
-										<span>PURWOCENG</span>
-										<span>PURWOCENG</span>
-									</span>
-									<span
-										onClick={(e) => this.ingredientClick(e)}
-										data-desc="Javanese Long Pepper works to improve blood circulation."
-									>
-										<span>JAVANESE LONG PEPPER</span>
-										<span>JAVANESE LONG PEPPER</span>
-									</span>
+									{homeData.ingredients.map((node, id) => {
+										return (
+											<span
+												key={id}
+												className="active"
+												onClick={(e) => this.ingredientClick(e)}
+												data-desc={node.desc}
+											>
+												<span>{node.title}</span>
+												<span>{node.title}</span>
+											</span>
+										);
+									})}
 								</div>
 								<div id="ing_display">
 									<div id="ing_display_number">1</div>
@@ -453,13 +415,9 @@ export default class Home extends React.Component {
 						</div>
 						<div className="bg">
 							<div id="ing_bg">
-								<img src={IngMaca} alt="herbamojo" />
-								<img src={IngGinseng} alt="herbamojo" />
-								<img src={IngJahe} alt="herbamojo" />
-								<img src={IngTribulus} alt="herbamojo" />
-								<img src={IngPasakBumi} alt="herbamojo" />
-								<img src={IngPurwaceng} alt="herbamojo" />
-								<img src={IngCabe} alt="herbamojo" />
+								{homeData.ingredients.map((node, id) => {
+									return <img key={id} src={node.image} alt="herbamojo" />;
+								})}
 							</div>
 						</div>
 					</section>
@@ -467,52 +425,186 @@ export default class Home extends React.Component {
 						<div className="wrapper">
 							<h1>SHOP</h1>
 							<div className="content">
-								<div>
-									<h2>ONLINE</h2>
-									<div id="onlineshop" className="shopSlider noslider">
-										<div className="arrow">
-											<Arrow/>
-										</div>
-										<div className="wrapper">
-                        <div className="shop">
-                        <div>1</div>
-                        </div>
-										</div>
-										<div className="arrow">
-											<Arrow/>
-										</div>
-									</div>
-								</div>
-								<div>
-									<h2>OFFLINE</h2>
-									<div id="offlineshop" className="shopSlider">
-										<div className="arrow" 
-												onClick={() => {
-													this.slider.slickPrev();
-												}}>
-											<Arrow/>
-										</div>
+								{homeData.onlineshop.length > 0 && (
+									<div>
+										<h2>ONLINE</h2>
+										<div
+											id="onlineshop"
+											className={`shopSlider ${homeData.onlineshop.length <= 2 && ' noslider'}`}
+										>
+											{homeData.onlineshop.length > 2 ? (
+												<div
+													className="arrow"
+													onClick={() => {
+														if (this.onlineslider) this.onlineslider.slickPrev();
+													}}
+												>
+													<Arrow />
+												</div>
+											) : (
+												<div className="arrow">
+													<Arrow />
+												</div>
+											)}
 
-                    <Slider {...sliderSettings} ref={(c) => (this.slider = c)} className="wrapper">
-                        
-                    <div className="shop">
-                        <div>1</div>
-                        </div>
-                        <div className="shop">
-                        <div>2</div>
-                        </div>
-                        <div className="shop">
-                        <div>3</div>
-                        </div>
-                    </Slider>
-										<div className="arrow" 
-												onClick={() => {
-													this.slider.slickNext();
-												}}>
-											<Arrow/>
+											{homeData.onlineshop.length > 2 ? (
+												<Slider
+													{...sliderSettings}
+													ref={(d) => (this.onlineslider = d)}
+													className="wrapper"
+												>
+													{homeData.onlineshop.map((node, id) => {
+														return (
+															<div className="shop" key={id}>
+																{node.link ? (
+																	<a
+																		className="svg"
+																		target="_blank"
+																		rel="noopener noreferrer"
+																		href={node.link}
+																	>
+																		<img src={node.image} alt="herbamojo" />
+																	</a>
+																) : (
+																	<div>
+																		<img src={node.image} alt="herbamojo" />
+																	</div>
+																)}
+															</div>
+														);
+													})}
+												</Slider>
+											) : (
+												<div className="wrapper">
+													{homeData.onlineshop.map((node, id) => {
+														return (
+															<div className="shop" key={id}>
+																{node.link ? (
+																	<a
+																		className="svg"
+																		target="_blank"
+																		rel="noopener noreferrer"
+																		href={node.link}
+																	>
+																		<img src={node.image} alt="herbamojo" />
+																	</a>
+																) : (
+																	<div>
+																		<img src={node.image} alt="herbamojo" />
+																	</div>
+																)}
+															</div>
+														);
+													})};
+												</div>
+											)}
+											{homeData.onlineshop.length > 2 ? (
+												<div
+													className="arrow"
+													onClick={() => {
+														if (this.onlineslider) this.onlineslider.slickNext();
+													}}
+												>
+													<Arrow />
+												</div>
+											) : (
+												<div className="arrow">
+													<Arrow />
+												</div>
+											)}
 										</div>
 									</div>
-								</div>
+								)}
+								{homeData.offlineshop.length > 0 && (
+									<div>
+										<h2>OFFLINE</h2>
+										<div
+											id="offlineshop"
+											className={`shopSlider ${homeData.offlineshop.length <= 2 && ' noslider'}`}
+										>
+											{homeData.offlineshop.length > 2 ? (
+												<div
+													className="arrow"
+													onClick={() => {
+														if (this.offlineslider) this.offlineslider.slickPrev();
+													}}
+												>
+													<Arrow />
+												</div>
+											) : (
+												<div className="arrow">
+													<Arrow />
+												</div>
+											)}
+
+											{homeData.offlineshop.length > 2 ? (
+												<Slider
+													{...sliderSettings}
+													ref={(c) => (this.offlineslider = c)}
+													className="wrapper"
+												>
+													{homeData.offlineshop.map((node, id) => {
+														return (
+															<div className="shop" key={id}>
+																{node.link ? (
+																	<a
+																		className="svg"
+																		target="_blank"
+																		rel="noopener noreferrer"
+																		href={node.link}
+																	>
+																		<img src={node.image} alt="herbamojo" />
+																	</a>
+																) : (
+																	<div>
+																		<img src={node.image} alt="herbamojo" />
+																	</div>
+																)}
+															</div>
+														);
+													})}
+												</Slider>
+											) : (
+												<div className="wrapper">
+													{homeData.offlineshop.map((node, id) => {
+														return (
+															<div className="shop" key={id}>
+																{node.link ? (
+																	<a
+																		className="svg"
+																		target="_blank"
+																		rel="noopener noreferrer"
+																		href={node.link}
+																	>
+																		<img src={node.image} alt="herbamojo" />
+																	</a>
+																) : (
+																	<div>
+																		<img src={node.image} alt="herbamojo" />
+																	</div>
+																)}
+															</div>
+														);
+													})}
+												</div>
+											)}
+											{homeData.offlineshop.length > 2 ? (
+												<div
+													className="arrow"
+													onClick={() => {
+														if (this.offlineslider) this.offlineslider.slickNext();
+													}}
+												>
+													<Arrow />
+												</div>
+											) : (
+												<div className="arrow">
+													<Arrow />
+												</div>
+											)}
+										</div>
+									</div>
+								)}
 							</div>
 						</div>
 					</section>
@@ -527,3 +619,36 @@ export default class Home extends React.Component {
 		);
 	}
 }
+
+export const query = graphql`
+	query {
+		general: markdownRemark(frontmatter: { issetting: { eq: true }, contenttype: { eq: "general_setting" } }) {
+			frontmatter {
+				web_name
+				footer {
+					email
+					ig_link
+					wa_no
+				}
+			}
+		}
+		home: markdownRemark(frontmatter: { issetting: { eq: true }, contenttype: { eq: "home_setting" } }) {
+			frontmatter {
+				title
+				ingredients {
+					image
+					title
+					desc
+				}
+				onlineshop {
+					image
+					link
+				}
+				offlineshop {
+					image
+					link
+				}
+			}
+		}
+	}
+`;

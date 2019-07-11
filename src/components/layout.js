@@ -8,13 +8,11 @@ export default class Layout extends React.Component {
 		return (
 			<StaticQuery
 				query={graphql`
-					query GeneralSetting {
+					query LayoutQuery {
 						markdownRemark(
 							frontmatter: { issetting: { eq: true }, contenttype: { eq: "general_setting" } }
 						) {
 							frontmatter {
-								issetting
-								contenttype
 								title
 								web_name
 								seo {
@@ -43,7 +41,7 @@ export default class Layout extends React.Component {
 					};
 
 					return (
-						<main className={props.mainClass}>
+						<main className={props.mainClass} id={props.mainID}>
 							<Helmet>
 								<meta charSet="utf-8" />
 								<title>{props.titleText ? `${props.titleText} | ${web_name}` : web_name}</title>

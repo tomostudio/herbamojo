@@ -35,9 +35,9 @@ export class LoaderClass {
         if (obj.intervalcheck !== null && obj.intervalcheck !== undefined && typeof obj.intervalcheck === 'function') this.intervalcheck = obj.intervalcheck_function;
         if (obj.postload !== null && obj.postload !== undefined && typeof obj.postload === 'function') this.postload = obj.postload;
 
-        if(obj.firstload_delay)this.delay.firstload = obj.firstload_delay;
-        if(obj.default_delay)this.delay.default = obj.default_delay;
-        if(obj.reload_delay)this.delay.reload = obj.reload_delay;
+        if (obj.firstload_delay) this.delay.firstload = obj.firstload_delay;
+        if (obj.default_delay) this.delay.default = obj.default_delay;
+        if (obj.reload_delay) this.delay.reload = obj.reload_delay;
 
         if (!this.images.check) this.loadcheck.images = true;
 
@@ -79,31 +79,35 @@ export class LoaderClass {
             this.loadcheck.images = false;
             this.images.init = true;
             if (this.parent !== null) {
-                this.images.list = document.querySelector(this.parent).querySelectorAll('img');
+                if (document.querySelector(this.parent)) this.images.list = document.querySelector(this.parent).querySelectorAll('img');
             } else {
-                this.images.list = document.querySelectorAll('img');
+                if (document.querySelectorAll('img')) this.images.list = document.querySelectorAll('img');
             }
-
             this.imageload();
         }
     }
     imageload() {
         if (this.images.check) {
-            this.images.list.forEach((image) => {
-                const eachimageloaded = (e) => {
-                    e.target.removeEventListener("load", eachimageloaded.bind(this), false);
-                    this.images.loaded++;
-                    this.imageloadfinish();
-                }
-                image.addEventListener("load", eachimageloaded.bind(this), false);
-            });
+            if (this.images.list && this.images.list.length > 0) {
+                this.images.list.forEach((image) => {
+                    const eachimageloaded = (e) => {
+                        e.target.removeEventListener("load", eachimageloaded.bind(this), false);
+                        this.images.loaded++;
+                        this.imageloadfinish();
+                    }
+                    image.addEventListener("load", eachimageloaded.bind(this), false);
+                });
+            } else {
+                this.loadcheck.images = true;
+                this.images.init = false;
+                this.load();
+            }
         }
     }
     imageloadfinish() {
         if (this.images.loaded >= this.images.list.length) {
             this.loadcheck.images = true;
             this.images.init = false;
-
             this.load();
         }
     }
