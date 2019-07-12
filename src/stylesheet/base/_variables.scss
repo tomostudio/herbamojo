@@ -21,6 +21,8 @@ $global_opacity: .5;
 //SPECIFIC
 $home-offcenter: 200px;
 $mobileinnersection-maxwidth: 360px;
+$mobileHeaderHeight: 80px;
+$mobileSocialMedia: 35px;
 
 // ==========================================================================
 // REPONSIVE SIZES
@@ -52,7 +54,6 @@ $lineheight-heading2-m: 35px;
 
 $font-size-button: 21px;
 $lineheight-button: 16px;
-
 $font-size-button-m: 16px;
 $lineheight-button-m: 14px;
 
@@ -120,6 +121,61 @@ $font-size-subbody: 20px;
     100% {
         @include transform(translate(00px, 0%));
         opacity: 1;
+    }
+}
+
+@include keyframes(mobilemenuout) {
+    0% {
+        width: 100%;
+        right: 0px;
+        left: auto;
+    }
+
+    100% {
+        width: 0%;
+        right: 0px;
+        left: auto;
+    }
+}
+@include keyframes(mobilemenuin1) {
+    0% {
+        width: 0%;
+        left: 0px;
+        right: auto;
+    }
+
+    50%, 100% {
+        width: 100%;
+        left: 0px;
+        right: auto;
+    }
+}
+
+@include keyframes(mobilemenuin2) {
+    0%, 25% {
+        width: 0%;
+        left: 0px;
+        right: auto;
+    }
+
+    75%, 100% {
+        width: 100%;
+        left: 0px;
+        right: auto;
+    }
+}
+
+@include keyframes(mobilemenuin3) {
+    0%, 50% {
+        width: 0%;
+        left: 0px;
+        right: auto;
+    }
+
+    100% {
+        width: 100%;
+        left: 0px;
+        right: auto;
     }
 }
 

@@ -226,7 +226,8 @@ export const ScrollSnap = {
                 //     scrollPos = each.offsetHeight - ScrollSnap.common.windowHeight();
                 // }
 
-                ScrollSnap.v.sections.targets.push(each.getBoundingClientRect().top);
+				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                ScrollSnap.v.sections.targets.push((each.getBoundingClientRect().top + scrollTop));
 
                 if (ScrollSnap.v.hasfooter && ((index + 1) === ScrollSnap.v.sections.length)) {
                     let footeroffset = each.offsetHeight - ScrollSnap.common.windowHeight();

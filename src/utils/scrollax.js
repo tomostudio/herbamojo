@@ -59,7 +59,7 @@ export class Scrollax {
     kill() {
         window.removeEventListener('scroll', this.scrollevent.bind(this), false);
     }
-    scrollevent(e) {
+    trigger(){
         const windowH = window.innerHeight || document.documentElement.clientHeight;
         if (this.scrolltarget !== null) {
             let movement = {
@@ -94,7 +94,10 @@ export class Scrollax {
                 movement.y = this.transform.y > 0 ? Math.round(this.scrolltarget.getBoundingClientRect().y / windowH * 100 * this.transform.y) : 0;
                 this.scrolltarget.style.transform = `transform(${movement.x}%, ${movement.y}%)`;
             }
-
         }
+    }
+    scrollevent(e) {
+        console.log('scroll trigger');
+        this.trigger();
     }
 }

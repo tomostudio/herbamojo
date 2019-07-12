@@ -1,25 +1,28 @@
 import React from 'react';
-import Layout from 'components/layout';
-import Footer from 'components/footer';
-import MobileHeader from 'components/mobileheader';
+import { Link, graphql } from 'gatsby';
+import Slider from 'react-slick';
+//UTILS
 import { ScrollSnap } from 'utils/scrollsnap';
 import { Scrollax } from 'utils/scrollax';
 import { ScrollIt } from 'utils/scrollit';
 import { LoaderClass } from 'utils/loader';
 import { InViewportClass } from 'utils/inviewport';
 import { MediaCheck } from 'utils/mediacheck';
-import { Link, graphql } from 'gatsby';
-import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
+import { ResponsiveVH } from 'utils/responsivevh';
 
-// SLICK
-import Slider from 'react-slick';
+//COMPONENTS
+import Layout from 'components/layout';
+import Footer from 'components/footer';
+import MobileHeader from 'components/mobileheader';
 
 //JS SVG
 import InstagramSVG from 'svg/instagram.js';
 import EmailSVG from 'svg/email.js';
 import WhatsappSVG from 'svg/whatsapp.js';
-import { Arrow , ArrowSmaller} from 'svg/symbols.js';
+import { Arrow, ArrowSmaller } from 'svg/symbols.js';
 
+//IMAGES
+import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
 import BottleImg from 'images/static/herbamojo_productshot.png';
 
 //SVG CERT
@@ -150,6 +153,8 @@ export default class Home extends React.Component {
 
 			// INIT RESIZE
 			this.resize();
+
+			this.forceVH = new ResponsiveVH({ target: '.fitheight' });
 		}
 	});
 	inview = {
@@ -169,6 +174,7 @@ export default class Home extends React.Component {
 	};
 	snapNav = null;
 	scrollsnap = null;
+	forceVH = null;
 	componentDidMount() {
 		if (typeof document !== `undefined`) {
 			document.body.classList.remove('loaded');
@@ -189,6 +195,7 @@ export default class Home extends React.Component {
 		if (this.scrollax.home_mobile) this.scrollax.home_mobile.kill();
 		// if (ScrollSnap) ScrollSnap.kill();
 
+		document.body.classList.remove('menu_open');
 		this.snapNav.forEach((nav, index) => {
 			nav.onClick = null;
 		});
@@ -197,17 +204,23 @@ export default class Home extends React.Component {
 			window.removeEventListener('resize', this.resize, false);
 		}
 	}
+	scrollaxCallibrate() {
+		if (this.scrollax.one) this.scrollax.one.trigger();
+		if (this.scrollax.two) this.scrollax.two.trigger();
+		if (this.scrollax.ing_bg) this.scrollax.ing_bg.trigger();
+		if (this.scrollax.home_mobile) this.scrollax.home_mobile.trigger();
+	}
 	resize() {
-
 		//ADJUST INGREDIENTS DESCRIPTION MOBILE HEIGHT
 		const ingDescMobile = document.querySelectorAll('#ing_sel > span > div:last-child > div');
 		let height = [];
-		ingDescMobile.forEach(desc => {
+		ingDescMobile.forEach((desc) => {
 			height.push(desc.clientHeight);
 			desc.parentNode.style.height = desc.clientHeight.toString() + 'px';
-		})
-
-
+		});
+		if (!MediaCheck.width.mobile) {
+			document.body.classList.remove('menu_open');
+		}
 	}
 	gotoShop() {
 		if (MediaCheck.width.mobile()) {
@@ -279,6 +292,33 @@ export default class Home extends React.Component {
 			}, delay);
 		}
 	}
+	menuToggle() {
+		if (typeof document !== `undefined`) {
+			if (document.body.classList.contains('menu_open')) {
+				document.body.classList.remove('menu_open');
+			} else {
+				document.body.classList.add('menu_open');
+			}
+		}
+	}
+	mobileScroll(e) {
+		if (e.currentTarget != null) {
+			let child = e.currentTarget;
+			let index = 0;
+			while ((child = child.previousSibling) != null) index++;
+			const sections = document.querySelectorAll('main.home section');
+			if (sections != null && sections[index]) {
+				const elTop = sections[index].getBoundingClientRect().top;
+				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+				window.scrollTo(0, elTop + scrollTop);
+				// ScrollIt(elTop + scrollTop, 50);
+				setTimeout(() => {
+					this.scrollaxCallibrate();
+				}, 10);
+				this.menuToggle();
+			}
+		}
+	}
 	render() {
 		this.IndexLoader.renderload();
 		const generalData = this.props.data.general.frontmatter;
@@ -309,6 +349,67 @@ export default class Home extends React.Component {
 		return (
 			<Layout titleText="Home" mainClass="home" mainID="homeEN">
 				<MobileHeader indonesia={false} />
+				{/* MOBILE NAVIGATION */}
+				<div id="MobileNavigation">
+					<div>
+						<div className="menubutton" onClick={(e) => this.menuToggle(e)}>
+							<span />
+							<span />
+							<span />
+						</div>
+					</div>
+					<div className="fitheight">
+						<div>
+							<div className="closebutton" onClick={(e) => this.menuToggle(e)}>
+								<span />
+								<span />
+							</div>
+						</div>
+						<div className="fitheight">
+							<span onClick={(e) => this.mobileScroll(e)}>HOME</span>
+							<span onClick={(e) => this.mobileScroll(e)}>ABOUT</span>
+							<span onClick={(e) => this.mobileScroll(e)}>BENEFITS</span>
+							<span onClick={(e) => this.mobileScroll(e)}>INGREDIENTS</span>
+							<span onClick={(e) => this.mobileScroll(e)}>SHOP</span>
+							{/* <span>JOURNAL</span> */}
+							<div>
+								<div>
+									{footerData.ig_link !== '' && (
+										<a
+											className="svg"
+											target="_blank"
+											rel="noopener noreferrer"
+											href={footerData.ig_link}
+										>
+											<InstagramSVG />
+										</a>
+									)}
+
+									{footerData.wa_no !== '' && (
+										<a
+											className="svg"
+											target="_blank"
+											rel="noopener noreferrer"
+											href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
+										>
+											<WhatsappSVG />
+										</a>
+									)}
+									{footerData.email !== '' && (
+										<a
+											className="svg"
+											target="_blank"
+											rel="noopener noreferrer"
+											href={`mailto:${footerData.email}`}
+										>
+											<EmailSVG />
+										</a>
+									)}
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
 				<div className="overlay_wrapper">
 					<div className="overlay">
 						<div className="wrapper">
@@ -502,7 +603,9 @@ export default class Home extends React.Component {
 													<span>{node.title}</span>
 													<span>{node.title}</span>
 												</div>
-												<div><div>{node.desc}</div></div>
+												<div>
+													<div>{node.desc}</div>
+												</div>
 											</span>
 										);
 									})}
@@ -532,7 +635,9 @@ export default class Home extends React.Component {
 										<h2>ONLINE</h2>
 										<div
 											id="onlineshop"
-											className={`shopSlider ${homeData.onlineshop.length === 1 ? ' oneslide' : ''} ${homeData.onlineshop.length === 2 ? ' twoslide' : ''}`}
+											className={`shopSlider ${homeData.onlineshop.length === 1
+												? ' oneslide'
+												: ''} ${homeData.onlineshop.length === 2 ? ' twoslide' : ''}`}
 										>
 											{homeData.onlineshop.length > 1 ? (
 												<div
@@ -626,7 +731,9 @@ export default class Home extends React.Component {
 										<h2>OFFLINE</h2>
 										<div
 											id="offlineshop"
-											className={`shopSlider ${homeData.offlineshop.length === 1 ? ' oneslide' : ''} ${homeData.offlineshop.length === 2 ? ' twoslide' : ''}`}
+											className={`shopSlider ${homeData.offlineshop.length === 1
+												? ' oneslide'
+												: ''} ${homeData.offlineshop.length === 2 ? ' twoslide' : ''}`}
 										>
 											{homeData.offlineshop.length > 1 ? (
 												<div
@@ -757,6 +864,8 @@ export const query = graphql`
 					image
 					title
 					desc
+					titleid
+					descid
 				}
 				onlineshop {
 					image

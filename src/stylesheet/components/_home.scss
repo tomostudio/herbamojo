@@ -990,16 +990,20 @@ main.home {
 
                         @include respond-to(mobile) {
                             margin-bottom: #{ $globalmobile-padding * 2};
+
                             &:last-child {
                                 margin-bottom: 0px;
                             }
                         }
+
                         $arrowwidth: 34px;
                         $mobilearrowwidth: 12px;
+
                         &>div.shopSlider {
                             width: 100%;
                             margin-top: $global-padding / 2;
                             @include setflex(row, nowrap, space-between, center, center);
+
                             @include respond-to(mobile) {
                                 max-width: $mobileinnersection-maxwidth;
                                 margin: #{ $globalmobile-padding * 1.5} auto 0px;
@@ -1039,6 +1043,7 @@ main.home {
                                         &.mobile {
                                             display: block;
                                         }
+
                                         & .stroke {
                                             stroke: $color_green;
                                         }
@@ -1048,9 +1053,11 @@ main.home {
                                         }
                                     }
                                 }
-                                &:last-child{
+
+                                &:last-child {
                                     @include transform(rotate(180deg));
                                 }
+
                                 body.onhover &:hover {
 
                                     & svg {
@@ -1061,11 +1068,12 @@ main.home {
                                         & .fill {
                                             fill: $color_green;
                                         }
+
                                         @include respond-to(mobile) {
                                             & .stroke {
                                                 stroke: white;
                                             }
-    
+
                                             & .fill {
                                                 fill: white;
                                             }
@@ -1078,9 +1086,10 @@ main.home {
                                 width: calc(100% - #{$arrowwidth * 2} - #{$global-padding});
                                 position: relative;
                                 margin: 0px #{$global-padding / 2};
-                                @include respond-to(mobile){
+
+                                @include respond-to(mobile) {
                                     margin: 0px #{$globalmobile-padding};
-                                    width: calc(100% - #{$mobilearrowwidth * 2}  - #{$globalmobile-padding * 2});
+                                    width: calc(100% - #{$mobilearrowwidth * 2} - #{$globalmobile-padding * 2});
                                 }
 
                                 & *:focus {
@@ -1127,6 +1136,7 @@ main.home {
                                     }
                                 }
                             }
+
                             &.oneslide {
                                 &>.arrow {
                                     opacity: .25;
@@ -1238,6 +1248,254 @@ main.home {
 
                 body.onhover &:hover {
                     color: white;
+                }
+            }
+        }
+    }
+
+    & #MobileNavigation {
+        display: none;
+
+        @include respond-to(mobile) {
+            display: block;
+        }
+
+        &>div:first-child {
+            position: fixed;
+            top: 0px;
+            right: 0px;
+            height: $mobileHeaderHeight;
+            padding: $globalmobile-padding;
+            @include setflex(row, nowrap);
+            z-index: 12;
+
+            &>div {
+                width: 26px;
+                pointer-events: auto;
+                cursor: pointer;
+
+                &>span {
+                    width: 26px;
+                    height: 4px;
+                    background: white;
+                    display: block;
+                    margin-bottom: 4px;
+                    position: relative;
+
+                    &::after {
+                        @include pseudo;
+                        position: absolute;
+                        top: 0px;
+                        left: auto;
+                        right: 0px;
+                        width: 0%;
+                        height: 100%;
+                        background: $color_green;
+                        // @include transition(width $global-transition);
+                        @include animation(mobilemenuout .25s ease 1 forwards);
+                    }
+
+                    &:last-child {
+                        margin-bottom: 0px;
+                    }
+                }
+
+                body.onhover &:hover {
+                    $transitionspeed: .5s;
+
+                    &>span {
+                        background: $color_green;
+                        @include transition(background 0s $transitionspeed);
+
+                        &:nth-child(1)::after {
+                            @include animation(mobilemenuin1 $transitionspeed ease 1 forwards);
+                        }
+
+                        &:nth-child(2)::after {
+                            @include animation(mobilemenuin2 $transitionspeed ease 1 forwards);
+                        }
+
+                        &:nth-child(3)::after {
+                            @include animation(mobilemenuin3 $transitionspeed ease 1 forwards);
+                        }
+                    }
+                }
+            }
+        }
+
+        &>div:nth-child(2) {
+            position: fixed;
+            width: 100vw;
+            height: 100vh;
+            z-index: 12;
+            background: $color_green;
+            overflow: hidden;
+            @include transition(all .4s);
+
+            body:not(.menu_open) & {
+                height: 0px;
+            }
+
+            &>div:first-child {
+                position: fixed;
+                top: 0px;
+                right: 0px;
+                height: $mobileHeaderHeight;
+                padding: $globalmobile-padding;
+                @include setflex(row, nowrap);
+                pointer-events: none;
+                z-index: 12;
+
+                &>div {
+                    width: 26px;
+                    height: 26px;
+                    pointer-events: auto;
+                    cursor: pointer;
+                    position: relative;
+                    @include transition(opacity .4s .2s);
+
+                    body:not(.menu_open) & {
+                        pointer-events: none !important;
+                        @include transition(opacity .2s);
+                        opacity: 0;
+                    }
+
+                    &>span {
+                        width: 26px;
+                        height: 4px;
+                        display: block;
+                        position: absolute;
+                        top: 50%;
+                        left: 50%;
+                        @include transform(translate(-50%, -50%) rotate(45deg));
+                        @include transition(background $global-transition);
+
+                        &::after {
+                            @include pseudo;
+                            position: absolute;
+                            top: 0px;
+                            left: 0px;
+                            right: auto;
+                            width: 100%;
+                            height: 100%;
+                            background: white;
+                            z-index: 5;
+                            @include transition(background $global-transition, width .4s .2s);
+
+                            body:not(.menu_open) & {
+                                @include transition(background $global-transition, width 0s .5s);
+                                width: 0%;
+                            }
+                        }
+
+                        &:last-child {
+                            @include transform(translate(-50%, -50%)rotate(-45deg));
+
+                            &::after {
+                                @include transition(background $global-transition, width .4s .4s);
+
+                                body:not(.menu_open) & {
+                                    @include transition(background $global-transition, width 0s .5s);
+                                }
+                            }
+                        }
+                    }
+
+                    body.onhover &:hover {
+                        &>span {
+                            &::after {
+                                background: black;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &>div:nth-child(2) {
+                display: none;
+
+                @include respond-to(mobile) {
+                    // display: grid;
+                    // grid-template: auto auto auto auto/ 1fr;
+                    // justify-items: center;
+                    @include setflex(column, nowrap, space-between, center, center);
+                }
+
+                &::after,
+                &::before {
+                    @include pseudo;
+                    position: relative;
+                    height: 3vh;
+                    min-height: 20px;
+                    pointer-events: none;
+                    width: 100%;
+                }
+                width: 100vw;
+                height: 100vh;
+                border: solid thin red;
+                overflow: auto;
+                padding: 50px;
+                @include padding-safe-bottom(50px);
+                @include padding-safe-top(50px);
+                font-size: 48px;
+                line-height: 64px;
+                font-family: 'Amarillo';
+                &>span {
+                    cursor: pointer;
+                    color: black;
+                    @include transition(color $global-transition);
+
+                    body.onhover &:hover {
+                        color: white;
+
+                    }
+                }
+
+                &>div:last-child {
+                    width: 100%;
+                    &::before {
+                        @include pseudo;
+                        position: relative;
+                        height: 4vh;
+                        min-height: 20px;
+                        max-height: 40px;
+                        pointer-events: none;
+                        width: 100%;
+                    }
+                    &>div {
+                        @include setflex(row, nowrap, center, center, center);
+                        width: 100%;
+                        &>a {
+                            @include flex-grow(0);
+                            display: block;
+                            margin: 0px 5px;
+                            width: $mobileSocialMedia;
+                            height: $mobileSocialMedia;
+                            @include transition(opacity $global-transition);
+
+                            &.svg>svg {
+                                width: 100%;
+                                height: auto;
+                                display: block;
+                            }
+
+                            &>img {
+                                height: 100%;
+                            }
+
+                            body.onhover &:hover {
+                                opacity: $global_opacity;
+                            }
+
+                            &.svg {
+                                @include transition(opacity 0s);
+
+                                body.onhover &:hover {
+                                    opacity: 1;
+                                }
+                            }
+                        }
+                    }
                 }
             }
         }
