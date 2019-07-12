@@ -627,10 +627,6 @@ main.home {
                             padding: 0px $globalmobile-padding;
                             border: solid thin transparent;
                             @include transition(all $global-transition);
-
-                            &.inview {
-                                border: solid thin red;
-                            }
                         }
 
                         &>img {
@@ -1432,7 +1428,6 @@ main.home {
                 }
                 width: 100vw;
                 height: 100vh;
-                border: solid thin red;
                 overflow: auto;
                 padding: 50px;
                 @include padding-safe-bottom(50px);
