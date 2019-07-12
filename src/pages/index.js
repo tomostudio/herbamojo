@@ -303,7 +303,9 @@ export default class Home extends React.Component {
 			]
 		};
 
-		window.addEventListener('resize', this.resize, false);
+		if (typeof document !== `undefined`) {
+			window.addEventListener('resize', this.resize, false);
+		}
 		return (
 			<Layout titleText="Home" mainClass="home" mainID="homeEN">
 				<MobileHeader indonesia={false} />
