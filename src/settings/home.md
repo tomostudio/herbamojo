@@ -2,6 +2,13 @@
 issetting: true
 contenttype: home_setting
 title: Home Setting
+home:
+  background: /assets/images/herbamojo_homebg.jpg
+  backgroundmobile: /assets/images/herbamojo_productshot3.jpg
+about:
+  background: /assets/images/herbamojo_lifestylebg.jpg
+  desc: 'HERBAMOJO is a high quality herbal formula to support male stamina.HERBAMOJO contains 7 key herbal ingredients that works optimally to help improve energy, immunity and performance.'
+  descid: ''
 ingredients:
   - title: MACA
     titleid: MACA
@@ -48,8 +55,6 @@ onlineshop:
     link: https://tokopedia.com
 
 offlineshop:
-  - image: /assets/shop/purefoods.png
-    link: https://google.com
   - image: /assets/shop/purefoods.png
     link: https://google.com
 ---

@@ -8,6 +8,10 @@ export const ScrollSnap = {
             treshold: 0,
             enable: true,
         },
+        responsiveHeight: {
+            treshold: 0,
+            enable: true,
+        },
         sections: {
             identifier: '',
             all: null,
@@ -75,6 +79,7 @@ export const ScrollSnap = {
         ScrollSnap.v.nav.hideoncover = obj.hide_nav_oncover !== undefined ? obj.hide_nav_oncover : false;
         ScrollSnap.v.nav.hideonfooter = obj.hide_nav_onfooter !== undefined ? obj.hide_nav_onfooter : true;
         ScrollSnap.v.responsiveWidth.treshold = obj.responsive_width || 0;
+        ScrollSnap.v.responsiveHeight.treshold = obj.responsive_height || 0;
         ScrollSnap.v.nav.identifier = obj.snap_identifier !== undefined ? obj.snap_identifier : '';
         ScrollSnap.v.nav.childClass = obj.snap_child_identifier !== undefined ? obj.snap_child_identifier : '> *';
         ScrollSnap.v.nav.activeClass = obj.snap_active_class || 'active';
@@ -120,8 +125,7 @@ export const ScrollSnap = {
             //CHECK ALL SECTIONS AND DISABLE SNAP IF ANY OF THE SECTIONS HAS HEIGHT BIGGER THAN THE WINDOW
             let navAtrCheck = true;
             ScrollSnap.v.sections.all.forEach((each) => {
-                // 
-                if (each.clientHeight > ScrollSnap.common.windowHeight()) {
+                if (each.clientHeight > ScrollSnap.common.windowHeight() ||  ScrollSnap.common.windowHeight() < ScrollSnap.v.responsiveHeight.treshold) {
                     checkheight = true;
                 }
 
@@ -213,13 +217,16 @@ export const ScrollSnap = {
             ScrollSnap.v.sections.targets = [];
 
             ScrollSnap.v.sections.all.forEach((each, index) => {
-                let scrollPos;
-                if (index !== 0) {
-                    scrollPos = ScrollSnap.v.sections.targets[index - 1] + each.offsetHeight;
-                } else {
-                    scrollPos = each.offsetHeight - ScrollSnap.common.windowHeight();
-                }
-                ScrollSnap.v.sections.targets.push(scrollPos);
+                // let scrollPos;
+
+                // console.log(each.getBoundingClientRect().y, each.getBoundingClientRect().top);
+                // if (index !== 0) {
+                //     scrollPos = ScrollSnap.v.sections.targets[index - 1] + each.offsetHeight;
+                // } else {
+                //     scrollPos = each.offsetHeight - ScrollSnap.common.windowHeight();
+                // }
+
+                ScrollSnap.v.sections.targets.push(each.getBoundingClientRect().top);
 
                 if (ScrollSnap.v.hasfooter && ((index + 1) === ScrollSnap.v.sections.length)) {
                     let footeroffset = each.offsetHeight - ScrollSnap.common.windowHeight();

@@ -14,23 +14,25 @@ $loading-transition: .5s;
 // COMMON VAR
 
 $global-padding: 40px;
+$globalmobile-padding: 20px;
 $global-maxwidth: 1280px;
 $global_opacity: .5;
+
+//SPECIFIC
+$home-offcenter: 200px;
+$mobileinnersection-maxwidth: 360px;
+
 // ==========================================================================
 // REPONSIVE SIZES
 
 // WIDTH
 $break-smaller: 450px; // MOBILE
-$break-small: 750px; // MOBILE
+$break-small: 700px; // MOBILE
 $break-medium: 1024px; // TABLET
 $break-large: 1240px; // DESKTOP M
 
 // HEIGHT
 $height-break: 500px;
-
-//SPECIFIC
-$home-offcenter: 200px;
-
 
 // ==========================================================================
 // FONT SIZES
@@ -39,11 +41,20 @@ $font-size-title: 60px;
 $lineheight-title: 40px;
 $letterspacing-title: 2px;
 
+$font-size-title-m: 60px;
+$lineheight-title-m: 40px;
+$letterspacing-title-m: 2px;
+
 $font-size-heading2: 40px;
 $lineheight-heading2: 40px;
+$font-size-heading2-m: 35px;
+$lineheight-heading2-m: 35px;
 
 $font-size-button: 21px;
 $lineheight-button: 16px;
+
+$font-size-button-m: 16px;
+$lineheight-button-m: 14px;
 
 $font-size-body: 24px;
 $font-size-subbody: 20px;
@@ -55,13 +66,13 @@ $font-size-subbody: 20px;
 
     0%,
     1% {
-        @include transform(translate(100px, -50%));
+        @include transform(translate(100px, 0%));
         opacity: 1;
     }
 
     75%,
     100% {
-        @include transform(translate(0px, -50%));
+        @include transform(translate(0px, 0%));
         opacity: 0;
     }
 }
@@ -71,13 +82,43 @@ $font-size-subbody: 20px;
 
     0%,
     25% {
-        @include transform(translate(200px, -50%));
+        @include transform(translate(200px, 0%));
         opacity: 0;
     }
 
     90%,
     100% {
-        @include transform(translate(100px, -50%));
+        @include transform(translate(100px, 0%));
+        opacity: 1;
+    }
+}
+@include keyframes(ingbg_transitionoutm) {
+
+    0%,
+    1% {
+        @include transform(translate(0px, 0%));
+        opacity: 1;
+    }
+
+    75%,
+    100% {
+        @include transform(translate(-100px, 0%));
+        opacity: 0;
+    }
+}
+
+
+@include keyframes(ingbg_transitioninm) {
+
+    0%,
+    25% {
+        @include transform(translate(100px, 0%));
+        opacity: 0;
+    }
+
+    90%,
+    100% {
+        @include transform(translate(00px, 0%));
         opacity: 1;
     }
 }
@@ -114,7 +155,7 @@ $font-size-subbody: 20px;
         left: auto;
     }
 
-    90% {
+    99% {
         width: 0%;
         right: 0px;
         left: auto;
@@ -124,6 +165,51 @@ $font-size-subbody: 20px;
         width: 0%;
         left: 0px;
         right: auto;
+    }
+}
+
+@include keyframes(loadingbeforemobile) {
+    0% {
+        height: 0%;
+        top: 0px;
+        bottom: auto;
+    }
+
+    33% {
+        height: 100%;
+        top: 0px;
+        bottom: auto;
+    }
+
+    66% {
+        height: 100%;
+        top: 0px;
+        bottom: auto;
+    }
+
+    99%,
+    100% {
+        height: 0%;
+        top: 0px;
+        bottom: auto;
+    }
+
+    66.5% {
+        height: 100%;
+        bottom: 0px;
+        top: auto;
+    }
+
+    99% {
+        height: 0%;
+        bottom: 0px;
+        top: auto;
+    }
+
+    100% {
+        height: 0%;
+        top: 0px;
+        bottom: auto;
     }
 }
 
@@ -153,7 +239,7 @@ $font-size-subbody: 20px;
         left: auto;
     }
 
-    90% {
+    99% {
         width: 0%;
         right: 0px;
         left: auto;
@@ -163,5 +249,55 @@ $font-size-subbody: 20px;
         width: 0%;
         left: 0px;
         right: auto;
+    }
+}
+
+@include keyframes(loadingaftermobile) {
+    0% {
+        height: 0%;
+        top: 0px;
+        bottom: auto;
+    }
+
+    33% {
+        height: 0%;
+        top: 0px;
+        bottom: auto;
+    }
+
+    66% {
+        height: 100%;
+        top: 0px;
+        bottom: auto;
+    }
+
+    66.5% {
+        height: 100%;
+        bottom: 0px;
+        top: auto;
+    }
+
+    99% {
+        height: 0%;
+        bottom: 0px;
+        top: auto;
+    }
+
+    100% {
+        height: 0%;
+        top: 0px;
+        bottom: auto;
+    }
+}
+
+@mixin mobilegaptop() {
+    &::before{
+        @include pseudo();
+        position: relative;
+        height: 7.5vh;
+        min-height: 75px;
+        max-height: 120px;
+        pointer-events: none;
+        width: 100%;
     }
 }

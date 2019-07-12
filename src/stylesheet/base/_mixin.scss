@@ -1,10 +1,3 @@
-// WIDTH
-$break-smaller: 450px; // MOBILE
-$break-small: 750px; // MOBILE
-$break-medium: 1024px; // TABLET
-$break-large: 1240px; // DESKTOP M
-
-$height-break: 350px;
 
 //MEDIA MIXIN
 @mixin respond-to($media) {
@@ -22,12 +15,17 @@ $height-break: 350px;
     }
   }
 
-  @else if $media==mobile_smaller {
+  @else if $media==smaller {
     @media only screen and (max-width: $break-smaller) {
       @content;
     }
   }
 
+  @else if $media==not_tablet {
+    @media only screen and (min-width: $break-medium) {
+      @content;
+    }
+  }
   @else if $media==tablet {
     @media only screen and (max-width: $break-medium - 1) {
       @content;

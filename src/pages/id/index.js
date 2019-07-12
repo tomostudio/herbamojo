@@ -51,7 +51,7 @@ export default class Home extends React.Component {
 				snap_identifier: 'div.overlay .right_nav .snap_nav',
 				speed: 500,
 				maxduration: 1000,
-				responsive_width: 300
+				responsive_width: 700
 			});
 
 			this.inview.footer = new InViewportClass({

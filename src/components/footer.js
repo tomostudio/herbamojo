@@ -32,7 +32,7 @@ export default class Footer extends React.Component {
 					return (
 						<section className="footer">
 							<div className="wrapper">
-								<div className="hidden">
+								<div className="">
 									<Link to="/">HOME</Link>
 									<Link to="/">JOURNAL</Link>
 								</div>

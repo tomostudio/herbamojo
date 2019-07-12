@@ -1,11 +1,13 @@
 import React from 'react';
 import Layout from 'components/layout';
 import Footer from 'components/footer';
+import MobileHeader from 'components/mobileheader';
 import { ScrollSnap } from 'utils/scrollsnap';
 import { Scrollax } from 'utils/scrollax';
+import { ScrollIt } from 'utils/scrollit';
 import { LoaderClass } from 'utils/loader';
 import { InViewportClass } from 'utils/inviewport';
-// import { MediaCheck } from 'utils/mediacheck';
+import { MediaCheck } from 'utils/mediacheck';
 import { Link, graphql } from 'gatsby';
 import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
 
@@ -16,10 +18,8 @@ import Slider from 'react-slick';
 import InstagramSVG from 'svg/instagram.js';
 import EmailSVG from 'svg/email.js';
 import WhatsappSVG from 'svg/whatsapp.js';
-import { Arrow } from 'svg/symbols.js';
+import { Arrow , ArrowSmaller} from 'svg/symbols.js';
 
-import FirstBG from 'images/static/herbamojo-bg2.jpg';
-import SecondBG from 'images/static/herbamojo-bg1.jpg';
 import BottleImg from 'images/static/herbamojo_productshot.png';
 
 //SVG CERT
@@ -36,7 +36,6 @@ import BenefitEnergy from 'images/symbols/energy.svg';
 import BenefitImmune from 'images/symbols/immune.svg';
 import BenefitExercise from 'images/symbols/exercise.svg';
 
-
 export default class Home extends React.Component {
 	IndexLoader = new LoaderClass({
 		parent: '#homeEN',
@@ -44,26 +43,34 @@ export default class Home extends React.Component {
 		postload: () => {
 			if (typeof document !== `undefined`) {
 				document.body.classList.add('loaded');
-				window.scroll(0,0);
+				window.scroll(0, 0);
 			}
 
-			this.scrollsnap = ScrollSnap.init({
-				sections_identifier: 'main.home section',
-				snap_identifier: 'div.overlay .right_nav .snap_nav',
+			ScrollSnap.init({
+				sections_identifier: 'main.home#homeEN section',
+				snap_identifier: '',
 				speed: 500,
 				maxduration: 1000,
-				responsive_width: 300
+				responsive_width: 700,
+				responsive_height: 500
 			});
 
-			this.inview.footer = new InViewportClass({
-				target: 'section.footer',
-				visibility: 0.05,
-				enter: () => {
-					document.querySelector('div.overlay').classList.add('stuck');
-				},
-				exit: () => {
-					document.querySelector('div.overlay').classList.remove('stuck');
+			this.snapNav = document.querySelectorAll(`main#homeEN div.overlay .right_nav .snap_nav > *`);
+			const setNav = (i) => {
+				this.snapNav.forEach((nav) => {
+					nav.classList.remove('active');
+				});
+				if (i >= 0) {
+					this.snapNav[i].classList.add('active');
 				}
+			};
+			setNav(0);
+
+			//SETUP BUTTON
+			this.snapNav.forEach((nav, index) => {
+				nav.onclick = () => {
+					ScrollSnap.snap.to(index);
+				};
 			});
 
 			this.inview.bottlesection = new InViewportClass({
@@ -77,35 +84,90 @@ export default class Home extends React.Component {
 				}
 			});
 
+			//SECTIONS INVIEW
 			this.inview.home = new InViewportClass({
 				target: 'section#home',
-				visibility: 0.4,
+				visibility: 0.55,
 				enter: () => {
 					document.querySelector('#ShopButton').classList.add('hide');
+					setNav(0);
 				},
 				exit: () => {
 					document.querySelector('#ShopButton').classList.remove('hide');
 				}
 			});
+			this.inview.about = new InViewportClass({
+				target: 'section#about',
+				visibility: 0.55,
+				enter: () => {
+					setNav(1);
+				}
+			});
 
-			this.scrollax.one = new Scrollax({ target: 'img.paralax1', scroll_movement: 0.25, alternate_left: true });
-			this.scrollax.two = new Scrollax({ target: 'img.paralax2', scroll_movement: 0.25, alternate_right: true });
-			this.scrollax.ing_bg = new Scrollax({ target: '#ing_bg', scroll_movement: 0.25 });
+			this.inview.benefits = new InViewportClass({
+				target: 'section#benefits',
+				visibility: 0.55,
+				enter: () => {
+					setNav(2);
+				}
+			});
+
+			this.inview.ingredients = new InViewportClass({
+				target: 'section#ingredients',
+				visibility: 0.55,
+				enter: () => {
+					setNav(3);
+				}
+			});
+			this.inview.shop = new InViewportClass({
+				target: 'section#shop',
+				visibility: 0.55,
+				enter: () => {
+					setNav(4);
+				}
+			});
+
+			this.inview.footer = new InViewportClass({
+				target: 'section.footer',
+				visibility: 0.05,
+				enter: () => {
+					document.querySelector('div.overlay').classList.add('stuck');
+					setNav(-1);
+				},
+				exit: () => {
+					document.querySelector('div.overlay').classList.remove('stuck');
+				}
+			});
+
+			this.scrollax.one = new Scrollax({ target: 'img.paralax1', move_left: 0.25 });
+			this.scrollax.two = new Scrollax({ target: 'img.paralax2', move_right: 0.25 });
+			this.scrollax.ing_bg = new Scrollax({ target: '#ing_bg', move_top: 0.35 });
+			this.scrollax.home_mobile = new Scrollax({ target: 'img.mobile.prlx', move_bottom: 0.3 });
+			this.scrollax.about_mobile = new Scrollax({ target: '#about .content .bottle > img', move_bottom: 0.3 });
 
 			//INGREDIENTS SET
-			this.ingredientToggle(document.querySelector('#ing_sel > *:nth-child(1)'));
+			this.ingredientToggle(document.querySelector('#ing_sel > *:nth-child(1) > div:first-child'));
+
+			// INIT RESIZE
+			this.resize();
 		}
 	});
 	inview = {
 		footer: null,
 		home: null,
+		about: null,
+		benefits: null,
+		ingredients: null,
+		shop: null,
 		bottlesection: null
 	};
 	scrollax = {
 		one: null,
+		home_mobile: null,
 		two: null,
 		ing_bg: null
 	};
+	snapNav = null;
 	scrollsnap = null;
 	componentDidMount() {
 		if (typeof document !== `undefined`) {
@@ -115,15 +177,54 @@ export default class Home extends React.Component {
 	}
 	componentWillUnmount() {
 		if (this.inview.home) this.inview.home.kill();
+		if (this.inview.about) this.inview.about.kill();
+		if (this.inview.benefits) this.inview.benefits.kill();
+		if (this.inview.ingredients) this.inview.ingredients.kill();
+		if (this.inview.shop) this.inview.shop.kill();
 		if (this.inview.footer) this.inview.footer.kill();
 		if (this.inview.bottlesection) this.inview.bottlesection.kill();
 		if (this.scrollax.one) this.scrollax.one.kill();
 		if (this.scrollax.two) this.scrollax.two.kill();
 		if (this.scrollax.ing_bg) this.scrollax.ing_bg.kill();
-		if (this.scrollsnap) this.scrollsnap.kill();
+		if (this.scrollax.home_mobile) this.scrollax.home_mobile.kill();
+		// if (ScrollSnap) ScrollSnap.kill();
+
+		this.snapNav.forEach((nav, index) => {
+			nav.onClick = null;
+		});
+
+		if (typeof document !== `undefined`) {
+			window.removeEventListener('resize', this.resize, false);
+		}
+	}
+	resize() {
+
+		//ADJUST INGREDIENTS DESCRIPTION MOBILE HEIGHT
+		const ingDescMobile = document.querySelectorAll('#ing_sel > span > div:last-child > div');
+		let height = [];
+		ingDescMobile.forEach(desc => {
+			height.push(desc.clientHeight);
+			desc.parentNode.style.height = desc.clientHeight.toString() + 'px';
+		})
+
+
 	}
 	gotoShop() {
-		ScrollSnap.snap.to(4);
+		if (MediaCheck.width.mobile()) {
+			const scrollTarget = document.querySelector('section#shop').getBoundingClientRect().top;
+			const curScrollPos = window.pageYOffset || document.documentElement.scrollTop;
+			const wH =
+				window.innerHeight ||
+				document.documentElement.clientHeight ||
+				document.getElementsByTagName('body')[0].clientHeight;
+			const dist = Math.abs(scrollTarget - curScrollPos);
+			let duration = dist / wH * 500;
+			if (duration < 250) duration = 250;
+			if (duration > 1000) duration = 1000;
+			ScrollIt(scrollTarget, duration);
+		} else {
+			ScrollSnap.snap.to(4);
+		}
 	}
 	ingredientChanging = false;
 	ingredientChangeTimeout = null;
@@ -133,12 +234,12 @@ export default class Home extends React.Component {
 	ingredientToggle(target) {
 		if (target != null) {
 			const delay = 500;
-			let child = target;
+			let child = target.parentNode;
 			let index = 1;
 			while ((child = child.previousSibling) != null) index++;
 			let change = {
 				number: index,
-				desc: target.dataset.desc
+				desc: target.parentNode.dataset.desc
 			};
 
 			const displayContainer = document.querySelector('#ing_display');
@@ -153,7 +254,7 @@ export default class Home extends React.Component {
 				btn.classList.remove('active');
 			});
 
-			target.classList.add('active');
+			target.parentNode.classList.add('active');
 
 			if (!this.ingredientChanging) {
 				this.ingredientChanging = true;
@@ -193,7 +294,7 @@ export default class Home extends React.Component {
 			slidesToScroll: 1,
 			responsive: [
 				{
-					breakpoint: 750,
+					breakpoint: 800,
 					settings: {
 						slidesToShow: 1,
 						slidesToScroll: 1
@@ -201,8 +302,11 @@ export default class Home extends React.Component {
 				}
 			]
 		};
+
+		window.addEventListener('resize', this.resize, false);
 		return (
 			<Layout titleText="Home" mainClass="home" mainID="homeEN">
+				<MobileHeader indonesia={false} />
 				<div className="overlay_wrapper">
 					<div className="overlay">
 						<div className="wrapper">
@@ -295,7 +399,8 @@ export default class Home extends React.Component {
 								</div>
 							</div>
 							<div className="bg">
-								<img className="paralax1" src={FirstBG} alt="herbamojo" />
+								<img className="paralax1" src={homeData.home.background} alt="herbamojo" />
+								<img className="mobile prlx" src={homeData.home.backgroundmobile} alt="herbamojo" />
 							</div>
 						</section>
 						<section id="about">
@@ -305,11 +410,10 @@ export default class Home extends React.Component {
 									<div className="logo">
 										<img src={HerbamojoLogo} alt="herbamojo" />
 									</div>
-									<div className="description">
-										HERBAMOJO is a high quality herbal formula to support male stamina.HERBAMOJO
-										contains 7 key herbal ingredients that works optimally to help improve energy,
-										immunity and performance.
+									<div className="bottle">
+										<img src={BottleImg} alt="herbamojo" />
 									</div>
+									<div className="description">{homeData.about.desc}</div>
 									<div className="certification">
 										<div>
 											<img src={CertNatural} alt="herbamojo" />
@@ -343,7 +447,7 @@ export default class Home extends React.Component {
 								</div>
 							</div>
 							<div className="bg">
-								<img className="paralax2" src={SecondBG} alt="herbamojo" />
+								<img className="paralax2" src={homeData.about.background} alt="herbamojo" />
 							</div>
 						</section>
 						<section id="benefits">
@@ -391,14 +495,12 @@ export default class Home extends React.Component {
 								<div id="ing_sel">
 									{homeData.ingredients.map((node, id) => {
 										return (
-											<span
-												key={id}
-												className="active"
-												onClick={(e) => this.ingredientClick(e)}
-												data-desc={node.desc}
-											>
-												<span>{node.title}</span>
-												<span>{node.title}</span>
+											<span key={id} className="active" data-desc={node.desc}>
+												<div onClick={(e) => this.ingredientClick(e)}>
+													<span>{node.title}</span>
+													<span>{node.title}</span>
+												</div>
+												<div><div>{node.desc}</div></div>
 											</span>
 										);
 									})}
@@ -428,9 +530,9 @@ export default class Home extends React.Component {
 										<h2>ONLINE</h2>
 										<div
 											id="onlineshop"
-											className={`shopSlider ${homeData.onlineshop.length <= 2 && ' noslider'}`}
+											className={`shopSlider ${homeData.onlineshop.length === 1 ? ' oneslide' : ''} ${homeData.onlineshop.length === 2 ? ' twoslide' : ''}`}
 										>
-											{homeData.onlineshop.length > 2 ? (
+											{homeData.onlineshop.length > 1 ? (
 												<div
 													className="arrow"
 													onClick={() => {
@@ -438,14 +540,16 @@ export default class Home extends React.Component {
 													}}
 												>
 													<Arrow />
+													<ArrowSmaller classProps="mobile" />
 												</div>
 											) : (
 												<div className="arrow">
 													<Arrow />
+													<ArrowSmaller classProps="mobile" />
 												</div>
 											)}
 
-											{homeData.onlineshop.length > 2 ? (
+											{homeData.onlineshop.length > 1 ? (
 												<Slider
 													{...sliderSettings}
 													ref={(d) => (this.onlineslider = d)}
@@ -496,7 +600,7 @@ export default class Home extends React.Component {
 													})};
 												</div>
 											)}
-											{homeData.onlineshop.length > 2 ? (
+											{homeData.onlineshop.length > 1 ? (
 												<div
 													className="arrow"
 													onClick={() => {
@@ -504,10 +608,12 @@ export default class Home extends React.Component {
 													}}
 												>
 													<Arrow />
+													<ArrowSmaller classProps="mobile" />
 												</div>
 											) : (
 												<div className="arrow">
 													<Arrow />
+													<ArrowSmaller classProps="mobile" />
 												</div>
 											)}
 										</div>
@@ -518,9 +624,9 @@ export default class Home extends React.Component {
 										<h2>OFFLINE</h2>
 										<div
 											id="offlineshop"
-											className={`shopSlider ${homeData.offlineshop.length <= 2 && ' noslider'}`}
+											className={`shopSlider ${homeData.offlineshop.length === 1 ? ' oneslide' : ''} ${homeData.offlineshop.length === 2 ? ' twoslide' : ''}`}
 										>
-											{homeData.offlineshop.length > 2 ? (
+											{homeData.offlineshop.length > 1 ? (
 												<div
 													className="arrow"
 													onClick={() => {
@@ -528,14 +634,16 @@ export default class Home extends React.Component {
 													}}
 												>
 													<Arrow />
+													<ArrowSmaller classProps="mobile" />
 												</div>
 											) : (
 												<div className="arrow">
 													<Arrow />
+													<ArrowSmaller classProps="mobile" />
 												</div>
 											)}
 
-											{homeData.offlineshop.length > 2 ? (
+											{homeData.offlineshop.length > 1 ? (
 												<Slider
 													{...sliderSettings}
 													ref={(c) => (this.offlineslider = c)}
@@ -586,7 +694,7 @@ export default class Home extends React.Component {
 													})}
 												</div>
 											)}
-											{homeData.offlineshop.length > 2 ? (
+											{homeData.offlineshop.length > 1 ? (
 												<div
 													className="arrow"
 													onClick={() => {
@@ -594,10 +702,12 @@ export default class Home extends React.Component {
 													}}
 												>
 													<Arrow />
+													<ArrowSmaller classProps="mobile" />
 												</div>
 											) : (
 												<div className="arrow">
 													<Arrow />
+													<ArrowSmaller classProps="mobile" />
 												</div>
 											)}
 										</div>
@@ -633,6 +743,14 @@ export const query = graphql`
 		home: markdownRemark(frontmatter: { issetting: { eq: true }, contenttype: { eq: "home_setting" } }) {
 			frontmatter {
 				title
+				home {
+					background
+					backgroundmobile
+				}
+				about {
+					background
+					desc
+				}
 				ingredients {
 					image
 					title

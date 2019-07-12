@@ -183,6 +183,10 @@ main.home {
                 }
             }
         }
+
+        @include respond-to(mobile) {
+            display: none;
+        }
     }
 
     & section:not(.footer) {
@@ -192,9 +196,17 @@ main.home {
         -webkit-scroll-snap-coordinate: 0% 0%;
         color: white;
 
-        body.snap_on &{
+        @include respond-to(mobile) {
+            // border: solid thin yellow;
+            max-height: none;
+            min-height: 100vh;
+            height: auto;
+        }
+
+        body.snap_on & {
             overflow: hidden;
         }
+
         &>.wrapper {
             & h1 {
                 margin: 0px;
@@ -202,6 +214,18 @@ main.home {
                 letter-spacing: $letterspacing-title;
                 font-family: 'Amarillo';
                 line-height: $lineheight-title;
+
+                @include respond-to(mobile) {
+                    margin-top: 0px;
+                    width: 100%;
+                    display: block;
+                    text-align: center;
+                    font-size: $font-size-title-m;
+                    letter-spacing: $letterspacing-title-m;
+                    line-height: $lineheight-title-m;
+                    word-break: break-word;
+                    @include mobilegaptop;
+                }
             }
 
             & h2 {
@@ -209,24 +233,51 @@ main.home {
                 font-size: $font-size-heading2;
                 font-family: 'Amarillo';
                 line-height: $lineheight-heading2;
+
+                @include respond-to(mobile) {
+                    font-size: $font-size-heading2-m;
+                    line-height: $lineheight-heading2-m;
+                }
+
             }
 
             &>.content {
                 padding-top: 50px;
+
+                @include respond-to(mobile) {
+                    padding-top: 0px;
+                    text-align: center;
+                }
             }
 
             &>.content.half {
                 width: calc(50% + #{$home-offcenter / 2});
                 padding-right: $global-padding / 2;
+
+                @include respond-to(mobile) {
+                    width: 100%;
+                    padding-right: 0px;
+                }
             }
         }
 
         &#home {
             position: relative;
 
+            @include respond-to(mobile) {
+                @include setflex(column, nowrap, stretch, center, center);
+            }
+
             &>.wrapper {
                 position: relative;
                 @include setflex(row, nowrap, flex-start, center, center);
+
+                @include respond-to(mobile) {
+                    padding-top: $globalmobile-padding;
+                    @include flex-grow(1);
+                    height: 100%;
+                    @include setflex(column, nowrap, stretch, center, center);
+                }
 
                 & .logo {
                     position: absolute;
@@ -234,6 +285,10 @@ main.home {
                     left: 0px;
                     display: inline-block;
                     width: 140px;
+
+                    @include respond-to(mobile) {
+                        display: none;
+                    }
 
                     &>img {
                         width: 100%;
@@ -252,12 +307,48 @@ main.home {
                     width: 100%;
                     position: relative;
 
+                    @include respond-to(mobile) {
+                        // padding: $mobile-paddingtop 0px #{$globalmobile-padding * 4};
+                        padding: 0px 0px #{$globalmobile-padding * 4};
+                        @include flex-grow(1);
+                        height: 100%;
+                        @include setflex(column, nowrap, space-between, center, center);
+                        @include mobilegaptop;
+                    }
+
                     &>span {
                         display: inline-block;
                         font-family: 'Amarillo';
                         margin-right: 10px;
                         font-size: 120px;
                         line-height: 90%;
+
+                        @include respond-to(mobile) {
+                            margin: 0px auto;
+                            font-size: 70px;
+                            display: block;
+                            text-align: center;
+                            position: relative;
+
+                            &::after {
+                                @include pseudo();
+                                position: relative;
+                                height: 7.5vh;
+                                min-height: 40px;
+                                pointer-events: none;
+                                width: 100%;
+
+                            }
+
+                            &:nth-last-child(2) {
+                                color: $color_green;
+
+                                &::after {
+                                    height: 2.5vh;
+                                    min-height: 30px;
+                                }
+                            }
+                        }
                     }
 
                     & #GetButton {
@@ -273,11 +364,37 @@ main.home {
                         color: $color_green;
                         font-size: 30px;
                         line-height: 28px;
-                        @include transition(color $global-transition, background $global-transition);
+                        @include transition(border $global-transition, color $global-transition, background $global-transition);
+
+                        @include respond-to(mobile) {
+                            position: relative;
+                            margin: 0px auto;
+                            left: 0px;
+                            right: 0px;
+                            // bottom: 40px;
+                            bottom: 0px;
+                            top: auto;
+                            @include transform(translate(0%, 0%));
+                            font-size: 25px;
+                            line-height: 24px;
+                            border: solid 2px white;
+                            color: white;
+                            width: 80%;
+                            max-width: 300px;
+
+                            &::after {
+                                display: none;
+                            }
+
+                        }
 
                         body.onhover &:hover {
                             background: $color_green;
                             color: white;
+
+                            @include respond-to(mobile) {
+                                border-color: $color_green;
+                            }
                         }
                     }
                 }
@@ -294,16 +411,43 @@ main.home {
                 z-index: -1;
                 overflow: hidden;
 
+                @include respond-to(mobile) {
+                    width: 100%;
+                    right: 0;
+                }
+
                 &>img {
                     position: relative;
-                    width: 125%;
-                    @include transform(translate(-5%, 0%));
-                    height: 100vh;
-                    object-fit: cover;
-                    object-position: right;
+                    height: 100%;
+
+                    &.mobile {
+                        width: calc(100vw - (#{$globalmobile-padding } * 4));
+                        display: none;
+                        margin: auto;
+                        object-fit: contain;
+                        object-position: center;
+                        top: auto;
+
+                        @include respond-to(mobile) {
+                            display: block;
+                        }
+                    }
+
+                    &:not(.mobile) {
+                        width: 125%;
+                        @include transform(translate(-5%, 0%));
+                        object-fit: cover;
+                        object-position: right;
+
+                        @include respond-to(mobile) {
+                            display: none;
+                        }
+                    }
                 }
             }
         }
+
+        $sectionmobilespacing: 50px;
 
         &#about {
             position: relative;
@@ -318,6 +462,10 @@ main.home {
                 z-index: -1;
                 overflow: hidden;
 
+                @include respond-to(mobile) {
+                    display: none;
+                }
+
                 &>img {
                     @include transform(translate(-25%, 0%));
                     position: relative;
@@ -328,13 +476,44 @@ main.home {
                 }
             }
 
+
             & .content.half {
+                @include respond-to(mobile) {
+                    width: calc(100% - #{$globalmobile-padding * 2});
+                    margin: $sectionmobilespacing auto 0px;
+                    padding-bottom: $sectionmobilespacing;
+                }
+
                 &>.logo {
                     width: 300px;
                     display: block;
 
+                    @include respond-to(mobile) {
+                        width: 100%;
+                        max-width: 300px;
+                        margin: 0px auto;
+                    }
+
                     &>img {
                         width: 100%;
+                    }
+                }
+
+                &>.bottle {
+                    display: none;
+
+                    @include respond-to(mobile) {
+                        display: block;
+                        padding: 0px $globalmobile-padding;
+                        margin-top: $sectionmobilespacing;
+
+                        &>img {
+                            position: relative;
+                            width: 75%;
+                            max-width: 175px;
+                            margin: 0px auto;
+                            @include transform(translate(0, 8vh));
+                        }
                     }
                 }
 
@@ -345,20 +524,47 @@ main.home {
                     font-family: 'Maison Mono';
                     font-size: 15px;
                     line-height: 180%;
+
+                    @include respond-to(mobile) {
+                        width: 100%;
+                        max-width: $mobileinnersection-maxwidth;
+                        margin: $sectionmobilespacing auto 0px;
+                        font-weight: bold;
+                    }
                 }
 
                 &>.certification {
                     width: 100%;
                     margin-top: $global-padding * 1.5;
-                    @include setflex(row, wrap, flex-start, flex-start, flex-start);
+                    max-width: 500px;
+                    display: grid;
+                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+                    grid-template-rows: auto;
+                    grid-gap: 15px;
+                    justify-items: start;
+                    align-items: start;
+
+                    @include respond-to(tablet) {
+                        grid-template-columns: 1fr 1fr 1fr 1fr;
+                    }
+
+                    @include respond-to(mobile) {
+                        width: 100%;
+                        max-width: $mobileinnersection-maxwidth;
+                        margin: $sectionmobilespacing auto 0px;
+                        grid-template-columns: 1fr 1fr 1fr;
+                        justify-items: center;
+                        grid-gap: 30px;
+                    }
 
                     &>* {
                         @include setflex(column, nowrap);
+                        display: inline-flex;
                         width: 50px;
-                        margin-right: 15px;
+                        @include flex-grow(1);
 
-                        &:last-child {
-                            margin-right: 0px;
+                        @include respond-to(mobile) {
+                            width: 65px;
                         }
 
                         &>img {
@@ -366,13 +572,19 @@ main.home {
                         }
 
                         &>span {
+                            width: 100%;
                             display: block;
                             margin-top: 10px;
                             text-align: center;
                             font-family: 'Amarillo';
                             font-size: 9px;
-                            line-height: 12px;
+                            line-height: 140%;
                             color: white;
+
+                            @include respond-to(mobile) {
+                                font-size: 12px;
+                            }
+
                         }
                     }
                 }
@@ -383,15 +595,43 @@ main.home {
             & .content.half {
                 padding-top: 40px;
 
+                @include respond-to(mobile) {
+                    padding-top: 0px;
+                    width: calc(100% - #{$globalmobile-padding * 2});
+                    margin: $sectionmobilespacing auto 0px;
+                    padding-bottom: $sectionmobilespacing;
+                }
+
                 &>div {
                     width: 100%;
                     display: grid;
                     grid-template: auto auto / auto auto;
+
                     grid-gap: 10px;
                     max-width: 500px;
 
+                    @include respond-to(mobile) {
+                        max-width: $mobileinnersection-maxwidth - 100px;
+                        margin: 0px auto;
+                        grid-gap: 20px;
+                        justify-items: center;
+                        align-items: center;
+                        grid-template: auto auto auto auto / auto;
+                    }
+
                     &>* {
                         width: 150px;
+
+                        @include respond-to(mobile) {
+                            width: 100%;
+                            padding: 0px $globalmobile-padding;
+                            border: solid thin transparent;
+                            @include transition(all $global-transition);
+
+                            &.inview {
+                                border: solid thin red;
+                            }
+                        }
 
                         &>img {
                             width: 100%;
@@ -413,7 +653,20 @@ main.home {
                                 display: block;
                                 font-size: 21px;
                                 line-height: 100%;
+                            }
 
+                            @include respond-to(mobile) {
+                                text-align: center;
+
+                                &>span:first-child {
+                                    font-size: 40px;
+                                    line-height: 27px;
+                                }
+
+                                &>span:nth-child(2) {
+                                    margin-top: 10px;
+                                    font-size: 17px;
+                                }
                             }
                         }
                     }
@@ -429,6 +682,14 @@ main.home {
                     width: 100%;
                     @include setflex(row, nowrap, flex-start, stretch, stretch);
 
+                    @include respond-to(mobile) {
+                        padding-top: 0px;
+                        display: block;
+                        width: calc(100% - #{$globalmobile-padding * 2});
+                        margin: $sectionmobilespacing auto 0px;
+                        padding-bottom: $sectionmobilespacing;
+                    }
+
                     &>div {
                         display: block;
 
@@ -441,66 +702,122 @@ main.home {
                             font-size: 40px;
                             line-height: 100%;
 
+                            @include respond-to(mobile) {
+                                width: 100%;
+                                max-width: $mobileinnersection-maxwidth;
+                                margin: 0px auto;
+                                text-align: center;
+                            }
+
                             &>span {
                                 display: block;
                                 margin-bottom: 25px;
-                                cursor: pointer;
                                 position: relative;
 
-                                &>span:nth-child(1) {
-                                    -webkit-text-stroke: 1px white;
-                                    -webkit-text-fill-color: rgba(255, 255, 255, 0);
-                                    @include transition(opacity $global-transition);
+                                &>div:first-child {
+                                    cursor: pointer;
+
+                                    &>span:nth-child(1) {
+                                        -webkit-text-stroke: 1px white;
+                                        -webkit-text-fill-color: rgba(255, 255, 255, 0);
+                                        @include transition(opacity $global-transition);
+                                    }
+
+                                    &>span:nth-child(2) {
+                                        position: absolute;
+                                        top: 0px;
+                                        left: 0px;
+                                        width: 100%;
+                                        height: 100%;
+                                        z-index: 5;
+                                        color: white;
+                                        opacity: 0;
+                                        @include transition(all $global-transition);
+                                    }
                                 }
 
-                                &>span:nth-child(2) {
-                                    position: absolute;
-                                    top: 0px;
-                                    left: 0px;
-                                    width: 100%;
-                                    height: 100%;
-                                    z-index: 5;
-                                    color: white;
-                                    opacity: 0;
-                                    @include transition(all $global-transition);
+                                &>div:last-child {
+                                    display: none;
+
+                                    @include respond-to(mobile) {
+                                        display: block;
+                                        width: 100%;
+                                        font-family: 'Maison Mono';
+                                        font-size: 14px;
+                                        line-height: 120%;
+                                        text-align: center;
+                                        pointer-events: none;
+                                        height: 0px;
+                                        @include transition(all $global-transition);
+                                        opacity: 0;
+
+                                        &>div {
+                                            width: 100%;
+                                            padding-top: $globalmobile-padding;
+                                            position: relative;
+                                        }
+                                    }
+                                }
+
+                                &:not(.active)>div:last-child {
+                                    @include respond-to(mobile) {
+                                        opacity: 0;
+                                        height: 0px !important;
+                                    }
                                 }
 
                                 &:last-child {
                                     margin-bottom: 0px;
                                 }
 
-                                body.onhover &:hover {
-                                    &>span:nth-child(1) {
-                                        opacity: 0;
-                                        @include transition(opacity $global-transition #{$global-transition / 3});
-                                    }
+                                body.onhover & {
+                                    &>div:first-child:hover {
+                                        &>span:nth-child(1) {
+                                            opacity: 0;
+                                            @include transition(opacity $global-transition #{$global-transition / 3});
+                                        }
 
-                                    &>span:nth-child(2) {
-                                        color: white;
-                                        opacity: 1;
+                                        &>span:nth-child(2) {
+                                            color: white;
+                                            opacity: 1;
+                                        }
                                     }
                                 }
 
                                 &.active {
-                                    pointer-events: none;
+                                    &>div:first-child {
+                                        pointer-events: none;
 
-                                    &>span:nth-child(1) {
-                                        opacity: 0;
+                                        &>span:nth-child(1) {
+                                            opacity: 0;
+                                        }
+
+                                        &>span:nth-child(2) {
+                                            color: $color_green !important;
+                                            opacity: 1;
+                                        }
                                     }
 
-                                    &>span:nth-child(2) {
-                                        color: $color_green !important;
-                                        opacity: 1;
+                                    &>div:last-child {
+                                        @include respond-to(mobile) {
+                                            opacity: 1;
+                                            // height: 0px;
+                                        }
                                     }
                                 }
                             }
                         }
 
                         &:nth-child(2) {
+
                             @include flex-grow(1);
                             @include setflex(column, nowrap, center, center, center);
                             padding: 0px 75px;
                             @include transition(opacity .4s);
+
+                            @include respond-to(mobile) {
+                                display: none;
+                            }
 
                             &>* {
                                 display: block;
@@ -542,11 +859,15 @@ main.home {
                 overflow: hidden;
                 pointer-events: none;
 
+                @include respond-to(mobile) {
+                    // overflow: visible;
+                }
+
                 &>div {
-                    position: absolute;
-                    margin-top: 50vh;
+                    position: relative;
+                    margin-top: 0px;
                     right: 0px;
-                    @include transform(translate(100px, -50%));
+                    @include transform(translate(100px, 0%));
                     left: 0px;
                     right: auto;
                     height: 100%;
@@ -558,6 +879,17 @@ main.home {
                         // opacity: 0;
                         @include animation(ingbg_transitionout .4s ease-in 1 forwards);
                     }
+
+                    @include respond-to(mobile) {
+                        @include transform(translate(0px, 0%));
+                        position: relative;
+                        margin-top: 0%;
+                        @include animation(ingbg_transitioninm .4s ease-out 1 forwards);
+
+                        &.transition {
+                            @include animation(ingbg_transitionoutm .4s ease-in 1 forwards);
+                        }
+                    }
                 }
 
                 & img {
@@ -568,6 +900,7 @@ main.home {
                     top: 50%;
                     right: 0px;
                     @include transform(translate(0%, -50%));
+
                     left: auto;
                     object-fit: scale-down;
                     object-position: right center;
@@ -599,6 +932,36 @@ main.home {
                         width: 100%;
                         max-width: 550px;
                     }
+
+                    @include respond-to(mobile) {
+                        min-height: 30vh;
+                        max-height: 75vh !important;
+                        max-width: none !important;
+                        width: 150% !important;
+                        left: 50%;
+                        right: auto;
+                        @include transform(translate(-50%, -50%));
+                        object-position: center center;
+
+                        &:nth-child(5),
+                        &:nth-child(2) {
+                            @include transform(translate(-30%, -50%));
+                        }
+
+                        &:nth-child(1),
+                        &:nth-child(6),
+                        &:nth-child(3) {
+                            @include transform(translate(-70%, -50%));
+                        }
+
+                        &:nth-child(7) {
+                            width: 120% !important;
+                        }
+
+                        &:nth-child(3) {
+                            width: 100% !important;
+                        }
+                    }
                 }
             }
         }
@@ -612,6 +975,12 @@ main.home {
                 &>.content {
                     width: 100%;
 
+                    @include respond-to(mobile) {
+                        width: calc(100% - #{$globalmobile-padding * 2});
+                        margin: $sectionmobilespacing auto 0px;
+                        padding-bottom: $sectionmobilespacing;
+                    }
+
                     &>div {
                         margin-bottom: $global-padding;
 
@@ -619,55 +988,103 @@ main.home {
                             margin-bottom: 0px;
                         }
 
-                        &>div.shopSlider{
+                        @include respond-to(mobile) {
+                            margin-bottom: #{ $globalmobile-padding * 2};
+                            &:last-child {
+                                margin-bottom: 0px;
+                            }
+                        }
+                        $arrowwidth: 34px;
+                        $mobilearrowwidth: 12px;
+                        &>div.shopSlider {
                             width: 100%;
                             margin-top: $global-padding / 2;
                             @include setflex(row, nowrap, space-between, center, center);
+                            @include respond-to(mobile) {
+                                max-width: $mobileinnersection-maxwidth;
+                                margin: #{ $globalmobile-padding * 1.5} auto 0px;
+                            }
 
                             &>.arrow {
-                                width: 34px;
-                                height: 34px;
+                                width: $arrowwidth;
+                                height: auto;
                                 @include flex-grow(0);
                                 @include flex-shrink(0);
-                                & > svg {
-                                    width: 100%;
-                                    height: 100%;
+                                cursor: pointer;
+
+                                @include respond-to(mobile) {
+                                    width: $mobilearrowwidth;
                                 }
+
                                 & svg {
-                                    & .stroke{
+                                    width: 100%;
+                                    height: auto;
+
+                                    &.mobile {
+                                        display: none;
+                                    }
+
+                                    & .stroke {
                                         @include transition(stroke $global_transition);
                                     }
-                                    & .fill{
+
+                                    & .fill {
                                         @include transition(fill $global_transition);
                                     }
-                                }
 
-                                &:first-child {
-                                    margin-right: $global-padding / 2;
-                                }
+                                    @include respond-to(mobile) {
 
-                                &:last-child {
-                                    margin-left: $global-padding / 2;
-                                    @include transform(rotate(-180deg));
-                                }
-                                body.onhover &:hover{
-                                    cursor: pointer;
-                                     & svg {
-                                         & .stroke{
+                                        display: none;
+
+                                        &.mobile {
+                                            display: block;
+                                        }
+                                        & .stroke {
                                             stroke: $color_green;
-                                         }
-                                         & .fill{
+                                        }
+
+                                        & .fill {
                                             fill: $color_green;
-                                         }
-                                     }
+                                        }
+                                    }
+                                }
+                                &:last-child{
+                                    @include transform(rotate(180deg));
+                                }
+                                body.onhover &:hover {
+
+                                    & svg {
+                                        & .stroke {
+                                            stroke: $color_green;
+                                        }
+
+                                        & .fill {
+                                            fill: $color_green;
+                                        }
+                                        @include respond-to(mobile) {
+                                            & .stroke {
+                                                stroke: white;
+                                            }
+    
+                                            & .fill {
+                                                fill: white;
+                                            }
+                                        }
+                                    }
                                 }
                             }
 
                             & div.wrapper {
-                                width: calc(100% - 70px - #{$global-padding});
+                                width: calc(100% - #{$arrowwidth * 2} - #{$global-padding});
                                 position: relative;
+                                margin: 0px #{$global-padding / 2};
+                                @include respond-to(mobile){
+                                    margin: 0px #{$globalmobile-padding};
+                                    width: calc(100% - #{$mobilearrowwidth * 2}  - #{$globalmobile-padding * 2});
+                                }
+
                                 & *:focus {
-                                    outline:none;
+                                    outline: none;
                                 }
 
                                 & .shop {
@@ -675,50 +1092,64 @@ main.home {
                                     min-height: 100px;
                                     @include flex-grow(0);
                                     position: relative;
-                                    padding: 0px #{$global-padding / 2}; 
-                                     & > *{
+                                    padding: 0px #{$global-padding / 2};
+
+                                    &>* {
                                         width: 100%;
                                         height: 150px;
                                         display: block;
-                                        & > img{
-                                            object-fit:scale-down;
+
+                                        &>img {
+                                            object-fit: scale-down;
                                             width: 80%;
                                             margin: auto;
                                             display: block;
                                             height: 100%;
                                         }
-                                     }
-                                     & > a{
-                                         @include transition(opacity $global-transition);
-                                         body.onhover &:hover{
+                                    }
+
+                                    &>a {
+                                        @include transition(opacity $global-transition);
+
+                                        body.onhover &:hover {
                                             opacity: $global_opacity;
                                             cursor: pointer;
-                                         }
-                                     }
+                                        }
+                                    }
                                 }
                             }
 
-                            &.noslider {
+                            &.twoslide {
+                                @include bp-min(800px) {
+                                    &>.arrow {
+                                        opacity: .25;
+                                        pointer-events: none;
+                                    }
+                                }
+                            }
+                            &.oneslide {
                                 &>.arrow {
                                     opacity: .25;
                                     pointer-events: none;
                                 }
+
                                 & div.wrapper {
                                     display: grid;
-                                    grid-template: auto / 1fr 1fr ;
-                                    & .shop{
+                                    grid-template: auto / 1fr 1fr;
+
+                                    @include bp-max(800px) {
+                                        grid-template: auto / auto;
+                                    }
+
+                                    & .shop {
                                         display: none;
                                         width: 100%;
                                         margin-right: 0px;
-                                        &:nth-child(1){
+
+                                        &:nth-child(1) {
                                             display: block;
                                             grid-row: 1 / 2;
                                             grid-column: 1 / 2;
-                                        }
-                                        &:nth-child(2){
-                                            grid-row: 1 / 2;
-                                            grid-column: 2 / 3;
-                                            display: block;
                                         }
                                     }
 
@@ -749,6 +1180,10 @@ main.home {
             width: 3px;
             height: calc(200vh + 165px);
             background: $color_green;
+
+            @include respond-to(mobile) {
+                display: none;
+            }
         }
 
         &>.bottlewrapper {
@@ -759,6 +1194,10 @@ main.home {
             top: 50%;
             left: calc(50% + #{$home-offcenter});
             @include transform(translate(-50%, -50%));
+
+            @include respond-to(mobile) {
+                display: none;
+            }
 
             &.stuck {
                 position: absolute;

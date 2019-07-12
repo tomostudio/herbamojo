@@ -4,13 +4,13 @@ export const MediaCheck = {
         //WIDTH
         w: {
             small: 450,
-            mobile: 750,
+            mobile: 700,
             tablet: 1024,
             desktop: 1280
         },
         //HEIGHT
         h: {
-            short: 350
+            short: 500
         }
     },
     width: {
