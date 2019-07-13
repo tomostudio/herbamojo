@@ -80,14 +80,13 @@ body:not(.loaded) {
             // right: $globalmobile-padding + 10px - 100px;
             right: auto;
             left: $globalmobile-padding + 10px - 100px;
-            font-size: 35vh;
+            font-size: 25vh;
             line-height: 70%;
-            top: auto;
-            bottom: $globalmobile-padding - 5px;
-            @include bottom-safe($globalmobile-padding - 5px);
+            bottom: auto;
+            top: $globalmobile-padding - 5px;
             @include left-safe($globalmobile-padding + 10px - 100px);
-            @include transform(rotate(-90deg) translate(0%, 100%));
-            @include transform-origin(bottom left);
+            @include transform(rotate(90deg) translate( 0%, -100%));
+            @include transform-origin(top left);
         }
     }
 
@@ -168,20 +167,20 @@ body.loaded main {
             grid-area: 1 / 1 /2 /2;
             justify-self: start;
 
-            &>a {
+            &> * {
                 pointer-events: auto;
                 font-family: 'Amarillo';
                 font-size: $font-size-button-m;
                 line-height: $lineheight-button-m;
                 // vertical-align: middle;
-                color: white;
+                color: $color_green;
                 @include transition(color $global-transition);
                 display: inline-block;
 
                 body.onhover &:hover,
                 &.disable {
-                    color: $color_green;
                     cursor: pointer;
+                    color: white;
                 }
 
                 &.disable {
@@ -370,6 +369,12 @@ main {
                 }
             }
         }
+    }
+    &.en{
+
+    }
+    &.id{
+        border: solid red thin;
     }
 }
 

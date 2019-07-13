@@ -190,21 +190,20 @@ main.home {
     }
 
     & section:not(.footer) {
-        scroll-snap-align: start;
         height: 100vh;
         max-height: 100vh;
-        -webkit-scroll-snap-coordinate: 0% 0%;
         color: white;
 
         @include respond-to(mobile) {
-            // border: solid thin yellow;
             max-height: none;
             min-height: 100vh;
             height: auto;
         }
 
         body.snap_on & {
-            overflow: hidden;
+            @media only screen and (min-height: $height-break) and (min-width: $break-small) {
+                overflow: hidden;
+            }
         }
 
         &>.wrapper {
@@ -404,16 +403,15 @@ main.home {
             &>.bg {
                 position: absolute;
                 top: 0px;
-                left: auto;
                 height: 100%;
-                width: 50%;
-                right: 50%;
+                width: 55%;
+                left: 0%;
                 z-index: -1;
-                overflow: hidden;
 
                 @include respond-to(mobile) {
                     width: 100%;
                     right: 0;
+                    overflow: hidden;
                 }
 
                 &>img {
@@ -435,7 +433,7 @@ main.home {
 
                     &:not(.mobile) {
                         width: 125%;
-                        @include transform(translate(-5%, 0%));
+                        @include transform(translate(-12.5%, 0%));
                         object-fit: cover;
                         object-position: right;
 
@@ -805,39 +803,45 @@ main.home {
                         }
 
                         &:nth-child(2) {
-
                             @include flex-grow(1);
-                            @include setflex(column, nowrap, center, center, center);
-                            padding: 0px 75px;
-                            @include transition(opacity .4s);
-
-                            @include respond-to(mobile) {
-                                display: none;
-                            }
-
-                            &>* {
-                                display: block;
-                                width: 100%;
-
-                                &:first-child {
-                                    font-family: 'Amarillo';
-                                    font-size: 350px;
-                                    line-height: 250px;
-                                    color: $color_green;
-                                    text-align: center;
+                            & > div {
+                                height: 100%;
+                                @include setflex(column, nowrap, center, center, center);
+                                padding: 0px 75px;
+                                @include transition(opacity .4s .1s);
+    
+                                @include respond-to(mobile) {
+                                    display: none;
                                 }
-
-                                &:nth-child(2) {
-                                    margin-top: $global-padding;
-                                    font-family: 'Maison Mono';
-                                    font-size: 18px;
-                                    line-height: 28px;
-                                    text-align: center;
+    
+                                &>* {
+                                    display: block;
+                                    width: 100%;
+    
+                                    &:first-child {
+                                        font-family: 'Amarillo';
+                                        font-size: 350px;
+                                        line-height: 250px;
+                                        color: $color_green;
+                                        text-align: center;
+                                    }
+    
+                                    &:nth-child(2) {
+                                        margin-top: $global-padding;
+                                        font-family: 'Maison Mono';
+                                        font-size: 18px;
+                                        line-height: 28px;
+                                        text-align: center;
+                                    }
                                 }
-                            }
-
-                            &.transition {
-                                opacity: 0;
+    
+                                &.transition {
+                                    opacity: 0;
+    
+                                    &:first-child {
+                                        @include transition(opacity .2s);
+                                    }
+                                }
                             }
                         }
                     }
@@ -868,8 +872,8 @@ main.home {
                     right: auto;
                     height: 100%;
                     width: 100%;
-                    @include animation(ingbg_transitionin .4s ease-out 1 forwards);
-                    opacity: 1;
+                    opacity: 0;
+                    @include animation(ingbg_transitionin .6s .2s ease 1 forwards);
 
                     &.transition {
                         // opacity: 0;
@@ -880,7 +884,7 @@ main.home {
                         @include transform(translate(0px, 0%));
                         position: relative;
                         margin-top: 0%;
-                        @include animation(ingbg_transitioninm .4s ease-out 1 forwards);
+                        @include animation(ingbg_transitioninm .6s .2s ease 1 forwards);
 
                         &.transition {
                             @include animation(ingbg_transitionoutm .4s ease-in 1 forwards);
@@ -956,6 +960,57 @@ main.home {
 
                         &:nth-child(3) {
                             width: 100% !important;
+                        }
+                    }
+                }
+            }
+
+            &:not(.inview) {
+                &>.bg {
+                    // opacity: 0;
+                    @include transition(opacity .5s);
+                }
+
+                &>.wrapper {
+                    &>.content {
+                        &>div {
+                            &:first-child {
+                                &>span {
+                                    @include transition(opacity $global-transition);
+                                    opacity: 0;
+                                }
+                            }
+
+                            &:nth-child(2) {
+                                @include transition(opacity .5s);
+                                opacity: 0;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &.inview {
+                $delay1: 1.25s;
+                &>.bg {
+                    @include transition(opacity .5s);
+                    // @include transition(opacity 1.5s #{$delay1 + .25s});
+                }
+
+                &>.wrapper {
+                    &>.content {
+                        &>div {
+                            &:first-child {
+                                @for $i from 1 through 7 {
+                                    &>span:nth-child(#{$i}) {
+                                        @include transition(opacity 1s #{.25s + ($i * .25s)});
+                                        opacity: 1;
+                                    }
+                                }
+                            }
+                            &:nth-child(2) {
+                                @include transition(opacity 1.5s $delay1);
+                            }
                         }
                     }
                 }
@@ -1235,7 +1290,7 @@ main.home {
                 background: $color_green;
                 // border: solid 3px $color_green;
                 color: black;
-                @include transition(all $global-transition);
+                @include transition(opacity .4s, color $global-transition);
 
                 &.hide {
                     opacity: 0;
@@ -1426,6 +1481,7 @@ main.home {
                     pointer-events: none;
                     width: 100%;
                 }
+
                 width: 100vw;
                 height: 100vh;
                 overflow: auto;
@@ -1435,6 +1491,7 @@ main.home {
                 font-size: 48px;
                 line-height: 64px;
                 font-family: 'Amarillo';
+
                 &>span {
                     cursor: pointer;
                     color: black;
@@ -1448,6 +1505,7 @@ main.home {
 
                 &>div:last-child {
                     width: 100%;
+
                     &::before {
                         @include pseudo;
                         position: relative;
@@ -1457,9 +1515,11 @@ main.home {
                         pointer-events: none;
                         width: 100%;
                     }
+
                     &>div {
                         @include setflex(row, nowrap, center, center, center);
                         width: 100%;
+
                         &>a {
                             @include flex-grow(0);
                             display: block;

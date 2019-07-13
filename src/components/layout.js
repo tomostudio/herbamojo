@@ -41,7 +41,7 @@ export default class Layout extends React.Component {
 					};
 
 					return (
-						<main className={props.mainClass} id={props.mainID}>
+						<main className={`${props.mainClass} ${props.indo ? `id` : `en`}`} id={props.mainID}>
 							<Helmet>
 								<meta charSet="utf-8" />
 								<title>{props.titleText ? `${props.titleText} | ${web_name}` : web_name}</title>

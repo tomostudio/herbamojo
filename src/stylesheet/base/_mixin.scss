@@ -94,32 +94,14 @@
   }
 
   //	HEIGHT BREAK
-  @if $media==height_break {
+  @if $media==height_less {
     @media only screen and (max-height: $height-break) {
       @content;
     }
   }
 
-  @if $media==height_less {
-    @media only screen and (max-height: $height-break) and (min-width: $break-small) {
-      @content;
-    }
-  }
-
-  @else if $media==height_more {
-    @media only screen and (min-height: $height-break) and (min-width: $break-small) {
-      @content;
-    }
-  }
-
-  @if $media==height_less_mobile {
-    @media only screen and (max-height: $height-break) and (max-width: $break-small) {
-      @content;
-    }
-  }
-
-  @else if $media==height_more_mobile {
-    @media only screen and (min-height: $height-break) and (max-width: $break-small) {
+  @if $media==height_more {
+    @media only screen and (min-height: $height-break) {
       @content;
     }
   }

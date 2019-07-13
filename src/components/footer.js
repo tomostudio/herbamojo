@@ -8,23 +8,12 @@ export default class Footer extends React.Component {
 	render() {
 		return (
 			<StaticQuery
-				query={graphql`
-					query FooterQuery {
-						markdownRemark(
-							frontmatter: { issetting: { eq: true }, contenttype: { eq: "general_setting" } }
-						) {
-							frontmatter {
-								footer {
-									email
-									ig_link
-									wa_no
-								}
-							}
-						}
-					}
-				`}
+				query={footerQuery}
 				render={(data) => {
-					const footerData = data.markdownRemark.frontmatter.footer;
+					console.log(data);
+					const footerData = data.general.frontmatter.footer;
+					const navigation = data.general.frontmatter.navigation;
+
 					if (typeof footerData.wa_no === 'string') {
 						footerData.wa_no = footerData.wa_no.replace('+', '');
 					}
@@ -32,10 +21,16 @@ export default class Footer extends React.Component {
 					return (
 						<section className="footer">
 							<div className="wrapper">
-								<div className="">
-									<Link to="/">HOME</Link>
-									<Link to="/">JOURNAL</Link>
-								</div>
+								{!data.general.frontmatter.journaldisable && (
+									<div>
+										<Link to="/">
+											{this.props.indonesia ? navigation.home.id : navigation.home.en}
+										</Link>
+										<Link to="/">
+											{this.props.indonesia ? navigation.journal.id : navigation.journal.en}
+										</Link>
+									</div>
+								)}
 								<div>
 									{footerData.ig_link !== '' && (
 										<a
@@ -77,24 +72,28 @@ export default class Footer extends React.Component {
 		);
 	}
 }
-// export default (props) => (
-// 	<section className="footer">
-// 		<div className="wrapper">
-// 			<div className="">
-// 				<Link to="/">HOME</Link>
-// 				<Link to="/">JOURNAL</Link>
-// 			</div>
-// 			<div>
-// 				<a className="svg" target="_blank" rel="noopener noreferrer" href="https://instagram.com/herbamojo">
-// 					<InstagramSVG />
-// 				</a>
-// 				<a className="svg" target="_blank" rel="noopener noreferrer" href="https://instagram.com/herbamojo">
-// 					<WhatsappSVG />
-// 				</a>
-// 				<a className="svg" target="_blank" rel="noopener noreferrer" href="https://instagram.com/herbamojo">
-// 					<EmailSVG />
-// 				</a>
-// 			</div>
-// 		</div>
-// 	</section>
-// );
+
+const footerQuery = graphql`
+	query FooterQuery {
+		general: markdownRemark(frontmatter: { issetting: { eq: true }, contenttype: { eq: "general_setting" } }) {
+			frontmatter {
+				journaldisable
+				footer {
+					email
+					ig_link
+					wa_no
+				}
+				navigation {
+					home {
+						en
+						id
+					}
+					journal {
+						en
+						id
+					}
+				}
+			}
+		}
+	}
+`;

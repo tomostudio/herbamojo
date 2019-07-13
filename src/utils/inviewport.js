@@ -24,30 +24,37 @@ export class InViewportClass {
 
         if (obj.enter !== null && obj.enter !== undefined && typeof obj.enter === 'function') this.enter = obj.enter;
         if (obj.exit !== null && obj.exit !== undefined && typeof obj.exit === 'function') this.exit = obj.exit;
+        if (obj.always !== null && obj.always !== undefined && typeof obj.always === 'function') this.always = obj.always;
 
-        this.init();
-    }
-    init() {
-        window.addEventListener('scroll', this.scrollevent.bind(this), false);
-        this.scrollevent();
+        window.addEventListener('scroll', this.trigger.bind(this), false);
+        this.trigger();
     }
     kill() {
-        window.removeEventListener('scroll', this.scrollevent.bind(this), false);
+        window.removeEventListener('scroll', this.trigger.bind(this), false);
     }
     enter() {}
     exit() {}
-    scrollevent() {
+    always() {}
+    trigger() {
         if (this.scrolltarget !== null) {
-            if (InViewportDetect(this.scrolltarget, this.margin.top, this.margin.right, this.margin.bottom, this.margin.left, this.visibility)) {
-                this.enter();
+            let inview = InViewportDetect(this.scrolltarget, this.margin.top, this.margin.right, this.margin.bottom, this.margin.left, this.visibility);
+            this.always(inview);
+            if (inview.detected) {
+                this.enter(inview);
             } else {
-                this.exit();
+                this.exit(inview);
             }
         }
     }
 }
 
 export const InViewportDetect = (target = null, top = 0, right = 0, bottom = 0, left = 0, visibility = .5) => {
+    let returnobj = {
+        detected: false,
+        visibility: 0,
+        targetdistance: null,
+        margin: null
+    }
     if (target !== null) {
         if (visibility > 1) {
             visibility = 1;
@@ -59,14 +66,24 @@ export const InViewportDetect = (target = null, top = 0, right = 0, bottom = 0, 
             target = targetelem;
         }
         let distance = target.getBoundingClientRect();
-        let detected = false;
-        if (distance.top >= top - distance.height * visibleMultipler &&
-            distance.left >= left - distance.width * visibleMultipler &&
-            distance.bottom <= ((window.innerHeight || document.documentElement.clientHeight) + distance.height * visibleMultipler - bottom) &&
-            distance.right <= ((window.innerWidth || document.documentElement.clientWidth) + distance.width * visibleMultipler - right)) {
-            detected = true;
+        returnobj.targetdistance = distance;
 
-            /*
+        const margin = {
+            top: top - distance.height * visibleMultipler,
+            left: left - distance.width * visibleMultipler,
+            bottom: ((window.innerHeight || document.documentElement.clientHeight) + distance.height * visibleMultipler - bottom),
+            right: ((window.innerWidth || document.documentElement.clientWidth) + distance.width * visibleMultipler - right),
+        }
+
+        returnobj.margin = margin;
+
+        let detected = false;
+        if (distance.top >= margin.top &&
+            distance.left >= margin.left &&
+            distance.bottom <= margin.bottom &&
+            distance.right <= margin.right) {
+            detected = true;
+        }
             //CALCULATE VISIBLE FROM
             let visibleLeft = Math.max(Math.min((distance.width - (left) + distance.left) / distance.width, 1), 0);
             let visibleRight = Math.max(Math.min((distance.width + (((window.innerWidth || document.documentElement.clientWidth) - right) - distance.right)) / distance.width, 1), 0);
@@ -75,12 +92,12 @@ export const InViewportDetect = (target = null, top = 0, right = 0, bottom = 0, 
 
             //CALCULATE GET THE OVERALL MINIMUM VISIBLITY
             const visible = Math.min(visibleLeft, visibleRight, visibleTop, visibleBottom);
-            // console.log('detected visiblity', visible);
-            */
-        }
-        return detected;
+
+            returnobj.visibility = visible;
+        returnobj.detected = detected;
     } else {
-        return false;
+        returnobj.detected = false;
     }
+    return returnobj
 
 }
