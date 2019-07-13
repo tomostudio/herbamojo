@@ -92,7 +92,6 @@ export default class Home extends React.Component {
 					document.querySelector('div.bottlewrapper').classList.add('stuck');
 				},
 				always: (e) => {
-					console.log(e);
 				}
 			});
 

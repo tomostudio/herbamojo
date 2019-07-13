@@ -33,7 +33,7 @@ export class Scrollax {
         this.move.top = obj.move_top !== undefined ? obj.move_top : 0;
         this.move.bottom = obj.move_bottom !== undefined ? obj.move_bottom : 0;
 
-        this.init();
+        window.addEventListener('scroll', this.scrollevent.bind(this), false);
     }
     set(obj) {
         if (obj.transform_x !== undefined) this.transform.x = obj.transform_x;
@@ -52,9 +52,6 @@ export class Scrollax {
             this.center.y = this.scrolltarget.getBoundingClientRect().top;
         }
 
-    }
-    init() {
-        window.addEventListener('scroll', this.scrollevent.bind(this), false);
     }
     kill() {
         window.removeEventListener('scroll', this.scrollevent.bind(this), false);
@@ -97,7 +94,6 @@ export class Scrollax {
         }
     }
     scrollevent(e) {
-        console.log('scroll trigger');
         this.trigger();
     }
 }
