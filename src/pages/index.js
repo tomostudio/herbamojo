@@ -686,7 +686,7 @@ export default class Home extends React.Component {
 									</section>
 									<section id="about">
 										<div className="wrapper">
-											<h1>{this.langID ? transData.about.title.id : transData.about.title.id}</h1>
+											<h1>{this.langID ? transData.about.title.id : transData.about.title.en}</h1>
 											<div className="content half">
 												<div className="logo">
 													<img src={HerbamojoLogo} alt="herbamojo" />
@@ -695,7 +695,7 @@ export default class Home extends React.Component {
 													<img src={BottleImg} alt="herbamojo" />
 												</div>
 												<div className="description">
-													{this.langID ? homeData.about.desc.id : homeData.about.desc.id}
+													{this.langID ? homeData.about.desc.id : homeData.about.desc.en}
 												</div>
 												<div className="certification">
 													<div>
@@ -775,7 +775,7 @@ export default class Home extends React.Component {
 												{this.langID ? (
 													transData.benefits.title.id
 												) : (
-													transData.benefits.title.id
+													transData.benefits.title.en
 												)}
 											</h1>
 											<div className="content half">
@@ -867,7 +867,7 @@ export default class Home extends React.Component {
 											{this.langID ? (
 												transData.ingredients.title.id
 											) : (
-												transData.ingredients.title.id
+												transData.ingredients.title.en
 											)}
 										</h1>
 										<div className="content">
@@ -918,7 +918,7 @@ export default class Home extends React.Component {
 								</section>
 								<section id="shop">
 									<div className="wrapper">
-										<h1>{this.langID ? transData.shop.title.id : transData.shop.title.id}</h1>
+										<h1>{this.langID ? transData.shop.title.id : transData.shop.title.en}</h1>
 										<div className="content">
 											{homeData.onlineshop.length > 0 && (
 												<div>
@@ -926,7 +926,7 @@ export default class Home extends React.Component {
 														{this.langID ? (
 															transData.shop.online.id
 														) : (
-															transData.shop.online.id
+															transData.shop.online.en
 														)}
 													</h2>
 													<div
@@ -1044,7 +1044,7 @@ export default class Home extends React.Component {
 														{this.langID ? (
 															transData.shop.offline.id
 														) : (
-															transData.shop.offline.id
+															transData.shop.offline.en
 														)}
 													</h2>
 													<div
@@ -1163,7 +1163,7 @@ export default class Home extends React.Component {
 									<section id="journal">
 										<div className="wrapper">
 											<h1>
-												{this.langID ? transData.journal.title.id : transData.journal.title.id}
+												{this.langID ? transData.journal.title.id : transData.journal.title.en}
 											</h1>
 										</div>
 									</section>
