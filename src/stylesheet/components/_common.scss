@@ -5,10 +5,20 @@ body {
 body:not(.loaded) {
     height: 100vh;
     overflow: hidden;
-
+    touch-action: none;
+    position: relative;
     & main {
         opacity: 0;
         @include transition(all 0s);
+    }
+    &.__disablescroll {
+        @include respond-to(mobile) {
+            & #___gatsby{
+                pointer-events: none;
+                overflow: hidden;
+                height: 100vh;
+            }
+        }
     }
 }
 
@@ -381,13 +391,6 @@ main {
 .wrapper {
     min-height: 100%;
 }
-
-div.inview {
-    width: 100px;
-    height: 50px;
-    border: solid thin red;
-}
-
 a.svg {
     @include transition(opacity 0s);
 

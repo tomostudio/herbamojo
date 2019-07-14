@@ -2,13 +2,14 @@ import React from 'react';
 import { StaticQuery, Link, graphql } from 'gatsby';
 import Slider from 'react-slick';
 //UTILS
-import { ScrollSnap } from 'utils/scrollsnap';
+import { ScrollSnapClass } from 'utils/scrollsnap';
 import { Scrollax } from 'utils/scrollax';
 import { ScrollIt } from 'utils/scrollit';
 import { LoaderClass } from 'utils/loader';
 import { InViewportClass } from 'utils/inviewport';
 import { MediaCheck } from 'utils/mediacheck';
-import { ResponsiveVH } from 'utils/responsivevh';
+import { ResponsiveVH } from 'utils/responsive-vh';
+import { DisableScroll } from 'utils/disablescroll';
 
 //COMPONENTS
 import Layout from 'components/layout';
@@ -43,42 +44,41 @@ export default class Home extends React.Component {
 	//TOGGLE LANGUAGE
 	// --------------
 	langID = this.props.langID || false;
+	MainID = this.langID ? 'homeID' : 'homeEN';
+	LoadAnimationDelay = 2000;
+	LoadAnimationTimeout = null;
 	// --------------
 	IndexLoader = new LoaderClass({
-		parent: `#${this.langID ? 'homeID' : 'homeEN'}`,
+		parent: `#${this.MainID}`,
 		default_delay: 500,
 		postload: () => {
-			if (typeof document !== `undefined`) {
-				document.body.classList.add('loaded');
+			if (typeof window !== undefined) {
 				window.scroll(0, 0);
+
+				this.HomeScrollSnap = new ScrollSnapClass({
+					sections_identifier: `main.home#${this.MainID} section`,
+					snap_identifier: '',
+					speed: 500,
+					maxduration: 1000,
+					responsive_width: 700,
+					responsive_height: 500
+				});
 			}
-
-			ScrollSnap.init({
-				sections_identifier: `main.home#${this.langID ? 'homeID' : 'homeEN'} section`,
-				snap_identifier: '',
-				speed: 500,
-				maxduration: 1000,
-				responsive_width: 700,
-				responsive_height: 500
-			});
-
-			this.snapNav = document.querySelectorAll(
-				`main#${this.langID ? 'homeID' : 'homeEN'} div.overlay .right_nav .snap_nav > *`
-			);
+			this.SnapNav = document.querySelectorAll(`main#${this.MainID} div.overlay .right_nav .snap_nav > *`);
 			const setNav = (i) => {
-				this.snapNav.forEach((nav) => {
+				this.SnapNav.forEach((nav) => {
 					nav.classList.remove('active');
 				});
 				if (i >= 0) {
-					this.snapNav[i].classList.add('active');
+					this.SnapNav[i].classList.add('active');
 				}
 			};
 			setNav(0);
 
 			//SETUP BUTTON
-			this.snapNav.forEach((nav, index) => {
+			this.SnapNav.forEach((nav, index) => {
 				nav.onclick = () => {
-					ScrollSnap.snap.to(index);
+					this.HomeScrollSnap.snap.to(index);
 				};
 			});
 
@@ -91,8 +91,7 @@ export default class Home extends React.Component {
 				exit: () => {
 					document.querySelector('div.bottlewrapper').classList.add('stuck');
 				},
-				always: (e) => {
-				}
+				always: (e) => {}
 			});
 
 			//SECTIONS INVIEW
@@ -105,7 +104,7 @@ export default class Home extends React.Component {
 					setNav(0);
 				},
 				exit: () => {
-					document.querySelector('section#home').classList.remove('inview');
+					// document.querySelector('section#home').classList.remove('inview');
 					document.querySelector('#ShopButton').classList.remove('hide');
 				}
 			});
@@ -115,9 +114,15 @@ export default class Home extends React.Component {
 				enter: () => {
 					setNav(1);
 					document.querySelector('section#about').classList.add('inview');
-				},
-				exit: () => {
-					document.querySelector('section#about').classList.remove('inview');
+				}
+			});
+			this.inview.aboutm = new InViewportClass({
+				target: 'section#about',
+				visibility: 0.25,
+				enter: () => {
+					if (MediaCheck.width.mobile()) {
+						document.querySelector('section#about').classList.add('inview');
+					}
 				}
 			});
 
@@ -132,27 +137,60 @@ export default class Home extends React.Component {
 					document.querySelector('section#benefits').classList.remove('inview');
 				}
 			});
+			const AllBenefits = document.querySelectorAll('section#benefits .content.half>div>div');
+			AllBenefits.forEach((benefit, index) => {
+				this.inview.benefitsm[index] = new InViewportClass({
+					target: `section#benefits .content.half>div>div:nth-child(${index + 1})`,
+					visibility: 0.55,
+					enter: () => {
+						if (MediaCheck.width.mobile()) benefit.classList.add('inview');
+					},
+					exit: () => {
+						// if (MediaCheck.width.mobile()) benefit.classList.remove('inview');
+					}
+				});
+			});
 
 			this.inview.ingredients = new InViewportClass({
 				target: 'section#ingredients',
 				visibility: 0.55,
 				enter: () => {
 					setNav(3);
-					document.querySelector('section#ingredients').classList.add('inview');
+					if (!MediaCheck.width.mobile()) {
+						document.querySelector('section#ingredients').classList.add('inview');
+					}
 				},
-				exit: () => {
-					// document.querySelector('section#ingredients').classList.remove('inview');
-				}
+				exit: () => {}
+			});
+			this.inview.ingredientsm = new InViewportClass({
+				target: 'section#ingredients',
+				visibility: 0.25,
+				enter: () => {
+					if (MediaCheck.width.mobile()) {
+						document.querySelector('section#ingredients').classList.add('inview');
+					}
+				},
+				exit: () => {}
 			});
 			this.inview.shop = new InViewportClass({
 				target: 'section#shop',
 				visibility: 0.55,
 				enter: () => {
 					setNav(4);
-					document.querySelector('section#shop').classList.add('inview');
+					if (!MediaCheck.width.mobile()) document.querySelector('section#shop').classList.add('inview');
 				},
 				exit: () => {
-					document.querySelector('section#shop').classList.remove('inview');
+					if (!MediaCheck.width.mobile()) document.querySelector('section#shop').classList.remove('inview');
+				}
+			});
+			this.inview.shopm = new InViewportClass({
+				target: 'section#shop',
+				visibility: 0.25,
+				enter: () => {
+					if (MediaCheck.width.mobile()) document.querySelector('section#shop').classList.add('inview');
+				},
+				exit: () => {
+					if (MediaCheck.width.mobile()) document.querySelector('section#shop').classList.remove('inview');
 				}
 			});
 
@@ -180,17 +218,37 @@ export default class Home extends React.Component {
 			// INIT RESIZE
 			this.resize();
 
-			this.forceVH = new ResponsiveVH({ target: '.fitheight' });
+			this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
 			this.inview.bottlesection.trigger();
+
+			// TRIGGER SCROLL SNAP INIT AND PAUSE
+			this.HomeScrollSnap.init();
+			this.HomeScrollSnap.pause();
+
+			// SET ANIMATION DELAY
+			if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
+			this.LoadAnimationTimeout = setTimeout(() => {
+				//ENABLE SCROLL
+				if (this.disableScrollBody !== null) this.disableScrollBody.enable();
+				this.HomeScrollSnap.play();
+				if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
+			}, this.LoadAnimationDelay);
+			if (typeof document !== `undefined`) {
+				document.body.classList.add('loaded');
+			}
 		}
 	});
 	inview = {
 		footer: null,
 		home: null,
 		about: null,
+		aboutm: null,
 		benefits: null,
+		benefitsm: [ null, null, null, null ],
 		ingredients: null,
+		ingredientsm: null,
 		shop: null,
+		shopm: null,
 		bottlesection: null
 	};
 	scrollax = {
@@ -199,35 +257,49 @@ export default class Home extends React.Component {
 		two: null,
 		ing_bg: null
 	};
-	snapNav = null;
-	scrollsnap = null;
-	forceVH = null;
+	disableScrollBody = null;
+	HomeScrollSnap = null;
+	SnapNav = null;
+	ForceVH = null;
 	componentDidMount() {
 		if (typeof document !== `undefined`) {
 			document.body.classList.remove('loaded');
 		}
 		this.IndexLoader.mountload();
+		if (!document.body.classList.contains('loaded')) {
+			//DISABLE SCROLL ON MAIN WINDOW
+			this.disableScrollBody = new DisableScroll();
+		}
 	}
 	componentWillUnmount() {
 		if (this.inview.home) this.inview.home.kill();
 		if (this.inview.about) this.inview.about.kill();
+		if (this.inview.aboutm) this.inview.aboutm.kill();
 		if (this.inview.benefits) this.inview.benefits.kill();
+		this.inview.benefitsm.forEach((benefit, index)=> {
+			if (this.inview.benefitsm[index]) this.inview.benefitsm[index].kill();
+		})
 		if (this.inview.ingredients) this.inview.ingredients.kill();
+		if (this.inview.ingredientsm) this.inview.ingredientsm.kill();
 		if (this.inview.shop) this.inview.shop.kill();
+		if (this.inview.shopm) this.inview.shopm.kill();
 		if (this.inview.footer) this.inview.footer.kill();
 		if (this.inview.bottlesection) this.inview.bottlesection.kill();
 		if (this.scrollax.one) this.scrollax.one.kill();
 		if (this.scrollax.two) this.scrollax.two.kill();
 		if (this.scrollax.ing_bg) this.scrollax.ing_bg.kill();
 		if (this.scrollax.home_mobile) this.scrollax.home_mobile.kill();
-		// if (ScrollSnap) ScrollSnap.kill();
-
-		document.body.classList.remove('menu_open');
-		this.snapNav.forEach((nav, index) => {
+		if (this.HomeScrollSnap) this.HomeScrollSnap.kill();
+		if (this.disableScrollBody !== null) this.disableScrollBody.enable();
+		if (this.ForceVH) this.ForceVH.kill();
+		if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
+		this.SnapNav.forEach((nav, index) => {
 			nav.onClick = null;
 		});
 
 		if (typeof document !== `undefined`) {
+			//RESET MOBILE MENU OPEN
+			document.body.classList.remove('menu_open');
 			window.removeEventListener('resize', this.resize, false);
 		}
 	}
@@ -246,6 +318,7 @@ export default class Home extends React.Component {
 			desc.parentNode.style.height = desc.clientHeight.toString() + 'px';
 		});
 		if (!MediaCheck.width.mobile) {
+			// REMOVE MENU OPEN WHEN IT IS NOT MOBILE
 			document.body.classList.remove('menu_open');
 		}
 	}
@@ -263,7 +336,7 @@ export default class Home extends React.Component {
 			if (duration > 1000) duration = 1000;
 			ScrollIt(scrollTarget, duration);
 		} else {
-			ScrollSnap.snap.to(4);
+			this.HomeScrollSnap.snap.to(4);
 		}
 	}
 	ingredientChanging = false;
@@ -273,7 +346,7 @@ export default class Home extends React.Component {
 	}
 	ingredientToggle(target) {
 		if (target != null) {
-			const delay = 500;
+			const delay = MediaCheck.width.mobile ? 500 : 500;
 			let child = target.parentNode;
 			let index = 1;
 			while ((child = child.previousSibling) != null) index++;
@@ -347,6 +420,7 @@ export default class Home extends React.Component {
 		}
 	}
 	render() {
+		
 		this.IndexLoader.renderload();
 
 		const sliderSettings = {
@@ -379,12 +453,7 @@ export default class Home extends React.Component {
 					const footerData = generalData.footer;
 					const transData = data.home.frontmatter.translations;
 					return (
-						<Layout
-							titleText="Home"
-							mainClass="home"
-							indo={this.langID}
-							mainID={this.langID ? 'homeID' : 'homeEN'}
-						>
+						<Layout titleText="Home" mainClass="home" indo={this.langID} mainID={this.MainID}>
 							<MobileHeader indonesia={this.langID} />
 							<div id="MobileNavigation">
 								<div>
@@ -394,7 +463,7 @@ export default class Home extends React.Component {
 										<span />
 									</div>
 								</div>
-								<div className="fitheight">
+								<div className="">
 									<div>
 										<div className="closebutton" onClick={(e) => this.menuToggle(e)}>
 											<span />
@@ -403,26 +472,26 @@ export default class Home extends React.Component {
 									</div>
 									<div className="fitheight">
 										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.home.title.id : transData.home.title.id}
+											{this.langID ? transData.home.title.id : transData.home.title.en}
 										</span>
 										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.about.title.id : transData.about.title.id}
+											{this.langID ? transData.about.title.id : transData.about.title.en}
 										</span>
 										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.benefits.title.id : transData.benefits.title.id}
+											{this.langID ? transData.benefits.title.id : transData.benefits.title.en}
 										</span>
 										<span onClick={(e) => this.mobileScroll(e)}>
 											{this.langID ? (
 												transData.ingredients.title.id
 											) : (
-												transData.ingredients.title.id
+												transData.ingredients.title.en
 											)}
 										</span>
 										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.shop.title.id : transData.shop.title.id}
+											{this.langID ? transData.shop.title.id : transData.shop.title.en}
 										</span>
 										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.journal.title.id : transData.journal.title.id}
+											{this.langID ? transData.journal.title.id : transData.journal.title.en}
 										</span>
 										<div>
 											<div>
@@ -566,7 +635,7 @@ export default class Home extends React.Component {
 									<div className="greenline" />
 									<div className="bottlewrapper">
 										<img src={BottleImg} alt="herbamojo" />
-										<span id="ShopButton" onClick={this.gotoShop}>
+										<span id="ShopButton" className="hide" onClick={this.gotoShop}>
 											{this.langID ? transData.home.shopfloat.id : transData.home.shopfloat.en}
 										</span>
 									</div>
@@ -636,7 +705,7 @@ export default class Home extends React.Component {
 															{this.langID ? (
 																transData.about.cert.natural.id
 															) : (
-																transData.about.cert.natural.id
+																transData.about.cert.natural.en
 															)}
 														</span>
 													</div>
@@ -647,7 +716,7 @@ export default class Home extends React.Component {
 															{this.langID ? (
 																transData.about.cert.bpom.id
 															) : (
-																transData.about.cert.bpom.id
+																transData.about.cert.bpom.en
 															)}
 														</span>
 													</div>
@@ -658,7 +727,7 @@ export default class Home extends React.Component {
 															{this.langID ? (
 																transData.about.cert.halal.id
 															) : (
-																transData.about.cert.halal.id
+																transData.about.cert.halal.en
 															)}
 														</span>
 													</div>
@@ -669,7 +738,7 @@ export default class Home extends React.Component {
 															{this.langID ? (
 																transData.about.cert.quality.id
 															) : (
-																transData.about.cert.quality.id
+																transData.about.cert.quality.en
 															)}
 														</span>
 													</div>
@@ -679,7 +748,7 @@ export default class Home extends React.Component {
 															{this.langID ? (
 																transData.about.cert.expert.id
 															) : (
-																transData.about.cert.expert.id
+																transData.about.cert.expert.en
 															)}
 														</span>
 													</div>
@@ -690,7 +759,7 @@ export default class Home extends React.Component {
 															{this.langID ? (
 																transData.about.cert.quadra.id
 															) : (
-																transData.about.cert.quadra.id
+																transData.about.cert.quadra.en
 															)}
 														</span>
 													</div>
@@ -1094,7 +1163,9 @@ export default class Home extends React.Component {
 								{!data.general.frontmatter.journaldisable && (
 									<section id="journal">
 										<div className="wrapper">
-										<h1>{this.langID ? transData.journal.title.id : transData.journal.title.id}</h1>
+											<h1>
+												{this.langID ? transData.journal.title.id : transData.journal.title.id}
+											</h1>
 										</div>
 									</section>
 								)}

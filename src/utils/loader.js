@@ -49,7 +49,7 @@ export class LoaderClass {
     }
     load() {
         this.intervalcheck();
-        console.log(this.loadcheck);
+        // console.log(this.loadcheck);
         if (this.loadcheck.time && this.loadcheck.data && this.loadcheck.reload && this.loadcheck.images && !this.loadcheck.page) {
             if (this.delay.firstload > 0) {
                 if (firstload) {
@@ -95,7 +95,6 @@ export class LoaderClass {
                     const eachimageloaded = (e) => {
                         e.target.removeEventListener("load", eachimageloaded.bind(this), false);
                         this.images.loaded++;
-                        console.log('loaded', e.target, this.images.loaded, this.images.list.length );
                         this.imageloadfinish();
                     }
                     if(image.complete){

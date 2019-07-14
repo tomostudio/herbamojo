@@ -10,7 +10,6 @@ export default class Footer extends React.Component {
 			<StaticQuery
 				query={footerQuery}
 				render={(data) => {
-					console.log(data);
 					const footerData = data.general.frontmatter.footer;
 					const navigation = data.general.frontmatter.navigation;
 

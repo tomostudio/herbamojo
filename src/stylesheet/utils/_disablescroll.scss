@@ -1,0 +1,8 @@
+.__disablescroll {
+    &::-webkit-scrollbar {
+        width: 0 !important;
+        display: none;
+    }
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
+}

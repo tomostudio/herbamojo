@@ -6,6 +6,7 @@ $color_green: #29CB7E;
 // ==========================================================================
 // TRANSITION
 $global-transition: .25s;
+$globalslow-transition: .4s;
 $page-transition: .25s;
 
 $loading-transition: .5s;
@@ -23,6 +24,10 @@ $home-offcenter: 200px;
 $mobileinnersection-maxwidth: 350px;
 $mobileHeaderHeight: 80px;
 $mobileSocialMedia: 35px;
+
+//LOAD DELAY
+$initialAnimDelayHome: 2.25s;
+$initialTranstionHome: 1.25s;
 
 // ==========================================================================
 // REPONSIVE SIZES
@@ -93,15 +98,15 @@ $font-size-subbody: 20px;
         opacity: 1;
     }
 }
+
 @include keyframes(ingbg_transitionoutm) {
 
     0%,
-    1% {
+    25% {
         @include transform(translate(0px, 0%));
         opacity: 1;
     }
 
-    75%,
     100% {
         @include transform(translate(-100px, 0%));
         opacity: 0;
@@ -112,12 +117,11 @@ $font-size-subbody: 20px;
 @include keyframes(ingbg_transitioninm) {
 
     0%,
-    25% {
+    1% {
         @include transform(translate(100px, 0%));
         opacity: 0;
     }
 
-    90%,
     100% {
         @include transform(translate(00px, 0%));
         opacity: 1;
@@ -137,6 +141,7 @@ $font-size-subbody: 20px;
         left: auto;
     }
 }
+
 @include keyframes(mobilemenuin1) {
     0% {
         width: 0%;
@@ -144,7 +149,8 @@ $font-size-subbody: 20px;
         right: auto;
     }
 
-    50%, 100% {
+    50%,
+    100% {
         width: 100%;
         left: 0px;
         right: auto;
@@ -152,13 +158,16 @@ $font-size-subbody: 20px;
 }
 
 @include keyframes(mobilemenuin2) {
-    0%, 25% {
+
+    0%,
+    25% {
         width: 0%;
         left: 0px;
         right: auto;
     }
 
-    75%, 100% {
+    75%,
+    100% {
         width: 100%;
         left: 0px;
         right: auto;
@@ -166,7 +175,9 @@ $font-size-subbody: 20px;
 }
 
 @include keyframes(mobilemenuin3) {
-    0%, 50% {
+
+    0%,
+    50% {
         width: 0%;
         left: 0px;
         right: auto;
@@ -347,7 +358,7 @@ $font-size-subbody: 20px;
 }
 
 @mixin mobilegaptop() {
-    &::before{
+    &::before {
         @include pseudo();
         position: relative;
         height: 7.5vh;
