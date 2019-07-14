@@ -86,8 +86,9 @@ export class ScrollSnapClass {
         this.v.nav.identifier = obj.snap_identifier !== undefined ? obj.snap_identifier : '';
         this.v.nav.childClass = obj.snap_child_identifier !== undefined ? obj.snap_child_identifier : '> *';
         this.v.nav.activeClass = obj.snap_active_class || 'active';
-
-        this.v.sections.all = document.querySelectorAll(this.v.sections.identifier);
+        if (typeof document !== `undefined`) {
+            this.v.sections.all = document.querySelectorAll(this.v.sections.identifier);
+        }
 
         if (obj.afterScrollEvent && typeof obj.afterScrollEvent === 'function') {
             this.scrollEvent.after = obj.afterScrollEvent;
@@ -111,7 +112,7 @@ export class ScrollSnapClass {
     kill() {
         this.v.snap.enable = false;
         this.event.remove();
-        document.body.classList.remove('snapon');
+        if (typeof document !== `undefined`) document.body.classList.remove('snapon');
     }
     pause() {
         this.v.snap.pause = true;

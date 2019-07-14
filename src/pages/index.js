@@ -222,8 +222,11 @@ export default class Home extends React.Component {
 			this.inview.bottlesection.trigger();
 
 			// TRIGGER SCROLL SNAP INIT AND PAUSE
-			this.HomeScrollSnap.init();
-			this.HomeScrollSnap.pause();
+			if (typeof document !== `undefined`) {
+				document.body.classList.add('loaded');
+				this.HomeScrollSnap.init();
+				this.HomeScrollSnap.pause();
+			}
 
 			// SET ANIMATION DELAY
 			if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
@@ -233,9 +236,6 @@ export default class Home extends React.Component {
 				this.HomeScrollSnap.play();
 				if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
 			}, this.LoadAnimationDelay);
-			if (typeof document !== `undefined`) {
-				document.body.classList.add('loaded');
-			}
 		}
 	});
 	inview = {
@@ -276,9 +276,9 @@ export default class Home extends React.Component {
 		if (this.inview.about) this.inview.about.kill();
 		if (this.inview.aboutm) this.inview.aboutm.kill();
 		if (this.inview.benefits) this.inview.benefits.kill();
-		this.inview.benefitsm.forEach((benefit, index)=> {
+		this.inview.benefitsm.forEach((benefit, index) => {
 			if (this.inview.benefitsm[index]) this.inview.benefitsm[index].kill();
-		})
+		});
 		if (this.inview.ingredients) this.inview.ingredients.kill();
 		if (this.inview.ingredientsm) this.inview.ingredientsm.kill();
 		if (this.inview.shop) this.inview.shop.kill();
@@ -289,7 +289,7 @@ export default class Home extends React.Component {
 		if (this.scrollax.two) this.scrollax.two.kill();
 		if (this.scrollax.ing_bg) this.scrollax.ing_bg.kill();
 		if (this.scrollax.home_mobile) this.scrollax.home_mobile.kill();
-		if (this.HomeScrollSnap) this.HomeScrollSnap.kill();
+		if (typeof document !== `undefined`) if (this.HomeScrollSnap) this.HomeScrollSnap.kill();
 		if (this.disableScrollBody !== null) this.disableScrollBody.enable();
 		if (this.ForceVH) this.ForceVH.kill();
 		if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
@@ -420,7 +420,6 @@ export default class Home extends React.Component {
 		}
 	}
 	render() {
-		
 		this.IndexLoader.renderload();
 
 		const sliderSettings = {
