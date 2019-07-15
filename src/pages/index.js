@@ -66,13 +66,6 @@ export default class Home extends React.Component {
 					responsive_height: 500,
 					hasfooter: false
 				});
-				window.addEventListener(
-					'scroll',
-					() => {
-						console.log(window.pageYOffset || document.documentElement.scrollTop);
-					},
-					false
-				);
 			}
 			this.SnapNav = document.querySelectorAll(`main#${this.MainID} div.overlay .right_nav .snap_nav > *`);
 			const setNav = (i) => {
@@ -531,7 +524,7 @@ export default class Home extends React.Component {
 					const footerData = generalData.footer;
 					const transData = data.home.frontmatter.translations;
 					return (
-						<Layout titleText="Home" mainClass="home" indo={this.langID} mainID={this.MainID}>
+						<Layout mainClass="home" indo={this.langID} mainID={this.MainID}>
 							<MobileHeader indonesia={this.langID} />
 							<div id="MobileNavigation">
 								<div>

@@ -69,7 +69,7 @@ export const ScrollIt = (destination, duration = 200, easing = 'linear', callbac
         return;
     }
 
-    const scroll = () => {
+    function scroll() {
         if (typeof window !== `undefined`) {
             const now = 'now' in window.performance ? performance.now() : new Date().getTime();
             const time = Math.min(1, (now - startTime) / duration);

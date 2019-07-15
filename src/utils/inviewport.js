@@ -167,6 +167,7 @@ export const PassDetect = (target = null, detectbottom = true) => {
     }
     return returnobj
 }
+
 export const InViewportDetect = (target = null, top = 0, right = 0, bottom = 0, left = 0, visibility = .5) => {
     let returnobj = {
         detected: false,

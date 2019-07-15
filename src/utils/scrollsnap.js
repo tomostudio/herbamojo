@@ -232,11 +232,8 @@ export class ScrollSnapClass {
                     let footeroffset = each.offsetHeight - this.common.windowHeight();
                     this.v.sections.targets.push(this.v.sections.targets[index] + footeroffset);
                 }
-                console.log(each.getBoundingClientRect(), scrollTop);
-            });
+            }, this);
 
-            console.log(this.v.sections.all[1].getBoundingClientRect().height, this.v.sections.all[1].offsetHeight, this.v.sections.all[1].clientHeight);
-            console.log('reset scrollsnap target', this.v.sections.targets);
         },
 
         down: () => {

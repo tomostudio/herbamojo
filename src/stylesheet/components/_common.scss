@@ -5,19 +5,21 @@ body {
 body:not(.loaded) {
     height: 100vh;
     overflow: hidden;
-    touch-action: none;
     position: relative;
+
     & main {
         opacity: 0;
         @include transition(all 0s);
     }
-    &.__disablescroll {
-        @include respond-to(mobile) {
-            & #___gatsby{
-                pointer-events: none;
-                overflow: hidden;
-                height: 100vh;
-            }
+}
+
+body.__disablescroll {
+    touch-action: none;
+    @include respond-to(mobile) {
+        & #MainLayout {
+            pointer-events: none;
+            overflow: hidden;
+            height: 100vh;
         }
     }
 }
@@ -95,7 +97,7 @@ body:not(.loaded) {
             bottom: auto;
             top: $globalmobile-padding - 5px;
             @include left-safe($globalmobile-padding + 10px - 100px);
-            @include transform(rotate(90deg) translate( 0%, -100%));
+            @include transform(rotate(90deg) translate(0%, -100%));
             @include transform-origin(top left);
         }
     }
@@ -107,6 +109,7 @@ body:not(.loaded) {
         &>div:last-child {
             right: $global-padding;
             @include transition(all 0s);
+
             @include respond-to(mobile) {
                 right: auto;
                 left: $globalmobile-padding + 10px;
@@ -177,7 +180,7 @@ body.loaded main {
             grid-area: 1 / 1 /2 /2;
             justify-self: start;
 
-            &> * {
+            &>* {
                 pointer-events: auto;
                 font-family: 'Amarillo';
                 font-size: $font-size-button-m;
@@ -210,10 +213,12 @@ body.loaded main {
             cursor: pointer;
             pointer-events: auto;
             @include transition(opacity $global-transition);
-            body.onhover &:hover{
+
+            body.onhover &:hover {
                 opacity: $global_opacity;
             }
-            & > img{
+
+            &>img {
                 height: 100%;
             }
         }
@@ -380,10 +385,10 @@ main {
             }
         }
     }
-    &.en{
 
-    }
-    &.id{
+    &.en {}
+
+    &.id {
         border: solid red thin;
     }
 }
@@ -391,6 +396,7 @@ main {
 .wrapper {
     min-height: 100%;
 }
+
 a.svg {
     @include transition(opacity 0s);
 
