@@ -623,8 +623,10 @@ main.home {
                         display: block;
                         padding: 0px $globalmobile-padding;
                         margin-top: $sectionmobilespacing;
-
+                        width: 100%;
+                        pointer-events: none;
                         &>img {
+                            pointer-events: auto;
                             position: relative;
                             width: 75%;
                             max-width: 175px;
