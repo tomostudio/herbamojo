@@ -33,7 +33,12 @@ module.exports = {
         `gatsby-plugin-netlify-cache`,
         `gatsby-plugin-react-helmet`,
         `gatsby-plugin-sass`,
-        `gatsby-plugin-netlify-cms`,
+        {
+            resolve: `gatsby-plugin-netlify-cms`,
+            options: {
+                htmlTitle: `Content Manager | HERBAMOJO`,
+            },
+        },
         `gatsby-plugin-layout`,
         `gatsby-plugin-sitemap`,
         {

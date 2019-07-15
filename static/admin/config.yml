@@ -67,6 +67,26 @@ collections:
           - { name: 'issetting', label: 'issetting', widget: 'hidden', default: true, required: true, }
           - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'home_setting', required: true, }
           - { label: 'Title', name: 'title', widget: 'hidden', default: 'Home Setting', required: true, }
+          - label: "Home Section Setting"
+            name: "home"
+            widget: "object"
+            required: true
+            fields:
+            - { name: 'background', label: 'Background', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 1500px x 1500px', default: '', required: true,}
+            - { name: 'backgroundmobile', label: 'Mobile Background', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 1500px x 1500px', default: '', required: true,}
+          - label: "About Section Setting"
+            name: "about"
+            widget: "object"
+            required: true
+            fields:
+            - { name: 'background', label: 'Background', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 1500px x 1500px', default: '', required: true,}
+            - label: "Description"
+              name: "desc"
+              widget: "object"
+              required: true
+              fields:
+              - { label: 'English', name: 'en', widget: 'text', default: '', required: true}
+              - { label: 'Indonesia', name: 'id', widget: 'text', default: '',required: true}
       - file: 'src/settings/slug.md'
         label: 'URL Redirect'
         name: 'slug'
