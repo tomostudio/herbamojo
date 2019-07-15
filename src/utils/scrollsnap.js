@@ -203,7 +203,7 @@ export class ScrollSnapClass {
 
             }
             if (this.v.snap.enable) {
-                console.log('snap enable');
+                console.log('scrollsnap enable');
                 //CHECK CURRENT POSITION AND ADJUST
                 let checkcur = Math.floor(this.common.scrollPosition() / this.common.windowHeight());
                 if (checkcur >= this.v.sections.length) {
@@ -216,7 +216,7 @@ export class ScrollSnapClass {
                 document.body.classList.add('snapon');
             } else {
                 // TURN OFF CLASS
-                console.log('snap disable');
+                console.log('scrollsnap disable');
                 document.body.classList.remove('snapon');
             }
         },
@@ -316,7 +316,6 @@ export class ScrollSnapClass {
                 this.v.listener.inittriggered = true;
                 this.v.listener.init = true;
                 if (window.addEventListener) {
-                    console.log('event init');
                     window.addEventListener('DOMMouseScroll', this.event.scroll, {
                         pasive: false
                     });
