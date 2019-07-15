@@ -8,6 +8,7 @@ export class InViewportClass {
     };
     scrolltarget = null;
     visibility = .1;
+    inview = false;
     constructor(obj) {
         this.margin.top = obj.margin_top || 0;
         this.margin.right = obj.margin_right || 0;
@@ -60,9 +61,15 @@ export class InViewportClass {
             let inview = InViewportDetect(this.scrolltarget, this.margin.top, this.margin.right, this.margin.bottom, this.margin.left, this.visibility);
             this.always(inview);
             if (inview.detected) {
-                this.enter(inview);
+                if(!this.inview){
+                    this.inview = true;
+                    this.enter(inview);
+                }
             } else {
+                if(this.inview){
+                    this.inview = false;
                 this.exit(inview);
+                }
             }
         }
     }

@@ -790,12 +790,14 @@ main.home {
                             border: solid thin transparent;
                             @include transition(all $global-transition);
                         }
-
-                        &>img {
+                        & > div{
+                            width: 100%;
+                        }
+                        &>div:first-child>img {
                             width: 100%;
                         }
 
-                        &>div {
+                        &>div:last-child {
                             font-family: 'Amarillo';
                             text-align: left;
                             color: white;
@@ -832,26 +834,33 @@ main.home {
             }
 
             & .content.half>div {
-                &>div {
+                &>div{
                     @include transition(opacity $global-transition);
                     opacity: 0;
+                    &>div:last-child {
+                        @include transition(opacity $global-transition);
+                        opacity: 0;
+                    }
                 }
             }
 
             body.loaded &.inview {
                 $_transition: 1s;
-                $eachdelay: .2s;
+                $eachdelay: 1s;
+                $initdelay: 1s;
 
                 & .content.half>div {
-                    @for $i from 0 to 2 {
+                    @for $i from 0 through 1 {
                         $n: $i * 2;
-
                         @include respond-to(not_mobile) {
-
                             &>div:nth-child(#{$n + 2}),
                             &>div:nth-child(#{$n + 1}) {
-                                @include transition(opacity $_transition #{((($i * 2 ) + 1) * $eachdelay)});
+                                @include transition(opacity $global-transition #{($i * $eachdelay)});
                                 opacity: 1;
+                                & >div:last-child {
+                                    @include transition(opacity $_transition #{$initdelay + ($i * $eachdelay)});
+                                    opacity: 1;
+                                }
                             }
                         }
                     }
@@ -866,6 +875,10 @@ main.home {
                         &>div.inview {
                             @include transition(opacity $_transition);
                             opacity: 1;
+                            & >div:last-child {
+                                @include transition(opacity $_transition 1s);
+                                opacity: 1;
+                            }
                         }
                     }
                 }

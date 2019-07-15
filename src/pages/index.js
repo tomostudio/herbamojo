@@ -1,6 +1,8 @@
 import React from 'react';
 import { StaticQuery, Link, graphql } from 'gatsby';
 import Slider from 'react-slick';
+import lottie from 'lottie-web';
+
 //UTILS
 import { ScrollSnapClass } from 'utils/scrollsnap';
 import { Scrollax } from 'utils/scrollax';
@@ -34,11 +36,11 @@ import CertResearch from 'images/symbols/research.svg';
 import CertQuadra from 'images/symbols/quadra.svg';
 import CertHalal from 'images/symbols/halal.svg';
 
-//SVG BENEFITS
-import BenefitStamina from 'images/symbols/stamina.svg';
-import BenefitEnergy from 'images/symbols/energy.svg';
-import BenefitImmune from 'images/symbols/immune.svg';
-import BenefitExercise from 'images/symbols/exercise.svg';
+//ANIMATION DATA FOR BENEFIT
+import AnimDataEnergy from 'animationdata/energy.json';
+import AnimDataImmune from 'animationdata/immune.json';
+import AnimDataStamina from 'animationdata/stamina.json';
+import AnimDataExercise from 'animationdata/exercise.json';
 
 export default class Home extends React.Component {
 	//TOGGLE LANGUAGE
@@ -126,15 +128,34 @@ export default class Home extends React.Component {
 				}
 			});
 
+			let BenefitAnimTimeout1 = null,
+				BenefitAnimTimeout2 = null;
 			this.inview.benefits = new InViewportClass({
 				target: 'section#benefits',
 				visibility: 0.55,
 				enter: () => {
 					setNav(2);
-					document.querySelector('section#benefits').classList.add('inview');
+					if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
+					if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
+					if (!MediaCheck.width.mobile()) {
+						this.AnimObject.forEach((obj, index)=>{
+							if(this.AnimObject[index].anim)this.AnimObject[index].anim.goToAndStop(0);
+						});
+						document.querySelector('section#benefits').classList.add('inview');
+						BenefitAnimTimeout1 = setTimeout(() => {
+							if(this.AnimObject[0].anim)this.AnimObject[0].anim.goToAndPlay(0);
+							if(this.AnimObject[1].anim)this.AnimObject[1].anim.goToAndPlay(0);
+						}, 250);
+						BenefitAnimTimeout2 = setTimeout(() => {
+							if(this.AnimObject[2].anim)this.AnimObject[2].anim.goToAndPlay(0);
+							if(this.AnimObject[3].anim)this.AnimObject[3].anim.goToAndPlay(0);
+						}, 1250);
+					}
 				},
 				exit: () => {
 					document.querySelector('section#benefits').classList.remove('inview');
+					if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
+					if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
 				}
 			});
 			const AllBenefits = document.querySelectorAll('section#benefits .content.half>div>div');
@@ -143,7 +164,12 @@ export default class Home extends React.Component {
 					target: `section#benefits .content.half>div>div:nth-child(${index + 1})`,
 					visibility: 0.55,
 					enter: () => {
-						if (MediaCheck.width.mobile()) benefit.classList.add('inview');
+						if (MediaCheck.width.mobile()) {
+							if(!benefit.classList.contains('inview')){
+								benefit.classList.add('inview');
+								if(this.AnimObject[index].anim)this.AnimObject[index].anim.goToAndPlay(0);
+							}
+						}
 					},
 					exit: () => {
 						// if (MediaCheck.width.mobile()) benefit.classList.remove('inview');
@@ -193,7 +219,6 @@ export default class Home extends React.Component {
 					if (MediaCheck.width.mobile()) document.querySelector('section#shop').classList.remove('inview');
 				}
 			});
-
 			this.inview.footer = new InViewportClass({
 				target: 'section.footer',
 				visibility: 0.05,
@@ -206,6 +231,7 @@ export default class Home extends React.Component {
 				}
 			});
 
+			// SCROLLAX
 			this.scrollax.one = new Scrollax({ target: 'img.paralax1', move_right: 0.25 });
 			this.scrollax.two = new Scrollax({ target: 'img.paralax2', move_left: 0.25 });
 			this.scrollax.ing_bg = new Scrollax({ target: '#ing_bg', move_top: 0.35 });
@@ -257,6 +283,28 @@ export default class Home extends React.Component {
 		two: null,
 		ing_bg: null
 	};
+	AnimObject = [
+		{
+			id_name: 'benefitstamina',
+			anim: null,
+			animeData: AnimDataStamina
+		},
+		{
+			id_name: 'benefit_energy',
+			anim: null,
+			animeData: AnimDataEnergy
+		},
+		{
+			id_name: 'BenefitImmune',
+			anim: null,
+			animeData: AnimDataImmune
+		},
+		{
+			id_name: 'BenefitExercise',
+			anim: null,
+			animeData: AnimDataExercise
+		}
+	];
 	disableScrollBody = null;
 	HomeScrollSnap = null;
 	SnapNav = null;
@@ -270,6 +318,21 @@ export default class Home extends React.Component {
 			//DISABLE SCROLL ON MAIN WINDOW
 			this.disableScrollBody = new DisableScroll();
 		}
+
+		// SETUP LOTTIE
+		const _ap = false;
+		this.AnimObject.forEach((obj, index)=>{
+
+			this.AnimObject[index].anim = lottie.loadAnimation({
+				container: document.querySelector(`#${this.AnimObject[index].id_name}`),
+				name: this.AnimObject[index].id_name,
+				renderer: 'svg',
+				loop: false,
+				autoplay: _ap,
+				animationData: this.AnimObject[index].animeData
+			});
+			this.AnimObject[index].anim.goToAndStop(0);
+		});
 	}
 	componentWillUnmount() {
 		if (this.inview.home) this.inview.home.kill();
@@ -293,6 +356,14 @@ export default class Home extends React.Component {
 		if (this.disableScrollBody !== null) this.disableScrollBody.enable();
 		if (this.ForceVH) this.ForceVH.kill();
 		if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
+
+		this.AnimObject.forEach((obj, index)=>{
+			if (this.AnimObject[index].anim !== null) {
+				this.AnimObject[index].anim.stop();
+				this.AnimObject[index].anim = null;
+			}
+		});
+
 		this.SnapNav.forEach((nav, index) => {
 			nav.onClick = null;
 		});
@@ -411,7 +482,6 @@ export default class Home extends React.Component {
 				const elTop = sections[index].getBoundingClientRect().top;
 				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 				window.scrollTo(0, elTop + scrollTop);
-				// ScrollIt(elTop + scrollTop, 50);
 				setTimeout(() => {
 					this.scrollaxCallibrate();
 				}, 10);
@@ -781,7 +851,9 @@ export default class Home extends React.Component {
 											<div className="content half">
 												<div>
 													<div>
-														<img src={BenefitStamina} alt="herbamojo" />
+														<div id={this.AnimObject[0].id_name}>
+															{/* <img src={BenefitStamina} alt="herbamojo" /> */}
+														</div>
 														<div>
 															<span>
 																{this.langID ? (
@@ -800,7 +872,9 @@ export default class Home extends React.Component {
 														</div>
 													</div>
 													<div>
-														<img src={BenefitEnergy} alt="herbamojo" />
+														<div id={this.AnimObject[1].id_name}>
+															{/* <img src={BenefitEnergy} alt="herbamojo" /> */}
+														</div>
 														<div>
 															<span>
 																{this.langID ? (
@@ -819,7 +893,9 @@ export default class Home extends React.Component {
 														</div>
 													</div>
 													<div>
-														<img src={BenefitImmune} alt="herbamojo" />
+														<div id={this.AnimObject[2].id_name}>
+															{/* <img src={BenefitImmune} alt="herbamojo" /> */}
+														</div>
 														<div>
 															<span>
 																{this.langID ? (
@@ -838,7 +914,9 @@ export default class Home extends React.Component {
 														</div>
 													</div>
 													<div>
-														<img src={BenefitExercise} alt="herbamojo" />
+														<div id={this.AnimObject[3].id_name}>
+															{/* <img src={BenefitExercise} alt="herbamojo" /> */}
+														</div>
 														<div>
 															<span>
 																{this.langID ? (
