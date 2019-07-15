@@ -258,6 +258,10 @@ main.home {
                     font-size: $font-size-heading2-m;
                     line-height: $lineheight-heading2-m;
                 }
+                @include respond-to(smaller) {
+                    font-size: $font-size-heading2-s;
+                    line-height: $lineheight-heading2-s;
+                }
 
             }
 
@@ -1433,7 +1437,7 @@ main.home {
 
                                         &>img {
                                             object-fit: scale-down;
-                                            width: 80%;
+                                            width: 100%;
                                             margin: auto;
                                             display: block;
                                             height: 100%;

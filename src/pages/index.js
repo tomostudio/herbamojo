@@ -66,9 +66,13 @@ export default class Home extends React.Component {
 					responsive_height: 500,
 					hasfooter: false
 				});
-				window.addEventListener('scroll', () => {
-					console.log(window.pageYOffset || document.documentElement.scrollTop);
-				}, false);
+				window.addEventListener(
+					'scroll',
+					() => {
+						console.log(window.pageYOffset || document.documentElement.scrollTop);
+					},
+					false
+				);
 			}
 			this.SnapNav = document.querySelectorAll(`main#${this.MainID} div.overlay .right_nav .snap_nav > *`);
 			const setNav = (i) => {
@@ -1059,6 +1063,7 @@ export default class Home extends React.Component {
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
+																					style={{ background: node.background !== null ? node.background : 'transparent' }}
 																				>
 																					<img
 																						src={node.image}
@@ -1066,7 +1071,7 @@ export default class Home extends React.Component {
 																					/>
 																				</a>
 																			) : (
-																				<div>
+																				<div style={{ background: node.background !== null ? node.background : 'transparent' }}>
 																					<img
 																						src={node.image}
 																						alt="herbamojo"
@@ -1088,6 +1093,7 @@ export default class Home extends React.Component {
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
+																					style={{ background: node.background !== null ? node.background : 'transparent' }}
 																				>
 																					<img
 																						src={node.image}
@@ -1095,7 +1101,7 @@ export default class Home extends React.Component {
 																					/>
 																				</a>
 																			) : (
-																				<div>
+																				<div style={{ background: node.background !== null ? node.background : 'transparent' }}>
 																					<img
 																						src={node.image}
 																						alt="herbamojo"
@@ -1177,6 +1183,7 @@ export default class Home extends React.Component {
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
+																					style={{ background: node.background !== null ? node.background : 'transparent' }}
 																				>
 																					<img
 																						src={node.image}
@@ -1184,7 +1191,7 @@ export default class Home extends React.Component {
 																					/>
 																				</a>
 																			) : (
-																				<div>
+																				<div style={{ background: node.background !== null ? node.background : 'transparent' }}>
 																					<img
 																						src={node.image}
 																						alt="herbamojo"
@@ -1206,6 +1213,7 @@ export default class Home extends React.Component {
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
+																					style={{ background: node.background !== null ? node.background : 'transparent' }}
 																				>
 																					<img
 																						src={node.image}
@@ -1213,7 +1221,7 @@ export default class Home extends React.Component {
 																					/>
 																				</a>
 																			) : (
-																				<div>
+																				<div style={{ background: node.background !== null ? node.background : 'transparent' }}>
 																					<img
 																						src={node.image}
 																						alt="herbamojo"
@@ -1308,10 +1316,12 @@ const indexQuery = graphql`
 				onlineshop {
 					image
 					link
+					background
 				}
 				offlineshop {
 					image
 					link
+					background
 				}
 				translations {
 					home {
