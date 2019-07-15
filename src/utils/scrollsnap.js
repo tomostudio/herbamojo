@@ -78,7 +78,7 @@ export class ScrollSnapClass {
         this.v.scroll.minduration = obj.minimum_speed || 300;
         this.v.scroll.maxduration = obj.maxduration || 1500;
 
-        this.v.hasfooter = obj.hasfooter !== undefined ? obj.hasfooter : true;
+        this.v.hasfooter = obj.hasfooter !== undefined ? obj.hasfooter : false;
         this.v.nav.hideoncover = obj.hide_nav_oncover !== undefined ? obj.hide_nav_oncover : false;
         this.v.nav.hideonfooter = obj.hide_nav_onfooter !== undefined ? obj.hide_nav_onfooter : true;
         this.v.responsiveWidth.treshold = obj.responsive_width || 0;
@@ -224,10 +224,7 @@ export class ScrollSnapClass {
         setuptargets: () => {
             this.v.sections.targets = [];
 
-            document.body.classList.add('snapon');
-
             this.v.sections.all.forEach((each, index) => {
-
                 const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
                 this.v.sections.targets.push((each.getBoundingClientRect().top + scrollTop));
 
@@ -235,9 +232,11 @@ export class ScrollSnapClass {
                     let footeroffset = each.offsetHeight - this.common.windowHeight();
                     this.v.sections.targets.push(this.v.sections.targets[index] + footeroffset);
                 }
+                console.log(each.getBoundingClientRect(), scrollTop);
             });
 
-            if (!this.v.snap.enable) document.body.classList.remove('snapon');
+            console.log(this.v.sections.all[1].getBoundingClientRect().height, this.v.sections.all[1].offsetHeight, this.v.sections.all[1].clientHeight);
+            console.log('reset scrollsnap target', this.v.sections.targets);
         },
 
         down: () => {
@@ -253,10 +252,8 @@ export class ScrollSnapClass {
         },
         to: (target) => {
             if (!this.v.scroll.snapping && !this.scrollit.scrolling && !this.v.snap.pause) {
-                if (this.v.sections.current !== target) {
-                    this.v.sections.current = target;
-                    this.snap.scrolling();
-                }
+                this.v.sections.current = target;
+                this.snap.scrolling();
             }
         },
         up: () => {
@@ -276,7 +273,7 @@ export class ScrollSnapClass {
                 this.v.scroll.snapping = true;
 
                 // ADJUST NAVIGATION
-                if (this.v.snap.enable && !this.v.snap.pause && this.v.nav.identifier !== '') {
+                if (!this.v.snap.pause && this.v.nav.identifier !== '') {
                     if (this.v.hasfooter && this.v.sections.current === this.v.sections.length) {
                         this.nav.set(-1);
                     } else {
@@ -292,7 +289,7 @@ export class ScrollSnapClass {
                     }
                 }
 
-                const topval = this.common.windowHeight() * this.v.sections.current;
+                const topval = this.v.sections.targets[this.v.sections.current];
 
                 const dist = Math.abs(topval - this.common.scrollPosition());
                 let duration = dist / this.common.windowHeight() * this.v.scroll.speed;
@@ -301,6 +298,7 @@ export class ScrollSnapClass {
 
                 this.scrollEvent.before();
                 this.scrollit.go(topval, duration);
+                // console.log('scroll to', topval, duration);
 
                 setTimeout(() => {
                     this.v.scroll.snapping = false;
@@ -370,7 +368,7 @@ export class ScrollSnapClass {
             }
             //SET DELAY AND DISABLE SCROLL ONLY AFTER THE RESIZE EVENT IS RESOLVE
             this.event.resizeTimeout = setTimeout(() => {
-
+                this.snap.setuptargets();
                 this.event.resizePause = false;
                 this.snap.setup();
             }, 250);

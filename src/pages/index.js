@@ -8,7 +8,7 @@ import { ScrollSnapClass } from 'utils/scrollsnap';
 import { Scrollax } from 'utils/scrollax';
 import { ScrollIt } from 'utils/scrollit';
 import { LoaderClass } from 'utils/loader';
-import { InViewportClass } from 'utils/inviewport';
+import { InViewportClass, ScrollPassClass } from 'utils/inviewport';
 import { MediaCheck } from 'utils/mediacheck';
 import { ResponsiveVH } from 'utils/responsive-vh';
 import { DisableScroll } from 'utils/disablescroll';
@@ -63,8 +63,12 @@ export default class Home extends React.Component {
 					speed: 500,
 					maxduration: 1000,
 					responsive_width: 700,
-					responsive_height: 500
+					responsive_height: 500,
+					hasfooter: false
 				});
+				window.addEventListener('scroll', () => {
+					console.log(window.pageYOffset || document.documentElement.scrollTop);
+				}, false);
 			}
 			this.SnapNav = document.querySelectorAll(`main#${this.MainID} div.overlay .right_nav .snap_nav > *`);
 			const setNav = (i) => {
@@ -84,16 +88,16 @@ export default class Home extends React.Component {
 				};
 			});
 
-			this.inview.bottlesection = new InViewportClass({
+			// SCROLL PASS FOR BOTTLE FLOAT
+			this.scrollpass.bottlesection = new ScrollPassClass({
 				target: '.bottlesection_wrapper',
-				visibility: 0.332,
-				enter: () => {
-					document.querySelector('div.bottlewrapper').classList.remove('stuck');
-				},
-				exit: () => {
+				detectbottom: true,
+				passed: () => {
 					document.querySelector('div.bottlewrapper').classList.add('stuck');
 				},
-				always: (e) => {}
+				notpassed: () => {
+					document.querySelector('div.bottlewrapper').classList.remove('stuck');
+				}
 			});
 
 			//SECTIONS INVIEW
@@ -138,17 +142,17 @@ export default class Home extends React.Component {
 					if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
 					if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
 					if (!MediaCheck.width.mobile()) {
-						this.AnimObject.forEach((obj, index)=>{
-							if(this.AnimObject[index].anim)this.AnimObject[index].anim.goToAndStop(0);
+						this.AnimObject.forEach((obj, index) => {
+							if (this.AnimObject[index].anim) this.AnimObject[index].anim.goToAndStop(0);
 						});
 						document.querySelector('section#benefits').classList.add('inview');
 						BenefitAnimTimeout1 = setTimeout(() => {
-							if(this.AnimObject[0].anim)this.AnimObject[0].anim.goToAndPlay(0);
-							if(this.AnimObject[1].anim)this.AnimObject[1].anim.goToAndPlay(0);
+							if (this.AnimObject[0].anim) this.AnimObject[0].anim.goToAndPlay(0);
+							if (this.AnimObject[1].anim) this.AnimObject[1].anim.goToAndPlay(0);
 						}, 250);
 						BenefitAnimTimeout2 = setTimeout(() => {
-							if(this.AnimObject[2].anim)this.AnimObject[2].anim.goToAndPlay(0);
-							if(this.AnimObject[3].anim)this.AnimObject[3].anim.goToAndPlay(0);
+							if (this.AnimObject[2].anim) this.AnimObject[2].anim.goToAndPlay(0);
+							if (this.AnimObject[3].anim) this.AnimObject[3].anim.goToAndPlay(0);
 						}, 1250);
 					}
 				},
@@ -165,9 +169,9 @@ export default class Home extends React.Component {
 					visibility: 0.55,
 					enter: () => {
 						if (MediaCheck.width.mobile()) {
-							if(!benefit.classList.contains('inview')){
+							if (!benefit.classList.contains('inview')) {
 								benefit.classList.add('inview');
-								if(this.AnimObject[index].anim)this.AnimObject[index].anim.goToAndPlay(0);
+								if (this.AnimObject[index].anim) this.AnimObject[index].anim.goToAndPlay(0);
 							}
 						}
 					},
@@ -245,7 +249,7 @@ export default class Home extends React.Component {
 			this.resize();
 
 			this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
-			this.inview.bottlesection.trigger();
+			this.scrollpass.bottlesection.trigger();
 
 			// TRIGGER SCROLL SNAP INIT AND PAUSE
 			if (typeof document !== `undefined`) {
@@ -274,7 +278,9 @@ export default class Home extends React.Component {
 		ingredients: null,
 		ingredientsm: null,
 		shop: null,
-		shopm: null,
+		shopm: null
+	};
+	scrollpass = {
 		bottlesection: null
 	};
 	scrollax = {
@@ -321,8 +327,7 @@ export default class Home extends React.Component {
 
 		// SETUP LOTTIE
 		const _ap = false;
-		this.AnimObject.forEach((obj, index)=>{
-
+		this.AnimObject.forEach((obj, index) => {
 			this.AnimObject[index].anim = lottie.loadAnimation({
 				container: document.querySelector(`#${this.AnimObject[index].id_name}`),
 				name: this.AnimObject[index].id_name,
@@ -347,7 +352,7 @@ export default class Home extends React.Component {
 		if (this.inview.shop) this.inview.shop.kill();
 		if (this.inview.shopm) this.inview.shopm.kill();
 		if (this.inview.footer) this.inview.footer.kill();
-		if (this.inview.bottlesection) this.inview.bottlesection.kill();
+		if (this.scrollpass.bottlesection) this.scrollpass.bottlesection.kill();
 		if (this.scrollax.one) this.scrollax.one.kill();
 		if (this.scrollax.two) this.scrollax.two.kill();
 		if (this.scrollax.ing_bg) this.scrollax.ing_bg.kill();
@@ -357,7 +362,7 @@ export default class Home extends React.Component {
 		if (this.ForceVH) this.ForceVH.kill();
 		if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
 
-		this.AnimObject.forEach((obj, index)=>{
+		this.AnimObject.forEach((obj, index) => {
 			if (this.AnimObject[index].anim !== null) {
 				this.AnimObject[index].anim.stop();
 				this.AnimObject[index].anim = null;
@@ -703,10 +708,16 @@ export default class Home extends React.Component {
 								<div className="bottlesection_wrapper">
 									<div className="greenline" />
 									<div className="bottlewrapper">
-										<img src={BottleImg} alt="herbamojo" />
-										<span id="ShopButton" className="hide" onClick={this.gotoShop}>
-											{this.langID ? transData.home.shopfloat.id : transData.home.shopfloat.en}
-										</span>
+										<div>
+											<img src={BottleImg} alt="herbamojo" />
+											<span id="ShopButton" className="hide" onClick={this.gotoShop}>
+												{this.langID ? (
+													transData.home.shopfloat.id
+												) : (
+													transData.home.shopfloat.en
+												)}
+											</span>
+										</div>
 									</div>
 									<section id="home">
 										<div className="wrapper">

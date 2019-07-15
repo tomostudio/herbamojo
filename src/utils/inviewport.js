@@ -61,20 +61,112 @@ export class InViewportClass {
             let inview = InViewportDetect(this.scrolltarget, this.margin.top, this.margin.right, this.margin.bottom, this.margin.left, this.visibility);
             this.always(inview);
             if (inview.detected) {
-                if(!this.inview){
+                if (!this.inview) {
                     this.inview = true;
                     this.enter(inview);
                 }
             } else {
-                if(this.inview){
+                if (this.inview) {
                     this.inview = false;
-                this.exit(inview);
+                    this.exit(inview);
                 }
             }
         }
     }
 }
 
+
+export class ScrollPassClass {
+    scrolltarget = null;
+    scrollpassed = false;
+    detectbottom = true;
+    constructor(obj) {
+        this.scrolltarget = obj.target || null;
+        this.detectbottom = obj.detectbottom || true;
+
+        if (typeof this.scrolltarget === 'string') {
+            const targetelem = document.querySelector(this.scrolltarget);
+            this.scrolltarget = targetelem;
+        }
+
+        if (obj.passed !== null && obj.passed !== undefined && typeof obj.passed === 'function') this.passed = obj.passed;
+        if (obj.notpassed !== null && obj.notpassed !== undefined && typeof obj.notpassed === 'function') this.notpassed = obj.notpassed;
+        if (obj.always !== null && obj.always !== undefined && typeof obj.always === 'function') this.always = obj.always;
+
+        window.addEventListener('scroll', this.trigger.bind(this), false);
+        this.trigger();
+    }
+    set(obj) {
+        if (obj.madetectbottomrgin) this.detectbottom = obj.detectbottom || true;
+
+        if (obj.target) {
+            this.scrolltarget = obj.target || null;
+            if (typeof this.scrolltarget === 'string') {
+                const targetelem = document.querySelector(this.scrolltarget);
+                this.scrolltarget = targetelem;
+            }
+        }
+        if (obj.passed !== null && obj.passed !== undefined && typeof obj.passed === 'function') this.passed = obj.passed;
+        if (obj.notpassed !== null && obj.notpassed !== undefined && typeof obj.notpassed === 'function') this.notpassed = obj.notpassed;
+        if (obj.always !== null && obj.always !== undefined && typeof obj.always === 'function') this.always = obj.always;
+
+        this.trigger();
+    }
+    kill() {
+        window.removeEventListener('scroll', this.trigger.bind(this), false);
+    }
+    passed() {}
+    notpassed() {}
+    always() {}
+    trigger() {
+        if (this.scrolltarget !== null) {
+            let passdetect = PassDetect(this.scrolltarget, this.detectbottom);
+            this.always(passdetect);
+            if (passdetect.passed !== null && passdetect.passed !== undefined) {
+                if (this.scrollpassed && !passdetect.passed) {
+                    this.scrollpassed = passdetect.passed
+                    this.notpassed(passdetect)
+                } else if (!this.scrollpassed && passdetect.passed) {
+                    this.scrollpassed = passdetect.passed
+                    this.passed(passdetect);
+                }
+            }
+        }
+    }
+}
+export const PassDetect = (target = null, detectbottom = true) => {
+    let returnobj = {
+        passed: false,
+        target: null,
+        margin: 0,
+        detectbottom: true,
+    }
+    const vh = window.innerHeight || document.documentElement.clientHeight || document.getElementsByTagName('body')[0].clientHeight;
+    if (target !== null) {
+        if (typeof target === 'string') {
+            const targetelem = document.querySelector(target);
+            target = targetelem;
+        }
+        let _t = target.getBoundingClientRect();
+        returnobj.target = _t;
+        returnobj.detectbottom = detectbottom;
+
+        if (detectbottom) {
+            if (_t.bottom < vh) {
+                returnobj.passed = true
+            } else {
+                returnobj.passed = false
+            }
+        } else {
+            if (_t.top < 0) {
+                returnobj.passed = true
+            } else {
+                returnobj.passed = false
+            }
+        }
+    }
+    return returnobj
+}
 export const InViewportDetect = (target = null, top = 0, right = 0, bottom = 0, left = 0, visibility = .5) => {
     let returnobj = {
         detected: false,

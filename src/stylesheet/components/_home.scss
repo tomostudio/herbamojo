@@ -12,6 +12,7 @@ main.home {
             top: auto;
             bottom: 0px;
             left: 0px;
+            overflow: hidden;
         }
 
         .wrapper {
@@ -128,6 +129,10 @@ main.home {
                 }
 
                 &>.social_ctn {
+                    @include respond-to(height_less) {
+                        display: none;
+                    }
+
                     &>a {
                         pointer-events: auto;
                         height: 40px;
@@ -257,9 +262,12 @@ main.home {
             }
 
             &>.content {
-                padding-top: 50px;
+                @include respond-to(not_mobile) {
+                    margin-top: 40px;
+                }
 
                 @include respond-to(mobile) {
+                    margin-top: 0px;
                     padding-top: 0px;
                     text-align: center;
                 }
@@ -282,6 +290,9 @@ main.home {
             @include respond-to(mobile) {
                 @include setflex(column, nowrap, stretch, center, center);
             }
+            @include respond-to(height_less) {
+                height: 450px;
+            }
 
             &>.wrapper {
                 position: relative;
@@ -291,6 +302,22 @@ main.home {
                     @include flex-grow(1);
                     height: 100%;
                     @include setflex(column, nowrap, stretch, center, center);
+                }
+
+                & .content {
+                    @include respond-to(not_mobile) {
+                        padding-top: 0px;
+
+                        &::before {
+                            @include pseudo;
+                            position: relative;
+                            pointer-events: none;
+                            width: 100%;
+                            height: 7.5vh;
+                            min-height: 50px;
+                            max-height: 200px;
+                        }
+                    }
                 }
 
                 & .logo {
@@ -567,6 +594,7 @@ main.home {
 
 
             & .content.half {
+                @include setflex(column, nowrap, flex-start, flex-start, flex-start);
                 @include respond-to(mobile) {
                     width: calc(100% - #{$globalmobile-padding * 2});
                     margin: $sectionmobilespacing auto 0px;
@@ -614,6 +642,19 @@ main.home {
                     font-size: 15px;
                     line-height: 180%;
 
+                    @include respond-to(not_mobile) {
+                        padding-top: 0px;
+
+                        &::after {
+                            @include pseudo;
+                            position: relative;
+                            pointer-events: none;
+                            width: 100%;
+                            height: 10vh;
+                            min-height: 25px;
+                            max-height: $global-padding * 1.5;
+                        }
+                    }
                     @include respond-to(mobile) {
                         width: 100%;
                         max-width: $mobileinnersection-maxwidth;
@@ -624,7 +665,6 @@ main.home {
 
                 &>.certification {
                     width: 100%;
-                    margin-top: $global-padding * 1.5;
                     max-width: 500px;
                     display: grid;
                     grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
@@ -632,7 +672,6 @@ main.home {
                     grid-gap: 15px;
                     justify-items: start;
                     align-items: start;
-
                     @include respond-to(tablet) {
                         grid-template-columns: 1fr 1fr 1fr 1fr;
                     }
@@ -754,10 +793,8 @@ main.home {
 
         &#benefits {
             & .content.half {
-                padding-top: 40px;
 
                 @include respond-to(mobile) {
-                    padding-top: 0px;
                     width: calc(100% - #{$globalmobile-padding * 2});
                     margin: $sectionmobilespacing auto 0px;
                     padding-bottom: $sectionmobilespacing;
@@ -790,9 +827,11 @@ main.home {
                             border: solid thin transparent;
                             @include transition(all $global-transition);
                         }
-                        & > div{
+
+                        &>div {
                             width: 100%;
                         }
+
                         &>div:first-child>img {
                             width: 100%;
                         }
@@ -834,9 +873,10 @@ main.home {
             }
 
             & .content.half>div {
-                &>div{
+                &>div {
                     @include transition(opacity $global-transition);
                     opacity: 0;
+
                     &>div:last-child {
                         @include transition(opacity $global-transition);
                         opacity: 0;
@@ -852,12 +892,15 @@ main.home {
                 & .content.half>div {
                     @for $i from 0 through 1 {
                         $n: $i * 2;
+
                         @include respond-to(not_mobile) {
+
                             &>div:nth-child(#{$n + 2}),
                             &>div:nth-child(#{$n + 1}) {
                                 @include transition(opacity $global-transition #{($i * $eachdelay)});
                                 opacity: 1;
-                                & >div:last-child {
+
+                                &>div:last-child {
                                     @include transition(opacity $_transition #{$initdelay + ($i * $eachdelay)});
                                     opacity: 1;
                                 }
@@ -875,7 +918,8 @@ main.home {
                         &>div.inview {
                             @include transition(opacity $_transition);
                             opacity: 1;
-                            & >div:last-child {
+
+                            &>div:last-child {
                                 @include transition(opacity $_transition 1s);
                                 opacity: 1;
                             }
@@ -892,7 +936,6 @@ main.home {
                 &>.content {
                     width: 100%;
                     @include setflex(row, nowrap, flex-start, stretch, stretch);
-
                     @include respond-to(mobile) {
                         padding-top: 0px;
                         display: block;
@@ -1488,9 +1531,14 @@ main.home {
             left: calc(50% + #{$home-offcenter});
             @include transform(translate(-50%, -50%));
             width: 3px;
-            height: calc(200vh + 165px);
+            height: calc(100% - 100vh + 165px);
             background: $color_green;
 
+            @include respond-to(height_less) {
+                top: calc(50vh);
+                @include transform(translate(-50%, 0%));
+                height: calc(100% - 50vh - 50px);
+            }
             @include respond-to(mobile) {
                 display: none;
             }
@@ -1505,13 +1553,14 @@ main.home {
         }
 
         & .bottlewrapper {
-            pointer-events: auto;
-            width: 200px;
+            width: 100%;
+            height: 100vh;
+            pointer-events: none;
             position: fixed;
             z-index: 10;
-            top: 50%;
-            left: calc(50% + #{$home-offcenter});
-            @include transform(translate(-50%, -50%));
+            top: 0%;
+            left: 0%;
+            @include transform(translate(0%, 0%));
 
             @include respond-to(mobile) {
                 display: none;
@@ -1520,44 +1569,60 @@ main.home {
             &.stuck {
                 position: absolute;
                 top: auto;
-                @include transform(translate(-50%, 50%));
-                bottom: 50vh;
+                @include transform(translate(0%,0%));
+                bottom: 0px;
             }
 
-            &>img {
-                width: 100%;
-                height: auto;
-            }
-
-            &>#ShopButton {
+            &>div {
                 pointer-events: auto;
+                width: 200px;
                 position: absolute;
-                cursor: pointer;
-                top: auto;
-                left: 50%;
                 z-index: 10;
-                bottom: -25px;
-                @include transform(translate(-50%, 100%));
-                font-family: 'Amarillo';
-                padding: 6px 25px;
-                display: inline-block;
-                color: $color_green;
-                font-size: 30px;
-                line-height: 28px;
-                background: $color_green;
-                // border: solid 3px $color_green;
-                color: black;
-                @include transition(opacity $globalslow-transition, color $global-transition);
+                top: 50%;
+                left: calc(50% + #{$home-offcenter});
+                @include transform(translate(-50%, -50%));
 
-                &.hide {
-                    opacity: 0;
-                    pointer-events: none;
+                &>img {
+                    width: 100%;
+                    height: auto;
+                    max-height: calc(100vh - (80px * 2));
+                    object-fit: contain;
                 }
 
-                body.onhover &:hover {
-                    color: white;
+                &>#ShopButton {
+                    pointer-events: auto;
+                    position: absolute;
+                    cursor: pointer;
+                    top: auto;
+                    left: 50%;
+                    z-index: 10;
+                    bottom: -25px;
+                    @include transform(translate(-50%, 100%));
+                    font-family: 'Amarillo';
+                    padding: 6px 25px;
+                    display: inline-block;
+                    color: $color_green;
+                    font-size: 30px;
+                    line-height: 28px;
+                    background: $color_green;
+                    color: black;
+                    @include transition(opacity $globalslow-transition, color $global-transition);
+
+                    @include respond-to(height_less) {
+                        bottom: -10px;
+                    }
+
+                    &.hide {
+                        opacity: 0;
+                        pointer-events: none;
+                    }
+
+                    body.onhover &:hover {
+                        color: white;
+                    }
                 }
             }
+
 
             @include transition(opacity $global-transition);
             opacity: 0;
