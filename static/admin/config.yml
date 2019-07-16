@@ -37,7 +37,7 @@ collections:
             required: false
             fields:
             - { label: 'Email', name: 'email', widget: 'string', hint: 'Input Herbamojo Contact Email', default: '', required: false,}
-            - { label: 'Instagram', name: 'ig_link', widget: 'string',  hint: 'Input link starting with https://', default: '',required: false,}
+            - { label: 'Instagram', name: 'ig_link', widget: 'string',  hint: 'Input link starting with https:// or http://', default: '',required: false,}
             - { name: 'wa_no', label: 'Whatsapp No.', widget: 'string', hint: 'Input the Registered Whatsapp Number. Only Number, no space or plus (+) sign.', default: '', required: false,}
           - label: "Navigation"
             name: "navigation"
@@ -50,14 +50,14 @@ collections:
               required: false
               fields:
               - { label: 'English', name: 'en', widget: 'string', default: 'Home', required: false}
-              - { label: 'Indonesia', name: 'id', widget: 'string', default: 'Home',required: false}
+              - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Home',required: false}
             - label: "Journal"
               name: "journal"
               widget: "object"
               required: false
               fields:
               - { label: 'English', name: 'en', widget: 'string', default: 'Journal', required: false}
-              - { label: 'Indonesia', name: 'id', widget: 'string', default: 'Journal',required: false}
+              - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Journal',required: false}
       - file: 'src/settings/home.md'
         label: 'Home Setting'
         name: 'home'
@@ -86,7 +86,99 @@ collections:
               required: true
               fields:
               - { label: 'English', name: 'en', widget: 'text', default: '', required: true}
-              - { label: 'Indonesia', name: 'id', widget: 'text', default: '',required: true}
+              - { label: 'Indonesian', name: 'id', widget: 'text', default: '',required: true}
+          - label: "Ingredients Section Setting"
+            name: "ingredients"
+            widget: "list"
+            allow_add: false
+            required: true
+            fields:
+            - label: "Title"
+              name: "title"
+              widget: "object"
+              required: true
+              fields:
+              - { label: 'English', name: 'en', widget: 'string', default: '', required: true}
+              - { label: 'Indonesian', name: 'id', widget: 'string', default: '',required: true}
+            - { name: 'image', label: 'Background Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 2000px x 1500px', default: '', required: true,}
+            - label: "Description"
+              name: "desc"
+              widget: "object"
+              required: true
+              fields:
+              - { label: 'English', name: 'en', widget: 'text', default: '', required: true}
+              - { label: 'Indonesian', name: 'id', widget: 'text', default: '',required: true}
+          - label: "Online Shop List"
+            name: "onlineshop"
+            widget: "list"
+            allow_add: true
+            required: false
+            fields:
+            - { name: 'image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 2000px x 1500px', default: '', required: false,}
+            - { label: 'Link', name: 'link', widget: 'string', hint: 'Input link starting with https:// or http://', default: '', required: false}
+            - { label: 'Background Color', name: 'background', widget: 'string', hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent', default: 'transparent', required: false}
+          - label: "Offline Shop List"
+            name: "offlineshop"
+            widget: "list"
+            allow_add: true
+            required: false
+            fields:
+            - { name: 'image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 2000px x 1500px', default: '', required: false,}
+            - { label: 'Link', name: 'link', widget: 'string', hint: 'Input link starting with https:// or http://', default: '', required: false}
+            - { label: 'Background Color', name: 'background', widget: 'string', hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent', default: 'transparent', required: false}
+          - label: "Translations List"
+            name: "translations"
+            widget: "object"
+            required: true
+            fields:
+            - label: "Home"
+              name: "home"
+              widget: "object"
+              required: true
+              fields:
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'Home', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Home',required: true}
+              - label: "Know Your Strength"
+                name: "kys"
+                widget: "object"
+                required: true
+                fields:
+                - label: "English"
+                  name: "en"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Know', name: 'know', widget: 'string', default: 'Know', required: true}
+                  - { label: 'Your', name: 'your', widget: 'string', default: 'Your',required: true}
+                  - { label: 'Strength', name: 'strength', widget: 'string', default: 'Strength',required: true}
+                - label: "Indonesian"
+                  name: "en"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Know', name: 'know', widget: 'string', default: 'Know', required: true}
+                  - { label: 'Your', name: 'your', widget: 'string', default: 'Your',required: true}
+                  - { label: 'Strength', name: 'strength', widget: 'string', default: 'Strength',required: true}
+              - label: "Get Yours Button"
+                name: "getyours"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'Get Yours Now', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Get Yours Now',required: true}
+              - label: "Shop Button Below Bottle"
+                name: "shopfloat"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'Shop', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Shop',required: true}
+          
       - file: 'src/settings/slug.md'
         label: 'URL Redirect'
         name: 'slug'

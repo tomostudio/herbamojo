@@ -892,7 +892,7 @@ main.home {
 
             body.loaded &.inview {
                 $_transition: 1s;
-                $eachdelay: 1s;
+                $eachdelay: .5;
                 $initdelay: 1s;
 
                 & .content.half>div {
@@ -1512,7 +1512,7 @@ main.home {
                 &>.wrapper>.content {
                     @for $i from 1 to 3 {
                         &>div:nth-child(#{$i}) {
-                            @include transition(opacity $_transition #{((($i * 2)) * $eachdelay)});
+                            @include transition(opacity $_transition #{(((($i - 1) * 2)) * $eachdelay)});
                             opacity: 1;
                         }
                     }

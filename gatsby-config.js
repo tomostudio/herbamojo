@@ -37,6 +37,7 @@ module.exports = {
             resolve: `gatsby-plugin-netlify-cms`,
             options: {
                 htmlTitle: `Content Manager | HERBAMOJO`,
+                htmlFavicon: `${__dirname}/static/icon.png`,
             },
         },
         `gatsby-plugin-layout`,

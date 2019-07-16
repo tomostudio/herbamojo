@@ -8,8 +8,8 @@ home:
 about:
   background: /assets/images/herbamojo_lifestylebg.jpg
   desc:
-    en: 'HERBAMOJO is a high quality herbal formula to support male stamina.HERBAMOJO contains 7 key herbal ingredients that works optimally to help improve energy, immunity and performance.'
-    id: 'HERBAMOJO is a high quality herbal formula to support male stamina.HERBAMOJO contains 7 key herbal ingredients that works optimally to help improve energy, immunity and performance.'
+    en: 'HERBAMOJO is a high quality herbal formula to support male stamina. HERBAMOJO contains 7 key herbal ingredients that works optimally to help improve energy, immunity and performance.'
+    id: 'HERBAMOJO adalah formulasi herbal berkualitas untuk meningkatkan stamina pria, dengan 7 ekstrak herbal yang berkhasiat untuk meningkatkan energi, imun, dan performa secara optimal.'
 ingredients:
   - title:
       en: MACA
@@ -92,7 +92,6 @@ offlineshop:
   - image: /assets/shop/ranch_market.png
     link: ''
     background: transparent
-journaldisable: false
 
 translations:
   home:

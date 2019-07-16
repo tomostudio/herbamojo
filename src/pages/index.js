@@ -2,6 +2,7 @@ import React from 'react';
 import { StaticQuery, Link, graphql } from 'gatsby';
 import Slider from 'react-slick';
 import lottie from 'lottie-web';
+import { Helmet } from 'react-helmet';
 
 //UTILS
 import { ScrollSnapClass } from 'utils/scrollsnap';
@@ -150,7 +151,7 @@ export default class Home extends React.Component {
 						BenefitAnimTimeout2 = setTimeout(() => {
 							if (this.AnimObject[2].anim) this.AnimObject[2].anim.goToAndPlay(0);
 							if (this.AnimObject[3].anim) this.AnimObject[3].anim.goToAndPlay(0);
-						}, 1250);
+						}, 750);
 					}
 				},
 				exit: () => {
@@ -523,8 +524,16 @@ export default class Home extends React.Component {
 					const homeData = data.home.frontmatter;
 					const footerData = generalData.footer;
 					const transData = data.home.frontmatter.translations;
+					const id_seodesc = generalData.seo.seo_shortdesc_id;
 					return (
 						<Layout mainClass="home" indo={this.langID} mainID={this.MainID}>
+							{this.langID && (
+								<Helmet>
+									{id_seodesc && <meta name="description" content={id_seodesc} />}
+									{id_seodesc && <meta property="og:description" content={id_seodesc} />}
+									{id_seodesc && <meta name="twitter:description" content={id_seodesc} />}
+								</Helmet>
+							)}
 							<MobileHeader indonesia={this.langID} />
 							<div id="MobileNavigation">
 								<div>
@@ -1274,6 +1283,9 @@ const indexQuery = graphql`
 			frontmatter {
 				web_name
 				journaldisable
+				seo{
+					seo_shortdesc_id
+				}
 				footer {
 					email
 					ig_link
