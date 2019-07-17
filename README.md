@@ -46,4 +46,4 @@ Staging Changes: config.yml
 ### CONTRIBUTORS
 Hendhy Hutomo (hello@hendhyhutomo.com)
 
-[![Netlify Status](https://api.netlify.com/api/v1/badges/db0ae369-a929-400f-b89f-61d045119aa4/deploy-status)](https://app.netlify.com/sites/talentcap/deploys)
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b38e55c5-7587-4df0-860f-b2be3035cdeb/deploy-status)](https://app.netlify.com/sites/herbamojo/deploys)
