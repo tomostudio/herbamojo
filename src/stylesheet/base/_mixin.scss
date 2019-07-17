@@ -427,7 +427,7 @@ $asset-base-path: '../';
   $padding: unquote(($y / $x) * 100 + '%');
 
   @if $pseudo {
-    &:before {
+    &::before {
       @include pseudo($pos: relative);
       width: 100%;
       padding-top: $padding;

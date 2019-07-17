@@ -157,7 +157,7 @@ collections:
                   - { label: 'Your', name: 'your', widget: 'string', default: 'Your',required: true}
                   - { label: 'Strength', name: 'strength', widget: 'string', default: 'Strength',required: true}
                 - label: "Indonesian"
-                  name: "en"
+                  name: "id"
                   widget: "object"
                   required: true
                   fields:
@@ -178,7 +178,210 @@ collections:
                 fields:
                 - { label: 'English', name: 'en', widget: 'string', default: 'Shop', required: true}
                 - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Shop',required: true}
-          
+            - label: "About"
+              name: "about"
+              widget: "object"
+              required: true
+              fields:
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'About', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'About',required: true}
+              - label: "Certificates"
+                name: "cert"
+                widget: "object"
+                required: true
+                fields:
+                - label: "100% Natural"
+                  name: "natural"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'English', name: 'en', widget: 'string', default: '100% Natural', required: true}
+                  - { label: 'Indonesian', name: 'id', widget: 'string', default: '100% Natural',required: true}
+                - label: "BPOM Approved"
+                  name: "bpom"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'English', name: 'en', widget: 'string', default: 'BPOM Approved', required: true}
+                  - { label: 'Indonesian', name: 'id', widget: 'string', default: 'BPOM Approved',required: true}
+                - label: "Halal"
+                  name: "halal"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'English', name: 'en', widget: 'string', default: 'Halal', required: true}
+                  - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Halal',required: true}
+                - label: "High Quality Extracts"
+                  name: "quality"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'English', name: 'en', widget: 'string', default: 'High Quality Extracts', required: true}
+                  - { label: 'Indonesian', name: 'id', widget: 'string', default: 'High Quality Extracts',required: true}
+                - label: "Expertly Researched"
+                  name: "expert"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'English', name: 'en', widget: 'string', default: 'Expertly Researched', required: true}
+                  - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Expertly Researched',required: true}
+                - label: "Quadra Extraction System"
+                  name: "quadra"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'English', name: 'en', widget: 'string', default: 'Quadra Extraction System', required: true}
+                  - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Quadra Extraction System',required: true}
+            - label: "Benefits"
+              name: "benefits"
+              widget: "object"
+              required: true
+              fields:
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'Benefits', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Benefits',required: true}
+              - label: "Benefit 1 Supports Male Stamina"
+                name: "stamina"
+                widget: "object"
+                required: true
+                fields:
+                - label: "English"
+                  name: "en"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Line 1', name: 'line1', widget: 'string', default: 'Supports', required: true}
+                  - { label: 'Line 2', name: 'line2', widget: 'string', default: 'Male Stamina',required: true}
+                - label: "Indonesian"
+                  name: "id"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Line 1', name: 'line1', widget: 'string', default: 'Memelihara', required: true}
+                  - { label: 'Line 2', name: 'line2', widget: 'string', default: 'Stamina Pria',required: true}
+              - label: "Benefit 2 Increases Energy"
+                name: "increases"
+                widget: "object"
+                required: true
+                fields:
+                - label: "English"
+                  name: "en"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Line 1', name: 'line1', widget: 'string', default: 'Increases', required: true}
+                  - { label: 'Line 2', name: 'line2', widget: 'string', default: 'Energy',required: true}
+                - label: "Indonesian"
+                  name: "id"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Line 1', name: 'line1', widget: 'string', default: 'Meningkatkan', required: true}
+                  - { label: 'Line 2', name: 'line2', widget: 'string', default: 'Energi',required: true}
+              - label: "Benefit 3 Supports Immune Function"
+                name: "immune"
+                widget: "object"
+                required: true
+                fields:
+                - label: "English"
+                  name: "en"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Line 1', name: 'line1', widget: 'string', default: 'Supports', required: true}
+                  - { label: 'Line 2', name: 'line2', widget: 'string', default: 'Immune Function',required: true}
+                - label: "Indonesian"
+                  name: "id"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Line 1', name: 'line1', widget: 'string', default: 'Menjaga', required: true}
+                  - { label: 'Line 2', name: 'line2', widget: 'string', default: 'Imunitas',required: true}
+              - label: "Benefit 4 Enhances Excercise Performance"
+                name: "enhance"
+                widget: "object"
+                required: true
+                fields:
+                - label: "English"
+                  name: "en"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Line 1', name: 'line1', widget: 'string', default: 'Enhances', required: true}
+                  - { label: 'Line 2', name: 'line2', widget: 'string', default: 'Excercise Performance',required: true}
+                - label: "Indonesian"
+                  name: "id"
+                  widget: "object"
+                  required: true
+                  fields:
+                  - { label: 'Line 1', name: 'line1', widget: 'string', default: 'Meningkatkan', required: true}
+                  - { label: 'Line 2', name: 'line2', widget: 'string', default: 'Performa Olahraga',required: true}
+            - label: "Ingredients"
+              name: "ingredients"
+              widget: "object"
+              required: true
+              fields:
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'Ingredients', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Ingredients',required: true}
+            - label: "Shop"
+              name: "Shop"
+              widget: "object"
+              required: true
+              fields:
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'Shop', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Shop',required: true}
+              - label: "Online"
+                name: "online"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'Online', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Online',required: true}
+              - label: "Offline"
+                name: "offline"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'Offline', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Offline',required: true}
+            - label: "Journal"
+              name: "journal"
+              widget: "object"
+              required: true
+              fields:
+              - label: "Title"
+                name: "title"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'Journal', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Journal',required: true}
+              - label: "View All"
+                name: "viewall"
+                widget: "object"
+                required: true
+                fields:
+                - { label: 'English', name: 'en', widget: 'string', default: 'View All', required: true}
+                - { label: 'Indonesian', name: 'id', widget: 'string', default: 'View All',required: true}
       - file: 'src/settings/slug.md'
         label: 'URL Redirect'
         name: 'slug'
