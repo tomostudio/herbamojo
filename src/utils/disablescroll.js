@@ -11,13 +11,16 @@ export class DisableScroll {
         }
         this.disable();
     }
-    disable(){
+    disable() {
         if (!this.scrolldisabled) {
             console.log('scroll disable');
             this.scrolldisabled = true;
             if (this.target === null) {
                 if (typeof document !== `undefined`) {
                     document.body.classList.add('__disablescroll');
+                    if (('ontouchstart' in document.documentElement)) {
+                        document.body.classList.add('__disabletouch');
+                    }
                 }
                 if (window.addEventListener) {
                     window.addEventListener('DOMMouseScroll', this.event.disable, false);
@@ -40,6 +43,7 @@ export class DisableScroll {
                     document.documentElement.addEventListener('touchmove', this.event.disableHard, false);
                 }
             } else {
+                this.target.classList.add('__disablescroll');
                 if (this.target.addEventListener) {
                     this.target.addEventListener('DOMMouseScroll', this.event.disable, false);
                     this.target.addEventListener('wheel', this.event.disable, {
@@ -64,6 +68,7 @@ export class DisableScroll {
         if (this.target === null) {
             if (typeof document !== `undefined`) {
                 document.body.classList.remove('__disablescroll');
+                document.body.classList.remove('__disabletouch');
             }
             if (window.addEventListener) {
                 window.removeEventListener('DOMMouseScroll', this.event.disable, false);
@@ -76,7 +81,7 @@ export class DisableScroll {
                 window.removeEventListener('keydown', this.event.keydown, false);
             }
             if ('ontouchstart' in document.documentElement) {
-                window.ontouchstart =  this.event.disableHard;
+                window.ontouchstart = this.event.disableHard;
                 window.removeEventListener('touchstart', this.event.disableHard, false);
                 window.removeEventListener('touchmove', this.event.disableHard, false);
                 document.body.removeEventListener('touchstart', this.event.disableHard, false);
@@ -87,6 +92,7 @@ export class DisableScroll {
                 document.documentElement.removeEventListener('touchmove', this.event.disableHard, false);
             }
         } else {
+            this.target.classList.remove('__disablescroll');
             if (this.target.addEventListener) {
                 this.target.removeEventListener('DOMMouseScroll', this.event.disable, false);
                 this.target.removeEventListener('wheel', this.event.disable, {

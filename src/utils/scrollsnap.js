@@ -112,7 +112,10 @@ export class ScrollSnapClass {
     kill() {
         this.v.snap.enable = false;
         this.event.remove();
-        if (typeof document !== `undefined`) document.body.classList.remove('snapon');
+        if (typeof document !== `undefined`) {
+            document.body.classList.remove('__snapon');
+            document.body.classList.remove('__snaphastouch');
+        }
     }
     pause() {
         this.v.snap.pause = true;
@@ -130,7 +133,7 @@ export class ScrollSnapClass {
             this.v.snap.pause = false;
             this.v.snap.enable = true;
 
-            document.body.classList.add('snapon');
+            document.body.classList.add('__snapon');
 
             this.v.sections.all = document.querySelectorAll(this.v.sections.identifier);
 
@@ -178,6 +181,7 @@ export class ScrollSnapClass {
                 //PENDING
             }
 
+
             //SET TRIGGER
             if (this.v.nav.identifier !== '') {
                 this.v.nav.children = document.querySelectorAll(`${this.v.nav.identifier} ${this.v.nav.childIdentifier}`);
@@ -213,11 +217,18 @@ export class ScrollSnapClass {
                 }
                 this.snap.scrolling();
                 // TURN ON CLASS
-                document.body.classList.add('snapon');
+                document.body.classList.add('__snapon');
             } else {
                 // TURN OFF CLASS
                 console.log('scrollsnap disable');
-                document.body.classList.remove('snapon');
+                document.body.classList.remove('__snapon');
+            }
+
+            if (('ontouchstart' in document.documentElement) && this.v.snap.enable) {
+                document.body.classList.add('__snaphastouch');
+            }
+            else{
+                document.body.classList.remove('__snaphastouch');
             }
         },
 
@@ -326,6 +337,7 @@ export class ScrollSnapClass {
                 if ('ontouchstart' in document.documentElement) {
                     document.addEventListener('touchstart', this.event.touchstart, false);
                     document.addEventListener('touchmove', this.event.touchmove, false);
+                    document.addEventListener('touchend', this.event.touchend, false);
                 }
 
                 window.addEventListener('resize', this.event.resize);
@@ -351,6 +363,7 @@ export class ScrollSnapClass {
                 if ('ontouchstart' in document.documentElement) {
                     document.removeEventListener('touchstart', this.event.touchstart, false);
                     document.removeEventListener('touchmove', this.event.touchmove, false);
+                    document.removeEventListener('touchend', this.event.touchend, false);
                 }
                 window.removeEventListener('resize', this.event.resize);
                 this.v.listener.init = false;
@@ -451,8 +464,11 @@ export class ScrollSnapClass {
                 this.v.xDown = evt.touches[0].clientX;
                 this.v.yDown = evt.touches[0].clientY;
             }
+            console.log('touch start');
+            evt.preventDefault();
         },
         touchmove: (evt) => {
+            console.log('touch move');
             if (this.v.snap.enable) {
                 if (!this.v.xDown || !this.v.yDown) {
                     return;
@@ -466,7 +482,7 @@ export class ScrollSnapClass {
 
                 if (!this.v.snap.pause && !this.event.resizePause) {
                     if (Math.abs(xDiff) > Math.abs(yDiff)) {
-                        /*most significant*/
+                        // MOVE LEFT AND RIGHT
                         if (xDiff > 0) {} else {}
                     } else {
                         if (yDiff > 0) {
@@ -478,6 +494,12 @@ export class ScrollSnapClass {
                 }
                 this.v.xDown = null;
                 this.v.yDown = null;
+                evt.preventDefault();
+            }
+        },
+        touchend: (evt) => {
+            if (this.v.snap.enable) {
+                console.log('touch end',evt);
             }
         },
     }

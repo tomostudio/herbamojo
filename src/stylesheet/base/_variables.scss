@@ -21,8 +21,11 @@ $global_opacity: .5;
 
 //SPECIFIC
 $home-offcenter: 200px;
+$home-offcenter-t: 250px;
+$tabletinnersection-maxwidth: 450px;
 $mobileinnersection-maxwidth: 350px;
 $mobileHeaderHeight: 80px;
+$tabletSocialMedia: 50px;
 $mobileSocialMedia: 35px;
 
 //LOAD DELAY
@@ -35,6 +38,7 @@ $initialTranstionHome: 1.25s;
 // WIDTH
 $break-smaller: 450px; // MOBILE
 $break-small: 700px; // MOBILE
+$break-middle: 800px; // INBETWEEN MOBILE & TABLET
 $break-medium: 1024px; // TABLET
 $break-large: 1240px; // DESKTOP M
 
@@ -360,12 +364,11 @@ $font-size-subbody: 20px;
 }
 
 @mixin mobilegaptop() {
+    // padding-top: 55px;
     &::before {
         @include pseudo();
         position: relative;
-        height: 7.5vh;
-        min-height: 75px;
-        max-height: 120px;
+        height: 60px;
         pointer-events: none;
         width: 100%;
     }

@@ -63,7 +63,7 @@ export default class Home extends React.Component {
 					snap_identifier: '',
 					speed: 500,
 					maxduration: 1000,
-					responsive_width: 700,
+					responsive_width: 800,
 					responsive_height: 500,
 					hasfooter: false
 				});
@@ -124,7 +124,7 @@ export default class Home extends React.Component {
 				target: 'section#about',
 				visibility: 0.25,
 				enter: () => {
-					if (MediaCheck.width.mobile()) {
+					if (MediaCheck.width.mtablet()) {
 						document.querySelector('section#about').classList.add('inview');
 					}
 				}
@@ -139,7 +139,7 @@ export default class Home extends React.Component {
 					setNav(2);
 					if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
 					if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
-					if (!MediaCheck.width.mobile()) {
+					if (!MediaCheck.width.mtablet()) {
 						this.AnimObject.forEach((obj, index) => {
 							if (this.AnimObject[index].anim) this.AnimObject[index].anim.goToAndStop(0);
 						});
@@ -164,9 +164,9 @@ export default class Home extends React.Component {
 			AllBenefits.forEach((benefit, index) => {
 				this.inview.benefitsm[index] = new InViewportClass({
 					target: `section#benefits .content.half>div>div:nth-child(${index + 1})`,
-					visibility: 0.55,
+					visibility: 0.75,
 					enter: () => {
-						if (MediaCheck.width.mobile()) {
+						if (MediaCheck.width.mtablet()) {
 							if (!benefit.classList.contains('inview')) {
 								benefit.classList.add('inview');
 								if (this.AnimObject[index].anim) this.AnimObject[index].anim.goToAndPlay(0);
@@ -174,7 +174,7 @@ export default class Home extends React.Component {
 						}
 					},
 					exit: () => {
-						// if (MediaCheck.width.mobile()) benefit.classList.remove('inview');
+						if (MediaCheck.width.mtablet()) benefit.classList.remove('inview');
 					}
 				});
 			});
@@ -184,41 +184,49 @@ export default class Home extends React.Component {
 				visibility: 0.55,
 				enter: () => {
 					setNav(3);
-					if (!MediaCheck.width.mobile()) {
+					if (!MediaCheck.width.mtablet()) {
 						document.querySelector('section#ingredients').classList.add('inview');
 					}
 				},
-				exit: () => {}
+				exit: () => {
+					if (!MediaCheck.width.mtablet()) {
+						document.querySelector('section#ingredients').classList.remove('inview');
+					}
+				}
 			});
 			this.inview.ingredientsm = new InViewportClass({
 				target: 'section#ingredients',
 				visibility: 0.25,
 				enter: () => {
-					if (MediaCheck.width.mobile()) {
+					if (MediaCheck.width.mtablet()) {
 						document.querySelector('section#ingredients').classList.add('inview');
 					}
 				},
-				exit: () => {}
+				exit: () => {
+					if (MediaCheck.width.mtablet()) {
+						document.querySelector('section#ingredients').classList.remove('inview');
+					}
+				}
 			});
 			this.inview.shop = new InViewportClass({
 				target: 'section#shop',
 				visibility: 0.55,
 				enter: () => {
 					setNav(4);
-					if (!MediaCheck.width.mobile()) document.querySelector('section#shop').classList.add('inview');
+					if (!MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.add('inview');
 				},
 				exit: () => {
-					if (!MediaCheck.width.mobile()) document.querySelector('section#shop').classList.remove('inview');
+					if (!MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.remove('inview');
 				}
 			});
 			this.inview.shopm = new InViewportClass({
 				target: 'section#shop',
 				visibility: 0.25,
 				enter: () => {
-					if (MediaCheck.width.mobile()) document.querySelector('section#shop').classList.add('inview');
+					if (MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.add('inview');
 				},
 				exit: () => {
-					if (MediaCheck.width.mobile()) document.querySelector('section#shop').classList.remove('inview');
+					if (MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.remove('inview');
 				}
 			});
 			this.inview.footer = new InViewportClass({
@@ -391,13 +399,13 @@ export default class Home extends React.Component {
 			height.push(desc.clientHeight);
 			desc.parentNode.style.height = desc.clientHeight.toString() + 'px';
 		});
-		if (!MediaCheck.width.mobile) {
+		if (!MediaCheck.width.mtablet) {
 			// REMOVE MENU OPEN WHEN IT IS NOT MOBILE
 			document.body.classList.remove('menu_open');
 		}
 	}
 	gotoShop() {
-		if (MediaCheck.width.mobile()) {
+		if (MediaCheck.width.mtablet()) {
 			const scrollTarget = document.querySelector('section#shop').getBoundingClientRect().top;
 			const curScrollPos = window.pageYOffset || document.documentElement.scrollTop;
 			const wH =
@@ -420,7 +428,7 @@ export default class Home extends React.Component {
 	}
 	ingredientToggle(target) {
 		if (target != null) {
-			const delay = MediaCheck.width.mobile ? 500 : 500;
+			const delay = MediaCheck.width.mtablet ? 500 : 500;
 			let child = target.parentNode;
 			let index = 1;
 			while ((child = child.previousSibling) != null) index++;
@@ -504,7 +512,7 @@ export default class Home extends React.Component {
 			slidesToScroll: 1,
 			responsive: [
 				{
-					breakpoint: 800,
+					breakpoint: 850,
 					settings: {
 						slidesToShow: 1,
 						slidesToScroll: 1
@@ -551,61 +559,74 @@ export default class Home extends React.Component {
 										</div>
 									</div>
 									<div className="fitheight">
-										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.home.title.id : transData.home.title.en}
-										</span>
-										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.about.title.id : transData.about.title.en}
-										</span>
-										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.benefits.title.id : transData.benefits.title.en}
-										</span>
-										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? (
-												transData.ingredients.title.id
-											) : (
-												transData.ingredients.title.en
-											)}
-										</span>
-										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.shop.title.id : transData.shop.title.en}
-										</span>
-										<span onClick={(e) => this.mobileScroll(e)}>
-											{this.langID ? transData.journal.title.id : transData.journal.title.en}
-										</span>
 										<div>
-											<div>
-												{footerData.ig_link !== '' && (
-													<a
-														className="svg"
-														target="_blank"
-														rel="noopener noreferrer"
-														href={footerData.ig_link}
-													>
-														<InstagramSVG />
-													</a>
+											<span onClick={(e) => this.mobileScroll(e)}>
+												{this.langID ? transData.home.title.id : transData.home.title.en}
+											</span>
+											<span onClick={(e) => this.mobileScroll(e)}>
+												{this.langID ? transData.about.title.id : transData.about.title.en}
+											</span>
+											<span onClick={(e) => this.mobileScroll(e)}>
+												{this.langID ? (
+													transData.benefits.title.id
+												) : (
+													transData.benefits.title.en
 												)}
+											</span>
+											<span onClick={(e) => this.mobileScroll(e)}>
+												{this.langID ? (
+													transData.ingredients.title.id
+												) : (
+													transData.ingredients.title.en
+												)}
+											</span>
+											<span onClick={(e) => this.mobileScroll(e)}>
+												{this.langID ? transData.shop.title.id : transData.shop.title.en}
+											</span>
 
-												{footerData.wa_no !== '' && (
-													<a
-														className="svg"
-														target="_blank"
-														rel="noopener noreferrer"
-														href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
-													>
-														<WhatsappSVG />
-													</a>
-												)}
-												{footerData.email !== '' && (
-													<a
-														className="svg"
-														target="_blank"
-														rel="noopener noreferrer"
-														href={`mailto:${footerData.email}`}
-													>
-														<EmailSVG />
-													</a>
-												)}
+											{!data.general.frontmatter.journaldisable && (
+												<span onClick={(e) => this.mobileScroll(e)}>
+													{this.langID ? (
+														transData.journal.title.id
+													) : (
+														transData.journal.title.en
+													)}
+												</span>
+											)}
+											<div>
+												<div>
+													{footerData.ig_link !== '' && (
+														<a
+															className="svg"
+															target="_blank"
+															rel="noopener noreferrer"
+															href={footerData.ig_link}
+														>
+															<InstagramSVG />
+														</a>
+													)}
+
+													{footerData.wa_no !== '' && (
+														<a
+															className="svg"
+															target="_blank"
+															rel="noopener noreferrer"
+															href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
+														>
+															<WhatsappSVG />
+														</a>
+													)}
+													{footerData.email !== '' && (
+														<a
+															className="svg"
+															target="_blank"
+															rel="noopener noreferrer"
+															href={`mailto:${footerData.email}`}
+														>
+															<EmailSVG />
+														</a>
+													)}
+												</div>
 											</div>
 										</div>
 									</div>
@@ -989,16 +1010,16 @@ export default class Home extends React.Component {
 													);
 												})}
 											</div>
-											<div>
-												<div id="ing_display">
-													<div id="ing_display_number">1</div>
-													<div id="ing_display_description">
-														{this.langID ? (
-															homeData.ingredients[0].desc.id
-														) : (
-															homeData.ingredients[0].desc.en
-														)}
-													</div>
+										</div>
+										<div>
+											<div id="ing_display">
+												<div id="ing_display_number">1</div>
+												<div id="ing_display_description">
+													{this.langID ? (
+														homeData.ingredients[0].desc.id
+													) : (
+														homeData.ingredients[0].desc.en
+													)}
 												</div>
 											</div>
 										</div>
@@ -1065,7 +1086,12 @@ export default class Home extends React.Component {
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
-																					style={{ background: node.background !== null ? node.background : 'transparent' }}
+																					style={{
+																						background:
+																							node.background !== null
+																								? node.background
+																								: 'transparent'
+																					}}
 																				>
 																					<img
 																						src={node.image}
@@ -1073,7 +1099,14 @@ export default class Home extends React.Component {
 																					/>
 																				</a>
 																			) : (
-																				<div style={{ background: node.background !== null ? node.background : 'transparent' }}>
+																				<div
+																					style={{
+																						background:
+																							node.background !== null
+																								? node.background
+																								: 'transparent'
+																					}}
+																				>
 																					<img
 																						src={node.image}
 																						alt="herbamojo"
@@ -1095,7 +1128,12 @@ export default class Home extends React.Component {
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
-																					style={{ background: node.background !== null ? node.background : 'transparent' }}
+																					style={{
+																						background:
+																							node.background !== null
+																								? node.background
+																								: 'transparent'
+																					}}
 																				>
 																					<img
 																						src={node.image}
@@ -1103,7 +1141,14 @@ export default class Home extends React.Component {
 																					/>
 																				</a>
 																			) : (
-																				<div style={{ background: node.background !== null ? node.background : 'transparent' }}>
+																				<div
+																					style={{
+																						background:
+																							node.background !== null
+																								? node.background
+																								: 'transparent'
+																					}}
+																				>
 																					<img
 																						src={node.image}
 																						alt="herbamojo"
@@ -1185,7 +1230,12 @@ export default class Home extends React.Component {
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
-																					style={{ background: node.background !== null ? node.background : 'transparent' }}
+																					style={{
+																						background:
+																							node.background !== null
+																								? node.background
+																								: 'transparent'
+																					}}
 																				>
 																					<img
 																						src={node.image}
@@ -1193,7 +1243,14 @@ export default class Home extends React.Component {
 																					/>
 																				</a>
 																			) : (
-																				<div style={{ background: node.background !== null ? node.background : 'transparent' }}>
+																				<div
+																					style={{
+																						background:
+																							node.background !== null
+																								? node.background
+																								: 'transparent'
+																					}}
+																				>
 																					<img
 																						src={node.image}
 																						alt="herbamojo"
@@ -1215,7 +1272,12 @@ export default class Home extends React.Component {
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
-																					style={{ background: node.background !== null ? node.background : 'transparent' }}
+																					style={{
+																						background:
+																							node.background !== null
+																								? node.background
+																								: 'transparent'
+																					}}
 																				>
 																					<img
 																						src={node.image}
@@ -1223,7 +1285,14 @@ export default class Home extends React.Component {
 																					/>
 																				</a>
 																			) : (
-																				<div style={{ background: node.background !== null ? node.background : 'transparent' }}>
+																				<div
+																					style={{
+																						background:
+																							node.background !== null
+																								? node.background
+																								: 'transparent'
+																					}}
+																				>
 																					<img
 																						src={node.image}
 																						alt="herbamojo"
@@ -1283,7 +1352,7 @@ const indexQuery = graphql`
 			frontmatter {
 				web_name
 				journaldisable
-				seo{
+				seo {
 					seo_shortdesc_id
 				}
 				footer {

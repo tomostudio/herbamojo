@@ -189,7 +189,7 @@ main.home {
             }
         }
 
-        @include respond-to(mobile) {
+        @include respond-to(m_tablet) {
             display: none;
         }
 
@@ -207,7 +207,7 @@ main.home {
         max-height: 100vh;
         color: white;
 
-        @include respond-to(mobile) {
+        @include respond-to(m_tablet) {
             max-height: none;
             min-height: 100vh;
             height: auto;
@@ -219,7 +219,7 @@ main.home {
             height: auto;
         }
 
-        body.snapon & {
+        body.__snapon & {
             overflow: hidden;
 
             @media (min-height: $height-break), (min-width: $break-small) {
@@ -235,7 +235,7 @@ main.home {
                 font-family: 'Amarillo';
                 line-height: $lineheight-title;
 
-                @include respond-to(mobile) {
+                @include respond-to(m_tablet) {
                     margin-top: 0px;
                     width: 100%;
                     display: block;
@@ -254,10 +254,11 @@ main.home {
                 font-family: 'Amarillo';
                 line-height: $lineheight-heading2;
 
-                @include respond-to(mobile) {
+                @include respond-to(m_tablet) {
                     font-size: $font-size-heading2-m;
                     line-height: $lineheight-heading2-m;
                 }
+
                 @include respond-to(smaller) {
                     font-size: $font-size-heading2-s;
                     line-height: $lineheight-heading2-s;
@@ -266,11 +267,9 @@ main.home {
             }
 
             &>.content {
-                @include respond-to(not_mobile) {
-                    margin-top: 40px;
-                }
+                margin-top: 40px;
 
-                @include respond-to(mobile) {
+                @include respond-to(m_tablet) {
                     margin-top: 0px;
                     padding-top: 0px;
                     text-align: center;
@@ -281,7 +280,11 @@ main.home {
                 width: calc(50% + #{$home-offcenter / 2});
                 padding-right: $global-padding / 2;
 
-                @include respond-to(mobile) {
+                @include respond-to(tablet) {
+                    width: calc(50% + #{$home-offcenter-t / 2});
+                }
+
+                @include respond-to(m_tablet) {
                     width: 100%;
                     padding-right: 0px;
                 }
@@ -291,9 +294,10 @@ main.home {
         &#home {
             position: relative;
 
-            @include respond-to(mobile) {
+            @include respond-to(m_tablet) {
                 @include setflex(column, nowrap, stretch, center, center);
             }
+
             @include respond-to(height_less) {
                 height: 450px;
             }
@@ -302,24 +306,26 @@ main.home {
                 position: relative;
                 @include setflex(row, nowrap, flex-start, center, center);
 
-                @include respond-to(mobile) {
+                @include respond-to(m_tablet) {
                     @include flex-grow(1);
                     height: 100%;
                     @include setflex(column, nowrap, stretch, center, center);
                 }
 
                 & .content {
-                    @include respond-to(not_mobile) {
-                        padding-top: 0px;
+                    &::before {
+                        @include pseudo;
+                        position: relative;
+                        pointer-events: none;
+                        width: 100%;
+                        height: 7.5vh;
+                        min-height: 50px;
+                        max-height: 200px;
+                    }
 
+                    @include respond-to(m_tablet) {
                         &::before {
-                            @include pseudo;
-                            position: relative;
-                            pointer-events: none;
-                            width: 100%;
-                            height: 7.5vh;
-                            min-height: 50px;
-                            max-height: 200px;
+                            display: none;
                         }
                     }
                 }
@@ -331,7 +337,7 @@ main.home {
                     display: inline-block;
                     width: 140px;
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         display: none;
                     }
 
@@ -352,7 +358,7 @@ main.home {
                     width: 100%;
                     position: relative;
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         // padding: $mobile-paddingtop 0px #{$globalmobile-padding * 4};
                         padding: 0px 0px 0px;
                         // @include padding-safe-bottom(120px);
@@ -364,11 +370,22 @@ main.home {
                         &::after {
                             @include pseudo();
                             position: relative;
+                            height: 20px;
+                        }
+                    }
+
+                    @include respond-to(mobile) {
+                        &::before {
+                            height: 60px;
+                        }
+
+                        &::after {
+                            @include pseudo();
+                            position: relative;
+                            height: 0px;
                             height: 7.5vh;
                             min-height: 100px;
                             max-height: 150px;
-                            pointer-events: none;
-                            width: 100%;
                         }
                     }
 
@@ -379,22 +396,13 @@ main.home {
                         font-size: 120px;
                         line-height: 90%;
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             margin: 0px auto;
-                            font-size: 70px;
+                            font-size: 100px;
                             display: block;
                             text-align: center;
                             position: relative;
 
-                            &::after {
-                                @include pseudo();
-                                position: relative;
-                                height: 7.5vh;
-                                min-height: 40px;
-                                pointer-events: none;
-                                width: 100%;
-
-                            }
 
                             &:nth-last-child(2) {
                                 color: $color_green;
@@ -403,6 +411,19 @@ main.home {
                                     height: 2.5vh;
                                     min-height: 30px;
                                 }
+                            }
+                        }
+
+                        @include respond-to(mobile) {
+                            font-size: 70px;
+
+                            &::after {
+                                @include pseudo();
+                                position: relative;
+                                height: 7.5vh;
+                                min-height: 40px;
+                                pointer-events: none;
+                                width: 100%;
                             }
                         }
                     }
@@ -422,7 +443,7 @@ main.home {
                         line-height: 28px;
                         @include transition(border $global-transition, color $global-transition, background $global-transition);
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             position: relative;
                             margin: 0px auto;
                             left: 0px;
@@ -441,14 +462,13 @@ main.home {
                             &::after {
                                 display: none;
                             }
-
                         }
 
                         body.onhover &:hover {
                             background: $color_green;
                             color: white;
 
-                            @include respond-to(mobile) {
+                            @include respond-to(m_tablet) {
                                 border-color: $color_green;
                             }
                         }
@@ -465,7 +485,7 @@ main.home {
                 left: 0%;
                 z-index: -1;
 
-                @include respond-to(mobile) {
+                @include respond-to(m_tablet) {
                     width: 100%;
                     right: 0;
                     overflow: hidden;
@@ -483,7 +503,7 @@ main.home {
                         object-position: center;
                         top: auto;
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             display: block;
                         }
                     }
@@ -494,7 +514,7 @@ main.home {
                         object-fit: cover;
                         object-position: right;
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             display: none;
                         }
                     }
@@ -519,9 +539,10 @@ main.home {
             &>.bg {
                 @include transition(opacity $global-transition);
                 opacity: 0;
+                @include transform(translate(-75px, 0));
 
-                @include respond-to(not_mobile) {
-                    @include transform(translate(-75px, 0));
+                @include respond-to(m_tablet) {
+                    @include transform(translate(0px, 0));
                 }
             }
 
@@ -538,7 +559,7 @@ main.home {
                             @include transition(opacity $_transition #{$initdelay + ($i * $eachdelay)});
                             opacity: 1;
 
-                            @include respond-to(mobile) {
+                            @include respond-to(m_tablet) {
                                 @include transition(opacity $_transition #{$initdelaymobile + ($i * $eachdelay)});
                             }
                         }
@@ -548,7 +569,7 @@ main.home {
                         @include transition(opacity $_transition #{$initdelay + (4 * $eachdelay)}, border $global-transition, color $global-transition, background $global-transition);
                         opacity: 1;
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             @include transition(opacity $_transition #{$initdelaymobile + (4 * $eachdelay)}, border $global-transition, color $global-transition, background $global-transition);
                         }
                     }
@@ -556,13 +577,13 @@ main.home {
 
                 &>.bg {
                     @include transition(transform $_transition #{$initdelay + (4.5 * $eachdelay)}, opacity $_transition #{$initdelay + (5 * $eachdelay)});
+                    opacity: 1;
+                    @include transform(translate(0, 0));
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         @include transition(opacity $_transition #{$initdelaymobile + (5 * $eachdelay)});
                     }
 
-                    opacity: 1;
-                    @include transform(translate(0, 0));
                 }
             }
         }
@@ -571,6 +592,10 @@ main.home {
 
         &#about {
             position: relative;
+
+            @include respond-to(m_tablet) {
+                min-height: 0px;
+            }
 
             &>.bg {
                 position: absolute;
@@ -582,7 +607,11 @@ main.home {
                 z-index: -1;
                 overflow: hidden;
 
-                @include respond-to(mobile) {
+                @include respond-to(tablet) {
+                    width: calc(50% - #{$home-offcenter-t});
+                }
+
+                @include respond-to(m_tablet) {
                     display: none;
                 }
 
@@ -599,20 +628,25 @@ main.home {
 
             & .content.half {
                 @include setflex(column, nowrap, flex-start, flex-start, flex-start);
-                @include respond-to(mobile) {
+
+                @include respond-to(m_tablet) {
                     width: calc(100% - #{$globalmobile-padding * 2});
                     margin: $sectionmobilespacing auto 0px;
-                    padding-bottom: $sectionmobilespacing;
+                    padding-bottom: $sectionmobilespacing / 2;
                 }
 
                 &>.logo {
                     width: 300px;
                     display: block;
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         width: 100%;
-                        max-width: 300px;
+                        max-width: 400px;
                         margin: 0px auto;
+                    }
+
+                    @include respond-to(mobile) {
+                        max-width: 300px;
                     }
 
                     &>img {
@@ -623,21 +657,31 @@ main.home {
                 &>.bottle {
                     display: none;
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         display: block;
                         padding: 0px $globalmobile-padding;
                         margin-top: $sectionmobilespacing;
                         width: 100%;
                         pointer-events: none;
+                        position: relative;
+                        z-index: 20;
+
                         &>img {
                             pointer-events: auto;
                             position: relative;
                             width: 75%;
-                            max-width: 175px;
+                            max-width: 250px;
                             margin: 0px auto;
                             @include transform(translate(0, 8vh));
                         }
                     }
+
+                    @include respond-to(mobile) {
+                        &>img {
+                            max-width: 175px;
+                        }
+                    }
+
                 }
 
                 &>.description {
@@ -648,7 +692,7 @@ main.home {
                     font-size: 15px;
                     line-height: 180%;
 
-                    @include respond-to(not_mobile) {
+                    @include respond-to(not_tablet_m) {
                         padding-top: 0px;
 
                         &::after {
@@ -661,11 +705,20 @@ main.home {
                             max-height: $global-padding * 1.5;
                         }
                     }
-                    @include respond-to(mobile) {
+
+                    @include respond-to(m_tablet) {
                         width: 100%;
-                        max-width: $mobileinnersection-maxwidth;
+                        max-width: $tabletinnersection-maxwidth;
                         margin: $sectionmobilespacing auto 0px;
                         font-weight: bold;
+
+                        &::after {
+                            display: none;
+                        }
+                    }
+
+                    @include respond-to(mobile) {
+                        max-width: $mobileinnersection-maxwidth;
                     }
                 }
 
@@ -678,14 +731,22 @@ main.home {
                     grid-gap: 15px;
                     justify-items: start;
                     align-items: start;
+
                     @include respond-to(tablet) {
+                        max-width: 350px;
                         grid-template-columns: 1fr 1fr 1fr 1fr;
                     }
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         width: 100%;
+                        max-width: $tabletinnersection-maxwidth;
+                        margin: ($sectionmobilespacing - 15px) auto 0px;
+                        @include setflex(row, wrap, center, center, flex-start);
+                    }
+
+                    @include respond-to(mobile) {
+                        margin: ($sectionmobilespacing) auto 0px;
                         max-width: $mobileinnersection-maxwidth;
-                        margin: $sectionmobilespacing auto 0px;
                         grid-template-columns: 1fr 1fr 1fr;
                         justify-items: center;
                         grid-gap: 30px;
@@ -695,10 +756,15 @@ main.home {
                         @include setflex(column, nowrap);
                         display: inline-flex;
                         width: 50px;
-                        @include flex-grow(1);
+                        @include flex-grow(0);
+
+                        @include respond-to(m_tablet) {
+                            width: 65px;
+                            margin: 15px;
+                        }
 
                         @include respond-to(mobile) {
-                            width: 65px;
+                            margin: 0px;
                         }
 
                         &>img {
@@ -715,7 +781,7 @@ main.home {
                             line-height: 140%;
                             color: white;
 
-                            @include respond-to(mobile) {
+                            @include respond-to(m_tablet) {
                                 font-size: 12px;
                             }
 
@@ -765,7 +831,7 @@ main.home {
                         opacity: 1;
                         @include transition(opacity $_transition #{$initdelay + (0 * $eachdelay)});
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             @include transition(opacity $_transition #{$initdelay + (1 * $eachdelay)});
                         }
                     }
@@ -774,7 +840,7 @@ main.home {
                         opacity: 1;
                         @include transition(opacity $_transition #{$initdelay + (1 * $eachdelay)});
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             @include transition(opacity $_transition #{$initdelay + (2 * $eachdelay)});
                         }
                     }
@@ -783,7 +849,7 @@ main.home {
                         opacity: 1;
                         @include transition(opacity $_transition #{$initdelay + (2 * $eachdelay)});
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             @include transition(opacity $_transition #{$initdelay + (3 * $eachdelay)});
                         }
                     }
@@ -798,9 +864,13 @@ main.home {
         }
 
         &#benefits {
+            @include respond-to(m_tablet) {
+                min-height: 0px;
+            }
+
             & .content.half {
 
-                @include respond-to(mobile) {
+                @include respond-to(m_tablet) {
                     width: calc(100% - #{$globalmobile-padding * 2});
                     margin: $sectionmobilespacing auto 0px;
                     padding-bottom: $sectionmobilespacing;
@@ -814,12 +884,16 @@ main.home {
                     grid-gap: 10px;
                     max-width: 500px;
 
-                    @include respond-to(mobile) {
-                        max-width: $mobileinnersection-maxwidth - 100px;
+                    @include respond-to(m_tablet) {
+                        // max-width: 600px;
                         margin: 0px auto;
                         grid-gap: 20px;
                         justify-items: center;
                         align-items: center;
+                    }
+
+                    @include respond-to(mobile) {
+                        max-width: $mobileinnersection-maxwidth - 100px;
                         grid-template: auto auto auto auto / auto;
                     }
 
@@ -827,7 +901,7 @@ main.home {
                         width: 150px;
                         padding-bottom: 20px;
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             width: 100%;
                             padding: 0px $globalmobile-padding;
                             border: solid thin transparent;
@@ -860,7 +934,7 @@ main.home {
                                 line-height: 100%;
                             }
 
-                            @include respond-to(mobile) {
+                            @include respond-to(m_tablet) {
                                 text-align: center;
 
                                 &>span:first-child {
@@ -899,7 +973,7 @@ main.home {
                     @for $i from 0 through 1 {
                         $n: $i * 2;
 
-                        @include respond-to(not_mobile) {
+                        @include respond-to(not_tablet_m) {
 
                             &>div:nth-child(#{$n + 2}),
                             &>div:nth-child(#{$n + 1}) {
@@ -919,7 +993,7 @@ main.home {
             body.loaded & {
                 $_transition: 1s;
 
-                @include respond-to(mobile) {
+                @include respond-to(m_tablet) {
                     & .content.half>div {
                         &>div.inview {
                             @include transition(opacity $_transition);
@@ -938,12 +1012,28 @@ main.home {
         &#ingredients {
             position: relative;
 
+            @include respond-to(m_tablet) {
+                min-height: 0px;
+            }
+
             &>.wrapper {
+                position: relative;
+                @include setflex(column, nowrap, flex-start, flex-start, flex-start, );
+
+                @include respond-to(m_tablet) {
+                    display: block;
+                }
+
+                &>h1 {
+                    @include flex-shrink(0);
+                    @include flex-grow(0);
+                }
+
                 &>.content {
                     width: 100%;
-                    @include setflex(row, nowrap, flex-start, stretch, stretch);
-                    @include respond-to(mobile) {
-                        padding-top: 0px;
+                    @include flex-grow(1);
+
+                    @include respond-to(m_tablet) {
                         display: block;
                         width: calc(100% - #{$globalmobile-padding * 2});
                         margin: $sectionmobilespacing auto 0px;
@@ -952,6 +1042,12 @@ main.home {
 
                     &>div {
                         display: block;
+                        @include flex-grow(0);
+                        @include flex-shrink(0);
+
+                        &:focus {
+                            outline: none;
+                        }
 
                         &:first-child {
                             font-family: 'Amarillo';
@@ -962,17 +1058,33 @@ main.home {
                             font-size: 40px;
                             line-height: 100%;
 
-                            @include respond-to(mobile) {
+                            &:focus {
+                                outline: none;
+                            }
+
+                            @include respond-to(m_tablet) {
                                 width: 100%;
-                                max-width: $mobileinnersection-maxwidth;
+                                max-width: $tabletinnersection-maxwidth;
                                 margin: 0px auto;
                                 text-align: center;
+                            }
+
+                            @include respond-to(mobile) {
+                                max-width: $mobileinnersection-maxwidth;
                             }
 
                             &>span {
                                 display: block;
                                 margin-bottom: 25px;
                                 position: relative;
+
+                                @include respond-to(m_tablet) {
+                                    margin-bottom: 40px;
+                                }
+
+                                @include respond-to(mobile) {
+                                    margin-bottom: 20px;
+                                }
 
                                 &>div:first-child {
                                     cursor: pointer;
@@ -999,7 +1111,7 @@ main.home {
                                 &>div:last-child {
                                     display: none;
 
-                                    @include respond-to(mobile) {
+                                    @include respond-to(m_tablet) {
                                         display: block;
                                         width: 100%;
                                         font-family: 'Maison Mono';
@@ -1020,7 +1132,7 @@ main.home {
                                 }
 
                                 &:not(.active)>div:last-child {
-                                    @include respond-to(mobile) {
+                                    @include respond-to(m_tablet) {
                                         opacity: 0;
                                         height: 0px !important;
                                     }
@@ -1059,7 +1171,7 @@ main.home {
                                     }
 
                                     &>div:last-child {
-                                        @include respond-to(mobile) {
+                                        @include respond-to(m_tablet) {
                                             opacity: 1;
                                             // height: 0px;
                                         }
@@ -1068,47 +1180,59 @@ main.home {
                             }
                         }
 
-                        &:nth-child(2) {
-                            @include flex-grow(1);
+                    }
+                }
 
-                            &>div {
-                                height: 100%;
-                                @include setflex(column, nowrap, center, center, center);
-                                padding: 0px 75px;
-                                @include transition(opacity $globalslow-transition .1s);
+                &>div:last-child {
+                    position: absolute;
+                    top: 0px;
+                    left: auto;
+                    right: 0px;
+                    width: calc(100% - 300px);
+                    height: 100%;
+                    pointer-events: none;
 
-                                @include respond-to(mobile) {
-                                    display: none;
-                                }
+                    @include respond-to(m_tablet) {
+                        display: none;
+                    }
 
-                                &>* {
-                                    display: block;
-                                    width: 100%;
+                    &>div {
+                        height: 100%;
+                        @include setflex(column, nowrap, center, center, center);
+                        padding: 0px 75px;
+                        @include transition(opacity $globalslow-transition .1s);
 
-                                    &:first-child {
-                                        font-family: 'Amarillo';
-                                        font-size: 350px;
-                                        line-height: 250px;
-                                        color: $color_green;
-                                        text-align: center;
-                                    }
+                        @include respond-to(tablet) {
+                            padding: 0px 50px;
+                        }
 
-                                    &:nth-child(2) {
-                                        margin-top: $global-padding;
-                                        font-family: 'Maison Mono';
-                                        font-size: 18px;
-                                        line-height: 28px;
-                                        text-align: center;
-                                    }
-                                }
+                        &>* {
+                            pointer-events: auto;
+                            display: block;
+                            width: 100%;
 
-                                &.transition {
-                                    opacity: 0;
+                            &:first-child {
+                                font-family: 'Amarillo';
+                                font-size: 350px;
+                                line-height: 250px;
+                                color: $color_green;
+                                text-align: center;
+                            }
 
-                                    &:first-child {
-                                        @include transition(opacity .2s);
-                                    }
-                                }
+                            &:nth-child(2) {
+                                margin-top: $global-padding;
+                                font-family: 'Maison Mono';
+                                font-size: 18px;
+                                line-height: 28px;
+                                text-align: center;
+                            }
+                        }
+
+                        &.transition {
+                            opacity: 0;
+
+                            &:first-child {
+                                @include transition(opacity .2s);
                             }
                         }
                     }
@@ -1126,7 +1250,7 @@ main.home {
                 overflow: hidden;
                 pointer-events: none;
 
-                @include respond-to(mobile) {
+                @include respond-to(m_tablet) {
                     // overflow: visible;
                 }
 
@@ -1147,7 +1271,7 @@ main.home {
                         @include animation(ingbg_transitionout .4s ease-in 1 forwards);
                     }
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         @include transform(translate(0px, 0%));
                         position: relative;
                         margin-top: 0%;
@@ -1200,7 +1324,7 @@ main.home {
                         max-width: 550px;
                     }
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         min-height: 30vh;
                         max-height: 75vh !important;
                         max-width: none !important;
@@ -1234,10 +1358,9 @@ main.home {
 
             &:not(.inview) {
                 &>.bg {
-                    // opacity: 0;
                     @include transition(opacity .5s);
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         opacity: 0;
                     }
                 }
@@ -1262,12 +1385,11 @@ main.home {
             }
 
             &.inview {
-                $delay1: 1.25s;
 
                 &>.bg {
-                    @include transition(opacity .5s);
+                    @include transition(opacity .4s);
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         @include transition(opacity 1.5s 1s);
                     }
                 }
@@ -1278,14 +1400,14 @@ main.home {
                             &:first-child {
                                 @for $i from 1 through 7 {
                                     &>span:nth-child(#{$i}) {
-                                        @include transition(opacity 1s #{.25s + ($i * .25s)});
+                                        @include transition(opacity 1s #{($i * .25s)});
                                         opacity: 1;
                                     }
                                 }
                             }
 
                             &:nth-child(2) {
-                                @include transition(opacity 1.5s $delay1);
+                                @include transition(opacity 1.5s 1s);
                             }
                         }
                     }
@@ -1296,13 +1418,17 @@ main.home {
         &#shop {
             position: relative;
 
+            @include respond-to(m_tablet) {
+                min-height: 0px;
+            }
+
             &>.wrapper {
                 position: relative;
 
                 &>.content {
                     width: 100%;
 
-                    @include respond-to(mobile) {
+                    @include respond-to(m_tablet) {
                         width: calc(100% - #{$globalmobile-padding * 2});
                         margin: $sectionmobilespacing auto 0px;
                         padding-bottom: $sectionmobilespacing;
@@ -1315,7 +1441,7 @@ main.home {
                             margin-bottom: 0px;
                         }
 
-                        @include respond-to(mobile) {
+                        @include respond-to(m_tablet) {
                             margin-bottom: #{ $globalmobile-padding * 2};
 
                             &:last-child {
@@ -1331,9 +1457,13 @@ main.home {
                             margin-top: $global-padding / 2;
                             @include setflex(row, nowrap, space-between, center, center);
 
+                            @include respond-to(m_tablet) {
+                                max-width: 500px;
+                                margin: #{ $globalmobile-padding * 1.5} auto 0px;
+                            }
+
                             @include respond-to(mobile) {
                                 max-width: $mobileinnersection-maxwidth;
-                                margin: #{ $globalmobile-padding * 1.5} auto 0px;
                             }
 
                             &>.arrow {
@@ -1342,6 +1472,10 @@ main.home {
                                 @include flex-grow(0);
                                 @include flex-shrink(0);
                                 cursor: pointer;
+
+                                @include respond-to(m_tablet) {
+                                    width: $mobilearrowwidth + 5px;
+                                }
 
                                 @include respond-to(mobile) {
                                     width: $mobilearrowwidth;
@@ -1363,7 +1497,7 @@ main.home {
                                         @include transition(fill $global_transition);
                                     }
 
-                                    @include respond-to(mobile) {
+                                    @include respond-to(m_tablet) {
 
                                         display: none;
 
@@ -1396,7 +1530,7 @@ main.home {
                                             fill: $color_green;
                                         }
 
-                                        @include respond-to(mobile) {
+                                        @include respond-to(m_tablet) {
                                             & .stroke {
                                                 stroke: white;
                                             }
@@ -1414,6 +1548,11 @@ main.home {
                                 position: relative;
                                 margin: 0px #{$global-padding / 2};
 
+                                @include respond-to(m_tablet) {
+                                    margin: 0px #{$globalmobile-padding + 20px};
+                                    width: calc(100% - #{($mobilearrowwidth + 5px) * 2} - #{($globalmobile-padding + 20px) * 2});
+                                }
+
                                 @include respond-to(mobile) {
                                     margin: 0px #{$globalmobile-padding};
                                     width: calc(100% - #{$mobilearrowwidth * 2} - #{$globalmobile-padding * 2});
@@ -1425,7 +1564,6 @@ main.home {
 
                                 & .shop {
                                     width: 50%;
-                                    min-height: 100px;
                                     @include flex-grow(0);
                                     position: relative;
                                     padding: 0px #{$global-padding / 2};
@@ -1433,6 +1571,15 @@ main.home {
                                     &>* {
                                         width: 100%;
                                         height: 150px;
+
+                                        @include respond-to(m_tablet) {
+                                            height: 200px;
+                                        }
+
+                                        @include respond-to(mobile) {
+                                            height: 150px;
+                                        }
+
                                         display: block;
 
                                         &>img {
@@ -1545,7 +1692,12 @@ main.home {
                 @include transform(translate(-50%, 0%));
                 height: calc(100% - 50vh - 50px);
             }
-            @include respond-to(mobile) {
+
+            @include respond-to(tablet) {
+                left: calc(50% + #{$home-offcenter-t});
+            }
+
+            @include respond-to(m_tablet) {
                 display: none;
             }
 
@@ -1568,14 +1720,14 @@ main.home {
             left: 0%;
             @include transform(translate(0%, 0%));
 
-            @include respond-to(mobile) {
+            @include respond-to(m_tablet) {
                 display: none;
             }
 
             &.stuck {
                 position: absolute;
                 top: auto;
-                @include transform(translate(0%,0%));
+                @include transform(translate(0%, 0%));
                 bottom: 0px;
             }
 
@@ -1587,6 +1739,10 @@ main.home {
                 top: 50%;
                 left: calc(50% + #{$home-offcenter});
                 @include transform(translate(-50%, -50%));
+
+                @include respond-to(tablet) {
+                    left: calc(50% + #{$home-offcenter-t});
+                }
 
                 &>img {
                     width: 100%;
@@ -1643,7 +1799,7 @@ main.home {
     & #MobileNavigation {
         display: none;
 
-        @include respond-to(mobile) {
+        @include respond-to(m_tablet) {
             display: block;
         }
 
@@ -1800,88 +1956,100 @@ main.home {
 
             &>div:nth-child(2) {
                 display: none;
-
-                @include respond-to(mobile) {
-                    // display: grid;
-                    // grid-template: auto auto auto auto/ 1fr;
-                    // justify-items: center;
-                    @include setflex(column, nowrap, space-between, center, center);
-                }
-
-                &::after,
-                &::before {
-                    @include pseudo;
-                    position: relative;
-                    height: 3vh;
-                    min-height: 20px;
-                    pointer-events: none;
-                    width: 100%;
-                }
-
-                width: 100vw;
                 height: 100vh;
-                overflow: auto;
-                padding: 50px;
-                // @include padding-safe-bottom(50px);
-                // @include padding-safe-top(50px);
-                font-size: 48px;
-                line-height: 64px;
-                font-family: 'Amarillo';
-
-                &>span {
-                    cursor: pointer;
-                    color: black;
-                    @include transition(color $global-transition);
-
-                    body.onhover &:hover {
-                        color: white;
-                    }
+                width: 100vw;
+                position: relative;
+                @include respond-to(m_tablet) {
+                    display: block;
                 }
-
-                &>div:last-child {
+                &>div {
+                    @include flex-grow(0);
+                    @include setflex(column, nowrap, space-between, center, center);
+                    overflow: auto;
+                    padding: 50px;
+                    // @include padding-safe-bottom(50px);
+                    // @include padding-safe-top(50px);
+                    font-size: 48px;
+                    line-height: 64px;
+                    font-family: 'Amarillo';
+                    height: 100%;
                     width: 100%;
+                    max-height: 800px;
+                    position: absolute;
+                    top: 50%;
+                    left: 50%;
+                    @include transform(translate( -50%, -50%));
 
+                    &::after,
                     &::before {
                         @include pseudo;
                         position: relative;
-                        height: 4vh;
+                        height: 3vh;
                         min-height: 20px;
-                        max-height: 40px;
                         pointer-events: none;
                         width: 100%;
                     }
+                    &>span {
+                        cursor: pointer;
+                        color: black;
+                        @include transition(color $global-transition);
 
-                    &>div {
-                        @include setflex(row, nowrap, center, center, center);
+                        body.onhover &:hover {
+                            color: white;
+                        }
+                    }
+
+                    &>div:last-child {
                         width: 100%;
 
-                        &>a {
-                            @include flex-grow(0);
-                            display: block;
-                            margin: 0px 5px;
-                            width: $mobileSocialMedia;
-                            height: $mobileSocialMedia;
-                            @include transition(opacity $global-transition);
+                        &::before {
+                            @include pseudo;
+                            position: relative;
+                            height: 4vh;
+                            min-height: 20px;
+                            max-height: 40px;
+                            pointer-events: none;
+                            width: 100%;
+                        }
 
-                            &.svg>svg {
-                                width: 100%;
-                                height: auto;
+                        &>div {
+                            @include setflex(row, nowrap, center, center, center);
+                            width: 100%;
+
+                            &>a {
+                                @include flex-grow(0);
                                 display: block;
-                            }
+                                margin: 0px 10px;
+                                width: $tabletSocialMedia + 10px;
+                                height: $tabletSocialMedia + 10px;
+                                @include transition(opacity $global-transition);
 
-                            &>img {
-                                height: 100%;
-                            }
+                                @include respond-to(mobile) {
+                                    width: $mobileSocialMedia;
+                                    height: $mobileSocialMedia;
+                                    margin: 0px 5px;
+                                }
 
-                            body.onhover &:hover {
-                                opacity: $global_opacity;
-                            }
+                                &.svg>svg {
+                                    width: 100%;
+                                    height: auto;
+                                    display: block;
+                                }
 
-                            &.svg {
-                                @include transition(opacity 0s);
+                                &>img {
+                                    height: 100%;
+                                }
 
                                 body.onhover &:hover {
-                                    opacity: 1;
+                                    opacity: $global_opacity;
+                                }
+
+                                &.svg {
+                                    @include transition(opacity 0s);
+
+                                    body.onhover &:hover {
+                                        opacity: 1;
+                                    }
                                 }
                             }
                         }

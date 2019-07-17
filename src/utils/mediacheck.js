@@ -5,6 +5,7 @@ export const MediaCheck = {
         w: {
             small: 450,
             mobile: 700,
+            mtablet: 800,
             tablet: 1024,
             desktop: 1280
         },
@@ -38,6 +39,7 @@ export const MediaCheck = {
         },
         small: () => (MediaCheck.checkWidth(MediaCheck.v.w.small)),
         mobile: () => (MediaCheck.checkWidth(MediaCheck.v.w.mobile)),
+        mtablet: () => (MediaCheck.checkWidth(MediaCheck.v.w.mtablet)),
         tablet: () => (MediaCheck.checkWidth(MediaCheck.v.w.tablet)),
         desktop: () => (MediaCheck.checkWidth(MediaCheck.v.w.desktop))
     },

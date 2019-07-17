@@ -338,7 +338,7 @@ collections:
                 - { label: 'English', name: 'en', widget: 'string', default: 'Ingredients', required: true}
                 - { label: 'Indonesian', name: 'id', widget: 'string', default: 'Ingredients',required: true}
             - label: "Shop"
-              name: "Shop"
+              name: "shop"
               widget: "object"
               required: true
               fields:

@@ -6,3 +6,8 @@
     -ms-overflow-style: none;
     overflow: -moz-scrollbars-none;
 }
+body.__disablescroll{
+    &.__disabletouch{
+        overflow: hidden;
+    }
+}

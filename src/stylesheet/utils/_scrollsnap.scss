@@ -1,9 +1,11 @@
-body.snapon {
+body.__snapon {
+    -ms-overflow-style: none;
+    overflow: -moz-scrollbars-none;
     &::-webkit-scrollbar {
         width: 0 !important;
         display: none;
     }
-
-    -ms-overflow-style: none;
-    overflow: -moz-scrollbars-none;
+    &.__snaphastouch{
+        overflow: hidden;
+    }
 }
