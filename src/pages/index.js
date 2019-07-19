@@ -404,7 +404,7 @@ export default class Home extends React.Component {
 			document.body.classList.remove('menu_open');
 		}
 	}
-	gotoShop() {
+	gotoShop = () => {
 		if (MediaCheck.width.mtablet()) {
 			const scrollTarget = document.querySelector('section#shop').getBoundingClientRect().top;
 			const curScrollPos = window.pageYOffset || document.documentElement.scrollTop;
@@ -651,7 +651,7 @@ export default class Home extends React.Component {
 														{this.langID ? (
 															transData.home.title.id
 														) : (
-															transData.home.title.id
+															transData.home.title.en
 														)}
 													</span>
 												</span>
@@ -660,7 +660,7 @@ export default class Home extends React.Component {
 														{this.langID ? (
 															transData.about.title.id
 														) : (
-															transData.about.title.id
+															transData.about.title.en
 														)}
 													</span>
 												</span>
@@ -669,7 +669,7 @@ export default class Home extends React.Component {
 														{this.langID ? (
 															transData.benefits.title.id
 														) : (
-															transData.benefits.title.id
+															transData.benefits.title.en
 														)}
 													</span>
 												</span>
@@ -678,7 +678,7 @@ export default class Home extends React.Component {
 														{this.langID ? (
 															transData.ingredients.title.id
 														) : (
-															transData.ingredients.title.id
+															transData.ingredients.title.en
 														)}
 													</span>
 												</span>
@@ -687,13 +687,21 @@ export default class Home extends React.Component {
 														{this.langID ? (
 															transData.shop.title.id
 														) : (
-															transData.shop.title.id
+															transData.shop.title.en
 														)}
 													</span>
 												</span>
-												{/* <span>
-										<span>{this.langID ? transData.journal.title.id : transData.journal.title.id }</span>
-									</span> */}
+												{!data.general.frontmatter.journaldisable && (
+													<span>
+														<span>
+															{this.langID ? (
+																transData.journal.title.id
+															) : (
+																transData.journal.title.en
+															)}
+														</span>
+													</span>
+												)}
 											</div>
 											<div className="social_ctn">
 												{footerData.ig_link !== '' && (
@@ -1079,10 +1087,9 @@ export default class Home extends React.Component {
 															>
 																{homeData.onlineshop.map((node, id) => {
 																	return (
-																		<div className="shop" key={id}>
+																		<div className="shop" key={id}  dataid={id}>
 																			{node.link ? (
 																				<a
-																					className="svg"
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
@@ -1121,10 +1128,9 @@ export default class Home extends React.Component {
 															<div className="wrapper">
 																{homeData.onlineshop.map((node, id) => {
 																	return (
-																		<div className="shop" key={id}>
+																		<div className="shop" key={id} dataid={id}>
 																			{node.link ? (
 																				<a
-																					className="svg"
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
@@ -1223,10 +1229,9 @@ export default class Home extends React.Component {
 															>
 																{homeData.offlineshop.map((node, id) => {
 																	return (
-																		<div className="shop" key={id}>
+																		<div className="shop" key={id} dataid={id}>
 																			{node.link ? (
 																				<a
-																					className="svg"
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}
@@ -1265,10 +1270,9 @@ export default class Home extends React.Component {
 															<div className="wrapper">
 																{homeData.offlineshop.map((node, id) => {
 																	return (
-																		<div className="shop" key={id}>
+																		<div className="shop" key={id} dataid={id}> 
 																			{node.link ? (
 																				<a
-																					className="svg"
 																					target="_blank"
 																					rel="noopener noreferrer"
 																					href={node.link}

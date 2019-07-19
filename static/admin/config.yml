@@ -29,6 +29,7 @@ collections:
             required: false
             fields:
             - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
+            - { label: 'Short Description Indonesia', name: 'seo_shortdesc_id', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
             - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
             - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
           - label: "Footer"

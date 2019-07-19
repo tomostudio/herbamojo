@@ -11,6 +11,10 @@ seo:
     HERBAMOJO is a high quality herbal formula to support male stamina.
     HERBAMOJO contains 7 key herbal ingredients that works optimally to help
     improve energy, immunity and performance.
+  seo_shortdesc_id: >-
+    HERBAMOJO is a high quality herbal formula to support male stamina.
+    HERBAMOJO contains 7 key herbal ingredients that works optimally to help
+    improve energy, immunity and performance.
 footer:
   email: info@herbamojo.id
   ig_link: 'https://www.instagram.com/herbamojo'
@@ -23,4 +27,3 @@ navigation:
     en: Journal
     id: Jurnal
 ---
-

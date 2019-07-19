@@ -745,6 +745,7 @@ main.home {
                     }
 
                     @include respond-to(mobile) {
+                        display: grid;
                         margin: ($sectionmobilespacing) auto 0px;
                         max-width: $mobileinnersection-maxwidth;
                         grid-template-columns: 1fr 1fr 1fr;
