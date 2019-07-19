@@ -6,6 +6,8 @@
 
 // VENDOR
 @import "vendor/slick";
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.core";
+@import "node_modules/@glidejs/glide/src/assets/sass/glide.theme";
 
 // UTILS
 @import "utils/scrollsnap";

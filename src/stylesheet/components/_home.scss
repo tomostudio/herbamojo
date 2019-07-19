@@ -1544,7 +1544,7 @@ main.home {
                                 }
                             }
 
-                            & div.wrapper {
+                            & .wrapper {
                                 width: calc(100% - #{$arrowwidth * 2} - #{$global-padding});
                                 position: relative;
                                 margin: 0px #{$global-padding / 2};

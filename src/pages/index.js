@@ -1,8 +1,8 @@
 import React from 'react';
 import { StaticQuery, Link, graphql } from 'gatsby';
-import Slider from 'react-slick';
 import lottie from 'lottie-web';
 import { Helmet } from 'react-helmet';
+import Glide from '@glidejs/glide';
 
 //UTILS
 import { ScrollSnapClass } from 'utils/scrollsnap';
@@ -251,18 +251,37 @@ export default class Home extends React.Component {
 			//INGREDIENTS SET
 			this.ingredientToggle(document.querySelector('#ing_sel > *:nth-child(1) > div:first-child'));
 
-			// INIT RESIZE
-			this.resize();
 
-			this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
-			this.scrollpass.bottlesection.trigger();
+			//GLIDE SETUP
+			const glidesetting = {
+				type: 'carousel',
+				startAt: 0,
+				perView: 2,
+				breakpoints: {
+					800: {
+						perView: 1
+					}
+				}
+			};
 
+			if (typeof document !== `undefined`) {
+				if (document.querySelector('#onlineslider'))
+					this.slider.online = new Glide('#onlineslider', glidesetting).mount();
+				if (document.querySelector('#offlineslider'))
+					this.slider.offline = new Glide('#offlineslider', glidesetting).mount();
+			}
 			// TRIGGER SCROLL SNAP INIT AND PAUSE
 			if (typeof document !== `undefined`) {
 				document.body.classList.add('loaded');
 				this.HomeScrollSnap.init();
 				this.HomeScrollSnap.pause();
 			}
+			
+			// INIT RESIZE
+			this.resize();
+
+			this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
+			this.scrollpass.bottlesection.trigger();
 
 			// SET ANIMATION DELAY
 			if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
@@ -274,13 +293,17 @@ export default class Home extends React.Component {
 			}, this.LoadAnimationDelay);
 		}
 	});
+	slider = {
+		online: null,
+		offline: null
+	};
 	inview = {
 		footer: null,
 		home: null,
 		about: null,
 		aboutm: null,
 		benefits: null,
-		benefitsm: [ null, null, null, null ],
+		benefitsm: [ null, null, null, null],
 		ingredients: null,
 		ingredientsm: null,
 		shop: null,
@@ -365,6 +388,10 @@ export default class Home extends React.Component {
 		if (this.scrollax.home_mobile) this.scrollax.home_mobile.kill();
 		if (typeof document !== `undefined`) if (this.HomeScrollSnap) this.HomeScrollSnap.kill();
 		if (this.disableScrollBody !== null) this.disableScrollBody.enable();
+
+		if (this.slider.online !== null)this.slider.online.destroy();
+		if (this.slider.offline !== null)this.slider.offline.destroy();
+
 		if (this.ForceVH) this.ForceVH.kill();
 		if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
 
@@ -391,7 +418,7 @@ export default class Home extends React.Component {
 		if (this.scrollax.ing_bg) this.scrollax.ing_bg.trigger();
 		if (this.scrollax.home_mobile) this.scrollax.home_mobile.trigger();
 	}
-	resize() {
+	resize = () => {
 		//ADJUST INGREDIENTS DESCRIPTION MOBILE HEIGHT
 		const ingDescMobile = document.querySelectorAll('#ing_sel > span > div:last-child > div');
 		let height = [];
@@ -402,6 +429,29 @@ export default class Home extends React.Component {
 		if (!MediaCheck.width.mtablet) {
 			// REMOVE MENU OPEN WHEN IT IS NOT MOBILE
 			document.body.classList.remove('menu_open');
+		}
+
+		if(this.slider.online !== null){
+			const _so = document.querySelector('#onlineshop');
+			if(!MediaCheck.width.mtablet()){
+				if(_so.classList.contains('twoslide')){
+					this.slider.online.disable();
+				}
+			}
+			else{
+				this.slider.online.enable();
+			}
+		}
+		if(this.slider.offline !== null){
+			const _so = document.querySelector('#offlineshop');
+			if(!MediaCheck.width.mtablet()){
+				if(_so.classList.contains('twoslide')){
+					this.slider.offline.disable();
+				}
+			}
+			else{
+				this.slider.offline.enable();
+			}
 		}
 	}
 	gotoShop = () => {
@@ -420,7 +470,7 @@ export default class Home extends React.Component {
 		} else {
 			this.HomeScrollSnap.snap.to(4);
 		}
-	}
+	};
 	ingredientChanging = false;
 	ingredientChangeTimeout = null;
 	ingredientClick(e) {
@@ -503,27 +553,10 @@ export default class Home extends React.Component {
 	render() {
 		this.IndexLoader.renderload();
 
-		const sliderSettings = {
-			infinite: true,
-			speed: 500,
-			autoplay: false,
-			arrows: false,
-			slidesToShow: 2,
-			slidesToScroll: 1,
-			responsive: [
-				{
-					breakpoint: 850,
-					settings: {
-						slidesToShow: 1,
-						slidesToScroll: 1
-					}
-				}
-			]
-		};
-
 		if (typeof document !== `undefined`) {
 			window.addEventListener('resize', this.resize, false);
 		}
+
 		return (
 			<StaticQuery
 				query={indexQuery}
@@ -1065,8 +1098,7 @@ export default class Home extends React.Component {
 															<div
 																className="arrow"
 																onClick={() => {
-																	if (this.onlineslider)
-																		this.onlineslider.slickPrev();
+																	if (this.slider.online) this.slider.online.go('<');
 																}}
 															>
 																<Arrow />
@@ -1080,50 +1112,56 @@ export default class Home extends React.Component {
 														)}
 
 														{homeData.onlineshop.length > 1 ? (
-															<Slider
-																{...sliderSettings}
-																ref={(d) => (this.onlineslider = d)}
-																className="wrapper"
-															>
-																{homeData.onlineshop.map((node, id) => {
-																	return (
-																		<div className="shop" key={id}  dataid={id}>
-																			{node.link ? (
-																				<a
-																					target="_blank"
-																					rel="noopener noreferrer"
-																					href={node.link}
-																					style={{
-																						background:
-																							node.background !== null
-																								? node.background
-																								: 'transparent'
-																					}}
-																				>
-																					<img
-																						src={node.image}
-																						alt="herbamojo"
-																					/>
-																				</a>
-																			) : (
+															<div id="onlineslider" className="glide wrapper">
+																<div data-glide-el="track" className="glide__track">
+																	<ul className="glide__slides ">
+																		{homeData.onlineshop.map((node, id) => {
+																			return (
 																				<div
-																					style={{
-																						background:
-																							node.background !== null
-																								? node.background
-																								: 'transparent'
-																					}}
+																					className="shop glide__slide"
+																					key={id}
+																					dataid={id}
 																				>
-																					<img
-																						src={node.image}
-																						alt="herbamojo"
-																					/>
+																					{node.link ? (
+																						<a
+																							target="_blank"
+																							rel="noopener noreferrer"
+																							href={node.link}
+																							style={{
+																								background:
+																									node.background !==
+																									null
+																										? node.background
+																										: 'transparent'
+																							}}
+																						>
+																							<img
+																								src={node.image}
+																								alt="herbamojo"
+																							/>
+																						</a>
+																					) : (
+																						<div
+																							style={{
+																								background:
+																									node.background !==
+																									null
+																										? node.background
+																										: 'transparent'
+																							}}
+																						>
+																							<img
+																								src={node.image}
+																								alt="herbamojo"
+																							/>
+																						</div>
+																					)}
 																				</div>
-																			)}
-																		</div>
-																	);
-																})}
-															</Slider>
+																			);
+																		})}
+																	</ul>
+																</div>
+															</div>
 														) : (
 															<div className="wrapper">
 																{homeData.onlineshop.map((node, id) => {
@@ -1170,8 +1208,7 @@ export default class Home extends React.Component {
 															<div
 																className="arrow"
 																onClick={() => {
-																	if (this.onlineslider)
-																		this.onlineslider.slickNext();
+																	if (this.slider.online) this.slider.online.go('>');
 																}}
 															>
 																<Arrow />
@@ -1207,8 +1244,8 @@ export default class Home extends React.Component {
 															<div
 																className="arrow"
 																onClick={() => {
-																	if (this.offlineslider)
-																		this.offlineslider.slickPrev();
+																	if (this.slider.offline)
+																		this.slider.offline.go('<');
 																}}
 															>
 																<Arrow />
@@ -1222,11 +1259,58 @@ export default class Home extends React.Component {
 														)}
 
 														{homeData.offlineshop.length > 1 ? (
-															<Slider
-																{...sliderSettings}
-																ref={(c) => (this.offlineslider = c)}
-																className="wrapper"
-															>
+															<div id="offlineslider" className="glide wrapper">
+																<div data-glide-el="track" className="glide__track">
+																	<ul className="glide__slides ">
+																		{homeData.offlineshop.map((node, id) => {
+																			return (
+																				<div
+																					className="shop glide__slide"
+																					key={id}
+																					dataid={id}
+																				>
+																					{node.link ? (
+																						<a
+																							target="_blank"
+																							rel="noopener noreferrer"
+																							href={node.link}
+																							style={{
+																								background:
+																									node.background !==
+																									null
+																										? node.background
+																										: 'transparent'
+																							}}
+																						>
+																							<img
+																								src={node.image}
+																								alt="herbamojo"
+																							/>
+																						</a>
+																					) : (
+																						<div
+																							style={{
+																								background:
+																									node.background !==
+																									null
+																										? node.background
+																										: 'transparent'
+																							}}
+																						>
+																							<img
+																								src={node.image}
+																								alt="herbamojo"
+																							/>
+																						</div>
+																					)}
+																				</div>
+																			);
+																		})}
+																	</ul>
+																</div>
+															</div>
+														) : (
+															<div className="wrapper">
 																{homeData.offlineshop.map((node, id) => {
 																	return (
 																		<div className="shop" key={id} dataid={id}>
@@ -1265,55 +1349,14 @@ export default class Home extends React.Component {
 																		</div>
 																	);
 																})}
-															</Slider>
-														) : (
-															<div className="wrapper">
-																{homeData.offlineshop.map((node, id) => {
-																	return (
-																		<div className="shop" key={id} dataid={id}> 
-																			{node.link ? (
-																				<a
-																					target="_blank"
-																					rel="noopener noreferrer"
-																					href={node.link}
-																					style={{
-																						background:
-																							node.background !== null
-																								? node.background
-																								: 'transparent'
-																					}}
-																				>
-																					<img
-																						src={node.image}
-																						alt="herbamojo"
-																					/>
-																				</a>
-																			) : (
-																				<div
-																					style={{
-																						background:
-																							node.background !== null
-																								? node.background
-																								: 'transparent'
-																					}}
-																				>
-																					<img
-																						src={node.image}
-																						alt="herbamojo"
-																					/>
-																				</div>
-																			)}
-																		</div>
-																	);
-																})}
 															</div>
 														)}
 														{homeData.offlineshop.length > 1 ? (
 															<div
 																className="arrow"
 																onClick={() => {
-																	if (this.offlineslider)
-																		this.offlineslider.slickNext();
+																	if (this.slider.offline)
+																		this.slider.offline.go('>');
 																}}
 															>
 																<Arrow />
