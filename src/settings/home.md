@@ -199,6 +199,6 @@ translations:
       id: Online
     title:
       en: Shop
-      id: Shop
+      id: Beli
 ---
 
