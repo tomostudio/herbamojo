@@ -120,7 +120,7 @@ translations:
         your: Your
     shopfloat:
       en: Shop
-      id: Shop
+      id: Beli
     title:
       en: Home
       id: Homeid
