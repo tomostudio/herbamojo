@@ -12,9 +12,9 @@ seo:
     HERBAMOJO contains 7 key herbal ingredients that works optimally to help
     improve energy, immunity and performance.
 footer:
-  email: ''
+  email: info@herbamojo.id
   ig_link: 'https://www.instagram.com/herbamojo'
-  wa_no: 082123100111
+  wa_no: '6282123100111'
 navigation:
   home:
     en: Home
