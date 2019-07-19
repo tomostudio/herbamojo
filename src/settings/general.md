@@ -21,6 +21,6 @@ navigation:
     id: Homeid
   journal:
     en: Journal
-    id: Journal
+    id: Jurnal
 ---
 
