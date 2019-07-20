@@ -6,10 +6,10 @@ export default class Layout extends React.Component {
 	render() {
 		const props = this.props;
 		if(this.props.indo){
-			document.querySelector('html').setAttribute('lang', 'id');
+			if (typeof document !== undefined)document.querySelector('html').setAttribute('lang', 'id');
 		}
 		else{
-			document.querySelector('html').setAttribute('lang', 'en');
+			if (typeof document !== undefined)document.querySelector('html').setAttribute('lang', 'en');
 		}
 		return (
 			<StaticQuery
