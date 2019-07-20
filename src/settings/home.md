@@ -3,10 +3,10 @@ issetting: true
 contenttype: home_setting
 title: Home Setting
 home:
-  background: /assets/images/herbamojo_homebg.jpg
-  backgroundmobile: /assets/images/herbamojo_productshot3.jpg
+  background: /assets/herbamojo_homebg.jpg
+  backgroundmobile: /assets/herbamojo_productshot3.jpg
 about:
-  background: /assets/images/herbamojo_lifestylebg.jpg
+  background: /assets/herbamojo_lifestylebg.jpg
   desc:
     en: >-
       HERBAMOJO is a high quality herbal formula to support male stamina.
@@ -22,7 +22,7 @@ ingredients:
       id: >-
         Maca berkhasiat untuk meningkatkan energi dan stamina dan sebagai
         afrodisiak
-    image: /assets/ingredients/maca.png
+    image: /assets/maca.jpg
     title:
       en: MACA
       id: MACA
@@ -33,7 +33,7 @@ ingredients:
       id: >-
         Ginseng berkhasiat untuk meningkatkan energi, stamina dan menjaga
         imunitas. Berkhasiat sebagai afrodisiak
-    image: /assets/ingredients/ginseng.png
+    image: /assets/ginseng.jpg
     title:
       en: GINSENG
       id: GINSENG
@@ -42,35 +42,35 @@ ingredients:
         Jahe merah bekhasiat untuk melancarkan peredaran darah dan meningkatkan
         energi.
       id: Red Ginger works to improve blood circulation and increase energy.
-    image: /assets/ingredients/jahe_merah.png
+    image: /assets/jahe_merah.jpg
     title:
       en: RED GINGER
       id: JAHE MERAH
   - desc:
       en: Tribulus berkhasiat untuk meningkatkan stamina pria.
       id: Tribulus works to increase male stamina.
-    image: /assets/ingredients/tribulus.png
+    image: /assets/tribulus.jpg
     title:
       en: TRIBULUS
       id: TRIBULUS
   - desc:
       en: Pasak bumi berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak
       id: Long Jack works to increase stamina and as an aphrodisiac.
-    image: /assets/ingredients/pasak_bumi.png
+    image: /assets/pasak_bumi.jpg
     title:
       en: LONG JACK
       id: PASAK BUMI
   - desc:
       en: Purwoceng berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak.
       id: Purwoceng works to increase stamina and as an aphrodisiac.
-    image: /assets/ingredients/purwaceng.png
+    image: /assets/purwoceng.jpg
     title:
       en: PURWOCENG
       id: PURWOCENG
   - desc:
       en: Cabe Jawa berkhasiat untuk melancarkan peredaran darah.
       id: Javanese Long Pepper works to increase stamina and as an aphrodisiac.
-    image: /assets/ingredients/cabe.png
+    image: /assets/cabe.jpg
     title:
       en: JAVANESE LONG PEPPER
       id: CABE JAWA

@@ -31,7 +31,7 @@ collections:
             - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
             - { label: 'Short Description Indonesia', name: 'seo_shortdesc_id', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
             - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
-            - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
+            - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px | JPEG / PNG / GIF', default: '', required: false,}
           - label: "Footer"
             name: "footer"
             widget: "object"
@@ -73,14 +73,14 @@ collections:
             widget: "object"
             required: true
             fields:
-            - { name: 'background', label: 'Background', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 1500px x 1500px', default: '', required: true,}
-            - { name: 'backgroundmobile', label: 'Mobile Background', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 1500px x 1500px', default: '', required: true,}
+            - { name: 'background', label: 'Background', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 1500px x 1500px | JPEG / PNG / GIF', default: '', required: true,}
+            - { name: 'backgroundmobile', label: 'Mobile Background', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 1500px x 1500px | JPEG / PNG / GIF', default: '', required: true,}
           - label: "About Section Setting"
             name: "about"
             widget: "object"
             required: true
             fields:
-            - { name: 'background', label: 'Background', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 1500px x 1500px', default: '', required: true,}
+            - { name: 'background', label: 'Background', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 1500px x 1500px | JPEG / PNG / GIF', default: '', required: true,}
             - label: "Description"
               name: "desc"
               widget: "object"
@@ -101,7 +101,7 @@ collections:
               fields:
               - { label: 'English', name: 'en', widget: 'string', default: '', required: true}
               - { label: 'Indonesian', name: 'id', widget: 'string', default: '',required: true}
-            - { name: 'image', label: 'Background Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 2000px x 1500px', default: '', required: true,}
+            - { name: 'image', label: 'Background Image', widget: 'image', hint: 'Minimum Resolution: 1500px x 1000px | JPEG / PNG / GIF', default: '', required: true,}
             - label: "Description"
               name: "desc"
               widget: "object"
@@ -115,7 +115,7 @@ collections:
             allow_add: true
             required: false
             fields:
-            - { name: 'image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 2000px x 1500px', default: '', required: false,}
+            - { name: 'image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 2000px x 1500px | JPEG / PNG / GIF', default: '', required: false,}
             - { label: 'Link', name: 'link', widget: 'string', hint: 'Input link starting with https:// or http://', default: '', required: false}
             - { label: 'Background Color', name: 'background', widget: 'string', hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent', default: 'transparent', required: false}
           - label: "Offline Shop List"
@@ -124,7 +124,7 @@ collections:
             allow_add: true
             required: false
             fields:
-            - { name: 'image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 2000px x 1500px', default: '', required: false,}
+            - { name: 'image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 2000px x 1500px | JPEG / PNG / GIF', default: '', required: false,}
             - { label: 'Link', name: 'link', widget: 'string', hint: 'Input link starting with https:// or http://', default: '', required: false}
             - { label: 'Background Color', name: 'background', widget: 'string', hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent', default: 'transparent', required: false}
           - label: "Translations List"

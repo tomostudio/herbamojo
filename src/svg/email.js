@@ -3,7 +3,6 @@ export default (props) => (
 	<svg viewBox="0 0 70 68" version="1.1" xmlns="http://www.w3.org/2000/svg">
 		<defs>
 			<polygon
-				id="path-1"
 				points="43.4554616 32.7575457 43.4554616 0.130803748 8.00289882e-21 0.130803748 0 32.7575457"
 			/>
 		</defs>
@@ -13,7 +12,6 @@ export default (props) => (
 					<g transform="translate(1142.000000, 80.000000)">
 						<ellipse
 							className="stroke"
-							id="Oval-Copy-16"
 							stroke="#000000"
 							strokeWidth="3"
 							cx="32.9275609"

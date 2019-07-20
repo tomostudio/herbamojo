@@ -669,10 +669,10 @@ export default class Home extends React.Component {
 								<div className="overlay">
 									<div className="wrapper">
 										<div>
-											<Link className={`${!this.props.langID && 'disable'}`} to="/">
+											<Link aria-label="English" className={`${!this.props.langID && 'disable'}`} to="/">
 												EN
 											</Link>
-											<Link className={`${this.props.langID && 'disable'}`} to="/id">
+											<Link aria-label="Indonesia" className={`${this.props.langID && 'disable'}`} to="/id">
 												ID
 											</Link>
 										</div>
@@ -743,6 +743,7 @@ export default class Home extends React.Component {
 														target="_blank"
 														rel="noopener noreferrer"
 														href={footerData.ig_link}
+														aria-label="Instagram"
 													>
 														<InstagramSVG />
 													</a>
@@ -754,6 +755,7 @@ export default class Home extends React.Component {
 														target="_blank"
 														rel="noopener noreferrer"
 														href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
+														aria-label="Whatsapp"
 													>
 														<WhatsappSVG />
 													</a>
@@ -764,6 +766,7 @@ export default class Home extends React.Component {
 														target="_blank"
 														rel="noopener noreferrer"
 														href={`mailto:${footerData.email}`}
+														aria-label="Email"
 													>
 														<EmailSVG />
 													</a>
@@ -1114,7 +1117,7 @@ export default class Home extends React.Component {
 														{homeData.onlineshop.length > 1 ? (
 															<div id="onlineslider" className="glide wrapper">
 																<div data-glide-el="track" className="glide__track">
-																	<ul className="glide__slides ">
+																	<div className="glide__slides ">
 																		{homeData.onlineshop.map((node, id) => {
 																			return (
 																				<div
@@ -1134,6 +1137,7 @@ export default class Home extends React.Component {
 																										? node.background
 																										: 'transparent'
 																							}}
+																							aria-label="ShopSlide"
 																						>
 																							<img
 																								src={node.image}
@@ -1159,7 +1163,7 @@ export default class Home extends React.Component {
 																				</div>
 																			);
 																		})}
-																	</ul>
+																	</div>
 																</div>
 															</div>
 														) : (
@@ -1261,7 +1265,7 @@ export default class Home extends React.Component {
 														{homeData.offlineshop.length > 1 ? (
 															<div id="offlineslider" className="glide wrapper">
 																<div data-glide-el="track" className="glide__track">
-																	<ul className="glide__slides ">
+																	<div className="glide__slides ">
 																		{homeData.offlineshop.map((node, id) => {
 																			return (
 																				<div
@@ -1306,7 +1310,7 @@ export default class Home extends React.Component {
 																				</div>
 																			);
 																		})}
-																	</ul>
+																	</div>
 																</div>
 															</div>
 														) : (
