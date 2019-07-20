@@ -13,7 +13,6 @@ export class DisableScroll {
     }
     disable() {
         if (!this.scrolldisabled) {
-            console.log('scroll disable');
             this.scrolldisabled = true;
             if (this.target === null) {
                 if (typeof document !== `undefined`) {
@@ -63,7 +62,7 @@ export class DisableScroll {
         }
     }
     enable = () => {
-        console.log('scroll enable');
+        // console.log('scroll enable');
         this.scrolldisabled = false;
         if (this.target === null) {
             if (typeof document !== `undefined`) {

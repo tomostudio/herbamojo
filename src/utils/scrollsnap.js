@@ -207,7 +207,7 @@ export class ScrollSnapClass {
 
             }
             if (this.v.snap.enable) {
-                console.log('scrollsnap enable');
+                // console.log('scrollsnap enable');
                 //CHECK CURRENT POSITION AND ADJUST
                 let checkcur = Math.floor(this.common.scrollPosition() / this.common.windowHeight());
                 if (checkcur >= this.v.sections.length) {
@@ -220,7 +220,7 @@ export class ScrollSnapClass {
                 document.body.classList.add('__snapon');
             } else {
                 // TURN OFF CLASS
-                console.log('scrollsnap disable');
+                // console.log('scrollsnap disable');
                 document.body.classList.remove('__snapon');
             }
 

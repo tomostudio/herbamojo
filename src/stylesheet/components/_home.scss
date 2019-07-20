@@ -1745,11 +1745,17 @@ main.home {
                     left: calc(50% + #{$home-offcenter-t});
                 }
 
+                &>picture,
                 &>img {
                     width: 100%;
                     height: auto;
                     max-height: calc(100vh - (80px * 2));
                     object-fit: contain;
+                    & > img{
+
+                        width: 100%;
+                        height: 100%;
+                    }
                 }
 
                 &>#ShopButton {

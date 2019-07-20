@@ -28,6 +28,7 @@ import { Arrow, ArrowSmaller } from 'svg/symbols.js';
 //IMAGES
 import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
 import BottleImg from 'images/static/herbamojo_productshot.png';
+import BottleImgWebP from 'images/static/herbamojo_productshot.webp';
 
 //SVG CERT
 import CertBPOM from 'images/symbols/bpom.svg';
@@ -251,7 +252,6 @@ export default class Home extends React.Component {
 			//INGREDIENTS SET
 			this.ingredientToggle(document.querySelector('#ing_sel > *:nth-child(1) > div:first-child'));
 
-
 			//GLIDE SETUP
 			const glidesetting = {
 				type: 'carousel',
@@ -276,7 +276,7 @@ export default class Home extends React.Component {
 				this.HomeScrollSnap.init();
 				this.HomeScrollSnap.pause();
 			}
-			
+
 			// INIT RESIZE
 			this.resize();
 
@@ -303,7 +303,7 @@ export default class Home extends React.Component {
 		about: null,
 		aboutm: null,
 		benefits: null,
-		benefitsm: [ null, null, null, null],
+		benefitsm: [ null, null, null, null ],
 		ingredients: null,
 		ingredientsm: null,
 		shop: null,
@@ -347,10 +347,9 @@ export default class Home extends React.Component {
 	componentDidMount() {
 		if (typeof document !== `undefined`) {
 			document.body.classList.remove('loaded');
-			if(this.langID){
+			if (this.langID) {
 				document.querySelector('html').setAttribute('lang', 'id');
-			}
-			else{
+			} else {
 				document.querySelector('html').setAttribute('lang', 'en');
 			}
 		}
@@ -395,8 +394,8 @@ export default class Home extends React.Component {
 		if (typeof document !== `undefined`) if (this.HomeScrollSnap) this.HomeScrollSnap.kill();
 		if (this.disableScrollBody !== null) this.disableScrollBody.enable();
 
-		if (this.slider.online !== null)this.slider.online.destroy();
-		if (this.slider.offline !== null)this.slider.offline.destroy();
+		if (this.slider.online !== null) this.slider.online.destroy();
+		if (this.slider.offline !== null) this.slider.offline.destroy();
 
 		if (this.ForceVH) this.ForceVH.kill();
 		if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
@@ -418,6 +417,20 @@ export default class Home extends React.Component {
 			window.removeEventListener('resize', this.resize, false);
 		}
 	}
+	inviewRetrigger() {
+		if (this.inview.home) this.inview.home.trigger();
+		if (this.inview.about) this.inview.about.trigger();
+		if (this.inview.aboutm) this.inview.aboutm.trigger();
+		if (this.inview.benefits) this.inview.benefits.trigger();
+		this.inview.benefitsm.forEach((benefit, index) => {
+			if (this.inview.benefitsm[index]) this.inview.benefitsm[index].trigger();
+		});
+		if (this.inview.ingredients) this.inview.ingredients.trigger();
+		if (this.inview.ingredientsm) this.inview.ingredientsm.trigger();
+		if (this.inview.shop) this.inview.shop.trigger();
+		if (this.inview.shopm) this.inview.shopm.trigger();
+		if (this.inview.footer) this.inview.footer.trigger();
+	}
 	scrollaxCallibrate() {
 		if (this.scrollax.one) this.scrollax.one.trigger();
 		if (this.scrollax.two) this.scrollax.two.trigger();
@@ -436,30 +449,29 @@ export default class Home extends React.Component {
 			// REMOVE MENU OPEN WHEN IT IS NOT MOBILE
 			document.body.classList.remove('menu_open');
 		}
+		this.inviewRetrigger();
 
-		if(this.slider.online !== null){
+		if (this.slider.online !== null) {
 			const _so = document.querySelector('#onlineshop');
-			if(!MediaCheck.width.mtablet()){
-				if(_so.classList.contains('twoslide')){
+			if (!MediaCheck.width.mtablet()) {
+				if (_so.classList.contains('twoslide')) {
 					this.slider.online.disable();
 				}
-			}
-			else{
+			} else {
 				this.slider.online.enable();
 			}
 		}
-		if(this.slider.offline !== null){
+		if (this.slider.offline !== null) {
 			const _so = document.querySelector('#offlineshop');
-			if(!MediaCheck.width.mtablet()){
-				if(_so.classList.contains('twoslide')){
+			if (!MediaCheck.width.mtablet()) {
+				if (_so.classList.contains('twoslide')) {
 					this.slider.offline.disable();
 				}
-			}
-			else{
+			} else {
 				this.slider.offline.enable();
 			}
 		}
-	}
+	};
 	gotoShop = () => {
 		if (MediaCheck.width.mtablet()) {
 			const scrollTarget = document.querySelector('section#shop').getBoundingClientRect().top;
@@ -678,10 +690,18 @@ export default class Home extends React.Component {
 								<div className="overlay">
 									<div className="wrapper">
 										<div>
-											<Link aria-label="English" className={`${!this.props.langID && 'disable'}`} to="/">
+											<Link
+												aria-label="English"
+												className={`${!this.props.langID && 'disable'}`}
+												to="/"
+											>
 												EN
 											</Link>
-											<Link aria-label="Indonesia" className={`${this.props.langID && 'disable'}`} to="/id">
+											<Link
+												aria-label="Indonesia"
+												className={`${this.props.langID && 'disable'}`}
+												to="/id"
+											>
 												ID
 											</Link>
 										</div>
@@ -789,7 +809,11 @@ export default class Home extends React.Component {
 									<div className="greenline" />
 									<div className="bottlewrapper">
 										<div>
-											<img src={BottleImg} alt="herbamojo" />
+											<picture>
+												<source srcSet={BottleImgWebP} type="image/webp" />
+												<source srcSet={BottleImg}  type="image/jpeg" />
+												<img src={BottleImg}  alt="Herbamojo" />
+											</picture>
 											<span id="ShopButton" className="hide" onClick={this.gotoShop}>
 												{this.langID ? (
 													transData.home.shopfloat.id
