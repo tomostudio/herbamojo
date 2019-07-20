@@ -4,13 +4,6 @@ import 'stylesheet/main.scss';
 import { Helmet } from 'react-helmet';
 export default class Layout extends React.Component {
 	render() {
-		const props = this.props;
-		if(this.props.indo){
-			if (typeof document !== undefined)document.querySelector('html').setAttribute('lang', 'id');
-		}
-		else{
-			if (typeof document !== undefined)document.querySelector('html').setAttribute('lang', 'en');
-		}
 		return (
 			<StaticQuery
 				query={graphql`
@@ -46,6 +39,7 @@ export default class Layout extends React.Component {
 						url: 'https://herbamojo.id'
 					};
 
+					const props = this.props;
 					return (
 						<main className={`${props.mainClass} ${props.indo ? `id` : `en`}`} id={props.mainID}>
 							<Helmet>

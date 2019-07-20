@@ -347,6 +347,12 @@ export default class Home extends React.Component {
 	componentDidMount() {
 		if (typeof document !== `undefined`) {
 			document.body.classList.remove('loaded');
+			if(this.langID){
+				document.querySelector('html').setAttribute('lang', 'id');
+			}
+			else{
+				document.querySelector('html').setAttribute('lang', 'en');
+			}
 		}
 		this.IndexLoader.mountload();
 		if (!document.body.classList.contains('loaded')) {
