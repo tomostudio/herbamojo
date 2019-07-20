@@ -22,10 +22,10 @@ export default class Footer extends React.Component {
 							<div className="wrapper">
 								{!data.general.frontmatter.journaldisable && (
 									<div>
-										<Link to="/">
+										<Link aria-label="Home" to="/">
 											{this.props.indonesia ? navigation.home.id : navigation.home.en}
 										</Link>
-										<Link to="/">
+										<Link aria-label="Journal" to="/">
 											{this.props.indonesia ? navigation.journal.id : navigation.journal.en}
 										</Link>
 									</div>
@@ -37,6 +37,7 @@ export default class Footer extends React.Component {
 											target="_blank"
 											rel="noopener noreferrer"
 											href={footerData.ig_link}
+											aria-label="Instagram"
 										>
 											<InstagramSVG />
 										</a>
@@ -48,6 +49,7 @@ export default class Footer extends React.Component {
 											target="_blank"
 											rel="noopener noreferrer"
 											href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
+											aria-label="Whatsapp"
 										>
 											<WhatsappSVG />
 										</a>
@@ -58,6 +60,7 @@ export default class Footer extends React.Component {
 											target="_blank"
 											rel="noopener noreferrer"
 											href={`mailto:${footerData.email}`}
+											aria-label="Email"
 										>
 											<EmailSVG />
 										</a>

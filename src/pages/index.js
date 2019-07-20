@@ -634,6 +634,7 @@ export default class Home extends React.Component {
 															target="_blank"
 															rel="noopener noreferrer"
 															href={footerData.ig_link}
+															aria-label="Instagram"
 														>
 															<InstagramSVG />
 														</a>
@@ -645,6 +646,7 @@ export default class Home extends React.Component {
 															target="_blank"
 															rel="noopener noreferrer"
 															href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
+															aria-label="Whatsapp"
 														>
 															<WhatsappSVG />
 														</a>
@@ -655,6 +657,7 @@ export default class Home extends React.Component {
 															target="_blank"
 															rel="noopener noreferrer"
 															href={`mailto:${footerData.email}`}
+															aria-label="Email"
 														>
 															<EmailSVG />
 														</a>
@@ -1137,7 +1140,7 @@ export default class Home extends React.Component {
 																										? node.background
 																										: 'transparent'
 																							}}
-																							aria-label="ShopSlide"
+																							aria-label="Shop Slider"
 																						>
 																							<img
 																								src={node.image}
@@ -1182,6 +1185,7 @@ export default class Home extends React.Component {
 																								? node.background
 																								: 'transparent'
 																					}}
+																					aria-label="Shop Slider"
 																				>
 																					<img
 																						src={node.image}
@@ -1285,6 +1289,7 @@ export default class Home extends React.Component {
 																										? node.background
 																										: 'transparent'
 																							}}
+																							aria-label="Shop Slider"
 																						>
 																							<img
 																								src={node.image}
@@ -1329,6 +1334,7 @@ export default class Home extends React.Component {
 																								? node.background
 																								: 'transparent'
 																					}}
+																					aria-label="Shop Slider"
 																				>
 																					<img
 																						src={node.image}
