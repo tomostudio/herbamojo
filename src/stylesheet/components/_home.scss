@@ -1375,12 +1375,11 @@ main.home {
                                     opacity: 0;
                                 }
                             }
-
-                            &:nth-child(2) {
-                                @include transition(opacity .5s);
-                                opacity: 0;
-                            }
                         }
+                    }
+                    &>div:last-child{
+                        @include transition(opacity .5s);
+                        opacity: 0;
                     }
                 }
             }
@@ -1406,11 +1405,10 @@ main.home {
                                     }
                                 }
                             }
-
-                            &:nth-child(2) {
-                                @include transition(opacity 1.5s 1s);
-                            }
                         }
+                    }
+                    &>div:last-child{
+                        @include transition(opacity 1.5s 1s);
                     }
                 }
             }
@@ -1654,7 +1652,7 @@ main.home {
             }
 
             body.loaded &.inview {
-                $_transition: 1s;
+                $_transition: 1.5s;
                 $eachdelay: .2s;
 
                 &>.wrapper>.content {
