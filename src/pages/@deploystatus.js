@@ -18,32 +18,35 @@ export default class Status extends React.Component {
 			const _r = DeployList[0];
 			return _r;
 		}
+
 		__getLatestStatus().then((_r) => {
+			let __printmessage = '';
+			switch (_r.state.toString()) {
+				case 'ready':
+					__printmessage = 'Success';
+					break;
 
-            let __printmessage = '';
-            switch(_r.state.toString()){
-                case 'ready':
-                __printmessage = 'Success';
-                break;
+				case 'building':
+					__printmessage = 'Builiding';
+					break;
 
-                case 'building':
-                __printmessage = 'Builiding';
-                break;
-
-                default:
-                __printmessage = 'Error';
-                break;
-            }
-            
-            document.getElementById('DeployStatus').innerHTML = __printmessage;
-			// console.log(_r.state.toString());
+				default:
+					__printmessage = 'Error';
+					break;
+			}
+			document.getElementById('DeployStatus').innerHTML = __printmessage;
 		});
 	}
 	statusHTML() {
 		return '<iframe src="https://api.netlify.com/api/v1/badges/b38e55c5-7587-4df0-860f-b2be3035cdeb/deploy-status" frameBorder="0" width="136" height="20" border></iframe>';
 	}
+	fetchInterval = null;
 	render() {
 		this.getStatus();
+		if (this.fetchInterval !== null) clearInterval(this.fetchInterval);
+		this.fetchInterval = setInterval(() => {
+			this.getStatus();
+		}, 15000);
 		return (
 			<main id="status">
 				<span>
