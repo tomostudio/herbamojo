@@ -10,7 +10,7 @@ export default class Status extends React.Component {
 		}
 	}
 	getStatus() {
-		const client = new NetlifyAPI('e0b3b9e1cdf99d6f7053e1fa9261be702661f54f4613fa1e90d255adff82137a');
+		const client = new NetlifyAPI('f302a97fa24fc20726bb9db6d53a097c011f8507a9a18f5f5fa50d0816926aca');
 		async function __getLatestStatus() {
 			const DeployList = await client.listSiteDeploys({
 				siteId: 'b38e55c5-7587-4df0-860f-b2be3035cdeb'
@@ -27,7 +27,7 @@ export default class Status extends React.Component {
 					break;
 
 				case 'building':
-					__printmessage = 'Builiding';
+					__printmessage = 'Building';
 					break;
 
 				default:
@@ -62,5 +62,3 @@ export default class Status extends React.Component {
 		);
 	}
 }
-
-// e0b3b9e1cdf99d6f7053e1fa9261be702661f54f4613fa1e90d255adff82137a
