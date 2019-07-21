@@ -43,6 +43,13 @@ The site is now running at `http://localhost:8000`!
 Staging Changes: config.yml
 
 
+## ESLINT
+RUN ESLINT with
+
+```sh
+eslint --init
+```
+
 ### CONTRIBUTORS
 Hendhy Hutomo (hello@hendhyhutomo.com)
 
