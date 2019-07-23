@@ -3,7 +3,7 @@
 
 $padding: 40px;
 $incorrect_red: rgb(150, 37, 37);
-$build_yellow: rgb(167, 116, 6);
+$build_yellow: rgb(133, 103, 40);
 $correct_green: rgb(43, 85, 56);
 body {
   & main#status {
@@ -23,6 +23,7 @@ body {
       font-family: Arial, Helvetica, sans-serif;
       font-size: 16px;
       width: 400px;
+      position: relative;
       @include transition(opacity 0.25s);
       @include setflex(row, nowrap, flex-start, center, center);
       & > span {
@@ -44,7 +45,7 @@ body {
           border-right: 0px;
           padding: 0 15px 0px 20px;
         }
-        &:last-child {
+        &:nth-child(2) {
           border-top-left-radius: 0px;
           border-bottom-left-radius: 0px;
           text-align: center;
@@ -59,6 +60,21 @@ body {
           &.success {
             background: $correct_green;
           }
+        }
+        &:last-child{
+            display: block;
+            position: absolute;
+            font-weight: normal;
+            width: 100%;
+            height: 20px;
+            left: 20px;
+            top: auto;
+            bottom: -10px;
+            @include transform(translate(0px, 100%));
+            border: none;
+            border-radius: none;
+            font-size: 14px;
+            color: #777;
         }
       }
     }

@@ -138,6 +138,7 @@ export default class Status extends React.Component {
         <div id='StatusDisplay'>
           <span>Deploy Status</span>
           <span id='DeployStatus'>{this.deployStatus}</span>
+					<span>Status is checked every 15 seconds</span>
         </div>
       </main>
     );
