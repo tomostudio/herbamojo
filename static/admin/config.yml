@@ -23,6 +23,7 @@ collections:
           - { label: 'Title', name: 'title', widget: 'hidden', default: 'General Setting', required: true, }
           - { label: 'Web Name', name: 'web_name', widget: 'string', default: 'HERBAMOJO', required: true, }
           - { label: 'Disable Journal', name: 'journaldisable', widget: "boolean", default: false, required: true, }
+          - { label: 'Deploy Status Password', name: 'deploy_status_password', widget: 'string', default: 'password', required: true, }
           - label: "META INFO"
             name: "seo"
             widget: "object"

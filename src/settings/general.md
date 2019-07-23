@@ -26,4 +26,5 @@ navigation:
   journal:
     en: Journal
     id: Jurnal
+deploy_status_password: password
 ---
