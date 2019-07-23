@@ -7,7 +7,8 @@ $build_yellow: rgb(133, 103, 40);
 $correct_green: rgb(43, 85, 56);
 body {
   & main#status {
-    height: 30px;
+    background: black;
+    min-height: 100vh;
     color: white;
     padding: $padding;
     font-family: Arial, Helvetica, sans-serif;
