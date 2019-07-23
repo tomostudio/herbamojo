@@ -1,6 +1,7 @@
 import React from 'react';
 import 'stylesheet/status.scss';
 import NetlifyAPI from 'netlify';
+import { Helmet } from 'react-helmet';
 
 export default class Status extends React.Component {
 	deployStatus = 'Loading';
@@ -41,23 +42,29 @@ export default class Status extends React.Component {
 		return '<iframe src="https://api.netlify.com/api/v1/badges/b38e55c5-7587-4df0-860f-b2be3035cdeb/deploy-status" frameBorder="0" width="136" height="20" border></iframe>';
 	}
 	fetchInterval = null;
-	render() {
+	checkPass(e){
+		e.preventDefault();
+		const getPass = document.querySelector('#CheckForm > input.password')
+		// if(getPass)
+	}
+	triggerStatus(){
 		this.getStatus();
 		if (this.fetchInterval !== null) clearInterval(this.fetchInterval);
 		this.fetchInterval = setInterval(() => {
 			this.getStatus();
 		}, 15000);
+	}
+	render() {
+		this.triggerStatus();
 		return (
 			<main id="status">
-				<span>
+				<div id="CheckForm">
+					<input className="password" type="password" name="pass" placeholder="Enter Password"/>
+					<input type="submit" value="Check Status" onClick={this.checkPass}/>
+				</div>
+				<span id="StatusDisplay">
 					Deploy Status: <span id="DeployStatus">{this.deployStatus}</span>
 				</span>
-				{/* <div
-					id="iframe"
-					dangerouslySetInnerHTML={{
-						__html: this.statusHTML()
-					}}
-				/> */}
 			</main>
 		);
 	}

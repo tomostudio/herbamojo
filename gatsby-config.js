@@ -41,7 +41,12 @@ module.exports = {
             },
         },
         `gatsby-plugin-layout`,
-        `gatsby-plugin-sitemap`,
+        {
+          resolve: `gatsby-plugin-sitemap`,
+          options: {
+            exclude: [`/@deploystatus`],
+          }
+        },
         {
             resolve: `gatsby-plugin-google-analytics`,
             options: {
