@@ -21,7 +21,18 @@ export default class Status extends React.Component {
       const DeployList = await client.listSiteDeploys({
         siteId: 'b38e55c5-7587-4df0-860f-b2be3035cdeb'
       });
-      const _r = DeployList[0];
+
+      let count = 0;
+      //CHECK IF DEPLOY IS SKIPPED or NEW
+      while (count < DeployList.length) {
+        if (DeployList[count].error_message === 'Skipped' || DeployList[count].state === 'new') {
+          count++;
+        } else {
+          break;
+        }
+      }
+
+      const _r = DeployList[count];
       return _r;
     }
 
