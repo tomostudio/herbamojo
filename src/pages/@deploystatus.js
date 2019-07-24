@@ -123,7 +123,7 @@ export default class Status extends React.Component {
         <Helmet>
           <meta charSet='utf-8' />
           <title>
-            DeployStatus for {this.props.data.general.frontmatter.web_name}
+            Deploy Status for {this.props.data.general.frontmatter.web_name}
           </title>
         </Helmet>
         <form id='CheckForm'>
