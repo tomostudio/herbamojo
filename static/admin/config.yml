@@ -125,7 +125,7 @@ collections:
             allow_add: true
             required: true
             fields:
-            - { name: 'image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 2000px x 1500px | JPEG / PNG / GIF', default: '', required: true,}
+            - { name: 'image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png|gif)$], hint: 'Minimum Resolution: 500px x 200px | JPEG / PNG / GIF', default: '', required: true,}
             - { label: 'Link', name: 'link', widget: 'string', hint: 'Input link starting with https:// or http://', default: '', required: true}
             - { label: 'Background Color', name: 'background', widget: 'string', hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent', default: 'transparent', required: true}
           - label: "Translations List"
