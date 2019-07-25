@@ -2,7 +2,7 @@
 issetting: true
 contenttype: general_setting
 title: General Setting
-web_name: HERBAMOJO TESTING
+web_name: HERBAMOJO
 journaldisable: true
 deploy_status_password: password
 seo:
@@ -17,7 +17,7 @@ seo:
     HERBAMOJO contains 7 key herbal ingredients that works optimally to help
     improve energy, immunity and performance.
 footer:
-  email: info@herbamojo.id
+  email: ''
   ig_link: 'https://www.instagram.com/herbamojo'
   wa_no: '6282123100111'
 navigation:
