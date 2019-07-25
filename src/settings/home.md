@@ -18,15 +18,6 @@ about:
       imun, dan performa secara optimal.
 ingredients:
   - desc:
-      en: Maca works to increase energy and stamina. Also works as an aphrodisiac.
-      id: >-
-        Maca berkhasiat untuk meningkatkan energi dan stamina dan sebagai
-        afrodisiak
-    image: /assets/maca.jpg
-    title:
-      en: MACA
-      id: MACA
-  - desc:
       en: >-
         Ginseng works to increase energy and stamina and support immune
         function. Also works as an aphrodisiac.
@@ -53,6 +44,15 @@ ingredients:
     title:
       en: TRIBULUS
       id: TRIBULUS
+  - desc:
+      en: Maca works to increase energy and stamina. Also works as an aphrodisiac.
+      id: >-
+        Maca berkhasiat untuk meningkatkan energi dan stamina dan sebagai
+        afrodisiak
+    image: /assets/maca.jpg
+    title:
+      en: MACA
+      id: MACA
   - desc:
       en: Pasak bumi berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak
       id: Long Jack works to increase stamina and as an aphrodisiac.
@@ -103,6 +103,9 @@ offlineshop:
     link: ''
   - background: transparent
     image: /assets/shop/apotekroxy.png
+    link: ''
+  - background: transparent
+    image: /assets/naturalfarm.jpeg
     link: ''
 translations:
   home:
@@ -201,3 +204,4 @@ translations:
       en: Shop
       id: Beli
 ---
+
