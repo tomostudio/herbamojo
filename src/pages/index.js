@@ -1114,7 +1114,7 @@ export default class Home extends React.Component {
 									<div className="wrapper">
 										<h1>{this.langID ? transData.shop.title.id : transData.shop.title.en}</h1>
 										<div className="content">
-											{homeData.onlineshop.length > 0 && (
+											{(homeData.onlineshop.length > 1 || (homeData.onlineshop.length === 1 && homeData.onlineshop[0].image !== '') ) && (
 												<div>
 													<h2>
 														{this.langID ? (
@@ -1262,7 +1262,7 @@ export default class Home extends React.Component {
 													</div>
 												</div>
 											)}
-											{homeData.offlineshop.length > 0 && (
+											{(homeData.offlineshop.length > 1 || (homeData.offlineshop.length === 1 && homeData.offlineshop[0].image !== '') ) && (
 												<div>
 													<h2>
 														{this.langID ? (
