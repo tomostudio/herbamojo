@@ -519,6 +519,7 @@ export default class Home extends React.Component {
 
 			target.parentNode.classList.add('active');
 
+			// ADD BACKGROUND TRANSITION;
 			if (!this.ingredientChanging) {
 				this.ingredientChanging = true;
 				displayBg.classList.add('transition');

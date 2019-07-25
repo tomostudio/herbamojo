@@ -1264,22 +1264,36 @@ main.home {
                     right: auto;
                     height: 100%;
                     width: 100%;
-                    opacity: 0;
-                    @include animation(ingbg_transitionin .6s .2s ease 1 forwards);
+                    @include animation(ingbg_transitionin .6s .2s ease-out 1 forwards);
+                    & > img{
+                      opacity: 1;
+                      @include transition(opacity .05s .2s);
+                    }
 
                     &.transition {
-                        // opacity: 0;
                         @include animation(ingbg_transitionout .4s ease-in 1 forwards);
+                        & > img{
+                          opacity: 0;
+                          @include transition(opacity .05s .35s);
+                        }
                     }
 
                     @include respond-to(m_tablet) {
                         @include transform(translate(0px, 0%));
                         position: relative;
                         margin-top: 0%;
-                        @include animation(ingbg_transitioninm 1s 0s ease 1 forwards);
+                        @include animation(ingbg_transitioninm 1s 0s ease-out 1 forwards);
+                        & > img{
+                          opacity: 1;
+                          @include transition(opacity .05s 0s);
+                        }
 
                         &.transition {
-                            @include animation(ingbg_transitionoutm .4s 0s ease-in 1 forwards);
+                          @include animation(ingbg_transitionoutm .4s 0s ease-in 1 forwards);
+                          & > img{
+                            opacity: 0;
+                            @include transition(opacity .05s .35s);
+                          }
                         }
                     }
                 }
