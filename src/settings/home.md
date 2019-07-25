@@ -104,7 +104,7 @@ offlineshop:
   - background: transparent
     image: /assets/shop/apotekroxy.png
     link: ''
-  - background: transparent
+  - background: '#FFFFFF'
     image: /assets/naturalfarm.jpeg
     link: ''
 translations:
