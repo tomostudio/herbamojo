@@ -115,19 +115,38 @@ export class LoaderClass {
   }
   imageload() {
     if (this.images.check) {
-      console.log(this.images.list);
       if (this.images.list && this.images.list.length > 0) {
         this.images.list.forEach(image => {
-          const eachimageloaded = e => {
-            e.target.removeEventListener('load', eachimageloaded, false);
+          //ADD CONDITIONAL TO CHECK IF IMAGE HAS VALID SRC
+          if (
+            image.src !== null &&
+            image.src !== '' &&
+            image.src !== undefined
+          ) {
+            const eachimageloaded = e => {
+              e.target.removeEventListener('load', eachimageloaded, false);
+              e.target.removeEventListener('error', eachimageerror, false);
+              this.images.loaded++;
+              this.imageloadfinish();
+            };
+            const eachimageerror = e => {
+              e.target.removeEventListener('load', eachimageloaded, false);
+              e.target.removeEventListener('error', eachimageerror, false);
+              this.images.loaded++;
+              console.log('fail to load',e.target);
+              this.imageloadfinish();
+            };
+            if (image.complete) {
+              this.images.loaded++;
+              this.imageloadfinish();
+            } else {
+              image.addEventListener('load', eachimageloaded, false);
+              image.addEventListener('error', eachimageerror, false);
+            }
+          }
+          else{
             this.images.loaded++;
             this.imageloadfinish();
-          };
-          if (image.complete) {
-            this.images.loaded++;
-            this.imageloadfinish();
-          } else {
-            image.addEventListener('load', eachimageloaded, false);
           }
         }, this);
       } else {

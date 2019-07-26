@@ -585,6 +585,30 @@ export default class Home extends React.Component {
 					const footerData = generalData.footer;
 					const transData = data.home.frontmatter.translations;
 					const id_seodesc = generalData.seo.seo_shortdesc_id;
+
+					// ONLINE AND OFFLINE SHOP VALIDITY CHECKER
+					let offlineshop = [];
+					homeData.offlineshop.forEach(shop => {
+						if (
+							shop.image !== null &&
+							shop.image !== '' &&
+            	shop.image !== undefined
+						) {
+							offlineshop.push(shop);
+						}
+					});
+
+					let onlineshop = [];
+					homeData.onlineshop.forEach(shop => {
+						if (
+							shop.image !== null &&
+							shop.image !== '' &&
+            	shop.image !== undefined
+						) {
+							onlineshop.push(shop);
+						}
+					});
+
 					return (
 						<Layout mainClass="home" indo={this.langID} mainID={this.MainID}>
 							{this.langID && (
@@ -1114,7 +1138,7 @@ export default class Home extends React.Component {
 									<div className="wrapper">
 										<h1>{this.langID ? transData.shop.title.id : transData.shop.title.en}</h1>
 										<div className="content">
-											{(homeData.onlineshop.length > 1 || (homeData.onlineshop.length === 1 && homeData.onlineshop[0].image !== '') ) && (
+											{(onlineshop.length > 1 || (onlineshop.length === 1 && onlineshop[0].image !== '') ) && (
 												<div>
 													<h2>
 														{this.langID ? (
@@ -1125,13 +1149,13 @@ export default class Home extends React.Component {
 													</h2>
 													<div
 														id="onlineshop"
-														className={`shopSlider ${homeData.onlineshop.length === 1
+														className={`shopSlider ${onlineshop.length === 1
 															? ' oneslide'
-															: ''} ${homeData.onlineshop.length === 2
+															: ''} ${onlineshop.length === 2
 															? ' twoslide'
 															: ''}`}
 													>
-														{homeData.onlineshop.length > 1 ? (
+														{onlineshop.length > 1 ? (
 															<div
 																className="arrow"
 																onClick={() => {
@@ -1148,11 +1172,11 @@ export default class Home extends React.Component {
 															</div>
 														)}
 
-														{homeData.onlineshop.length > 1 ? (
+														{onlineshop.length > 1 ? (
 															<div id="onlineslider" className="glide wrapper">
 																<div data-glide-el="track" className="glide__track">
 																	<div className="glide__slides ">
-																		{homeData.onlineshop.map((node, id) => {
+																		{onlineshop.map((node, id) => {
 																			return (
 																				<div
 																					className="shop glide__slide"
@@ -1202,7 +1226,7 @@ export default class Home extends React.Component {
 															</div>
 														) : (
 															<div className="wrapper">
-																{homeData.onlineshop.map((node, id) => {
+																{onlineshop.map((node, id) => {
 																	return (
 																		<div className="shop" key={id} dataid={id}>
 																			{node.link ? (
@@ -1243,7 +1267,7 @@ export default class Home extends React.Component {
 																})};
 															</div>
 														)}
-														{homeData.onlineshop.length > 1 ? (
+														{onlineshop.length > 1 ? (
 															<div
 																className="arrow"
 																onClick={() => {
@@ -1262,7 +1286,7 @@ export default class Home extends React.Component {
 													</div>
 												</div>
 											)}
-											{(homeData.offlineshop.length > 1 || (homeData.offlineshop.length === 1 && homeData.offlineshop[0].image !== '') ) && (
+											{(offlineshop.length > 1 || (offlineshop.length === 1 && offlineshop[0].image !== '') ) && (
 												<div>
 													<h2>
 														{this.langID ? (
@@ -1273,13 +1297,13 @@ export default class Home extends React.Component {
 													</h2>
 													<div
 														id="offlineshop"
-														className={`shopSlider ${homeData.offlineshop.length === 1
+														className={`shopSlider ${offlineshop.length === 1
 															? ' oneslide'
-															: ''} ${homeData.offlineshop.length === 2
+															: ''} ${offlineshop.length === 2
 															? ' twoslide'
 															: ''}`}
 													>
-														{homeData.offlineshop.length > 1 ? (
+														{offlineshop.length > 1 ? (
 															<div
 																className="arrow"
 																onClick={() => {
@@ -1297,11 +1321,11 @@ export default class Home extends React.Component {
 															</div>
 														)}
 
-														{homeData.offlineshop.length > 1 ? (
+														{offlineshop.length > 1 ? (
 															<div id="offlineslider" className="glide wrapper">
 																<div data-glide-el="track" className="glide__track">
 																	<div className="glide__slides ">
-																		{homeData.offlineshop.map((node, id) => {
+																		{offlineshop.map((node, id) => {
 																			return (
 																				<div
 																					className="shop glide__slide"
@@ -1351,7 +1375,7 @@ export default class Home extends React.Component {
 															</div>
 														) : (
 															<div className="wrapper">
-																{homeData.offlineshop.map((node, id) => {
+																{offlineshop.map((node, id) => {
 																	return (
 																		<div className="shop" key={id} dataid={id}>
 																			{node.link ? (
@@ -1392,7 +1416,7 @@ export default class Home extends React.Component {
 																})}
 															</div>
 														)}
-														{homeData.offlineshop.length > 1 ? (
+														{offlineshop.length > 1 ? (
 															<div
 																className="arrow"
 																onClick={() => {
