@@ -1,2074 +1,2185 @@
 main.home {
-    & .overlay_wrapper {
-        position: relative;
-        overflow-x: hidden;
+  & .overlay_wrapper {
+    position: relative;
+    overflow-x: hidden;
+  }
+
+  & .overlay {
+    z-index: 10;
+
+    &.stuck {
+      position: absolute;
+      top: auto;
+      bottom: 0px;
+      left: 0px;
+      overflow: hidden;
     }
 
-    & .overlay {
-        z-index: 10;
+    .wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-template-areas: 'left right';
+      pointer-events: none;
 
-        &.stuck {
+      & > *:first-child {
+        grid-area: left;
+        justify-self: start;
+      }
+
+      & .right_nav {
+        grid-area: right;
+        justify-self: end;
+        @include setflex(column, nowrap, space-between, center, center);
+
+        & .snap_nav {
+          width: 35px;
+          @include setflex(column, nowrap, space-between, center, center);
+          height: auto;
+          pointer-events: auto;
+          position: relative;
+
+          &::before {
+            // VISUAL LINE
+            @include pseudo();
             position: absolute;
-            top: auto;
-            bottom: 0px;
-            left: 0px;
-            overflow: hidden;
+            top: 50%;
+            left: 50%;
+            @include transform(translate(-50%, -50%));
+            background: $color_green;
+            width: 2px;
+            height: calc(100% - 50px);
+          }
+
+          & > * {
+            width: 36px;
+            height: 36px;
+            border-radius: 36px;
+            pointer-events: auto;
+            margin-bottom: 40px;
+            display: block;
+            position: relative;
+
+            &:last-child {
+              margin-bottom: 0px;
+            }
+
+            &::after {
+              @include pseudo();
+              width: 18px;
+              height: 18px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              border-radius: 35px;
+              @include transform(translate(-50%, -50%));
+              background: $color_green;
+              @include transition(all $global-transition);
+            }
+
+            &::before {
+              @include pseudo();
+              width: 10px;
+              height: 10px;
+              position: absolute;
+              top: 50%;
+              left: 50%;
+              background: black;
+              border-radius: 36px;
+              @include transform(translate(-50%, -50%));
+              border: solid $color_green 2px;
+              @include transition(all $global-transition);
+            }
+
+            & > span {
+              font-size: $font-size-button;
+              line-height: $lineheight-button;
+              text-align: right;
+              position: absolute;
+              font-family: 'Amarillo';
+              pointer-events: none;
+              top: 50%;
+              left: auto;
+              right: 35px;
+              opacity: 0;
+              @include transform(translate(0px, -50%));
+              @include transition(all $global-transition);
+              color: white;
+            }
+
+            body.onhover &:hover,
+            &.active {
+              &::before {
+                width: 36px;
+                height: 36px;
+              }
+            }
+
+            body.onhover &:hover {
+              cursor: pointer;
+
+              & > span {
+                opacity: 1;
+                right: 55px;
+                @include transition(all $global-transition);
+              }
+            }
+          }
         }
 
-        .wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr;
-            grid-template-areas: "left right";
-            pointer-events: none;
+        & > .social_ctn {
+          @include respond-to(height_less) {
+            display: none;
+          }
 
-            &>*:first-child {
-                grid-area: left;
-                justify-self: start;
+          & > a {
+            pointer-events: auto;
+            height: 40px;
+            margin-top: 25px;
+
+            &:first-child {
+              margin-top: 0px;
             }
 
-            & .right_nav {
-                grid-area: right;
-                justify-self: end;
-                @include setflex(column, nowrap, space-between, center, center);
+            display: block;
+            @include transition(opacity $global-transition);
 
-                & .snap_nav {
-                    width: 35px;
-                    @include setflex(column, nowrap, space-between, center, center);
-                    height: auto;
-                    pointer-events: auto;
-                    position: relative;
+            &.svg > svg {
+              height: 100%;
+              width: auto;
 
-                    &::before {
-                        // VISUAL LINE
-                        @include pseudo();
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        @include transform(translate(-50%, -50%));
-                        background: $color_green;
-                        width: 2px;
-                        height: calc(100% - 50px);
-                    }
+              & .fill {
+                fill: $color_green;
+              }
 
-                    &>* {
-                        width: 36px;
-                        height: 36px;
-                        border-radius: 36px;
-                        pointer-events: auto;
-                        margin-bottom: 40px;
-                        display: block;
-                        position: relative;
-
-                        &:last-child {
-                            margin-bottom: 0px;
-                        }
-
-
-                        &::after {
-                            @include pseudo();
-                            width: 18px;
-                            height: 18px;
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            border-radius: 35px;
-                            @include transform(translate(-50%, -50%));
-                            background: $color_green;
-                            @include transition(all $global-transition);
-                        }
-
-                        &::before {
-                            @include pseudo();
-                            width: 10px;
-                            height: 10px;
-                            position: absolute;
-                            top: 50%;
-                            left: 50%;
-                            background: black;
-                            border-radius: 36px;
-                            @include transform(translate(-50%, -50%));
-                            border: solid $color_green 2px;
-                            @include transition(all $global-transition);
-                        }
-
-                        &>span {
-                            font-size: $font-size-button;
-                            line-height: $lineheight-button;
-                            text-align: right;
-                            position: absolute;
-                            font-family: 'Amarillo';
-                            pointer-events: none;
-                            top: 50%;
-                            left: auto;
-                            right: 35px;
-                            opacity: 0;
-                            @include transform(translate(0px, -50%));
-                            @include transition(all $global-transition);
-                            color: white;
-                        }
-
-                        body.onhover &:hover,
-                        &.active {
-                            &::before {
-                                width: 36px;
-                                height: 36px;
-                            }
-                        }
-
-                        body.onhover &:hover {
-                            cursor: pointer;
-
-                            &>span {
-                                opacity: 1;
-                                right: 55px;
-                                @include transition(all $global-transition);
-                            }
-                        }
-                    }
-                }
-
-                &>.social_ctn {
-                    @include respond-to(height_less) {
-                        display: none;
-                    }
-
-                    &>a {
-                        pointer-events: auto;
-                        height: 40px;
-                        margin-top: 25px;
-
-                        &:first-child {
-                            margin-top: 0px;
-                        }
-
-                        display: block;
-                        @include transition(opacity $global-transition);
-
-                        &.svg>svg {
-                            height: 100%;
-                            width: auto;
-
-                            & .fill {
-                                fill: $color_green;
-                            }
-
-                            & .stroke {
-                                stroke: $color_green;
-                            }
-                        }
-
-                        &>img {
-                            height: 100%;
-                        }
-
-                        body.onhover &:hover {
-                            opacity: $global_opacity;
-                        }
-
-                        &.svg {
-                            @include transition(opacity 0s);
-
-                            body.onhover &:hover {
-                                opacity: 1;
-
-                                &>svg {
-
-                                    & .fill {
-                                        fill: white;
-                                    }
-
-                                    & .stroke {
-                                        stroke: white;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+              & .stroke {
+                stroke: $color_green;
+              }
             }
+
+            & > img {
+              height: 100%;
+            }
+
+            body.onhover &:hover {
+              opacity: $global_opacity;
+            }
+
+            &.svg {
+              @include transition(opacity 0s);
+
+              body.onhover &:hover {
+                opacity: 1;
+
+                & > svg {
+                  & .fill {
+                    fill: white;
+                  }
+
+                  & .stroke {
+                    stroke: white;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+    @include respond-to(m_tablet) {
+      display: none;
+    }
+
+    @include transition(opacity $global-transition);
+    opacity: 0;
+
+    body.loaded & {
+      @include transition(
+        opacity #{$initialTranstionHome} #{$initialAnimDelayHome}
+      );
+      opacity: 1;
+    }
+  }
+
+  & section:not(.footer) {
+    height: 100vh;
+    max-height: 100vh;
+    color: white;
+
+    @include respond-to(m_tablet) {
+      max-height: none;
+      min-height: 100vh;
+      height: auto;
+    }
+
+    @include respond-to(height_less) {
+      max-height: none;
+      min-height: 100vh;
+      height: auto;
+    }
+
+    body.__snapon & {
+      overflow: hidden;
+
+      @media (min-height: $height-break), (min-width: $break-small) {
+        overflow: hidden;
+      }
+    }
+
+    & > .wrapper {
+      @include setflex(column, nowrap, flex-start, flex-start, flex-start);
+      & h1 {
+        margin: 0px;
+        font-size: $font-size-title;
+        letter-spacing: $letterspacing-title;
+        font-family: 'Amarillo';
+        line-height: $lineheight-title;
+
+        @include respond-to(m_tablet) {
+          margin-top: 0px;
+          width: 100%;
+          display: block;
+          text-align: center;
+          font-size: $font-size-title-m;
+          letter-spacing: $letterspacing-title-m;
+          line-height: $lineheight-title-m;
+          word-break: break-word;
+          @include mobilegaptop;
+        }
+      }
+
+      & h2 {
+        margin: 0px;
+        font-size: $font-size-heading2;
+        font-family: 'Amarillo';
+        line-height: $lineheight-heading2;
+
+        @include respond-to(m_tablet) {
+          font-size: $font-size-heading2-m;
+          line-height: $lineheight-heading2-m;
+        }
+
+        @include respond-to(smaller) {
+          font-size: $font-size-heading2-s;
+          line-height: $lineheight-heading2-s;
+        }
+      }
+
+      & > .content {
+        @include flex-grow(1);
+        margin-top: 40px;
+        &.flex {
+          @include setflex(column, nowrap, center, flex-start, flex-start);
+          @media only screen and (min-height: 800px) {
+            &::after {
+              @include pseudo;
+              position: relative;
+              width: 100%;
+              pointer-events: none;
+              opacity: 0;
+              height: 80px;
+            }
+          }
         }
 
         @include respond-to(m_tablet) {
-            display: none;
+          margin-top: 0px;
+          padding-top: 0px;
+          text-align: center;
+          &.flex::after {
+            display: none !important;
+          }
+        }
+      }
+
+      & > .content.half {
+        width: calc(50% + #{$home-offcenter / 2});
+        padding-right: $global-padding / 2;
+
+        @include respond-to(tablet) {
+          width: calc(50% + #{$home-offcenter-t / 2});
         }
 
+        @include respond-to(m_tablet) {
+          width: 100%;
+          padding-right: 0px;
+        }
+      }
+    }
+
+    &#home {
+      position: relative;
+
+      @include respond-to(m_tablet) {
+        @include setflex(column, nowrap, stretch, center, center);
+      }
+
+      @include respond-to(height_less) {
+        height: 450px;
+      }
+
+      & > .wrapper {
+        position: relative;
+        @include setflex(row, nowrap, flex-start, center, center);
+
+        @include respond-to(m_tablet) {
+          @include flex-grow(1);
+          height: 100%;
+          @include setflex(column, nowrap, stretch, center, center);
+        }
+
+        & .content {
+          &::before {
+            @include pseudo;
+            position: relative;
+            pointer-events: none;
+            width: 100%;
+            height: 7.5vh;
+            min-height: 50px;
+            max-height: 200px;
+          }
+
+          @include respond-to(m_tablet) {
+            &::before {
+              display: none;
+            }
+          }
+        }
+
+        & .logo {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          display: inline-block;
+          width: 140px;
+
+          @include respond-to(m_tablet) {
+            display: none;
+          }
+
+          & > img {
+            width: 100%;
+          }
+        }
+
+        & a.logo {
+          @include transition(opacity $global-transition);
+
+          body.onhover &:hover {
+            opacity: $global_opacity;
+          }
+        }
+
+        & > .content {
+          width: 100%;
+          position: relative;
+
+          @include respond-to(m_tablet) {
+            // padding: $mobile-paddingtop 0px #{$globalmobile-padding * 4};
+            padding: 0px 0px 0px;
+            // @include padding-safe-bottom(120px);
+            @include flex-grow(1);
+            height: 100%;
+            @include setflex(column, nowrap, space-between, center, center);
+            @include mobilegaptop;
+
+            &::after {
+              @include pseudo();
+              position: relative;
+              height: 20px;
+            }
+          }
+
+          @include respond-to(mobile) {
+            &::before {
+              height: 60px;
+            }
+
+            &::after {
+              @include pseudo();
+              position: relative;
+              height: 0px;
+              height: 7.5vh;
+              min-height: 100px;
+              max-height: 150px;
+            }
+          }
+
+          & > span {
+            display: inline-block;
+            font-family: 'Amarillo';
+            margin-right: 10px;
+            font-size: 120px;
+            line-height: 90%;
+
+            @include respond-to(m_tablet) {
+              margin: 0px auto;
+              font-size: 100px;
+              display: block;
+              text-align: center;
+              position: relative;
+
+              &:nth-last-child(2) {
+                color: $color_green;
+
+                &::after {
+                  height: 2.5vh;
+                  min-height: 30px;
+                }
+              }
+            }
+
+            @include respond-to(mobile) {
+              font-size: 70px;
+
+              &::after {
+                @include pseudo();
+                position: relative;
+                height: 7.5vh;
+                min-height: 40px;
+                pointer-events: none;
+                width: 100%;
+              }
+            }
+          }
+
+          & #GetButton {
+            font-family: 'Amarillo';
+            position: absolute;
+            left: 0px;
+            cursor: pointer;
+            bottom: -20px;
+            @include transform(translate(0%, 100%));
+            border: solid 3px $color_green;
+            padding: 8px 40px;
+            display: inline-block;
+            color: $color_green;
+            font-size: 30px;
+            line-height: 28px;
+            @include transition(
+              border $global-transition,
+              color $global-transition,
+              background $global-transition
+            );
+
+            @include respond-to(m_tablet) {
+              position: relative;
+              margin: 0px auto;
+              left: 0px;
+              right: 0px;
+              // bottom: 40px;
+              bottom: 0px;
+              top: auto;
+              @include transform(translate(0%, 0%));
+              font-size: 25px;
+              line-height: 24px;
+              border: solid 2px white;
+              color: white;
+              width: 80%;
+              max-width: 300px;
+
+              &::after {
+                display: none;
+              }
+            }
+
+            body.onhover &:hover {
+              background: $color_green;
+              color: white;
+
+              @include respond-to(m_tablet) {
+                border-color: $color_green;
+              }
+            }
+          }
+        }
+      }
+
+      & > .bg {
+        position: absolute;
+        top: 0px;
+        height: 100%;
+        width: 55%;
+        left: 0%;
+        z-index: -1;
+
+        @include respond-to(m_tablet) {
+          width: 100%;
+          right: 0;
+          overflow: hidden;
+        }
+
+        & > img {
+          position: relative;
+          height: 100%;
+
+          &.mobile {
+            width: calc(100vw - (#{$globalmobile-padding} * 4));
+            display: none;
+            margin: auto;
+            object-fit: contain;
+            object-position: center;
+            top: auto;
+
+            @include respond-to(m_tablet) {
+              display: block;
+            }
+          }
+
+          &:not(.mobile) {
+            width: 125%;
+            @include transform(translate(-12.5%, 0%));
+            object-fit: cover;
+            object-position: right;
+
+            @include respond-to(m_tablet) {
+              display: none;
+            }
+          }
+        }
+      }
+
+      // PRE TRANSITION
+
+      & > .wrapper > .content {
+        & #GetButton,
+        & > span {
+          @include transition(opacity $global-transition);
+          opacity: 0;
+        }
+
+        & #GetButton {
+          @include transition(
+            opacity $global-transition,
+            border $global-transition,
+            color $global-transition,
+            background $global-transition
+          );
+        }
+      }
+
+      & > .bg {
         @include transition(opacity $global-transition);
         opacity: 0;
-
-        body.loaded & {
-            @include transition(opacity #{$initialTranstionHome} #{$initialAnimDelayHome});
-            opacity: 1;
-        }
-    }
-
-    & section:not(.footer) {
-        height: 100vh;
-        max-height: 100vh;
-        color: white;
+        @include transform(translate(-75px, 0));
 
         @include respond-to(m_tablet) {
-            max-height: none;
-            min-height: 100vh;
-            height: auto;
+          @include transform(translate(0px, 0));
         }
+      }
 
-        @include respond-to(height_less) {
-            max-height: none;
-            min-height: 100vh;
-            height: auto;
-        }
+      // TRANSITION
+      body.loaded &.inview {
+        $initdelay: 0.25s;
+        $initdelaymobile: 0.25s;
+        $eachdelay: 0.3s;
+        $_transition: 1.5s;
 
-        body.__snapon & {
-            overflow: hidden;
+        & > .wrapper > .content {
+          @for $i from 1 through 3 {
+            & > span:nth-child(#{$i}) {
+              @include transition(
+                opacity $_transition #{$initdelay + ($i * $eachdelay)}
+              );
+              opacity: 1;
 
-            @media (min-height: $height-break), (min-width: $break-small) {
-                overflow: hidden;
+              @include respond-to(m_tablet) {
+                @include transition(
+                  opacity $_transition #{$initdelaymobile + ($i * $eachdelay)}
+                );
+              }
             }
-        }
+          }
 
-        &>.wrapper {
-            & h1 {
-                margin: 0px;
-                font-size: $font-size-title;
-                letter-spacing: $letterspacing-title;
-                font-family: 'Amarillo';
-                line-height: $lineheight-title;
-
-                @include respond-to(m_tablet) {
-                    margin-top: 0px;
-                    width: 100%;
-                    display: block;
-                    text-align: center;
-                    font-size: $font-size-title-m;
-                    letter-spacing: $letterspacing-title-m;
-                    line-height: $lineheight-title-m;
-                    word-break: break-word;
-                    @include mobilegaptop;
-                }
-            }
-
-            & h2 {
-                margin: 0px;
-                font-size: $font-size-heading2;
-                font-family: 'Amarillo';
-                line-height: $lineheight-heading2;
-
-                @include respond-to(m_tablet) {
-                    font-size: $font-size-heading2-m;
-                    line-height: $lineheight-heading2-m;
-                }
-
-                @include respond-to(smaller) {
-                    font-size: $font-size-heading2-s;
-                    line-height: $lineheight-heading2-s;
-                }
-
-            }
-
-            &>.content {
-                margin-top: 40px;
-
-                @include respond-to(m_tablet) {
-                    margin-top: 0px;
-                    padding-top: 0px;
-                    text-align: center;
-                }
-            }
-
-            &>.content.half {
-                width: calc(50% + #{$home-offcenter / 2});
-                padding-right: $global-padding / 2;
-
-                @include respond-to(tablet) {
-                    width: calc(50% + #{$home-offcenter-t / 2});
-                }
-
-                @include respond-to(m_tablet) {
-                    width: 100%;
-                    padding-right: 0px;
-                }
-            }
-        }
-
-        &#home {
-            position: relative;
+          & #GetButton {
+            @include transition(
+              opacity $_transition #{$initdelay + (4 * $eachdelay)},
+              border $global-transition,
+              color $global-transition,
+              background $global-transition
+            );
+            opacity: 1;
 
             @include respond-to(m_tablet) {
-                @include setflex(column, nowrap, stretch, center, center);
+              @include transition(
+                opacity $_transition #{$initdelaymobile + (4 * $eachdelay)},
+                border $global-transition,
+                color $global-transition,
+                background $global-transition
+              );
+            }
+          }
+        }
+
+        & > .bg {
+          @include transition(
+            transform $_transition #{$initdelay + (4.5 * $eachdelay)},
+            opacity $_transition #{$initdelay + (5 * $eachdelay)}
+          );
+          opacity: 1;
+          @include transform(translate(0, 0));
+
+          @include respond-to(m_tablet) {
+            @include transition(
+              opacity $_transition #{$initdelaymobile + (5 * $eachdelay)}
+            );
+          }
+        }
+      }
+    }
+
+    $sectionmobilespacing: 50px;
+
+    &#about {
+      position: relative;
+
+      @include respond-to(m_tablet) {
+        min-height: 0px;
+      }
+
+      & > .bg {
+        position: absolute;
+        top: 0px;
+        height: 100%;
+        width: calc(50% - #{$home-offcenter});
+        left: auto;
+        right: 0%;
+        z-index: -1;
+        overflow: hidden;
+
+        @include respond-to(tablet) {
+          width: calc(50% - #{$home-offcenter-t});
+        }
+
+        @include respond-to(m_tablet) {
+          display: none;
+        }
+
+        & > img {
+          @include transform(translate(-25%, 0%));
+          position: relative;
+          width: 150%;
+          height: 100%;
+          object-fit: cover;
+          object-position: center;
+        }
+      }
+
+      & .content.half {
+        @include setflex(column, nowrap, center, flex-start, flex-start);
+
+        @include respond-to(m_tablet) {
+          width: calc(100% - #{$globalmobile-padding * 2});
+          margin: $sectionmobilespacing auto 0px;
+          padding-bottom: $sectionmobilespacing / 2;
+        }
+        &::after {
+          @include pseudo;
+          position: relative;
+          width: 100%;
+          visibility: hidden;
+          height: 5vh;
+          max-height: 100px;
+          pointer-events: none;
+        }
+        & > .logo {
+          width: 300px;
+          display: block;
+
+          @include respond-to(m_tablet) {
+            width: 100%;
+            max-width: 400px;
+            margin: 0px auto;
+          }
+
+          @include respond-to(mobile) {
+            max-width: 300px;
+          }
+
+          & > img {
+            width: 100%;
+          }
+        }
+
+        & > .bottle {
+          display: none;
+
+          @include respond-to(m_tablet) {
+            display: block;
+            padding: 0px $globalmobile-padding;
+            margin-top: $sectionmobilespacing;
+            width: 100%;
+            pointer-events: none;
+            position: relative;
+            z-index: 20;
+
+            & > img {
+              pointer-events: auto;
+              position: relative;
+              width: 75%;
+              max-width: 250px;
+              margin: 0px auto;
+              @include transform(translate(0, 8vh));
+            }
+          }
+
+          @include respond-to(mobile) {
+            & > img {
+              max-width: 175px;
+            }
+          }
+        }
+
+        & > .description {
+          display: block;
+          margin-top: 35px;
+          color: white;
+          font-family: 'Maison Mono';
+          font-size: 15px;
+          line-height: 180%;
+
+          @include respond-to(not_tablet_m) {
+            padding-top: 0px;
+
+            &::after {
+              @include pseudo;
+              position: relative;
+              pointer-events: none;
+              width: 100%;
+              height: 10vh;
+              min-height: 25px;
+              max-height: $global-padding * 1.5;
+            }
+          }
+
+          @include respond-to(m_tablet) {
+            width: 100%;
+            max-width: $tabletinnersection-maxwidth;
+            margin: $sectionmobilespacing auto 0px;
+            font-weight: bold;
+
+            &::after {
+              display: none;
+            }
+          }
+
+          @include respond-to(mobile) {
+            max-width: $mobileinnersection-maxwidth;
+          }
+        }
+
+        & > .certification {
+          width: 100%;
+          max-width: 500px;
+          display: grid;
+          grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
+          grid-template-rows: auto;
+          grid-gap: 15px;
+          justify-items: start;
+          align-items: start;
+
+          @include respond-to(tablet) {
+            max-width: 350px;
+            grid-template-columns: 1fr 1fr 1fr 1fr;
+          }
+
+          @include respond-to(m_tablet) {
+            width: 100%;
+            max-width: $tabletinnersection-maxwidth;
+            margin: ($sectionmobilespacing - 15px) auto 0px;
+            @include setflex(row, wrap, center, center, flex-start);
+          }
+
+          @include respond-to(mobile) {
+            display: grid;
+            margin: ($sectionmobilespacing) auto 0px;
+            max-width: $mobileinnersection-maxwidth;
+            grid-template-columns: 1fr 1fr 1fr;
+            justify-items: center;
+            grid-gap: 30px;
+          }
+
+          & > * {
+            @include setflex(column, nowrap);
+            display: inline-flex;
+            width: 50px;
+            @include flex-grow(0);
+
+            @include respond-to(m_tablet) {
+              width: 65px;
+              margin: 15px;
             }
 
-            @include respond-to(height_less) {
-                height: 450px;
+            @include respond-to(mobile) {
+              margin: 0px;
             }
 
-            &>.wrapper {
+            & > img {
+              width: 100%;
+            }
+
+            & > span {
+              width: 100%;
+              display: block;
+              margin-top: 10px;
+              text-align: center;
+              font-family: 'Amarillo';
+              font-size: 9px;
+              line-height: 140%;
+              color: white;
+
+              @include respond-to(m_tablet) {
+                font-size: 12px;
+              }
+            }
+          }
+        }
+      }
+
+      // PRE TRANSITION
+
+      & .content.half {
+        $_transition: 0.5s;
+        & > .logo {
+          opacity: 0;
+          @include transition(
+            opacity $_transition
+          );
+        }
+
+        & > .bottle {
+          opacity: 0;
+          @include transition(
+            opacity $_transition
+          );
+        }
+
+        & > .description {
+          opacity: 0;
+          @include transition(
+            opacity $_transition
+          );
+        }
+
+        & > .certification {
+          opacity: 0;
+          @include transition(
+            opacity $_transition
+          );
+        }
+      }
+
+      & > .bg > img {
+        opacity: 0;
+        @include transform(translate(-15%, 0%));
+      }
+
+      body.loaded &.inview {
+        $initdelay: 0.25s;
+        $initdelaymobile: 0s;
+        $_transition: 1.5s;
+        $eachdelay: 0.25s;
+
+        & .content.half {
+          & > .logo {
+            opacity: 1;
+            @include transition(
+              opacity $_transition #{$initdelay + (0 * $eachdelay)}
+            );
+          }
+
+          & > .bottle {
+            opacity: 1;
+            @include transition(
+              opacity $_transition #{$initdelay + (0 * $eachdelay)}
+            );
+
+            @include respond-to(m_tablet) {
+              @include transition(
+                opacity $_transition #{$initdelay + (1 * $eachdelay)}
+              );
+            }
+          }
+
+          & > .description {
+            opacity: 1;
+            @include transition(
+              opacity $_transition #{$initdelay + (1 * $eachdelay)}
+            );
+
+            @include respond-to(m_tablet) {
+              @include transition(
+                opacity $_transition #{$initdelay + (2 * $eachdelay)}
+              );
+            }
+          }
+
+          & > .certification {
+            opacity: 1;
+            @include transition(
+              opacity $_transition #{$initdelay + (2 * $eachdelay)}
+            );
+
+            @include respond-to(m_tablet) {
+              @include transition(
+                opacity $_transition #{$initdelay + (3 * $eachdelay)}
+              );
+            }
+          }
+        }
+
+        & > .bg > img {
+          opacity: 1;
+          @include transform(translate(-25%, 0%));
+          @include transition(
+            transform $_transition #{$initdelay + (3 * $eachdelay)},
+            opacity $_transition #{$initdelay + (3 * $eachdelay)}
+          );
+        }
+      }
+    }
+
+    &#benefits {
+      @include respond-to(m_tablet) {
+        min-height: 0px;
+      }
+
+      & .content.half {
+        @include respond-to(m_tablet) {
+          width: calc(100% - #{$globalmobile-padding * 2});
+          margin: $sectionmobilespacing auto 0px;
+          padding-bottom: $sectionmobilespacing;
+        }
+
+        & > div {
+          width: 100%;
+          display: grid;
+          grid-template: auto auto / auto auto;
+
+          grid-gap: 10px;
+          max-width: 500px;
+
+          @include respond-to(m_tablet) {
+            // max-width: 600px;
+            margin: 0px auto;
+            grid-gap: 20px;
+            justify-items: center;
+            align-items: center;
+          }
+
+          @include respond-to(mobile) {
+            max-width: $mobileinnersection-maxwidth - 100px;
+            grid-template: auto auto auto auto / auto;
+          }
+
+          & > * {
+            width: 150px;
+            padding-bottom: 20px;
+
+            @include respond-to(m_tablet) {
+              width: 100%;
+              padding: 0px $globalmobile-padding;
+              border: solid thin transparent;
+              @include transition(all $global-transition);
+            }
+
+            & > div {
+              width: 100%;
+            }
+
+            & > div:first-child > img {
+              width: 100%;
+            }
+
+            & > div:last-child {
+              font-family: 'Amarillo';
+              text-align: left;
+              color: white;
+
+              & > span:first-child {
+                font-size: 31px;
+                line-height: 29px;
+                display: block;
+              }
+
+              & > span:nth-child(2) {
+                margin-top: 5px;
+                display: block;
+                font-size: 21px;
+                line-height: 100%;
+              }
+
+              @include respond-to(m_tablet) {
+                text-align: center;
+
+                & > span:first-child {
+                  font-size: 40px;
+                  line-height: 27px;
+                }
+
+                & > span:nth-child(2) {
+                  margin-top: 10px;
+                  font-size: 17px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      & .content.half > div {
+        & > div {
+          @include transition(opacity $global-transition);
+          opacity: 0;
+
+          & > div:last-child {
+            @include transition(opacity $global-transition);
+            opacity: 0;
+          }
+        }
+      }
+
+      body.loaded &.inview {
+        $_transition: 1s;
+        $eachdelay: 0.5;
+        $initdelay: 1s;
+
+        & .content.half > div {
+          @for $i from 0 through 1 {
+            $n: $i * 2;
+
+            @include respond-to(not_tablet_m) {
+              & > div:nth-child(#{$n + 2}),
+              & > div:nth-child(#{$n + 1}) {
+                @include transition(
+                  opacity $global-transition #{($i * $eachdelay)}
+                );
+                opacity: 1;
+
+                & > div:last-child {
+                  @include transition(
+                    opacity $_transition #{$initdelay + ($i * $eachdelay)}
+                  );
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      body.loaded & {
+        $_transition: 1s;
+
+        @include respond-to(m_tablet) {
+          & .content.half > div {
+            & > div.inview {
+              @include transition(opacity $_transition);
+              opacity: 1;
+
+              & > div:last-child {
+                @include transition(opacity $_transition 1s);
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+
+    &#ingredients {
+      position: relative;
+
+      @include respond-to(m_tablet) {
+        min-height: 0px;
+      }
+
+      & > .wrapper {
+        position: relative;
+        @include setflex(column, nowrap, flex-start, flex-start, flex-start);
+
+        @include respond-to(m_tablet) {
+          display: block;
+        }
+
+        & > h1 {
+          @include flex-shrink(0);
+          @include flex-grow(0);
+        }
+
+        & > .content {
+          width: 100%;
+          @include flex-grow(1);
+
+          @include respond-to(m_tablet) {
+            display: block;
+            width: calc(100% - #{$globalmobile-padding * 2});
+            margin: $sectionmobilespacing auto 0px;
+            padding-bottom: $sectionmobilespacing;
+          }
+
+          & > div {
+            display: block;
+            @include flex-grow(0);
+            @include flex-shrink(0);
+
+            &:focus {
+              outline: none;
+            }
+
+            &:first-child {
+              font-family: 'Amarillo';
+              text-align: left;
+              @include flex-grow(0);
+              @include flex-shrink(0);
+              width: 300px;
+              font-size: 40px;
+              line-height: 100%;
+
+              &:focus {
+                outline: none;
+              }
+
+              @include respond-to(m_tablet) {
+                width: 100%;
+                max-width: $tabletinnersection-maxwidth;
+                margin: 0px auto;
+                text-align: center;
+              }
+
+              @include respond-to(mobile) {
+                max-width: $mobileinnersection-maxwidth;
+              }
+
+              & > span {
+                display: block;
+                margin-bottom: 25px;
                 position: relative;
-                @include setflex(row, nowrap, flex-start, center, center);
 
                 @include respond-to(m_tablet) {
-                    @include flex-grow(1);
-                    height: 100%;
-                    @include setflex(column, nowrap, stretch, center, center);
+                  margin-bottom: 40px;
                 }
 
-                & .content {
-                    &::before {
-                        @include pseudo;
-                        position: relative;
-                        pointer-events: none;
-                        width: 100%;
-                        height: 7.5vh;
-                        min-height: 50px;
-                        max-height: 200px;
-                    }
-
-                    @include respond-to(m_tablet) {
-                        &::before {
-                            display: none;
-                        }
-                    }
+                @include respond-to(mobile) {
+                  margin-bottom: 20px;
                 }
 
-                & .logo {
+                & > div:first-child {
+                  cursor: pointer;
+
+                  & > span:nth-child(1) {
+                    -webkit-text-stroke: 1px white;
+                    -webkit-text-fill-color: rgba(255, 255, 255, 0);
+                    @include transition(opacity $global-transition);
+                  }
+
+                  & > span:nth-child(2) {
                     position: absolute;
                     top: 0px;
                     left: 0px;
-                    display: inline-block;
-                    width: 140px;
-
-                    @include respond-to(m_tablet) {
-                        display: none;
-                    }
-
-                    &>img {
-                        width: 100%;
-                    }
-                }
-
-                & a.logo {
-                    @include transition(opacity $global-transition);
-
-                    body.onhover &:hover {
-                        opacity: $global_opacity;
-                    }
-                }
-
-                &>.content {
                     width: 100%;
-                    position: relative;
-
-                    @include respond-to(m_tablet) {
-                        // padding: $mobile-paddingtop 0px #{$globalmobile-padding * 4};
-                        padding: 0px 0px 0px;
-                        // @include padding-safe-bottom(120px);
-                        @include flex-grow(1);
-                        height: 100%;
-                        @include setflex(column, nowrap, space-between, center, center);
-                        @include mobilegaptop;
-
-                        &::after {
-                            @include pseudo();
-                            position: relative;
-                            height: 20px;
-                        }
-                    }
-
-                    @include respond-to(mobile) {
-                        &::before {
-                            height: 60px;
-                        }
-
-                        &::after {
-                            @include pseudo();
-                            position: relative;
-                            height: 0px;
-                            height: 7.5vh;
-                            min-height: 100px;
-                            max-height: 150px;
-                        }
-                    }
-
-                    &>span {
-                        display: inline-block;
-                        font-family: 'Amarillo';
-                        margin-right: 10px;
-                        font-size: 120px;
-                        line-height: 90%;
-
-                        @include respond-to(m_tablet) {
-                            margin: 0px auto;
-                            font-size: 100px;
-                            display: block;
-                            text-align: center;
-                            position: relative;
-
-
-                            &:nth-last-child(2) {
-                                color: $color_green;
-
-                                &::after {
-                                    height: 2.5vh;
-                                    min-height: 30px;
-                                }
-                            }
-                        }
-
-                        @include respond-to(mobile) {
-                            font-size: 70px;
-
-                            &::after {
-                                @include pseudo();
-                                position: relative;
-                                height: 7.5vh;
-                                min-height: 40px;
-                                pointer-events: none;
-                                width: 100%;
-                            }
-                        }
-                    }
-
-                    & #GetButton {
-                        font-family: 'Amarillo';
-                        position: absolute;
-                        left: 0px;
-                        cursor: pointer;
-                        bottom: -20px;
-                        @include transform(translate(0%, 100%));
-                        border: solid 3px $color_green;
-                        padding: 8px 40px;
-                        display: inline-block;
-                        color: $color_green;
-                        font-size: 30px;
-                        line-height: 28px;
-                        @include transition(border $global-transition, color $global-transition, background $global-transition);
-
-                        @include respond-to(m_tablet) {
-                            position: relative;
-                            margin: 0px auto;
-                            left: 0px;
-                            right: 0px;
-                            // bottom: 40px;
-                            bottom: 0px;
-                            top: auto;
-                            @include transform(translate(0%, 0%));
-                            font-size: 25px;
-                            line-height: 24px;
-                            border: solid 2px white;
-                            color: white;
-                            width: 80%;
-                            max-width: 300px;
-
-                            &::after {
-                                display: none;
-                            }
-                        }
-
-                        body.onhover &:hover {
-                            background: $color_green;
-                            color: white;
-
-                            @include respond-to(m_tablet) {
-                                border-color: $color_green;
-                            }
-                        }
-                    }
-                }
-
-            }
-
-            &>.bg {
-                position: absolute;
-                top: 0px;
-                height: 100%;
-                width: 55%;
-                left: 0%;
-                z-index: -1;
-
-                @include respond-to(m_tablet) {
-                    width: 100%;
-                    right: 0;
-                    overflow: hidden;
-                }
-
-                &>img {
-                    position: relative;
                     height: 100%;
-
-                    &.mobile {
-                        width: calc(100vw - (#{$globalmobile-padding } * 4));
-                        display: none;
-                        margin: auto;
-                        object-fit: contain;
-                        object-position: center;
-                        top: auto;
-
-                        @include respond-to(m_tablet) {
-                            display: block;
-                        }
-                    }
-
-                    &:not(.mobile) {
-                        width: 125%;
-                        @include transform(translate(-12.5%, 0%));
-                        object-fit: cover;
-                        object-position: right;
-
-                        @include respond-to(m_tablet) {
-                            display: none;
-                        }
-                    }
-                }
-            }
-
-            // PRE TRANSITION
-
-            &>.wrapper>.content {
-
-                & #GetButton,
-                &>span {
-                    @include transition(opacity $global-transition);
-                    opacity: 0;
-                }
-
-                & #GetButton {
-                    @include transition(opacity $global-transition, border $global-transition, color $global-transition, background $global-transition);
-                }
-            }
-
-            &>.bg {
-                @include transition(opacity $global-transition);
-                opacity: 0;
-                @include transform(translate(-75px, 0));
-
-                @include respond-to(m_tablet) {
-                    @include transform(translate(0px, 0));
-                }
-            }
-
-            // TRANSITION
-            body.loaded &.inview {
-                $initdelay: .25s;
-                $initdelaymobile: .25s;
-                $eachdelay: .3s;
-                $_transition: 1.5s;
-
-                &>.wrapper>.content {
-                    @for $i from 1 through 3 {
-                        &>span:nth-child(#{$i}) {
-                            @include transition(opacity $_transition #{$initdelay + ($i * $eachdelay)});
-                            opacity: 1;
-
-                            @include respond-to(m_tablet) {
-                                @include transition(opacity $_transition #{$initdelaymobile + ($i * $eachdelay)});
-                            }
-                        }
-                    }
-
-                    & #GetButton {
-                        @include transition(opacity $_transition #{$initdelay + (4 * $eachdelay)}, border $global-transition, color $global-transition, background $global-transition);
-                        opacity: 1;
-
-                        @include respond-to(m_tablet) {
-                            @include transition(opacity $_transition #{$initdelaymobile + (4 * $eachdelay)}, border $global-transition, color $global-transition, background $global-transition);
-                        }
-                    }
-                }
-
-                &>.bg {
-                    @include transition(transform $_transition #{$initdelay + (4.5 * $eachdelay)}, opacity $_transition #{$initdelay + (5 * $eachdelay)});
-                    opacity: 1;
-                    @include transform(translate(0, 0));
-
-                    @include respond-to(m_tablet) {
-                        @include transition(opacity $_transition #{$initdelaymobile + (5 * $eachdelay)});
-                    }
-
-                }
-            }
-        }
-
-        $sectionmobilespacing: 50px;
-
-        &#about {
-            position: relative;
-
-            @include respond-to(m_tablet) {
-                min-height: 0px;
-            }
-
-            &>.bg {
-                position: absolute;
-                top: 0px;
-                height: 100%;
-                width: calc(50% - #{$home-offcenter});
-                left: auto;
-                right: 0%;
-                z-index: -1;
-                overflow: hidden;
-
-                @include respond-to(tablet) {
-                    width: calc(50% - #{$home-offcenter-t});
-                }
-
-                @include respond-to(m_tablet) {
-                    display: none;
-                }
-
-                &>img {
-                    @include transform(translate(-25%, 0%));
-                    position: relative;
-                    width: 150%;
-                    height: 100%;
-                    object-fit: cover;
-                    object-position: center;
-                }
-            }
-
-
-            & .content.half {
-                @include setflex(column, nowrap, flex-start, flex-start, flex-start);
-
-                @include respond-to(m_tablet) {
-                    width: calc(100% - #{$globalmobile-padding * 2});
-                    margin: $sectionmobilespacing auto 0px;
-                    padding-bottom: $sectionmobilespacing / 2;
-                }
-
-                &>.logo {
-                    width: 300px;
-                    display: block;
-
-                    @include respond-to(m_tablet) {
-                        width: 100%;
-                        max-width: 400px;
-                        margin: 0px auto;
-                    }
-
-                    @include respond-to(mobile) {
-                        max-width: 300px;
-                    }
-
-                    &>img {
-                        width: 100%;
-                    }
-                }
-
-                &>.bottle {
-                    display: none;
-
-                    @include respond-to(m_tablet) {
-                        display: block;
-                        padding: 0px $globalmobile-padding;
-                        margin-top: $sectionmobilespacing;
-                        width: 100%;
-                        pointer-events: none;
-                        position: relative;
-                        z-index: 20;
-
-                        &>img {
-                            pointer-events: auto;
-                            position: relative;
-                            width: 75%;
-                            max-width: 250px;
-                            margin: 0px auto;
-                            @include transform(translate(0, 8vh));
-                        }
-                    }
-
-                    @include respond-to(mobile) {
-                        &>img {
-                            max-width: 175px;
-                        }
-                    }
-
-                }
-
-                &>.description {
-                    display: block;
-                    margin-top: 35px;
+                    z-index: 5;
                     color: white;
-                    font-family: 'Maison Mono';
-                    font-size: 15px;
-                    line-height: 180%;
-
-                    @include respond-to(not_tablet_m) {
-                        padding-top: 0px;
-
-                        &::after {
-                            @include pseudo;
-                            position: relative;
-                            pointer-events: none;
-                            width: 100%;
-                            height: 10vh;
-                            min-height: 25px;
-                            max-height: $global-padding * 1.5;
-                        }
-                    }
-
-                    @include respond-to(m_tablet) {
-                        width: 100%;
-                        max-width: $tabletinnersection-maxwidth;
-                        margin: $sectionmobilespacing auto 0px;
-                        font-weight: bold;
-
-                        &::after {
-                            display: none;
-                        }
-                    }
-
-                    @include respond-to(mobile) {
-                        max-width: $mobileinnersection-maxwidth;
-                    }
-                }
-
-                &>.certification {
-                    width: 100%;
-                    max-width: 500px;
-                    display: grid;
-                    grid-template-columns: 1fr 1fr 1fr 1fr 1fr 1fr;
-                    grid-template-rows: auto;
-                    grid-gap: 15px;
-                    justify-items: start;
-                    align-items: start;
-
-                    @include respond-to(tablet) {
-                        max-width: 350px;
-                        grid-template-columns: 1fr 1fr 1fr 1fr;
-                    }
-
-                    @include respond-to(m_tablet) {
-                        width: 100%;
-                        max-width: $tabletinnersection-maxwidth;
-                        margin: ($sectionmobilespacing - 15px) auto 0px;
-                        @include setflex(row, wrap, center, center, flex-start);
-                    }
-
-                    @include respond-to(mobile) {
-                        display: grid;
-                        margin: ($sectionmobilespacing) auto 0px;
-                        max-width: $mobileinnersection-maxwidth;
-                        grid-template-columns: 1fr 1fr 1fr;
-                        justify-items: center;
-                        grid-gap: 30px;
-                    }
-
-                    &>* {
-                        @include setflex(column, nowrap);
-                        display: inline-flex;
-                        width: 50px;
-                        @include flex-grow(0);
-
-                        @include respond-to(m_tablet) {
-                            width: 65px;
-                            margin: 15px;
-                        }
-
-                        @include respond-to(mobile) {
-                            margin: 0px;
-                        }
-
-                        &>img {
-                            width: 100%;
-                        }
-
-                        &>span {
-                            width: 100%;
-                            display: block;
-                            margin-top: 10px;
-                            text-align: center;
-                            font-family: 'Amarillo';
-                            font-size: 9px;
-                            line-height: 140%;
-                            color: white;
-
-                            @include respond-to(m_tablet) {
-                                font-size: 12px;
-                            }
-
-                        }
-                    }
-                }
-            }
-
-            // PRE TRANSITION
-
-            & .content.half {
-                &>.logo {
                     opacity: 0;
+                    @include transition(all $global-transition);
+                  }
                 }
 
-                &>.bottle {
-                    opacity: 0;
-                }
+                & > div:last-child {
+                  display: none;
 
-                &>.description {
-                    opacity: 0;
-                }
-
-                &>.certification {
-                    opacity: 0;
-                }
-            }
-
-            &>.bg>img {
-                opacity: 0;
-                @include transform(translate(-15%, 0%));
-            }
-
-            body.loaded &.inview {
-                $initdelay: .25s;
-                $initdelaymobile: .25s;
-                $_transition: 1.5s;
-                $eachdelay: .25s;
-
-                & .content.half {
-                    &>.logo {
-                        opacity: 1;
-                        @include transition(opacity $_transition #{$initdelay + (0 * $eachdelay)});
-                    }
-
-                    &>.bottle {
-                        opacity: 1;
-                        @include transition(opacity $_transition #{$initdelay + (0 * $eachdelay)});
-
-                        @include respond-to(m_tablet) {
-                            @include transition(opacity $_transition #{$initdelay + (1 * $eachdelay)});
-                        }
-                    }
-
-                    &>.description {
-                        opacity: 1;
-                        @include transition(opacity $_transition #{$initdelay + (1 * $eachdelay)});
-
-                        @include respond-to(m_tablet) {
-                            @include transition(opacity $_transition #{$initdelay + (2 * $eachdelay)});
-                        }
-                    }
-
-                    &>.certification {
-                        opacity: 1;
-                        @include transition(opacity $_transition #{$initdelay + (2 * $eachdelay)});
-
-                        @include respond-to(m_tablet) {
-                            @include transition(opacity $_transition #{$initdelay + (3 * $eachdelay)});
-                        }
-                    }
-                }
-
-                &>.bg>img {
-                    opacity: 1;
-                    @include transform(translate(-25%, 0%));
-                    @include transition(transform $_transition #{$initdelay + (3 * $eachdelay)}, opacity $_transition #{$initdelay + (3 * $eachdelay)});
-                }
-            }
-        }
-
-        &#benefits {
-            @include respond-to(m_tablet) {
-                min-height: 0px;
-            }
-
-            & .content.half {
-
-                @include respond-to(m_tablet) {
-                    width: calc(100% - #{$globalmobile-padding * 2});
-                    margin: $sectionmobilespacing auto 0px;
-                    padding-bottom: $sectionmobilespacing;
-                }
-
-                &>div {
-                    width: 100%;
-                    display: grid;
-                    grid-template: auto auto / auto auto;
-
-                    grid-gap: 10px;
-                    max-width: 500px;
-
-                    @include respond-to(m_tablet) {
-                        // max-width: 600px;
-                        margin: 0px auto;
-                        grid-gap: 20px;
-                        justify-items: center;
-                        align-items: center;
-                    }
-
-                    @include respond-to(mobile) {
-                        max-width: $mobileinnersection-maxwidth - 100px;
-                        grid-template: auto auto auto auto / auto;
-                    }
-
-                    &>* {
-                        width: 150px;
-                        padding-bottom: 20px;
-
-                        @include respond-to(m_tablet) {
-                            width: 100%;
-                            padding: 0px $globalmobile-padding;
-                            border: solid thin transparent;
-                            @include transition(all $global-transition);
-                        }
-
-                        &>div {
-                            width: 100%;
-                        }
-
-                        &>div:first-child>img {
-                            width: 100%;
-                        }
-
-                        &>div:last-child {
-                            font-family: 'Amarillo';
-                            text-align: left;
-                            color: white;
-
-                            &>span:first-child {
-                                font-size: 31px;
-                                line-height: 29px;
-                                display: block;
-                            }
-
-                            &>span:nth-child(2) {
-                                margin-top: 5px;
-                                display: block;
-                                font-size: 21px;
-                                line-height: 100%;
-                            }
-
-                            @include respond-to(m_tablet) {
-                                text-align: center;
-
-                                &>span:first-child {
-                                    font-size: 40px;
-                                    line-height: 27px;
-                                }
-
-                                &>span:nth-child(2) {
-                                    margin-top: 10px;
-                                    font-size: 17px;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            & .content.half>div {
-                &>div {
-                    @include transition(opacity $global-transition);
-                    opacity: 0;
-
-                    &>div:last-child {
-                        @include transition(opacity $global-transition);
-                        opacity: 0;
-                    }
-                }
-            }
-
-            body.loaded &.inview {
-                $_transition: 1s;
-                $eachdelay: .5;
-                $initdelay: 1s;
-
-                & .content.half>div {
-                    @for $i from 0 through 1 {
-                        $n: $i * 2;
-
-                        @include respond-to(not_tablet_m) {
-
-                            &>div:nth-child(#{$n + 2}),
-                            &>div:nth-child(#{$n + 1}) {
-                                @include transition(opacity $global-transition #{($i * $eachdelay)});
-                                opacity: 1;
-
-                                &>div:last-child {
-                                    @include transition(opacity $_transition #{$initdelay + ($i * $eachdelay)});
-                                    opacity: 1;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            body.loaded & {
-                $_transition: 1s;
-
-                @include respond-to(m_tablet) {
-                    & .content.half>div {
-                        &>div.inview {
-                            @include transition(opacity $_transition);
-                            opacity: 1;
-
-                            &>div:last-child {
-                                @include transition(opacity $_transition 1s);
-                                opacity: 1;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        &#ingredients {
-            position: relative;
-
-            @include respond-to(m_tablet) {
-                min-height: 0px;
-            }
-
-            &>.wrapper {
-                position: relative;
-                @include setflex(column, nowrap, flex-start, flex-start, flex-start, );
-
-                @include respond-to(m_tablet) {
+                  @include respond-to(m_tablet) {
                     display: block;
-                }
-
-                &>h1 {
-                    @include flex-shrink(0);
-                    @include flex-grow(0);
-                }
-
-                &>.content {
                     width: 100%;
-                    @include flex-grow(1);
+                    font-family: 'Maison Mono';
+                    font-size: 14px;
+                    line-height: 120%;
+                    text-align: center;
+                    pointer-events: none;
+                    height: 0px;
+                    @include transition(all $globalslow-transition);
+                    opacity: 0;
 
-                    @include respond-to(m_tablet) {
-                        display: block;
-                        width: calc(100% - #{$globalmobile-padding * 2});
-                        margin: $sectionmobilespacing auto 0px;
-                        padding-bottom: $sectionmobilespacing;
+                    & > div {
+                      width: 100%;
+                      padding-top: $globalmobile-padding;
+                      position: relative;
                     }
-
-                    &>div {
-                        display: block;
-                        @include flex-grow(0);
-                        @include flex-shrink(0);
-
-                        &:focus {
-                            outline: none;
-                        }
-
-                        &:first-child {
-                            font-family: 'Amarillo';
-                            text-align: left;
-                            @include flex-grow(0);
-                            @include flex-shrink(0);
-                            width: 300px;
-                            font-size: 40px;
-                            line-height: 100%;
-
-                            &:focus {
-                                outline: none;
-                            }
-
-                            @include respond-to(m_tablet) {
-                                width: 100%;
-                                max-width: $tabletinnersection-maxwidth;
-                                margin: 0px auto;
-                                text-align: center;
-                            }
-
-                            @include respond-to(mobile) {
-                                max-width: $mobileinnersection-maxwidth;
-                            }
-
-                            &>span {
-                                display: block;
-                                margin-bottom: 25px;
-                                position: relative;
-
-                                @include respond-to(m_tablet) {
-                                    margin-bottom: 40px;
-                                }
-
-                                @include respond-to(mobile) {
-                                    margin-bottom: 20px;
-                                }
-
-                                &>div:first-child {
-                                    cursor: pointer;
-
-                                    &>span:nth-child(1) {
-                                        -webkit-text-stroke: 1px white;
-                                        -webkit-text-fill-color: rgba(255, 255, 255, 0);
-                                        @include transition(opacity $global-transition);
-                                    }
-
-                                    &>span:nth-child(2) {
-                                        position: absolute;
-                                        top: 0px;
-                                        left: 0px;
-                                        width: 100%;
-                                        height: 100%;
-                                        z-index: 5;
-                                        color: white;
-                                        opacity: 0;
-                                        @include transition(all $global-transition);
-                                    }
-                                }
-
-                                &>div:last-child {
-                                    display: none;
-
-                                    @include respond-to(m_tablet) {
-                                        display: block;
-                                        width: 100%;
-                                        font-family: 'Maison Mono';
-                                        font-size: 14px;
-                                        line-height: 120%;
-                                        text-align: center;
-                                        pointer-events: none;
-                                        height: 0px;
-                                        @include transition(all $globalslow-transition);
-                                        opacity: 0;
-
-                                        &>div {
-                                            width: 100%;
-                                            padding-top: $globalmobile-padding;
-                                            position: relative;
-                                        }
-                                    }
-                                }
-
-                                &:not(.active)>div:last-child {
-                                    @include respond-to(m_tablet) {
-                                        opacity: 0;
-                                        height: 0px !important;
-                                    }
-                                }
-
-                                &:last-child {
-                                    margin-bottom: 0px;
-                                }
-
-                                body.onhover & {
-                                    &>div:first-child:hover {
-                                        &>span:nth-child(1) {
-                                            opacity: 0;
-                                            @include transition(opacity $global-transition #{$global-transition / 3});
-                                        }
-
-                                        &>span:nth-child(2) {
-                                            color: white;
-                                            opacity: 1;
-                                        }
-                                    }
-                                }
-
-                                &.active {
-                                    &>div:first-child {
-                                        pointer-events: none;
-
-                                        &>span:nth-child(1) {
-                                            opacity: 0;
-                                        }
-
-                                        &>span:nth-child(2) {
-                                            color: $color_green !important;
-                                            opacity: 1;
-                                        }
-                                    }
-
-                                    &>div:last-child {
-                                        @include respond-to(m_tablet) {
-                                            opacity: 1;
-                                            // height: 0px;
-                                        }
-                                    }
-                                }
-                            }
-                        }
-
-                    }
+                  }
                 }
 
-                &>div:last-child {
-                    position: absolute;
-                    top: 0px;
-                    left: auto;
-                    right: 0px;
-                    width: calc(100% - 300px);
-                    height: 100%;
+                &:not(.active) > div:last-child {
+                  @include respond-to(m_tablet) {
+                    opacity: 0;
+                    height: 0px !important;
+                  }
+                }
+
+                &:last-child {
+                  margin-bottom: 0px;
+                }
+
+                body.onhover & {
+                  & > div:first-child:hover {
+                    & > span:nth-child(1) {
+                      opacity: 0;
+                      @include transition(
+                        opacity $global-transition #{$global-transition / 3}
+                      );
+                    }
+
+                    & > span:nth-child(2) {
+                      color: white;
+                      opacity: 1;
+                    }
+                  }
+                }
+
+                &.active {
+                  & > div:first-child {
                     pointer-events: none;
 
+                    & > span:nth-child(1) {
+                      opacity: 0;
+                    }
+
+                    & > span:nth-child(2) {
+                      color: $color_green !important;
+                      opacity: 1;
+                    }
+                  }
+
+                  & > div:last-child {
                     @include respond-to(m_tablet) {
-                        display: none;
+                      opacity: 1;
+                      // height: 0px;
                     }
-
-                    &>div {
-                        height: 100%;
-                        @include setflex(column, nowrap, center, center, center);
-                        padding: 0px 75px;
-                        @include transition(opacity $globalslow-transition .1s);
-
-                        @include respond-to(tablet) {
-                            padding: 0px 50px;
-                        }
-
-                        &>* {
-                            pointer-events: auto;
-                            display: block;
-                            width: 100%;
-
-                            &:first-child {
-                                font-family: 'Amarillo';
-                                font-size: 350px;
-                                line-height: 250px;
-                                color: $color_green;
-                                text-align: center;
-                            }
-
-                            &:nth-child(2) {
-                                margin-top: $global-padding;
-                                font-family: 'Maison Mono';
-                                font-size: 18px;
-                                line-height: 28px;
-                                text-align: center;
-                            }
-                        }
-
-                        &.transition {
-                            opacity: 0;
-
-                            &:first-child {
-                                @include transition(opacity .2s);
-                            }
-                        }
-                    }
+                  }
                 }
+              }
             }
-
-            &>.bg {
-                position: absolute;
-                top: 0px;
-                left: 0px;
-                z-index: -1;
-                width: 100%;
-                height: 100%;
-                opacity: 0.5;
-                overflow: hidden;
-                pointer-events: none;
-
-                @include respond-to(m_tablet) {
-                    // overflow: visible;
-                }
-
-                &>div {
-                    position: relative;
-                    margin-top: 0px;
-                    right: 0px;
-                    @include transform(translate(100px, 0%));
-                    left: 0px;
-                    right: auto;
-                    height: 100%;
-                    width: 100%;
-                    @include animation(ingbg_transitionin .6s .2s ease-out 1 both);
-
-                    &.transition {
-                        @include animation(ingbg_transitionout .4s ease-in 1 both);
-                    }
-
-                    @include respond-to(m_tablet) {
-                        @include transform(translate(0px, 0%));
-                        position: relative;
-                        margin-top: 0%;
-                        @include animation(ingbg_transitioninm 1s 0s ease-out 1 both);
-
-                        &.transition {
-                          @include animation(ingbg_transitionoutm .4s 0s ease-in 1 both);
-                        }
-                    }
-                }
-
-                & img {
-                    max-width: 100%;
-                    min-height: 50vh;
-                    max-height: 100vh;
-                    position: absolute;
-                    top: 50%;
-                    right: 0px;
-                    @include transform(translate(0%, -50%));
-
-                    left: auto;
-                    object-fit: scale-down;
-                    object-position: right center;
-                    display: none;
-
-                    &.active {
-                        display: block;
-                    }
-
-                    &:nth-child(1),
-                    &:nth-child(7) {
-                        max-width: 80%;
-                        max-height: 70vh;
-                    }
-
-                    &:nth-child(6),
-                    &:nth-child(4) {
-                        max-width: 100%;
-                        max-height: 80vh;
-                    }
-
-                    &:nth-child(2) {
-                        right: -10%;
-                        max-width: 90%;
-                        max-height: 90vh;
-                    }
-
-                    &:nth-child(3) {
-                        width: 100%;
-                        max-width: 550px;
-                    }
-
-                    @include respond-to(m_tablet) {
-                        min-height: 30vh;
-                        max-height: 75vh !important;
-                        max-width: none !important;
-                        width: 150% !important;
-                        left: 50%;
-                        right: auto;
-                        @include transform(translate(-50%, -50%));
-                        object-position: center center;
-
-                        &:nth-child(5),
-                        &:nth-child(2) {
-                            @include transform(translate(-30%, -50%));
-                        }
-
-                        &:nth-child(1),
-                        &:nth-child(6),
-                        &:nth-child(3) {
-                            @include transform(translate(-70%, -50%));
-                        }
-
-                        &:nth-child(7) {
-                            width: 120% !important;
-                        }
-
-                        &:nth-child(3) {
-                            width: 100% !important;
-                        }
-                    }
-                }
-            }
-
-            &:not(.inview) {
-                &>.bg {
-                    @include transition(opacity .5s);
-
-                    @include respond-to(m_tablet) {
-                        opacity: 0;
-                    }
-                }
-
-                &>.wrapper {
-                    &>.content {
-                        &>div {
-                            &:first-child {
-                                &>span {
-                                    @include transition(opacity $global-transition);
-                                    opacity: 0;
-                                }
-                            }
-                        }
-                    }
-                    &>div:last-child{
-                        @include transition(opacity .5s);
-                        opacity: 0;
-                    }
-                }
-            }
-
-            &.inview {
-
-                &>.bg {
-                    @include transition(opacity .4s);
-
-                    @include respond-to(m_tablet) {
-                        @include transition(opacity 1.5s 1s);
-                    }
-                }
-
-                &>.wrapper {
-                    &>.content {
-                        &>div {
-                            &:first-child {
-                                @for $i from 1 through 7 {
-                                    &>span:nth-child(#{$i}) {
-                                        @include transition(opacity 1s #{($i * .25s)});
-                                        opacity: 1;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                    &>div:last-child{
-                        @include transition(opacity 1.5s 1s);
-                    }
-                }
-            }
+          }
         }
 
-        &#shop {
-            position: relative;
+        & > div:last-child {
+          position: absolute;
+          top: 0px;
+          left: auto;
+          right: 0px;
+          width: calc(100% - 300px);
+          height: 100%;
+          pointer-events: none;
 
-            @include respond-to(m_tablet) {
-                min-height: 0px;
-            }
+          @include respond-to(m_tablet) {
+            display: none;
+          }
 
-            &>.wrapper {
-                position: relative;
-
-                &>.content {
-                    width: 100%;
-
-                    @include respond-to(m_tablet) {
-                        width: calc(100% - #{$globalmobile-padding * 2});
-                        margin: $sectionmobilespacing auto 0px;
-                        padding-bottom: $sectionmobilespacing;
-                    }
-
-                    &>div {
-                        margin-bottom: $global-padding;
-
-                        &:last-child {
-                            margin-bottom: 0px;
-                        }
-
-                        @include respond-to(m_tablet) {
-                            margin-bottom: #{ $globalmobile-padding * 2};
-
-                            &:last-child {
-                                margin-bottom: 0px;
-                            }
-                        }
-
-                        $arrowwidth: 34px;
-                        $mobilearrowwidth: 12px;
-
-                        &>div.shopSlider {
-                            width: 100%;
-                            margin-top: $global-padding / 2;
-                            @include setflex(row, nowrap, space-between, center, center);
-
-                            @include respond-to(m_tablet) {
-                                max-width: 500px;
-                                margin: #{ $globalmobile-padding * 1.5} auto 0px;
-                            }
-
-                            @include respond-to(mobile) {
-                                max-width: $mobileinnersection-maxwidth;
-                            }
-
-                            &>.arrow {
-                                width: $arrowwidth;
-                                height: auto;
-                                @include flex-grow(0);
-                                @include flex-shrink(0);
-                                cursor: pointer;
-
-                                @include respond-to(m_tablet) {
-                                    width: $mobilearrowwidth + 5px;
-                                }
-
-                                @include respond-to(mobile) {
-                                    width: $mobilearrowwidth;
-                                }
-
-                                & svg {
-                                    width: 100%;
-                                    height: auto;
-
-                                    &.mobile {
-                                        display: none;
-                                    }
-
-                                    & .stroke {
-                                        @include transition(stroke $global_transition);
-                                    }
-
-                                    & .fill {
-                                        @include transition(fill $global_transition);
-                                    }
-
-                                    @include respond-to(m_tablet) {
-
-                                        display: none;
-
-                                        &.mobile {
-                                            display: block;
-                                        }
-
-                                        & .stroke {
-                                            stroke: $color_green;
-                                        }
-
-                                        & .fill {
-                                            fill: $color_green;
-                                        }
-                                    }
-                                }
-
-                                &:last-child {
-                                    @include transform(rotate(180deg));
-                                }
-
-                                body.onhover &:hover {
-
-                                    & svg {
-                                        & .stroke {
-                                            stroke: $color_green;
-                                        }
-
-                                        & .fill {
-                                            fill: $color_green;
-                                        }
-
-                                        @include respond-to(m_tablet) {
-                                            & .stroke {
-                                                stroke: white;
-                                            }
-
-                                            & .fill {
-                                                fill: white;
-                                            }
-                                        }
-                                    }
-                                }
-                            }
-
-                            & .wrapper {
-                                width: calc(100% - #{$arrowwidth * 2} - #{$global-padding});
-                                position: relative;
-                                margin: 0px #{$global-padding / 2};
-
-                                @include respond-to(m_tablet) {
-                                    margin: 0px #{$globalmobile-padding + 20px};
-                                    width: calc(100% - #{($mobilearrowwidth + 5px) * 2} - #{($globalmobile-padding + 20px) * 2});
-                                }
-
-                                @include respond-to(mobile) {
-                                    margin: 0px #{$globalmobile-padding};
-                                    width: calc(100% - #{$mobilearrowwidth * 2} - #{$globalmobile-padding * 2});
-                                }
-
-                                & *:focus {
-                                    outline: none;
-                                }
-
-                                & .shop {
-                                    width: 50%;
-                                    @include flex-grow(0);
-                                    position: relative;
-                                    padding: 0px #{$global-padding / 2};
-
-                                    &>* {
-                                        width: 100%;
-                                        height: 150px;
-
-                                        @include respond-to(m_tablet) {
-                                            height: 200px;
-                                        }
-
-                                        @include respond-to(mobile) {
-                                            height: 150px;
-                                        }
-
-                                        display: block;
-
-                                        &>img {
-                                            object-fit: scale-down;
-                                            width: 100%;
-                                            margin: auto;
-                                            display: block;
-                                            height: 100%;
-                                        }
-                                    }
-
-                                    &>a {
-                                        @include transition(opacity $global-transition);
-
-                                        body.onhover &:hover {
-                                            opacity: $global_opacity;
-                                            cursor: pointer;
-                                        }
-                                    }
-                                }
-                            }
-
-                            &.twoslide {
-                                @include bp-min(800px) {
-                                    &>.arrow {
-                                        opacity: .25;
-                                        pointer-events: none;
-                                    }
-                                }
-                            }
-
-                            &.oneslide {
-                                &>.arrow {
-                                    opacity: .25;
-                                    pointer-events: none;
-                                }
-
-                                & div.wrapper {
-                                    display: grid;
-                                    grid-template: auto / 1fr 1fr;
-
-                                    @include bp-max(800px) {
-                                        grid-template: auto / auto;
-                                    }
-
-                                    & .shop {
-                                        display: none;
-                                        width: 100%;
-                                        margin-right: 0px;
-
-                                        &:nth-child(1) {
-                                            display: block;
-                                            grid-row: 1 / 2;
-                                            grid-column: 1 / 2;
-                                        }
-                                    }
-
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-
-            // PRE TRANSITION
-            &>.wrapper {
-                &>.content>div {
-                    @include transition(opacity $global-transition);
-                    opacity: 0;
-                }
-            }
-
-            body.loaded &.inview {
-                $_transition: 1.5s;
-                $eachdelay: .2s;
-
-                &>.wrapper>.content {
-                    @for $i from 1 to 3 {
-                        &>div:nth-child(#{$i}) {
-                            @include transition(opacity $_transition #{(((($i - 1) * 2)) * $eachdelay)});
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
-        }
-    }
-
-    & .bottlesection_wrapper {
-        position: relative;
-        pointer-events: none;
-        z-index: 5;
-
-        &>section {
-            pointer-events: auto;
-        }
-
-        & .greenline {
-            pointer-events: none;
-            position: absolute;
-            top: calc(50% + 165px);
-            left: calc(50% + #{$home-offcenter});
-            @include transform(translate(-50%, -50%));
-            width: 3px;
-            height: calc(100% - 100vh + 165px);
-            background: $color_green;
-
-            @include respond-to(height_less) {
-                top: calc(50vh);
-                @include transform(translate(-50%, 0%));
-                height: calc(100% - 50vh - 50px);
-            }
+          & > div {
+            height: 100%;
+            @include setflex(column, nowrap, center, center, center);
+            padding: 0px 75px;
+            @include transition(opacity $globalslow-transition 0.1s);
 
             @include respond-to(tablet) {
-                left: calc(50% + #{$home-offcenter-t});
+              padding: 0px 50px;
             }
 
-            @include respond-to(m_tablet) {
-                display: none;
+            & > * {
+              pointer-events: auto;
+              display: block;
+              width: 100%;
+
+              &:first-child {
+                font-family: 'Amarillo';
+                font-size: 350px;
+                line-height: 250px;
+                color: $color_green;
+                text-align: center;
+              }
+
+              &:nth-child(2) {
+                margin-top: $global-padding;
+                font-family: 'Maison Mono';
+                font-size: 18px;
+                line-height: 28px;
+                text-align: center;
+              }
             }
 
-            @include transition(opacity $global-transition);
-            opacity: 0;
+            &.transition {
+              opacity: 0;
 
-            body.loaded & {
-                @include transition(opacity #{$initialTranstionHome} #{$initialAnimDelayHome + ($initialTranstionHome / 2)});
-                opacity: 1;
+              &:first-child {
+                @include transition(opacity 0.2s);
+              }
             }
+          }
         }
+      }
 
-        & .bottlewrapper {
-            width: 100%;
-            height: 100vh;
-            pointer-events: none;
-            position: fixed;
-            z-index: 10;
-            top: 0%;
-            left: 0%;
-            @include transform(translate(0%, 0%));
-
-            @include respond-to(m_tablet) {
-                display: none;
-            }
-
-            &.stuck {
-                position: absolute;
-                top: auto;
-                @include transform(translate(0%, 0%));
-                bottom: 0px;
-            }
-
-            &>div {
-                pointer-events: auto;
-                width: 200px;
-                position: absolute;
-                z-index: 10;
-                top: 50%;
-                left: calc(50% + #{$home-offcenter});
-                @include transform(translate(-50%, -50%));
-
-                @include respond-to(tablet) {
-                    left: calc(50% + #{$home-offcenter-t});
-                }
-
-                &>picture,
-                &>img {
-                    width: 100%;
-                    height: auto;
-                    max-height: calc(100vh - (80px * 2));
-                    object-fit: contain;
-                    & > img{
-
-                        width: 100%;
-                        height: 100%;
-                    }
-                }
-
-                &>#ShopButton {
-                    pointer-events: auto;
-                    position: absolute;
-                    cursor: pointer;
-                    top: auto;
-                    left: 50%;
-                    z-index: 10;
-                    bottom: -25px;
-                    @include transform(translate(-50%, 100%));
-                    font-family: 'Amarillo';
-                    padding: 6px 25px;
-                    display: inline-block;
-                    color: $color_green;
-                    font-size: 30px;
-                    line-height: 28px;
-                    background: $color_green;
-                    color: black;
-                    @include transition(opacity $globalslow-transition, color $global-transition);
-
-                    @include respond-to(height_less) {
-                        bottom: -10px;
-                    }
-
-                    &.hide {
-                        opacity: 0;
-                        pointer-events: none;
-                    }
-
-                    body.onhover &:hover {
-                        color: white;
-                    }
-                }
-            }
-
-
-            @include transition(opacity $global-transition);
-            opacity: 0;
-
-            body.loaded & {
-                @include transition(opacity #{$initialTranstionHome} #{$initialAnimDelayHome});
-                opacity: 1;
-            }
-        }
-    }
-
-    & #MobileNavigation {
-        display: none;
+      & > .bg {
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        opacity: 0.5;
+        overflow: hidden;
+        pointer-events: none;
 
         @include respond-to(m_tablet) {
-            display: block;
+          // overflow: visible;
         }
 
-        &>div:first-child {
-            position: fixed;
-            top: 0px;
-            right: 0px;
-            height: $mobileHeaderHeight;
-            padding: $globalmobile-padding;
-            @include setflex(row, nowrap);
-            z-index: 12;
+        & > div {
+          position: relative;
+          margin-top: 0px;
+          right: 0px;
+          @include transform(translate(100px, 0%));
+          left: 0px;
+          right: auto;
+          height: 100%;
+          width: 100%;
+          @include animation(ingbg_transitionin 0.6s 0.2s ease-out 1 both);
 
-            &>div {
-                width: 26px;
-                pointer-events: auto;
+          &.transition {
+            @include animation(ingbg_transitionout 0.4s ease-in 1 both);
+          }
+
+          @include respond-to(m_tablet) {
+            @include transform(translate(0px, 0%));
+            position: relative;
+            margin-top: 0%;
+            @include animation(ingbg_transitioninm 1s 0s ease-out 1 both);
+
+            &.transition {
+              @include animation(ingbg_transitionoutm 0.4s 0s ease-in 1 both);
+            }
+          }
+        }
+
+        & img {
+          max-width: 100%;
+          min-height: 50vh;
+          max-height: 100vh;
+          position: absolute;
+          top: 50%;
+          right: 0px;
+          @include transform(translate(0%, -50%));
+
+          left: auto;
+          object-fit: scale-down;
+          object-position: right center;
+          display: none;
+
+          &.active {
+            display: block;
+          }
+
+          &:nth-child(1),
+          &:nth-child(7) {
+            max-width: 80%;
+            max-height: 70vh;
+          }
+
+          &:nth-child(6),
+          &:nth-child(4) {
+            max-width: 100%;
+            max-height: 80vh;
+          }
+
+          &:nth-child(2) {
+            right: -10%;
+            max-width: 90%;
+            max-height: 90vh;
+          }
+
+          &:nth-child(3) {
+            width: 100%;
+            max-width: 550px;
+          }
+
+          @include respond-to(m_tablet) {
+            min-height: 30vh;
+            max-height: 75vh !important;
+            max-width: none !important;
+            width: 150% !important;
+            left: 50%;
+            right: auto;
+            @include transform(translate(-50%, -50%));
+            object-position: center center;
+
+            &:nth-child(5),
+            &:nth-child(2) {
+              @include transform(translate(-30%, -50%));
+            }
+
+            &:nth-child(1),
+            &:nth-child(6),
+            &:nth-child(3) {
+              @include transform(translate(-70%, -50%));
+            }
+
+            &:nth-child(7) {
+              width: 120% !important;
+            }
+
+            &:nth-child(3) {
+              width: 100% !important;
+            }
+          }
+        }
+      }
+
+      &:not(.inview) {
+        & > .bg {
+          @include transition(opacity 0.5s);
+
+          @include respond-to(m_tablet) {
+            opacity: 0;
+          }
+        }
+
+        & > .wrapper {
+          & > .content {
+            & > div {
+              &:first-child {
+                & > span {
+                  @include transition(opacity $global-transition);
+                  opacity: 0;
+                }
+              }
+            }
+          }
+          & > div:last-child {
+            @include transition(opacity 0.5s);
+            opacity: 0;
+          }
+        }
+      }
+
+      &.inview {
+        & > .bg {
+          @include transition(opacity 0.4s);
+
+          @include respond-to(m_tablet) {
+            @include transition(opacity 1.5s 1s);
+          }
+        }
+
+        & > .wrapper {
+          & > .content {
+            & > div {
+              &:first-child {
+                @for $i from 1 through 7 {
+                  & > span:nth-child(#{$i}) {
+                    @include transition(opacity 1s #{($i * 0.25s)});
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+          & > div:last-child {
+            @include transition(opacity 1.5s 1s);
+          }
+        }
+      }
+    }
+
+    &#shop {
+      position: relative;
+
+      @include respond-to(m_tablet) {
+        min-height: 0px;
+      }
+
+      & > .wrapper {
+        position: relative;
+
+        & > .content {
+          width: 100%;
+
+          @include respond-to(m_tablet) {
+            width: calc(100% - #{$globalmobile-padding * 2});
+            margin: $sectionmobilespacing auto 0px;
+            padding-bottom: $sectionmobilespacing;
+          }
+
+          & > div {
+            width: 100%;
+            margin-bottom: $global-padding;
+
+            &:last-child {
+              margin-bottom: 0px;
+            }
+
+            @include respond-to(m_tablet) {
+              margin-bottom: #{$globalmobile-padding * 2};
+
+              &:last-child {
+                margin-bottom: 0px;
+              }
+            }
+
+            $arrowwidth: 34px;
+            $mobilearrowwidth: 12px;
+
+            & > div.shopSlider {
+              width: 100%;
+              margin-top: $global-padding / 2;
+              @include setflex(row, nowrap, space-between, center, center);
+
+              @include respond-to(m_tablet) {
+                max-width: 500px;
+                margin: #{$globalmobile-padding * 1.5} auto 0px;
+              }
+
+              @include respond-to(mobile) {
+                max-width: $mobileinnersection-maxwidth;
+              }
+
+              & > .arrow {
+                width: $arrowwidth;
+                height: auto;
+                @include flex-grow(0);
+                @include flex-shrink(0);
                 cursor: pointer;
 
-                &>span {
-                    width: 26px;
-                    height: 4px;
-                    background: white;
-                    display: block;
-                    margin-bottom: 4px;
-                    position: relative;
+                @include respond-to(m_tablet) {
+                  width: $mobilearrowwidth + 5px;
+                }
 
-                    &::after {
-                        @include pseudo;
-                        position: absolute;
-                        top: 0px;
-                        left: auto;
-                        right: 0px;
-                        width: 0%;
-                        height: 100%;
-                        background: $color_green;
-                        // @include transition(width $global-transition);
-                        @include animation(mobilemenuout .25s ease 1 forwards);
+                @include respond-to(mobile) {
+                  width: $mobilearrowwidth;
+                }
+
+                & svg {
+                  width: 100%;
+                  height: auto;
+
+                  &.mobile {
+                    display: none;
+                  }
+
+                  & .stroke {
+                    @include transition(stroke $global_transition);
+                  }
+
+                  & .fill {
+                    @include transition(fill $global_transition);
+                  }
+
+                  @include respond-to(m_tablet) {
+                    display: none;
+
+                    &.mobile {
+                      display: block;
                     }
 
-                    &:last-child {
-                        margin-bottom: 0px;
+                    & .stroke {
+                      stroke: $color_green;
                     }
+
+                    & .fill {
+                      fill: $color_green;
+                    }
+                  }
+                }
+
+                &:last-child {
+                  @include transform(rotate(180deg));
                 }
 
                 body.onhover &:hover {
-                    $transitionspeed: .5s;
-
-                    &>span {
-                        background: $color_green;
-                        @include transition(background 0s $transitionspeed);
-
-                        &:nth-child(1)::after {
-                            @include animation(mobilemenuin1 $transitionspeed ease 1 forwards);
-                        }
-
-                        &:nth-child(2)::after {
-                            @include animation(mobilemenuin2 $transitionspeed ease 1 forwards);
-                        }
-
-                        &:nth-child(3)::after {
-                            @include animation(mobilemenuin3 $transitionspeed ease 1 forwards);
-                        }
+                  & svg {
+                    & .stroke {
+                      stroke: $color_green;
                     }
+
+                    & .fill {
+                      fill: $color_green;
+                    }
+
+                    @include respond-to(m_tablet) {
+                      & .stroke {
+                        stroke: white;
+                      }
+
+                      & .fill {
+                        fill: white;
+                      }
+                    }
+                  }
                 }
-            }
-        }
+              }
 
-        &>div:nth-child(2) {
-            position: fixed;
-            width: 100vw;
-            height: 100vh;
-            z-index: 12;
-            background: $color_green;
-            overflow: hidden;
-            @include transition(all $globalslow-transition);
+              & .wrapper {
+                width: calc(100% - #{$arrowwidth * 2} - #{$global-padding});
+                position: relative;
+                margin: 0px #{$global-padding / 2};
 
-            body:not(.menu_open) & {
-                height: 0px;
-            }
+                @include respond-to(m_tablet) {
+                  margin: 0px #{$globalmobile-padding + 20px};
+                  width: calc(
+                    100% - #{($mobilearrowwidth + 5px) * 2} - #{(
+                        $globalmobile-padding + 20px
+                      ) * 2}
+                  );
+                }
 
-            &>div:first-child {
-                position: fixed;
-                top: 0px;
-                right: 0px;
-                height: $mobileHeaderHeight;
-                padding: $globalmobile-padding;
-                @include setflex(row, nowrap);
-                pointer-events: none;
-                z-index: 12;
+                @include respond-to(mobile) {
+                  margin: 0px #{$globalmobile-padding};
+                  width: calc(
+                    100% - #{$mobilearrowwidth * 2} - #{$globalmobile-padding * 2}
+                  );
+                }
 
-                &>div {
-                    width: 26px;
-                    height: 26px;
-                    pointer-events: auto;
-                    cursor: pointer;
-                    position: relative;
-                    @include transition(opacity $globalslow-transition .2s);
+                & *:focus {
+                  outline: none;
+                }
 
-                    body:not(.menu_open) & {
-                        pointer-events: none !important;
-                        @include transition(opacity .2s);
-                        opacity: 0;
+                & .shop {
+                  width: 50%;
+                  @include flex-grow(0);
+                  position: relative;
+                  padding: 0px #{$global-padding / 2};
+
+                  & > * {
+                    width: 100%;
+                    height: 150px;
+
+                    @include respond-to(m_tablet) {
+                      height: 200px;
                     }
 
-                    &>span {
-                        width: 26px;
-                        height: 4px;
-                        display: block;
-                        position: absolute;
-                        top: 50%;
-                        left: 50%;
-                        @include transform(translate(-50%, -50%) rotate(45deg));
-                        @include transition(background $global-transition);
-
-                        &::after {
-                            @include pseudo;
-                            position: absolute;
-                            top: 0px;
-                            left: 0px;
-                            right: auto;
-                            width: 100%;
-                            height: 100%;
-                            background: white;
-                            z-index: 5;
-                            @include transition(background $global-transition, width $globalslow-transition .2s);
-
-                            body:not(.menu_open) & {
-                                @include transition(background $global-transition, width 0s .5s);
-                                width: 0%;
-                            }
-                        }
-
-                        &:last-child {
-                            @include transform(translate(-50%, -50%)rotate(-45deg));
-
-                            &::after {
-                                @include transition(background $global-transition, width $globalslow-transition .4s);
-
-                                body:not(.menu_open) & {
-                                    @include transition(background $global-transition, width 0s .5s);
-                                }
-                            }
-                        }
+                    @include respond-to(mobile) {
+                      height: 150px;
                     }
+
+                    display: block;
+
+                    & > img {
+                      object-fit: scale-down;
+                      width: 100%;
+                      margin: auto;
+                      display: block;
+                      height: 100%;
+                    }
+                  }
+
+                  & > a {
+                    @include transition(opacity $global-transition);
 
                     body.onhover &:hover {
-                        &>span {
-                            &::after {
-                                background: black;
-                            }
-                        }
+                      opacity: $global_opacity;
+                      cursor: pointer;
                     }
+                  }
                 }
-            }
+              }
 
-            &>div:nth-child(2) {
-                display: none;
-                height: 100vh;
-                width: 100vw;
-                position: relative;
-                @include respond-to(m_tablet) {
-                    display: block;
+              &.twoslide {
+                @include bp-min(800px) {
+                  & > .arrow {
+                    opacity: 0.25;
+                    pointer-events: none;
+                  }
                 }
-                &>div {
-                    @include flex-grow(0);
-                    @include setflex(column, nowrap, space-between, center, center);
-                    overflow: auto;
-                    padding: 50px;
-                    // @include padding-safe-bottom(50px);
-                    // @include padding-safe-top(50px);
-                    font-size: 48px;
-                    line-height: 64px;
-                    font-family: 'Amarillo';
-                    height: 100%;
+              }
+
+              &.oneslide {
+                & > .arrow {
+                  opacity: 0.25;
+                  pointer-events: none;
+                }
+
+                & div.wrapper {
+                  display: grid;
+                  grid-template: auto / 1fr 1fr;
+
+                  @include bp-max(800px) {
+                    grid-template: auto / auto;
+                  }
+
+                  & .shop {
+                    display: none;
                     width: 100%;
-                    max-height: 800px;
-                    position: absolute;
-                    top: 50%;
-                    left: 50%;
-                    @include transform(translate( -50%, -50%));
+                    margin-right: 0px;
 
-                    &::after,
-                    &::before {
-                        @include pseudo;
-                        position: relative;
-                        height: 3vh;
-                        min-height: 20px;
-                        pointer-events: none;
-                        width: 100%;
+                    &:nth-child(1) {
+                      display: block;
+                      grid-row: 1 / 2;
+                      grid-column: 1 / 2;
                     }
-                    &>span {
-                        cursor: pointer;
-                        color: black;
-                        @include transition(color $global-transition);
-
-                        body.onhover &:hover {
-                            color: white;
-                        }
-                    }
-
-                    &>div:last-child {
-                        width: 100%;
-
-                        &::before {
-                            @include pseudo;
-                            position: relative;
-                            height: 4vh;
-                            min-height: 20px;
-                            max-height: 40px;
-                            pointer-events: none;
-                            width: 100%;
-                        }
-
-                        &>div {
-                            @include setflex(row, nowrap, center, center, center);
-                            width: 100%;
-
-                            &>a {
-                                @include flex-grow(0);
-                                display: block;
-                                margin: 0px 10px;
-                                width: $tabletSocialMedia + 10px;
-                                height: $tabletSocialMedia + 10px;
-                                @include transition(opacity $global-transition);
-
-                                @include respond-to(mobile) {
-                                    width: $mobileSocialMedia;
-                                    height: $mobileSocialMedia;
-                                    margin: 0px 5px;
-                                }
-
-                                &.svg>svg {
-                                    width: 100%;
-                                    height: auto;
-                                    display: block;
-                                }
-
-                                &>img {
-                                    height: 100%;
-                                }
-
-                                body.onhover &:hover {
-                                    opacity: $global_opacity;
-                                }
-
-                                &.svg {
-                                    @include transition(opacity 0s);
-
-                                    body.onhover &:hover {
-                                        opacity: 1;
-                                    }
-                                }
-                            }
-                        }
-                    }
+                  }
                 }
+              }
             }
+          }
         }
+      }
+
+      // PRE TRANSITION
+      & > .wrapper {
+        & > .content > div {
+          @include transition(opacity $global-transition);
+          opacity: 0;
+        }
+      }
+
+      body.loaded &.inview {
+        $_transition: 1.5s;
+        $eachdelay: 0.2s;
+
+        & > .wrapper > .content {
+          @for $i from 1 to 3 {
+            & > div:nth-child(#{$i}) {
+              @include transition(
+                opacity $_transition #{(((($i - 1) * 2)) * $eachdelay)}
+              );
+              opacity: 1;
+            }
+          }
+        }
+      }
+    }
+  }
+
+  & .bottlesection_wrapper {
+    position: relative;
+    pointer-events: none;
+    z-index: 5;
+
+    & > section {
+      pointer-events: auto;
     }
 
-    & #MobileHeader,
-    & #MobileNavigation {
-        opacity: 0;
+    & .greenline {
+      pointer-events: none;
+      position: absolute;
+      top: calc(50% + 165px);
+      left: calc(50% + #{$home-offcenter});
+      @include transform(translate(-50%, -50%));
+      width: 3px;
+      height: calc(100% - 100vh + 165px);
+      background: $color_green;
 
-        body.loaded & {
-            @include transition(opacity #{$initialTranstionHome} #{$initialAnimDelayHome});
-            opacity: 1;
-        }
+      @include respond-to(height_less) {
+        top: calc(50vh);
+        @include transform(translate(-50%, 0%));
+        height: calc(100% - 50vh - 50px);
+      }
+
+      @include respond-to(tablet) {
+        left: calc(50% + #{$home-offcenter-t});
+      }
+
+      @include respond-to(m_tablet) {
+        display: none;
+      }
+
+      @include transition(opacity $global-transition);
+      opacity: 0;
+
+      body.loaded & {
+        @include transition(
+          opacity #{$initialTranstionHome} #{$initialAnimDelayHome + (
+              $initialTranstionHome / 2
+            )}
+        );
+        opacity: 1;
+      }
     }
+
+    & .bottlewrapper {
+      width: 100%;
+      height: 100vh;
+      pointer-events: none;
+      position: fixed;
+      z-index: 10;
+      top: 0%;
+      left: 0%;
+      @include transform(translate(0%, 0%));
+
+      @include respond-to(m_tablet) {
+        display: none;
+      }
+
+      &.stuck {
+        position: absolute;
+        top: auto;
+        @include transform(translate(0%, 0%));
+        bottom: 0px;
+      }
+
+      & > div {
+        pointer-events: auto;
+        width: 200px;
+        position: absolute;
+        z-index: 10;
+        top: 50%;
+        left: calc(50% + #{$home-offcenter});
+        @include transform(translate(-50%, -50%));
+
+        @include respond-to(tablet) {
+          left: calc(50% + #{$home-offcenter-t});
+        }
+
+        & > picture,
+        & > img {
+          width: 100%;
+          height: auto;
+          max-height: calc(100vh - (80px * 2));
+          object-fit: contain;
+          & > img {
+            width: 100%;
+            height: 100%;
+          }
+        }
+
+        & > #ShopButton {
+          pointer-events: auto;
+          position: absolute;
+          cursor: pointer;
+          top: auto;
+          left: 50%;
+          z-index: 10;
+          bottom: -25px;
+          @include transform(translate(-50%, 100%));
+          font-family: 'Amarillo';
+          padding: 6px 25px;
+          display: inline-block;
+          color: $color_green;
+          font-size: 30px;
+          line-height: 28px;
+          background: $color_green;
+          color: black;
+          @include transition(
+            opacity $globalslow-transition,
+            color $global-transition
+          );
+
+          @include respond-to(height_less) {
+            bottom: -10px;
+          }
+
+          &.hide {
+            opacity: 0;
+            pointer-events: none;
+          }
+
+          body.onhover &:hover {
+            color: white;
+          }
+        }
+      }
+
+      @include transition(opacity $global-transition);
+      opacity: 0;
+
+      body.loaded & {
+        @include transition(
+          opacity #{$initialTranstionHome} #{$initialAnimDelayHome}
+        );
+        opacity: 1;
+      }
+    }
+  }
+
+  & #MobileNavigation {
+    display: none;
+
+    @include respond-to(m_tablet) {
+      display: block;
+    }
+
+    & > div:first-child {
+      position: fixed;
+      top: 0px;
+      right: 0px;
+      height: $mobileHeaderHeight;
+      padding: $globalmobile-padding;
+      @include setflex(row, nowrap);
+      z-index: 12;
+
+      & > div {
+        width: 26px;
+        pointer-events: auto;
+        cursor: pointer;
+
+        & > span {
+          width: 26px;
+          height: 4px;
+          background: white;
+          display: block;
+          margin-bottom: 4px;
+          position: relative;
+
+          &::after {
+            @include pseudo;
+            position: absolute;
+            top: 0px;
+            left: auto;
+            right: 0px;
+            width: 0%;
+            height: 100%;
+            background: $color_green;
+            // @include transition(width $global-transition);
+            @include animation(mobilemenuout 0.25s ease 1 forwards);
+          }
+
+          &:last-child {
+            margin-bottom: 0px;
+          }
+        }
+
+        body.onhover &:hover {
+          $transitionspeed: 0.5s;
+
+          & > span {
+            background: $color_green;
+            @include transition(background 0s $transitionspeed);
+
+            &:nth-child(1)::after {
+              @include animation(
+                mobilemenuin1 $transitionspeed ease 1 forwards
+              );
+            }
+
+            &:nth-child(2)::after {
+              @include animation(
+                mobilemenuin2 $transitionspeed ease 1 forwards
+              );
+            }
+
+            &:nth-child(3)::after {
+              @include animation(
+                mobilemenuin3 $transitionspeed ease 1 forwards
+              );
+            }
+          }
+        }
+      }
+    }
+
+    & > div:nth-child(2) {
+      position: fixed;
+      width: 100vw;
+      height: 100vh;
+      z-index: 12;
+      background: $color_green;
+      overflow: hidden;
+      @include transition(all $globalslow-transition);
+
+      body:not(.menu_open) & {
+        height: 0px;
+      }
+
+      & > div:first-child {
+        position: fixed;
+        top: 0px;
+        right: 0px;
+        height: $mobileHeaderHeight;
+        padding: $globalmobile-padding;
+        @include setflex(row, nowrap);
+        pointer-events: none;
+        z-index: 12;
+
+        & > div {
+          width: 26px;
+          height: 26px;
+          pointer-events: auto;
+          cursor: pointer;
+          position: relative;
+          @include transition(opacity $globalslow-transition 0.2s);
+
+          body:not(.menu_open) & {
+            pointer-events: none !important;
+            @include transition(opacity 0.2s);
+            opacity: 0;
+          }
+
+          & > span {
+            width: 26px;
+            height: 4px;
+            display: block;
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            @include transform(translate(-50%, -50%) rotate(45deg));
+            @include transition(background $global-transition);
+
+            &::after {
+              @include pseudo;
+              position: absolute;
+              top: 0px;
+              left: 0px;
+              right: auto;
+              width: 100%;
+              height: 100%;
+              background: white;
+              z-index: 5;
+              @include transition(
+                background $global-transition,
+                width $globalslow-transition 0.2s
+              );
+
+              body:not(.menu_open) & {
+                @include transition(
+                  background $global-transition,
+                  width 0s 0.5s
+                );
+                width: 0%;
+              }
+            }
+
+            &:last-child {
+              @include transform(translate(-50%, -50%) rotate(-45deg));
+
+              &::after {
+                @include transition(
+                  background $global-transition,
+                  width $globalslow-transition 0.4s
+                );
+
+                body:not(.menu_open) & {
+                  @include transition(
+                    background $global-transition,
+                    width 0s 0.5s
+                  );
+                }
+              }
+            }
+          }
+
+          body.onhover &:hover {
+            & > span {
+              &::after {
+                background: black;
+              }
+            }
+          }
+        }
+      }
+
+      & > div:nth-child(2) {
+        display: none;
+        height: 100vh;
+        width: 100vw;
+        position: relative;
+        @include respond-to(m_tablet) {
+          display: block;
+        }
+        & > div {
+          @include flex-grow(0);
+          @include setflex(column, nowrap, space-between, center, center);
+          overflow: auto;
+          padding: 50px;
+          // @include padding-safe-bottom(50px);
+          // @include padding-safe-top(50px);
+          font-size: 48px;
+          line-height: 64px;
+          font-family: 'Amarillo';
+          height: 100%;
+          width: 100%;
+          max-height: 800px;
+          position: absolute;
+          top: 50%;
+          left: 50%;
+          @include transform(translate(-50%, -50%));
+
+          &::after,
+          &::before {
+            @include pseudo;
+            position: relative;
+            height: 3vh;
+            min-height: 20px;
+            pointer-events: none;
+            width: 100%;
+          }
+          & > span {
+            cursor: pointer;
+            color: black;
+            @include transition(color $global-transition);
+
+            body.onhover &:hover {
+              color: white;
+            }
+          }
+
+          & > div:last-child {
+            width: 100%;
+
+            &::before {
+              @include pseudo;
+              position: relative;
+              height: 4vh;
+              min-height: 20px;
+              max-height: 40px;
+              pointer-events: none;
+              width: 100%;
+            }
+
+            & > div {
+              @include setflex(row, nowrap, center, center, center);
+              width: 100%;
+
+              & > a {
+                @include flex-grow(0);
+                display: block;
+                margin: 0px 10px;
+                width: $tabletSocialMedia + 10px;
+                height: $tabletSocialMedia + 10px;
+                @include transition(opacity $global-transition);
+
+                @include respond-to(mobile) {
+                  width: $mobileSocialMedia;
+                  height: $mobileSocialMedia;
+                  margin: 0px 5px;
+                }
+
+                &.svg > svg {
+                  width: 100%;
+                  height: auto;
+                  display: block;
+                }
+
+                & > img {
+                  height: 100%;
+                }
+
+                body.onhover &:hover {
+                  opacity: $global_opacity;
+                }
+
+                &.svg {
+                  @include transition(opacity 0s);
+
+                  body.onhover &:hover {
+                    opacity: 1;
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  & #MobileHeader,
+  & #MobileNavigation {
+    opacity: 0;
+
+    body.loaded & {
+      @include transition(
+        opacity #{$initialTranstionHome} #{$initialAnimDelayHome}
+      );
+      opacity: 1;
+    }
+  }
 }
