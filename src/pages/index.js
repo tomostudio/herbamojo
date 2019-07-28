@@ -128,6 +128,11 @@ export default class Home extends React.Component {
 					if (MediaCheck.width.mtablet()) {
 						document.querySelector('section#about').classList.add('inview');
 					}
+				},
+				exit: () => {
+					if (MediaCheck.width.mtablet()) {
+						document.querySelector('section#about').classList.remove('inview');
+					}
 				}
 			});
 
@@ -897,7 +902,7 @@ export default class Home extends React.Component {
 									<section id="about">
 										<div className="wrapper">
 											<h1>{this.langID ? transData.about.title.id : transData.about.title.en}</h1>
-											<div className="content half">
+											<div className="content half ">
 												<div className="logo">
 													<img src={HerbamojoLogo} alt="herbamojo" />
 												</div>
@@ -988,7 +993,7 @@ export default class Home extends React.Component {
 													transData.benefits.title.en
 												)}
 											</h1>
-											<div className="content half">
+											<div className="content half flex">
 												<div>
 													<div>
 														<div id={this.AnimObject[0].id_name}>
@@ -1088,7 +1093,7 @@ export default class Home extends React.Component {
 												transData.ingredients.title.en
 											)}
 										</h1>
-										<div className="content">
+										<div className="content flex">
 											<div id="ing_sel">
 												{homeData.ingredients.map((node, id) => {
 													return (
@@ -1137,7 +1142,7 @@ export default class Home extends React.Component {
 								<section id="shop">
 									<div className="wrapper">
 										<h1>{this.langID ? transData.shop.title.id : transData.shop.title.en}</h1>
-										<div className="content">
+										<div className="content flex">
 											{(onlineshop.length > 1 || (onlineshop.length === 1 && onlineshop[0].image !== '') ) && (
 												<div>
 													<h2>
