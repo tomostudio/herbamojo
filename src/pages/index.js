@@ -275,11 +275,12 @@ export default class Home extends React.Component {
 				if (document.querySelector('#offlineslider'))
 					this.slider.offline = new Glide('#offlineslider', glidesetting).mount();
 			}
-			// TRIGGER SCROLL SNAP INIT AND PAUSE
 			if (typeof document !== `undefined`) {
-				document.body.classList.add('loaded');
+				// TRIGGER SCROLL SNAP INIT AND PAUSE
 				this.HomeScrollSnap.init();
 				this.HomeScrollSnap.pause();
+				//ADD CLASS LOADED
+				document.body.classList.add('loaded');
 			}
 
 			// INIT RESIZE

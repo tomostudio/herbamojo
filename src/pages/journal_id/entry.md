@@ -1,10 +1,10 @@
 ---
 issetting: false
 slug: journal_entry
-indonesia: false
+indonesia: true
 contenttype: journal
 index: 1
-title: Journal Entry ENGLISH
+title: Journal Entry INDONESIA
 thumbimage: ''
 seo:
   seo_image: ''
