@@ -1,71 +1,78 @@
 module.exports = {
-    siteMetadata: {
-        title: `Herbamojo Website`,
-        siteUrl: `https://herbamojo.id`,
+  siteMetadata: {
+    title: `Herbamojo Website`,
+    siteUrl: `https://herbamojo.id`
+  },
+  plugins: [
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `settings`,
+        path: `${__dirname}/src/settings`
+      }
     },
-    plugins: [{
-            resolve: 'gatsby-source-filesystem',
-            options: {
-                path: `${__dirname}/static/assets`,
-                name: 'assets',
-            },
-        }, {
-            resolve: `gatsby-plugin-manifest`,
-            options: {
-                name: "Gatsby Starter",
-                short_name: "gatsbyStarter",
-                start_url: "/",
-                background_color: "#000000",
-                theme_color: "#15C87F",
-                display: "standalone",
-                icon: "src/images/icon/icon.png",
-            },
-        },
-        {
-            resolve: `gatsby-source-filesystem`,
-            options: {
-                name: `src`,
-                path: `${__dirname}/src/`,
-            },
-        },
-        `gatsby-plugin-offline`,
-        // `gatsby-plugin-remove-serviceworker`,
-        `gatsby-plugin-netlify-cache`,
-        `gatsby-plugin-react-helmet`,
-        `gatsby-plugin-sass`,
-        {
-            resolve: `gatsby-plugin-netlify-cms`,
-            options: {
-                htmlTitle: `Content Manager | HERBAMOJO`,
-                htmlFavicon: `${__dirname}/static/icon.png`,
-            },
-        },
-        `gatsby-plugin-layout`,
-        {
-          resolve: `gatsby-plugin-sitemap`,
-          options: {
-            exclude: [`/@deploystatus`],
-          }
-        },
-        {
-            resolve: `gatsby-plugin-google-analytics`,
-            options: {
-                trackingId: "UA-97840044-2",
-            }
-        },
-        {
-            resolve: `gatsby-transformer-remark`,
-            options: {
-                plugins: [
-                    `gatsby-remark-unwrap-images`
-                ],
-            },
-        },
-        {
-            resolve: `gatsby-plugin-netlify`,
-            options: {
-                generateMatchPathRewrites: false, // boolean to turn off automatic creation of redirect rules for client only paths
-            },
-        },
-    ],
-}
+    {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        path: `${__dirname}/static/assets`,
+        name: 'assets'
+      }
+    },
+    {
+      resolve: `gatsby-plugin-manifest`,
+      options: {
+        name: 'Gatsby Starter',
+        short_name: 'gatsbyStarter',
+        start_url: '/',
+        background_color: '#000000',
+        theme_color: '#15C87F',
+        display: 'standalone',
+        icon: 'src/images/icon/icon.png'
+      }
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `src`,
+        path: `${__dirname}/src/`
+      }
+    },
+    `gatsby-plugin-offline`,
+    // `gatsby-plugin-remove-serviceworker`,
+    `gatsby-plugin-netlify-cache`,
+    `gatsby-plugin-react-helmet`,
+    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+      options: {
+        htmlTitle: `Content Manager | HERBAMOJO`,
+        htmlFavicon: `${__dirname}/static/icon.png`
+      }
+    },
+    `gatsby-plugin-layout`,
+    {
+      resolve: `gatsby-plugin-sitemap`,
+      options: {
+        exclude: [`/@deploystatus`]
+      }
+    },
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: 'UA-97840044-2'
+      }
+    },
+    {
+      resolve: `gatsby-transformer-remark`,
+      options: {
+        plugins: [`gatsby-remark-unwrap-images`]
+      }
+    },
+    {
+      resolve: `gatsby-plugin-netlify`,
+      options: {
+        generateMatchPathRewrites: false // boolean to turn off automatic creation of redirect rules for client only paths
+      }
+    }
+  ]
+};

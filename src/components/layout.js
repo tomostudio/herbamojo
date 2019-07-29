@@ -45,7 +45,7 @@ export default class Layout extends React.Component {
           const props = this.props;
           return (
             <main
-              className={`${props.mainClass} ${props.indo ? `id` : `en`}`}
+              className={`${props.mainClass} ${props.indonesia ? `id` : `en`}`}
               id={props.mainID}
             >
               <Helmet>

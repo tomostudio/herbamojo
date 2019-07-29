@@ -17,7 +17,7 @@ import { DisableScroll } from 'utils/disablescroll';
 //COMPONENTS
 import Layout from 'components/layout';
 import Footer from 'components/footer';
-import MobileHeader from 'components/mobileheader';
+import MobileHomeHeader from 'components/mobilehomeheader';
 
 //JS SVG
 import InstagramSVG from 'svg/instagram.js';
@@ -616,7 +616,7 @@ export default class Home extends React.Component {
 					});
 
 					return (
-						<Layout mainClass="home" indo={this.langID} mainID={this.MainID}>
+						<Layout mainClass="home" indonesia={this.langID} mainID={this.MainID}>
 							{this.langID && (
 								<Helmet>
 									{id_seodesc && <meta name="description" content={id_seodesc} />}
@@ -624,7 +624,7 @@ export default class Home extends React.Component {
 									{id_seodesc && <meta name="twitter:description" content={id_seodesc} />}
 								</Helmet>
 							)}
-							<MobileHeader indonesia={this.langID} />
+							<MobileHomeHeader indonesia={this.langID} />
 							<div id="MobileNavigation">
 								<div>
 									<div className="menubutton" onClick={(e) => this.menuToggle(e)}>
@@ -1455,7 +1455,7 @@ export default class Home extends React.Component {
 									</section>
 								)}
 							</div>
-							<Footer />
+							<Footer indonesia={this.langID}/>
 						</Layout>
 					);
 				}}

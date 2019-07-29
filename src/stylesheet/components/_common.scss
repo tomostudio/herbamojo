@@ -1,5 +1,7 @@
 body {
     background: black;
+    color: white;
+    font-family: 'Maison Mono';
 }
 
 body:not(.loaded) {
@@ -160,84 +162,6 @@ body.loaded main {
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-}
-
-#MobileHeader {
-    display: none;
-
-    @include respond-to(m_tablet) {
-        display: grid;
-        grid-template: auto / 1fr auto 1fr;
-        align-items: center;
-        position: fixed;
-        z-index: 11;
-        top: 0px;
-        left: 0px;
-        width: 100%;
-        height: $mobileHeaderHeight;
-        pointer-events: none;
-        padding: $globalmobile-padding;
-
-        &>*:first-child {
-            display: block;
-            grid-area: 1 / 1 /2 /2;
-            justify-self: start;
-
-            &>* {
-                pointer-events: auto;
-                font-family: 'Amarillo';
-                font-size: $font-size-button;
-                line-height: $lineheight-button;
-                // vertical-align: middle;
-                color: $color_green;
-                @include transition(color $global-transition);
-                display: inline-block;
-
-                body.onhover &:hover,
-                &.disable {
-                    cursor: pointer;
-                    color: white;
-                }
-
-                &.disable {
-                    pointer-events: none;
-                }
-
-                &:first-child {
-                    margin-right: 10px;
-                }
-            }
-        }
-
-        &>*:nth-child(2) {
-            grid-area: 1 / 2 /2 /3;
-            justify-self: center;
-            height: 40px;
-            cursor: pointer;
-            pointer-events: auto;
-            @include transition(opacity $global-transition);
-
-            body.onhover &:hover {
-                opacity: $global_opacity;
-            }
-
-            &>img {
-                height: 100%;
-            }
-        }
-    }
-
-    @include respond-to(mobile) {
-        &>*:first-child {
-            &>* {
-                font-size: $font-size-button-m;
-                line-height: $lineheight-button-m;
-                &:first-child {
-                    margin-right: 5px;
-                }
-            }
-        }
-    }
 }
 
 main {

@@ -27,5 +27,8 @@ navigation:
   journal:
     en: Journal
     id: Jurnal
+journalslug: journal
+journalperlist: 1
+errortext: Page Not Found
 ---
 

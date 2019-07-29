@@ -1,6 +1,7 @@
 import React from 'react';
 import Layout from 'components/layout';
 import Footer from 'components/footer';
+import JournalHeader from 'components/journalheader';
 import { Link, graphql } from 'gatsby';
 
 //UTILS
@@ -51,7 +52,8 @@ export default class Journal extends React.Component {
     const content = this.props.data.content.frontmatter;
     const journals = this.props.data.journals;
     return (
-      <Layout mainClass='journal' indo={this.LangID} mainID={this.MainID}>
+      <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
+      <JournalHeader indonesia={this.LangID} />
         <section>
           <div className='wrapper'>{content.title}</div>
         </section>

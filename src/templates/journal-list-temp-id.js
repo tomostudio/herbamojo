@@ -9,7 +9,7 @@ import { LoaderClass } from 'utils/loader';
 import { DisableScroll } from 'utils/disablescroll';
 
 export default class Journal extends React.Component {
-  LangID = false;
+  LangID = true;
   MainID = `journallistid`;
   disableScrollBody = null;
   JournalLoader = new LoaderClass({
@@ -51,10 +51,10 @@ export default class Journal extends React.Component {
     this.JournalLoader.renderload();
     const journals = this.props.data.journals;
     return (
-      <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
+      <Layout mainClass='journal' indo={this.LangID} mainID={this.MainID}>
         <JournalHeader indonesia={this.LangID} />
         <section>
-          journal list
+          journal list indonesia
           <div>
             {journals.edges.map((journal, id) => {
               return (
@@ -78,7 +78,7 @@ export const query = graphql`
         frontmatter: {
           issetting: { eq: false }
           contenttype: { eq: "journal" }
-          indonesia: { eq: false }
+          indonesia: { eq: true }
           active: { eq: true }
         }
       }

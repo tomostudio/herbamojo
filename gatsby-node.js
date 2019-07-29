@@ -3,6 +3,7 @@ const { createFilePath } = require(`gatsby-source-filesystem`);
 let checkstatus = false;
 let redirectObject = null;
 let journalslug = 'journal';
+let journalperList = 6;
 
 exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
   const { createRedirect } = actions;
@@ -22,10 +23,17 @@ exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
   }
 
   const { createNodeField } = actions;
-
   if (node.internal.type === `MarkdownRemark`) {
-    // if (node.frontmatter.issetting && node.frontmatter.contenttype === 'events')
-    //   eventsslug = node.frontmatter.slug;
+    if (
+      node.frontmatter.issetting &&
+      node.frontmatter.contenttype === 'general_setting'
+    )
+      journalperList = node.frontmatter.journalperlist;
+    if (
+      node.frontmatter.issetting &&
+      node.frontmatter.contenttype === 'general_setting'
+    )
+      journalslug = node.frontmatter.journalslug;
   }
 
   if (node.internal.type === `MarkdownRemark`) {
@@ -37,7 +45,7 @@ exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
     let slug = node.frontmatter.slug;
     if (!node.frontmatter.indonesia) {
       if (filepath.includes('pages/journal/'))
-			slug = `${journalslug}/${node.frontmatter.slug}`;
+        slug = `${journalslug}/${node.frontmatter.slug}`;
       createNodeField({
         node,
         name: `slug`,
@@ -71,10 +79,11 @@ exports.createPages = ({ graphql, actions }) => {
                   slug
                 }
                 frontmatter {
-									date
+                  date
                   issetting
                   contenttype
                   active
+                  indonesia
                 }
               }
             }
@@ -117,6 +126,53 @@ exports.createPages = ({ graphql, actions }) => {
           redirectObject = result.data.slug_setting.frontmatter;
           checkstatus = true;
         }
+
+        //CREATE LIST PAGE
+        const journalen = results.filter(function(data) {
+          return (data.node.frontmatter.contenttype === 'journal' && data.node.frontmatter.active === true && data.node.frontmatter.indonesia === false)
+        });
+        const journalid = results.filter(function(data) {
+          return (data.node.frontmatter.contenttype === 'journal' && data.node.frontmatter.active === true && data.node.frontmatter.indonesia === true)
+        });
+
+        //GET PAGE NUMBER
+				const lengthEN = Math.ceil(journalen.length / journalperList);
+        const lengthID = Math.ceil(journalid.length / journalperList);
+
+        //ENGLISH
+				if (lengthEN > 0) {
+					Array.from({
+						length: lengthEN
+					}).forEach((_, i) => {
+						createPage({
+							path: i === 0 ? `/${journalslug}` : `/${journalslug}/${i + 1}`,
+							component: path.resolve('./src/templates/journal-list-temp.js'),
+							context: {
+								limit: journalperList,
+								skip: i * journalperList,
+								index: i,
+								total: lengthEN
+							}
+						});
+					});
+        }
+        //INDONESIA
+				if (lengthID > 0) {
+					Array.from({
+						length: lengthID
+					}).forEach((_, i) => {
+						createPage({
+							path: i === 0 ? `/id/${journalslug}` : `/${journalslug}/${i + 1}`,
+							component: path.resolve('./src/templates/journal-list-temp-id.js'),
+							context: {
+								limit: journalperList,
+								skip: i * journalperList,
+								index: i,
+								total: lengthID
+							}
+						});
+					});
+				}
       })
     );
   });
