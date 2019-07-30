@@ -2,7 +2,6 @@ import React from 'react';
 import Transition from 'components/transition';
 
 class Loader extends React.Component {
-  loaderVH = null;
   render() {
     return (
       <div id='LoaderWrapper'>

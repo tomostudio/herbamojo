@@ -60,7 +60,7 @@ export default class Journal extends React.Component {
       // INDONESIAN URL
       englishURL = curURL.substring(3);
       indonesianURL = curURL;
-      if(content.altslug !== null && content.altslug !== ''){
+      if (content.altslug !== null && content.altslug !== '') {
         let _au = content.altslug;
         if (_au.substring(0, 1) !== '/') {
           _au = `/${_au}`;
@@ -75,7 +75,7 @@ export default class Journal extends React.Component {
       }
       englishURL = _u;
       indonesianURL = `/id${_u}`;
-      if(content.altslug !== null && content.altslug !== ''){
+      if (content.altslug !== null && content.altslug !== '') {
         let _au = content.altslug;
         if (_au.substring(0, 1) !== '/') {
           _au = `/${_au}`;
@@ -89,22 +89,25 @@ export default class Journal extends React.Component {
           indonesia={this.LangID}
           urltarget={englishURL}
           urltargetid={indonesianURL}
+          black={false}
+          journallist={false}
         />
-        <section>
-          <div className='wrapper'>{content.title}</div>
-        </section>
-        <section>
-          <div className='wrapper'>
-            {journals.edges.map((journal, id) => {
-              return (
-                <Link key={journal.node.id} to={journal.node.fields.slug}>
-                  {journal.node.frontmatter.title}
-                </Link>
-              );
-            })}
-          </div>
-        </section>
-
+        <div className='contentWrapper'>
+          <section>
+            <div className='wrapper'>{content.title}</div>
+          </section>
+          <section>
+            <div className='wrapper'>
+              {journals.edges.map((journal, id) => {
+                return (
+                  <Link key={journal.node.id} to={journal.node.fields.slug}>
+                    {journal.node.frontmatter.title}
+                  </Link>
+                );
+              })}
+            </div>
+          </section>
+        </div>
         <Footer />
       </Layout>
     );
@@ -139,11 +142,22 @@ export const query = graphql`
         }
       }
     }
-		general: markdownRemark(frontmatter: { issetting: { eq: true }, contenttype: { eq: "general_setting" } }) {
-			frontmatter {
+    general: markdownRemark(
+      frontmatter: {
+        issetting: { eq: true }
+        contenttype: { eq: "general_setting" }
+      }
+    ) {
+      frontmatter {
         journalslug
-			}
-		}
+        navigation {
+          journal {
+            en
+            id
+          }
+        }
+      }
+    }
     content: markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       id

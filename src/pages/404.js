@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from 'components/layout';
 import Footer from 'components/footer';
-import { Link, graphql } from 'gatsby';
+import { StaticQuery, graphql } from 'gatsby';
 
 //UTILS
 import { LoaderClass } from 'utils/loader';
@@ -12,7 +12,7 @@ export default class Journal extends React.Component {
   disableScrollBody = null;
   ErrorLoader = new LoaderClass({
     parent: `#${this.MainID}`,
-    default_delay: 500,
+    default_delay: 250,
     postload: () => {
       if (typeof window !== undefined) {
         window.scroll(0, 0);
@@ -44,17 +44,26 @@ export default class Journal extends React.Component {
   render() {
     this.ErrorLoader.renderload();
     return (
-      <Layout mainClass='error' indonesia={false} mainID={this.MainID}>
-        <section>
-          <div className='wrapper'>Error</div>
-        </section>
-				<Footer indonesia={false}/>
-      </Layout>
+      <StaticQuery
+        query={errorQuery}
+        render={data => {
+          return (
+            <Layout mainClass='error' indonesia={false} mainID={this.MainID}>
+              <section>
+                <div className='wrapper'>
+                  {data.general.frontmatter.errortext}
+                </div>
+              </section>
+              <Footer indonesia={false} />
+            </Layout>
+          );
+        }}
+      />
     );
   }
 }
 
-export const query = graphql`
+const errorQuery = graphql`
   query {
     general: markdownRemark(
       frontmatter: {
@@ -63,8 +72,6 @@ export const query = graphql`
       }
     ) {
       frontmatter {
-        web_name
-        journaldisable
         errortext
       }
     }

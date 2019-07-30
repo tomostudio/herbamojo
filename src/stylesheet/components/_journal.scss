@@ -1,73 +1,566 @@
 main.journal {
   & #JournalHeader {
-    display: grid;
-    grid-template: auto / 1fr auto 1fr;
-    align-items: center;
-    z-index: 11;
     top: 0px;
     left: 0px;
-    width: 100%;
-    height: $mobileHeaderHeight;
-    pointer-events: none;
-    padding: $globalmobile-padding;
     @include sticky;
-
-    & > *:first-child {
-      display: block;
-      grid-area: 1 / 1 /2 /2;
-      justify-self: start;
-
-      & > * {
-        pointer-events: auto;
+    z-index: 10;
+    width: 100%;
+    padding: 0px ($global-padding);
+    pointer-events: none;
+    @include transition(background $global-transition);
+    @include respond-to(m_tablet) {
+      padding: 0px $globalmobile-padding;
+    }
+    & > .wrapper {
+      display: grid;
+      grid-template: auto / auto 1fr auto;
+      align-items: center;
+      justify-content: stretch;
+      z-index: 11;
+      width: 100%;
+      margin: 0px auto;
+      width: 100%;
+      max-width: $global-maxwidth - (($global-padding) * 2);
+      height: $mobileHeaderHeight;
+      pointer-events: none;
+      grid-gap: 0px;
+      & > *:first-child {
+        display: block;
+        grid-area: 1 / 1 /2 /2;
+        justify-self: start;
         font-family: 'Amarillo';
         font-size: $font-size-button;
         line-height: $lineheight-button;
-        // vertical-align: middle;
-        color: $color_green;
-        @include transition(color $global-transition);
-        display: inline-block;
 
-        body.onhover &:hover,
-        &.disable {
-          cursor: pointer;
-          color: white;
-        }
-
-        &.disable {
-          pointer-events: none;
-        }
-
-        &:first-child {
-          margin-right: 10px;
-        }
-      }
-    }
-
-    & > *:nth-child(2) {
-      grid-area: 1 / 2 /2 /3;
-      justify-self: center;
-      height: 40px;
-      cursor: pointer;
-      pointer-events: auto;
-      @include transition(opacity $global-transition);
-
-      body.onhover &:hover {
-        opacity: $global_opacity;
-      }
-
-      & > img {
-        height: 100%;
-      }
-    }
-
-    @include respond-to(mobile) {
-      & > *:first-child {
         & > * {
-          font-size: $font-size-button-m;
-          line-height: $lineheight-button-m;
-          &:first-child {
-            margin-right: 5px;
+          pointer-events: auto;
+          // vertical-align: middle;
+          color: $color_green;
+          @include transition(color $global-transition);
+          display: inline-block;
+
+          body.onhover &:hover,
+          &.disable {
+            cursor: pointer;
+            color: white;
           }
+
+          &.disable {
+            pointer-events: none;
+          }
+
+          &:first-child {
+            margin-right: 10px;
+          }
+        }
+        @include respond-to(mobile) {
+          & > * {
+            font-size: $font-size-button-m;
+            line-height: $lineheight-button-m;
+            &:first-child {
+              margin-right: 5px;
+            }
+          }
+        }
+      }
+
+      & > div:nth-child(2) {
+        grid-area: 1 / 2 / 2 / 3;
+        justify-self: stretch;
+        text-align: left;
+        text-transform: uppercase;
+        font-family: 'Amarillo';
+        font-size: $font-size-title;
+        line-height: $lineheight-title;
+        letter-spacing: $letterspacing-title;
+        @include respond-to(m_tablet) {
+          display: none;
+        }
+      }
+      & > a:nth-child(2) {
+        grid-area: 1 / 2 / 2 / 3;
+        justify-self: center;
+        cursor: pointer;
+        pointer-events: auto;
+        @include transition(color $global-transition);
+        font-family: 'Amarillo';
+        font-size: $font-size-button;
+        line-height: $lineheight-button;
+        text-transform: uppercase;
+        body.onhover &:hover {
+          color: $color_green;
+        }
+        @include respond-to(m_tablet) {
+          text-transform: none;
+          grid-area: 1 / 3 / 2 / 4;
+          justify-self: right;
+          font-family: 'Maison Mono';
+          font-size: $font-size-button-m;
+          line-height: 120%;
+          text-align: right;
+          margin-left: 40px;
+        }
+        @include respond-to(mobile) {
+          font-size: 14px;
+          width: 80px;
+        }
+      }
+      & > *:nth-child(3) {
+        grid-area: 1 / 3 / 2 / 4;
+        justify-self: right;
+        height: 40px;
+        cursor: pointer;
+        pointer-events: auto;
+
+        & > img {
+          @include transition(opacity $global-transition);
+          height: 100%;
+        }
+
+        & > svg {
+          height: 100%;
+          & .fill {
+            @include transition(fill $global-transition);
+          }
+        }
+        body.onhover &:hover {
+          & > img {
+            opacity: $global_opacity;
+          }
+          & > svg {
+            & .fill {
+              fill: #fff;
+            }
+          }
+        }
+        @include respond-to(m_tablet) {
+          grid-area: 1 / 2 / 2 / 3;
+          justify-self: center;
+        }
+      }
+      @include respond-to(m_tablet) {
+        grid-template: auto / 1fr auto 1fr;
+      }
+      @include respond-to(mobile) {
+        height: 60px;
+      }
+      &.black {
+        & > *:first-child {
+          & > * {
+            body.onhover &:hover,
+            &.disable {
+              color: black;
+            }
+          }
+        }
+        & > *:nth-child(2) {
+          color: black;
+        }
+        & > *:nth-child(3) {
+          body.onhover &:hover {
+            & > svg {
+              & .fill {
+                fill: black;
+              }
+            }
+          }
+        }
+      }
+    }
+    &.list {
+      & > .wrapper {
+        padding-right: 100px;
+        padding-top: $global-padding;
+        height: 100px;
+        @include align-items(flex-start);
+        @include respond-to(m_tablet) {
+          padding-top: 0px;
+          padding-right: 0px;
+          @include align-items(center);
+          height: $mobileHeaderHeight;
+        }
+        @include respond-to(mobile) {
+          height: 60px;
+        }
+        & > *:first-child {
+          width: 100px;
+          @include respond-to(m_tablet) {
+            width: auto;
+          }
+        }
+        & > *:nth-child(3) {
+          height: 60px;
+          @include respond-to(m_tablet) {
+            height: 40px;
+          }
+        }
+      }
+    }
+    &.stuck:not(.list) {
+      background: $color_green;
+      & > .wrapper {
+        & > *:first-child {
+          & > * {
+            color: white;
+
+            body.onhover &:hover,
+            &.disable {
+              cursor: pointer;
+              color: black;
+            }
+          }
+        }
+        & > a:nth-child(2) {
+          body.onhover &:hover {
+            color: white;
+          }
+        }
+        & > *:nth-child(3) {
+          & > svg {
+            & .fill {
+              fill: white;
+            }
+          }
+          body.onhover &:hover {
+            & > svg {
+              & .fill {
+                fill: black;
+              }
+            }
+          }
+        }
+
+        &.black {
+        }
+      }
+    }
+    &.stuck.list {
+      @include respond-to(m_tablet) {
+        background: $color_green;
+        & > .wrapper {
+          & > *:first-child {
+            & > * {
+              color: white;
+
+              body.onhover &:hover,
+              &.disable {
+                cursor: pointer;
+                color: black;
+              }
+            }
+          }
+          & > a:nth-child(2) {
+            body.onhover &:hover {
+              color: white;
+            }
+          }
+          & > *:nth-child(3) {
+            & > svg {
+              & .fill {
+                fill: white;
+              }
+            }
+            body.onhover &:hover {
+              & > svg {
+                & .fill {
+                  fill: black;
+                }
+              }
+            }
+          }
+
+          &.black {
+          }
+        }
+      }
+    }
+  }
+  & section:not(.footer) {
+    margin: 0px auto;
+    width: 100%;
+    padding: 0px (100px + $global-padding);
+    @include respond-to(m_tablet) {
+      padding: 0px $globalmobile-padding;
+    }
+    & > .wrapper {
+      margin: 0px auto;
+      width: 100%;
+      padding: $global-padding 0px;
+      max-width: $global-maxwidth - ((100px + $global-padding) * 2);
+
+      @include respond-to(m_tablet) {
+        max-width: $global-maxwidth - ($global-padding * 2);
+      }
+    }
+    &.mobileTitleSection {
+      display: none;
+      @include respond-to(m_tablet) {
+        display: block;
+        text-align: center;
+        & > .wrapper {
+          padding: 40px 0px 30px;
+          & > h1 {
+            font-size: $font-size-title-m;
+            letter-spacing: $letterspacing-title-m;
+            line-height: $lineheight-title-m;
+            word-break: break-word;
+            font-family: 'Amarillo';
+            margin: 0px;
+          }
+        }
+      }
+    }
+    &.journallist {
+      padding-top: $global-padding;
+      padding-bottom: 60px;
+      @include respond-to(m_tablet) {
+        padding-top: 0px;
+        padding-bottom: 50px;
+      }
+    }
+  }
+  & > .contentWrapper {
+    min-height: calc(100vh - 80px);
+    @include respond-to(mobile) {
+      min-height: calc(100vh - 60px);
+    }
+  }
+  &.list {
+    & > .contentWrapper {
+      min-height: calc(100vh - 100px);
+      @include respond-to(mobile) {
+        min-height: calc(100vh - 60px);
+      }
+    }
+  }
+}
+
+section.journallist {
+  margin: 0px auto;
+  width: 100%;
+  padding: 0px (100px + $global-padding);
+  @include respond-to(m_tablet) {
+    padding: 0px $globalmobile-padding;
+  }
+  & > .wrapper {
+    margin: 0px auto;
+    width: 100%;
+    padding: 0px !important;
+    max-width: $global-maxwidth - ((100px + $global-padding) * 2);
+
+    @include respond-to(m_tablet) {
+      max-width: $global-maxwidth - ($global-padding * 2);
+    }
+    & .__journalcontainer {
+      width: 100%;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: auto;
+      grid-gap: 15px;
+      @include bp-max(950px) {
+        grid-template-columns: 1fr;
+      }
+      @include respond-to(m_tablet) {
+        grid-gap: 7px;
+        grid-template-columns: 1fr 1fr;
+      }
+      @include respond-to(mobile) {
+        grid-template-columns: 1fr;
+      }
+      & > a {
+        display: block;
+        width: 100%;
+        height: 0px;
+        padding-top: 9 / 16 * 100%;
+        min-height: 200px;
+        max-height: 250px;
+        position: relative;
+        color: white;
+        @include transition(color $global-transition);
+        @include respond-to(desktop_more) {
+          height: 250px;
+          padding-top: 0px;
+        }
+        @include bp-max(950px) {
+          height: 200px;
+          padding-top: 0px;
+        }
+        @include respond-to(m_tablet) {
+          padding-top: 9 / 16 * 100%;
+          min-height: 200px;
+          max-height: 250px;
+        }
+        @include respond-to(mobile) {
+          padding-top: 0px;
+          min-height: 125px;
+          height: 20vh;
+          max-height: 175px;
+        }
+        &.black {
+          color: black;
+        }
+        & > div:first-child {
+          width: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          z-index: 2;
+          padding: 0px $global-padding;
+          @include setflex(column, nowrap);
+          padding-top: 10px;
+          padding-bottom: 40px;
+          @include bp-max(1000px) {
+            padding: $globalmobile-padding;
+            padding-bottom: 25px;
+          }
+          @include respond-to(mobile) {
+            padding: $globalmobile-padding;
+          }
+          & > span {
+            margin-top: 0px;
+            display: block;
+            font-family: 'Maison Mono';
+            font-weight: 300;
+            font-size: 13px;
+            line-height: 16px;
+            text-align: center;
+          }
+          & > h2 {
+            margin: 0px;
+            margin-top: 20px;
+            display: block;
+            font-family: 'Amarillo';
+            font-size: $font-size-heading2;
+            line-height: $lineheight-heading2;
+            text-align: center;
+            @include bp-max(950px) {
+              font-size: $font-size-heading2-m;
+              line-height: $lineheight-heading2-m;
+            }
+            @include respond-to(m_tablet) {
+              margin-top: 10px;
+              font-size: $font-size-heading2-m;
+              line-height: $lineheight-heading2-m;
+            }
+            @include respond-to(smaller) {
+              margin-top: 5px;
+              font-size: 25px;
+              line-height: 100%;
+            }
+          }
+        }
+        & > picture {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0px;
+          left: 0px;
+          z-index: 0;
+          & > img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+          }
+        }
+        &::after {
+          @include pseudo;
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0px;
+          left: 0px;
+          z-index: 1;
+          background: $color_green;
+          opacity: 0;
+          @include transition(opacity $global-transition);
+        }
+        body.onhover &:hover {
+          color: black;
+          &::after {
+            opacity: 0.5;
+          }
+        }
+      }
+    }
+    & .__navcontainer {
+      margin: 0px auto;
+      margin-top: 60px;
+      width: 100%;
+      display: grid;
+      grid-template: auto / auto auto;
+      grid-gap: 0px;
+      // justify-content: center;
+      align-items: center;
+      @include bp-max(950px) {
+        grid-gap: 100px;
+      }
+      @include respond-to(m_tablet) {
+        margin-top: 50px;
+        grid-gap: 0px;
+      }
+      @include respond-to(mobile) {
+        grid-gap: 80px;
+      }
+      @include respond-to(smaller) {
+        margin-top: 30px;
+        grid-gap: 30px;
+      }
+      & > a {
+        display: block;
+        text-align: center;
+        width: 60px;
+        justify-self: center;
+        &.disable{
+          pointer-events: none;
+          opacity: .25;
+        }
+        & svg {
+          height: 60px;
+          width: 60px;
+          & .stroke {
+            @include transition(stroke $global-transition);
+          }
+        }
+        @include bp-max(950px) {
+          justify-self: right;
+          &:last-child {
+            justify-self: left;
+          }
+        }
+        @include respond-to(m_tablet) {
+          width: 40px;
+          & svg {
+            height: 40px;
+            width: 40px;
+          }
+          justify-self: center;
+          &:last-child {
+            justify-self: center;
+          }
+        }
+        @include respond-to(mobile) {
+          justify-self: right;
+          &:last-child {
+            justify-self: left;
+          }
+        }
+        @include respond-to(smaller) {
+          width: 25px;
+          & svg {
+            height: 25px;
+            width: 25px;
+          }
+        }
+        body.onhover &:hover {
+          & svg {
+            & .stroke {
+              stroke: $color_green;
+            }
+          }
+        }
+        &:last-child svg {
+          @include transform(rotate(180deg));
         }
       }
     }

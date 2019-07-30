@@ -41,7 +41,7 @@ export class InViewportClass {
     )
       this.always = obj.always;
 
-    window.addEventListener('scroll', this.trigger.bind(this), false);
+    window.addEventListener('scroll', this.trigger, false);
     this.trigger();
   }
   set(obj) {
@@ -81,13 +81,15 @@ export class InViewportClass {
 
     this.trigger();
   }
-  kill() {
-    window.removeEventListener('scroll', this.trigger.bind(this), false);
-  }
+  kill = () => {
+    window.removeEventListener('scroll', this.trigger, false);
+    // this.enter = null;
+    // this.exit = null;
+  };
   enter() {}
   exit() {}
   always() {}
-  trigger() {
+  trigger = () => {
     if (this.scrolltarget !== null) {
       let inview = InViewportDetect(
         this.scrolltarget,
@@ -110,7 +112,7 @@ export class InViewportClass {
         }
       }
     }
-  }
+  };
 }
 
 export class ScrollPassClass {
@@ -145,7 +147,7 @@ export class ScrollPassClass {
     )
       this.always = obj.always;
 
-    window.addEventListener('scroll', this.trigger.bind(this), false);
+    window.addEventListener('scroll', this.trigger, false);
     this.trigger();
   }
   set(obj) {
@@ -179,13 +181,13 @@ export class ScrollPassClass {
 
     this.trigger();
   }
-  kill() {
-    window.removeEventListener('scroll', this.trigger.bind(this), false);
-  }
+  kill = () => {
+    window.removeEventListener('scroll', this.trigger, false);
+  };
   passed() {}
   notpassed() {}
   always() {}
-  trigger() {
+  trigger = () => {
     if (this.scrolltarget !== null) {
       let passdetect = PassDetect(this.scrolltarget, this.detectbottom);
       this.always(passdetect);
@@ -199,7 +201,7 @@ export class ScrollPassClass {
         }
       }
     }
-  }
+  };
 }
 export const PassDetect = (target = null, detectbottom = true) => {
   let returnobj = {

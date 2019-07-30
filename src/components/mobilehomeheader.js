@@ -13,13 +13,11 @@ export default class MobileHomeHeader extends React.Component {
           <span className={`${!this.props.indonesia && 'disable'}`}>EN</span>
           <span className={`${this.props.indonesia && 'disable'}`}>ID</span>
         </Link>
-        <Link
-          aria-label='Herbamojo Main Page'
-          to={this.props.indonesia ? '/id' : '/'}
+        <span
           className='logo'
         >
           <img src={HerbamojoLogo} alt='herbamojo' />
-        </Link>
+        </span>
       </div>
     );
   }

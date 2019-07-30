@@ -1,19 +1,19 @@
 ---
 issetting: false
 contenttype: journal
-indonesia: true
+indonesia: false
 active: true
-slug: journal-entry
-altslug: journal-entry
+slug: journal-entry-7
+altslug: journal-entry-7
 seo:
   seo_image: ''
   seo_keywords: ''
   seo_shortdesc: ''
-date: 2019-03-22T08:01:31.713Z
-title: Journal Entry INDONESIA
+date: 2019-07-22T08:01:31.713Z
+title: Journal Entry ENGLISH 7
 thumbimage: /assets/herbamojo_productshot3.jpg
 coverimage: /assets/herbamojo_productshot3.jpg
-listcolorblack: true
-headercolorblack: true
+listcolorblack: false
+headercolorblack: false
 ---
 

@@ -1446,7 +1446,7 @@ export default class Home extends React.Component {
 									</div>
 								</section>
 								{!data.general.frontmatter.journaldisable && (
-									<section id="journal">
+									<section id="journal" className="journallist">
 										<div className="wrapper">
 											<h1>
 												{this.langID ? transData.journal.title.id : transData.journal.title.en}

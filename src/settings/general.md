@@ -3,7 +3,7 @@ issetting: true
 contenttype: general_setting
 title: General Setting
 web_name: HERBAMOJO STAGING
-journaldisable: true
+journaldisable: false
 deploy_status_password: password
 seo:
   seo_image: /assets/herbamojo_homebg.jpg
@@ -28,7 +28,10 @@ navigation:
     en: Journal
     id: Jurnal
 journalslug: journal
-journalperlist: 1
+journalperlist: 6
+journalbacktext:
+  en: Back to Journal
+  id: Back to Journal
 errortext: Page Not Found
 ---
 

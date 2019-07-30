@@ -3,7 +3,9 @@ body {
     color: white;
     font-family: 'Maison Mono';
 }
-
+html{
+    height: initial;
+}
 body:not(.loaded) {
     height: 100vh;
     overflow: hidden;

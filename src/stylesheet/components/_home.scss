@@ -1739,6 +1739,15 @@ main.home {
         }
       }
     }
+    &#journal{
+      padding-top: 40px;
+      padding-bottom: 40px;
+      @include respond-to(m_tablet) {
+        padding-top: $globalmobile-padding;
+        padding-bottom: $globalmobile-padding;
+      }
+
+    }
   }
 
   & .bottlesection_wrapper {
@@ -2214,14 +2223,8 @@ main.home {
         grid-area: 1 / 2 /2 /3;
         justify-self: center;
         height: 40px;
-        cursor: pointer;
         pointer-events: auto;
         @include transition(opacity $global-transition);
-
-        body.onhover &:hover {
-          opacity: $global_opacity;
-        }
-
         & > img {
           height: 100%;
         }

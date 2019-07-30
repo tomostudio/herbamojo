@@ -27,7 +27,7 @@ class Transition extends React.PureComponent {
   render() {
     //Destructuring props to avoid garbage this.props... in return statement
     const { children, location } = this.props;
-
+    console.log('transition render');
     return (
       //Using TransitionGroup and ReactTransition which are both
       //coming from  'react-transition-group' and are required for transitions to work
@@ -39,6 +39,11 @@ class Transition extends React.PureComponent {
           timeout={{
             enter: timeout,
             exit: timeout
+          }}
+          addEndListener={(node, done) => {
+            console.log('transition end');
+            // // use the css transitionend event to mark the finish of a transition
+            // node.addEventListener('transitionend', done, false);
           }}
         >
           {//Application of the styles depending on the status of page(entering, exiting, entered) in the DOM
