@@ -128,6 +128,7 @@ export const query = graphql`
         indonesia
         title
         date(formatString: "DD MMMM, YYYY")
+        altslug
         seo {
           seo_shortdesc
           seo_keywords

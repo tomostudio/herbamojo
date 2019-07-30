@@ -31,12 +31,13 @@ collections:
             ],
         }
       - label: "Indonesian Journal Slug"
-        name: "indoslug"
+        name: "altslug"
         widget: "relation"
         collection: "journal"
         searchFields: ["slug", "title"]
         valueField: "slug"
         displayFields: ["slug", "title"]
+        default: ''
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
       - label: "META INFO"
         name: "seo"
@@ -76,12 +77,13 @@ collections:
             ],
         }
       - label: "English Journal Slug"
-        name: "englishslug"
+        name: "altslug"
         widget: "relation"
         collection: "journal"
         searchFields: ["slug", "title"]
         valueField: "slug"
         displayFields: ["slug", "title"]
+        default: ''
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
       - label: "META INFO"
         name: "seo"
