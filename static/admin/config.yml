@@ -67,14 +67,14 @@ collections:
               'Invalid Characters'
             ],
         }
-      - label: "English Journal"
+      - label: "English Journal Slug"
         name: "englishslug"
         widget: "relation"
         collection: "journal"
         searchFields: ["slug", "title"]
         valueField: "slug"
         displayFields: ["slug", "title"]
-        hint: 'Displaying Slug and Title'
+        hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
       - label: "META INFO"
         name: "seo"
         widget: "object"
