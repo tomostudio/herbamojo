@@ -45,7 +45,7 @@ exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
     let slug = node.frontmatter.slug;
     if (!node.frontmatter.indonesia) {
       if (filepath.includes('pages/journal/'))
-        slug = `${journalslug}/${node.frontmatter.slug}`;
+        slug = `/${journalslug}/${node.frontmatter.slug}`;
       createNodeField({
         node,
         name: `slug`,
@@ -53,7 +53,7 @@ exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
       });
     } else {
       if (filepath.includes('pages/journal_id/'))
-        slug = `id/${journalslug}/${node.frontmatter.slug}`;
+        slug = `/id/${journalslug}/${node.frontmatter.slug}`;
       createNodeField({
         node,
         name: `slug`,
@@ -129,50 +129,74 @@ exports.createPages = ({ graphql, actions }) => {
 
         //CREATE LIST PAGE
         const journalen = results.filter(function(data) {
-          return (data.node.frontmatter.contenttype === 'journal' && data.node.frontmatter.active === true && data.node.frontmatter.indonesia === false)
+          return (
+            data.node.frontmatter.contenttype === 'journal' &&
+            data.node.frontmatter.active === true &&
+            data.node.frontmatter.indonesia === false
+          );
         });
         const journalid = results.filter(function(data) {
-          return (data.node.frontmatter.contenttype === 'journal' && data.node.frontmatter.active === true && data.node.frontmatter.indonesia === true)
+          return (
+            data.node.frontmatter.contenttype === 'journal' &&
+            data.node.frontmatter.active === true &&
+            data.node.frontmatter.indonesia === true
+          );
         });
 
         //GET PAGE NUMBER
-				const lengthEN = Math.ceil(journalen.length / journalperList);
+        const lengthEN = Math.ceil(journalen.length / journalperList);
         const lengthID = Math.ceil(journalid.length / journalperList);
 
         //ENGLISH
-				if (lengthEN > 0) {
-					Array.from({
-						length: lengthEN
-					}).forEach((_, i) => {
-						createPage({
-							path: i === 0 ? `/${journalslug}` : `/${journalslug}/${i + 1}`,
-							component: path.resolve('./src/templates/journal-list-temp.js'),
-							context: {
-								limit: journalperList,
-								skip: i * journalperList,
-								index: i,
-								total: lengthEN
-							}
-						});
-					});
+        if (lengthEN > 0) {
+          Array.from({
+            length: lengthEN
+          }).forEach((_, i) => {
+            let listpath;
+            if (i === 0) {
+              listpath = `/${journalslug}`;
+            } else {
+              listpath = `/${journalslug}/${i + 1}`;
+            }
+            createPage({
+              path: listpath,
+              component: path.resolve('./src/templates/journal-list-temp.js'),
+              context: {
+                limit: journalperList,
+                skip: i * journalperList,
+                index: i,
+                slug: listpath,
+                total: lengthEN
+              }
+            });
+          });
         }
         //INDONESIA
-				if (lengthID > 0) {
-					Array.from({
-						length: lengthID
-					}).forEach((_, i) => {
-						createPage({
-							path: i === 0 ? `/id/${journalslug}` : `/${journalslug}/${i + 1}`,
-							component: path.resolve('./src/templates/journal-list-temp-id.js'),
-							context: {
-								limit: journalperList,
-								skip: i * journalperList,
-								index: i,
-								total: lengthID
-							}
-						});
-					});
-				}
+        if (lengthID > 0) {
+          Array.from({
+            length: lengthID
+          }).forEach((_, i) => {
+            let listpath;
+            if (i === 0) {
+              listpath = `/id/${journalslug}`;
+            } else {
+              listpath = `/id/${journalslug}/${i + 1}`;
+            }
+            createPage({
+              path: listpath,
+              component: path.resolve(
+                './src/templates/journal-list-temp-id.js'
+              ),
+              context: {
+                limit: journalperList,
+                skip: i * journalperList,
+                index: i,
+                slug: listpath,
+                total: lengthID
+              }
+            });
+          });
+        }
       })
     );
   });

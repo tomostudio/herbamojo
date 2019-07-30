@@ -1,9 +1,8 @@
 ---
 issetting: false
-slug: journal_entry
+slug: journal-entry
 indonesia: false
 contenttype: journal
-index: 1
 title: Journal Entry ENGLISH
 thumbimage: ''
 seo:

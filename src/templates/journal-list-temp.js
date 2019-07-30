@@ -50,9 +50,29 @@ export default class Journal extends React.Component {
   render() {
     this.JournalLoader.renderload();
     const journals = this.props.data.journals;
+
+    // SET URL
+    const curURL = this.props.pageContext.slug.toString();
+    let englishURL, indonesianURL;
+    if (curURL.substring(0, 3) === '/id') {
+      englishURL = curURL.substring(3);
+      indonesianURL = curURL;
+    } else {
+      let _u = curURL;
+      if (_u.substring(0, 1) === '/') {
+        _u = `/${_u}`;
+      }
+      englishURL = _u;
+      indonesianURL = `/id${_u}`;
+    }
+
     return (
       <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
-        <JournalHeader indonesia={this.LangID} />
+        <JournalHeader
+          indonesia={this.LangID}
+          urltarget={englishURL}
+          urltargetid={indonesianURL}
+        />
         <section>
           journal list
           <div>

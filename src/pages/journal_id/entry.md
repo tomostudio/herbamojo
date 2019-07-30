@@ -3,7 +3,6 @@ issetting: false
 slug: journal_entry
 indonesia: true
 contenttype: journal
-index: 1
 title: Journal Entry INDONESIA
 thumbimage: ''
 seo:

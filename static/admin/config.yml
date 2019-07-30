@@ -5,6 +5,87 @@ backend:
 media_folder: static/assets
 public_folder: assets
 collections:
+  - name: journal
+    identifier_field: title
+    label: Journals English
+    label_singular: Journal
+    folder: src/pages/journal
+    create: true
+    preview_path: "/journal/{{fields.slug}}"
+    editor:
+      preview: false
+    fields:
+      - { name: 'issetting', label: 'issetting', widget: 'hidden', default: false, required: true, }
+      - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'case', required: true, }
+      - { name: 'indonesia', label: 'indonesia', widget: 'hidden', default: true, required: true, }
+      - { name: 'active', label: 'Active', widget: 'boolean', required: true, default: true }
+      - {
+          name: 'slug',
+          label: 'Slug',
+          widget: 'string',
+          hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: "project-slug"',
+          pattern:
+            [
+              '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+              'Invalid Characters'
+            ],
+        }
+      - label: "META INFO"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+        - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
+        - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
+        - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
+      - { name: 'date', label: 'Date', widget: 'date', required: true }
+      - { name: 'title', label: 'Title',widget: 'text', required: true}
+      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x750 | 1:1 | JPG/PNG', required: true }
+      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Flexible | JPG/PNG', required: true }
+  - name: journal_id
+    identifier_field: title
+    label: Journals Indonesian
+    label_singular: Journal
+    folder: src/pages/journal_id
+    create: true
+    preview_path: "/id/journal/{{fields.slug}}"
+    editor:
+      preview: false
+    fields:
+      - { name: 'issetting', label: 'issetting', widget: 'hidden', default: false, required: true, }
+      - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'case', required: true, }
+      - { name: 'indonesia', label: 'indonesia', widget: 'hidden', default: false, required: true, }
+      - { name: 'active', label: 'Active', widget: 'boolean', required: true, default: true }
+      - {
+          name: 'slug',
+          label: 'Slug',
+          widget: 'string',
+          hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: "project-slug"',
+          pattern:
+            [
+              '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+              'Invalid Characters'
+            ],
+        }
+      - label: "English Journal"
+        name: "English Journal"
+        widget: "relation"
+        collection: "journal"
+        searchFields: ["slug", "title"]
+        valueField: "slug"
+        displayFields: ["slug", "title"]
+      - label: "META INFO"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+        - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
+        - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
+        - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
+      - { name: 'date', label: 'Date', widget: 'date', required: true }
+      - { name: 'title', label: 'Title',widget: 'text', required: true}
+      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x750 | 1:1 | JPG/PNG', required: true }
+      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Flexible | JPG/PNG', required: true }
   - label: 'Settings'
     name: 'settings'
     delete: false
