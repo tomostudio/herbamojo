@@ -1,16 +1,17 @@
 ---
 issetting: false
-slug: journal-entry
-indonesia: false
 contenttype: journal
-title: Journal Entry ENGLISH
-thumbimage: ''
+indonesia: false
+active: true
+slug: journal-entry
+indoslug: journal-entry
 seo:
   seo_image: ''
   seo_keywords: ''
   seo_shortdesc: ''
 date: 2019-03-22T08:01:31.713Z
-coverimage: ''
-active: true
+title: Journal Entry ENGLISH
+thumbimage: /assets/herbamojo_productshot3.jpg
+coverimage: /assets/herbamojo_productshot3.jpg
 ---
-## TESTING
+
