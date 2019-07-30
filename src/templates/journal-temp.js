@@ -14,7 +14,7 @@ export default class Journal extends React.Component {
   disableScrollBody = null;
   JournalLoader = new LoaderClass({
     parent: `#${this.MainID}`,
-    default_delay: 500,
+    default_delay: 250,
     postload: () => {
       if (typeof window !== undefined) {
         window.scroll(0, 0);
@@ -50,27 +50,45 @@ export default class Journal extends React.Component {
   render() {
     this.JournalLoader.renderload();
     const content = this.props.data.content.frontmatter;
+    const general = this.props.data.general.frontmatter;
     const journals = this.props.data.journals;
 
     const curURL = this.props.pageContext.slug.toString();
     let englishURL, indonesianURL;
+
     if (curURL.substring(0, 3) === '/id') {
+      // INDONESIAN URL
       englishURL = curURL.substring(3);
       indonesianURL = curURL;
+      if(content.altslug !== null && content.altslug !== ''){
+        let _au = content.altslug;
+        if (_au.substring(0, 1) !== '/') {
+          _au = `/${_au}`;
+        }
+        englishURL = `/${general.journalslug}${_au}`;
+      }
     } else {
+      // ENGLISH URL
       let _u = curURL;
-      if (_u.substring(0, 1) === '/') {
+      if (_u.substring(0, 1) !== '/') {
         _u = `/${_u}`;
       }
       englishURL = _u;
       indonesianURL = `/id${_u}`;
+      if(content.altslug !== null && content.altslug !== ''){
+        let _au = content.altslug;
+        if (_au.substring(0, 1) !== '/') {
+          _au = `/${_au}`;
+        }
+        indonesianURL = `/id/${general.journalslug}${_au}`;
+      }
     }
-
     return (
       <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
         <JournalHeader
           indonesia={this.LangID}
-          urltarget={this.props.pageContext.slug}
+          urltarget={englishURL}
+          urltargetid={indonesianURL}
         />
         <section>
           <div className='wrapper'>{content.title}</div>
@@ -121,6 +139,11 @@ export const query = graphql`
         }
       }
     }
+		general: markdownRemark(frontmatter: { issetting: { eq: true }, contenttype: { eq: "general_setting" } }) {
+			frontmatter {
+        journalslug
+			}
+		}
     content: markdownRemark(fields: { slug: { eq: $slug } }) {
       html
       id

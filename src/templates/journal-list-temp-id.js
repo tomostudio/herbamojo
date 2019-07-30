@@ -14,7 +14,7 @@ export default class Journal extends React.Component {
   disableScrollBody = null;
   JournalLoader = new LoaderClass({
     parent: `#${this.MainID}`,
-    default_delay: 500,
+    default_delay: 250,
     postload: () => {
       if (typeof window !== undefined) {
         window.scroll(0, 0);
