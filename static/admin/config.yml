@@ -68,7 +68,7 @@ collections:
             ],
         }
       - label: "English Journal"
-        name: "English Journal"
+        name: "englishslug"
         widget: "relation"
         collection: "journal"
         searchFields: ["slug", "title"]
