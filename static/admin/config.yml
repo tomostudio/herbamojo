@@ -74,6 +74,7 @@ collections:
         searchFields: ["slug", "title"]
         valueField: "slug"
         displayFields: ["slug", "title"]
+        hint: 'Displaying Slug and Title'
       - label: "META INFO"
         name: "seo"
         widget: "object"
