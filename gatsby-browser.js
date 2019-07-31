@@ -20,22 +20,23 @@ exports.onPreRouteUpdate = ({ location }) => {
 };
 
 // DELAY SCROLL UPDATE
-const transitionDelay = 2000
+// const transitionDelay = 500
 
-exports.shouldUpdateScroll = ({
-    routerProps: {
-        location
-    },
-    getSavedScrollPosition,
-}) => {
-    if (location.action === 'PUSH') {
-        window.setTimeout(() => window.scrollTo(0, 0), transitionDelay)
-    } else {
-        const savedPosition = getSavedScrollPosition(location)
-        window.setTimeout(
-            () => window.scrollTo(...(savedPosition || [0, 0])),
-            transitionDelay
-        )
-    }
-    return false
-}
+// exports.shouldUpdateScroll = ({
+//     routerProps: {
+//         location
+//     },
+//     getSavedScrollPosition,
+// }) => {
+//     window.setTimeout(() => window.scrollTo(0, 0), transitionDelay)
+
+//     if (location.action === 'PUSH') {
+//     } else {
+//         const savedPosition = getSavedScrollPosition(location)
+//         window.setTimeout(
+//             () => window.scrollTo(...(savedPosition || [0, 0])),
+//             transitionDelay
+//         )
+//     }
+//     return false
+// }

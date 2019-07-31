@@ -14,7 +14,8 @@ class Loader extends React.Component {
 const Layout = ({ children, location }) => (
   <div id='MainLayout'>
     <Loader />
-    <Transition location={location}>{children}</Transition>
+    {children}
+    {/* <Transition location={location}>{children}</Transition> */}
   </div>
 );
 

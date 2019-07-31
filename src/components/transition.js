@@ -10,8 +10,8 @@ const timeout = 500;
 //This object contains basic styles for animation, but you can extend them to whatever you like. Be creative!
 const getTransitionStyles = {
   entering: {
+    opacity: 0,
     position: 'absolute',
-    opacity: 0
   },
   entered: {
     transition: `opacity ${timeout}ms ease-in-out`,
@@ -19,7 +19,8 @@ const getTransitionStyles = {
   },
   exiting: {
     transition: `opacity ${timeout}ms ease-in-out`,
-    opacity: 0
+    opacity: 0,
+    position: 'absolute',
   }
 };
 
@@ -27,7 +28,6 @@ class Transition extends React.PureComponent {
   render() {
     //Destructuring props to avoid garbage this.props... in return statement
     const { children, location } = this.props;
-    console.log('transition render');
     return (
       //Using TransitionGroup and ReactTransition which are both
       //coming from  'react-transition-group' and are required for transitions to work

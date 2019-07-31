@@ -3,6 +3,7 @@ import Layout from 'components/layout';
 import Footer from 'components/footer';
 import JournalHeader from 'components/journalheader';
 import { Link, graphql } from 'gatsby';
+import { Helmet } from 'react-helmet';
 
 //UTILS
 import { LoaderClass } from 'utils/loader';
@@ -10,15 +11,17 @@ import { DisableScroll } from 'utils/disablescroll';
 
 import { Arrow } from 'svg/symbols.js';
 
-export default class Journal extends React.Component {
+export default class JournalList extends React.Component {
   LangID = true;
-  MainID = `journallistid`;
+  MainID = `journallist${this.LangID ? 'id' : 'en'}${
+    this.props.pageContext.index
+  }`;
   disableScrollBody = null;
   JournalLoader = new LoaderClass({
     parent: `#${this.MainID}`,
     default_delay: 250,
     postload: () => {
-      console.log('postload id');
+      console.log('postload en');
       if (typeof document !== `undefined`) {
         document.body.classList.add('loaded');
       }
@@ -26,7 +29,6 @@ export default class Journal extends React.Component {
     }
   });
   componentDidMount() {
-    console.log('mount id');
     if (typeof document !== `undefined`) {
       document.body.classList.remove('loaded');
       if (this.LangID) {
@@ -43,15 +45,14 @@ export default class Journal extends React.Component {
     }
   }
   componentWillUnmount() {
-    console.log('unmount id');
     if (this.disableScrollBody !== null) {
       this.disableScrollBody.enable();
       this.disableScrollBody = null;
     }
   }
   render() {
-    console.log('render id');
     this.JournalLoader.renderload();
+
     const journals = this.props.data.journals;
 
     // SET URL
@@ -60,7 +61,7 @@ export default class Journal extends React.Component {
     if (this.props.pageContext.index > this.props.pageContext.alttotal - 1) {
       normalaltlinks = true;
     }
-    
+
     let englishURL, indonesianURL;
     let rawjournalurl = this.props.data.general.frontmatter.journalslug;
     if (rawjournalurl.substring(0, 1) !== '/') {
@@ -70,7 +71,7 @@ export default class Journal extends React.Component {
       //ON ID
       indonesianURL = curURL;
       englishURL = curURL.substring(3);
-      if(normalaltlinks){
+      if (normalaltlinks) {
         englishURL = rawjournalurl;
       }
     } else {
@@ -81,11 +82,12 @@ export default class Journal extends React.Component {
       }
       englishURL = _u;
       indonesianURL = `/id${_u}`;
-      if(normalaltlinks){
+      if (normalaltlinks) {
         indonesianURL = `/id${rawjournalurl}`;
       }
     }
 
+    //SET NAVIGATION
     const context = this.props.pageContext;
     let prevurl, nexturl;
     const curindex = context.index + 1;
@@ -107,8 +109,23 @@ export default class Journal extends React.Component {
       nexturl = '/';
     }
 
+    //SET TITLE TEXT
+
+    let printTitle;
+    const journaltext = this.props.data.general.frontmatter.navigation.journal;
+    if (curURL.substring(0, 3) === '/id') {
+      //ON ID
+      printTitle = journaltext.id;
+    } else {
+      //ON EN
+      printTitle = journaltext.en;
+    }
+    if(curindex > 1){
+      printTitle = `${printTitle} ${curindex}`
+    }
     return (
       <Layout
+        titleText={printTitle}
         mainClass='journal list'
         indonesia={this.LangID}
         mainID={this.MainID}
