@@ -137,7 +137,7 @@ export default class Home extends React.Component {
       });
 
       // INVIEW SETUP
-			// HOME
+      // HOME
       this.inviewArray[0] = new InViewportClass({
         target: 'section#home',
         visibility: 0.55,
@@ -150,7 +150,7 @@ export default class Home extends React.Component {
           document.querySelector('#ShopButton').classList.remove('hide');
         }
       });
-			//ABOUT 
+      //ABOUT
       this.inviewArray[1] = new InViewportClass({
         target: 'section#about',
         visibility: 0.55,
@@ -158,9 +158,9 @@ export default class Home extends React.Component {
           setNav(1);
           document.querySelector('section#about').classList.add('inview');
         }
-			});
-			
-			//ABOUT MOBILE 
+      });
+
+      //ABOUT MOBILE
       this.inviewArray[2] = new InViewportClass({
         target: 'section#about',
         visibility: 0.25,
@@ -176,7 +176,7 @@ export default class Home extends React.Component {
         }
       });
 
-			//BENEFITS 
+      //BENEFITS
       let BenefitAnimTimeout1 = null,
         BenefitAnimTimeout2 = null;
       this.inviewArray[3] = new InViewportClass({
@@ -211,9 +211,9 @@ export default class Home extends React.Component {
           if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
           if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
         }
-			});
-			
-			//BENEFITS MOBILE
+      });
+
+      //BENEFITS MOBILE
       const AllBenefits = document.querySelectorAll(
         'section#benefits .content.half>div>div'
       );
@@ -236,7 +236,7 @@ export default class Home extends React.Component {
           }
         });
       });
-			//INGREDIENTS 
+      //INGREDIENTS
       this.inviewArray[4] = new InViewportClass({
         target: 'section#ingredients',
         visibility: 0.55,
@@ -256,7 +256,7 @@ export default class Home extends React.Component {
           }
         }
       });
-			//INGREDIENTS MOBILE
+      //INGREDIENTS MOBILE
       this.inviewArray[5] = new InViewportClass({
         target: 'section#ingredients',
         visibility: 0.25,
@@ -275,7 +275,7 @@ export default class Home extends React.Component {
           }
         }
       });
-			//SHOP
+      //SHOP
       this.inviewArray[6] = new InViewportClass({
         target: 'section#shop',
         visibility: 0.55,
@@ -288,8 +288,8 @@ export default class Home extends React.Component {
           if (!MediaCheck.width.mtablet())
             document.querySelector('section#shop').classList.remove('inview');
         }
-			});
-			//SHOP MOBILE
+      });
+      //SHOP MOBILE
       this.inviewArray[7] = new InViewportClass({
         target: 'section#shop',
         visibility: 0.25,
@@ -307,14 +307,16 @@ export default class Home extends React.Component {
         target: 'section#journal',
         visibility: 0.55,
         enter: () => {
-          if (!MediaCheck.width.mtablet()){
-          	setNav(5);
+          if (!MediaCheck.width.mtablet()) {
+            setNav(5);
             document.querySelector('section#journal').classList.add('inview');
-					}
+          }
         },
         exit: () => {
           if (!MediaCheck.width.mtablet())
-            document.querySelector('section#journal').classList.remove('inview');
+            document
+              .querySelector('section#journal')
+              .classList.remove('inview');
         }
       });
       // this.inview.shopm = new InViewportClass({
@@ -335,7 +337,7 @@ export default class Home extends React.Component {
           setNav(-1);
         },
         exit: () => {
-					document.querySelector('div.overlay').classList.remove('stuck');
+          document.querySelector('div.overlay').classList.remove('stuck');
           setNav(this.SnapNav.length - 1);
         }
       });
@@ -694,943 +696,937 @@ export default class Home extends React.Component {
         this.menuToggle();
       }
     }
-	}
-	
-	render() {
-		this.IndexLoader.renderload();
+  }
 
-		if (typeof document !== `undefined`) {
-			window.addEventListener('resize', this.resize, false);
-		}
+  render() {
+    this.IndexLoader.renderload();
 
-		return (
-			<StaticQuery
-				query={indexQuery}
-				render={(data) => {
-					
-					const generalData = data.general.frontmatter;
-					const homeData = data.home.frontmatter;
-					const footerData = generalData.footer;
-					const transData = data.home.frontmatter.translations;
-					const id_seodesc = generalData.seo.seo_shortdesc_id;
+    if (typeof document !== `undefined`) {
+      window.addEventListener('resize', this.resize, false);
+    }
 
-					let journalslug = generalData.journalslug;
-					if (journalslug.substring(0, 1) !== '/') {
-						journalslug = `/${journalslug}`;
-					}
+    return (
+      <StaticQuery
+        query={indexQuery}
+        render={data => {
+          const generalData = data.general.frontmatter;
+          const homeData = data.home.frontmatter;
+          const footerData = generalData.footer;
+          const transData = data.home.frontmatter.translations;
+          const id_seodesc = generalData.seo.seo_shortdesc_id;
 
-					// ONLINE AND OFFLINE SHOP VALIDITY CHECKER
-					let offlineshop = [];
-					homeData.offlineshop.forEach(shop => {
-						if (
-							shop.image !== null &&
-							shop.image !== '' &&
-            	shop.image !== undefined
-						) {
-							offlineshop.push(shop);
-						}
-					});
+          let journalslug = generalData.journalslug;
+          if (journalslug.substring(0, 1) !== '/') {
+            journalslug = `/${journalslug}`;
+          }
 
-					let onlineshop = [];
-					homeData.onlineshop.forEach(shop => {
-						if (
-							shop.image !== null &&
-							shop.image !== '' &&
-            	shop.image !== undefined
-						) {
-							onlineshop.push(shop);
-						}
-					});
+          // ONLINE AND OFFLINE SHOP VALIDITY CHECKER
+          let offlineshop = [];
+          homeData.offlineshop.forEach(shop => {
+            if (
+              shop.image !== null &&
+              shop.image !== '' &&
+              shop.image !== undefined
+            ) {
+              offlineshop.push(shop);
+            }
+          });
 
-					let printjournal = [];
+          let onlineshop = [];
+          homeData.onlineshop.forEach(shop => {
+            if (
+              shop.image !== null &&
+              shop.image !== '' &&
+              shop.image !== undefined
+            ) {
+              onlineshop.push(shop);
+            }
+          });
 
-					if(this.langID){
-						printjournal = data.journals_id;
-					}
-					else{
-						printjournal = data.journals;
-					}
-					return (
-						<Layout mainClass='home' indonesia={this.langID} mainID={this.MainID}>
-							{this.langID && (
-								<Helmet>
-									{id_seodesc && <meta name='description' content={id_seodesc} />}
-									{id_seodesc && <meta property='og:description' content={id_seodesc} />}
-									{id_seodesc && <meta name='twitter:description' content={id_seodesc} />}
-								</Helmet>
-							)}
-							<MobileHomeHeader indonesia={this.langID} />
-							<div id='MobileNavigation'>
-								<div>
-									<div className='menubutton' onClick={(e) => this.menuToggle(e)}>
-										<span />
-										<span />
-										<span />
-									</div>
-								</div>
-								<div>
-									<div>
-										<div className='closebutton' onClick={(e) => this.menuToggle(e)}>
-											<span />
-											<span />
-										</div>
-									</div>
-									<div className='fitheight'>
-										<div>
-											<span onClick={(e) => this.mobileScroll(e)}>
-												{this.langID ? transData.home.title.id : transData.home.title.en}
-											</span>
-											<span onClick={(e) => this.mobileScroll(e)}>
-												{this.langID ? transData.about.title.id : transData.about.title.en}
-											</span>
-											<span onClick={(e) => this.mobileScroll(e)}>
-												{this.langID ? (
-													transData.benefits.title.id
-												) : (
-													transData.benefits.title.en
-												)}
-											</span>
-											<span onClick={(e) => this.mobileScroll(e)}>
-												{this.langID ? (
-													transData.ingredients.title.id
-												) : (
-													transData.ingredients.title.en
-												)}
-											</span>
-											<span onClick={(e) => this.mobileScroll(e)}>
-												{this.langID ? transData.shop.title.id : transData.shop.title.en}
-											</span>
+          let printjournal = [];
 
-											{!data.general.frontmatter.journaldisable && (
-												<span onClick={(e) => this.mobileScroll(e)}>
-													{this.langID ? (
-														transData.journal.title.id
-													) : (
-														transData.journal.title.en
-													)}
-												</span>
-											)}
-											<div>
-												<div>
-													{footerData.ig_link !== '' && (
-														<a
-															className='svg'
-															target='_blank'
-															rel='noopener noreferrer'
-															href={footerData.ig_link}
-															aria-label='Instagram'
-														>
-															<InstagramSVG />
-														</a>
-													)}
+          if (this.langID) {
+            printjournal = data.journals_id;
+          } else {
+            printjournal = data.journals;
+          }
+          return (
+            <Layout
+              mainClass='home'
+              indonesia={this.langID}
+              mainID={this.MainID}
+            >
+              {this.langID && (
+                <Helmet>
+                  {id_seodesc && (
+                    <meta name='description' content={id_seodesc} />
+                  )}
+                  {id_seodesc && (
+                    <meta property='og:description' content={id_seodesc} />
+                  )}
+                  {id_seodesc && (
+                    <meta name='twitter:description' content={id_seodesc} />
+                  )}
+                </Helmet>
+              )}
+              <MobileHomeHeader indonesia={this.langID} />
+              <div id='MobileNavigation'>
+                <div>
+                  <div className='menubutton' onClick={e => this.menuToggle(e)}>
+                    <span />
+                    <span />
+                    <span />
+                  </div>
+                </div>
+                <div>
+                  <div>
+                    <div
+                      className='closebutton'
+                      onClick={e => this.menuToggle(e)}
+                    >
+                      <span />
+                      <span />
+                    </div>
+                  </div>
+                  <div className='fitheight'>
+                    <div>
+                      <span onClick={e => this.mobileScroll(e)}>
+                        {this.langID
+                          ? transData.home.title.id
+                          : transData.home.title.en}
+                      </span>
+                      <span onClick={e => this.mobileScroll(e)}>
+                        {this.langID
+                          ? transData.about.title.id
+                          : transData.about.title.en}
+                      </span>
+                      <span onClick={e => this.mobileScroll(e)}>
+                        {this.langID
+                          ? transData.benefits.title.id
+                          : transData.benefits.title.en}
+                      </span>
+                      <span onClick={e => this.mobileScroll(e)}>
+                        {this.langID
+                          ? transData.ingredients.title.id
+                          : transData.ingredients.title.en}
+                      </span>
+                      <span onClick={e => this.mobileScroll(e)}>
+                        {this.langID
+                          ? transData.shop.title.id
+                          : transData.shop.title.en}
+                      </span>
 
-													{footerData.wa_no !== '' && (
-														<a
-															className='svg'
-															target='_blank'
-															rel='noopener noreferrer'
-															href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
-															aria-label='Whatsapp'
-														>
-															<WhatsappSVG />
-														</a>
-													)}
-													{footerData.email !== '' && (
-														<a
-															className='svg'
-															target='_blank'
-															rel='noopener noreferrer'
-															href={`mailto:${footerData.email}`}
-															aria-label='Email'
-														>
-															<EmailSVG />
-														</a>
-													)}
-												</div>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div className='overlay_wrapper'>
-								<div className='overlay'>
-									<div className='wrapper'>
-										<div>
-											<Link
-												aria-label='English'
-												className={`${!this.props.langID && 'disable'}`}
-												to='/'
-											>
-												EN
-											</Link>
-											<Link
-												aria-label='Indonesia'
-												className={`${this.props.langID && 'disable'}`}
-												to='/id'
-											>
-												ID
-											</Link>
-										</div>
-										<div className='right_nav'>
-											<div className='snap_nav'>
-												<span>
-													<span>
-														{this.langID ? (
-															transData.home.title.id
-														) : (
-															transData.home.title.en
-														)}
-													</span>
-												</span>
-												<span className='active'>
-													<span>
-														{this.langID ? (
-															transData.about.title.id
-														) : (
-															transData.about.title.en
-														)}
-													</span>
-												</span>
-												<span>
-													<span>
-														{this.langID ? (
-															transData.benefits.title.id
-														) : (
-															transData.benefits.title.en
-														)}
-													</span>
-												</span>
-												<span>
-													<span>
-														{this.langID ? (
-															transData.ingredients.title.id
-														) : (
-															transData.ingredients.title.en
-														)}
-													</span>
-												</span>
-												<span>
-													<span>
-														{this.langID ? (
-															transData.shop.title.id
-														) : (
-															transData.shop.title.en
-														)}
-													</span>
-												</span>
-												{!data.general.frontmatter.journaldisable && (
-													<span>
-														<span>
-															{this.langID ? (
-																transData.journal.title.id
-															) : (
-																transData.journal.title.en
-															)}
-														</span>
-													</span>
-												)}
-											</div>
-											<div className='social_ctn'>
-												{footerData.ig_link !== '' && (
-													<a
-														className='svg'
-														target='_blank'
-														rel='noopener noreferrer'
-														href={footerData.ig_link}
-														aria-label='Instagram'
-													>
-														<InstagramSVG />
-													</a>
-												)}
+                      {!data.general.frontmatter.journaldisable && (
+                        <span onClick={e => this.mobileScroll(e)}>
+                          {this.langID
+                            ? transData.journal.title.id
+                            : transData.journal.title.en}
+                        </span>
+                      )}
+                      <div>
+                        <div>
+                          {footerData.ig_link !== '' && (
+                            <a
+                              className='svg'
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              href={footerData.ig_link}
+                              aria-label='Instagram'
+                            >
+                              <InstagramSVG />
+                            </a>
+                          )}
 
-												{footerData.wa_no !== '' && (
-													<a
-														className='svg'
-														target='_blank'
-														rel='noopener noreferrer'
-														href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
-														aria-label='Whatsapp'
-													>
-														<WhatsappSVG />
-													</a>
-												)}
-												{footerData.email !== '' && (
-													<a
-														className='svg'
-														target='_blank'
-														rel='noopener noreferrer'
-														href={`mailto:${footerData.email}`}
-														aria-label='Email'
-													>
-														<EmailSVG />
-													</a>
-												)}
-											</div>
-										</div>
-									</div>
-								</div>
-								<div className='bottlesection_wrapper'>
-									<div className='greenline' />
-									<div className='bottlewrapper'>
-										<div>
-											<picture>
-												<source srcSet={BottleImgWebP} type='image/webp' />
-												<source srcSet={BottleImg}  type='image/jpeg' />
-												<img src={BottleImg}  alt='Herbamojo' />
-											</picture>
-											<span id='ShopButton' className='hide' onClick={this.gotoShop}>
-												{this.langID ? (
-													transData.home.shopfloat.id
-												) : (
-													transData.home.shopfloat.en
-												)}
-											</span>
-										</div>
-									</div>
-									<section id='home'>
-										<div className='wrapper'>
-											<h1 className='hidden'>{generalData.web_name}</h1>
-											<span className='logo'>
-												<img src={HerbamojoLogo} alt='herbamojo' />
-											</span>
-											<div className='content'>
-												<span>
-													{this.langID ? (
-														transData.home.kys.id.know
-													) : (
-														transData.home.kys.en.know
-													)}
-												</span>
-												<span>
-													{this.langID ? (
-														transData.home.kys.id.your
-													) : (
-														transData.home.kys.en.your
-													)}
-												</span>
-												<span>
-													{this.langID ? (
-														transData.home.kys.id.strength
-													) : (
-														transData.home.kys.en.strength
-													)}
-												</span>
-												<span id='GetButton' onClick={this.gotoShop}>
-													{this.langID ? (
-														transData.home.getyours.id
-													) : (
-														transData.home.getyours.en
-													)}
-												</span>
-											</div>
-										</div>
-										<div className='bg'>
-											<img className='paralax1' src={homeData.home.background} alt='herbamojo' />
-											<img
-												className='mobile prlx'
-												src={homeData.home.backgroundmobile}
-												alt='herbamojo'
-											/>
-										</div>
-									</section>
-									<section id='about'>
-										<div className='wrapper'>
-											<h1>{this.langID ? transData.about.title.id : transData.about.title.en}</h1>
-											<div className='content half flex '>
-												<div className='logo'>
-													<img src={HerbamojoLogo} alt='herbamojo' />
-												</div>
-												<div className='bottle'>
-													<img src={BottleImg} alt='herbamojo' />
-												</div>
-												<div className='description'>
-													{this.langID ? homeData.about.desc.id : homeData.about.desc.en}
-												</div>
-												<div className='certification'>
-													<div>
-														<img src={CertNatural} alt='herbamojo' />
-														<span>
-															{this.langID ? (
-																transData.about.cert.natural.id
-															) : (
-																transData.about.cert.natural.en
-															)}
-														</span>
-													</div>
+                          {footerData.wa_no !== '' && (
+                            <a
+                              className='svg'
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              href={`https://api.whatsapp.com/send?phone=${
+                                footerData.wa_no
+                              }`}
+                              aria-label='Whatsapp'
+                            >
+                              <WhatsappSVG />
+                            </a>
+                          )}
+                          {footerData.email !== '' && (
+                            <a
+                              className='svg'
+                              target='_blank'
+                              rel='noopener noreferrer'
+                              href={`mailto:${footerData.email}`}
+                              aria-label='Email'
+                            >
+                              <EmailSVG />
+                            </a>
+                          )}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div className='overlay_wrapper'>
+                <div className='overlay'>
+                  <div className='wrapper'>
+                    <div>
+                      <Link
+                        aria-label='English'
+                        className={`${!this.props.langID && 'disable'}`}
+                        to='/'
+                      >
+                        EN
+                      </Link>
+                      <Link
+                        aria-label='Indonesia'
+                        className={`${this.props.langID && 'disable'}`}
+                        to='/id'
+                      >
+                        ID
+                      </Link>
+                    </div>
+                    <div className='right_nav'>
+                      <div className='snap_nav'>
+                        <span>
+                          <span>
+                            {this.langID
+                              ? transData.home.title.id
+                              : transData.home.title.en}
+                          </span>
+                        </span>
+                        <span className='active'>
+                          <span>
+                            {this.langID
+                              ? transData.about.title.id
+                              : transData.about.title.en}
+                          </span>
+                        </span>
+                        <span>
+                          <span>
+                            {this.langID
+                              ? transData.benefits.title.id
+                              : transData.benefits.title.en}
+                          </span>
+                        </span>
+                        <span>
+                          <span>
+                            {this.langID
+                              ? transData.ingredients.title.id
+                              : transData.ingredients.title.en}
+                          </span>
+                        </span>
+                        <span>
+                          <span>
+                            {this.langID
+                              ? transData.shop.title.id
+                              : transData.shop.title.en}
+                          </span>
+                        </span>
+                        {!data.general.frontmatter.journaldisable && (
+                          <span>
+                            <span>
+                              {this.langID
+                                ? transData.journal.title.id
+                                : transData.journal.title.en}
+                            </span>
+                          </span>
+                        )}
+                      </div>
+                      <div className='social_ctn'>
+                        {footerData.ig_link !== '' && (
+                          <a
+                            className='svg'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            href={footerData.ig_link}
+                            aria-label='Instagram'
+                          >
+                            <InstagramSVG />
+                          </a>
+                        )}
 
-													<div>
-														<img src={CertBPOM} alt='herbamojo' />
-														<span>
-															{this.langID ? (
-																transData.about.cert.bpom.id
-															) : (
-																transData.about.cert.bpom.en
-															)}
-														</span>
-													</div>
+                        {footerData.wa_no !== '' && (
+                          <a
+                            className='svg'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            href={`https://api.whatsapp.com/send?phone=${
+                              footerData.wa_no
+                            }`}
+                            aria-label='Whatsapp'
+                          >
+                            <WhatsappSVG />
+                          </a>
+                        )}
+                        {footerData.email !== '' && (
+                          <a
+                            className='svg'
+                            target='_blank'
+                            rel='noopener noreferrer'
+                            href={`mailto:${footerData.email}`}
+                            aria-label='Email'
+                          >
+                            <EmailSVG />
+                          </a>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div className='bottlesection_wrapper'>
+                  <div className='greenline' />
+                  <div className='bottlewrapper'>
+                    <div>
+                      <picture>
+                        <source srcSet={BottleImgWebP} type='image/webp' />
+                        <source srcSet={BottleImg} type='image/jpeg' />
+                        <img src={BottleImg} alt='Herbamojo' />
+                      </picture>
+                      <span
+                        id='ShopButton'
+                        className='hide'
+                        onClick={this.gotoShop}
+                      >
+                        {this.langID
+                          ? transData.home.shopfloat.id
+                          : transData.home.shopfloat.en}
+                      </span>
+                    </div>
+                  </div>
+                  <section id='home'>
+                    <div className='wrapper'>
+                      <h1 className='hidden'>{generalData.web_name}</h1>
+                      <span className='logo'>
+                        <img src={HerbamojoLogo} alt='herbamojo' />
+                      </span>
+                      <div className='content'>
+                        <span>
+                          {this.langID
+                            ? transData.home.kys.id.know
+                            : transData.home.kys.en.know}
+                        </span>
+                        <span>
+                          {this.langID
+                            ? transData.home.kys.id.your
+                            : transData.home.kys.en.your}
+                        </span>
+                        <span>
+                          {this.langID
+                            ? transData.home.kys.id.strength
+                            : transData.home.kys.en.strength}
+                        </span>
+                        <span id='GetButton' onClick={this.gotoShop}>
+                          {this.langID
+                            ? transData.home.getyours.id
+                            : transData.home.getyours.en}
+                        </span>
+                      </div>
+                    </div>
+                    <div className='bg'>
+                      <img
+                        className='paralax1'
+                        src={homeData.home.background}
+                        alt='herbamojo'
+                      />
+                      <img
+                        className='mobile prlx'
+                        src={homeData.home.backgroundmobile}
+                        alt='herbamojo'
+                      />
+                    </div>
+                  </section>
+                  <section id='about'>
+                    <div className='wrapper'>
+                      <h1>
+                        {this.langID
+                          ? transData.about.title.id
+                          : transData.about.title.en}
+                      </h1>
+                      <div className='content half flex '>
+                        <div className='logo'>
+                          <img src={HerbamojoLogo} alt='herbamojo' />
+                        </div>
+                        <div className='bottle'>
+                          <img src={BottleImg} alt='herbamojo' />
+                        </div>
+                        <div className='description'>
+                          {this.langID
+                            ? homeData.about.desc.id
+                            : homeData.about.desc.en}
+                        </div>
+                        <div className='certification'>
+                          <div>
+                            <img src={CertNatural} alt='herbamojo' />
+                            <span>
+                              {this.langID
+                                ? transData.about.cert.natural.id
+                                : transData.about.cert.natural.en}
+                            </span>
+                          </div>
 
-													<div>
-														<img src={CertHalal} alt='herbamojo' />
-														<span>
-															{this.langID ? (
-																transData.about.cert.halal.id
-															) : (
-																transData.about.cert.halal.en
-															)}
-														</span>
-													</div>
+                          <div>
+                            <img src={CertBPOM} alt='herbamojo' />
+                            <span>
+                              {this.langID
+                                ? transData.about.cert.bpom.id
+                                : transData.about.cert.bpom.en}
+                            </span>
+                          </div>
 
-													<div>
-														<img src={CertQuality} alt='herbamojo' />
-														<span>
-															{this.langID ? (
-																transData.about.cert.quality.id
-															) : (
-																transData.about.cert.quality.en
-															)}
-														</span>
-													</div>
-													<div>
-														<img src={CertResearch} alt='herbamojo' />
-														<span>
-															{this.langID ? (
-																transData.about.cert.expert.id
-															) : (
-																transData.about.cert.expert.en
-															)}
-														</span>
-													</div>
+                          <div>
+                            <img src={CertHalal} alt='herbamojo' />
+                            <span>
+                              {this.langID
+                                ? transData.about.cert.halal.id
+                                : transData.about.cert.halal.en}
+                            </span>
+                          </div>
 
-													<div>
-														<img src={CertQuadra} alt='herbamojo' />
-														<span>
-															{this.langID ? (
-																transData.about.cert.quadra.id
-															) : (
-																transData.about.cert.quadra.en
-															)}
-														</span>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div className='bg'>
-											<img className='paralax2' src={homeData.about.background} alt='herbamojo' />
-										</div>
-									</section>
-									<section id='benefits'>
-										<div className='wrapper'>
-											<h1>
-												{this.langID ? (
-													transData.benefits.title.id
-												) : (
-													transData.benefits.title.en
-												)}
-											</h1>
-											<div className='content half flex'>
-												<div>
-													<div>
-														<div id={this.AnimObject[0].id_name}>
-														</div>
-														<div>
-															<span>
-																{this.langID ? (
-																	transData.benefits.stamina.id.line1
-																) : (
-																	transData.benefits.stamina.en.line1
-																)}
-															</span>
-															<span>
-																{this.langID ? (
-																	transData.benefits.stamina.id.line2
-																) : (
-																	transData.benefits.stamina.en.line2
-																)}
-															</span>
-														</div>
-													</div>
-													<div>
-														<div id={this.AnimObject[1].id_name}>
-														</div>
-														<div>
-															<span>
-																{this.langID ? (
-																	transData.benefits.increases.id.line1
-																) : (
-																	transData.benefits.increases.en.line1
-																)}
-															</span>
-															<span>
-																{this.langID ? (
-																	transData.benefits.increases.id.line2
-																) : (
-																	transData.benefits.increases.en.line2
-																)}
-															</span>
-														</div>
-													</div>
-													<div>
-														<div id={this.AnimObject[2].id_name}>
-														</div>
-														<div>
-															<span>
-																{this.langID ? (
-																	transData.benefits.immune.id.line1
-																) : (
-																	transData.benefits.immune.en.line1
-																)}
-															</span>
-															<span>
-																{this.langID ? (
-																	transData.benefits.immune.id.line2
-																) : (
-																	transData.benefits.immune.en.line2
-																)}
-															</span>
-														</div>
-													</div>
-													<div>
-														<div id={this.AnimObject[3].id_name}>
-														</div>
-														<div>
-															<span>
-																{this.langID ? (
-																	transData.benefits.enhance.id.line1
-																) : (
-																	transData.benefits.enhance.en.line1
-																)}
-															</span>
-															<span>
-																{this.langID ? (
-																	transData.benefits.enhance.id.line2
-																) : (
-																	transData.benefits.enhance.en.line2
-																)}
-															</span>
-														</div>
-													</div>
-												</div>
-											</div>
-										</div>
-									</section>
-								</div>
-								<section id='ingredients'>
-									<div className='wrapper'>
-										<h1>
-											{this.langID ? (
-												transData.ingredients.title.id
-											) : (
-												transData.ingredients.title.en
-											)}
-										</h1>
-										<div className='content flex'>
-											<div id='ing_sel'>
-												{homeData.ingredients.map((node, id) => {
-													return (
-														<span
-															key={id}
-															className='active'
-															data-desc={this.langID ? node.desc.id : node.desc.en}
-														>
-															<div onClick={(e) => this.ingredientClick(e)}>
-																<span>
-																	{this.langID ? node.title.id : node.title.en}
-																</span>
-																<span>
-																	{this.langID ? node.title.id : node.title.en}
-																</span>
-															</div>
-															<div>
-																<div>{this.langID ? node.desc.id : node.desc.en}</div>
-															</div>
-														</span>
-													);
-												})}
-											</div>
-										</div>
-										<div>
-											<div id='ing_display'>
-												<div id='ing_display_number'>1</div>
-												<div id='ing_display_description'>
-													{this.langID ? (
-														homeData.ingredients[0].desc.id
-													) : (
-														homeData.ingredients[0].desc.en
-													)}
-												</div>
-											</div>
-										</div>
-									</div>
-									<div className='bg'>
-										<div id='ing_bg'>
-											{homeData.ingredients.map((node, id) => {
-												return <img key={id} src={node.image} alt='herbamojo' />;
-											})}
-										</div>
-									</div>
-								</section>
-								<section id='shop'>
-									<div className='wrapper'>
-										<h1>{this.langID ? transData.shop.title.id : transData.shop.title.en}</h1>
-										<div className='content flex'>
-											{(onlineshop.length > 1 || (onlineshop.length === 1 && onlineshop[0].image !== '') ) && (
-												<div>
-													<h2>
-														{this.langID ? (
-															transData.shop.online.id
-														) : (
-															transData.shop.online.en
-														)}
-													</h2>
-													<div
-														id='onlineshop'
-														className={`shopSlider ${onlineshop.length === 1
-															? ' oneslide'
-															: ''} ${onlineshop.length === 2
-															? ' twoslide'
-															: ''}`}
-													>
-														{onlineshop.length > 1 ? (
-															<div
-																className='arrow'
-																onClick={() => {
-																	if (this.slider.online) this.slider.online.go('<');
-																}}
-															>
-																<Arrow />
-																<ArrowSmaller classProps='mobile' />
-															</div>
-														) : (
-															<div className='arrow'>
-																<Arrow />
-																<ArrowSmaller classProps='mobile' />
-															</div>
-														)}
+                          <div>
+                            <img src={CertQuality} alt='herbamojo' />
+                            <span>
+                              {this.langID
+                                ? transData.about.cert.quality.id
+                                : transData.about.cert.quality.en}
+                            </span>
+                          </div>
+                          <div>
+                            <img src={CertResearch} alt='herbamojo' />
+                            <span>
+                              {this.langID
+                                ? transData.about.cert.expert.id
+                                : transData.about.cert.expert.en}
+                            </span>
+                          </div>
 
-														{onlineshop.length > 1 ? (
-															<div id='onlineslider' className='glide wrapper'>
-																<div data-glide-el='track' className='glide__track'>
-																	<div className='glide__slides '>
-																		{onlineshop.map((node, id) => {
-																			return (
-																				<div
-																					className='shop glide__slide'
-																					key={id}
-																					dataid={id}
-																				>
-																					{node.link ? (
-																						<a
-																							target='_blank'
-																							rel='noopener noreferrer'
-																							href={node.link}
-																							style={{
-																								background:
-																									node.background !==
-																									null
-																										? node.background
-																										: 'transparent'
-																							}}
-																							aria-label='Shop Slider'
-																						>
-																							<img
-																								src={node.image}
-																								alt='herbamojo'
-																							/>
-																						</a>
-																					) : (
-																						<div
-																							style={{
-																								background:
-																									node.background !==
-																									null
-																										? node.background
-																										: 'transparent'
-																							}}
-																						>
-																							<img
-																								src={node.image}
-																								alt='herbamojo'
-																							/>
-																						</div>
-																					)}
-																				</div>
-																			);
-																		})}
-																	</div>
-																</div>
-															</div>
-														) : (
-															<div className='wrapper'>
-																{onlineshop.map((node, id) => {
-																	return (
-																		<div className='shop' key={id} dataid={id}>
-																			{node.link ? (
-																				<a
-																					target='_blank'
-																					rel='noopener noreferrer'
-																					href={node.link}
-																					style={{
-																						background:
-																							node.background !== null
-																								? node.background
-																								: 'transparent'
-																					}}
-																					aria-label='Shop Slider'
-																				>
-																					<img
-																						src={node.image}
-																						alt='herbamojo'
-																					/>
-																				</a>
-																			) : (
-																				<div
-																					style={{
-																						background:
-																							node.background !== null
-																								? node.background
-																								: 'transparent'
-																					}}
-																				>
-																					<img
-																						src={node.image}
-																						alt='herbamojo'
-																					/>
-																				</div>
-																			)}
-																		</div>
-																	);
-																})};
-															</div>
-														)}
-														{onlineshop.length > 1 ? (
-															<div
-																className='arrow'
-																onClick={() => {
-																	if (this.slider.online) this.slider.online.go('>');
-																}}
-															>
-																<Arrow />
-																<ArrowSmaller classProps='mobile' />
-															</div>
-														) : (
-															<div className='arrow'>
-																<Arrow />
-																<ArrowSmaller classProps='mobile' />
-															</div>
-														)}
-													</div>
-												</div>
-											)}
-											{(offlineshop.length > 1 || (offlineshop.length === 1 && offlineshop[0].image !== '') ) && (
-												<div>
-													<h2>
-														{this.langID ? (
-															transData.shop.offline.id
-														) : (
-															transData.shop.offline.en
-														)}
-													</h2>
-													<div
-														id='offlineshop'
-														className={`shopSlider ${offlineshop.length === 1
-															? ' oneslide'
-															: ''} ${offlineshop.length === 2
-															? ' twoslide'
-															: ''}`}
-													>
-														{offlineshop.length > 1 ? (
-															<div
-																className='arrow'
-																onClick={() => {
-																	if (this.slider.offline)
-																		this.slider.offline.go('<');
-																}}
-															>
-																<Arrow />
-																<ArrowSmaller classProps='mobile' />
-															</div>
-														) : (
-															<div className='arrow'>
-																<Arrow />
-																<ArrowSmaller classProps='mobile' />
-															</div>
-														)}
+                          <div>
+                            <img src={CertQuadra} alt='herbamojo' />
+                            <span>
+                              {this.langID
+                                ? transData.about.cert.quadra.id
+                                : transData.about.cert.quadra.en}
+                            </span>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div className='bg'>
+                      <img
+                        className='paralax2'
+                        src={homeData.about.background}
+                        alt='herbamojo'
+                      />
+                    </div>
+                  </section>
+                  <section id='benefits'>
+                    <div className='wrapper'>
+                      <h1>
+                        {this.langID
+                          ? transData.benefits.title.id
+                          : transData.benefits.title.en}
+                      </h1>
+                      <div className='content half flex'>
+                        <div>
+                          <div>
+                            <div id={this.AnimObject[0].id_name} />
+                            <div>
+                              <span>
+                                {this.langID
+                                  ? transData.benefits.stamina.id.line1
+                                  : transData.benefits.stamina.en.line1}
+                              </span>
+                              <span>
+                                {this.langID
+                                  ? transData.benefits.stamina.id.line2
+                                  : transData.benefits.stamina.en.line2}
+                              </span>
+                            </div>
+                          </div>
+                          <div>
+                            <div id={this.AnimObject[1].id_name} />
+                            <div>
+                              <span>
+                                {this.langID
+                                  ? transData.benefits.increases.id.line1
+                                  : transData.benefits.increases.en.line1}
+                              </span>
+                              <span>
+                                {this.langID
+                                  ? transData.benefits.increases.id.line2
+                                  : transData.benefits.increases.en.line2}
+                              </span>
+                            </div>
+                          </div>
+                          <div>
+                            <div id={this.AnimObject[2].id_name} />
+                            <div>
+                              <span>
+                                {this.langID
+                                  ? transData.benefits.immune.id.line1
+                                  : transData.benefits.immune.en.line1}
+                              </span>
+                              <span>
+                                {this.langID
+                                  ? transData.benefits.immune.id.line2
+                                  : transData.benefits.immune.en.line2}
+                              </span>
+                            </div>
+                          </div>
+                          <div>
+                            <div id={this.AnimObject[3].id_name} />
+                            <div>
+                              <span>
+                                {this.langID
+                                  ? transData.benefits.enhance.id.line1
+                                  : transData.benefits.enhance.en.line1}
+                              </span>
+                              <span>
+                                {this.langID
+                                  ? transData.benefits.enhance.id.line2
+                                  : transData.benefits.enhance.en.line2}
+                              </span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+                </div>
+                <section id='ingredients'>
+                  <div className='wrapper'>
+                    <h1>
+                      {this.langID
+                        ? transData.ingredients.title.id
+                        : transData.ingredients.title.en}
+                    </h1>
+                    <div className='content flex'>
+                      <div id='ing_sel'>
+                        {homeData.ingredients.map((node, id) => {
+                          return (
+                            <span
+                              key={id}
+                              className='active'
+                              data-desc={
+                                this.langID ? node.desc.id : node.desc.en
+                              }
+                            >
+                              <div onClick={e => this.ingredientClick(e)}>
+                                <span>
+                                  {this.langID ? node.title.id : node.title.en}
+                                </span>
+                                <span>
+                                  {this.langID ? node.title.id : node.title.en}
+                                </span>
+                              </div>
+                              <div>
+                                <div>
+                                  {this.langID ? node.desc.id : node.desc.en}
+                                </div>
+                              </div>
+                            </span>
+                          );
+                        })}
+                      </div>
+                    </div>
+                    <div>
+                      <div id='ing_display'>
+                        <div id='ing_display_number'>1</div>
+                        <div id='ing_display_description'>
+                          {this.langID
+                            ? homeData.ingredients[0].desc.id
+                            : homeData.ingredients[0].desc.en}
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div className='bg'>
+                    <div id='ing_bg'>
+                      {homeData.ingredients.map((node, id) => {
+                        return (
+                          <img key={id} src={node.image} alt='herbamojo' />
+                        );
+                      })}
+                    </div>
+                  </div>
+                </section>
+                <section id='shop'>
+                  <div className='wrapper'>
+                    <h1>
+                      {this.langID
+                        ? transData.shop.title.id
+                        : transData.shop.title.en}
+                    </h1>
+                    <div className='content flex'>
+                      {(onlineshop.length > 1 ||
+                        (onlineshop.length === 1 &&
+                          onlineshop[0].image !== '')) && (
+                        <div>
+                          <h2>
+                            {this.langID
+                              ? transData.shop.online.id
+                              : transData.shop.online.en}
+                          </h2>
+                          <div
+                            id='onlineshop'
+                            className={`shopSlider ${
+                              onlineshop.length === 1 ? ' oneslide' : ''
+                            } ${onlineshop.length === 2 ? ' twoslide' : ''}`}
+                          >
+                            {onlineshop.length > 1 ? (
+                              <div
+                                className='arrow'
+                                onClick={() => {
+                                  if (this.slider.online)
+                                    this.slider.online.go('<');
+                                }}
+                              >
+                                <Arrow />
+                                <ArrowSmaller classProps='mobile' />
+                              </div>
+                            ) : (
+                              <div className='arrow'>
+                                <Arrow />
+                                <ArrowSmaller classProps='mobile' />
+                              </div>
+                            )}
 
-														{offlineshop.length > 1 ? (
-															<div id='offlineslider' className='glide wrapper'>
-																<div data-glide-el='track' className='glide__track'>
-																	<div className='glide__slides '>
-																		{offlineshop.map((node, id) => {
-																			return (
-																				<div
-																					className='shop glide__slide'
-																					key={id}
-																					dataid={id}
-																				>
-																					{node.link ? (
-																						<a
-																							target='_blank'
-																							rel='noopener noreferrer'
-																							href={node.link}
-																							style={{
-																								background:
-																									node.background !==
-																									null
-																										? node.background
-																										: 'transparent'
-																							}}
-																							aria-label='Shop Slider'
-																						>
-																							<img
-																								src={node.image}
-																								alt='herbamojo'
-																							/>
-																						</a>
-																					) : (
-																						<div
-																							style={{
-																								background:
-																									node.background !==
-																									null
-																										? node.background
-																										: 'transparent'
-																							}}
-																						>
-																							<img
-																								src={node.image}
-																								alt='herbamojo'
-																							/>
-																						</div>
-																					)}
-																				</div>
-																			);
-																		})}
-																	</div>
-																</div>
-															</div>
-														) : (
-															<div className='wrapper'>
-																{offlineshop.map((node, id) => {
-																	return (
-																		<div className='shop' key={id} dataid={id}>
-																			{node.link ? (
-																				<a
-																					target='_blank'
-																					rel='noopener noreferrer'
-																					href={node.link}
-																					style={{
-																						background:
-																							node.background !== null
-																								? node.background
-																								: 'transparent'
-																					}}
-																					aria-label='Shop Slider'
-																				>
-																					<img
-																						src={node.image}
-																						alt='herbamojo'
-																					/>
-																				</a>
-																			) : (
-																				<div
-																					style={{
-																						background:
-																							node.background !== null
-																								? node.background
-																								: 'transparent'
-																					}}
-																				>
-																					<img
-																						src={node.image}
-																						alt='herbamojo'
-																					/>
-																				</div>
-																			)}
-																		</div>
-																	);
-																})}
-															</div>
-														)}
-														{offlineshop.length > 1 ? (
-															<div
-																className='arrow'
-																onClick={() => {
-																	if (this.slider.offline)
-																		this.slider.offline.go('>');
-																}}
-															>
-																<Arrow />
-																<ArrowSmaller classProps='mobile' />
-															</div>
-														) : (
-															<div className='arrow'>
-																<Arrow />
-																<ArrowSmaller classProps='mobile' />
-															</div>
-														)}
-													</div>
-												</div>
-											)}
-										</div>
-									</div>
-								</section>
-								{!data.general.frontmatter.journaldisable && (
-									<section id='journal' className='journallist'>
-										<div className='wrapper'>
-											<h1>
-												{this.langID ? transData.journal.title.id : transData.journal.title.en}
-											</h1>
+                            {onlineshop.length > 1 ? (
+                              <div id='onlineslider' className='glide wrapper'>
+                                <div
+                                  data-glide-el='track'
+                                  className='glide__track'
+                                >
+                                  <div className='glide__slides '>
+                                    {onlineshop.map((node, id) => {
+                                      return (
+                                        <div
+                                          className='shop glide__slide'
+                                          key={id}
+                                          dataid={id}
+                                        >
+                                          {node.link ? (
+                                            <a
+                                              target='_blank'
+                                              rel='noopener noreferrer'
+                                              href={node.link}
+                                              style={{
+                                                background:
+                                                  node.background !== null
+                                                    ? node.background
+                                                    : 'transparent'
+                                              }}
+                                              aria-label='Shop Slider'
+                                            >
+                                              <img
+                                                src={node.image}
+                                                alt='herbamojo'
+                                              />
+                                            </a>
+                                          ) : (
+                                            <div
+                                              style={{
+                                                background:
+                                                  node.background !== null
+                                                    ? node.background
+                                                    : 'transparent'
+                                              }}
+                                            >
+                                              <img
+                                                src={node.image}
+                                                alt='herbamojo'
+                                              />
+                                            </div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className='wrapper'>
+                                {onlineshop.map((node, id) => {
+                                  return (
+                                    <div className='shop' key={id} dataid={id}>
+                                      {node.link ? (
+                                        <a
+                                          target='_blank'
+                                          rel='noopener noreferrer'
+                                          href={node.link}
+                                          style={{
+                                            background:
+                                              node.background !== null
+                                                ? node.background
+                                                : 'transparent'
+                                          }}
+                                          aria-label='Shop Slider'
+                                        >
+                                          <img
+                                            src={node.image}
+                                            alt='herbamojo'
+                                          />
+                                        </a>
+                                      ) : (
+                                        <div
+                                          style={{
+                                            background:
+                                              node.background !== null
+                                                ? node.background
+                                                : 'transparent'
+                                          }}
+                                        >
+                                          <img
+                                            src={node.image}
+                                            alt='herbamojo'
+                                          />
+                                        </div>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                                ;
+                              </div>
+                            )}
+                            {onlineshop.length > 1 ? (
+                              <div
+                                className='arrow'
+                                onClick={() => {
+                                  if (this.slider.online)
+                                    this.slider.online.go('>');
+                                }}
+                              >
+                                <Arrow />
+                                <ArrowSmaller classProps='mobile' />
+                              </div>
+                            ) : (
+                              <div className='arrow'>
+                                <Arrow />
+                                <ArrowSmaller classProps='mobile' />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                      {(offlineshop.length > 1 ||
+                        (offlineshop.length === 1 &&
+                          offlineshop[0].image !== '')) && (
+                        <div>
+                          <h2>
+                            {this.langID
+                              ? transData.shop.offline.id
+                              : transData.shop.offline.en}
+                          </h2>
+                          <div
+                            id='offlineshop'
+                            className={`shopSlider ${
+                              offlineshop.length === 1 ? ' oneslide' : ''
+                            } ${offlineshop.length === 2 ? ' twoslide' : ''}`}
+                          >
+                            {offlineshop.length > 1 ? (
+                              <div
+                                className='arrow'
+                                onClick={() => {
+                                  if (this.slider.offline)
+                                    this.slider.offline.go('<');
+                                }}
+                              >
+                                <Arrow />
+                                <ArrowSmaller classProps='mobile' />
+                              </div>
+                            ) : (
+                              <div className='arrow'>
+                                <Arrow />
+                                <ArrowSmaller classProps='mobile' />
+                              </div>
+                            )}
 
-											<div className='content flex'>
-												<div className='__journalcontainer'>
-													{printjournal.edges.map((journal, id) => {
-														return (
-															<Link
-																key={journal.node.id}
-																to={journal.node.fields.slug}
-																className={
-																	journal.node.frontmatter.listcolorblack ? 'black' : ''
-																}
-															>
-																<div>
-																	<span>{journal.node.frontmatter.date}</span>
-																	<h2>{journal.node.frontmatter.title}</h2>
-																</div>
-																<picture>
-																	<source
-																		srcSet={journal.node.frontmatter.thumbimage}
-																		type='image/jpeg'
-																	/>
-																	<img
-																		src={journal.node.frontmatter.thumbimage}
-																		alt='Herbamojo'
-																	/>
-																</picture>
-															</Link>
-														);
-													})}
-											</div>
-												{printjournal.length > 1 && (
-													<Link className="viewall" to={this.langID ? `/id${journalslug}` : `${journalslug}`}  aria-label='Go to Journal'>
-														{this.langID ? (
-															transData.journal.viewall.id
-														) : (
-															transData.journal.viewall.en
-														)}
-													</Link>
-												)}
-											</div>
-										</div>
-									</section>
-								)}
-							</div>
-							<Footer indonesia={this.langID}/>
-						</Layout>
-					);
-				}}
-			/>
-		);
-	}
+                            {offlineshop.length > 1 ? (
+                              <div id='offlineslider' className='glide wrapper'>
+                                <div
+                                  data-glide-el='track'
+                                  className='glide__track'
+                                >
+                                  <div className='glide__slides '>
+                                    {offlineshop.map((node, id) => {
+                                      return (
+                                        <div
+                                          className='shop glide__slide'
+                                          key={id}
+                                          dataid={id}
+                                        >
+                                          {node.link ? (
+                                            <a
+                                              target='_blank'
+                                              rel='noopener noreferrer'
+                                              href={node.link}
+                                              style={{
+                                                background:
+                                                  node.background !== null
+                                                    ? node.background
+                                                    : 'transparent'
+                                              }}
+                                              aria-label='Shop Slider'
+                                            >
+                                              <img
+                                                src={node.image}
+                                                alt='herbamojo'
+                                              />
+                                            </a>
+                                          ) : (
+                                            <div
+                                              style={{
+                                                background:
+                                                  node.background !== null
+                                                    ? node.background
+                                                    : 'transparent'
+                                              }}
+                                            >
+                                              <img
+                                                src={node.image}
+                                                alt='herbamojo'
+                                              />
+                                            </div>
+                                          )}
+                                        </div>
+                                      );
+                                    })}
+                                  </div>
+                                </div>
+                              </div>
+                            ) : (
+                              <div className='wrapper'>
+                                {offlineshop.map((node, id) => {
+                                  return (
+                                    <div className='shop' key={id} dataid={id}>
+                                      {node.link ? (
+                                        <a
+                                          target='_blank'
+                                          rel='noopener noreferrer'
+                                          href={node.link}
+                                          style={{
+                                            background:
+                                              node.background !== null
+                                                ? node.background
+                                                : 'transparent'
+                                          }}
+                                          aria-label='Shop Slider'
+                                        >
+                                          <img
+                                            src={node.image}
+                                            alt='herbamojo'
+                                          />
+                                        </a>
+                                      ) : (
+                                        <div
+                                          style={{
+                                            background:
+                                              node.background !== null
+                                                ? node.background
+                                                : 'transparent'
+                                          }}
+                                        >
+                                          <img
+                                            src={node.image}
+                                            alt='herbamojo'
+                                          />
+                                        </div>
+                                      )}
+                                    </div>
+                                  );
+                                })}
+                              </div>
+                            )}
+                            {offlineshop.length > 1 ? (
+                              <div
+                                className='arrow'
+                                onClick={() => {
+                                  if (this.slider.offline)
+                                    this.slider.offline.go('>');
+                                }}
+                              >
+                                <Arrow />
+                                <ArrowSmaller classProps='mobile' />
+                              </div>
+                            ) : (
+                              <div className='arrow'>
+                                <Arrow />
+                                <ArrowSmaller classProps='mobile' />
+                              </div>
+                            )}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </section>
+                {!data.general.frontmatter.journaldisable && (
+                  <section id='journal' className='journallist'>
+                    <div className='wrapper'>
+                      <h1>
+                        {this.langID
+                          ? transData.journal.title.id
+                          : transData.journal.title.en}
+                      </h1>
+
+                      <div className='content flex'>
+                        <div className='__journalcontainer'>
+                          {printjournal.edges.map((journal, id) => {
+                            return (
+                              <Link
+                                key={journal.node.id}
+                                to={journal.node.fields.slug}
+                                className={
+                                  journal.node.frontmatter.listcolorblack
+                                    ? 'black'
+                                    : ''
+                                }
+                              >
+                                <div>
+                                  <span>{journal.node.frontmatter.date}</span>
+                                  <h2>{journal.node.frontmatter.title}</h2>
+                                </div>
+                                <picture>
+                                  <source
+                                    srcSet={journal.node.frontmatter.thumbimage}
+                                    type='image/jpeg'
+                                  />
+                                  <img
+                                    src={journal.node.frontmatter.thumbimage}
+                                    alt='Herbamojo'
+                                  />
+                                </picture>
+                              </Link>
+                            );
+                          })}
+                        </div>
+                        {printjournal.length > 1 && (
+                          <Link
+                            className='viewall'
+                            to={
+                              this.langID
+                                ? `/id${journalslug}`
+                                : `${journalslug}`
+                            }
+                            aria-label='Go to Journal'
+                          >
+                            {this.langID
+                              ? transData.journal.viewall.id
+                              : transData.journal.viewall.en}
+                          </Link>
+                        )}
+                      </div>
+                    </div>
+                  </section>
+                )}
+              </div>
+              <Footer indonesia={this.langID} />
+            </Layout>
+          );
+        }}
+      />
+    );
+  }
 }
 
 const indexQuery = graphql`

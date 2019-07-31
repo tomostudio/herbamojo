@@ -2,7 +2,7 @@ main.journal {
   & #JournalHeader {
     top: 0px;
     left: 0px;
-    @include sticky;
+    position: fixed;
     z-index: 10;
     width: 100%;
     padding: 0px ($global-padding);
@@ -34,15 +34,14 @@ main.journal {
 
         & > * {
           pointer-events: auto;
-          // vertical-align: middle;
-          color: $color_green;
+          color: white;
           @include transition(color $global-transition);
           display: inline-block;
 
           body.onhover &:hover,
           &.disable {
             cursor: pointer;
-            color: white;
+            color: $color_green;
           }
 
           &.disable {
@@ -99,6 +98,10 @@ main.journal {
           line-height: 120%;
           text-align: right;
           margin-left: 40px;
+          color: $color_green;
+          body.onhover &:hover {
+            color: white;
+          }
         }
         @include respond-to(mobile) {
           font-size: 14px;
@@ -147,14 +150,23 @@ main.journal {
       &.black {
         & > *:first-child {
           & > * {
+            color: black;
             body.onhover &:hover,
             &.disable {
-              color: black;
+              color: $color_green;
             }
           }
         }
         & > *:nth-child(2) {
           color: black;
+        }
+        & > a:nth-child(2) {
+          @include respond-to(m_tablet) {
+            color: $color_green;
+            body.onhover &:hover {
+              color: black;
+            }
+          }
         }
         & > *:nth-child(3) {
           body.onhover &:hover {
@@ -167,11 +179,29 @@ main.journal {
         }
       }
     }
+    &:not(.list) {
+      & > .wrapper {
+        & > *:first-child {
+          width: 46px;
+          margin-right: 98px - 46px;
+          @include respond-to(m_tablet) {
+            margin-right: 0px;
+            width: auto;
+          }
+        }
+        & > *:nth-child(3) {
+          width: 98px;
+          @include respond-to(m_tablet) {
+            width: auto;
+          }
+        }
+      }
+    }
     &.list {
       & > .wrapper {
         padding-right: 100px;
         padding-top: $global-padding;
-        height: 100px;
+        height: $mobileHeaderHeight + 20px;
         @include align-items(flex-start);
         @include respond-to(m_tablet) {
           padding-top: 0px;
@@ -180,7 +210,8 @@ main.journal {
           height: $mobileHeaderHeight;
         }
         @include respond-to(mobile) {
-          height: 60px;
+          // height: 60px;
+          height: $mobileHeaderHeight - 20px;
         }
         & > *:first-child {
           width: 100px;
@@ -211,8 +242,9 @@ main.journal {
           }
         }
         & > a:nth-child(2) {
+          color: white;
           body.onhover &:hover {
-            color: white;
+            color: black;
           }
         }
         & > *:nth-child(3) {
@@ -229,8 +261,73 @@ main.journal {
             }
           }
         }
+      }
+      @include respond-to(m_tablet) {
+        background: transparent;
+        & > .wrapper {
+          & > *:first-child {
+            & > * {
+              color: white;
 
-        &.black {
+              body.onhover &:hover,
+              &.disable {
+                color: $color_green;
+              }
+            }
+          }
+          & > a:nth-child(2) {
+            color: $color_green;
+            body.onhover &:hover {
+              color: white;
+            }
+          }
+          & > *:nth-child(3) {
+            & > svg {
+              & .fill {
+                fill: $color_green;
+              }
+            }
+            body.onhover &:hover {
+              & > svg {
+                & .fill {
+                  fill: white;
+                }
+              }
+            }
+          }
+
+          &.black {
+            & > *:first-child {
+              & > * {
+                color: black;
+
+                body.onhover &:hover,
+                &.disable {
+                  color: $color_green;
+                }
+              }
+            }
+            & > a:nth-child(2) {
+              color: $color_green;
+              body.onhover &:hover {
+                color: black;
+              }
+            }
+            & > *:nth-child(3) {
+              & > svg {
+                & .fill {
+                  fill: $color_green;
+                }
+              }
+              body.onhover &:hover {
+                & > svg {
+                  & .fill {
+                    fill: black;
+                  }
+                }
+              }
+            }
+          }
         }
       }
     }
@@ -275,24 +372,29 @@ main.journal {
       }
     }
   }
-  & section:not(.footer) {
-    margin: 0px auto;
-    width: 100%;
-    padding: 0px (100px + $global-padding);
-    @include respond-to(m_tablet) {
-      padding: 0px $globalmobile-padding;
-    }
-    & > .wrapper {
-      margin: 0px auto;
-      width: 100%;
-      padding: $global-padding 0px;
-      max-width: $global-maxwidth - ((100px + $global-padding) * 2);
-
-      @include respond-to(m_tablet) {
-        max-width: $global-maxwidth - ($global-padding * 2);
+  & > .sectionWrapper {
+    min-height: 100vh;
+  }
+  &.list {
+    & > .sectionWrapper {
+      &::before {
+        @include pseudo;
+        position: relative;
+        width: 100%;
+        pointer-events: none;
+        height: $mobileHeaderHeight + 20px;
+        @include respond-to(m_tablet) {
+          height: $mobileHeaderHeight;
+        }
+        @include respond-to(mobile) {
+          height: $mobileHeaderHeight - 20px;
+        }
       }
     }
-    &.mobileTitleSection {
+  }
+  & > .sectionWrapper section {
+    width: 100%;
+    &.listTitleMobile {
       display: none;
       @include respond-to(m_tablet) {
         display: block;
@@ -318,23 +420,162 @@ main.journal {
         padding-bottom: 50px;
       }
     }
-  }
-  & > .contentWrapper {
-    min-height: calc(100vh - 80px);
-    @include respond-to(mobile) {
-      min-height: calc(100vh - 60px);
-    }
-  }
-  &.list {
-    & > .contentWrapper {
-      min-height: calc(100vh - 100px);
+    &.journalcover {
+      width: 100%;
+      height: 0px;
+      max-height: 75vh;
+      padding: 0px;
+      padding-top: 9 / 16 * 100%;
+      color: white;
+      &.black {
+        color: black;
+      }
+      @include respond-to(desktop_more) {
+        height: 75vh;
+        padding-top: 0px;
+      }
+      @include respond-to(m_tablet) {
+        padding-top: 10 / 16 * 100%;
+      }
       @include respond-to(mobile) {
-        min-height: calc(100vh - 60px);
+        padding-top: 12 / 16 * 100%;
+      }
+      & > picture {
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        & > img {
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+        }
+      }
+      & > div {
+        width: 100%;
+        position: absolute;
+        top: 0px;
+        left: 0px;
+        height: 100%;
+        z-index: 2;
+        padding: $global-padding;
+        padding-top: 80px;
+        @include respond-to(m_tablet) {
+          padding: $globalmobile-padding;
+          padding-top: 80px;
+        }
+        @include respond-to(mobile) {
+          padding-top: 60px;
+        }
+        & > div {
+          width: 100%;
+          height: 100%;
+          text-align: center;
+          @include setflex(column, nowrap);
+          padding: 0px 150px;
+          position: relative;
+          @include respond-to(tablet) {
+            padding: 0px 100px;
+          }
+          @include respond-to(m_tablet) {
+            padding: 0px;
+          }
+          & > div {
+            cursor: default;
+            &:first-child {
+              font-family: 'Maison Mono';
+              font-size: 36px;
+              line-height: 40px;
+              font-weight: 300;
+              margin-bottom: 20px;
+
+              @include respond-to(tablet) {
+                font-size: 32px;
+                line-height: 36px;
+              }
+              @include respond-to(m_tablet) {
+                font-weight: normal;
+                font-size: 16px;
+                line-height: 20px;
+                margin-bottom: 15px;
+              }
+              @include respond-to(mobile) {
+                font-size: 13px;
+                line-height: 15px;
+                margin-bottom: 15px;
+              }
+            }
+            &:nth-child(2) {
+              font-family: 'Amarillo';
+              font-size: 90px;
+              line-height: 85px;
+              padding-bottom: 40px;
+              @include respond-to(tablet) {
+                font-size: 75px;
+                line-height: 75px;
+                padding-bottom: 36px;
+              }
+              @include respond-to(m_tablet) {
+                font-size: 48px;
+                line-height: 48px;
+                padding-bottom: 35px;
+              }
+              @include respond-to(mobile) {
+                font-size: 42px;
+                line-height: 42px;
+                padding-bottom: 30px;
+              }
+            }
+          }
+
+          & > a {
+            &:nth-child(3),
+            &:nth-child(4) {
+              position: absolute;
+              top: 50%;
+              max-width: 120px;
+              display: block;
+              font-family: 'Amarillo';
+              font-size: 30px;
+              line-height: 30px;
+              text-align: center;
+              @include transform(translate(0px, -50%));
+              @include transition(color $global-transition);
+              @include respond-to(tablet) {
+                font-size: 24px;
+                line-height: 24px;
+                max-width: 100px;
+              }
+              @include respond-to(m_tablet) {
+                display: none;
+              }
+              body.onhover &:hover {
+                color: $color_green;
+              }
+            }
+            &:nth-child(3) {
+              left: 0px;
+              right: auto;
+              // text-align: left;
+            }
+            &:nth-child(4) {
+              right: 0px;
+              left: auto;
+              // text-align: right;
+            }
+            &.disable{
+              pointer-events: none;
+              opacity: .25;
+            }
+          }
+        }
       }
     }
   }
 }
 
+//ALSO USED IN HOME
 section.journallist {
   margin: 0px auto;
   width: 100%;
@@ -368,6 +609,9 @@ section.journallist {
       @include bp-max(950px) {
         grid-template-columns: 1fr;
       }
+      @include bp-max(950px) {
+        grid-template-columns: 1fr;
+      }
       @include respond-to(m_tablet) {
         grid-gap: 7px;
         grid-template-columns: 1fr 1fr;
@@ -379,12 +623,16 @@ section.journallist {
         display: block;
         width: 100%;
         height: calc((100vh - 240px - 15px) / 2);
+        max-height: 250px;
         position: relative;
         color: white;
         @include transition(color $global-transition);
         @include respond-to(desktop_more) {
           height: 250px;
           padding-top: 0px;
+        }
+        @include bp-max(1050px) {
+          max-height: 220px;
         }
         @include bp-max(950px) {
           min-height: 0px;
@@ -518,9 +766,9 @@ section.journallist {
         text-align: center;
         width: 60px;
         justify-self: center;
-        &.disable{
+        &.disable {
           pointer-events: none;
-          opacity: .25;
+          opacity: 0.25;
         }
         & svg {
           height: 60px;

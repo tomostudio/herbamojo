@@ -4,7 +4,7 @@ contenttype: journal
 indonesia: false
 active: true
 slug: journal-entry-8
-altslug: journal-entry-8
+altslug: '/'
 seo:
   seo_image: ''
   seo_keywords: ''

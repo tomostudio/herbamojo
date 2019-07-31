@@ -14,6 +14,6 @@ title: Journal Entry INDONESIA
 thumbimage: /assets/herbamojo_productshot3.jpg
 coverimage: /assets/herbamojo_productshot3.jpg
 listcolorblack: true
-headercolorblack: true
+headercolorblack: false
 ---
 

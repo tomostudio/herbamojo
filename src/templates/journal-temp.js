@@ -3,10 +3,13 @@ import Layout from 'components/layout';
 import Footer from 'components/footer';
 import JournalHeader from 'components/journalheader';
 import { Link, graphql } from 'gatsby';
+import { Helmet } from 'react-helmet';
 
 //UTILS
 import { LoaderClass } from 'utils/loader';
 import { DisableScroll } from 'utils/disablescroll';
+
+import Placeholder from 'images/static/herbamojo-bg1.jpg';
 
 export default class Journal extends React.Component {
   LangID = this.props.data.content.frontmatter.indonesia || false;
@@ -83,16 +86,48 @@ export default class Journal extends React.Component {
         indonesianURL = `/id/${general.journalslug}${_au}`;
       }
     }
+    const { next, prev } = this.props.pageContext;
+    console.log('next, prev: ', next, prev);
     return (
       <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
         <JournalHeader
           indonesia={this.LangID}
           urltarget={englishURL}
           urltargetid={indonesianURL}
-          black={false}
+          black={content.headercolorblack}
           journallist={false}
         />
-        <div className='contentWrapper'>
+        <div className='sectionWrapper'>
+          <section
+            className={`journalcover ${
+              content.headercolorblack ? 'black' : ''
+            }`}
+          >
+            <div>
+              <div>
+                <div>{content.date}</div>
+                <div>{content.title}</div>
+                <Link to={prev === null ? '' : prev} className={prev === null ? 'disable' : ''}>
+                  {`${
+                    this.LangID
+                      ? general.journaltranslation.previousjournal.id
+                      : general.journaltranslation.previousjournal.en
+                  }`}
+                </Link>
+                <Link to={next === null ? '' : next} className={next === null ? 'disable' : ''}>
+                  {`${
+                    this.LangID
+                      ? general.journaltranslation.nextjournal.id
+                      : general.journaltranslation.nextjournal.en
+                  }`}
+                </Link>
+              </div>
+            </div>
+            <picture>
+              <source srcSet={Placeholder} type='image/jpeg' />
+              <img src={Placeholder} alt='Herbamojo' />
+            </picture>
+          </section>
           <section>
             <div className='wrapper'>{content.title}</div>
           </section>
@@ -156,6 +191,16 @@ export const query = graphql`
             id
           }
         }
+        journaltranslation {
+          nextjournal {
+            en
+            id
+          }
+          previousjournal {
+            en
+            id
+          }
+        }
       }
     }
     content: markdownRemark(fields: { slug: { eq: $slug } }) {
@@ -164,8 +209,9 @@ export const query = graphql`
       frontmatter {
         indonesia
         title
-        date(formatString: "DD MMMM, YYYY")
+        date(formatString: "DD/MM/YY")
         altslug
+        headercolorblack
         seo {
           seo_shortdesc
           seo_keywords

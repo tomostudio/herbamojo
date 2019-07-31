@@ -3,7 +3,6 @@ import Layout from 'components/layout';
 import Footer from 'components/footer';
 import JournalHeader from 'components/journalheader';
 import { Link, graphql } from 'gatsby';
-import { Helmet } from 'react-helmet';
 
 //UTILS
 import { LoaderClass } from 'utils/loader';
@@ -136,8 +135,8 @@ export default class JournalList extends React.Component {
           urltargetid={indonesianURL}
           journallist={true}
         />
-        <div className='contentWrapper'>
-          <section className='mobileTitleSection'>
+        <div className='sectionWrapper'>
+          <section className='listTitleMobile'>
             <div className='wrapper'>
               <h1>
                 {this.LangID

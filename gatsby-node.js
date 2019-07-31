@@ -120,20 +120,20 @@ exports.createPages = ({ graphql, actions }) => {
       `).then(result => {
         const results = result.data.all.edges;
         if (!journaldisable && results.length > 1) {
-          results.forEach(({ node }, index) => {
-            if (
-              node.frontmatter.contenttype === 'journal' &&
-              node.frontmatter.active === true
-            ) {
-              createPage({
-                path: node.fields.slug,
-                component: path.resolve(`./src/templates/journal-temp.js`),
-                context: {
-                  slug: node.fields.slug
-                }
-              });
-            }
-          });
+          // results.forEach(({ node }, index) => {
+          //   if (
+          //     node.frontmatter.contenttype === 'journal' &&
+          //     node.frontmatter.active === true
+          //   ) {
+          //     createPage({
+          //       path: node.fields.slug,
+          //       component: path.resolve(`./src/templates/journal-temp.js`),
+          //       context: {
+          //         slug: node.fields.slug
+          //       }
+          //     });
+          //   }
+          // });
 
           if (result.data.slug_setting) {
             redirectObject = result.data.slug_setting.frontmatter;
@@ -154,6 +154,55 @@ exports.createPages = ({ graphql, actions }) => {
               data.node.frontmatter.active === true &&
               data.node.frontmatter.indonesia === true
             );
+          });
+
+          journalen.forEach(({ node }, index) => {
+            let nextslug, prevslug;
+            if(index === 0){
+              prevslug = null;
+            }
+            else{
+              prevslug = journalen[index - 1].node.fields.slug;
+            }
+            if(index >= (journalen.length - 1)){
+              nextslug = null;
+            }
+            else{
+              nextslug = journalen[index + 1].node.fields.slug;
+            }
+            createPage({
+              path: node.fields.slug,
+              component: path.resolve(`./src/templates/journal-temp.js`),
+              context: {
+                slug: node.fields.slug,
+                prev: prevslug,
+                next: nextslug
+              }
+            });
+          });
+          journalid.forEach(({ node }, index) => {
+            let nextslug, prevslug;
+            if(index === 0){
+              prevslug = null;
+            }
+            else{
+              prevslug = journalid[index - 1].node.fields.slug;
+            }
+            if(index >= (journalid.length - 1)){
+              nextslug = null;
+            }
+            else{
+              nextslug = journalid[index + 1].node.fields.slug;
+            }
+            createPage({
+              path: node.fields.slug,
+              component: path.resolve(`./src/templates/journal-temp.js`),
+              context: {
+                slug: node.fields.slug,
+                prev: prevslug,
+                next: nextslug
+              }
+            });
           });
 
           //GET PAGE NUMBER

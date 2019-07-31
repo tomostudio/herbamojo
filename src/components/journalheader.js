@@ -69,9 +69,7 @@ export default class JournalHeader extends React.Component {
               <div className={`wrapper ${blackcolor && 'black'}`}>
                 <Link
                   aria-label='Language Toggle'
-                  to={
-                    this.props.indonesia ? `${urltarget}` : `${urltargetid}`
-                  }
+                  to={this.props.indonesia ? `${urltarget}` : `${urltargetid}`}
                 >
                   <span className={`${!this.props.indonesia && 'disable'}`}>
                     EN
@@ -99,8 +97,8 @@ export default class JournalHeader extends React.Component {
                   >
                     {`${
                       !this.props.indonesia
-                        ? data.general.frontmatter.journalbacktext.en
-                        : data.general.frontmatter.journalbacktext.id
+                        ? data.general.frontmatter.journaltranslation.journalbacktext.en
+                        : data.general.frontmatter.journaltranslation.journalbacktext.id
                     }`}
                   </Link>
                 )}
@@ -138,9 +136,11 @@ const headerQuery = graphql`
             id
           }
         }
-        journalbacktext {
-          en
-          id
+        journaltranslation {
+          journalbacktext {
+            en
+            id
+          }
         }
       }
     }

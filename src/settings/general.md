@@ -29,9 +29,16 @@ navigation:
     id: Jurnal
 journalslug: journal
 journalperlist: 6
-journalbacktext:
-  en: Back to Journal
-  id: Back to Journal
+journaltranslation:
+  journalbacktext:
+    en: Back to Journal
+    id: Kembali ke Jurnal
+  nextjournal:
+    en: Next Journal
+    id: Next Jurnal
+  previousjournal:
+    en: Previous Journal
+    id: Previous Jurnal
 errortext: Page Not Found
 ---
 
