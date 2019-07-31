@@ -120,8 +120,8 @@ export default class JournalList extends React.Component {
       //ON EN
       printTitle = journaltext.en;
     }
-    if(curindex > 1){
-      printTitle = `${printTitle} ${curindex}`
+    if (curindex > 1) {
+      printTitle = `${printTitle} ${curindex}`;
     }
     return (
       <Layout
@@ -148,52 +148,54 @@ export default class JournalList extends React.Component {
           </section>
           <section className='journallist'>
             <div className='wrapper'>
-              <div className='__journalcontainer'>
-                {journals.edges.map((journal, id) => {
-                  return (
+              <div className='content'>
+                <div className='__journalcontainer'>
+                  {journals.edges.map((journal, id) => {
+                    return (
+                      <Link
+                        key={journal.node.id}
+                        to={journal.node.fields.slug}
+                        className={
+                          journal.node.frontmatter.listcolorblack ? 'black' : ''
+                        }
+                      >
+                        <div>
+                          <span>{journal.node.frontmatter.date}</span>
+                          <h2>{journal.node.frontmatter.title}</h2>
+                        </div>
+                        <picture>
+                          <source
+                            srcSet={journal.node.frontmatter.thumbimage}
+                            type='image/jpeg'
+                          />
+                          <img
+                            src={journal.node.frontmatter.thumbimage}
+                            alt='Herbamojo'
+                          />
+                        </picture>
+                      </Link>
+                    );
+                  })}
+                </div>
+                {context.total > 1 && (
+                  <div className='__navcontainer'>
                     <Link
-                      key={journal.node.id}
-                      to={journal.node.fields.slug}
+                      to={prevurl}
+                      className={context.index === 0 ? 'disable' : ''}
+                    >
+                      <Arrow />
+                    </Link>
+                    <Link
+                      to={nexturl}
                       className={
-                        journal.node.frontmatter.listcolorblack ? 'black' : ''
+                        context.index === context.total - 1 ? 'disable' : ''
                       }
                     >
-                      <div>
-                        <span>{journal.node.frontmatter.date}</span>
-                        <h2>{journal.node.frontmatter.title}</h2>
-                      </div>
-                      <picture>
-                        <source
-                          srcSet={journal.node.frontmatter.thumbimage}
-                          type='image/jpeg'
-                        />
-                        <img
-                          src={journal.node.frontmatter.thumbimage}
-                          alt='Herbamojo'
-                        />
-                      </picture>
+                      <Arrow />
                     </Link>
-                  );
-                })}
+                  </div>
+                )}
               </div>
-              {context.total > 1 && (
-                <div className='__navcontainer'>
-                  <Link
-                    to={prevurl}
-                    className={context.index === 0 ? 'disable' : ''}
-                  >
-                    <Arrow />
-                  </Link>
-                  <Link
-                    to={nexturl}
-                    className={
-                      context.index === context.total - 1 ? 'disable' : ''
-                    }
-                  >
-                    <Arrow />
-                  </Link>
-                </div>
-              )}
             </div>
           </section>
         </div>

@@ -1,3 +1,5 @@
+$sectionmobilespacing: 50px;
+
 main.home {
   & .overlay_wrapper {
     position: relative;
@@ -62,6 +64,24 @@ main.home {
 
             &:last-child {
               margin-bottom: 0px;
+            }
+            @include respond-to(height_mid) {
+              // margin-bottom: 25px;
+              margin-bottom: calc(
+                (100vh - (36px * 6) - (#{$global-padding} * 2.5) - (55px * 3)) /
+                  5
+              );
+              &:last-child {
+                margin-bottom: 0px;
+              }
+            }
+            @include respond-to(height_less) {
+              margin-bottom: calc(
+                (100vh - (36px * 6) - (#{$global-padding} * 2)) / 5
+              );
+              &:last-child {
+                margin-bottom: 0px;
+              }
             }
 
             &::after {
@@ -141,6 +161,13 @@ main.home {
               margin-top: 0px;
             }
 
+            @include respond-to(height_mid) {
+              margin-top: 15px;
+
+              &:first-child {
+                margin-top: 0px;
+              }
+            }
             display: block;
             @include transition(opacity $global-transition);
 
@@ -203,19 +230,19 @@ main.home {
   }
 
   & section:not(.footer) {
-    height: 100vh;
-    max-height: 100vh;
+    height: auto;
+    min-height: 100vh;
     color: white;
-
+    @include setflex(column, nowrap, flex-start, flex-start, flex-start);
     @include respond-to(m_tablet) {
       max-height: none;
-      min-height: 100vh;
+      min-height: 0px;
       height: auto;
     }
 
     @include respond-to(height_less) {
       max-height: none;
-      min-height: 100vh;
+      min-height: 0px;
       height: auto;
     }
 
@@ -228,6 +255,7 @@ main.home {
     }
 
     & > .wrapper {
+      @include flex-grow(1);
       @include setflex(column, nowrap, flex-start, flex-start, flex-start);
       & h1 {
         margin: 0px;
@@ -269,16 +297,38 @@ main.home {
       & > .content {
         @include flex-grow(1);
         margin-top: 40px;
+        width: 100%;
         &.flex {
           @include setflex(column, nowrap, center, flex-start, flex-start);
+          &::after {
+            @include pseudo;
+            position: relative;
+            width: 100%;
+            pointer-events: none;
+            opacity: 0;
+            height: 80px;
+          }
           @media only screen and (min-height: 800px) {
+            @include setflex(column, nowrap, center, flex-start, flex-start);
             &::after {
-              @include pseudo;
-              position: relative;
-              width: 100%;
-              pointer-events: none;
-              opacity: 0;
-              height: 80px;
+              height: 120px;
+            }
+          }
+          @include respond-to(m_tablet) {
+            width: calc(100% - #{$globalmobile-padding * 2});
+            margin: $sectionmobilespacing auto 0px;
+            padding-bottom: $sectionmobilespacing / 2;
+          }
+          @include respond-to(height_less) {
+            @include setflex(
+              column,
+              nowrap,
+              flex-start,
+              flex-start,
+              flex-start
+            );
+            &::after {
+              display: none;
             }
           }
         }
@@ -327,6 +377,7 @@ main.home {
           @include flex-grow(1);
           height: 100%;
           @include setflex(column, nowrap, stretch, center, center);
+          min-height: 100vh;
         }
 
         & .content {
@@ -629,8 +680,6 @@ main.home {
       }
     }
 
-    $sectionmobilespacing: 50px;
-
     &#about {
       position: relative;
 
@@ -667,12 +716,13 @@ main.home {
       }
 
       & .content.half {
-        @include setflex(column, nowrap, center, flex-start, flex-start);
+        // @include setflex(column, nowrap, flex-start, flex-start, flex-start);
 
-        @include respond-to(m_tablet) {
-          width: calc(100% - #{$globalmobile-padding * 2});
-          margin: $sectionmobilespacing auto 0px;
-          padding-bottom: $sectionmobilespacing / 2;
+        @media only screen and (max-height: 800px) {
+          @include setflex(column, nowrap, flex-start, flex-start, flex-start);
+          &::after {
+            display: none;
+          }
         }
         &::after {
           @include pseudo;
@@ -938,12 +988,6 @@ main.home {
       }
 
       & .content.half {
-        @include respond-to(m_tablet) {
-          width: calc(100% - #{$globalmobile-padding * 2});
-          margin: $sectionmobilespacing auto 0px;
-          padding-bottom: $sectionmobilespacing;
-        }
-
         & > div {
           width: 100%;
           display: grid;
@@ -1106,9 +1150,6 @@ main.home {
 
           @include respond-to(m_tablet) {
             display: block;
-            width: calc(100% - #{$globalmobile-padding * 2});
-            margin: $sectionmobilespacing auto 0px;
-            padding-bottom: $sectionmobilespacing;
           }
 
           & > div {
@@ -1489,17 +1530,21 @@ main.home {
         min-height: 0px;
       }
 
+      body:not(.__snapon) & {
+        min-height: 0px;
+        & > .wrapper {
+          & > .content {
+            &::after {
+              display: none !important;
+            }
+          }
+        }
+      }
       & > .wrapper {
         position: relative;
 
         & > .content {
           width: 100%;
-
-          @include respond-to(m_tablet) {
-            width: calc(100% - #{$globalmobile-padding * 2});
-            margin: $sectionmobilespacing auto 0px;
-            padding-bottom: $sectionmobilespacing;
-          }
 
           & > div {
             width: 100%;
@@ -1739,7 +1784,7 @@ main.home {
         }
       }
     }
-    &#journal{
+    &#journal {
       padding-top: 40px;
       padding-bottom: 40px;
       @include respond-to(m_tablet) {
@@ -1747,6 +1792,37 @@ main.home {
         padding-bottom: $globalmobile-padding;
       }
 
+      & .wrapper > .content {
+        width: 100%;
+        margin-top: 40px;
+        &.flex {
+          &::after {
+            height: 20px;
+            @include respond-to(m_tablet) {
+              display: none !important;
+            }
+          }
+        }
+      }
+      & .viewall {
+        margin: $global-padding auto 0px;
+        font-family: 'Amarillo';
+        font-size: $font-size-button;
+        line-height: $lineheight-button;
+        color: white;
+        opacity: 0.5;
+        @include transition(opacity $global-transition);
+        body.onhover &:hover {
+          opacity: 1;
+        }
+        @include respond-to(m_tablet) {
+          margin: 20px auto 0px;
+        }
+        @include respond-to(mobile) {
+          font-size: $font-size-button-m;
+          line-height: $lineheight-button-m;
+        }
+      }
     }
   }
 

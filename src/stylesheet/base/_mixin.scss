@@ -110,6 +110,11 @@
             @content;
         }
     }
+    @if $media==height_mid {
+        @media only screen and (max-height: $height-break-mid) {
+            @content;
+        }
+    }
 
     @if $media==height_more {
         @media only screen and (min-height: $height-break) {

@@ -158,6 +158,9 @@ export class ScrollSnapClass {
         this.v.sections.identifier
       );
 
+      //SETUP SCROLL POSITIONING FOR EACH SECTION
+      this.snap.setuptargets();
+
       //CHECK ALL SECTIONS AND DISABLE SNAP IF ANY OF THE SECTIONS HAS HEIGHT BIGGER THAN THE WINDOW
       let checkheight = false;
       // CHECK IF THERE IS A NAV ATTR ON SECTION
@@ -189,9 +192,6 @@ export class ScrollSnapClass {
 
       //PUSH LENGTH TO GLOBAL VARIABLE
       this.v.sections.length = this.v.sections.all.length;
-
-      //SETUP SCROLL POSITIONING FOR EACH SECTION
-      this.snap.setuptargets();
 
       // ------
       //SNAP NAVIGATION SETUP
@@ -255,6 +255,9 @@ export class ScrollSnapClass {
       } else {
         document.body.classList.remove('__snaphastouch');
       }
+
+      //SETUP SCROLL POSITIONING FOR EACH SECTION
+      this.snap.setuptargets();
     },
 
     setuptargets: () => {

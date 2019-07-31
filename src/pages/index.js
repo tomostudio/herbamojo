@@ -45,552 +45,657 @@ import AnimDataStamina from 'animationdata/stamina.json';
 import AnimDataExercise from 'animationdata/exercise.json';
 
 export default class Home extends React.Component {
-	// --------------
-	langID = this.props.langID || false;
-	MainID = this.langID ? 'homeID' : 'homeEN';
-	LoadAnimationDelay = 2000;
-	LoadAnimationTimeout = null;
-	// VARIABLES
-	// --------------
-	slider = {
-		online: null,
-		offline: null
-	};
-	inviewArray = [];
-	inviewArrayBenefits = [ null, null, null, null ];
-	scrollpass = [];
-	scrollaxArray = [];
-	AnimObject = [
-		{
-			id_name: 'benefitstamina',
-			anim: null,
-			animeData: AnimDataStamina
-		},
-		{
-			id_name: 'benefit_energy',
-			anim: null,
-			animeData: AnimDataEnergy
-		},
-		{
-			id_name: 'BenefitImmune',
-			anim: null,
-			animeData: AnimDataImmune
-		},
-		{
-			id_name: 'BenefitExercise',
-			anim: null,
-			animeData: AnimDataExercise
-		}
-	];
-	HomeScrollSnap = null;
-	SnapNav = null;
-	ForceVH = null;
-	// --------------
-	IndexLoader = new LoaderClass({
-		parent: `#${this.MainID}`,
-		default_delay: 500,
-		postload: () => {
-			if (typeof window !== undefined) {
-				window.scroll(0, 0);
+  // --------------
+  langID = this.props.langID || false;
+  MainID = this.langID ? 'homeID' : 'homeEN';
+  LoadAnimationDelay = 2000;
+  LoadAnimationTimeout = null;
+  // VARIABLES
+  // --------------
+  slider = {
+    online: null,
+    offline: null
+  };
+  inviewArray = [];
+  inviewArrayBenefits = [null, null, null, null];
+  scrollpass = [];
+  scrollaxArray = [];
+  AnimObject = [
+    {
+      id_name: 'benefitstamina',
+      anim: null,
+      animeData: AnimDataStamina
+    },
+    {
+      id_name: 'benefit_energy',
+      anim: null,
+      animeData: AnimDataEnergy
+    },
+    {
+      id_name: 'BenefitImmune',
+      anim: null,
+      animeData: AnimDataImmune
+    },
+    {
+      id_name: 'BenefitExercise',
+      anim: null,
+      animeData: AnimDataExercise
+    }
+  ];
+  HomeScrollSnap = null;
+  SnapNav = null;
+  ForceVH = null;
+  // --------------
+  IndexLoader = new LoaderClass({
+    parent: `#${this.MainID}`,
+    default_delay: 500,
+    postload: () => {
+      if (typeof window !== undefined) {
+        window.scroll(0, 0);
 
-				this.HomeScrollSnap = new ScrollSnapClass({
-					sections_identifier: `main.home#${this.MainID} section`,
-					snap_identifier: '',
-					speed: 500,
-					maxduration: 1000,
-					responsive_width: 800,
-					responsive_height: 500,
-					hasfooter: false
-				});
-			}
-			this.SnapNav = document.querySelectorAll(`main#${this.MainID} div.overlay .right_nav .snap_nav > *`);
+        this.HomeScrollSnap = new ScrollSnapClass({
+          sections_identifier: `main.home#${this.MainID} section`,
+          snap_identifier: '',
+          speed: 500,
+          maxduration: 1000,
+          responsive_width: 800,
+          responsive_height: 500,
+          hasfooter: false
+        });
+      }
+      this.SnapNav = document.querySelectorAll(
+        `main#${this.MainID} div.overlay .right_nav .snap_nav > *`
+      );
 
-			const setNav = (i) => {
-				this.SnapNav.forEach((nav) => {
-					nav.classList.remove('active');
-				});
-				if (i >= 0) {
-					this.SnapNav[i].classList.add('active');
-				}
-			};
-			setNav(0);
+      const setNav = i => {
+        this.SnapNav.forEach(nav => {
+          nav.classList.remove('active');
+        });
+        if (i >= 0) {
+          this.SnapNav[i].classList.add('active');
+        }
+      };
+      setNav(0);
 
-			//SETUP BUTTON
-			this.SnapNav.forEach((nav, index) => {
-				nav.onclick = () => {
-					this.HomeScrollSnap.snap.to(index);
-				};
-			});
+      //SETUP BUTTON
+      this.SnapNav.forEach((nav, index) => {
+        nav.onclick = () => {
+          this.HomeScrollSnap.snap.to(index);
+        };
+      });
 
-			// SCROLL PASS FOR BOTTLE FLOAT
-			this.scrollpass[0] = new ScrollPassClass({
-				target: '.bottlesection_wrapper',
-				detectbottom: true,
-				passed: () => {
-					document.querySelector('div.bottlewrapper').classList.add('stuck');
-				},
-				notpassed: () => {
-					document.querySelector('div.bottlewrapper').classList.remove('stuck');
-				}
-			});
+      // SCROLL PASS FOR BOTTLE FLOAT
+      this.scrollpass[0] = new ScrollPassClass({
+        target: '.bottlesection_wrapper',
+        detectbottom: true,
+        passed: () => {
+          document.querySelector('div.bottlewrapper').classList.add('stuck');
+        },
+        notpassed: () => {
+          document.querySelector('div.bottlewrapper').classList.remove('stuck');
+        }
+      });
 
-			// INVIEW SETUP
-			this.inviewArray[0] = new InViewportClass({
-				target: 'section#home',
-				visibility: 0.55,
-				enter: () => {
-					document.querySelector('#ShopButton').classList.add('hide');
-					document.querySelector('section#home').classList.add('inview');
-					setNav(0);
-				},
-				exit: () => {
-					// document.querySelector('section#home').classList.remove('inview');
-					document.querySelector('#ShopButton').classList.remove('hide');
-				}
+      // INVIEW SETUP
+			// HOME
+      this.inviewArray[0] = new InViewportClass({
+        target: 'section#home',
+        visibility: 0.55,
+        enter: () => {
+          document.querySelector('#ShopButton').classList.add('hide');
+          document.querySelector('section#home').classList.add('inview');
+          setNav(0);
+        },
+        exit: () => {
+          document.querySelector('#ShopButton').classList.remove('hide');
+        }
+      });
+			//ABOUT 
+      this.inviewArray[1] = new InViewportClass({
+        target: 'section#about',
+        visibility: 0.55,
+        enter: () => {
+          setNav(1);
+          document.querySelector('section#about').classList.add('inview');
+        }
 			});
-			this.inviewArray[1] = new InViewportClass({
-				target: 'section#about',
-				visibility: 0.55,
-				enter: () => {
-					setNav(1);
-					document.querySelector('section#about').classList.add('inview');
-				}
-			});
-			this.inviewArray[2] = new InViewportClass({
-				target: 'section#about',
-				visibility: 0.25,
-				enter: () => {
-					if (MediaCheck.width.mtablet()) {
-						document.querySelector('section#about').classList.add('inview');
-					}
-				},
-				exit: () => {
-					if (MediaCheck.width.mtablet()) {
-						document.querySelector('section#about').classList.remove('inview');
-					}
-				}
-			});
+			
+			//ABOUT MOBILE 
+      this.inviewArray[2] = new InViewportClass({
+        target: 'section#about',
+        visibility: 0.25,
+        enter: () => {
+          if (MediaCheck.width.mtablet()) {
+            document.querySelector('section#about').classList.add('inview');
+          }
+        },
+        exit: () => {
+          if (MediaCheck.width.mtablet()) {
+            document.querySelector('section#about').classList.remove('inview');
+          }
+        }
+      });
 
-			let BenefitAnimTimeout1 = null,
-				BenefitAnimTimeout2 = null;
-			this.inviewArray[3] = new InViewportClass({
-				target: 'section#benefits',
-				visibility: 0.55,
-				enter: () => {
-					setNav(2);
-					if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
-					if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
-					if (!MediaCheck.width.mtablet()) {
-						this.AnimObject.forEach((obj, index) => {
-							if (this.AnimObject[index].anim) this.AnimObject[index].anim.goToAndStop(0);
-						});
-						document.querySelector('section#benefits').classList.add('inview');
-						BenefitAnimTimeout1 = setTimeout(() => {
-							if (this.AnimObject[0].anim) this.AnimObject[0].anim.goToAndPlay(0);
-							if (this.AnimObject[1].anim) this.AnimObject[1].anim.goToAndPlay(0);
-						}, 250);
-						BenefitAnimTimeout2 = setTimeout(() => {
-							if (this.AnimObject[2].anim) this.AnimObject[2].anim.goToAndPlay(0);
-							if (this.AnimObject[3].anim) this.AnimObject[3].anim.goToAndPlay(0);
-						}, 750);
-					}
-				},
-				exit: () => {
-					document.querySelector('section#benefits').classList.remove('inview');
-					if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
-					if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
-				}
+			//BENEFITS 
+      let BenefitAnimTimeout1 = null,
+        BenefitAnimTimeout2 = null;
+      this.inviewArray[3] = new InViewportClass({
+        target: 'section#benefits',
+        visibility: 0.55,
+        enter: () => {
+          setNav(2);
+          if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
+          if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
+          if (!MediaCheck.width.mtablet()) {
+            this.AnimObject.forEach((obj, index) => {
+              if (this.AnimObject[index].anim)
+                this.AnimObject[index].anim.goToAndStop(0);
+            });
+            document.querySelector('section#benefits').classList.add('inview');
+            BenefitAnimTimeout1 = setTimeout(() => {
+              if (this.AnimObject[0].anim)
+                this.AnimObject[0].anim.goToAndPlay(0);
+              if (this.AnimObject[1].anim)
+                this.AnimObject[1].anim.goToAndPlay(0);
+            }, 250);
+            BenefitAnimTimeout2 = setTimeout(() => {
+              if (this.AnimObject[2].anim)
+                this.AnimObject[2].anim.goToAndPlay(0);
+              if (this.AnimObject[3].anim)
+                this.AnimObject[3].anim.goToAndPlay(0);
+            }, 750);
+          }
+        },
+        exit: () => {
+          document.querySelector('section#benefits').classList.remove('inview');
+          if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
+          if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
+        }
 			});
-			const AllBenefits = document.querySelectorAll('section#benefits .content.half>div>div');
-			AllBenefits.forEach((benefit, index) => {
-				this.inviewArrayBenefits[index] = new InViewportClass({
-					target: `section#benefits .content.half>div>div:nth-child(${index + 1})`,
-					visibility: 0.75,
-					enter: () => {
-						if (MediaCheck.width.mtablet()) {
-							if (!benefit.classList.contains('inview')) {
-								benefit.classList.add('inview');
-								if (this.AnimObject[index].anim) this.AnimObject[index].anim.goToAndPlay(0);
-							}
-						}
-					},
-					exit: () => {
-						if (MediaCheck.width.mtablet()) benefit.classList.remove('inview');
-					}
-				});
+			
+			//BENEFITS MOBILE
+      const AllBenefits = document.querySelectorAll(
+        'section#benefits .content.half>div>div'
+      );
+      AllBenefits.forEach((benefit, index) => {
+        this.inviewArrayBenefits[index] = new InViewportClass({
+          target: `section#benefits .content.half>div>div:nth-child(${index +
+            1})`,
+          visibility: 0.75,
+          enter: () => {
+            if (MediaCheck.width.mtablet()) {
+              if (!benefit.classList.contains('inview')) {
+                benefit.classList.add('inview');
+                if (this.AnimObject[index].anim)
+                  this.AnimObject[index].anim.goToAndPlay(0);
+              }
+            }
+          },
+          exit: () => {
+            if (MediaCheck.width.mtablet()) benefit.classList.remove('inview');
+          }
+        });
+      });
+			//INGREDIENTS 
+      this.inviewArray[4] = new InViewportClass({
+        target: 'section#ingredients',
+        visibility: 0.55,
+        enter: () => {
+          setNav(3);
+          if (!MediaCheck.width.mtablet()) {
+            document
+              .querySelector('section#ingredients')
+              .classList.add('inview');
+          }
+        },
+        exit: () => {
+          if (!MediaCheck.width.mtablet()) {
+            document
+              .querySelector('section#ingredients')
+              .classList.remove('inview');
+          }
+        }
+      });
+			//INGREDIENTS MOBILE
+      this.inviewArray[5] = new InViewportClass({
+        target: 'section#ingredients',
+        visibility: 0.25,
+        enter: () => {
+          if (MediaCheck.width.mtablet()) {
+            document
+              .querySelector('section#ingredients')
+              .classList.add('inview');
+          }
+        },
+        exit: () => {
+          if (MediaCheck.width.mtablet()) {
+            document
+              .querySelector('section#ingredients')
+              .classList.remove('inview');
+          }
+        }
+      });
+			//SHOP
+      this.inviewArray[6] = new InViewportClass({
+        target: 'section#shop',
+        visibility: 0.55,
+        enter: () => {
+          setNav(4);
+          if (!MediaCheck.width.mtablet())
+            document.querySelector('section#shop').classList.add('inview');
+        },
+        exit: () => {
+          if (!MediaCheck.width.mtablet())
+            document.querySelector('section#shop').classList.remove('inview');
+        }
 			});
+			//SHOP MOBILE
+      this.inviewArray[7] = new InViewportClass({
+        target: 'section#shop',
+        visibility: 0.25,
+        enter: () => {
+          if (MediaCheck.width.mtablet())
+            document.querySelector('section#shop').classList.add('inview');
+        },
+        exit: () => {
+          if (MediaCheck.width.mtablet())
+            document.querySelector('section#shop').classList.remove('inview');
+        }
+      });
 
-			this.inviewArray[4] = new InViewportClass({
-				target: 'section#ingredients',
-				visibility: 0.55,
-				enter: () => {
-					setNav(3);
-					if (!MediaCheck.width.mtablet()) {
-						document.querySelector('section#ingredients').classList.add('inview');
+      this.inviewArray[8] = new InViewportClass({
+        target: 'section#journal',
+        visibility: 0.55,
+        enter: () => {
+          if (!MediaCheck.width.mtablet()){
+          	setNav(5);
+            document.querySelector('section#journal').classList.add('inview');
 					}
-				},
-				exit: () => {
-					if (!MediaCheck.width.mtablet()) {
-						document.querySelector('section#ingredients').classList.remove('inview');
-					}
-				}
-			});
-			this.inviewArray[5] = new InViewportClass({
-				target: 'section#ingredients',
-				visibility: 0.25,
-				enter: () => {
-					if (MediaCheck.width.mtablet()) {
-						document.querySelector('section#ingredients').classList.add('inview');
-					}
-				},
-				exit: () => {
-					if (MediaCheck.width.mtablet()) {
-						document.querySelector('section#ingredients').classList.remove('inview');
-					}
-				}
-			});
-			this.inviewArray[6] = new InViewportClass({
-				target: 'section#shop',
-				visibility: 0.55,
-				enter: () => {
-					setNav(4);
-					if (!MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.add('inview');
-				},
-				exit: () => {
-					if (!MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.remove('inview');
-				}
-			});
-			this.inviewArray[7] = new InViewportClass({
-				target: 'section#shop',
-				visibility: 0.25,
-				enter: () => {
-					if (MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.add('inview');
-				},
-				exit: () => {
-					if (MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.remove('inview');
-				}
-			});
-
-			this.inviewArray[8] = new InViewportClass({
-				target: 'section#journal',
-				visibility: 0.55,
-				enter: () => {
-					setNav(4);
-					if (!MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.add('inview');
-				},
-				exit: () => {
-					if (!MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.remove('inview');
-				}
-			});
-			// this.inview.shopm = new InViewportClass({
-			// 	target: 'section#journal',
-			// 	visibility: 0.25,
-			// 	enter: () => {
-			// 		if (MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.add('inview');
-			// 	},
-			// 	exit: () => {
-			// 		if (MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.remove('inview');
-			// 	}
-			// });
-			this.inviewArray[9] = new InViewportClass({
-				target: 'section.footer',
-				visibility: 0.05,
-				enter: () => {
-					document.querySelector('div.overlay').classList.add('stuck');
-					setNav(-1);
-				},
-				exit: () => {
+        },
+        exit: () => {
+          if (!MediaCheck.width.mtablet())
+            document.querySelector('section#journal').classList.remove('inview');
+        }
+      });
+      // this.inview.shopm = new InViewportClass({
+      // 	target: 'section#journal',
+      // 	visibility: 0.25,
+      // 	enter: () => {
+      // 		if (MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.add('inview');
+      // 	},
+      // 	exit: () => {
+      // 		if (MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.remove('inview');
+      // 	}
+      // });
+      this.inviewArray[9] = new InViewportClass({
+        target: 'section.footer',
+        visibility: 0.05,
+        enter: () => {
+          document.querySelector('div.overlay').classList.add('stuck');
+          setNav(-1);
+        },
+        exit: () => {
 					document.querySelector('div.overlay').classList.remove('stuck');
-				}
-			});
+          setNav(this.SnapNav.length - 1);
+        }
+      });
 
-			// SCROLLAX
-			this.scrollaxArray[0] = new Scrollax({ target: 'img.paralax1', move_right: 0.25 });
-			this.scrollaxArray[1]  = new Scrollax({ target: 'img.paralax2', move_left: 0.25 });
-			this.scrollaxArray[2]  = new Scrollax({ target: '#ing_bg', move_top: 0.35 });
-			this.scrollaxArray[3]  = new Scrollax({ target: 'img.mobile.prlx', move_bottom: 0.3 });
-			this.scrollaxArray[4] = new Scrollax({ target: '#about .content .bottle > img', move_bottom: 0.3 });
+      // SCROLLAX
+      this.scrollaxArray[0] = new Scrollax({
+        target: 'img.paralax1',
+        move_right: 0.25
+      });
+      this.scrollaxArray[1] = new Scrollax({
+        target: 'img.paralax2',
+        move_left: 0.25
+      });
+      this.scrollaxArray[2] = new Scrollax({
+        target: '#ing_bg',
+        move_top: 0.35
+      });
+      this.scrollaxArray[3] = new Scrollax({
+        target: 'img.mobile.prlx',
+        move_bottom: 0.3
+      });
+      this.scrollaxArray[4] = new Scrollax({
+        target: '#about .content .bottle > img',
+        move_bottom: 0.3
+      });
 
-			//INGREDIENTS SET
-			this.ingredientToggle(document.querySelector('#ing_sel > *:nth-child(1) > div:first-child'));
+      //INGREDIENTS SET
+      this.ingredientToggle(
+        document.querySelector('#ing_sel > *:nth-child(1) > div:first-child')
+      );
 
-			//GLIDE SETUP
-			const glidesetting = {
-				type: 'carousel',
-				startAt: 0,
-				perView: 2,
-				breakpoints: {
-					800: {
-						perView: 1
-					}
-				}
-			};
+      //GLIDE SETUP
+      const glidesetting = {
+        type: 'carousel',
+        startAt: 0,
+        perView: 2,
+        breakpoints: {
+          800: {
+            perView: 1
+          }
+        }
+      };
 
-			if (typeof document !== `undefined`) {
-				if (document.querySelector('#onlineslider'))
-					this.slider.online = new Glide('#onlineslider', glidesetting).mount();
-				if (document.querySelector('#offlineslider'))
-					this.slider.offline = new Glide('#offlineslider', glidesetting).mount();
-			}
-			if (typeof document !== `undefined`) {
-				// TRIGGER SCROLL SNAP INIT AND PAUSE
-				this.HomeScrollSnap.init();
-				this.HomeScrollSnap.pause();
-				//ADD CLASS LOADED
-				document.body.classList.add('loaded');
-			}
+      if (typeof document !== `undefined`) {
+        if (document.querySelector('#onlineslider'))
+          this.slider.online = new Glide('#onlineslider', glidesetting).mount();
+        if (document.querySelector('#offlineslider'))
+          this.slider.offline = new Glide(
+            '#offlineslider',
+            glidesetting
+          ).mount();
+      }
+      if (typeof document !== `undefined`) {
+        // TRIGGER SCROLL SNAP INIT AND PAUSE
+        this.HomeScrollSnap.init();
+        this.HomeScrollSnap.pause();
+        //ADD CLASS LOADED
+        document.body.classList.add('loaded');
+      }
 
-			// INIT RESIZE
-			this.resize();
+      // INIT RESIZE
+      this.resize();
 
-			this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
-			this.scrollpasRetrigger();
+      this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
+      this.scrollpasRetrigger();
 
-			// SET ANIMATION DELAY
-			if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
-			this.LoadAnimationTimeout = setTimeout(() => {
-				//ENABLE SCROLL
-				if (this.disableScrollBody !== null) this.disableScrollBody.enable();
-				this.HomeScrollSnap.play();
-				if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
-			}, this.LoadAnimationDelay);
-		}
-	});
-	componentDidMount() {
-		if (typeof document !== `undefined`) {
-			document.body.classList.remove('loaded');
-			if (this.langID) {
-				document.querySelector('html').setAttribute('lang', 'id');
-			} else {
-				document.querySelector('html').setAttribute('lang', 'en');
-			}
-		}
-		this.IndexLoader.mountload();
-		if (!document.body.classList.contains('loaded')) {
-			//DISABLE SCROLL ON MAIN WINDOW
-			this.disableScrollBody = new DisableScroll();
-		}
+      // SET ANIMATION DELAY
+      if (this.LoadAnimationTimeout !== null)
+        clearTimeout(this.LoadAnimationTimeout);
+      this.LoadAnimationTimeout = setTimeout(() => {
+        //ENABLE SCROLL
+        if (this.disableScrollBody !== null) this.disableScrollBody.enable();
+        this.HomeScrollSnap.play();
+        if (this.LoadAnimationTimeout !== null)
+          clearTimeout(this.LoadAnimationTimeout);
+      }, this.LoadAnimationDelay);
+    }
+  });
+  componentDidMount() {
+    if (typeof document !== `undefined`) {
+      document.body.classList.remove('loaded');
+      if (this.langID) {
+        document.querySelector('html').setAttribute('lang', 'id');
+      } else {
+        document.querySelector('html').setAttribute('lang', 'en');
+      }
+    }
+    this.IndexLoader.mountload();
+    if (!document.body.classList.contains('loaded')) {
+      //DISABLE SCROLL ON MAIN WINDOW
+      this.disableScrollBody = new DisableScroll();
+    }
 
-		// SETUP LOTTIE
-		const _ap = false;
-		this.AnimObject.forEach((obj, index) => {
-			this.AnimObject[index].anim = lottie.loadAnimation({
-				container: document.querySelector(`#${this.AnimObject[index].id_name}`),
-				name: this.AnimObject[index].id_name,
-				renderer: 'svg',
-				loop: false,
-				autoplay: _ap,
-				animationData: this.AnimObject[index].animeData
-			});
-			this.AnimObject[index].anim.goToAndStop(0);
-		});
+    // SETUP LOTTIE
+    const _ap = false;
+    this.AnimObject.forEach((obj, index) => {
+      this.AnimObject[index].anim = lottie.loadAnimation({
+        container: document.querySelector(`#${this.AnimObject[index].id_name}`),
+        name: this.AnimObject[index].id_name,
+        renderer: 'svg',
+        loop: false,
+        autoplay: _ap,
+        animationData: this.AnimObject[index].animeData
+      });
+      this.AnimObject[index].anim.goToAndStop(0);
+    });
+  }
+  componentWillUnmount() {
+    this.inviewArrayBenefits.forEach((benefit, index) => {
+      if (
+        this.inviewArrayBenefits[index] !== null &&
+        this.inviewArrayBenefits[index] !== undefined
+      ) {
+        this.inviewArrayBenefits[index].kill();
+        this.inviewArrayBenefits[index] = null;
+      }
+    });
+    this.inviewArray.forEach((each, index) => {
+      if (
+        this.inviewArray[index] !== null &&
+        this.inviewArray[index] !== undefined
+      ) {
+        this.inviewArray[index].kill();
+        this.inviewArray[index] = null;
+      }
+    });
+
+    this.scrollpass.forEach((each, index) => {
+      if (
+        this.scrollpass[index] !== null &&
+        this.scrollpass[index] !== undefined
+      ) {
+        this.scrollpass[index].kill();
+        this.scrollpass[index] = null;
+      }
+    });
+    this.scrollaxArray.forEach((each, index) => {
+      if (
+        this.scrollaxArray[index] !== null &&
+        this.scrollaxArray[index] !== undefined
+      ) {
+        this.scrollaxArray[index].kill();
+        this.scrollaxArray[index] = null;
+      }
+    });
+
+    if (typeof document !== `undefined`)
+      if (this.HomeScrollSnap) this.HomeScrollSnap.kill();
+    if (this.disableScrollBody !== null && this.disableScrollBody !== undefined)
+      this.disableScrollBody.enable();
+
+    if (this.slider.online !== null && this.slider.online !== undefined)
+      this.slider.online.destroy();
+    if (this.slider.offline !== null && this.slider.offline !== undefined)
+      this.slider.offline.destroy();
+
+    if (this.ForceVH !== null && this.ForceVH !== undefined)
+      this.ForceVH.kill();
+    if (
+      this.LoadAnimationTimeout !== null &&
+      this.LoadAnimationTimeout !== undefined
+    )
+      clearTimeout(this.LoadAnimationTimeout);
+
+    this.AnimObject.forEach((obj, index) => {
+      if (
+        this.AnimObject[index].anim !== null &&
+        this.AnimObject[index].anim !== undefined
+      ) {
+        this.AnimObject[index].anim.stop();
+        this.AnimObject[index].anim = null;
+      }
+    });
+
+    this.SnapNav.forEach((nav, index) => {
+      nav.onClick = null;
+    });
+
+    if (typeof document !== `undefined`) {
+      //RESET MOBILE MENU OPEN
+      document.body.classList.remove('menu_open');
+      window.removeEventListener('resize', this.resize, false);
+    }
+  }
+  inviewRetrigger() {
+    this.inviewArrayBenefits.forEach((benefit, index) => {
+      if (
+        this.inviewArrayBenefits[index] !== null &&
+        this.inviewArrayBenefits[index] !== undefined
+      )
+        this.inviewArrayBenefits[index].trigger();
+    });
+    this.inviewArray.forEach((each, index) => {
+      if (
+        this.inviewArray[index] !== null &&
+        this.inviewArray[index] !== undefined
+      )
+        this.inviewArray[index].trigger();
+    });
+  }
+  scrollpasRetrigger() {
+    this.scrollpass.forEach((each, index) => {
+      if (
+        this.scrollpass[index] !== null &&
+        this.scrollpass[index] !== undefined
+      ) {
+        this.scrollpass[index].trigger();
+      }
+    });
+  }
+  scrollaxRetrigger() {
+    this.scrollaxArray.forEach((each, index) => {
+      if (
+        this.scrollaxArray[index] !== null &&
+        this.scrollaxArray[index] !== undefined
+      ) {
+        this.scrollaxArray[index].trigger();
+      }
+    });
+  }
+  resize = () => {
+    //ADJUST INGREDIENTS DESCRIPTION MOBILE HEIGHT
+    const ingDescMobile = document.querySelectorAll(
+      '#ing_sel > span > div:last-child > div'
+    );
+    let height = [];
+    ingDescMobile.forEach(desc => {
+      height.push(desc.clientHeight);
+      desc.parentNode.style.height = desc.clientHeight.toString() + 'px';
+    });
+    if (!MediaCheck.width.mtablet) {
+      // REMOVE MENU OPEN WHEN IT IS NOT MOBILE
+      document.body.classList.remove('menu_open');
+    }
+    this.inviewRetrigger();
+
+    if (this.slider.online !== null) {
+      const _so = document.querySelector('#onlineshop');
+      if (!MediaCheck.width.mtablet()) {
+        if (_so.classList.contains('twoslide')) {
+          this.slider.online.disable();
+        }
+      } else {
+        this.slider.online.enable();
+      }
+    }
+    if (this.slider.offline !== null) {
+      const _so = document.querySelector('#offlineshop');
+      if (!MediaCheck.width.mtablet()) {
+        if (_so.classList.contains('twoslide')) {
+          this.slider.offline.disable();
+        }
+      } else {
+        this.slider.offline.enable();
+      }
+    }
+  };
+  gotoShop = () => {
+    if (MediaCheck.width.mtablet()) {
+      const scrollTarget = document
+        .querySelector('section#shop')
+        .getBoundingClientRect().top;
+      const curScrollPos =
+        window.pageYOffset || document.documentElement.scrollTop;
+      const wH =
+        window.innerHeight ||
+        document.documentElement.clientHeight ||
+        document.getElementsByTagName('body')[0].clientHeight;
+      const dist = Math.abs(scrollTarget - curScrollPos);
+      let duration = (dist / wH) * 500;
+      if (duration < 250) duration = 250;
+      if (duration > 1000) duration = 1000;
+      ScrollIt(scrollTarget, duration);
+    } else {
+      this.HomeScrollSnap.snap.to(4);
+    }
+  };
+  ingredientChanging = false;
+  ingredientChangeTimeout = null;
+  ingredientClick(e) {
+    this.ingredientToggle(e.currentTarget);
+  }
+  ingredientToggle(target) {
+    if (target != null) {
+      const delay = MediaCheck.width.mtablet ? 500 : 500;
+      let child = target.parentNode;
+      let index = 1;
+      while ((child = child.previousSibling) != null) index++;
+      let change = {
+        number: index,
+        desc: target.parentNode.dataset.desc
+      };
+
+      const displayContainer = document.querySelector('#ing_display');
+      const displayNumber = document.querySelector('#ing_display_number');
+      const displayDesc = document.querySelector('#ing_display_description');
+      const displayBg = document.querySelector('#ing_bg');
+
+      const ingredientsButtons = document.querySelectorAll('#ing_sel > *');
+      const ingredientsBg = document.querySelectorAll('#ing_bg > *');
+
+      ingredientsButtons.forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      target.parentNode.classList.add('active');
+
+      // ADD BACKGROUND TRANSITION;
+      if (!this.ingredientChanging) {
+        this.ingredientChanging = true;
+        displayBg.classList.add('transition');
+        displayContainer.classList.add('transition');
+      }
+
+      if (this.ingredientChangeTimeout != null)
+        clearTimeout(this.ingredientChangeTimeout);
+      this.ingredientChangeTimeout = setTimeout(() => {
+        this.ingredientChanging = false;
+        displayNumber.innerHTML = change.number;
+        displayDesc.innerHTML = change.desc;
+        displayContainer.classList.remove('transition');
+
+        ingredientsBg.forEach(bg => {
+          bg.classList.remove('active');
+        });
+        ingredientsBg[change.number - 1].classList.add('active');
+
+        displayBg.classList.remove('transition');
+        this.ingredientChangeTimeout = null;
+      }, delay);
+    }
+  }
+  menuToggle() {
+    if (typeof document !== `undefined`) {
+      if (document.body.classList.contains('menu_open')) {
+        document.body.classList.remove('menu_open');
+      } else {
+        document.body.classList.add('menu_open');
+      }
+    }
+  }
+  mobileScroll(e) {
+    if (e.currentTarget != null) {
+      let child = e.currentTarget;
+      let index = 0;
+      while ((child = child.previousSibling) != null) index++;
+      const sections = document.querySelectorAll('main.home section');
+      if (sections != null && sections[index]) {
+        const elTop = sections[index].getBoundingClientRect().top;
+        const scrollTop =
+          window.pageYOffset || document.documentElement.scrollTop;
+        window.scrollTo(0, elTop + scrollTop);
+        setTimeout(() => {
+          this.scrollaxRetrigger();
+        }, 10);
+        this.menuToggle();
+      }
+    }
 	}
-	componentWillUnmount() {
-		this.inviewArrayBenefits.forEach((benefit, index) => {
-			if (this.inviewArrayBenefits[index] !== null && this.inviewArrayBenefits[index] !== undefined ) {
-				this.inviewArrayBenefits[index].kill();
-				this.inviewArrayBenefits[index] = null;
-			}
-		});
-		this.inviewArray.forEach((each, index) => {
-			if (this.inviewArray[index] !== null && this.inviewArray[index] !== undefined ){
-				this.inviewArray[index].kill();
-				this.inviewArray[index] = null;
-			}
-		});
-
-		this.scrollpass.forEach((each, index) => {
-			if (this.scrollpass[index] !== null && this.scrollpass[index] !== undefined ){
-				this.scrollpass[index].kill();
-				this.scrollpass[index] = null;
-			}
-		});
-		this.scrollaxArray.forEach((each, index) => {
-			if (this.scrollaxArray[index] !== null && this.scrollaxArray[index] !== undefined ){
-				this.scrollaxArray[index].kill();
-				this.scrollaxArray[index] = null;
-			}
-		});
-
-		if (typeof document !== `undefined`) if (this.HomeScrollSnap) this.HomeScrollSnap.kill();
-		if (this.disableScrollBody !== null && this.disableScrollBody !== undefined) this.disableScrollBody.enable();
-
-		if (this.slider.online !== null && this.slider.online !== undefined ) this.slider.online.destroy();
-		if (this.slider.offline !== null && this.slider.offline !== undefined) this.slider.offline.destroy();
-
-		if (this.ForceVH !== null  && this.ForceVH !== undefined) this.ForceVH.kill();
-		if (this.LoadAnimationTimeout !== null && this.LoadAnimationTimeout !== undefined) clearTimeout(this.LoadAnimationTimeout);
-
-		this.AnimObject.forEach((obj, index) => {
-			if (this.AnimObject[index].anim !== null && this.AnimObject[index].anim !== undefined) {
-				this.AnimObject[index].anim.stop();
-				this.AnimObject[index].anim = null;
-			}
-		});
-
-		this.SnapNav.forEach((nav, index) => {
-			nav.onClick = null;
-		});
-
-		if (typeof document !== `undefined`) {
-			//RESET MOBILE MENU OPEN
-			document.body.classList.remove('menu_open');
-			window.removeEventListener('resize', this.resize, false);
-		}
-	}
-	inviewRetrigger() {
-		this.inviewArrayBenefits.forEach((benefit, index) => {
-			if (this.inviewArrayBenefits[index] !== null && this.inviewArrayBenefits[index] !== undefined ) this.inviewArrayBenefits[index].trigger();
-		});
-		this.inviewArray.forEach((each, index) => {
-			if (this.inviewArray[index] !== null && this.inviewArray[index] !== undefined ) this.inviewArray[index].trigger();
-		});
-	}
-	scrollpasRetrigger(){
-		this.scrollpass.forEach((each, index) => {
-			if (this.scrollpass[index] !== null && this.scrollpass[index] !== undefined ){
-				this.scrollpass[index].trigger();
-			}
-		});
-	}
-	scrollaxRetrigger() {
-		if (this.scrollax.one) this.scrollax.one.trigger();
-		if (this.scrollax.two) this.scrollax.two.trigger();
-		if (this.scrollax.ing_bg) this.scrollax.ing_bg.trigger();
-		if (this.scrollax.home_mobile) this.scrollax.home_mobile.trigger();
-	}
-	resize = () => {
-		//ADJUST INGREDIENTS DESCRIPTION MOBILE HEIGHT
-		const ingDescMobile = document.querySelectorAll('#ing_sel > span > div:last-child > div');
-		let height = [];
-		ingDescMobile.forEach((desc) => {
-			height.push(desc.clientHeight);
-			desc.parentNode.style.height = desc.clientHeight.toString() + 'px';
-		});
-		if (!MediaCheck.width.mtablet) {
-			// REMOVE MENU OPEN WHEN IT IS NOT MOBILE
-			document.body.classList.remove('menu_open');
-		}
-		this.inviewRetrigger();
-
-		if (this.slider.online !== null) {
-			const _so = document.querySelector('#onlineshop');
-			if (!MediaCheck.width.mtablet()) {
-				if (_so.classList.contains('twoslide')) {
-					this.slider.online.disable();
-				}
-			} else {
-				this.slider.online.enable();
-			}
-		}
-		if (this.slider.offline !== null) {
-			const _so = document.querySelector('#offlineshop');
-			if (!MediaCheck.width.mtablet()) {
-				if (_so.classList.contains('twoslide')) {
-					this.slider.offline.disable();
-				}
-			} else {
-				this.slider.offline.enable();
-			}
-		}
-	};
-	gotoShop = () => {
-		if (MediaCheck.width.mtablet()) {
-			const scrollTarget = document.querySelector('section#shop').getBoundingClientRect().top;
-			const curScrollPos = window.pageYOffset || document.documentElement.scrollTop;
-			const wH =
-				window.innerHeight ||
-				document.documentElement.clientHeight ||
-				document.getElementsByTagName('body')[0].clientHeight;
-			const dist = Math.abs(scrollTarget - curScrollPos);
-			let duration = dist / wH * 500;
-			if (duration < 250) duration = 250;
-			if (duration > 1000) duration = 1000;
-			ScrollIt(scrollTarget, duration);
-		} else {
-			this.HomeScrollSnap.snap.to(4);
-		}
-	};
-	ingredientChanging = false;
-	ingredientChangeTimeout = null;
-	ingredientClick(e) {
-		this.ingredientToggle(e.currentTarget);
-	}
-	ingredientToggle(target) {
-		if (target != null) {
-			const delay = MediaCheck.width.mtablet ? 500 : 500;
-			let child = target.parentNode;
-			let index = 1;
-			while ((child = child.previousSibling) != null) index++;
-			let change = {
-				number: index,
-				desc: target.parentNode.dataset.desc
-			};
-
-			const displayContainer = document.querySelector('#ing_display');
-			const displayNumber = document.querySelector('#ing_display_number');
-			const displayDesc = document.querySelector('#ing_display_description');
-			const displayBg = document.querySelector('#ing_bg');
-
-			const ingredientsButtons = document.querySelectorAll('#ing_sel > *');
-			const ingredientsBg = document.querySelectorAll('#ing_bg > *');
-
-			ingredientsButtons.forEach((btn) => {
-				btn.classList.remove('active');
-			});
-
-			target.parentNode.classList.add('active');
-
-			// ADD BACKGROUND TRANSITION;
-			if (!this.ingredientChanging) {
-				this.ingredientChanging = true;
-				displayBg.classList.add('transition');
-				displayContainer.classList.add('transition');
-			}
-
-			if (this.ingredientChangeTimeout != null) clearTimeout(this.ingredientChangeTimeout);
-			this.ingredientChangeTimeout = setTimeout(() => {
-				this.ingredientChanging = false;
-				displayNumber.innerHTML = change.number;
-				displayDesc.innerHTML = change.desc;
-				displayContainer.classList.remove('transition');
-
-				ingredientsBg.forEach((bg) => {
-					bg.classList.remove('active');
-				});
-				ingredientsBg[change.number - 1].classList.add('active');
-
-				displayBg.classList.remove('transition');
-				this.ingredientChangeTimeout = null;
-			}, delay);
-		}
-	}
-	menuToggle() {
-		if (typeof document !== `undefined`) {
-			if (document.body.classList.contains('menu_open')) {
-				document.body.classList.remove('menu_open');
-			} else {
-				document.body.classList.add('menu_open');
-			}
-		}
-	}
-	mobileScroll(e) {
-		if (e.currentTarget != null) {
-			let child = e.currentTarget;
-			let index = 0;
-			while ((child = child.previousSibling) != null) index++;
-			const sections = document.querySelectorAll('main.home section');
-			if (sections != null && sections[index]) {
-				const elTop = sections[index].getBoundingClientRect().top;
-				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-				window.scrollTo(0, elTop + scrollTop);
-				setTimeout(() => {
-					this.scrollaxRetrigger();
-				}, 10);
-				this.menuToggle();
-			}
-		}
-	}
+	
 	render() {
 		this.IndexLoader.renderload();
 
@@ -602,11 +707,17 @@ export default class Home extends React.Component {
 			<StaticQuery
 				query={indexQuery}
 				render={(data) => {
+					
 					const generalData = data.general.frontmatter;
 					const homeData = data.home.frontmatter;
 					const footerData = generalData.footer;
 					const transData = data.home.frontmatter.translations;
 					const id_seodesc = generalData.seo.seo_shortdesc_id;
+
+					let journalslug = generalData.journalslug;
+					if (journalslug.substring(0, 1) !== '/') {
+						journalslug = `/${journalslug}`;
+					}
 
 					// ONLINE AND OFFLINE SHOP VALIDITY CHECKER
 					let offlineshop = [];
@@ -631,32 +742,40 @@ export default class Home extends React.Component {
 						}
 					});
 
+					let printjournal = [];
+
+					if(this.langID){
+						printjournal = data.journals_id;
+					}
+					else{
+						printjournal = data.journals;
+					}
 					return (
-						<Layout mainClass="home" indonesia={this.langID} mainID={this.MainID}>
+						<Layout mainClass='home' indonesia={this.langID} mainID={this.MainID}>
 							{this.langID && (
 								<Helmet>
-									{id_seodesc && <meta name="description" content={id_seodesc} />}
-									{id_seodesc && <meta property="og:description" content={id_seodesc} />}
-									{id_seodesc && <meta name="twitter:description" content={id_seodesc} />}
+									{id_seodesc && <meta name='description' content={id_seodesc} />}
+									{id_seodesc && <meta property='og:description' content={id_seodesc} />}
+									{id_seodesc && <meta name='twitter:description' content={id_seodesc} />}
 								</Helmet>
 							)}
 							<MobileHomeHeader indonesia={this.langID} />
-							<div id="MobileNavigation">
+							<div id='MobileNavigation'>
 								<div>
-									<div className="menubutton" onClick={(e) => this.menuToggle(e)}>
+									<div className='menubutton' onClick={(e) => this.menuToggle(e)}>
 										<span />
 										<span />
 										<span />
 									</div>
 								</div>
-								<div className="">
+								<div>
 									<div>
-										<div className="closebutton" onClick={(e) => this.menuToggle(e)}>
+										<div className='closebutton' onClick={(e) => this.menuToggle(e)}>
 											<span />
 											<span />
 										</div>
 									</div>
-									<div className="fitheight">
+									<div className='fitheight'>
 										<div>
 											<span onClick={(e) => this.mobileScroll(e)}>
 												{this.langID ? transData.home.title.id : transData.home.title.en}
@@ -695,11 +814,11 @@ export default class Home extends React.Component {
 												<div>
 													{footerData.ig_link !== '' && (
 														<a
-															className="svg"
-															target="_blank"
-															rel="noopener noreferrer"
+															className='svg'
+															target='_blank'
+															rel='noopener noreferrer'
 															href={footerData.ig_link}
-															aria-label="Instagram"
+															aria-label='Instagram'
 														>
 															<InstagramSVG />
 														</a>
@@ -707,22 +826,22 @@ export default class Home extends React.Component {
 
 													{footerData.wa_no !== '' && (
 														<a
-															className="svg"
-															target="_blank"
-															rel="noopener noreferrer"
+															className='svg'
+															target='_blank'
+															rel='noopener noreferrer'
 															href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
-															aria-label="Whatsapp"
+															aria-label='Whatsapp'
 														>
 															<WhatsappSVG />
 														</a>
 													)}
 													{footerData.email !== '' && (
 														<a
-															className="svg"
-															target="_blank"
-															rel="noopener noreferrer"
+															className='svg'
+															target='_blank'
+															rel='noopener noreferrer'
 															href={`mailto:${footerData.email}`}
-															aria-label="Email"
+															aria-label='Email'
 														>
 															<EmailSVG />
 														</a>
@@ -733,28 +852,27 @@ export default class Home extends React.Component {
 									</div>
 								</div>
 							</div>
-							<div className="overlay_wrapper">
-								<div className="overlay">
-									<div className="wrapper">
+							<div className='overlay_wrapper'>
+								<div className='overlay'>
+									<div className='wrapper'>
 										<div>
 											<Link
-												aria-label="English"
+												aria-label='English'
 												className={`${!this.props.langID && 'disable'}`}
-												to="/"
+												to='/'
 											>
 												EN
 											</Link>
 											<Link
-												aria-label="Indonesia"
+												aria-label='Indonesia'
 												className={`${this.props.langID && 'disable'}`}
-												to="/id"
+												to='/id'
 											>
 												ID
 											</Link>
 										</div>
-										{/* NAVIGATION */}
-										<div className="right_nav">
-											<div className="snap_nav">
+										<div className='right_nav'>
+											<div className='snap_nav'>
 												<span>
 													<span>
 														{this.langID ? (
@@ -764,7 +882,7 @@ export default class Home extends React.Component {
 														)}
 													</span>
 												</span>
-												<span className="active">
+												<span className='active'>
 													<span>
 														{this.langID ? (
 															transData.about.title.id
@@ -812,14 +930,14 @@ export default class Home extends React.Component {
 													</span>
 												)}
 											</div>
-											<div className="social_ctn">
+											<div className='social_ctn'>
 												{footerData.ig_link !== '' && (
 													<a
-														className="svg"
-														target="_blank"
-														rel="noopener noreferrer"
+														className='svg'
+														target='_blank'
+														rel='noopener noreferrer'
 														href={footerData.ig_link}
-														aria-label="Instagram"
+														aria-label='Instagram'
 													>
 														<InstagramSVG />
 													</a>
@@ -827,22 +945,22 @@ export default class Home extends React.Component {
 
 												{footerData.wa_no !== '' && (
 													<a
-														className="svg"
-														target="_blank"
-														rel="noopener noreferrer"
+														className='svg'
+														target='_blank'
+														rel='noopener noreferrer'
 														href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
-														aria-label="Whatsapp"
+														aria-label='Whatsapp'
 													>
 														<WhatsappSVG />
 													</a>
 												)}
 												{footerData.email !== '' && (
 													<a
-														className="svg"
-														target="_blank"
-														rel="noopener noreferrer"
+														className='svg'
+														target='_blank'
+														rel='noopener noreferrer'
 														href={`mailto:${footerData.email}`}
-														aria-label="Email"
+														aria-label='Email'
 													>
 														<EmailSVG />
 													</a>
@@ -851,17 +969,16 @@ export default class Home extends React.Component {
 										</div>
 									</div>
 								</div>
-								{/* CONTENT */}
-								<div className="bottlesection_wrapper">
-									<div className="greenline" />
-									<div className="bottlewrapper">
+								<div className='bottlesection_wrapper'>
+									<div className='greenline' />
+									<div className='bottlewrapper'>
 										<div>
 											<picture>
-												<source srcSet={BottleImgWebP} type="image/webp" />
-												<source srcSet={BottleImg}  type="image/jpeg" />
-												<img src={BottleImg}  alt="Herbamojo" />
+												<source srcSet={BottleImgWebP} type='image/webp' />
+												<source srcSet={BottleImg}  type='image/jpeg' />
+												<img src={BottleImg}  alt='Herbamojo' />
 											</picture>
-											<span id="ShopButton" className="hide" onClick={this.gotoShop}>
+											<span id='ShopButton' className='hide' onClick={this.gotoShop}>
 												{this.langID ? (
 													transData.home.shopfloat.id
 												) : (
@@ -870,13 +987,13 @@ export default class Home extends React.Component {
 											</span>
 										</div>
 									</div>
-									<section id="home">
-										<div className="wrapper">
-											<h1 className="hidden">{generalData.web_name}</h1>
-											<span className="logo">
-												<img src={HerbamojoLogo} alt="herbamojo" />
+									<section id='home'>
+										<div className='wrapper'>
+											<h1 className='hidden'>{generalData.web_name}</h1>
+											<span className='logo'>
+												<img src={HerbamojoLogo} alt='herbamojo' />
 											</span>
-											<div className="content">
+											<div className='content'>
 												<span>
 													{this.langID ? (
 														transData.home.kys.id.know
@@ -898,7 +1015,7 @@ export default class Home extends React.Component {
 														transData.home.kys.en.strength
 													)}
 												</span>
-												<span id="GetButton" onClick={this.gotoShop}>
+												<span id='GetButton' onClick={this.gotoShop}>
 													{this.langID ? (
 														transData.home.getyours.id
 													) : (
@@ -907,31 +1024,31 @@ export default class Home extends React.Component {
 												</span>
 											</div>
 										</div>
-										<div className="bg">
-											<img className="paralax1" src={homeData.home.background} alt="herbamojo" />
+										<div className='bg'>
+											<img className='paralax1' src={homeData.home.background} alt='herbamojo' />
 											<img
-												className="mobile prlx"
+												className='mobile prlx'
 												src={homeData.home.backgroundmobile}
-												alt="herbamojo"
+												alt='herbamojo'
 											/>
 										</div>
 									</section>
-									<section id="about">
-										<div className="wrapper">
+									<section id='about'>
+										<div className='wrapper'>
 											<h1>{this.langID ? transData.about.title.id : transData.about.title.en}</h1>
-											<div className="content half ">
-												<div className="logo">
-													<img src={HerbamojoLogo} alt="herbamojo" />
+											<div className='content half flex '>
+												<div className='logo'>
+													<img src={HerbamojoLogo} alt='herbamojo' />
 												</div>
-												<div className="bottle">
-													<img src={BottleImg} alt="herbamojo" />
+												<div className='bottle'>
+													<img src={BottleImg} alt='herbamojo' />
 												</div>
-												<div className="description">
+												<div className='description'>
 													{this.langID ? homeData.about.desc.id : homeData.about.desc.en}
 												</div>
-												<div className="certification">
+												<div className='certification'>
 													<div>
-														<img src={CertNatural} alt="herbamojo" />
+														<img src={CertNatural} alt='herbamojo' />
 														<span>
 															{this.langID ? (
 																transData.about.cert.natural.id
@@ -942,7 +1059,7 @@ export default class Home extends React.Component {
 													</div>
 
 													<div>
-														<img src={CertBPOM} alt="herbamojo" />
+														<img src={CertBPOM} alt='herbamojo' />
 														<span>
 															{this.langID ? (
 																transData.about.cert.bpom.id
@@ -953,7 +1070,7 @@ export default class Home extends React.Component {
 													</div>
 
 													<div>
-														<img src={CertHalal} alt="herbamojo" />
+														<img src={CertHalal} alt='herbamojo' />
 														<span>
 															{this.langID ? (
 																transData.about.cert.halal.id
@@ -964,7 +1081,7 @@ export default class Home extends React.Component {
 													</div>
 
 													<div>
-														<img src={CertQuality} alt="herbamojo" />
+														<img src={CertQuality} alt='herbamojo' />
 														<span>
 															{this.langID ? (
 																transData.about.cert.quality.id
@@ -974,7 +1091,7 @@ export default class Home extends React.Component {
 														</span>
 													</div>
 													<div>
-														<img src={CertResearch} alt="herbamojo" />
+														<img src={CertResearch} alt='herbamojo' />
 														<span>
 															{this.langID ? (
 																transData.about.cert.expert.id
@@ -985,7 +1102,7 @@ export default class Home extends React.Component {
 													</div>
 
 													<div>
-														<img src={CertQuadra} alt="herbamojo" />
+														<img src={CertQuadra} alt='herbamojo' />
 														<span>
 															{this.langID ? (
 																transData.about.cert.quadra.id
@@ -997,12 +1114,12 @@ export default class Home extends React.Component {
 												</div>
 											</div>
 										</div>
-										<div className="bg">
-											<img className="paralax2" src={homeData.about.background} alt="herbamojo" />
+										<div className='bg'>
+											<img className='paralax2' src={homeData.about.background} alt='herbamojo' />
 										</div>
 									</section>
-									<section id="benefits">
-										<div className="wrapper">
+									<section id='benefits'>
+										<div className='wrapper'>
 											<h1>
 												{this.langID ? (
 													transData.benefits.title.id
@@ -1010,11 +1127,10 @@ export default class Home extends React.Component {
 													transData.benefits.title.en
 												)}
 											</h1>
-											<div className="content half flex">
+											<div className='content half flex'>
 												<div>
 													<div>
 														<div id={this.AnimObject[0].id_name}>
-															{/* <img src={BenefitStamina} alt="herbamojo" /> */}
 														</div>
 														<div>
 															<span>
@@ -1035,7 +1151,6 @@ export default class Home extends React.Component {
 													</div>
 													<div>
 														<div id={this.AnimObject[1].id_name}>
-															{/* <img src={BenefitEnergy} alt="herbamojo" /> */}
 														</div>
 														<div>
 															<span>
@@ -1056,7 +1171,6 @@ export default class Home extends React.Component {
 													</div>
 													<div>
 														<div id={this.AnimObject[2].id_name}>
-															{/* <img src={BenefitImmune} alt="herbamojo" /> */}
 														</div>
 														<div>
 															<span>
@@ -1077,7 +1191,6 @@ export default class Home extends React.Component {
 													</div>
 													<div>
 														<div id={this.AnimObject[3].id_name}>
-															{/* <img src={BenefitExercise} alt="herbamojo" /> */}
 														</div>
 														<div>
 															<span>
@@ -1101,8 +1214,8 @@ export default class Home extends React.Component {
 										</div>
 									</section>
 								</div>
-								<section id="ingredients">
-									<div className="wrapper">
+								<section id='ingredients'>
+									<div className='wrapper'>
 										<h1>
 											{this.langID ? (
 												transData.ingredients.title.id
@@ -1110,13 +1223,13 @@ export default class Home extends React.Component {
 												transData.ingredients.title.en
 											)}
 										</h1>
-										<div className="content flex">
-											<div id="ing_sel">
+										<div className='content flex'>
+											<div id='ing_sel'>
 												{homeData.ingredients.map((node, id) => {
 													return (
 														<span
 															key={id}
-															className="active"
+															className='active'
 															data-desc={this.langID ? node.desc.id : node.desc.en}
 														>
 															<div onClick={(e) => this.ingredientClick(e)}>
@@ -1136,9 +1249,9 @@ export default class Home extends React.Component {
 											</div>
 										</div>
 										<div>
-											<div id="ing_display">
-												<div id="ing_display_number">1</div>
-												<div id="ing_display_description">
+											<div id='ing_display'>
+												<div id='ing_display_number'>1</div>
+												<div id='ing_display_description'>
 													{this.langID ? (
 														homeData.ingredients[0].desc.id
 													) : (
@@ -1148,18 +1261,18 @@ export default class Home extends React.Component {
 											</div>
 										</div>
 									</div>
-									<div className="bg">
-										<div id="ing_bg">
+									<div className='bg'>
+										<div id='ing_bg'>
 											{homeData.ingredients.map((node, id) => {
-												return <img key={id} src={node.image} alt="herbamojo" />;
+												return <img key={id} src={node.image} alt='herbamojo' />;
 											})}
 										</div>
 									</div>
 								</section>
-								<section id="shop">
-									<div className="wrapper">
+								<section id='shop'>
+									<div className='wrapper'>
 										<h1>{this.langID ? transData.shop.title.id : transData.shop.title.en}</h1>
-										<div className="content flex">
+										<div className='content flex'>
 											{(onlineshop.length > 1 || (onlineshop.length === 1 && onlineshop[0].image !== '') ) && (
 												<div>
 													<h2>
@@ -1170,7 +1283,7 @@ export default class Home extends React.Component {
 														)}
 													</h2>
 													<div
-														id="onlineshop"
+														id='onlineshop'
 														className={`shopSlider ${onlineshop.length === 1
 															? ' oneslide'
 															: ''} ${onlineshop.length === 2
@@ -1179,36 +1292,36 @@ export default class Home extends React.Component {
 													>
 														{onlineshop.length > 1 ? (
 															<div
-																className="arrow"
+																className='arrow'
 																onClick={() => {
 																	if (this.slider.online) this.slider.online.go('<');
 																}}
 															>
 																<Arrow />
-																<ArrowSmaller classProps="mobile" />
+																<ArrowSmaller classProps='mobile' />
 															</div>
 														) : (
-															<div className="arrow">
+															<div className='arrow'>
 																<Arrow />
-																<ArrowSmaller classProps="mobile" />
+																<ArrowSmaller classProps='mobile' />
 															</div>
 														)}
 
 														{onlineshop.length > 1 ? (
-															<div id="onlineslider" className="glide wrapper">
-																<div data-glide-el="track" className="glide__track">
-																	<div className="glide__slides ">
+															<div id='onlineslider' className='glide wrapper'>
+																<div data-glide-el='track' className='glide__track'>
+																	<div className='glide__slides '>
 																		{onlineshop.map((node, id) => {
 																			return (
 																				<div
-																					className="shop glide__slide"
+																					className='shop glide__slide'
 																					key={id}
 																					dataid={id}
 																				>
 																					{node.link ? (
 																						<a
-																							target="_blank"
-																							rel="noopener noreferrer"
+																							target='_blank'
+																							rel='noopener noreferrer'
 																							href={node.link}
 																							style={{
 																								background:
@@ -1217,11 +1330,11 @@ export default class Home extends React.Component {
 																										? node.background
 																										: 'transparent'
 																							}}
-																							aria-label="Shop Slider"
+																							aria-label='Shop Slider'
 																						>
 																							<img
 																								src={node.image}
-																								alt="herbamojo"
+																								alt='herbamojo'
 																							/>
 																						</a>
 																					) : (
@@ -1236,7 +1349,7 @@ export default class Home extends React.Component {
 																						>
 																							<img
 																								src={node.image}
-																								alt="herbamojo"
+																								alt='herbamojo'
 																							/>
 																						</div>
 																					)}
@@ -1247,14 +1360,14 @@ export default class Home extends React.Component {
 																</div>
 															</div>
 														) : (
-															<div className="wrapper">
+															<div className='wrapper'>
 																{onlineshop.map((node, id) => {
 																	return (
-																		<div className="shop" key={id} dataid={id}>
+																		<div className='shop' key={id} dataid={id}>
 																			{node.link ? (
 																				<a
-																					target="_blank"
-																					rel="noopener noreferrer"
+																					target='_blank'
+																					rel='noopener noreferrer'
 																					href={node.link}
 																					style={{
 																						background:
@@ -1262,11 +1375,11 @@ export default class Home extends React.Component {
 																								? node.background
 																								: 'transparent'
 																					}}
-																					aria-label="Shop Slider"
+																					aria-label='Shop Slider'
 																				>
 																					<img
 																						src={node.image}
-																						alt="herbamojo"
+																						alt='herbamojo'
 																					/>
 																				</a>
 																			) : (
@@ -1280,7 +1393,7 @@ export default class Home extends React.Component {
 																				>
 																					<img
 																						src={node.image}
-																						alt="herbamojo"
+																						alt='herbamojo'
 																					/>
 																				</div>
 																			)}
@@ -1291,18 +1404,18 @@ export default class Home extends React.Component {
 														)}
 														{onlineshop.length > 1 ? (
 															<div
-																className="arrow"
+																className='arrow'
 																onClick={() => {
 																	if (this.slider.online) this.slider.online.go('>');
 																}}
 															>
 																<Arrow />
-																<ArrowSmaller classProps="mobile" />
+																<ArrowSmaller classProps='mobile' />
 															</div>
 														) : (
-															<div className="arrow">
+															<div className='arrow'>
 																<Arrow />
-																<ArrowSmaller classProps="mobile" />
+																<ArrowSmaller classProps='mobile' />
 															</div>
 														)}
 													</div>
@@ -1318,7 +1431,7 @@ export default class Home extends React.Component {
 														)}
 													</h2>
 													<div
-														id="offlineshop"
+														id='offlineshop'
 														className={`shopSlider ${offlineshop.length === 1
 															? ' oneslide'
 															: ''} ${offlineshop.length === 2
@@ -1327,37 +1440,37 @@ export default class Home extends React.Component {
 													>
 														{offlineshop.length > 1 ? (
 															<div
-																className="arrow"
+																className='arrow'
 																onClick={() => {
 																	if (this.slider.offline)
 																		this.slider.offline.go('<');
 																}}
 															>
 																<Arrow />
-																<ArrowSmaller classProps="mobile" />
+																<ArrowSmaller classProps='mobile' />
 															</div>
 														) : (
-															<div className="arrow">
+															<div className='arrow'>
 																<Arrow />
-																<ArrowSmaller classProps="mobile" />
+																<ArrowSmaller classProps='mobile' />
 															</div>
 														)}
 
 														{offlineshop.length > 1 ? (
-															<div id="offlineslider" className="glide wrapper">
-																<div data-glide-el="track" className="glide__track">
-																	<div className="glide__slides ">
+															<div id='offlineslider' className='glide wrapper'>
+																<div data-glide-el='track' className='glide__track'>
+																	<div className='glide__slides '>
 																		{offlineshop.map((node, id) => {
 																			return (
 																				<div
-																					className="shop glide__slide"
+																					className='shop glide__slide'
 																					key={id}
 																					dataid={id}
 																				>
 																					{node.link ? (
 																						<a
-																							target="_blank"
-																							rel="noopener noreferrer"
+																							target='_blank'
+																							rel='noopener noreferrer'
 																							href={node.link}
 																							style={{
 																								background:
@@ -1366,11 +1479,11 @@ export default class Home extends React.Component {
 																										? node.background
 																										: 'transparent'
 																							}}
-																							aria-label="Shop Slider"
+																							aria-label='Shop Slider'
 																						>
 																							<img
 																								src={node.image}
-																								alt="herbamojo"
+																								alt='herbamojo'
 																							/>
 																						</a>
 																					) : (
@@ -1385,7 +1498,7 @@ export default class Home extends React.Component {
 																						>
 																							<img
 																								src={node.image}
-																								alt="herbamojo"
+																								alt='herbamojo'
 																							/>
 																						</div>
 																					)}
@@ -1396,14 +1509,14 @@ export default class Home extends React.Component {
 																</div>
 															</div>
 														) : (
-															<div className="wrapper">
+															<div className='wrapper'>
 																{offlineshop.map((node, id) => {
 																	return (
-																		<div className="shop" key={id} dataid={id}>
+																		<div className='shop' key={id} dataid={id}>
 																			{node.link ? (
 																				<a
-																					target="_blank"
-																					rel="noopener noreferrer"
+																					target='_blank'
+																					rel='noopener noreferrer'
 																					href={node.link}
 																					style={{
 																						background:
@@ -1411,11 +1524,11 @@ export default class Home extends React.Component {
 																								? node.background
 																								: 'transparent'
 																					}}
-																					aria-label="Shop Slider"
+																					aria-label='Shop Slider'
 																				>
 																					<img
 																						src={node.image}
-																						alt="herbamojo"
+																						alt='herbamojo'
 																					/>
 																				</a>
 																			) : (
@@ -1429,7 +1542,7 @@ export default class Home extends React.Component {
 																				>
 																					<img
 																						src={node.image}
-																						alt="herbamojo"
+																						alt='herbamojo'
 																					/>
 																				</div>
 																			)}
@@ -1440,19 +1553,19 @@ export default class Home extends React.Component {
 														)}
 														{offlineshop.length > 1 ? (
 															<div
-																className="arrow"
+																className='arrow'
 																onClick={() => {
 																	if (this.slider.offline)
 																		this.slider.offline.go('>');
 																}}
 															>
 																<Arrow />
-																<ArrowSmaller classProps="mobile" />
+																<ArrowSmaller classProps='mobile' />
 															</div>
 														) : (
-															<div className="arrow">
+															<div className='arrow'>
 																<Arrow />
-																<ArrowSmaller classProps="mobile" />
+																<ArrowSmaller classProps='mobile' />
 															</div>
 														)}
 													</div>
@@ -1462,11 +1575,51 @@ export default class Home extends React.Component {
 									</div>
 								</section>
 								{!data.general.frontmatter.journaldisable && (
-									<section id="journal" className="journallist">
-										<div className="wrapper">
+									<section id='journal' className='journallist'>
+										<div className='wrapper'>
 											<h1>
 												{this.langID ? transData.journal.title.id : transData.journal.title.en}
 											</h1>
+
+											<div className='content flex'>
+												<div className='__journalcontainer'>
+													{printjournal.edges.map((journal, id) => {
+														return (
+															<Link
+																key={journal.node.id}
+																to={journal.node.fields.slug}
+																className={
+																	journal.node.frontmatter.listcolorblack ? 'black' : ''
+																}
+															>
+																<div>
+																	<span>{journal.node.frontmatter.date}</span>
+																	<h2>{journal.node.frontmatter.title}</h2>
+																</div>
+																<picture>
+																	<source
+																		srcSet={journal.node.frontmatter.thumbimage}
+																		type='image/jpeg'
+																	/>
+																	<img
+																		src={journal.node.frontmatter.thumbimage}
+																		alt='Herbamojo'
+																	/>
+																</picture>
+															</Link>
+														);
+													})}
+											</div>
+												{printjournal.length > 1 && (
+													<Link className="viewall" to={this.langID ? `/id${journalslug}` : `${journalslug}`}  aria-label='Go to Journal'>
+														{this.langID ? (
+															transData.journal.viewall.id
+														) : (
+															transData.journal.viewall.en
+														)}
+													</Link>
+												)}
+											</div>
 										</div>
 									</section>
 								)}
@@ -1481,221 +1634,260 @@ export default class Home extends React.Component {
 }
 
 const indexQuery = graphql`
-	query {
-		journals: allMarkdownRemark(
-		filter: {
-			frontmatter: {
-				issetting: { eq: false }
-				contenttype: { eq: "journal" }
-				indonesia: { eq: false }
-				active: { eq: true }
-			}
-		}
-		sort: { fields: [frontmatter___date], order: DESC }
-		limit: 4
-	) {
-		edges {
-			node {
-				id
-				frontmatter {
-					title
-					date(formatString: "DD/MM/YY")
-					listcolorblack
-					thumbimage
-				}
-				fields {
-					slug
-				}
-				excerpt
-			}
-		}
-	}
-		general: markdownRemark(frontmatter: { issetting: { eq: true }, contenttype: { eq: "general_setting" } }) {
-			frontmatter {
-				web_name
-				journaldisable
-				seo {
-					seo_shortdesc_id
-				}
-				footer {
-					email
-					ig_link
-					wa_no
-				}
-			}
-		}
-		home: markdownRemark(frontmatter: { issetting: { eq: true }, contenttype: { eq: "home_setting" } }) {
-			frontmatter {
-				title
-				home {
-					background
-					backgroundmobile
-				}
-				about {
-					background
-					desc {
-						en
-						id
-					}
-				}
-				ingredients {
-					image
-					title {
-						en
-						id
-					}
-					desc {
-						en
-						id
-					}
-				}
-				onlineshop {
-					image
-					link
-					background
-				}
-				offlineshop {
-					image
-					link
-					background
-				}
-				translations {
-					home {
-						title {
-							en
-							id
-						}
-						kys {
-							en {
-								know
-								your
-								strength
-							}
-							id {
-								know
-								your
-								strength
-							}
-						}
-						getyours {
-							en
-							id
-						}
-						shopfloat {
-							en
-							id
-						}
-					}
-					about {
-						title {
-							en
-							id
-						}
-						cert {
-							natural {
-								en
-								id
-							}
-							bpom {
-								en
-								id
-							}
-							halal {
-								en
-								id
-							}
-							quality {
-								en
-								id
-							}
-							expert {
-								en
-								id
-							}
-							quadra {
-								en
-								id
-							}
-						}
-					}
-					benefits {
-						title {
-							en
-							id
-						}
-						stamina {
-							en {
-								line1
-								line2
-							}
-							id {
-								line1
-								line2
-							}
-						}
-						increases {
-							en {
-								line1
-								line2
-							}
-							id {
-								line1
-								line2
-							}
-						}
-						immune {
-							en {
-								line1
-								line2
-							}
-							id {
-								line1
-								line2
-							}
-						}
-						enhance {
-							en {
-								line1
-								line2
-							}
-							id {
-								line1
-								line2
-							}
-						}
-					}
-					ingredients {
-						title {
-							en
-							id
-						}
-					}
-					shop {
-						title {
-							en
-							id
-						}
-						online {
-							en
-							id
-						}
-						offline {
-							en
-							id
-						}
-					}
-					journal {
-						title {
-							en
-							id
-						}
-						viewall {
-							en
-							id
-						}
-					}
-				}
-			}
-		}
-	}
+  query {
+    journals: allMarkdownRemark(
+      filter: {
+        frontmatter: {
+          issetting: { eq: false }
+          contenttype: { eq: "journal" }
+          indonesia: { eq: false }
+          active: { eq: true }
+        }
+      }
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 4
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "DD/MM/YY")
+            listcolorblack
+            thumbimage
+          }
+          fields {
+            slug
+          }
+          excerpt
+        }
+      }
+    }
+    journals_id: allMarkdownRemark(
+      filter: {
+        frontmatter: {
+          issetting: { eq: false }
+          contenttype: { eq: "journal" }
+          indonesia: { eq: true }
+          active: { eq: true }
+        }
+      }
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 4
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "DD/MM/YY")
+            listcolorblack
+            thumbimage
+          }
+          fields {
+            slug
+          }
+          excerpt
+        }
+      }
+    }
+    general: markdownRemark(
+      frontmatter: {
+        issetting: { eq: true }
+        contenttype: { eq: "general_setting" }
+      }
+    ) {
+      frontmatter {
+        web_name
+        journaldisable
+        journalslug
+        seo {
+          seo_shortdesc_id
+        }
+        footer {
+          email
+          ig_link
+          wa_no
+        }
+      }
+    }
+    home: markdownRemark(
+      frontmatter: {
+        issetting: { eq: true }
+        contenttype: { eq: "home_setting" }
+      }
+    ) {
+      frontmatter {
+        title
+        home {
+          background
+          backgroundmobile
+        }
+        about {
+          background
+          desc {
+            en
+            id
+          }
+        }
+        ingredients {
+          image
+          title {
+            en
+            id
+          }
+          desc {
+            en
+            id
+          }
+        }
+        onlineshop {
+          image
+          link
+          background
+        }
+        offlineshop {
+          image
+          link
+          background
+        }
+        translations {
+          home {
+            title {
+              en
+              id
+            }
+            kys {
+              en {
+                know
+                your
+                strength
+              }
+              id {
+                know
+                your
+                strength
+              }
+            }
+            getyours {
+              en
+              id
+            }
+            shopfloat {
+              en
+              id
+            }
+          }
+          about {
+            title {
+              en
+              id
+            }
+            cert {
+              natural {
+                en
+                id
+              }
+              bpom {
+                en
+                id
+              }
+              halal {
+                en
+                id
+              }
+              quality {
+                en
+                id
+              }
+              expert {
+                en
+                id
+              }
+              quadra {
+                en
+                id
+              }
+            }
+          }
+          benefits {
+            title {
+              en
+              id
+            }
+            stamina {
+              en {
+                line1
+                line2
+              }
+              id {
+                line1
+                line2
+              }
+            }
+            increases {
+              en {
+                line1
+                line2
+              }
+              id {
+                line1
+                line2
+              }
+            }
+            immune {
+              en {
+                line1
+                line2
+              }
+              id {
+                line1
+                line2
+              }
+            }
+            enhance {
+              en {
+                line1
+                line2
+              }
+              id {
+                line1
+                line2
+              }
+            }
+          }
+          ingredients {
+            title {
+              en
+              id
+            }
+          }
+          shop {
+            title {
+              en
+              id
+            }
+            online {
+              en
+              id
+            }
+            offline {
+              en
+              id
+            }
+          }
+          journal {
+            title {
+              en
+              id
+            }
+            viewall {
+              en
+              id
+            }
+          }
+        }
+      }
+    }
+  }
 `;
