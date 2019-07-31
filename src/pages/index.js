@@ -103,7 +103,6 @@ export default class Home extends React.Component {
 					hasfooter: false
 				});
 			}
-			
 			this.SnapNav = document.querySelectorAll(`main#${this.MainID} div.overlay .right_nav .snap_nav > *`);
 
 			const setNav = (i) => {
@@ -414,16 +413,16 @@ export default class Home extends React.Component {
 		});
 
 		if (typeof document !== `undefined`) if (this.HomeScrollSnap) this.HomeScrollSnap.kill();
-		if (this.disableScrollBody !== null) this.disableScrollBody.enable();
+		if (this.disableScrollBody !== null && this.disableScrollBody !== undefined) this.disableScrollBody.enable();
 
-		if (this.slider.online !== null) this.slider.online.destroy();
-		if (this.slider.offline !== null) this.slider.offline.destroy();
+		if (this.slider.online !== null && this.slider.online !== undefined ) this.slider.online.destroy();
+		if (this.slider.offline !== null && this.slider.offline !== undefined) this.slider.offline.destroy();
 
-		if (this.ForceVH) this.ForceVH.kill();
-		if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
+		if (this.ForceVH !== null  && this.ForceVH !== undefined) this.ForceVH.kill();
+		if (this.LoadAnimationTimeout !== null && this.LoadAnimationTimeout !== undefined) clearTimeout(this.LoadAnimationTimeout);
 
 		this.AnimObject.forEach((obj, index) => {
-			if (this.AnimObject[index].anim !== null) {
+			if (this.AnimObject[index].anim !== null && this.AnimObject[index].anim !== undefined) {
 				this.AnimObject[index].anim.stop();
 				this.AnimObject[index].anim = null;
 			}
