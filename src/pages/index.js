@@ -45,12 +45,46 @@ import AnimDataStamina from 'animationdata/stamina.json';
 import AnimDataExercise from 'animationdata/exercise.json';
 
 export default class Home extends React.Component {
-	//TOGGLE LANGUAGE
 	// --------------
 	langID = this.props.langID || false;
 	MainID = this.langID ? 'homeID' : 'homeEN';
 	LoadAnimationDelay = 2000;
 	LoadAnimationTimeout = null;
+	// VARIABLES
+	// --------------
+	slider = {
+		online: null,
+		offline: null
+	};
+	inviewArray = [];
+	inviewArrayBenefits = [ null, null, null, null ];
+	scrollpass = [];
+	scrollaxArray = [];
+	AnimObject = [
+		{
+			id_name: 'benefitstamina',
+			anim: null,
+			animeData: AnimDataStamina
+		},
+		{
+			id_name: 'benefit_energy',
+			anim: null,
+			animeData: AnimDataEnergy
+		},
+		{
+			id_name: 'BenefitImmune',
+			anim: null,
+			animeData: AnimDataImmune
+		},
+		{
+			id_name: 'BenefitExercise',
+			anim: null,
+			animeData: AnimDataExercise
+		}
+	];
+	HomeScrollSnap = null;
+	SnapNav = null;
+	ForceVH = null;
 	// --------------
 	IndexLoader = new LoaderClass({
 		parent: `#${this.MainID}`,
@@ -69,7 +103,9 @@ export default class Home extends React.Component {
 					hasfooter: false
 				});
 			}
+			
 			this.SnapNav = document.querySelectorAll(`main#${this.MainID} div.overlay .right_nav .snap_nav > *`);
+
 			const setNav = (i) => {
 				this.SnapNav.forEach((nav) => {
 					nav.classList.remove('active');
@@ -88,7 +124,7 @@ export default class Home extends React.Component {
 			});
 
 			// SCROLL PASS FOR BOTTLE FLOAT
-			this.scrollpass.bottlesection = new ScrollPassClass({
+			this.scrollpass[0] = new ScrollPassClass({
 				target: '.bottlesection_wrapper',
 				detectbottom: true,
 				passed: () => {
@@ -99,8 +135,8 @@ export default class Home extends React.Component {
 				}
 			});
 
-			//SECTIONS INVIEW
-			this.inview.home = new InViewportClass({
+			// INVIEW SETUP
+			this.inviewArray[0] = new InViewportClass({
 				target: 'section#home',
 				visibility: 0.55,
 				enter: () => {
@@ -113,7 +149,7 @@ export default class Home extends React.Component {
 					document.querySelector('#ShopButton').classList.remove('hide');
 				}
 			});
-			this.inview.about = new InViewportClass({
+			this.inviewArray[1] = new InViewportClass({
 				target: 'section#about',
 				visibility: 0.55,
 				enter: () => {
@@ -121,7 +157,7 @@ export default class Home extends React.Component {
 					document.querySelector('section#about').classList.add('inview');
 				}
 			});
-			this.inview.aboutm = new InViewportClass({
+			this.inviewArray[2] = new InViewportClass({
 				target: 'section#about',
 				visibility: 0.25,
 				enter: () => {
@@ -138,7 +174,7 @@ export default class Home extends React.Component {
 
 			let BenefitAnimTimeout1 = null,
 				BenefitAnimTimeout2 = null;
-			this.inview.benefits = new InViewportClass({
+			this.inviewArray[3] = new InViewportClass({
 				target: 'section#benefits',
 				visibility: 0.55,
 				enter: () => {
@@ -168,7 +204,7 @@ export default class Home extends React.Component {
 			});
 			const AllBenefits = document.querySelectorAll('section#benefits .content.half>div>div');
 			AllBenefits.forEach((benefit, index) => {
-				this.inview.benefitsm[index] = new InViewportClass({
+				this.inviewArrayBenefits[index] = new InViewportClass({
 					target: `section#benefits .content.half>div>div:nth-child(${index + 1})`,
 					visibility: 0.75,
 					enter: () => {
@@ -185,7 +221,7 @@ export default class Home extends React.Component {
 				});
 			});
 
-			this.inview.ingredients = new InViewportClass({
+			this.inviewArray[4] = new InViewportClass({
 				target: 'section#ingredients',
 				visibility: 0.55,
 				enter: () => {
@@ -200,7 +236,7 @@ export default class Home extends React.Component {
 					}
 				}
 			});
-			this.inview.ingredientsm = new InViewportClass({
+			this.inviewArray[5] = new InViewportClass({
 				target: 'section#ingredients',
 				visibility: 0.25,
 				enter: () => {
@@ -214,7 +250,7 @@ export default class Home extends React.Component {
 					}
 				}
 			});
-			this.inview.shop = new InViewportClass({
+			this.inviewArray[6] = new InViewportClass({
 				target: 'section#shop',
 				visibility: 0.55,
 				enter: () => {
@@ -225,7 +261,7 @@ export default class Home extends React.Component {
 					if (!MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.remove('inview');
 				}
 			});
-			this.inview.shopm = new InViewportClass({
+			this.inviewArray[7] = new InViewportClass({
 				target: 'section#shop',
 				visibility: 0.25,
 				enter: () => {
@@ -235,7 +271,29 @@ export default class Home extends React.Component {
 					if (MediaCheck.width.mtablet()) document.querySelector('section#shop').classList.remove('inview');
 				}
 			});
-			this.inview.footer = new InViewportClass({
+
+			this.inviewArray[8] = new InViewportClass({
+				target: 'section#journal',
+				visibility: 0.55,
+				enter: () => {
+					setNav(4);
+					if (!MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.add('inview');
+				},
+				exit: () => {
+					if (!MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.remove('inview');
+				}
+			});
+			// this.inview.shopm = new InViewportClass({
+			// 	target: 'section#journal',
+			// 	visibility: 0.25,
+			// 	enter: () => {
+			// 		if (MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.add('inview');
+			// 	},
+			// 	exit: () => {
+			// 		if (MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.remove('inview');
+			// 	}
+			// });
+			this.inviewArray[9] = new InViewportClass({
 				target: 'section.footer',
 				visibility: 0.05,
 				enter: () => {
@@ -248,11 +306,11 @@ export default class Home extends React.Component {
 			});
 
 			// SCROLLAX
-			this.scrollax.one = new Scrollax({ target: 'img.paralax1', move_right: 0.25 });
-			this.scrollax.two = new Scrollax({ target: 'img.paralax2', move_left: 0.25 });
-			this.scrollax.ing_bg = new Scrollax({ target: '#ing_bg', move_top: 0.35 });
-			this.scrollax.home_mobile = new Scrollax({ target: 'img.mobile.prlx', move_bottom: 0.3 });
-			this.scrollax.about_mobile = new Scrollax({ target: '#about .content .bottle > img', move_bottom: 0.3 });
+			this.scrollaxArray[0] = new Scrollax({ target: 'img.paralax1', move_right: 0.25 });
+			this.scrollaxArray[1]  = new Scrollax({ target: 'img.paralax2', move_left: 0.25 });
+			this.scrollaxArray[2]  = new Scrollax({ target: '#ing_bg', move_top: 0.35 });
+			this.scrollaxArray[3]  = new Scrollax({ target: 'img.mobile.prlx', move_bottom: 0.3 });
+			this.scrollaxArray[4] = new Scrollax({ target: '#about .content .bottle > img', move_bottom: 0.3 });
 
 			//INGREDIENTS SET
 			this.ingredientToggle(document.querySelector('#ing_sel > *:nth-child(1) > div:first-child'));
@@ -287,7 +345,7 @@ export default class Home extends React.Component {
 			this.resize();
 
 			this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
-			this.scrollpass.bottlesection.trigger();
+			this.scrollpasRetrigger();
 
 			// SET ANIMATION DELAY
 			if (this.LoadAnimationTimeout !== null) clearTimeout(this.LoadAnimationTimeout);
@@ -299,57 +357,6 @@ export default class Home extends React.Component {
 			}, this.LoadAnimationDelay);
 		}
 	});
-	slider = {
-		online: null,
-		offline: null
-	};
-	inview = {
-		footer: null,
-		home: null,
-		about: null,
-		aboutm: null,
-		benefits: null,
-		benefitsm: [ null, null, null, null ],
-		ingredients: null,
-		ingredientsm: null,
-		shop: null,
-		shopm: null
-	};
-	scrollpass = {
-		bottlesection: null
-	};
-	scrollax = {
-		one: null,
-		home_mobile: null,
-		two: null,
-		ing_bg: null
-	};
-	AnimObject = [
-		{
-			id_name: 'benefitstamina',
-			anim: null,
-			animeData: AnimDataStamina
-		},
-		{
-			id_name: 'benefit_energy',
-			anim: null,
-			animeData: AnimDataEnergy
-		},
-		{
-			id_name: 'BenefitImmune',
-			anim: null,
-			animeData: AnimDataImmune
-		},
-		{
-			id_name: 'BenefitExercise',
-			anim: null,
-			animeData: AnimDataExercise
-		}
-	];
-	disableScrollBody = null;
-	HomeScrollSnap = null;
-	SnapNav = null;
-	ForceVH = null;
 	componentDidMount() {
 		if (typeof document !== `undefined`) {
 			document.body.classList.remove('loaded');
@@ -380,23 +387,32 @@ export default class Home extends React.Component {
 		});
 	}
 	componentWillUnmount() {
-		if (this.inview.home) this.inview.home.kill();
-		if (this.inview.about) this.inview.about.kill();
-		if (this.inview.aboutm) this.inview.aboutm.kill();
-		if (this.inview.benefits) this.inview.benefits.kill();
-		this.inview.benefitsm.forEach((benefit, index) => {
-			if (this.inview.benefitsm[index]) this.inview.benefitsm[index].kill();
+		this.inviewArrayBenefits.forEach((benefit, index) => {
+			if (this.inviewArrayBenefits[index] !== null && this.inviewArrayBenefits[index] !== undefined ) {
+				this.inviewArrayBenefits[index].kill();
+				this.inviewArrayBenefits[index] = null;
+			}
 		});
-		if (this.inview.ingredients) this.inview.ingredients.kill();
-		if (this.inview.ingredientsm) this.inview.ingredientsm.kill();
-		if (this.inview.shop) this.inview.shop.kill();
-		if (this.inview.shopm) this.inview.shopm.kill();
-		if (this.inview.footer) this.inview.footer.kill();
-		if (this.scrollpass.bottlesection) this.scrollpass.bottlesection.kill();
-		if (this.scrollax.one) this.scrollax.one.kill();
-		if (this.scrollax.two) this.scrollax.two.kill();
-		if (this.scrollax.ing_bg) this.scrollax.ing_bg.kill();
-		if (this.scrollax.home_mobile) this.scrollax.home_mobile.kill();
+		this.inviewArray.forEach((each, index) => {
+			if (this.inviewArray[index] !== null && this.inviewArray[index] !== undefined ){
+				this.inviewArray[index].kill();
+				this.inviewArray[index] = null;
+			}
+		});
+
+		this.scrollpass.forEach((each, index) => {
+			if (this.scrollpass[index] !== null && this.scrollpass[index] !== undefined ){
+				this.scrollpass[index].kill();
+				this.scrollpass[index] = null;
+			}
+		});
+		this.scrollaxArray.forEach((each, index) => {
+			if (this.scrollaxArray[index] !== null && this.scrollaxArray[index] !== undefined ){
+				this.scrollaxArray[index].kill();
+				this.scrollaxArray[index] = null;
+			}
+		});
+
 		if (typeof document !== `undefined`) if (this.HomeScrollSnap) this.HomeScrollSnap.kill();
 		if (this.disableScrollBody !== null) this.disableScrollBody.enable();
 
@@ -424,20 +440,21 @@ export default class Home extends React.Component {
 		}
 	}
 	inviewRetrigger() {
-		if (this.inview.home) this.inview.home.trigger();
-		if (this.inview.about) this.inview.about.trigger();
-		if (this.inview.aboutm) this.inview.aboutm.trigger();
-		if (this.inview.benefits) this.inview.benefits.trigger();
-		this.inview.benefitsm.forEach((benefit, index) => {
-			if (this.inview.benefitsm[index]) this.inview.benefitsm[index].trigger();
+		this.inviewArrayBenefits.forEach((benefit, index) => {
+			if (this.inviewArrayBenefits[index] !== null && this.inviewArrayBenefits[index] !== undefined ) this.inviewArrayBenefits[index].trigger();
 		});
-		if (this.inview.ingredients) this.inview.ingredients.trigger();
-		if (this.inview.ingredientsm) this.inview.ingredientsm.trigger();
-		if (this.inview.shop) this.inview.shop.trigger();
-		if (this.inview.shopm) this.inview.shopm.trigger();
-		if (this.inview.footer) this.inview.footer.trigger();
+		this.inviewArray.forEach((each, index) => {
+			if (this.inviewArray[index] !== null && this.inviewArray[index] !== undefined ) this.inviewArray[index].trigger();
+		});
 	}
-	scrollaxCallibrate() {
+	scrollpasRetrigger(){
+		this.scrollpass.forEach((each, index) => {
+			if (this.scrollpass[index] !== null && this.scrollpass[index] !== undefined ){
+				this.scrollpass[index].trigger();
+			}
+		});
+	}
+	scrollaxRetrigger() {
 		if (this.scrollax.one) this.scrollax.one.trigger();
 		if (this.scrollax.two) this.scrollax.two.trigger();
 		if (this.scrollax.ing_bg) this.scrollax.ing_bg.trigger();
@@ -569,7 +586,7 @@ export default class Home extends React.Component {
 				const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 				window.scrollTo(0, elTop + scrollTop);
 				setTimeout(() => {
-					this.scrollaxCallibrate();
+					this.scrollaxRetrigger();
 				}, 10);
 				this.menuToggle();
 			}
@@ -1466,6 +1483,34 @@ export default class Home extends React.Component {
 
 const indexQuery = graphql`
 	query {
+		journals: allMarkdownRemark(
+		filter: {
+			frontmatter: {
+				issetting: { eq: false }
+				contenttype: { eq: "journal" }
+				indonesia: { eq: false }
+				active: { eq: true }
+			}
+		}
+		sort: { fields: [frontmatter___date], order: DESC }
+		limit: 4
+	) {
+		edges {
+			node {
+				id
+				frontmatter {
+					title
+					date(formatString: "DD/MM/YY")
+					listcolorblack
+					thumbimage
+				}
+				fields {
+					slug
+				}
+				excerpt
+			}
+		}
+	}
 		general: markdownRemark(frontmatter: { issetting: { eq: true }, contenttype: { eq: "general_setting" } }) {
 			frontmatter {
 				web_name
