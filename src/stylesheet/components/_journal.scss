@@ -564,11 +564,38 @@ main.journal {
               left: auto;
               // text-align: right;
             }
-            &.disable{
+            &.disable {
               pointer-events: none;
-              opacity: .25;
+              opacity: 0.25;
             }
           }
+        }
+      }
+    }
+  }
+  &:not(.list) > .sectionWrapper section {
+    &.journallist {
+      padding-bottom: $global-padding * 2;
+      @include respond-to(m_tablet) {
+        padding-bottom: $globalmobile-padding * 3;
+      }
+      @include respond-to(mobile) {
+        padding-bottom: $globalmobile-padding * 3;
+      }
+      & h1 {
+        font-family: 'Amarillo';
+        font-size: 48px;
+        line-height: 48px;
+        text-align: center;
+        margin-top: 0px;
+        margin-bottom: $global-padding;
+        @include respond-to(m_tablet) {
+          margin-bottom: $globalmobile-padding;
+        }
+        @include respond-to(mobile) {
+          margin-bottom: $globalmobile-padding;
+          font-size: 24px;
+          line-height: 24px;
         }
       }
     }

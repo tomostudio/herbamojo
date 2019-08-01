@@ -39,6 +39,9 @@ journaltranslation:
   previousjournal:
     en: Previous Journal
     id: Previous Jurnal
+  relatedjournal:
+    en: Related
+    id: Terhubung
 errortext: Page Not Found
 ---
 

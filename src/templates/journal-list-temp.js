@@ -11,7 +11,7 @@ import { DisableScroll } from 'utils/disablescroll';
 import { Arrow } from 'svg/symbols.js';
 
 export default class JournalList extends React.Component {
-  LangID = false;
+  LangID = this.props.pageContext.indo || false;
   MainID = `journallist${this.LangID ? 'id' : 'en'}${
     this.props.pageContext.index
   }`;
@@ -198,7 +198,7 @@ export default class JournalList extends React.Component {
             </div>
           </section>
         </div>
-        <Footer />
+        <Footer indonesia={this.LangID} />
       </Layout>
     );
   }

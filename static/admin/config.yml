@@ -33,7 +33,7 @@ collections:
       - label: "Indonesian Journal Slug"
         name: "altslug"
         widget: "relation"
-        collection: "journal"
+        collection: "journal_id"
         searchFields: ["slug", "title"]
         valueField: "slug"
         displayFields: ["slug", "title"]
@@ -51,6 +51,36 @@ collections:
       - { name: 'title', label: 'Title',widget: 'text', required: true}
       - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x750 | 1:1 | JPG/PNG', required: true }
       - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Flexible | JPG/PNG', required: true }
+      - name: 'related'
+        label: 'Related Journals'
+        widget: 'list'
+        label_singular: 'Related Journal'
+        required: false
+        fields:
+        - label: "Related Journal Selection"
+          name: "altslug"
+          widget: "relation"
+          collection: "journal"
+          searchFields: ["slug", "title"]
+          valueField: "slug"
+          displayFields: ["slug", "title"]
+          default: '/'
+          hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
+      - name: "listcolorblack"
+        label: "Content Color on Journal List"
+        widget: "select"
+        default: false
+        options:
+          - { label: "White", value: false }
+          - { label: "Black", value: true }
+      - name: "headercolorblack"
+        label: "Content Color on Cover and Header"
+        widget: "select"
+        default: false
+        options:
+          - { label: "White", value: false }
+          - { label: "Black", value: true }
+      - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, code, code-block,heading-one, heading-two, quote] }
   - name: journal_id
     identifier_field: title
     label: Journals Indonesian

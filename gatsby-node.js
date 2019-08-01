@@ -176,7 +176,8 @@ exports.createPages = ({ graphql, actions }) => {
               context: {
                 slug: node.fields.slug,
                 prev: prevslug,
-                next: nextslug
+                next: nextslug,
+                indo: false
               }
             });
           });
@@ -200,7 +201,8 @@ exports.createPages = ({ graphql, actions }) => {
               context: {
                 slug: node.fields.slug,
                 prev: prevslug,
-                next: nextslug
+                next: nextslug,
+                indo: true
               }
             });
           });
@@ -250,7 +252,7 @@ exports.createPages = ({ graphql, actions }) => {
               createPage({
                 path: listpath,
                 component: path.resolve(
-                  './src/templates/journal-list-temp-id.js'
+                  './src/templates/journal-list-temp.js'
                 ),
                 context: {
                   limit: journalperList,

@@ -87,7 +87,6 @@ export default class Journal extends React.Component {
       }
     }
     const { next, prev } = this.props.pageContext;
-    console.log('next, prev: ', next, prev);
     return (
       <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
         <JournalHeader
@@ -107,14 +106,20 @@ export default class Journal extends React.Component {
               <div>
                 <div>{content.date}</div>
                 <div>{content.title}</div>
-                <Link to={prev === null ? '' : prev} className={prev === null ? 'disable' : ''}>
+                <Link
+                  to={prev === null ? '' : prev}
+                  className={prev === null ? 'disable' : ''}
+                >
                   {`${
                     this.LangID
                       ? general.journaltranslation.previousjournal.id
                       : general.journaltranslation.previousjournal.en
                   }`}
                 </Link>
-                <Link to={next === null ? '' : next} className={next === null ? 'disable' : ''}>
+                <Link
+                  to={next === null ? '' : next}
+                  className={next === null ? 'disable' : ''}
+                >
                   {`${
                     this.LangID
                       ? general.journaltranslation.nextjournal.id
@@ -124,40 +129,69 @@ export default class Journal extends React.Component {
               </div>
             </div>
             <picture>
-              <source srcSet={Placeholder} type='image/jpeg' />
+              <source srcSet={content.coverimage} type='image/jpeg' />
               <img src={Placeholder} alt='Herbamojo' />
             </picture>
           </section>
-          <section>
+          <section className='content'>
             <div className='wrapper'>{content.title}</div>
           </section>
-          <section>
-            <div className='wrapper'>
-              {journals.edges.map((journal, id) => {
-                return (
-                  <Link key={journal.node.id} to={journal.node.fields.slug}>
-                    {journal.node.frontmatter.title}
-                  </Link>
-                );
-              })}
-            </div>
-          </section>
+          {journals.edges.length > 0 && (
+            <section className='related journallist'>
+              <div className='wrapper'>
+                <div className='content'>
+                  <h1>RELATED</h1>
+                  <div className='__journalcontainer'>
+                    {journals.edges.map((journal, id) => {
+                      return (
+                        <Link
+                          key={journal.node.id}
+                          to={journal.node.fields.slug}
+                          className={
+                            journal.node.frontmatter.listcolorblack
+                              ? 'black'
+                              : ''
+                          }
+                        >
+                          <div>
+                            <span>{journal.node.frontmatter.date}</span>
+                            <h2>{journal.node.frontmatter.title}</h2>
+                          </div>
+                          <picture>
+                            <source
+                              srcSet={journal.node.frontmatter.thumbimage}
+                              type='image/jpeg'
+                            />
+                            <img
+                              src={journal.node.frontmatter.thumbimage}
+                              alt='Herbamojo'
+                            />
+                          </picture>
+                        </Link>
+                      );
+                    })}
+                  </div>
+                </div>
+              </div>
+            </section>
+          )}
         </div>
-        <Footer />
+        <Footer indonesia={this.LangID} />
       </Layout>
     );
   }
 }
 
 export const query = graphql`
-  query($slug: String!) {
+  query($slug: String!, $indo: Boolean!) {
     journals: allMarkdownRemark(
-      limit: 3
+      limit: 2
       filter: {
         frontmatter: {
           issetting: { eq: false }
           contenttype: { eq: "journal" }
           active: { eq: true }
+          indonesia: { eq: $indo }
         }
         fields: { slug: { ne: $slug } }
       }
@@ -169,6 +203,38 @@ export const query = graphql`
           id
           frontmatter {
             title
+            date(formatString: "DD/MM/YY")
+            listcolorblack
+            thumbimage
+          }
+          fields {
+            slug
+          }
+          excerpt
+        }
+      }
+    }
+    journalsall: allMarkdownRemark(
+      filter: {
+        frontmatter: {
+          issetting: { eq: false }
+          contenttype: { eq: "journal" }
+          active: { eq: true }
+          indonesia: { eq: $indo }
+        }
+        fields: { slug: { ne: $slug } }
+      }
+      sort: { fields: [frontmatter___date], order: DESC }
+    ) {
+      totalCount
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "DD/MM/YY")
+            listcolorblack
+            thumbimage
           }
           fields {
             slug
@@ -212,6 +278,7 @@ export const query = graphql`
         date(formatString: "DD/MM/YY")
         altslug
         headercolorblack
+        coverimage
         seo {
           seo_shortdesc
           seo_keywords
