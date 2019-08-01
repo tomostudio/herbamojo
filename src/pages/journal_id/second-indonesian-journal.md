@@ -1,6 +1,6 @@
 ---
 issetting: false
-contenttype: case
+contenttype: journal
 indonesia: false
 active: true
 title: Second Indonesian Journal
@@ -27,4 +27,6 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 [Finally here is some link](https://herbana.id)
 
-[**This link is bold**](https://herbana.id)
+[This link is bold](https://herbana.id)
+
+<fake@example.com>

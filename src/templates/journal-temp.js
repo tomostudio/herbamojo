@@ -105,7 +105,7 @@ export default class Journal extends React.Component {
     // GET RELATED DATA
     const alljournals = this.props.data.alljournals;
     let related = [];
-    if(content.related){
+    if(content.related && content.related.length > 0){
       content.related.forEach(_r => {
       if (_r.relatedslug !== '/' && _r.relatedslug !== '') {
         const compareslug = _r.relatedslug;
