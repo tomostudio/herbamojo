@@ -1,5 +1,6 @@
 backend:
   name: git-gateway
+  branch: staging
 
 media_folder: static/assets
 public_folder: assets
@@ -56,7 +57,7 @@ collections:
         options:
           - { label: "White", value: false }
           - { label: "Black", value: true }
-      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x750 | 1:1 | JPG/PNG', required: true }
+      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x250 | Picture will be adjusted according to container | JPG/PNG', required: true }
       - name: "headercolorblack"
         label: "Text Color on Cover and Header"
         widget: "select"
@@ -64,7 +65,7 @@ collections:
         options:
           - { label: "White", value: false }
           - { label: "Black", value: true }
-      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Flexible | JPG/PNG', required: true }
+      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Picture will be adjusted according to container | JPG/PNG', required: true }
       - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, heading-one, heading-two, quote] }
       - name: 'related'
         label: 'Related Journals'
@@ -133,7 +134,7 @@ collections:
         options:
           - { label: "White", value: false }
           - { label: "Black", value: true }
-      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x750 | 1:1 | JPG/PNG', required: true }
+      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x250 | Picture will be adjusted according to container | JPG/PNG', required: true }
       - name: "headercolorblack"
         label: "Text Color on Cover and Header"
         widget: "select"
@@ -141,7 +142,7 @@ collections:
         options:
           - { label: "White", value: false }
           - { label: "Black", value: true }
-      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Flexible | JPG/PNG', required: true }
+      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Picture will be adjusted according to container | JPG/PNG', required: true }
       - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, heading-one, heading-two, quote] }
       - name: 'related'
         label: 'Related Journals'

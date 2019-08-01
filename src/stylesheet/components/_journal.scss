@@ -873,9 +873,6 @@ section.journallist {
       @include bp-max(950px) {
         grid-template-columns: 1fr;
       }
-      @include bp-max(950px) {
-        grid-template-columns: 1fr;
-      }
       @include respond-to(m_tablet) {
         grid-gap: 7px;
         grid-template-columns: 1fr 1fr;
