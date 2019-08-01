@@ -3,7 +3,7 @@ issetting: false
 contenttype: journal
 indonesia: false
 active: true
-title: Journal Entry ENGLISH 7
+title: Journal Entry ENGLISH LONG 7
 slug: journal-entry-7
 date: 2019-07-22T08:01:31.713Z
 seo:
