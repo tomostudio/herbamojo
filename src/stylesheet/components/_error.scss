@@ -1,5 +1,215 @@
-main.error{
-  & > section:first-child{
+main.error {
+  & > section:first-child {
     min-height: 100vh;
+    @include setflex(column, nowrap);
+    @include respond-to(tablet) {
+      padding: $global-padding ($global-padding);
+      & > .wrapper {
+        max-width: $global-maxwidth - (($global-padding) * 2);
+      }
+    }
+    @include respond-to(m_tablet) {
+      padding: $globalmobile-padding;
+    }
+    & > .wrapper {
+      @include flex-grow(1);
+      height: 100%;
+      position: relative;
+      min-height: 650px;
+      & > div {
+        position: relative;
+        max-width: 100%;
+        &:nth-child(1) {
+          & a {
+            width: 200px;
+            display: block;
+            & > svg {
+              width: 100%;
+              height: auto;
+              & .fill {
+                fill: $color_green;
+                @include transition(fill $global-transition);
+              }
+            }
+            body.onhover &:hover {
+              & > svg {
+                & .fill {
+                  fill: white;
+                }
+              }
+            }
+          }
+          @include respond-to(tablet) {
+            padding-left: 75px;
+          }
+          @include respond-to(m_tablet) {
+            padding-left: 0px;
+            text-align: center;
+            & a {
+              margin: 0px auto;
+              width: auto;
+              height: 40px;
+              display: block;
+              & > svg {
+                width: auto;
+                height: 100%;
+              }
+            }
+          }
+        }
+        &:nth-child(2) {
+          font-family: 'Amarillo';
+          position: absolute;
+          top: 50%;
+          left: 0%;
+          @include transform(translate(0%, -50%));
+          z-index: 2;
+          @include respond-to(m_tablet) {
+            top: calc(50%);
+            top: calc(50% + 40px);
+            left: 50%;
+            width: 100%;
+            @include transform(translate(-50%, -50%));
+          }
+          @include respond-to(mobile) {
+            top: calc(50% + 40px);
+          }
+          & > span {
+            display: block;
+            &:nth-child(1) {
+              -webkit-text-stroke: 6px white;
+              -webkit-text-fill-color: rgba(255, 255, 255, 0);
+              font-size: 400px;
+              line-height: 300px;
+              height: auto;
+              padding-bottom: 40px;
+              white-space: nowrap;
+              @include setflex(row, nowrap, flex-start);
+              position:relative;
+              left: -20px;
+              @include bp-max(1250px) {
+                -webkit-text-stroke: 4px white;
+                font-size: 350px;
+                line-height: 280px;
+                left: -15px;
+              }
+              @include respond-to(m_tablet) {
+                @include setflex(row, nowrap, center);
+                height: auto;
+                font-size: 250px;
+                line-height: 175px;
+                padding-bottom: 20px;
+                text-align: center;
+                left: 0px;
+              }
+              @include respond-to(mobile) {
+                -webkit-text-stroke: 3px white;
+                font-size: 200px;
+                line-height: 150px;
+                padding-bottom: 20px;
+              }
+              @include respond-to(smaller) {
+                font-size: 150px;
+                line-height: 125px;
+                padding-bottom: 0px;
+              }
+            }
+            &:nth-child(2) {
+              width: auto;
+              position: absolute;
+              font-size: 125px;
+              line-height: 80px;
+              top: auto;
+              left: 0px;
+              bottom: 0px;
+              white-space: nowrap;
+              @include transform(translate(0%, 100%));
+              @include setflex(row, nowrap, flex-start);
+              @include bp-max(1250px) {
+                font-size: 100px;
+                line-height: 60px;
+              }
+              @include respond-to(m_tablet) {
+                position: relative;
+                top: 0px;
+                left: 0px;
+                bottom: auto;
+                @include transform(translate(0%, 0%));
+                white-space: pre-line;
+                text-align: center;
+                font-size: 100px;
+                line-height: 95px;
+                padding: 0px $global-padding;
+                @include setflex(row, nowrap, center);
+              }
+              @include respond-to(mobile) {
+                font-size: 75px;
+                line-height: 75px;
+                padding: 0px $globalmobile-padding;
+              }
+              @include respond-to(smaller) {
+                padding: 0px;
+              }
+            }
+          }
+        }
+        &:nth-child(3) {
+          position: absolute;
+          height: calc(100% - 100px);
+          z-index: 0;
+          max-height: 650px;
+          width: auto;
+          top: 50%;
+          left: auto;
+          display: block;
+          right: -100px;
+          @include transform(translate(0%, -50%));
+          @include bp-max(1250px) {
+            max-height: 550px;
+          }
+          @include respond-to(tablet) {
+            right: 0px;
+          }
+          @include respond-to(m_tablet) {
+            top: calc(50% + 40px);
+            left: 50%;
+            display: block;
+            right: auto;
+            @include transform(translate(-50%, -50%));
+            opacity: 0.75;
+            height: 80%;
+            width: calc(100% - #{$globalmobile-padding * 2});
+            max-height: calc(100% - #{$globalmobile-padding * 2});
+            max-height: 550px;
+            max-width: 300px;
+          }
+          @include respond-to(mobile) {
+            max-width: 250px;
+            top: calc(50% + 40px);
+            height: calc(80% - 80px);
+            max-height: calc(100% - 80px - #{$globalmobile-padding * 2});
+          }
+          & > picture {
+            display: block;
+            height: 100%;
+            width: auto;
+            margin: 0px auto;
+            @include respond-to(m_tablet) {
+              width: 100%;
+            }
+            & > img {
+              height: 100%;
+              width: auto;
+              object-fit: contain;
+              @include respond-to(m_tablet) {
+                height: 100%;
+                width: 100%;
+                object-position: center center;
+              }
+            }
+          }
+        }
+      }
+    }
   }
 }

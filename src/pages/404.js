@@ -1,11 +1,14 @@
 import React from 'react';
 import Layout from 'components/layout';
 import Footer from 'components/footer';
-import { StaticQuery, graphql } from 'gatsby';
+import { StaticQuery, graphql, Link } from 'gatsby';
+import { HerbamojoLogo } from 'svg/symbols.js';
 
 //UTILS
 import { LoaderClass } from 'utils/loader';
 import { DisableScroll } from 'utils/disablescroll';
+import BottleImg from 'images/static/herbamojo_productshot.png';
+import BottleImgWebP from 'images/static/herbamojo_productshot.webp';
 
 export default class Journal extends React.Component {
   MainID = `ErrorPage`;
@@ -51,7 +54,22 @@ export default class Journal extends React.Component {
             <Layout mainClass='error' indonesia={false} mainID={this.MainID}>
               <section>
                 <div className='wrapper'>
-                  {data.general.frontmatter.errortext}
+                  <div>
+                    <Link to='/' aria-label='Shop Slider'>
+                      <HerbamojoLogo />
+                    </Link>
+                  </div>
+                  <div>
+                    <span>404</span>
+                    <span>{data.general.frontmatter.errortext}</span>
+                  </div>
+                  <div>
+                    <picture>
+                      <source srcSet={BottleImgWebP} type='image/webp' />
+                      <source srcSet={BottleImg} type='image/jpeg' />
+                      <img src={BottleImg} alt='Herbamojo' />
+                    </picture>
+                  </div>
                 </div>
               </section>
               <Footer indonesia={false} />

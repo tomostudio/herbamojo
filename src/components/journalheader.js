@@ -1,6 +1,5 @@
 import React from 'react';
 import { StaticQuery, graphql, Link } from 'gatsby';
-// import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
 
 import { HerbamojoLogo } from 'svg/symbols.js';
 

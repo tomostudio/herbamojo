@@ -17,17 +17,28 @@ export default class Footer extends React.Component {
             footerData.wa_no = footerData.wa_no.replace('+', '');
           }
 
+          let journalslug = data.general.frontmatter.journalslug;
+          if (journalslug.substring(0, 1) !== '/') {
+            journalslug = `/${journalslug}`;
+          }
+
           return (
             <section className='footer'>
               <div className='wrapper'>
                 {!data.general.frontmatter.journaldisable && (
                   <div>
-                    <Link aria-label='Home' to='/'>
+                    <Link
+                      aria-label='Home'
+                      to={this.props.indonesia ? `/id` : `/`}
+                    >
                       {this.props.indonesia
                         ? navigation.home.id
                         : navigation.home.en}
                     </Link>
-                    <Link aria-label='Journal' to='/'>
+                    <Link
+                      aria-label='Journal'
+                      to={this.props.indonesia ? `/id${journalslug}` : `${journalslug}`}
+                    >
                       {this.props.indonesia
                         ? navigation.journal.id
                         : navigation.journal.en}
@@ -91,6 +102,7 @@ const footerQuery = graphql`
     ) {
       frontmatter {
         journaldisable
+        journalslug
         footer {
           email
           ig_link

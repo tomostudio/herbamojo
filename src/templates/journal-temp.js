@@ -97,6 +97,10 @@ export default class Journal extends React.Component {
       }
     }
     const { next, prev } = this.props.pageContext;
+    let onlyarticle = false;
+    if(next === null & prev === null){
+      onlyarticle = true;
+    }
 
     // GET RELATED DATA
     const alljournals = this.props.data.alljournals;
@@ -182,6 +186,7 @@ export default class Journal extends React.Component {
               />
             </div>
           </section>
+          { !onlyarticle && (
           <section className='mobileJournalNavigation'>
             <div className='wrapper'>
               <Link
@@ -205,7 +210,7 @@ export default class Journal extends React.Component {
                 }`}</span><ArrowDouble />
               </Link>
             </div>
-          </section>
+          </section>)}
           {related.length > 0 && (
             <section className='related journallist'>
               <div className='wrapper'>
