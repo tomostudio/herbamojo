@@ -11,7 +11,6 @@ exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
 
   if (checkstatus && redirectObject !== null) {
     redirectObject.redirect.forEach(redirectRequest => {
-      // console.table(redirectRequest);
       if (redirectRequest.status) {
         const __from = redirectRequest.from;
         createRedirect({
@@ -120,7 +119,6 @@ exports.createPages = ({ graphql, actions }) => {
       `).then(result => {
         const results = result.data.all.edges;
         if (!journaldisable && results.length > 1) {
-
           if (result.data.slug_setting) {
             redirectObject = result.data.slug_setting.frontmatter;
             checkstatus = true;
@@ -144,53 +142,53 @@ exports.createPages = ({ graphql, actions }) => {
 
           journalen.forEach(({ node }, index) => {
             let nextslug, prevslug;
-            if(index === 0){
+            if (index === 0) {
               prevslug = null;
-            }
-            else{
+            } else {
               prevslug = journalen[index - 1].node.fields.slug;
             }
-            if(index >= (journalen.length - 1)){
+            if (index >= journalen.length - 1) {
               nextslug = null;
-            }
-            else{
+            } else {
               nextslug = journalen[index + 1].node.fields.slug;
             }
-            createPage({
-              path: node.fields.slug,
-              component: path.resolve(`./src/templates/journal-temp.js`),
-              context: {
-                slug: node.fields.slug,
-                prev: prevslug,
-                next: nextslug,
-                indo: false
-              }
-            });
+            if (!journaldisable) {
+              createPage({
+                path: node.fields.slug,
+                component: path.resolve(`./src/templates/journal-temp.js`),
+                context: {
+                  slug: node.fields.slug,
+                  prev: prevslug,
+                  next: nextslug,
+                  indo: false
+                }
+              });
+            }
           });
           journalid.forEach(({ node }, index) => {
             let nextslug, prevslug;
-            if(index === 0){
+            if (index === 0) {
               prevslug = null;
-            }
-            else{
+            } else {
               prevslug = journalid[index - 1].node.fields.slug;
             }
-            if(index >= (journalid.length - 1)){
+            if (index >= journalid.length - 1) {
               nextslug = null;
-            }
-            else{
+            } else {
               nextslug = journalid[index + 1].node.fields.slug;
             }
-            createPage({
-              path: node.fields.slug,
-              component: path.resolve(`./src/templates/journal-temp.js`),
-              context: {
-                slug: node.fields.slug,
-                prev: prevslug,
-                next: nextslug,
-                indo: true
-              }
-            });
+            if (!journaldisable) {
+              createPage({
+                path: node.fields.slug,
+                component: path.resolve(`./src/templates/journal-temp.js`),
+                context: {
+                  slug: node.fields.slug,
+                  prev: prevslug,
+                  next: nextslug,
+                  indo: true
+                }
+              });
+            }
           });
 
           //GET PAGE NUMBER
@@ -208,19 +206,23 @@ exports.createPages = ({ graphql, actions }) => {
               } else {
                 listpath = `/${journalslug}/${i + 1}`;
               }
-              createPage({
-                path: listpath,
-                component: path.resolve('./src/templates/journal-list-temp.js'),
-                context: {
-                  limit: journalperList,
-                  skip: i * journalperList,
-                  index: i,
-                  indo: false,
-                  slug: listpath,
-                  total: lengthEN,
-                  alttotal: lengthID
-                }
-              });
+              if (!journaldisable) {
+                createPage({
+                  path: listpath,
+                  component: path.resolve(
+                    './src/templates/journal-list-temp.js'
+                  ),
+                  context: {
+                    limit: journalperList,
+                    skip: i * journalperList,
+                    index: i,
+                    indo: false,
+                    slug: listpath,
+                    total: lengthEN,
+                    alttotal: lengthID
+                  }
+                });
+              }
             });
           }
 
@@ -235,21 +237,23 @@ exports.createPages = ({ graphql, actions }) => {
               } else {
                 listpath = `/id/${journalslug}/${i + 1}`;
               }
-              createPage({
-                path: listpath,
-                component: path.resolve(
-                  './src/templates/journal-list-temp.js'
-                ),
-                context: {
-                  limit: journalperList,
-                  skip: i * journalperList,
-                  index: i,
-                  slug: listpath,
-                  indo: true,
-                  total: lengthID,
-                  alttotal: lengthEN
-                }
-              });
+              if (!journaldisable) {
+                createPage({
+                  path: listpath,
+                  component: path.resolve(
+                    './src/templates/journal-list-temp.js'
+                  ),
+                  context: {
+                    limit: journalperList,
+                    skip: i * journalperList,
+                    index: i,
+                    slug: listpath,
+                    indo: true,
+                    total: lengthID,
+                    alttotal: lengthEN
+                  }
+                });
+              }
             });
           }
         }

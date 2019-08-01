@@ -19,6 +19,7 @@ collections:
       - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'case', required: true, }
       - { name: 'indonesia', label: 'indonesia', widget: 'hidden', default: true, required: true, }
       - { name: 'active', label: 'Active', widget: 'boolean', required: true, default: true }
+      - { name: 'title', label: 'Title',widget: 'string', required: true}
       - {
           name: 'slug',
           label: 'Slug',
@@ -29,7 +30,17 @@ collections:
               '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
               'Invalid Characters'
             ],
+          required: true
         }
+      - { name: 'date', label: 'Date', widget: 'date', required: true }
+      - label: "META INFO"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+        - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
+        - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
+        - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
       - label: "Indonesian Journal Slug"
         name: "altslug"
         widget: "relation"
@@ -39,18 +50,23 @@ collections:
         displayFields: ["slug", "title"]
         default: '/'
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
-      - label: "META INFO"
-        name: "seo"
-        widget: "object"
-        required: false
-        fields:
-        - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
-        - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
-        - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
-      - { name: 'date', label: 'Date', widget: 'date', required: true }
-      - { name: 'title', label: 'Title',widget: 'text', required: true}
+      - name: "listcolorblack"
+        label: "Text Color on Journal List Thumbnail"
+        widget: "select"
+        default: false
+        options:
+          - { label: "White", value: false }
+          - { label: "Black", value: true }
       - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x750 | 1:1 | JPG/PNG', required: true }
+      - name: "headercolorblack"
+        label: "Text Color on Cover and Header"
+        widget: "select"
+        default: false
+        options:
+          - { label: "White", value: false }
+          - { label: "Black", value: true }
       - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Flexible | JPG/PNG', required: true }
+      - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, heading-one, heading-two, quote] }
       - name: 'related'
         label: 'Related Journals'
         widget: 'list'
@@ -64,23 +80,7 @@ collections:
           searchFields: ["slug", "title"]
           valueField: "slug"
           displayFields: ["slug", "title"]
-          default: '/'
           hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
-      - name: "listcolorblack"
-        label: "Content Color on Journal List"
-        widget: "select"
-        default: false
-        options:
-          - { label: "White", value: false }
-          - { label: "Black", value: true }
-      - name: "headercolorblack"
-        label: "Content Color on Cover and Header"
-        widget: "select"
-        default: false
-        options:
-          - { label: "White", value: false }
-          - { label: "Black", value: true }
-      - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, heading-one, heading-two, quote] }
   - name: journal_id
     identifier_field: title
     label: Journals Indonesian
@@ -95,6 +95,7 @@ collections:
       - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'case', required: true, }
       - { name: 'indonesia', label: 'indonesia', widget: 'hidden', default: false, required: true, }
       - { name: 'active', label: 'Active', widget: 'boolean', required: true, default: true }
+      - { name: 'title', label: 'Title',widget: 'string', required: true}
       - {
           name: 'slug',
           label: 'Slug',
@@ -105,7 +106,17 @@ collections:
               '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
               'Invalid Characters'
             ],
+          required: true
         }
+      - { name: 'date', label: 'Date', widget: 'date', required: true }
+      - label: "META INFO"
+        name: "seo"
+        widget: "object"
+        required: false
+        fields:
+        - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
+        - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
+        - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
       - label: "English Journal Slug"
         name: "altslug"
         widget: "relation"
@@ -115,18 +126,37 @@ collections:
         displayFields: ["slug", "title"]
         default: '/'
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
-      - label: "META INFO"
-        name: "seo"
-        widget: "object"
+      - name: "listcolorblack"
+        label: "Text Color on Journal List Thumbnail"
+        widget: "select"
+        default: false
+        options:
+          - { label: "White", value: false }
+          - { label: "Black", value: true }
+      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x750 | 1:1 | JPG/PNG', required: true }
+      - name: "headercolorblack"
+        label: "Text Color on Cover and Header"
+        widget: "select"
+        default: false
+        options:
+          - { label: "White", value: false }
+          - { label: "Black", value: true }
+      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Flexible | JPG/PNG', required: true }
+      - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, heading-one, heading-two, quote] }
+      - name: 'related'
+        label: 'Related Journals'
+        widget: 'list'
+        label_singular: 'Related Journal'
         required: false
         fields:
-        - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
-        - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
-        - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
-      - { name: 'date', label: 'Date', widget: 'date', required: true }
-      - { name: 'title', label: 'Title',widget: 'text', required: true}
-      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x750 | 1:1 | JPG/PNG', required: true }
-      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Flexible | JPG/PNG', required: true }
+        - label: "Related Journal Selection"
+          name: "relatedslug"
+          widget: "relation"
+          collection: "journal_id"
+          searchFields: ["slug", "title"]
+          valueField: "slug"
+          displayFields: ["slug", "title"]
+          hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
   - label: 'Settings'
     name: 'settings'
     delete: false
