@@ -39,6 +39,12 @@ journaltranslation:
   previousjournal:
     en: Previous Journal
     id: Previous Jurnal
+  nextjournalmobile:
+    en: Next
+    id: Next
+  previousjournalmobile:
+    en: Previous
+    id: Previous
   relatedjournal:
     en: Related
     id: Terhubung

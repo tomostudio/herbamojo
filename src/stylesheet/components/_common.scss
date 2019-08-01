@@ -230,6 +230,12 @@ main {
             max-width: $global-maxwidth - ((100px + $global-padding) * 2);
         }
 
+        @include respond-to(tablet) {
+            padding: $global-padding (75px + $global-padding);
+            &>.wrapper {
+                max-width: $global-maxwidth - ((75px + $global-padding) * 2);
+            }
+        }
         @include respond-to(m_tablet) {
             padding: $globalmobile-padding;
 

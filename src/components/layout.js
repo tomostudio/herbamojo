@@ -3,14 +3,7 @@ import { StaticQuery, graphql } from 'gatsby';
 import 'stylesheet/main.scss';
 import { Helmet } from 'react-helmet';
 export default class Layout extends React.Component {
-  componentWillUnmount(){
-    console.log('layout unmount');
-  }
-  componentDidMount(){
-    console.log('layout mount');
-  }
   render() {
-    console.log('layout render');
     return (
       <StaticQuery
         query={graphql`

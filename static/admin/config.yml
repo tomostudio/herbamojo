@@ -80,7 +80,7 @@ collections:
         options:
           - { label: "White", value: false }
           - { label: "Black", value: true }
-      - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, code, code-block,heading-one, heading-two, quote] }
+      - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, heading-one, heading-two, quote] }
   - name: journal_id
     identifier_field: title
     label: Journals Indonesian

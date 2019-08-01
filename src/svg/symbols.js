@@ -31,6 +31,26 @@ export class Arrow extends React.Component {
     );
   }
 }
+
+export class ArrowDouble extends React.Component {
+  render() {
+    return (
+      <svg viewBox='0 0 8 6' version='1.1' xmlns='http://www.w3.org/2000/svg'>
+          <g
+            className='fill'
+            transform='translate(-132.000000, -816.000000)'
+            fill='#29CB7E'
+            fillRule='nonzero'
+          >
+            <path
+              d='M132.504,818.932 L135.42,816.016 L136.296,816.88 L134.196,818.968 L136.272,821.056 L135.456,821.872 L132.504,818.932 Z M136.264,818.932 L139.18,816.016 L140.056,816.88 L137.956,818.968 L140.032,821.056 L139.216,821.872 L136.264,818.932 Z'
+            />
+          </g>
+      </svg>
+    );
+  }
+}
+
 export class ArrowSmaller extends React.Component {
   render() {
     return (

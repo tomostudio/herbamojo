@@ -262,74 +262,74 @@ main.journal {
           }
         }
       }
-      @include respond-to(m_tablet) {
-        background: transparent;
-        & > .wrapper {
-          & > *:first-child {
-            & > * {
-              color: white;
+      // @include respond-to(m_tablet) {
+      //   // background: transparent;
+      //   & > .wrapper {
+      //     & > *:first-child {
+      //       & > * {
+      //         // color: white;
 
-              body.onhover &:hover,
-              &.disable {
-                color: $color_green;
-              }
-            }
-          }
-          & > a:nth-child(2) {
-            color: $color_green;
-            body.onhover &:hover {
-              color: white;
-            }
-          }
-          & > *:nth-child(3) {
-            & > svg {
-              & .fill {
-                fill: $color_green;
-              }
-            }
-            body.onhover &:hover {
-              & > svg {
-                & .fill {
-                  fill: white;
-                }
-              }
-            }
-          }
+      //         body.onhover &:hover,
+      //         &.disable {
+      //           // color: $color_green;
+      //         }
+      //       }
+      //     }
+      //     & > a:nth-child(2) {
+      //       // color: $color_green;
+      //       // body.onhover &:hover {
+      //       //   color: white;
+      //       // }
+      //     }
+      //     & > *:nth-child(3) {
+      //       & > svg {
+      //         & .fill {
+      //           // fill: $color_green;
+      //         }
+      //       }
+      //       body.onhover &:hover {
+      //         & > svg {
+      //           & .fill {
+      //             // fill: white;
+      //           }
+      //         }
+      //       }
+      //     }
 
-          &.black {
-            & > *:first-child {
-              & > * {
-                color: black;
+      //     &.black {
+      //       & > *:first-child {
+      //         & > * {
+      //           // color: black;
 
-                body.onhover &:hover,
-                &.disable {
-                  color: $color_green;
-                }
-              }
-            }
-            & > a:nth-child(2) {
-              color: $color_green;
-              body.onhover &:hover {
-                color: black;
-              }
-            }
-            & > *:nth-child(3) {
-              & > svg {
-                & .fill {
-                  fill: $color_green;
-                }
-              }
-              body.onhover &:hover {
-                & > svg {
-                  & .fill {
-                    fill: black;
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
+      //           body.onhover &:hover,
+      //           &.disable {
+      //             // color: $color_green;
+      //           }
+      //         }
+      //       }
+      //       & > a:nth-child(2) {
+      //         // color: $color_green;
+      //         // body.onhover &:hover {
+      //         //   color: black;
+      //         // }
+      //       }
+      //       & > *:nth-child(3) {
+      //         & > svg {
+      //           & .fill {
+      //             // fill: $color_green;
+      //           }
+      //         }
+      //         body.onhover &:hover {
+      //           & > svg {
+      //             & .fill {
+      //               // fill: black;
+      //             }
+      //           }
+      //         }
+      //       }
+      //     }
+      //   }
+      // }
     }
     &.stuck.list {
       @include respond-to(m_tablet) {
@@ -365,15 +365,13 @@ main.journal {
               }
             }
           }
-
-          &.black {
-          }
         }
       }
     }
   }
   & > .sectionWrapper {
     min-height: 100vh;
+    @include setflex(column, nowrap, flex-start, center,center);
   }
   &.list {
     & > .sectionWrapper {
@@ -471,6 +469,8 @@ main.journal {
         & > div {
           width: 100%;
           height: 100%;
+          margin: 0px auto;
+          max-width: $global-maxwidth - (($global-padding) * 2);
           text-align: center;
           @include setflex(column, nowrap);
           padding: 0px 150px;
@@ -510,11 +510,11 @@ main.journal {
               font-family: 'Amarillo';
               font-size: 90px;
               line-height: 85px;
-              padding-bottom: 40px;
+              padding-bottom: 60px;
               @include respond-to(tablet) {
                 font-size: 75px;
                 line-height: 75px;
-                padding-bottom: 36px;
+                padding-bottom: 56px;
               }
               @include respond-to(m_tablet) {
                 font-size: 48px;
@@ -573,66 +573,247 @@ main.journal {
       }
     }
   }
-  &:not(.list) > .sectionWrapper section {
-    &.journallist {
-      padding-bottom: $global-padding * 2;
-      @include respond-to(m_tablet) {
-        padding-bottom: $globalmobile-padding * 3;
-      }
-      @include respond-to(mobile) {
-        padding-bottom: $globalmobile-padding * 3;
-      }
-      & h1 {
-        font-family: 'Amarillo';
-        font-size: 48px;
-        line-height: 48px;
-        text-align: center;
-        margin-top: 0px;
-        margin-bottom: $global-padding;
+  &:not(.list) {
+    background: #f2f2f2;
+    & > .sectionWrapper section {
+      @include flex-grow(0);
+      &.journallist {
+        color: black;
+        padding-bottom: $global-padding * 2;
         @include respond-to(m_tablet) {
-          margin-bottom: $globalmobile-padding;
+          padding-bottom: $globalmobile-padding * 3;
         }
         @include respond-to(mobile) {
-          margin-bottom: $globalmobile-padding;
-          font-size: 24px;
-          line-height: 24px;
+          padding-bottom: $globalmobile-padding * 3;
+        }
+        & h1 {
+          color: inherit;
+          font-family: 'Amarillo';
+          font-size: 48px;
+          line-height: 48px;
+          text-align: center;
+          margin-top: 0px;
+          margin-bottom: $global-padding;
+          @include respond-to(m_tablet) {
+            margin-bottom: $globalmobile-padding;
+          }
+          @include respond-to(mobile) {
+            margin-bottom: $globalmobile-padding;
+            font-size: 24px;
+            line-height: 24px;
+          }
         }
       }
-    }
-    &.markupcontent {
+      &.markupcontent {
+        @include flex-grow(1);
+        color: black;
+        padding-top: 60px;
+        padding-left: 100px;
+        padding-right: 100px;
+        & > .wrapper {
+          margin: 0px auto;
+          width: 100%;
+          max-width: $global-maxwidth - ((100px) * 2);
+        }
+        @include respond-to(tablet) {
+          padding-left: 75px + $global-padding;
+          padding-right: 75px + $global-padding;
+          & > .wrapper {
+            max-width: $global-maxwidth - ((75px + $global-padding) * 2);
+          }
+        }
+        @include respond-to(m_tablet) {
+          padding: #{$globalmobile-padding * 2} $globalmobile-padding;
+          & > .wrapper {
+            max-width: $global-maxwidth - ($global-padding * 2);
+          }
+        }
+      }
+      &.mobileJournalNavigation {
+        display: none;
+        @include respond-to(m_tablet) {
+          padding-top: 0px;
+          padding-bottom: #{$globalmobile-padding * 3};
+          display: block;
+        }
+        @include respond-to(mobile) {
+          padding-bottom: #{$globalmobile-padding * 2};
+        }
+        & > .wrapper {
+          @include setflex(row, nowrap, center, center, center);
+          & > a {
+            display: block;
+            height: auto;
+            min-width: 180px;
+            padding: 7px 25px;
+            border: solid 2px $color_green;
+            color: $color_green;
+            @include transition(
+              background $global-transition,
+              color $global-transition
+            );
+            @include setflex(row, nowrap, center, center, center);
+            @include respond-to(mobile){
+              min-width: 105px;
+              padding: 5px 20px;
+              border: solid 1px $color_green;
+            }
+            &.disable {
+              opacity: 0.25;
+              pointer-events: none;
+            }
+            & > span:not(.arrow) {
+              margin-right: 15px;
+              font-family: 'Amarillo';
+              text-transform: uppercase;
+              font-size: 24px;
+              line-height: 24px;
+              height: 24px;
+              @include respond-to(mobile){
+                margin-right: 10px;
+                font-size: 16px;
+                line-height: 16px;
+                height: 16px;
+              }
+            }
+            & > svg{
+              height: 12px;
+              @include respond-to(mobile){
+                height: 8px;
+              }
+              @include transform(rotate(180deg));
+              & .fill{
+                @include transition(fill $global-transition);
+              }
+            }
+            body.onhover &:hover {
+              background: $color_green;
+              color: white;
+              & > svg{
+                & .fill{
+                  fill: white;
+                }
+              }
+            }
+            &:first-child {
+              & > span:not(.arrow) {
+                display: inline-block;
+                margin-right: 0px;
+                margin-left: 15px;
+                @include respond-to(mobile){
+                  margin-right: 0px;
+                  margin-left: 10px;
+                }
+              }
+              & > svg{
+                @include transform(rotate(0deg));
+              }
+              margin-right: 50px;
+            }
+          }
+        }
+      }
     }
   }
 }
 .markupstyle {
+  padding: 0px $global-padding;
+  position: relative;
+  width: 100%;
+  @include respond-to(tablet) {
+    padding: 0px;
+  }
+  & > * {
+    margin: 40px auto;
+    &:first-child {
+      margin-top: 0px;
+    }
+    &:last-child {
+      margin-bottom: 0px;
+    }
+    @include respond-to(tablet) {
+      margin: 20px auto;
+      &:first-child {
+        margin-top: 0px;
+      }
+      &:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
   & p {
     font-family: 'Maison Mono';
     font-size: 20px;
     line-height: 34px;
-    & > code {
+    @include respond-to(tablet) {
+      font-size: 16px;
+      line-height: 28px;
+    }
+    @include respond-to(mobile) {
+      font-size: 14px;
+      line-height: 22px;
     }
   }
-  & em{
+  & em {
     font-style: italic;
   }
-  & strong{
+  & strong {
     font-weight: bold;
   }
-  & a{
+  & img {
+    width: calc(100% + (#{$global-padding * 2}));
+    margin-left: -$global-padding;
+    display: block;
+    @include respond-to(tablet) {
+      width: 100%;
+      margin-left: 0px;
+    }
+    @include respond-to(mobile) {
+      margin: 30px auto;
+      &:first-child {
+        margin-top: 0px;
+      }
+      &:last-child {
+        margin-bottom: 0px;
+      }
+    }
+  }
+  & a {
     color: $color_green;
+    font-style: italic;
     @include transition(color $global-transition);
-    body.onhover &:hover{
-      color: black;
+    body.onhover &:hover {
+      color: inherit;
     }
   }
   & h1 {
     font-family: 'Amarillo';
     font-size: 48px;
     line-height: 48px;
+    @include respond-to(mobile) {
+      font-size: 28px;
+      line-height: 28px;
+    }
   }
   & h2 {
     font-family: 'Amarillo';
     font-size: 40px;
     line-height: 50px;
+    // margin: 40px auto;
+    &:first-child {
+      margin-top: 0px;
+    }
+    &:last-child {
+      margin-bottom: 0px;
+    }
+    @include respond-to(tablet) {
+      font-size: 32px;
+      line-height: 42px;
+    }
+    @include respond-to(mobile) {
+      font-size: 20px;
+      line-height: 24px;
+    }
   }
   & blockquote {
     font-family: 'Maison Mono';
@@ -640,10 +821,15 @@ main.journal {
     font-size: 24px;
     line-height: 34px;
     margin-inline-start: 100px;
-    margin-inline-end: 100px
-  }
-  & pre {
-    & > code {
+    margin-inline-end: 100px;
+    @include respond-to(tablet) {
+      font-size: 20px;
+      margin-inline-start: 75px;
+      margin-inline-end: 75px;
+    }
+    @include respond-to(mobile) {
+      margin-inline-start: $globalmobile-padding * 2;
+      margin-inline-end: $globalmobile-padding;
     }
   }
 }
@@ -652,6 +838,9 @@ section.journallist {
   margin: 0px auto;
   width: 100%;
   padding: 0px (100px + $global-padding);
+  @include respond-to(tablet) {
+    padding: $global-padding (75px + $global-padding);
+  }
   @include respond-to(m_tablet) {
     padding: 0px $globalmobile-padding;
   }
@@ -661,6 +850,9 @@ section.journallist {
     padding: 0px !important;
     max-width: $global-maxwidth - ((100px + $global-padding) * 2);
 
+    @include respond-to(tablet) {
+      max-width: $global-maxwidth - ((75px + $global-padding) * 2);
+    }
     @include respond-to(m_tablet) {
       max-width: $global-maxwidth - ($global-padding * 2);
     }
@@ -669,7 +861,7 @@ section.journallist {
       margin-left: auto;
       margin-right: auto;
       @include respond-to(m_tablet) {
-        width: calc(100% - #{$globalmobile-padding * 2});
+        // width: calc(100% - #{$globalmobile-padding * 2});
       }
     }
     & .__journalcontainer {
@@ -698,6 +890,7 @@ section.journallist {
         max-height: 250px;
         position: relative;
         color: white;
+        overflow: hidden;
         @include transition(color $global-transition);
         @include respond-to(desktop_more) {
           height: 250px;

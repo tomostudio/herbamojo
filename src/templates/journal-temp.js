@@ -9,7 +9,7 @@ import { Helmet } from 'react-helmet';
 import { LoaderClass } from 'utils/loader';
 import { DisableScroll } from 'utils/disablescroll';
 
-import Placeholder from 'images/static/herbamojo-bg1.jpg';
+import { ArrowDouble } from 'svg/symbols.js';
 
 export default class Journal extends React.Component {
   LangID = this.props.data.content.frontmatter.indonesia || false;
@@ -55,6 +55,16 @@ export default class Journal extends React.Component {
     const content = this.props.data.content.frontmatter;
     const general = this.props.data.general.frontmatter;
     const journals = this.props.data.journals;
+    // const seo = general.seo;
+
+    const seo = {
+      desc: content.seo.seo_shortdesc,
+      keywords: content.seo.seo_keywords
+    };
+
+    if (content.seo.seo_image !== '' && content.seo.seo_image !== undefined) {
+      seo.image = `https://herbamojo.id${content.seo.seo_image}`;
+    }
 
     const curURL = this.props.pageContext.slug.toString();
     let englishURL, indonesianURL;
@@ -91,7 +101,8 @@ export default class Journal extends React.Component {
     // GET RELATED DATA
     const alljournals = this.props.data.alljournals;
     let related = [];
-    content.related.forEach(_r => {
+    if(content.related){
+      content.related.forEach(_r => {
       if (_r.relatedslug !== '/') {
         const compareslug = _r.relatedslug;
         alljournals.edges.forEach(_j => {
@@ -102,10 +113,21 @@ export default class Journal extends React.Component {
         });
       }
     });
-    console.log(related);
+    }
 
     return (
       <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
+        {seo && (
+          <Helmet>
+            {seo.desc && <meta property='og:description' content={seo.desc} />}
+            {seo.desc && <meta name='description' content={seo.desc} />}
+            {seo.desc && <meta name='twitter:description' content={seo.desc} />}
+            {seo.keywords && <meta name='keywords' content={seo.keywords} />}
+            {seo.image && <meta name='image' content={seo.image} />}
+            {seo.image && <meta property='og:image' content={seo.image} />}
+            {seo.image && <meta name='twitter:image' content={seo.image} />}
+          </Helmet>
+        )}
         <JournalHeader
           indonesia={this.LangID}
           urltarget={englishURL}
@@ -147,18 +169,44 @@ export default class Journal extends React.Component {
             </div>
             <picture>
               <source srcSet={content.coverimage} type='image/jpeg' />
-              <img src={Placeholder} alt='Herbamojo' />
+              <img src={content.coverimage} alt='Herbamojo' />
             </picture>
           </section>
           <section className='markupcontent'>
             <div className='wrapper'>
               <div
                 className='markupstyle'
-                dangerouslySetInnerHTML={{ __html: this.props.data.content.html }}
+                dangerouslySetInnerHTML={{
+                  __html: this.props.data.content.html
+                }}
               />
             </div>
           </section>
-          {journals.edges.length > 0 && (
+          <section className='mobileJournalNavigation'>
+            <div className='wrapper'>
+              <Link
+                to={prev === null ? '' : prev}
+                className={prev === null ? 'disable' : ''}
+              >
+                <ArrowDouble /><span>{`${
+                  this.LangID
+                    ? general.journaltranslation.previousjournalmobile.id
+                    : general.journaltranslation.previousjournalmobile.en
+                }`}</span>
+              </Link>
+              <Link
+                to={next === null ? '' : next}
+                className={next === null ? 'disable' : ''}
+              >
+                <span>{`${
+                  this.LangID
+                    ? general.journaltranslation.nextjournalmobile.id
+                    : general.journaltranslation.nextjournalmobile.en
+                }`}</span><ArrowDouble />
+              </Link>
+            </div>
+          </section>
+          {related.length > 0 && (
             <section className='related journallist'>
               <div className='wrapper'>
                 <div className='content'>
@@ -291,6 +339,14 @@ export const query = graphql`
             id
           }
           previousjournal {
+            en
+            id
+          }
+          nextjournalmobile {
+            en
+            id
+          }
+          previousjournalmobile {
             en
             id
           }
