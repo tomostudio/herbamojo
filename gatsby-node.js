@@ -120,20 +120,6 @@ exports.createPages = ({ graphql, actions }) => {
       `).then(result => {
         const results = result.data.all.edges;
         if (!journaldisable && results.length > 1) {
-          // results.forEach(({ node }, index) => {
-          //   if (
-          //     node.frontmatter.contenttype === 'journal' &&
-          //     node.frontmatter.active === true
-          //   ) {
-          //     createPage({
-          //       path: node.fields.slug,
-          //       component: path.resolve(`./src/templates/journal-temp.js`),
-          //       context: {
-          //         slug: node.fields.slug
-          //       }
-          //     });
-          //   }
-          // });
 
           if (result.data.slug_setting) {
             redirectObject = result.data.slug_setting.frontmatter;
