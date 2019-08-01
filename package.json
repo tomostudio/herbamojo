@@ -1,7 +1,7 @@
 {
   "name": "herbamojo",
   "private": true,
-  "description": "Herbamojo Website ",
+  "description": "Herbamojo Website",
   "version": "1.0.0",
   "license": "MIT",
   "scripts": {

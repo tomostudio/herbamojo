@@ -1,5 +1,7 @@
 # HERBAMOJO Website
 
+version: 1.0.0
+
 Website URL `herbamojo.id`
 
 ### FRAMEWORK
