@@ -1,7 +1,7 @@
 ---
 issetting: false
-contenttype: journal
-indonesia: true
+contenttype: case
+indonesia: false
 active: true
 title: Second Indonesian Journal
 slug: jurnalkedua
@@ -15,8 +15,7 @@ listcolorblack: true
 thumbimage: /assets/placeimg_1000_1000_grayscale_arch.jpg
 headercolorblack: true
 coverimage: /assets/placeimg_1000_1000_grayscale_arch.jpg
-related:
-  - relatedslug: /
+related: []
 ---
 # This Article has a Heading
 
@@ -28,4 +27,4 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 
 [Finally here is some link](https://herbana.id)
 
-****[**This link is bold**](https://herbana.id)****
+[**This link is bold**](https://herbana.id)
