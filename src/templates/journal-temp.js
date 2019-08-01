@@ -92,13 +92,15 @@ export default class Journal extends React.Component {
     const alljournals = this.props.data.alljournals;
     let related = [];
     content.related.forEach(_r => {
-      const compareslug = _r.relatedslug;
-      alljournals.edges.forEach(_j => {
-        if (_j.node.frontmatter.slug === _r.relatedslug) {
-          // console.log(_r.relatedslug, _j);
-          related.push(_j);
-        }
-      });
+      if (_r.relatedslug !== '/') {
+        const compareslug = _r.relatedslug;
+        alljournals.edges.forEach(_j => {
+          if (_j.node.frontmatter.slug === _r.relatedslug) {
+            // console.log(_r.relatedslug, _j);
+            related.push(_j);
+          }
+        });
+      }
     });
     console.log(related);
 
@@ -148,8 +150,13 @@ export default class Journal extends React.Component {
               <img src={Placeholder} alt='Herbamojo' />
             </picture>
           </section>
-          <section className='content'>
-            <div className='wrapper'>{content.title}</div>
+          <section className='markupcontent'>
+            <div className='wrapper'>
+              <div
+                className='markupstyle'
+                dangerouslySetInnerHTML={{ __html: this.props.data.content.html }}
+              />
+            </div>
           </section>
           {journals.edges.length > 0 && (
             <section className='related journallist'>

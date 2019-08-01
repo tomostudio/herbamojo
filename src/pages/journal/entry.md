@@ -24,7 +24,7 @@ Test 1
 
 **Bold**
 
-Ita_l_ic
+_Italic_
 
 # Heading 1
 
