@@ -48,6 +48,7 @@ journaltranslation:
   relatedjournal:
     en: Related
     id: Terhubung
-errortext: Page Not Found
+errortranslation:
+  errortext: Page Not Found
 ---
 

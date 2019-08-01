@@ -61,7 +61,7 @@ export default class Journal extends React.Component {
                   </div>
                   <div>
                     <span>404</span>
-                    <span>{data.general.frontmatter.errortext}</span>
+                    <span>{data.general.frontmatter.errortranslation.errortext}</span>
                   </div>
                   <div>
                     <picture>
@@ -90,7 +90,9 @@ const errorQuery = graphql`
       }
     ) {
       frontmatter {
-        errortext
+        errortranslation {
+          errortext
+        }
       }
     }
   }

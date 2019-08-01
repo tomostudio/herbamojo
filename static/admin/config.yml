@@ -292,13 +292,6 @@ collections:
                       required: false,
                     }
           - {
-              label: 'Text on Error Page ',
-              name: 'errortext',
-              widget: 'string',
-              default: 'PAGE NOT FOUND',
-              required: true,
-            }
-          - {
               label: 'Main Journal Slug ',
               name: 'journalslug',
               widget: 'string',
@@ -311,10 +304,145 @@ collections:
           - {
               label: 'Journal Shown Per List',
               name: 'journalperlist',
-              widget: 'string',
+              widget: 'number',
               default: '6',
               required: true,
+              valueType: "int",
+              min: 2,
+              max: 12,
+              step: 2
             }
+          - label: 'Translation for Error Page'
+            name: 'errortranslation'
+            widget: 'object'
+            required: True
+            fields:
+              - {
+                  label: 'Page Not Found',
+                  name: 'errortext',
+                  widget: 'string',
+                  default: 'Page Not Found',
+                  required: true,
+                }
+          - label: 'Translation for Journal Page'
+            name: 'journaltranslation'
+            widget: 'object'
+            required: false
+            fields:
+              - label: 'Back to Journal'
+                name: 'journalbacktext'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'Back to Journal',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'Kembali ke Jurnal',
+                      required: true,
+                    }
+              - label: 'Navigation (Next Journal)'
+                name: 'nextjournal'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'Next Journal',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'Next Journal',
+                      required: true,
+                    }
+              - label: 'Navigation (Previous Journal)'
+                name: 'previousjournal'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'Previous Journal',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'Previous Journal',
+                      required: true,
+                    }
+              - label: 'Navigation Mobile (Next Journal)'
+                name: 'nextjournalmobile'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'Next',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'Next',
+                      required: true,
+                    }
+              - label: 'Navigation Mobile (Previous Journal)'
+                name: 'previousjournalmobile'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'Previous',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'Previous',
+                      required: true,
+                    }
+              - label: 'Related'
+                name: 'relatedjournal'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'Related',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'Related',
+                      required: true,
+                    }
       - file: 'src/settings/home.md'
         label: 'Home Setting'
         name: 'home'
