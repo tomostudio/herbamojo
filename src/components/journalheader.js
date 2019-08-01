@@ -56,7 +56,6 @@ export default class JournalHeader extends React.Component {
     const blackcolor = this.props.black || false;
     const onjournallist = this.props.journallist || false;
 
-    console.log(urltarget, urltargetid);
     return (
       <StaticQuery
         query={headerQuery}

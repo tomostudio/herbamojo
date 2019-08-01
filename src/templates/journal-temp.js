@@ -87,6 +87,21 @@ export default class Journal extends React.Component {
       }
     }
     const { next, prev } = this.props.pageContext;
+
+    // GET RELATED DATA
+    const alljournals = this.props.data.alljournals;
+    let related = [];
+    content.related.forEach(_r => {
+      const compareslug = _r.relatedslug;
+      alljournals.edges.forEach(_j => {
+        if (_j.node.frontmatter.slug === _r.relatedslug) {
+          // console.log(_r.relatedslug, _j);
+          related.push(_j);
+        }
+      });
+    });
+    console.log(related);
+
     return (
       <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
         <JournalHeader
@@ -140,9 +155,15 @@ export default class Journal extends React.Component {
             <section className='related journallist'>
               <div className='wrapper'>
                 <div className='content'>
-                  <h1>RELATED</h1>
+                  <h1>
+                    {`${
+                      this.LangID
+                        ? general.journaltranslation.relatedjournal.id
+                        : general.journaltranslation.relatedjournal.en
+                    }`}
+                  </h1>
                   <div className='__journalcontainer'>
-                    {journals.edges.map((journal, id) => {
+                    {related.map((journal, id) => {
                       return (
                         <Link
                           key={journal.node.id}
@@ -214,7 +235,7 @@ export const query = graphql`
         }
       }
     }
-    journalsall: allMarkdownRemark(
+    alljournals: allMarkdownRemark(
       filter: {
         frontmatter: {
           issetting: { eq: false }
@@ -222,7 +243,6 @@ export const query = graphql`
           active: { eq: true }
           indonesia: { eq: $indo }
         }
-        fields: { slug: { ne: $slug } }
       }
       sort: { fields: [frontmatter___date], order: DESC }
     ) {
@@ -235,6 +255,7 @@ export const query = graphql`
             date(formatString: "DD/MM/YY")
             listcolorblack
             thumbimage
+            slug
           }
           fields {
             slug
@@ -266,6 +287,10 @@ export const query = graphql`
             en
             id
           }
+          relatedjournal {
+            en
+            id
+          }
         }
       }
     }
@@ -279,6 +304,9 @@ export const query = graphql`
         altslug
         headercolorblack
         coverimage
+        related {
+          relatedslug
+        }
         seo {
           seo_shortdesc
           seo_keywords

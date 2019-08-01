@@ -14,8 +14,8 @@ title: Journal Entry ENGLISH
 thumbimage: /assets/herbamojo_productshot3.jpg
 coverimage: /assets/herbamojo_homebg.jpg
 related:
-  - altslug: journal-entry-2
-  - altslug: journal-entry
+  - relatedslug: journal-entry-2
+  - relatedslug: journal-entry
 listcolorblack: false
 headercolorblack: false
 ---

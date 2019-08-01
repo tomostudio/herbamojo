@@ -58,7 +58,7 @@ collections:
         required: false
         fields:
         - label: "Related Journal Selection"
-          name: "altslug"
+          name: "relatedslug"
           widget: "relation"
           collection: "journal"
           searchFields: ["slug", "title"]
