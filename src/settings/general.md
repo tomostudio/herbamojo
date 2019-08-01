@@ -2,7 +2,7 @@
 issetting: true
 contenttype: general_setting
 title: General Setting
-web_name: HERBAMOJO STAGING
+web_name: HERBAMOJO
 journaldisable: false
 deploy_status_password: password
 seo:
