@@ -107,7 +107,7 @@ export default class Journal extends React.Component {
     let related = [];
     if(content.related){
       content.related.forEach(_r => {
-      if (_r.relatedslug !== '/') {
+      if (_r.relatedslug !== '/' && _r.relatedslug !== '') {
         const compareslug = _r.relatedslug;
         alljournals.edges.forEach(_j => {
           if (_j.node.frontmatter.slug === _r.relatedslug) {

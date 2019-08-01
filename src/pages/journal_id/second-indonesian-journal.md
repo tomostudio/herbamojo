@@ -1,7 +1,7 @@
 ---
 issetting: false
-contenttype: case
-indonesia: false
+contenttype: journal
+indonesia: true
 active: true
 title: Second Indonesian Journal
 slug: jurnalkedua
