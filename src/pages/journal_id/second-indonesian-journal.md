@@ -1,7 +1,7 @@
 ---
 issetting: false
 contenttype: journal
-indonesia: false
+indonesia: true
 active: true
 title: Second Indonesian Journal
 slug: jurnalkedua
@@ -26,7 +26,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor i
 > Let me tell you a quote
 
 [Finally here is some link](https://herbana.id)
-
-[This link is bold](https://herbana.id)
-
-<fake@example.com>
