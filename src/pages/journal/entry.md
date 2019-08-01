@@ -16,7 +16,12 @@ coverimage: /assets/herbamojo_homebg.jpg
 related:
   - relatedslug: journal-entry-2
   - relatedslug: journal-entry
+  - relatedslug: /
 listcolorblack: false
 headercolorblack: false
 ---
+Test 1
 
+**Bold**
+
+Ita_l_ic
