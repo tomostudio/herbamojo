@@ -536,11 +536,9 @@ export class ScrollSnapClass {
         this.v.xDown = evt.touches[0].clientX;
         this.v.yDown = evt.touches[0].clientY;
       }
-      console.log('touch start');
       evt.preventDefault();
     },
     touchmove: evt => {
-      console.log('touch move');
       if (this.v.snap.enable) {
         if (!this.v.xDown || !this.v.yDown) {
           return;

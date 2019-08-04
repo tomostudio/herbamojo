@@ -98,9 +98,9 @@ main.journal {
           line-height: 120%;
           text-align: right;
           margin-left: 40px;
-          color: $color_green;
+          // color: $color_green;
           body.onhover &:hover {
-            color: white;
+            // color: white;
           }
         }
         @include respond-to(mobile) {

@@ -12,7 +12,9 @@ export class DisableScroll {
     this.disable();
   }
   disable() {
+    console.log('scroll disable trigger', this.scrolldisabled);
     if (!this.scrolldisabled) {
+      console.log('scroll disable', this.scrolldisabled);
       this.scrolldisabled = true;
       if (this.target === null) {
         if (typeof document !== `undefined`) {
@@ -32,34 +34,18 @@ export class DisableScroll {
           window.addEventListener('keydown', this.event.keydown, false);
         }
         if ('ontouchstart' in document.documentElement) {
-          window.addEventListener('touchstart', this.event.disableHard, false);
-          window.addEventListener('touchmove', this.event.disableHard, false);
-          document.body.addEventListener(
-            'touchstart',
-            this.event.disableHard,
-            false
-          );
-          document.body.addEventListener(
-            'touchmove',
-            this.event.disableHard,
-            false
-          );
-          document.addEventListener(
-            'touchstart',
-            this.event.disableHard,
-            false
-          );
-          document.addEventListener('touchmove', this.event.disableHard, false);
-          document.documentElement.addEventListener(
-            'touchstart',
-            this.event.disableHard,
-            false
-          );
-          document.documentElement.addEventListener(
-            'touchmove',
-            this.event.disableHard,
-            false
-          );
+          window.addEventListener('touchstart', this.event.disable, {
+            passive: false
+          });
+          window.addEventListener('touchmove', this.event.disable, {
+            passive: false
+          });
+          document.addEventListener('touchstart', this.event.disable, {
+            passive: false
+          });
+          document.addEventListener('touchmove', this.event.disable, {
+            passive: false
+          });
         }
       } else {
         this.target.classList.add('__disablescroll');
@@ -93,13 +79,15 @@ export class DisableScroll {
     }
   }
   enable = () => {
-    // console.log('scroll enable');
+    console.log('scroll enable trigger', this.scrolldisabled);
     this.scrolldisabled = false;
     if (this.target === null) {
+      console.log('scroll enable', this.scrolldisabled);
       if (typeof document !== `undefined`) {
         document.body.classList.remove('__disablescroll');
         document.body.classList.remove('__disabletouch');
       }
+
       if (window.addEventListener) {
         window.removeEventListener('DOMMouseScroll', this.event.disable, false);
         window.removeEventListener('wheel', this.event.disable, {
@@ -111,39 +99,18 @@ export class DisableScroll {
         window.removeEventListener('keydown', this.event.keydown, false);
       }
       if ('ontouchstart' in document.documentElement) {
-        window.ontouchstart = this.event.disableHard;
-        window.removeEventListener('touchstart', this.event.disableHard, false);
-        window.removeEventListener('touchmove', this.event.disableHard, false);
-        document.body.removeEventListener(
-          'touchstart',
-          this.event.disableHard,
-          false
-        );
-        document.body.removeEventListener(
-          'touchmove',
-          this.event.disableHard,
-          false
-        );
-        document.removeEventListener(
-          'touchstart',
-          this.event.disableHard,
-          false
-        );
-        document.removeEventListener(
-          'touchmove',
-          this.event.disableHard,
-          false
-        );
-        document.documentElement.removeEventListener(
-          'touchstart',
-          this.event.disableHard,
-          false
-        );
-        document.documentElement.removeEventListener(
-          'touchmove',
-          this.event.disableHard,
-          false
-        );
+        window.removeEventListener('touchstart', this.event.disable, {
+          passive: false
+        });
+        window.removeEventListener('touchmove', this.event.disable, {
+          passive: false
+        });
+        document.removeEventListener('touchstart', this.event.disable, {
+          passive: false
+        });
+        document.removeEventListener('touchmove', this.event.disable, {
+          passive: false
+        });
       }
     } else {
       this.target.classList.remove('__disablescroll');
@@ -182,12 +149,21 @@ export class DisableScroll {
   };
   event = {
     disable(e) {
+      console.log('touch soft');
       e = e || window.event;
-      if (e.preventDefault) e.preventDefault();
+      if (e.preventDefault) {
+        e.preventDefault();
+        e.stopPropagation();
+      }
       e.returnValue = false;
     },
-    disableHard(e) {
+    disableHard: e => {
+      console.log('touch hard', e);
+
+      e.returnValue = false;
+      e.cancelBubble = true;
       e.preventDefault();
+      e.stopPropagation();
     },
     keydown: e => {
       if (e.which === 38 || e.which === 40 || e.which === 32) {

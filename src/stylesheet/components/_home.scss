@@ -363,6 +363,7 @@ main.home {
 
       @include respond-to(m_tablet) {
         @include setflex(column, nowrap, stretch, center, center);
+        height: 100vh;
       }
 
       @include respond-to(height_less) {
@@ -377,7 +378,7 @@ main.home {
           @include flex-grow(1);
           height: 100%;
           @include setflex(column, nowrap, stretch, center, center);
-          min-height: 100vh;
+          min-height: 0px;
         }
 
         & .content {
@@ -427,9 +428,7 @@ main.home {
           position: relative;
 
           @include respond-to(m_tablet) {
-            // padding: $mobile-paddingtop 0px #{$globalmobile-padding * 4};
             padding: 0px 0px 0px;
-            // @include padding-safe-bottom(120px);
             @include flex-grow(1);
             height: 100%;
             @include setflex(column, nowrap, space-between, center, center);
@@ -439,6 +438,7 @@ main.home {
               @include pseudo();
               position: relative;
               height: 20px;
+              width: 100%;
             }
           }
 
@@ -450,7 +450,10 @@ main.home {
             &::after {
               @include pseudo();
               position: relative;
-              height: 0px;
+              // height: 0px;
+              width: 100%;
+              top: 0px;
+              left: 0px;
               height: 7.5vh;
               min-height: 100px;
               max-height: 150px;
@@ -527,8 +530,8 @@ main.home {
               line-height: 24px;
               border: solid 2px white;
               color: white;
-              width: 80%;
-              max-width: 300px;
+              width: auto;
+              max-width: 100%;
 
               &::after {
                 display: none;
@@ -988,6 +991,21 @@ main.home {
       }
 
       & .content.half {
+        &.flex {
+          @media only screen and (max-height: 800px) {
+            @include setflex(
+              column,
+              nowrap,
+              flex-start,
+              flex-start,
+              flex-start
+            );
+            &::after {
+              display: none;
+              height: 0px;
+            }
+          }
+        }
         & > div {
           width: 100%;
           display: grid;
@@ -1151,7 +1169,21 @@ main.home {
           @include respond-to(m_tablet) {
             display: block;
           }
-
+          &.flex {
+            @media only screen and (max-height: 800px) {
+              @include setflex(
+                column,
+                nowrap,
+                flex-start,
+                flex-start,
+                flex-start
+              );
+              &::after {
+                display: none;
+                height: 0px;
+              }
+            }
+          }
           & > div {
             display: block;
             @include flex-grow(0);
@@ -1531,7 +1563,7 @@ main.home {
       }
 
       body:not(.__snapon) & {
-        min-height: 0px;
+        min-height: 550px;
         & > .wrapper {
           & > .content {
             &::after {
@@ -2274,15 +2306,14 @@ main.home {
           font-family: 'Amarillo';
           font-size: $font-size-button;
           line-height: $lineheight-button;
-          // vertical-align: middle;
-          color: $color_green;
+          color: white;
           @include transition(color $global-transition);
           display: inline-block;
 
           body.onhover &:hover,
           &.disable {
             cursor: pointer;
-            color: white;
+            color: $color_green;
           }
 
           &.disable {

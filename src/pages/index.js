@@ -319,6 +319,7 @@ export default class Home extends React.Component {
               .classList.remove('inview');
         }
       });
+
       // this.inview.shopm = new InViewportClass({
       // 	target: 'section#journal',
       // 	visibility: 0.25,
@@ -329,6 +330,7 @@ export default class Home extends React.Component {
       // 		if (MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.remove('inview');
       // 	}
       // });
+
       this.inviewArray[9] = new InViewportClass({
         target: 'section.footer',
         visibility: 0.05,
