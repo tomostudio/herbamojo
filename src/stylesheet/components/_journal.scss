@@ -7,6 +7,7 @@ main.journal {
     width: 100%;
     padding: 0px ($global-padding);
     pointer-events: none;
+    background: rgba(0, 0, 0, 0);
     @include transition(background $global-transition);
     @include respond-to(m_tablet) {
       padding: 0px $globalmobile-padding;
@@ -162,10 +163,7 @@ main.journal {
         }
         & > a:nth-child(2) {
           @include respond-to(m_tablet) {
-            color: $color_green;
-            body.onhover &:hover {
-              color: black;
-            }
+            color: black;
           }
         }
         & > *:nth-child(3) {
@@ -371,7 +369,7 @@ main.journal {
   }
   & > .sectionWrapper {
     min-height: 100vh;
-    @include setflex(column, nowrap, flex-start, center,center);
+    @include setflex(column, nowrap, flex-start, center, center);
   }
   &.list {
     & > .sectionWrapper {
@@ -386,6 +384,46 @@ main.journal {
         }
         @include respond-to(mobile) {
           height: $mobileHeaderHeight - 20px;
+        }
+      }
+    }
+    $initdelay: 0.1s;
+    $_transition: 1s;
+    $_transition2: 1.5s;
+    $eachdelay: 0.2s;
+    & > .sectionWrapper section {
+      &.listTitleMobile {
+        @include transition(opacity 0.5s);
+        opacity: 0;
+      }
+      &.journallist {
+        & .__journalcontainer {
+          @include transition(opacity 0.5s);
+          opacity: 0;
+        }
+        & .__navcontainer {
+          @include transition(opacity 0.5s);
+          opacity: 0;
+        }
+      }
+      body.loaded & {
+        &.listTitleMobile {
+          @include transition(opacity $_transition $initdelay);
+          opacity: 1;
+        }
+        &.journallist {
+          & .__navcontainer ,
+          & .__journalcontainer {
+            @include transition(
+              opacity $_transition #{$initdelay + ($eachdelay)}
+            );
+            opacity: 1;
+            @include respond-to(m_tablet) {
+              @include transition(
+                opacity $_transition2 #{$initdelay + ($eachdelay * 1.5)}
+              );
+            }
+          }
         }
       }
     }
@@ -653,7 +691,7 @@ main.journal {
               color $global-transition
             );
             @include setflex(row, nowrap, center, center, center);
-            @include respond-to(mobile){
+            @include respond-to(mobile) {
               min-width: 105px;
               padding: 5px 20px;
               border: solid 1px $color_green;
@@ -669,28 +707,28 @@ main.journal {
               font-size: 24px;
               line-height: 24px;
               height: 24px;
-              @include respond-to(mobile){
+              @include respond-to(mobile) {
                 margin-right: 10px;
                 font-size: 16px;
                 line-height: 16px;
                 height: 16px;
               }
             }
-            & > svg{
+            & > svg {
               height: 12px;
-              @include respond-to(mobile){
+              @include respond-to(mobile) {
                 height: 8px;
               }
               @include transform(rotate(180deg));
-              & .fill{
+              & .fill {
                 @include transition(fill $global-transition);
               }
             }
             body.onhover &:hover {
               background: $color_green;
               color: white;
-              & > svg{
-                & .fill{
+              & > svg {
+                & .fill {
                   fill: white;
                 }
               }
@@ -700,12 +738,12 @@ main.journal {
                 display: inline-block;
                 margin-right: 0px;
                 margin-left: 15px;
-                @include respond-to(mobile){
+                @include respond-to(mobile) {
                   margin-right: 0px;
                   margin-left: 10px;
                 }
               }
-              & > svg{
+              & > svg {
                 @include transform(rotate(0deg));
               }
               margin-right: 50px;

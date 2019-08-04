@@ -307,29 +307,15 @@ export default class Home extends React.Component {
         target: 'section#journal',
         visibility: 0.55,
         enter: () => {
+          document.querySelector('section#journal').classList.add('inview');
           if (!MediaCheck.width.mtablet()) {
             setNav(5);
-            document.querySelector('section#journal').classList.add('inview');
           }
         },
         exit: () => {
-          if (!MediaCheck.width.mtablet())
-            document
-              .querySelector('section#journal')
-              .classList.remove('inview');
+          document.querySelector('section#journal').classList.remove('inview');
         }
       });
-
-      // this.inview.shopm = new InViewportClass({
-      // 	target: 'section#journal',
-      // 	visibility: 0.25,
-      // 	enter: () => {
-      // 		if (MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.add('inview');
-      // 	},
-      // 	exit: () => {
-      // 		if (MediaCheck.width.mtablet()) document.querySelector('section#journal').classList.remove('inview');
-      // 	}
-      // });
 
       this.inviewArray[9] = new InViewportClass({
         target: 'section.footer',
@@ -1602,7 +1588,7 @@ export default class Home extends React.Component {
                             );
                           })}
                         </div>
-                        {printjournal.length > 1 && (
+                        {printjournal.edges.length > 4 && (
                           <Link
                             className='viewall'
                             to={
@@ -1612,9 +1598,11 @@ export default class Home extends React.Component {
                             }
                             aria-label='Go to Journal'
                           >
-                            {this.langID
-                              ? transData.journal.viewall.id
-                              : transData.journal.viewall.en}
+                            <span>
+                              {this.langID
+                                ? transData.journal.viewall.id
+                                : transData.journal.viewall.en}
+                            </span>
                           </Link>
                         )}
                       </div>

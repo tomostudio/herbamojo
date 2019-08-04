@@ -238,6 +238,7 @@ main.home {
       max-height: none;
       min-height: 0px;
       height: auto;
+      @include mobilegapbottom;
     }
 
     @include respond-to(height_less) {
@@ -257,6 +258,7 @@ main.home {
     & > .wrapper {
       @include flex-grow(1);
       @include setflex(column, nowrap, flex-start, flex-start, flex-start);
+
       & h1 {
         margin: 0px;
         font-size: $font-size-title;
@@ -368,6 +370,9 @@ main.home {
 
       @include respond-to(height_less) {
         height: 450px;
+      }
+      &::after {
+        display: none;
       }
 
       & > .wrapper {
@@ -921,8 +926,7 @@ main.home {
       }
 
       body.loaded &.inview {
-        $initdelay: 0.25s;
-        $initdelaymobile: 0s;
+        $initdelay: 0s;
         $_transition: 1.5s;
         $eachdelay: 0.25s;
 
@@ -1084,11 +1088,11 @@ main.home {
 
       & .content.half > div {
         & > div {
-          @include transition(opacity $global-transition);
+          @include transition(opacity .5s);
           opacity: 0;
 
           & > div:last-child {
-            @include transition(opacity $global-transition);
+            @include transition(opacity .5s);
             opacity: 0;
           }
         }
@@ -1564,6 +1568,9 @@ main.home {
 
       body:not(.__snapon) & {
         min-height: 550px;
+        @include respond-to(m_tablet) {
+          min-height: 0px;
+        }
         & > .wrapper {
           & > .content {
             &::after {
@@ -1842,10 +1849,12 @@ main.home {
         font-size: $font-size-button;
         line-height: $lineheight-button;
         color: white;
-        opacity: 0.5;
-        @include transition(opacity $global-transition);
-        body.onhover &:hover {
-          opacity: 1;
+        & > span {
+          opacity: 0.5;
+          @include transition(opacity $global-transition);
+          body.onhover &:hover {
+            opacity: 1;
+          }
         }
         @include respond-to(m_tablet) {
           margin: 20px auto 0px;
@@ -1853,6 +1862,38 @@ main.home {
         @include respond-to(mobile) {
           font-size: $font-size-button-m;
           line-height: $lineheight-button-m;
+        }
+      }
+
+      & > .wrapper {
+        & > .content {
+          & > .viewall,
+          & > .__journalcontainer {
+            @include transition(opacity $global-transition);
+            opacity: 0;
+          }
+        }
+      }
+
+      body.loaded &.inview {
+        $_transition: 1.5s;
+        $eachdelay: 0.2s;
+
+        & > .wrapper > .content {
+          & > .__journalcontainer {
+            @include transition(opacity $_transition #{($eachdelay)});
+            opacity: 1;
+            // @for $i from 0 through 1 {
+            //   & > *:nth-child(#{($i * 2 ) + 1}),
+            //   & > *:nth-child(#{($i * 2 ) + 2}) {
+            //   }
+            // }
+          }
+
+          & > .viewall {
+            @include transition(opacity $_transition #{(2.5 * $eachdelay)});
+            opacity: 1;
+          }
         }
       }
     }

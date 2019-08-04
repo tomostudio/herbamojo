@@ -12,9 +12,9 @@ export class DisableScroll {
     this.disable();
   }
   disable() {
-    console.log('scroll disable trigger', this.scrolldisabled);
+    // console.log('scroll disable trigger', this.scrolldisabled);
     if (!this.scrolldisabled) {
-      console.log('scroll disable', this.scrolldisabled);
+      // console.log('scroll disable', this.scrolldisabled);
       this.scrolldisabled = true;
       if (this.target === null) {
         if (typeof document !== `undefined`) {
@@ -79,10 +79,10 @@ export class DisableScroll {
     }
   }
   enable = () => {
-    console.log('scroll enable trigger', this.scrolldisabled);
+    // console.log('scroll enable trigger', this.scrolldisabled);
     this.scrolldisabled = false;
     if (this.target === null) {
-      console.log('scroll enable', this.scrolldisabled);
+      // console.log('scroll enable', this.scrolldisabled);
       if (typeof document !== `undefined`) {
         document.body.classList.remove('__disablescroll');
         document.body.classList.remove('__disabletouch');
@@ -149,7 +149,7 @@ export class DisableScroll {
   };
   event = {
     disable(e) {
-      console.log('touch soft');
+      // console.log('touch soft');
       e = e || window.event;
       if (e.preventDefault) {
         e.preventDefault();
@@ -158,7 +158,7 @@ export class DisableScroll {
       e.returnValue = false;
     },
     disableHard: e => {
-      console.log('touch hard', e);
+      // console.log('touch hard', e);
 
       e.returnValue = false;
       e.cancelBubble = true;

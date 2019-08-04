@@ -1,7 +1,7 @@
 // ==========================================================================
 // COLOR
 
-$color_green: #29CB7E;
+$color_green: rgba(41,203,126, 1);
 
 // ==========================================================================
 // TRANSITION
@@ -369,7 +369,17 @@ $font-size-subbody: 20px;
     &::before {
         @include pseudo();
         position: relative;
-        height: 60px;
+        height: 30px;
+        pointer-events: none;
+        width: 100%;
+    }
+}
+
+@mixin mobilegapbottom() {
+    &::after {
+        @include pseudo();
+        position: relative;
+        height: 30px;
         pointer-events: none;
         width: 100%;
     }

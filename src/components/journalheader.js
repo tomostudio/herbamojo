@@ -17,7 +17,8 @@ export default class JournalHeader extends React.Component {
       }
       //CHECK SCROLl
       if (_sp > headerTreshold) {
-        JournalHeader.classList.add('stuck');
+        if (!JournalHeader.classList.contains('stuck'))
+          JournalHeader.classList.add('stuck');
       } else {
         JournalHeader.classList.remove('stuck');
       }
@@ -95,8 +96,10 @@ export default class JournalHeader extends React.Component {
                   >
                     {`${
                       !this.props.indonesia
-                        ? data.general.frontmatter.journaltranslation.journalbacktext.en
-                        : data.general.frontmatter.journaltranslation.journalbacktext.id
+                        ? data.general.frontmatter.journaltranslation
+                            .journalbacktext.en
+                        : data.general.frontmatter.journaltranslation
+                            .journalbacktext.id
                     }`}
                   </Link>
                 )}
