@@ -8,6 +8,7 @@ import { Helmet } from 'react-helmet';
 //UTILS
 import { LoaderClass } from 'utils/loader';
 import { DisableScroll } from 'utils/disablescroll';
+import { InViewportClass } from 'utils/inviewport';
 
 import { ArrowDouble } from 'svg/symbols.js';
 
@@ -15,6 +16,7 @@ export default class Journal extends React.Component {
   LangID = this.props.data.content.frontmatter.indonesia || false;
   MainID = `journal${this.props.data.content.id}`;
   disableScrollBody = null;
+  inviewArray = [];
   JournalLoader = new LoaderClass({
     parent: `#${this.MainID}`,
     default_delay: 250,
@@ -26,6 +28,28 @@ export default class Journal extends React.Component {
         document.body.classList.add('loaded');
       }
       if (this.disableScrollBody !== null) this.disableScrollBody.enable();
+
+      this.inviewArray[0] = new InViewportClass({
+        target: 'section#MobileNav',
+        visibility: 0.75,
+        enter: () => {
+          document.querySelector('section#MobileNav').classList.add('inview');
+        },
+        exit: () => {
+          document.querySelector('section#MobileNav').classList.remove('inview');
+        }
+      });
+
+      this.inviewArray[1] = new InViewportClass({
+        target: 'section#Related',
+        visibility: 0.55,
+        enter: () => {
+          document.querySelector('section#Related').classList.add('inview');
+        },
+        exit: () => {
+          document.querySelector('section#Related').classList.remove('inview');
+        }
+      });
     }
   });
   componentDidMount() {
@@ -49,6 +73,16 @@ export default class Journal extends React.Component {
       this.disableScrollBody.enable();
       this.disableScrollBody = null;
     }
+
+    this.inviewArray.forEach((each, index) => {
+      if (
+        this.inviewArray[index] !== null &&
+        this.inviewArray[index] !== undefined
+      ) {
+        this.inviewArray[index].kill();
+        this.inviewArray[index] = null;
+      }
+    });
   }
   render() {
     this.JournalLoader.renderload();
@@ -187,7 +221,7 @@ export default class Journal extends React.Component {
             </div>
           </section>
           { !onlyarticle && (
-          <section className='mobileJournalNavigation'>
+          <section id="MobileNav" className='mobileJournalNavigation'>
             <div className='wrapper'>
               <Link
                 to={prev === null ? '' : prev}
@@ -212,7 +246,7 @@ export default class Journal extends React.Component {
             </div>
           </section>)}
           {related.length > 0 && (
-            <section className='related journallist'>
+            <section id="Related" className='related journallist'>
               <div className='wrapper'>
                 <div className='content'>
                   <h1>

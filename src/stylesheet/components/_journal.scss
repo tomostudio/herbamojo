@@ -412,7 +412,7 @@ main.journal {
           opacity: 1;
         }
         &.journallist {
-          & .__navcontainer ,
+          & .__navcontainer,
           & .__journalcontainer {
             @include transition(
               opacity $_transition #{$initdelay + ($eachdelay)}
@@ -747,6 +747,65 @@ main.journal {
                 @include transform(rotate(0deg));
               }
               margin-right: 50px;
+            }
+          }
+        }
+      }
+    }
+
+    $initdelay: 0.1s;
+    $_transition: 1s;
+    $_transition2: 1.5s;
+    $eachdelay: 0.2s;
+    & > .sectionWrapper section {
+      &.journalcover {
+        & > div > div {
+          & > div{
+            @include transition(opacity 0.5s);
+            opacity: 0;
+            body.loaded & {
+              @include transition(opacity $_transition2 #{$eachdelay * .5});
+              opacity: 1;
+            }
+          }
+          & > a{
+            @include transition(opacity 0.5s);
+            opacity: 0;
+            body.loaded & {
+              @include transition(opacity $_transition #{$eachdelay * 3});
+              opacity: 1;
+            }
+          }
+        }
+      }
+      &.markupcontent {
+        @include transition(opacity 0.5s);
+        opacity: 0;
+        body.loaded & {
+          @include transition(opacity $_transition2 #{$eachdelay * 3});
+          opacity: 1;
+        }
+      }
+      &#MobileNav {
+        @include transition(opacity 0.5s);
+        opacity: 0;
+        body.loaded &.inview {
+          @include transition(opacity $_transition2);
+          opacity: 1;
+        }
+      }
+      &#Related {
+        & .content > * {
+          @include transition(opacity 0.5s);
+          opacity: 0;
+        }
+        body.loaded &.inview {
+          & .content > * {
+            @for $i from 1 through 2 {
+              &:nth-child(#{$i}) {
+                @include transition(opacity $_transition #{0.3s * ($i - 1)});
+                opacity: 1;
+              }
             }
           }
         }
