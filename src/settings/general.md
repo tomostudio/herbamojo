@@ -37,16 +37,16 @@ journaltranslation:
     id: Kembali ke Jurnal
   nextjournal:
     en: Next Journal
-    id: Next Jurnal
+    id: Jurnal selanjutnya
   nextjournalmobile:
     en: Next
-    id: Next
+    id: Selanjutnya
   previousjournal:
     en: Previous Journal
-    id: Previous Jurnal
+    id: Jurnal sebelumnya
   previousjournalmobile:
     en: Previous
-    id: Previous
+    id: Sebelumnya
   relatedjournal:
     en: Related
     id: Terhubung
