@@ -29,17 +29,17 @@ ingredients:
       en: GINSENG
       id: GINSENG
   - desc:
-      en: >-
+      en: Red Ginger works to improve blood circulation and increase energy.
+      id: >-
         Jahe merah bekhasiat untuk melancarkan peredaran darah dan meningkatkan
         energi.
-      id: Red Ginger works to improve blood circulation and increase energy.
     image: /assets/jahe_merah.jpg
     title:
       en: RED GINGER
       id: JAHE MERAH
   - desc:
-      en: Tribulus berkhasiat untuk meningkatkan stamina pria.
-      id: Tribulus works to increase male stamina.
+      en: Tribulus works to increase male stamina.
+      id: Tribulus berkhasiat untuk meningkatkan stamina pria.
     image: /assets/tribulus.jpg
     title:
       en: TRIBULUS
@@ -54,15 +54,15 @@ ingredients:
       en: MACA
       id: MACA
   - desc:
-      en: Pasak bumi berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak
-      id: Long Jack works to increase stamina and as an aphrodisiac.
+      en: Long Jack works to increase stamina and as an aphrodisiac.
+      id: Pasak bumi berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak
     image: /assets/pasak_bumi.jpg
     title:
       en: LONG JACK
       id: PASAK BUMI
   - desc:
-      en: Purwoceng berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak.
-      id: Purwoceng works to increase stamina and as an aphrodisiac.
+      en: Purwoceng works to increase stamina and as an aphrodisiac.
+      id: Purwoceng berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak.
     image: /assets/purwoceng.jpg
     title:
       en: PURWOCENG
@@ -82,10 +82,7 @@ onlineshop:
   - background: transparent
     image: /assets/shop/shopee.png
     link: 'https://shopee.co.id/Herbamojo-60-Kapsul-500mg-i.147920653.2234541062'
-offlineshop:
-  - background: transparent
-    image: ''
-    link: ''
+offlineshop: []
 translations:
   home:
     getyours:
@@ -183,3 +180,4 @@ translations:
       en: Shop
       id: Beli
 ---
+
