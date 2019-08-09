@@ -612,7 +612,7 @@ collections:
             name: 'onlineshop'
             widget: 'list'
             allow_add: true
-            hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
+            # hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
             fields:
               - {
                   name: 'image',
@@ -643,7 +643,7 @@ collections:
             name: 'offlineshop'
             widget: 'list'
             allow_add: true
-            hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
+            # hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
             fields:
               - {
                   name: 'image',
