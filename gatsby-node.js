@@ -48,6 +48,27 @@ exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
   }
 
   if (node.internal.type === `MarkdownRemark`) {
+    if (
+      node.frontmatter.issetting &&
+      node.frontmatter.contenttype === 'home_setting'
+    ) {
+      const { offlineshop, onlineshop } = node.frontmatter;
+      //AUTOMATICALLY REPLACE BLANK LSIT FOR OFFLINE & ONLINE SHOP
+      const blankobject = {
+        background: 'transparent',
+        image: '',
+        link: ''
+      };
+      if (offlineshop.length === 0) {
+        node.frontmatter.offlineshop.push(blankobject);
+      }
+      if (onlineshop.length === 0) {
+        node.frontmatter.onlineshop.push(blankobject);
+      }
+    }
+  }
+
+  if (node.internal.type === `MarkdownRemark`) {
     const filepath = createFilePath({
       node,
       getNode,
