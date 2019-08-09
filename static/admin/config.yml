@@ -613,6 +613,7 @@ collections:
             widget: 'list'
             allow_add: true
             required: true
+            hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
             fields:
               - {
                   name: 'image',
@@ -643,6 +644,8 @@ collections:
             name: 'offlineshop'
             widget: 'list'
             allow_add: true
+            required: true
+            hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
             fields:
               - {
                   name: 'image',
@@ -650,6 +653,7 @@ collections:
                   widget: 'image',
                   pattern: [\.(jpe?g|png|gif)$],
                   hint: 'Minimum Resolution: 500px x 200px | JPEG / PNG / GIF',
+                  required: true,
                   default: '',
                 }
               - {
@@ -657,6 +661,7 @@ collections:
                   name: 'link',
                   widget: 'string',
                   hint: 'Input link starting with https:// or http://',
+                  required: true,
                   default: '',
                 }
               - {
@@ -664,6 +669,7 @@ collections:
                   name: 'background',
                   widget: 'string',
                   hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
+                  required: true,
                   default: 'transparent',
                 }
           - label: 'Translations List'
