@@ -643,7 +643,6 @@ collections:
             name: 'offlineshop'
             widget: 'list'
             allow_add: true
-            required: true
             fields:
               - {
                   name: 'image',
