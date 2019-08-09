@@ -651,7 +651,6 @@ collections:
                   pattern: [\.(jpe?g|png|gif)$],
                   hint: 'Minimum Resolution: 500px x 200px | JPEG / PNG / GIF',
                   default: '',
-                  required: true,
                 }
               - {
                   label: 'Link',
@@ -659,7 +658,6 @@ collections:
                   widget: 'string',
                   hint: 'Input link starting with https:// or http://',
                   default: '',
-                  required: true,
                 }
               - {
                   label: 'Background Color',
@@ -667,7 +665,6 @@ collections:
                   widget: 'string',
                   hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
                   default: 'transparent',
-                  required: true,
                 }
           - label: 'Translations List'
             name: 'translations'
