@@ -620,6 +620,7 @@ collections:
                   widget: 'image',
                   pattern: [\.(jpe?g|png|gif)$],
                   hint: 'Minimum Resolution: 2000px x 1500px | JPEG / PNG / GIF',
+                  required: false,
                   default: '',
                 }
               - {
@@ -627,6 +628,7 @@ collections:
                   name: 'link',
                   widget: 'string',
                   hint: 'Input link starting with https:// or http://',
+                  required: false,
                   default: '',
                 }
               - {
@@ -634,6 +636,7 @@ collections:
                   name: 'background',
                   widget: 'string',
                   hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
+                  required: false,
                   default: 'transparent',
                 }
           - label: 'Offline Shop List'
@@ -648,6 +651,7 @@ collections:
                   widget: 'image',
                   pattern: [\.(jpe?g|png|gif)$],
                   hint: 'Minimum Resolution: 500px x 200px | JPEG / PNG / GIF',
+                  required: false,
                   default: '',
                 }
               - {
@@ -655,6 +659,7 @@ collections:
                   name: 'link',
                   widget: 'string',
                   hint: 'Input link starting with https:// or http://',
+                  required: false,
                   default: '',
                 }
               - {
@@ -663,6 +668,7 @@ collections:
                   widget: 'string',
                   hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
                   default: 'transparent',
+                  required: false,
                 }
           - label: 'Translations List'
             name: 'translations'
