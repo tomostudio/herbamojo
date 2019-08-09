@@ -68,8 +68,8 @@ ingredients:
       en: PURWOCENG
       id: PURWOCENG
   - desc:
-      en: Cabe Jawa berkhasiat untuk melancarkan peredaran darah.
-      id: Javanese Long Pepper works to increase stamina and as an aphrodisiac.
+      en: Javanese Long Pepper works to increase stamina and as an aphrodisiac.
+      id: Cabe Jawa berkhasiat untuk melancarkan peredaran darah.
     image: /assets/cabe.jpg
     title:
       en: JAVANESE LONG PEPPER
