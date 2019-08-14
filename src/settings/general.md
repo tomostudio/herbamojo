@@ -3,7 +3,7 @@ issetting: true
 contenttype: general_setting
 title: General Setting
 web_name: HERBAMOJO
-journaldisable: true
+journaldisable: false
 deploy_status_password: password
 seo:
   seo_image: /assets/herbamojo_homebg.jpg
