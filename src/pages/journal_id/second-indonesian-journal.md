@@ -2,7 +2,7 @@
 issetting: false
 contenttype: journal
 indonesia: true
-active: true
+active: false
 title: Second Indonesian Journal
 slug: jurnalkedua
 date: 2019-08-01T16:23:10.185Z
