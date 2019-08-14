@@ -2,19 +2,19 @@
 issetting: false
 contenttype: journal
 indonesia: false
-active: true
+active: false
+title: Journal Entry ENGLISH 5
 slug: journal-entry-5
-altslug: '/'
+date: 2019-05-22T08:01:31.713Z
 seo:
   seo_image: ''
   seo_keywords: ''
   seo_shortdesc: ''
-date: 2019-05-22T08:01:31.713Z
-title: Journal Entry ENGLISH 5
-thumbimage: /assets/herbamojo_productshot3.jpg
-coverimage: /assets/herbamojo_productshot3.jpg
+altslug: /
 listcolorblack: false
+thumbimage: /assets/herbamojo_productshot3.jpg
 headercolorblack: false
+coverimage: /assets/herbamojo_productshot3.jpg
 ---
 
 Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam elementum nec nibh luctus ultrices. Vivamus tempus et velit non accumsan. Sed ut condimentum diam. Integer hendrerit tristique varius. Nulla interdum ligula id turpis **rhoncus, a efficitur est sollicitudin. Donec et lobortis dolor.** Cras vitae tempus sapien, at blandit turpis.
