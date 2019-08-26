@@ -17,7 +17,7 @@ seo:
     and end your daily routine on a higher note. On this week's journal, we will
     be explaining a number of ways you can do to keep yourself refreshed
     throughout your daily activities. Read on!
-altslug: /
+altslug: 7-cara-untuk-meningkatkan-energi-tubuh
 listcolorblack: false
 thumbimage: /assets/energetic-man-bw.jpg
 headercolorblack: true
