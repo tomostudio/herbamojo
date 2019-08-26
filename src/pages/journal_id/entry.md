@@ -2,7 +2,7 @@
 issetting: false
 contenttype: journal
 indonesia: true
-active: false
+active: true
 title: Journal Entry INDONESIA
 slug: journal-entry
 date: 2019-03-22T08:01:31.713Z
