@@ -36,7 +36,9 @@ export default class Journal extends React.Component {
           document.querySelector('section#MobileNav').classList.add('inview');
         },
         exit: () => {
-          document.querySelector('section#MobileNav').classList.remove('inview');
+          document
+            .querySelector('section#MobileNav')
+            .classList.remove('inview');
         }
       });
 
@@ -103,16 +105,24 @@ export default class Journal extends React.Component {
     const curURL = this.props.pageContext.slug.toString();
     let englishURL, indonesianURL;
 
+    console.log(content.altslug);
+
     if (curURL.substring(0, 3) === '/id') {
       // INDONESIAN URL
       englishURL = curURL.substring(3);
       indonesianURL = curURL;
-      if (content.altslug !== null && content.altslug !== '') {
+      if (
+        content.altslug !== null &&
+        content.altslug !== '' &&
+        content.altslug !== '/'
+      ) {
         let _au = content.altslug;
         if (_au.substring(0, 1) !== '/') {
           _au = `/${_au}`;
         }
         englishURL = `/${general.journalslug}${_au}`;
+      } else {
+        englishURL = `/${general.journalslug}`;
       }
     } else {
       // ENGLISH URL
@@ -122,35 +132,44 @@ export default class Journal extends React.Component {
       }
       englishURL = _u;
       indonesianURL = `/id${_u}`;
-      if (content.altslug !== null && content.altslug !== '') {
+
+      if (
+        content.altslug !== null &&
+        content.altslug !== '' &&
+        content.altslug !== '/'
+      ) {
         let _au = content.altslug;
         if (_au.substring(0, 1) !== '/') {
           _au = `/${_au}`;
         }
         indonesianURL = `/id/${general.journalslug}${_au}`;
+      } else {
+        indonesianURL = `/id/${general.journalslug}`;
       }
+      // console.log(indonesianURL);
     }
+
     const { next, prev } = this.props.pageContext;
     let onlyarticle = false;
-    if(next === null & prev === null){
+    if ((next === null) & (prev === null)) {
       onlyarticle = true;
     }
 
     // GET RELATED DATA
     const alljournals = this.props.data.alljournals;
     let related = [];
-    if(content.related && content.related.length > 0){
+    if (content.related && content.related.length > 0) {
       content.related.forEach(_r => {
-      if (_r.relatedslug !== '/' && _r.relatedslug !== '') {
-        const compareslug = _r.relatedslug;
-        alljournals.edges.forEach(_j => {
-          if (_j.node.frontmatter.slug === _r.relatedslug) {
-            // console.log(_r.relatedslug, _j);
-            related.push(_j);
-          }
-        });
-      }
-    });
+        if (_r.relatedslug !== '/' && _r.relatedslug !== '') {
+          const compareslug = _r.relatedslug;
+          alljournals.edges.forEach(_j => {
+            if (_j.node.frontmatter.slug === _r.relatedslug) {
+              // console.log(_r.relatedslug, _j);
+              related.push(_j);
+            }
+          });
+        }
+      });
     }
 
     return (
@@ -183,26 +202,40 @@ export default class Journal extends React.Component {
               <div>
                 <div>{content.date}</div>
                 <div>{content.title}</div>
-                <Link
-                  to={prev === null ? '' : prev}
-                  className={prev === null ? 'disable' : ''}
-                >
-                  {`${
-                    this.LangID
-                      ? general.journaltranslation.previousjournal.id
-                      : general.journaltranslation.previousjournal.en
-                  }`}
-                </Link>
-                <Link
-                  to={next === null ? '' : next}
-                  className={next === null ? 'disable' : ''}
-                >
-                  {`${
-                    this.LangID
-                      ? general.journaltranslation.nextjournal.id
-                      : general.journaltranslation.nextjournal.en
-                  }`}
-                </Link>
+                {prev === null ? (
+                  <a className='navigation disable'>
+                    {`${
+                      this.LangID
+                        ? general.journaltranslation.previousjournal.id
+                        : general.journaltranslation.previousjournal.en
+                    }`}
+                  </a>
+                ) : (
+                  <Link to={prev} className='navigation'>
+                    {`${
+                      this.LangID
+                        ? general.journaltranslation.previousjournal.id
+                        : general.journaltranslation.previousjournal.en
+                    }`}
+                  </Link>
+                )}
+                {next === null ? (
+                  <a className='navigation disable'>
+                    {`${
+                      this.LangID
+                        ? general.journaltranslation.nextjournal.id
+                        : general.journaltranslation.nextjournal.en
+                    }`}
+                  </a>
+                ) : (
+                  <Link to={next} className='navigation'>
+                    {`${
+                      this.LangID
+                        ? general.journaltranslation.nextjournal.id
+                        : general.journaltranslation.nextjournal.en
+                    }`}
+                  </Link>
+                )}
               </div>
             </div>
             <picture>
@@ -220,33 +253,36 @@ export default class Journal extends React.Component {
               />
             </div>
           </section>
-          { !onlyarticle && (
-          <section id="MobileNav" className='mobileJournalNavigation'>
-            <div className='wrapper'>
-              <Link
-                to={prev === null ? '' : prev}
-                className={prev === null ? 'disable' : ''}
-              >
-                <ArrowDouble /><span>{`${
-                  this.LangID
-                    ? general.journaltranslation.previousjournalmobile.id
-                    : general.journaltranslation.previousjournalmobile.en
-                }`}</span>
-              </Link>
-              <Link
-                to={next === null ? '' : next}
-                className={next === null ? 'disable' : ''}
-              >
-                <span>{`${
-                  this.LangID
-                    ? general.journaltranslation.nextjournalmobile.id
-                    : general.journaltranslation.nextjournalmobile.en
-                }`}</span><ArrowDouble />
-              </Link>
-            </div>
-          </section>)}
+          {!onlyarticle && (
+            <section id='MobileNav' className='mobileJournalNavigation'>
+              <div className='wrapper'>
+                <Link
+                  to={prev === null ? '' : prev}
+                  className={prev === null ? 'disable' : ''}
+                >
+                  <ArrowDouble />
+                  <span>{`${
+                    this.LangID
+                      ? general.journaltranslation.previousjournalmobile.id
+                      : general.journaltranslation.previousjournalmobile.en
+                  }`}</span>
+                </Link>
+                <Link
+                  to={next === null ? '' : next}
+                  className={next === null ? 'disable' : ''}
+                >
+                  <span>{`${
+                    this.LangID
+                      ? general.journaltranslation.nextjournalmobile.id
+                      : general.journaltranslation.nextjournalmobile.en
+                  }`}</span>
+                  <ArrowDouble />
+                </Link>
+              </div>
+            </section>
+          )}
           {related.length > 0 && (
-            <section id="Related" className='related journallist'>
+            <section id='Related' className='related journallist'>
               <div className='wrapper'>
                 <div className='content'>
                   <h1>

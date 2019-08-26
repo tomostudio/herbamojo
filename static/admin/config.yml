@@ -126,6 +126,7 @@ collections:
         valueField: "slug"
         displayFields: ["title", "slug"]
         default: '/'
+        required: false
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
       - name: "listcolorblack"
         label: "Text Color on Journal List Thumbnail"

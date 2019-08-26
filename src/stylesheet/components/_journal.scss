@@ -567,18 +567,19 @@ main.journal {
             }
           }
 
-          & > a {
+          & > .navigation {
             &:nth-child(3),
             &:nth-child(4) {
               position: absolute;
               top: 50%;
-              max-width: 120px;
+              max-width: 150px;
               display: block;
               font-family: 'Amarillo';
-              font-size: 30px;
-              line-height: 30px;
+              font-size: 28px;
+              line-height: 28px;
               text-align: center;
               @include transform(translate(0px, -50%));
+              color: black;
               @include transition(color $global-transition);
               @include respond-to(tablet) {
                 font-size: 24px;
@@ -769,10 +770,10 @@ main.journal {
             }
           }
           & > a {
-            @include transition(opacity 0.5s);
+            @include transition(opacity 0.5s, color $global-transition);
             opacity: 0;
             body.loaded & {
-              @include transition(opacity $_transition #{$eachdelay * 3});
+              @include transition(opacity $_transition #{$eachdelay * 3}, color $global-transition);
               opacity: 1;
             }
           }
