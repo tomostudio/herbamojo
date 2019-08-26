@@ -1127,7 +1127,7 @@ section.journallist {
         justify-self: center;
         &.disable {
           pointer-events: none;
-          opacity: 0.25;
+          opacity: 0.25 !important;
         }
         & svg {
           height: 60px;

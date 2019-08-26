@@ -44,10 +44,11 @@ collections:
         name: "altslug"
         widget: "relation"
         collection: "journal_id"
-        searchFields: ["slug", "title"]
+        searchFields: ["title", "slug"]
         valueField: "slug"
-        displayFields: ["slug", "title"]
+        displayFields: ["title", "slug"]
         default: '/'
+        required: false
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
       - name: "listcolorblack"
         label: "Text Color on Journal List Thumbnail"
@@ -76,9 +77,9 @@ collections:
           name: "relatedslug"
           widget: "relation"
           collection: "journal"
-          searchFields: ["slug", "title"]
+          searchFields: ["title", "slug"]
           valueField: "slug"
-          displayFields: ["slug", "title"]
+          displayFields: ["title", "slug"]
           default: '/'
           hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
   - name: journal_id
@@ -121,9 +122,9 @@ collections:
         name: "altslug"
         widget: "relation"
         collection: "journal"
-        searchFields: ["slug", "title"]
+        searchFields: ["title", "slug"]
         valueField: "slug"
-        displayFields: ["slug", "title"]
+        displayFields: ["title", "slug"]
         default: '/'
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
       - name: "listcolorblack"
@@ -153,9 +154,9 @@ collections:
           name: "relatedslug"
           widget: "relation"
           collection: "journal_id"
-          searchFields: ["slug", "title"]
+          searchFields: ["title", "slug"]
           valueField: "slug"
-          displayFields: ["slug", "title"]
+          displayFields: ["title", "slug"]
           hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
   - label: 'Settings'
     name: 'settings'
