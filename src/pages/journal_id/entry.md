@@ -15,9 +15,10 @@ listcolorblack: false
 thumbimage: /assets/herbamojo_productshot3.jpg
 headercolorblack: false
 coverimage: /assets/herbamojo_productshot3.jpg
+related:
+  - relatedslug: 7-cara-untuk-meningkatkan-energi-tubuh
 ---
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam elementum nec nibh luctus ultrices. Vivamus tempus et velit non accumsan. Sed ut condimentum diam. Integer hendrerit tristique varius. Nulla interdum ligula id turpis **rhoncus, a efficitur est sollicitudin. Donec et lobortis dolor.** Cras vitae tempus sapien, at blandit turpis.
+Lorem ipsum dolor sit amet,[ consectetur adipiscing elit. ](Https://google.com)Aliquam elementum nec nibh luctus ultrices. Vivamus tempus et velit non accumsan. Sed ut condimentum diam. Integer hendrerit tristique varius. Nulla interdum ligula id turpis **rhoncus, a efficitur est sollicitudin. Donec et lobortis dolor.** Cras vitae tempus sapien, at blandit turpis.
 
 [Lorem ipsum dolor sit amet, consectetur adipiscing elit. ](https://google.com)
 
@@ -30,4 +31,3 @@ Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam elementum nec n
 ![](/assets/herbamojo_productshot3.jpg)
 
 Pellentesque condimentum tortor quis dictum venenatis. Donec dapibus pellentesque finibus. Pellentesque eu pharetra lectus. Mauris consectetur, lorem sed aliquet pharetra, odio nulla semper orci, ac ultricies purus _sapien ut ipsum. Nulla facilisis in turpis aliquam vestibulum._ Phasellus ex nunc, commodo et lacinia sit amet, **commodo** et urna.
-
