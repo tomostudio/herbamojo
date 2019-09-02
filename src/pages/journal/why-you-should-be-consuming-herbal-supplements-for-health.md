@@ -7,7 +7,7 @@ title: Why You Should Be Consuming Herbal Supplements for Health
 slug: why-you-should-be-consuming-herbal-supplements-for-health
 date: 2019-08-30T06:06:28.795Z
 seo:
-  seo_image: /assets/rsz_dtmxxx-af190709-herbamojo-product_1-1-.jpg
+  seo_image: /assets/dtmxxx-af190709-herbamojo-product-1-.jpg
   seo_keywords: >-
     herbamojo, herbal, wellness, natural, purwoceng, pasakbumi, maca, jahe
     merah, cabe jawa, tribulus, ginseng
@@ -20,9 +20,9 @@ seo:
     holistically. Read on!
 altslug: /
 listcolorblack: false
-thumbimage: /assets/rsz_dtmxxx-af190709-herbamojo-product_1-1-.jpg
+thumbimage: /assets/dtmxxx-af190709-herbamojo-product-1-.jpg
 headercolorblack: false
-coverimage: /assets/rsz_dtmxxx-af190709-herbamojo-product_1-1-.jpg
+coverimage: /assets/dtmxxx-af190709-herbamojo-product-1-.jpg
 related:
   - relatedslug: /
 ---
