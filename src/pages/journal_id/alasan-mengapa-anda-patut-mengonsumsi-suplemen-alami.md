@@ -21,9 +21,9 @@ seo:
     membantu memelihara kesehatan anda.
 altslug: why-you-should-be-consuming-herbal-supplements-for-health
 listcolorblack: false
-thumbimage: /assets/rsz_dtmxxx-af190709-herbamojo-product_1-1-.jpg
+thumbimage: /assets/dtmxxx-af190709-herbamojo-product-1-.jpg
 headercolorblack: false
-coverimage: /assets/rsz_dtmxxx-af190709-herbamojo-product_1-1-.jpg
+coverimage: /assets/dtmxxx-af190709-herbamojo-product-1-.jpg
 ---
 Suplemen seringkali digunakan sebagai pendamping makanan dalam menyediakan nutrisi tambahan bagi tubuh. Suplemen alami, dalam hal ini tentu memiliki keunggulan dibandingkan dengan suplemen sintetik, karena terbuat dari ekstrak tumbuhan alami dan menimbulkan efek samping yang minimal saat digunakan, bahkan tidak sama sekali. Pada jurnal minggu ini, kami akan menjelaskan beberapa alasan mengapa mengonsumsi suplemen alami dapat membantu memelihara kesehatan anda.
 
