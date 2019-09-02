@@ -16,7 +16,7 @@ collections:
     fields:
       - { name: 'issetting', label: 'issetting', widget: 'hidden', default: false, required: true, }
       - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'journal', required: true, }
-      - { name: 'indonesia', label: 'indonesia', widget: 'hidden', default: true, required: true, }
+      - { name: 'indonesia', label: 'indonesia', widget: 'hidden', default: false, required: true, }
       - { name: 'active', label: 'Active', widget: 'boolean', required: true, default: true }
       - { name: 'title', label: 'Title',widget: 'string', required: true}
       - {
