@@ -2,7 +2,7 @@
 issetting: false
 contenttype: journal
 indonesia: false
-active: true
+active: false
 title: Why You Should Be Consuming Herbal Supplements for Health
 slug: why-you-should-be-consuming-herbal-supplements-for-health
 date: 2019-08-30T06:06:28.795Z
