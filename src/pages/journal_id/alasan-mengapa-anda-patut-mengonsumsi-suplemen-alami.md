@@ -2,7 +2,7 @@
 issetting: false
 contenttype: journal
 indonesia: true
-active: false
+active: true
 title: Alasan Mengapa Anda Patut Mengonsumsi Suplemen Alami
 slug: alasan-mengapa-anda-patut-mengonsumsi-suplemen-alami
 date: 2019-08-30T06:27:21.110Z
