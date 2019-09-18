@@ -21,7 +21,7 @@ seo:
 altslug: /
 listcolorblack: false
 thumbimage: /assets/rsz_ginseng.png
-headercolorblack: false
+headercolorblack: true
 coverimage: /assets/rsz_ginseng.png
 related:
   - relatedslug: /
