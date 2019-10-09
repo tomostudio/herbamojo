@@ -1,22 +1,22 @@
 module.exports = {
   siteMetadata: {
     title: `Herbamojo Website`,
-    siteUrl: `https://herbamojo.id`
+    siteUrl: `https://herbamojo.id`,
   },
   plugins: [
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `settings`,
-        path: `${__dirname}/src/settings`
-      }
+        path: `${__dirname}/src/settings`,
+      },
     },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/static/assets`,
-        name: 'assets'
-      }
+        name: 'assets',
+      },
     },
     {
       resolve: `gatsby-plugin-manifest`,
@@ -27,15 +27,15 @@ module.exports = {
         background_color: '#000000',
         theme_color: '#15C87F',
         display: 'standalone',
-        icon: 'src/images/icon/icon.png'
-      }
+        icon: 'src/images/icon/icon.png',
+      },
     },
     {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `src`,
-        path: `${__dirname}/src/`
-      }
+        path: `${__dirname}/src/`,
+      },
     },
     `gatsby-plugin-offline`,
     // `gatsby-plugin-remove-serviceworker`,
@@ -46,34 +46,40 @@ module.exports = {
       resolve: `gatsby-plugin-netlify-cms`,
       options: {
         htmlTitle: `Content Manager | HERBAMOJO`,
-        htmlFavicon: `${__dirname}/static/icon.png`
-      }
+        htmlFavicon: `${__dirname}/static/icon.png`,
+      },
     },
     `gatsby-plugin-layout`,
     {
       resolve: `gatsby-plugin-sitemap`,
       options: {
-        exclude: [`/@deploystatus`]
-      }
+        exclude: [`/@deploystatus`],
+      },
     },
     {
       resolve: `gatsby-plugin-google-analytics`,
       options: {
         trackingId: 'UA-97840044-2',
-        exclude: ["/@deploystatus"],
-      }
+        exclude: ['/@deploystatus'],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-facebook-pixel`,
+      options: {
+        pixelId: '1710911005709446',
+      },
     },
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [`gatsby-remark-unwrap-images`]
-      }
+        plugins: [`gatsby-remark-unwrap-images`],
+      },
     },
     {
       resolve: `gatsby-plugin-netlify`,
       options: {
-        generateMatchPathRewrites: false // boolean to turn off automatic creation of redirect rules for client only paths
-      }
-    }
-  ]
+        generateMatchPathRewrites: false, // boolean to turn off automatic creation of redirect rules for client only paths
+      },
+    },
+  ],
 };
