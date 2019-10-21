@@ -21,7 +21,7 @@ seo:
     week's journal, we will be explaining a few tips you can do to manage stress
     related to the workplace.
 altslug: /
-listcolorblack: false
+listcolorblack: true
 thumbimage: /assets/rsz_adult-blur-businessman-927022.jpg
 headercolorblack: false
 coverimage: /assets/rsz_adult-blur-businessman-927022.jpg
