@@ -21,7 +21,7 @@ seo:
     jurnal minggu ini, kami akan membahas beberapa tips yang dapat anda lakukan
     untuk mengatasi stress yang anda hadapi di dunia kerja.
 altslug: 5-health-benefits-of-ginseng
-listcolorblack: false
+listcolorblack: true
 thumbimage: /assets/rsz_adult-blur-businessman-927022.jpg
 headercolorblack: true
 coverimage: /assets/rsz_adult-blur-businessman-927022.jpg
