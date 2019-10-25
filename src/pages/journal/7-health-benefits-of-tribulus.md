@@ -23,7 +23,7 @@ seo:
 altslug: /
 listcolorblack: false
 thumbimage: /assets/tribulus.png
-headercolorblack: false
+headercolorblack: true
 coverimage: /assets/tribulus.png
 related:
   - relatedslug: /
