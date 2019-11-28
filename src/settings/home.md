@@ -90,7 +90,19 @@ onlineshop:
     link: 'https://shopee.co.id/Herbamojo-60-Kapsul-500mg-i.147920653.2234541062'
 offlineshop:
   - background: transparent
-    image: ''
+    image: /assets/watson.png
+    link: ''
+  - background: transparent
+    image: /assets/ranch-market.png
+    link: ''
+  - background: transparent
+    image: /assets/farmers-market.png
+    link: ''
+  - background: transparent
+    image: /assets/apotekroxy.png
+    link: ''
+  - background: transparent
+    image: /assets/aeon.png
     link: ''
 translations:
   home:
