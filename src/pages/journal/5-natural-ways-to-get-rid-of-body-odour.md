@@ -3,8 +3,8 @@ issetting: false
 contenttype: journal
 indonesia: false
 active: true
-title: 5 Natural Ways to Get Rid of Body Odour
-slug: 5-natural-ways-to-get-rid-of-body-odour
+title: 5 Cara Alami untuk Mengurangi Bau Badan
+slug: 5-cara-alami-untuk-mengurangi-bau-badan
 date: 2019-12-02T02:35:59.091Z
 seo:
   seo_image: /assets/rsz_photo-of-man-running-2600354.jpg
@@ -12,14 +12,16 @@ seo:
     herbamojo, herbal, ginseng, maca, tribulus, javanese pepper, red ginger,
     purwoceng, pasak bumi, stamina, vitality
   seo_shortdesc: >-
-    As Indonesia is a tropical country, living in hot and humid weather
-    condition is a common occurence. One byproduct of humidity is sweat, as it
-    is the body's way to cool itself down. If sweat interacts with the bacteria
-    on the skin surface however, it may cause body odour. While sometimes it can
-    a the result of an underlying medical condition, most of the time, simple
-    lifestyle changes and home remedies can help get rid of it. On this week's
-    journal, we will be explaining a few tips you can do to manage body odour.
-    Read on!
+    Sebagai negara tropis, Indonesia tentunya memiliki iklim yang cenderung
+    panas dan lembab sepanjang tahun. Udara panas tentunya menyebabkan seseorang
+    berkeringat, karena keringat merupakan cara utama untuk menurunkan suhu
+    tubuh. Meski keringat itu sendiri tidak berbau, apabila keringat
+    berinteraksi dengan bakteri yang terdapat pada permukaan kulit, hal tersebut
+    dapat menyebabkan bau badan. Terkadang bau badan merupakan indikasi bahwa
+    ada  masalah internal pada tubuh, namun seringkali bau badan bukan merupakan
+    hal yang serius dan dapat ditangani dengan beberapa langkah mudah. Pada
+    jurnal minggu ini, kami akan menjelaskan beberapa tips yang dapat anda
+    lakukan untuk mengatasi bau badan.
 altslug: /
 listcolorblack: false
 thumbimage: /assets/rsz_photo-of-man-running-2600354.jpg
@@ -28,20 +30,19 @@ coverimage: /assets/rsz_photo-of-man-running-2600354.jpg
 related:
   - relatedslug: /
 ---
-Ginger is one of the popularly known herbs to maintain digestive health. However, red ginger is one of the particular type to have other less-known health benefits, including improving male vitality. On this week's journal, we will be explaining a number of benefits red ginger may have for your overall health.
 
-1. Prevent digestive problems
-	The feeling of warmth after consuming red ginger surely is beneficial to warm up the body, including preventing cold and flu, as well as giving a relief for your digestion. More than that however, red ginger is also known to maintain healthy digestion and prevent digestive diseases through its antibacterial content. Spread of harmful bacteria like E. coli, Salmonella enteriditis, and Staphylococcus aureus can all be prevented through frequent consumption of red ginger.
+1. Menggunakan deodoran alami
+	Beberapa orang mungkin memilih untuk tidak menggunakan deodoran yang tersedia di pasaran karena mengandung bahan-bahan kimia yang memiliki pengaruh kurang baik bagi kesehatan. Meski begitu, anda dapat menggantinya dengan deodoran alami. Cobalah untuk menggunakan alkohol 70% untuk mengurangi keringat dan melawan bakteri yang berada pada ketiak. Selain itu, anda juga dapat mencoba menggunakan cuka apel yang memiliki kandungan asam alaminya dan antimikroba. Namun, selalu berhati-hatilah dalam menggunakan cairan yang asam sebagai deodoran apabila anda memiliki kulit sensitif. Jangan menggunakannya setelah mencukur atau jika anda memiliki luka terbuka, dan hanya gunakan pada kulit yang bersih dan kering untuk menghindari iritasi.
 	
-2. Reduce inflammations
-	Red ginger is also beneficial to reduce pain and inflammation inside the body. Research have shown that red ginger extract can help reduce symptoms of osteoarthritis, like muscle pain. Its effect is allegedly more effective than consuming non-steroidal anti-inflammation drug (NSAID) that is usually used to manage inflammations. Active components that are contained in red ginger, like gingerol, gingerdione, zingeron, and oleoresin may further help inflammations like muscle pain and gout.	
+2. Atur pola makan anda
+	Makanan yang anda konsumsi juga berpengaruh besar terhadap bau badan. Misalnya, mengonsumsi makanan pedas, kari, maupun makanan yang mengandung bawang putih dapat membuat tubuh memproduksi gas sulfur ketika dicerna. Gas tersebut dapat keluar dari tubuh melalui pori-pori kulit dan menyebabkan bau kurang sedap. Makanan lain seperti daging merah juga dapat mempengaruhi bau badan karena tubuh harus bekerja keras dalam mencernanya. Kandungan asam amino pada daging merah dapat meninggalkan residu dalam usus, dan residu ini harus dicerna oleh enzim, yang kemudian dapat mempengaruhi bau pada tubuh.
+	Pastikan untuk mengonsumsi sayuran hijau seperti bayam dan kale, karena kandungannya dapat melawan penyebab bau badan. Meski begitu, perhatikan konsumsi sayuran seperti brokoli, kol, dan kembang kol karena kandungan sulfurnya dapat terserap oleh tubuh dan dibuang lewat keringat. Selain itu, konsumsi mineral seperti magnesium juga dapat memberikan pengaruh baik bagi tubuh untuk mengurangi penyebab bau badan dari dalam.
 
-3. Reduce risk of contracting gout
-	Gout is a condition where uric acid buildup happens in your joints, causing pain and swelling around the area. This condition is more prevalent in older adults, even though younger adults may also be at risk when not prevented from early on. 
-	Related to the previous pointer, red ginger may help reduce inflammation in the body, including gout, by clearing uric acid buildup on the joints by promoting a healthier blood flow. Therefore, by consuming red ginger frequently, gout can be prevented and treated naturally.
+3. Menjaga kebersihan diri
+	Kebersihan diri merupakan salah satu faktor penting yang dapat mempengaruhi bau badan. Langkah-langkah untuk menjaga kebersihan diri, apabila dilakukan dengan rutin dan benar, dapat membantu mengurangi jumlah bakteri yang terdapat di permukaan kulit. Misalnya mandi rutin dan mandi setelah berolahraga dapat memberi kesegaran sekaligus mengurangi kuman. Selain itu, mencuci pakaian secara rutin dan selalu menggunakan pakaian bersih setiap kali beraktifitas juga dapat membantu mengurangi potensi bau badan. Langkah ekstra yang mungkin dapat anda lakukan ialah menggunting atau mencukur bulu ketiak untuk mengurangi potensi kelembaban pada daerah tersebut serta mencegah bakteri berkembang biak lebih banyak.
 
-4. Improving male sexual health
-	The usage of red ginger as an aphrodisiac may not be well known. However, research have shown that frequent consumption of the herb may help improve and treat sexual dysfunction in male. Even though the effect may not as prevalent as other aphrodisiac herb, red ginger is able to improve blood flow in the body, that can contribute to improve erections in male. Other than that, antioxidant and androgenic activity found in red ginger can also improve testosterone production, affecting male fertility in a more positive way.
+4. Mengurangi konsumsi alkohol
+	Ketika anda mengonsumsi alkohol, tubuh langsung mencerna karena tidak dapat menyimpannya. Alkohol diproses melalui hati, dimana alkohol akan dinetralisir sebelum dibuang keluar tubuh. 90% alkohol diubah menjadi asam asetat, dan 10% sisanya dibuang melalui cara lain, yakni melalui urin, napas ataupun  keringat. Oleh karena itu, selalu ingat untuk menjaga konsumsi alkohol dalam batas normal agar bau badan tidak terjadi.
 
-5. Improve immunity
-	When consumed frequently, the anti-inflammatory and antioxidant content in red ginger can help reduce bad bacteria inside our body system. This action may help improve overall health and more importantly, help take care of our immune system. Moreover, consuming foods with high antioxidant content can also reduce the potential growth of cancer cells.
+5. Menggunakan pakaian yang dibuat dari serat alami
+	Pakaian juga merupakan faktor utama apabila anda sedang mencoba untuk mengurangi potensi bau badan. Apabila anda menggunakan pakaian yang tebal, ketat, maupun terbuat dari material seperti spandex, polyester, ataupun kulit, hal ini menyebabkan pori-pori kulit sulit bernapas dan tentu saja dapat menyebabkan biang keringat dan peningkatan resiko bau badan. Oleh karena itu, pilihlah untuk menggunakan pakaian yang longgar dan terbuat dari serat alami, seperti katun atau linen ketika cuaca panas atau ketika anda sedang berolahraga.
