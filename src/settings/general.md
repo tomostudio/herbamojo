@@ -19,7 +19,7 @@ seo:
 footer:
   email: info@herbamojo.id
   ig_link: 'https://www.instagram.com/herbamojo'
-  wa_no: '6282123100111'
+  wa_no: '6281316001066'
 navigation:
   home:
     en: Home
