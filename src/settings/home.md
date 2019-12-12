@@ -84,7 +84,7 @@ onlineshop:
   - background: transparent
     image: /assets/shop/tokopedia.png
     link: >-
-      https://www.tokopedia.com/deltomedstore/herbamojo-60-kapsul-500mg?trkid=f%3DCa0000L000P0W0S0Sh%2CCo0Po0Fr0Cb0_src%3Duniverse_page%3D1_ob%3D23_q%3Dherbamojo_po%3D1_catid%3D2289
+      https://www.tokopedia.com/herbamojo/herbamojo-free-2-sachet-daily?utm_source=Android&utm_source=Android&utm_medium=Share&utm_medium=Share&utm_campaign=Product%20Share&utm_campaign=Product%20Share&_branch_match_id=646233752325183067
   - background: transparent
     image: /assets/shop/shopee.png
     link: 'https://shopee.co.id/Herbamojo-60-Kapsul-500mg-i.147920653.2234541062'
