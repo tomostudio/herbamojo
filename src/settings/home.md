@@ -87,7 +87,7 @@ onlineshop:
       https://www.tokopedia.com/herbamojo/herbamojo-free-2-sachet-daily?utm_source=Android&utm_source=Android&utm_medium=Share&utm_medium=Share&utm_campaign=Product%20Share&utm_campaign=Product%20Share&_branch_match_id=646233752325183067
   - background: transparent
     image: /assets/shop/shopee.png
-    link: 'https://shopee.co.id/Herbamojo-60-Kapsul-500mg-i.147920653.2234541062'
+    link: 'https://shopee.co.id/herbamojo7'
 offlineshop:
   - background: transparent
     image: /assets/watson.png
