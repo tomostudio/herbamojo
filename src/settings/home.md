@@ -151,7 +151,7 @@ translations:
     enhance:
       en:
         line1: Enhances
-        line2: Excercise Performance
+        line2: Exercise Performance
       id:
         line1: Meningkatkan
         line2: Performa Olahraga
