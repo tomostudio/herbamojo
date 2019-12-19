@@ -150,18 +150,18 @@ translations:
   benefits:
     enhance:
       en:
-        line1: Enhances
-        line2: Exercise Performance
-      id:
-        line1: Meningkatkan
-        line2: Performa Olahraga
-    immune:
-      en:
         line1: Supports
         line2: Immune Function
       id:
         line1: Menjaga
         line2: Imunitas
+    immune:
+      en:
+        line1: Enhances
+        line2: Exercise Performance
+      id:
+        line1: Meningkatkan
+        line2: Performa Olahraga
     increases:
       en:
         line1: Increases
