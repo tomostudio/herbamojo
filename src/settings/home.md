@@ -83,8 +83,7 @@ ingredients:
 onlineshop:
   - background: transparent
     image: /assets/shop/tokopedia.png
-    link: >-
-      https://www.tokopedia.com/herbamojo/herbamojo-free-2-sachet-daily?utm_source=Android&utm_source=Android&utm_medium=Share&utm_medium=Share&utm_campaign=Product%20Share&utm_campaign=Product%20Share&_branch_match_id=646233752325183067
+    link: 'https://www.tokopedia.com/herbamojo?source=universe&st=product'
   - background: transparent
     image: /assets/shop/shopee.png
     link: 'https://shopee.co.id/herbamojo7'
