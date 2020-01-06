@@ -83,7 +83,7 @@ ingredients:
 onlineshop:
   - background: transparent
     image: /assets/shop/tokopedia.png
-    link: 'https://www.tokopedia.com/herbamojo?source=universe&st=product'
+    link: 'https://www.tokopedia.com/herbamojo'
   - background: transparent
     image: /assets/shop/shopee.png
     link: 'https://shopee.co.id/herbamojo7'
