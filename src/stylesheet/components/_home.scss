@@ -1088,11 +1088,11 @@ main.home {
 
       & .content.half > div {
         & > div {
-          @include transition(opacity .5s);
+          @include transition(opacity 0.5s);
           opacity: 0;
 
           & > div:last-child {
-            @include transition(opacity .5s);
+            @include transition(opacity 0.5s);
             opacity: 0;
           }
         }
@@ -1612,6 +1612,21 @@ main.home {
               @include respond-to(m_tablet) {
                 max-width: 500px;
                 margin: #{$globalmobile-padding * 1.5} auto 0px;
+                &.nomobileslider {
+                  & > .arrow {
+                    pointer-events: none;
+                    opacity: 0;
+                  }
+                  & .glide .glide__track {
+                    & .glide__slides {
+                      @include setflex(row nowrap);
+                      & > *{
+                        width: 100%;
+                        @include flex-grow(1);
+                      }
+                    }
+                  }
+                }
               }
 
               @include respond-to(mobile) {

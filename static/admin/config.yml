@@ -10,155 +10,289 @@ collections:
     label_singular: Journal
     folder: src/pages/journal
     create: true
-    preview_path: "/journal/{{fields.slug}}"
+    preview_path: '/journal/{{fields.slug}}'
     editor:
       preview: false
     fields:
-      - { name: 'issetting', label: 'issetting', widget: 'hidden', default: false, required: true, }
-      - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'journal', required: true, }
-      - { name: 'indonesia', label: 'indonesia', widget: 'hidden', default: false, required: true, }
-      - { name: 'active', label: 'Active', widget: 'boolean', required: true, default: true }
-      - { name: 'title', label: 'Title',widget: 'string', required: true}
+      - {
+          name: 'issetting',
+          label: 'issetting',
+          widget: 'hidden',
+          default: false,
+          required: true,
+        }
+      - {
+          name: 'contenttype',
+          label: 'contenttype',
+          widget: 'hidden',
+          default: 'journal',
+          required: true,
+        }
+      - {
+          name: 'indonesia',
+          label: 'indonesia',
+          widget: 'hidden',
+          default: false,
+          required: true,
+        }
+      - {
+          name: 'active',
+          label: 'Active',
+          widget: 'boolean',
+          required: true,
+          default: true,
+        }
+      - { name: 'title', label: 'Title', widget: 'string', required: true }
       - {
           name: 'slug',
           label: 'Slug',
           widget: 'string',
           hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: "project-slug"',
           pattern:
-            [
-              '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
-              'Invalid Characters'
-            ],
-          required: true
+            ['^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$', 'Invalid Characters'],
+          required: true,
         }
       - { name: 'date', label: 'Date', widget: 'date', required: true }
-      - label: "META INFO"
-        name: "seo"
-        widget: "object"
+      - label: 'META INFO'
+        name: 'seo'
+        widget: 'object'
         required: false
         fields:
-        - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
-        - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
-        - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
-      - label: "Indonesian Journal Slug"
-        name: "altslug"
-        widget: "relation"
-        collection: "journal_id"
-        searchFields: ["title", "slug"]
-        valueField: "slug"
-        displayFields: ["title", "slug"]
+          - {
+              label: 'Short Description',
+              name: 'seo_shortdesc',
+              widget: 'string',
+              hint: 'Max (200 Characters).',
+              default: '',
+              required: false,
+            }
+          - {
+              label: 'Keywords',
+              name: 'seo_keywords',
+              widget: 'string',
+              hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).',
+              default: '',
+              required: false,
+            }
+          - {
+              name: 'seo_image',
+              label: 'Image',
+              widget: 'image',
+              pattern: [\.(jpe?g|png)$],
+              hint: 'width: 1200px, height: 600px',
+              default: '',
+              required: false,
+            }
+      - label: 'Indonesian Journal Slug'
+        name: 'altslug'
+        widget: 'relation'
+        collection: 'journal_id'
+        searchFields: ['title', 'slug']
+        valueField: 'slug'
+        displayFields: ['title', 'slug']
         default: '/'
         required: false
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
-      - name: "listcolorblack"
-        label: "Text Color on Journal List Thumbnail"
-        widget: "select"
+      - name: 'listcolorblack'
+        label: 'Text Color on Journal List Thumbnail'
+        widget: 'select'
         default: false
         options:
-          - { label: "White", value: false }
-          - { label: "Black", value: true }
-      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x250 | Picture will be adjusted according to the Window | JPG/PNG', required: true }
-      - name: "headercolorblack"
-        label: "Text Color on Cover and Header"
-        widget: "select"
+          - { label: 'White', value: false }
+          - { label: 'Black', value: true }
+      - {
+          name: 'thumbimage',
+          label: 'Thumbnail Image',
+          widget: 'image',
+          pattern: [\.(jpe?g|png)$],
+          hint: '750x250 | Picture will be adjusted according to the Window | JPG/PNG',
+          required: true,
+        }
+      - name: 'headercolorblack'
+        label: 'Text Color on Cover and Header'
+        widget: 'select'
         default: false
         options:
-          - { label: "White", value: false }
-          - { label: "Black", value: true }
-      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Picture will be adjusted according to the Window | JPG/PNG', required: true }
-      - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, heading-one, heading-two, quote, bulleted-list, numbered-list] }
+          - { label: 'White', value: false }
+          - { label: 'Black', value: true }
+      - {
+          name: 'coverimage',
+          label: 'Cover Image',
+          widget: 'image',
+          pattern: [\.(jpe?g|png)$],
+          hint: 'Minimum 1440x800 | Picture will be adjusted according to the Window | JPG/PNG',
+          required: true,
+        }
+      - {
+          name: 'body',
+          label: 'Main Content',
+          widget: 'markdown',
+          buttons:
+            [
+              bold,
+              italic,
+              link,
+              heading-one,
+              heading-two,
+              quote,
+              bulleted-list,
+              numbered-list,
+            ],
+        }
       - name: 'related'
         label: 'Related Journals'
         widget: 'list'
         label_singular: 'Related Journal'
         required: false
         fields:
-        - label: "Related Journal Selection"
-          name: "relatedslug"
-          widget: "relation"
-          collection: "journal"
-          searchFields: ["title", "slug"]
-          valueField: "slug"
-          displayFields: ["title", "slug"]
-          default: '/'
-          hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
+          - label: 'Related Journal Selection'
+            name: 'relatedslug'
+            widget: 'relation'
+            collection: 'journal'
+            searchFields: ['title', 'slug']
+            valueField: 'slug'
+            displayFields: ['title', 'slug']
+            default: '/'
+            hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
   - name: journal_id
     identifier_field: title
     label: Journals Indonesian
     label_singular: Journal
     folder: src/pages/journal_id
     create: true
-    preview_path: "/id/journal/{{fields.slug}}"
+    preview_path: '/id/journal/{{fields.slug}}'
     editor:
       preview: false
     fields:
-      - { name: 'issetting', label: 'issetting', widget: 'hidden', default: false, required: true, }
-      - { name: 'contenttype', label: 'contenttype', widget: 'hidden', default: 'journal', required: true, }
-      - { name: 'indonesia', label: 'indonesia', widget: 'hidden', default: true, required: true, }
-      - { name: 'active', label: 'Active', widget: 'boolean', required: true, default: true }
-      - { name: 'title', label: 'Title',widget: 'string', required: true}
+      - {
+          name: 'issetting',
+          label: 'issetting',
+          widget: 'hidden',
+          default: false,
+          required: true,
+        }
+      - {
+          name: 'contenttype',
+          label: 'contenttype',
+          widget: 'hidden',
+          default: 'journal',
+          required: true,
+        }
+      - {
+          name: 'indonesia',
+          label: 'indonesia',
+          widget: 'hidden',
+          default: true,
+          required: true,
+        }
+      - {
+          name: 'active',
+          label: 'Active',
+          widget: 'boolean',
+          required: true,
+          default: true,
+        }
+      - { name: 'title', label: 'Title', widget: 'string', required: true }
       - {
           name: 'slug',
           label: 'Slug',
           widget: 'string',
           hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: "project-slug"',
           pattern:
-            [
-              '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
-              'Invalid Characters'
-            ],
-          required: true
+            ['^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$', 'Invalid Characters'],
+          required: true,
         }
       - { name: 'date', label: 'Date', widget: 'date', required: true }
-      - label: "META INFO"
-        name: "seo"
-        widget: "object"
+      - label: 'META INFO'
+        name: 'seo'
+        widget: 'object'
         required: false
         fields:
-        - { label: 'Short Description', name: 'seo_shortdesc', widget: 'string', hint: 'Max (200 Characters).', default: '', required: false,}
-        - { label: 'Keywords', name: 'seo_keywords', widget: 'string',  hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).', default: '',required: false,}
-        - { name: 'seo_image', label: 'Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'width: 1200px, height: 600px', default: '', required: false,}
-      - label: "English Journal Slug"
-        name: "altslug"
-        widget: "relation"
-        collection: "journal"
-        searchFields: ["title", "slug"]
-        valueField: "slug"
-        displayFields: ["title", "slug"]
+          - {
+              label: 'Short Description',
+              name: 'seo_shortdesc',
+              widget: 'string',
+              hint: 'Max (200 Characters).',
+              default: '',
+              required: false,
+            }
+          - {
+              label: 'Keywords',
+              name: 'seo_keywords',
+              widget: 'string',
+              hint: 'Each Keywords are seperated with a comma (","). Max (200 Characters).',
+              default: '',
+              required: false,
+            }
+          - {
+              name: 'seo_image',
+              label: 'Image',
+              widget: 'image',
+              pattern: [\.(jpe?g|png)$],
+              hint: 'width: 1200px, height: 600px',
+              default: '',
+              required: false,
+            }
+      - label: 'English Journal Slug'
+        name: 'altslug'
+        widget: 'relation'
+        collection: 'journal'
+        searchFields: ['title', 'slug']
+        valueField: 'slug'
+        displayFields: ['title', 'slug']
         default: '/'
         required: false
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
-      - name: "listcolorblack"
-        label: "Text Color on Journal List Thumbnail"
-        widget: "select"
+      - name: 'listcolorblack'
+        label: 'Text Color on Journal List Thumbnail'
+        widget: 'select'
         default: false
         options:
-          - { label: "White", value: false }
-          - { label: "Black", value: true }
-      - { name: 'thumbimage', label: 'Thumbnail Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: '750x250 | Picture will be adjusted according to the Window | JPG/PNG', required: true }
-      - name: "headercolorblack"
-        label: "Text Color on Cover and Header"
-        widget: "select"
+          - { label: 'White', value: false }
+          - { label: 'Black', value: true }
+      - {
+          name: 'thumbimage',
+          label: 'Thumbnail Image',
+          widget: 'image',
+          pattern: [\.(jpe?g|png)$],
+          hint: '750x250 | Picture will be adjusted according to the Window | JPG/PNG',
+          required: true,
+        }
+      - name: 'headercolorblack'
+        label: 'Text Color on Cover and Header'
+        widget: 'select'
         default: false
         options:
-          - { label: "White", value: false }
-          - { label: "Black", value: true }
-      - { name: 'coverimage', label: 'Cover Image', widget: 'image', pattern: [\.(jpe?g|png)$], hint: 'Minimum 1440x800 | Picture will be adjusted according to the Window | JPG/PNG', required: true }
-      - { name: 'body', label: 'Main Content', widget: 'markdown', buttons: [bold, italic, link, heading-one, heading-two, quote] }
+          - { label: 'White', value: false }
+          - { label: 'Black', value: true }
+      - {
+          name: 'coverimage',
+          label: 'Cover Image',
+          widget: 'image',
+          pattern: [\.(jpe?g|png)$],
+          hint: 'Minimum 1440x800 | Picture will be adjusted according to the Window | JPG/PNG',
+          required: true,
+        }
+      - {
+          name: 'body',
+          label: 'Main Content',
+          widget: 'markdown',
+          buttons: [bold, italic, link, heading-one, heading-two, quote],
+        }
       - name: 'related'
         label: 'Related Journals'
         widget: 'list'
         label_singular: 'Related Journal'
         required: false
         fields:
-        - label: "Related Journal Selection"
-          name: "relatedslug"
-          widget: "relation"
-          collection: "journal_id"
-          searchFields: ["title", "slug"]
-          valueField: "slug"
-          displayFields: ["title", "slug"]
-          hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
+          - label: 'Related Journal Selection'
+            name: 'relatedslug'
+            widget: 'relation'
+            collection: 'journal_id'
+            searchFields: ['title', 'slug']
+            valueField: 'slug'
+            displayFields: ['title', 'slug']
+            hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
   - label: 'Settings'
     name: 'settings'
     delete: false
@@ -339,10 +473,10 @@ collections:
               widget: 'number',
               default: '6',
               required: true,
-              valueType: "int",
+              valueType: 'int',
               min: 2,
               max: 12,
-              step: 2
+              step: 2,
             }
           - label: 'Translation for Error Page'
             name: 'errortranslation'
@@ -610,68 +744,85 @@ collections:
                       default: '',
                       required: true,
                     }
-          - label: 'Online Shop List'
+          - label: 'Online Shop'
             name: 'onlineshop'
-            widget: 'list'
-            allow_add: true
-            # hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
+            widget: 'object'
             fields:
-              - {
-                  name: 'image',
-                  label: 'Image',
-                  widget: 'image',
-                  pattern: [\.(jpe?g|png|gif)$],
-                  hint: 'Minimum Resolution: 2000px x 1500px | JPEG / PNG / GIF',
-                  required: false,
-                  default: '',
-                }
-              - {
-                  label: 'Link',
-                  name: 'link',
-                  widget: 'string',
-                  hint: 'Input link starting with https:// or http://',
-                  required: false,
-                  default: '',
-                }
-              - {
-                  label: 'Background Color',
-                  name: 'background',
-                  widget: 'string',
-                  hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
-                  required: false,
-                  default: 'transparent',
-                }
-          - label: 'Offline Shop List'
+              - label: 'Online Shop List'
+                name: 'onlineshoplist'
+                widget: 'list'
+                allow_add: true
+                # hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
+                fields:
+                  - {
+                      name: 'image',
+                      label: 'Image',
+                      widget: 'image',
+                      pattern: [\.(jpe?g|png|gif)$],
+                      hint: 'Minimum Resolution: 2000px x 1500px | JPEG / PNG / GIF',
+                      required: false,
+                      default: '',
+                    }
+                  - {
+                      label: 'Link',
+                      name: 'link',
+                      widget: 'string',
+                      hint: 'Input link starting with https:// or http://',
+                      required: false,
+                      default: '',
+                    }
+                  - {
+                      label: 'Background Color',
+                      name: 'background',
+                      widget: 'string',
+                      hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
+                      required: false,
+                      default: 'transparent',
+                    }
+              - label: 'Disable Online Shop Slider on Mobile'
+                name: 'onlinedisable_mobileslider'
+                widget: 'boolean'
+                default: false
+          
+          - label: 'Offline Shop'
             name: 'offlineshop'
-            widget: 'list'
-            allow_add: true
-            # hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
+            widget: 'object'
             fields:
-              - {
-                  name: 'image',
-                  label: 'Image',
-                  widget: 'image',
-                  pattern: [\.(jpe?g|png|gif)$],
-                  hint: 'Minimum Resolution: 500px x 200px | JPEG / PNG / GIF',
-                  required: false,
-                  default: '',
-                }
-              - {
-                  label: 'Link',
-                  name: 'link',
-                  widget: 'string',
-                  hint: 'Input link starting with https:// or http://',
-                  required: false,
-                  default: '',
-                }
-              - {
-                  label: 'Background Color',
-                  name: 'background',
-                  widget: 'string',
-                  hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
-                  default: 'transparent',
-                  required: false,
-                }
+              - label: 'Offline Shop List'
+                name: 'offlineshoplist'
+                widget: 'list'
+                allow_add: true
+                # hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
+                fields:
+                  - {
+                      name: 'image',
+                      label: 'Image',
+                      widget: 'image',
+                      pattern: [\.(jpe?g|png|gif)$],
+                      hint: 'Minimum Resolution: 500px x 200px | JPEG / PNG / GIF',
+                      required: false,
+                      default: '',
+                    }
+                  - {
+                      label: 'Link',
+                      name: 'link',
+                      widget: 'string',
+                      hint: 'Input link starting with https:// or http://',
+                      required: false,
+                      default: '',
+                    }
+                  - {
+                      label: 'Background Color',
+                      name: 'background',
+                      widget: 'string',
+                      hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
+                      default: 'transparent',
+                      required: false,
+                    }
+              - label: 'Disable Offline Shop Slider on Mobile'
+                name: 'offlinedisable_mobileslider'
+                widget: 'boolean'
+                default: false
           - label: 'Translations List'
             name: 'translations'
             widget: 'object'
