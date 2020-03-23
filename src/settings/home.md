@@ -80,6 +80,7 @@ ingredients:
     title:
       en: JAVANESE LONG PEPPER
       id: CABE JAWA
+onlineshop_option: NORMAL
 onlineshop:
   onlineshoplist:
     - background: transparent
@@ -91,7 +92,7 @@ onlineshop:
     - background: transparent
       image: /assets/shop/shopee.png
       link: 'https://shopee.co.id/herbamojo7'
-  slider_option: NATURAL
+  slider_option: NORMAL
 offlineshop:
   offlineshoplist:
     - background: transparent
@@ -109,7 +110,7 @@ offlineshop:
     - background: transparent
       image: /assets/aeon.png
       link: ''
-  slider_option: NATURAL
+  slider_option: NORMAL
 translations:
   home:
     getyours:

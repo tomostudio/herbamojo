@@ -743,6 +743,7 @@ export default class Home extends React.Component {
         render={data => {
           const generalData = data.general.frontmatter;
           const homeData = data.home.frontmatter;
+          const shopData = data.shop.frontmatter;
           const footerData = generalData.footer;
           const transData = data.home.frontmatter.translations;
           const id_seodesc = generalData.seo.seo_shortdesc_id;
@@ -754,7 +755,7 @@ export default class Home extends React.Component {
 
           // ONLINE AND OFFLINE SHOP VALIDITY CHECKER
           let offlineshop = [];
-          homeData.offlineshop.offlineshoplist.forEach(shop => {
+          shopData.offlineshop.offlineshoplist.forEach(shop => {
             if (
               shop.image !== null &&
               shop.image !== '' &&
@@ -771,13 +772,13 @@ export default class Home extends React.Component {
             offlineshoplayout = 'SINGLE';
           }
           let offlineshopemobileslider = true;
-          if (homeData.offlineshop.slider_option === 'NOMOBILE')
+          if (shopData.offlineshop.slider_option === 'NOMOBILE')
             offlineshopemobileslider = false;
-          if (homeData.offlineshop.slider_option === 'NOSLIDER')
+          if (shopData.offlineshop.slider_option === 'NOSLIDER')
             offlineshoplayout = 'NOSLIDER';
 
           let onlineshop = [];
-          homeData.onlineshop.onlineshoplist.forEach(shop => {
+          shopData.onlineshop.onlineshoplist.forEach(shop => {
             if (
               shop.image !== null &&
               shop.image !== '' &&
@@ -794,9 +795,9 @@ export default class Home extends React.Component {
             onlineshoplayout = 'SINGLE';
           }
           let onlineshopemobileslider = true;
-          if (homeData.onlineshop.slider_option === 'NOMOBILE')
+          if (shopData.onlineshop.slider_option === 'NOMOBILE')
             onlineshopemobileslider = false;
-          if (homeData.onlineshop.slider_option === 'NOSLIDER')
+          if (shopData.onlineshop.slider_option === 'NOSLIDER')
             onlineshoplayout = 'NOSLIDER';
 
           let printjournal = [];
@@ -1881,6 +1882,31 @@ const indexQuery = graphql`
         }
       }
     }
+    shop: markdownRemark(
+      frontmatter: {
+        issetting: { eq: true }
+        contenttype: { eq: "homeshop_setting" }
+      }
+    ) {
+      frontmatter {
+        onlineshop {
+          onlineshoplist {
+            image
+            link
+            background
+          }
+          slider_option
+        }
+        offlineshop {
+          offlineshoplist {
+            image
+            link
+            background
+          }
+          slider_option
+        }
+      }
+    }
     home: markdownRemark(
       frontmatter: {
         issetting: { eq: true }
@@ -1910,22 +1936,6 @@ const indexQuery = graphql`
             en
             id
           }
-        }
-        onlineshop {
-          onlineshoplist {
-            image
-            link
-            background
-          }
-          slider_option
-        }
-        offlineshop {
-          offlineshoplist {
-            image
-            link
-            background
-          }
-          slider_option
         }
         translations {
           home {

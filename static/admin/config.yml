@@ -744,15 +744,30 @@ collections:
                       default: '',
                       required: true,
                     }
+          - label: 'Online Shop Slider Option'
+            name: 'onlineshop_option'
+            widget: 'select'
+            # hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
+            options:
+              - label: 'Normal'
+                value: 'NORMAL'
+              - label: 'Desktop Only'
+                value: 'NOMOBILE'
+              - label: 'Disable Slider'
+                value: 'NOSLIDER'
           - label: 'Online Shop'
-            name: 'onlineshop'
-            widget: 'object'
+            name: onlineshop
+            widget: object
             fields:
+              - label: 'Slider Option'
+                name: 'slider_option'
+                widget: select
+                # hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
+                options: [NORMAL, NOMOBILE, NOSLIDER]
               - label: 'Online Shop List'
                 name: 'onlineshoplist'
                 widget: 'list'
                 allow_add: true
-                # hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
                 fields:
                   - {
                       name: 'image',
@@ -779,16 +794,6 @@ collections:
                       required: false,
                       default: 'transparent',
                     }
-              - label: 'Slider Option'
-                name: slider_option
-                widget: select
-                multiple: false
-                # hint: 'Natural, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
-                options:
-                  - { label: 'Normal', value: NATURAL }
-                  - { label: 'Desktop Only', value: NOMOBILE }
-                  - { label: 'Disable Slider', value: NOSLIDER }
-                default: 'NATURAL'
           - label: 'Offline Shop'
             name: 'offlineshop'
             widget: 'object'
@@ -797,7 +802,6 @@ collections:
                 name: 'offlineshoplist'
                 widget: 'list'
                 allow_add: true
-                # hint: 'Must have 1 Entry. If you want to clear all entries, leave 1 entry behind and leave it blank.'
                 fields:
                   - {
                       name: 'image',
@@ -1416,6 +1420,125 @@ collections:
                           default: 'View All',
                           required: true,
                         }
+      - file: 'src/settings/homeshop.md'
+        label: 'Shop in Home Setting'
+        name: 'homeshop'
+        delete: false
+        description: 'Settings for Shop on Landing Page'
+        fields:
+          - {
+              name: 'issetting',
+              label: 'issetting',
+              widget: 'hidden',
+              default: true,
+              required: true,
+            }
+          - {
+              name: 'contenttype',
+              label: 'contenttype',
+              widget: 'hidden',
+              default: 'homeshop_setting',
+              required: true,
+            }
+          - {
+              label: 'Title',
+              name: 'title',
+              widget: 'hidden',
+              default: 'Shop in Home Setting',
+              required: true,
+            }
+          - label: 'Online Shop'
+            name: onlineshop
+            widget: object
+            fields:
+              - label: 'Slider Option'
+                name: 'slider_option'
+                widget: select
+                hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
+                options:
+                  - label: 'Normal'
+                    value: 'NORMAL'
+                  - label: 'Desktop Only'
+                    value: 'NOMOBILE'
+                  - label: 'Disable Slider'
+                    value: 'NOSLIDER'
+                default: 'NORMAL'
+              - label: 'Online Shop List'
+                name: 'onlineshoplist'
+                widget: 'list'
+                allow_add: true
+                fields:
+                  - {
+                      name: 'image',
+                      label: 'Image',
+                      widget: 'image',
+                      pattern: [\.(jpe?g|png|gif)$],
+                      hint: 'Minimum Resolution: 2000px x 1500px | JPEG / PNG / GIF',
+                      required: false,
+                      default: '',
+                    }
+                  - {
+                      label: 'Link',
+                      name: 'link',
+                      widget: 'string',
+                      hint: 'Input link starting with https:// or http://',
+                      required: false,
+                      default: '',
+                    }
+                  - {
+                      label: 'Background Color',
+                      name: 'background',
+                      widget: 'string',
+                      hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
+                      required: false,
+                      default: 'transparent',
+                    }
+          - label: 'Offline Shop'
+            name: 'offlineshop'
+            widget: 'object'
+            fields:
+              - label: 'Slider Option'
+                name: 'slider_option'
+                widget: select
+                hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
+                options:
+                  - label: 'Normal'
+                    value: 'NORMAL'
+                  - label: 'Desktop Only'
+                    value: 'NOMOBILE'
+                  - label: 'Disable Slider'
+                    value: 'NOSLIDER'
+                default: 'NORMAL'
+              - label: 'Offline Shop List'
+                name: 'offlineshoplist'
+                widget: 'list'
+                allow_add: true
+                fields:
+                  - {
+                      name: 'image',
+                      label: 'Image',
+                      widget: 'image',
+                      pattern: [\.(jpe?g|png|gif)$],
+                      hint: 'Minimum Resolution: 500px x 200px | JPEG / PNG / GIF',
+                      required: false,
+                      default: '',
+                    }
+                  - {
+                      label: 'Link',
+                      name: 'link',
+                      widget: 'string',
+                      hint: 'Input link starting with https:// or http://',
+                      required: false,
+                      default: '',
+                    }
+                  - {
+                      label: 'Background Color',
+                      name: 'background',
+                      widget: 'string',
+                      hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
+                      default: 'transparent',
+                      required: false,
+                    }
       - file: 'src/settings/slug.md'
         label: 'URL Redirect'
         name: 'slug'
