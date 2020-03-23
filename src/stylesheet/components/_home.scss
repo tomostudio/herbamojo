@@ -1734,6 +1734,7 @@ main.home {
                 }
 
                 & .shop {
+                  border: solid thin white;
                   width: 50%;
                   @include flex-grow(0);
                   position: relative;
@@ -1768,6 +1769,16 @@ main.home {
                     body.onhover &:hover {
                       opacity: $global_opacity;
                       cursor: pointer;
+                    }
+                  }
+                }
+                &.noslider{
+                  margin: 0px 54px;
+                  @include setflex(row, wrap);
+                  @include respond-to(m_tablet) {
+                    margin: 0px auto;
+                    & .shop{
+                      width: 100%;
                     }
                   }
                 }

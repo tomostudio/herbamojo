@@ -779,11 +779,16 @@ collections:
                       required: false,
                       default: 'transparent',
                     }
-              - label: 'Disable Online Shop Slider on Mobile'
-                name: 'onlinedisable_mobileslider'
-                widget: 'boolean'
-                default: false
-          
+              - label: 'Slider Option'
+                name: 'slider_option'
+                widget: 'select'
+                options:
+                  - { label: 'Normal', value: 'NATURAL' }
+                  - { label: 'Desktop Only', value: 'NOMOBILE' }
+                  - { label: 'Disable Slider', value: 'NOSLIDER' }
+                default: 'NATURAL'
+                hint: 'Natural, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
+
           - label: 'Offline Shop'
             name: 'offlineshop'
             widget: 'object'
@@ -819,10 +824,15 @@ collections:
                       default: 'transparent',
                       required: false,
                     }
-              - label: 'Disable Offline Shop Slider on Mobile'
-                name: 'offlinedisable_mobileslider'
-                widget: 'boolean'
-                default: false
+              - label: 'Slider Option'
+                name: 'slider_option'
+                widget: 'select'
+                options:
+                  - { label: 'Normal', value: 'NATURAL' }
+                  - { label: 'Desktop Only', value: 'NOMOBILE' }
+                  - { label: 'Disable Slider', value: 'NOSLIDER' }
+                default: 'NATURAL'
+                hint: 'Natural, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
           - label: 'Translations List'
             name: 'translations'
             widget: 'object'

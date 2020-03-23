@@ -56,6 +56,10 @@ export default class Home extends React.Component {
     online: null,
     offline: null
   };
+  sliderStatus = {
+    online: 'NOSLIDER',
+    offline: 'NOSLIDER'
+  }
   inviewArray = [];
   inviewArrayBenefits = [null, null, null, null];
   scrollpass = [];
@@ -85,6 +89,18 @@ export default class Home extends React.Component {
   HomeScrollSnap = null;
   SnapNav = null;
   ForceVH = null;
+  //SLIDER SETTING (GLIDE)
+  glidesetting = {
+    type: 'carousel',
+    startAt: 0,
+    perView: 2,
+    gap: 0,
+    breakpoints: {
+      800: {
+        perView: 1
+      }
+    }
+  };
   // --------------
   IndexLoader = new LoaderClass({
     parent: `#${this.MainID}`,
@@ -292,7 +308,7 @@ export default class Home extends React.Component {
       //SHOP MOBILE
       this.inviewArray[7] = new InViewportClass({
         target: 'section#shop',
-        visibility: 0.25,
+        visibility: 0.1,
         enter: () => {
           if (MediaCheck.width.mtablet())
             document.querySelector('section#shop').classList.add('inview');
@@ -357,26 +373,19 @@ export default class Home extends React.Component {
         document.querySelector('#ing_sel > *:nth-child(1) > div:first-child')
       );
 
-      // SHOP GLIDE SETUP
-      const glidesetting = {
-        type: 'carousel',
-        startAt: 0,
-        perView: 2,
-        breakpoints: {
-          800: {
-            perView: 1
-          }
-        }
-      };
       // SHOP GLIDE SLIDER
       if (typeof document !== `undefined`) {
-        if (document.querySelector('#onlineslider'))
-          this.slider.online = new Glide('#onlineslider', glidesetting).mount();
-        if (document.querySelector('#offlineslider'))
+        if (document.querySelector('#onlineslider')){
+          this.slider.online = new Glide('#onlineslider', this.glidesetting).mount();
+          this.sliderStatus.online = 'MOUNTED';
+        }
+        if (document.querySelector('#offlineslider')){
           this.slider.offline = new Glide(
             '#offlineslider',
-            glidesetting
+            this.glidesetting
           ).mount();
+          this.sliderStatus.offline = 'MOUNTED';
+        }
       }
 
       if (typeof document !== `undefined`) {
@@ -552,6 +561,8 @@ export default class Home extends React.Component {
     const ingDescMobile = document.querySelectorAll(
       '#ing_sel > span > div:last-child > div'
     );
+    const offlineslider = document.querySelector('#offlineshop');
+    const onlineslider = document.querySelector('#onlineshop');
     let height = [];
     ingDescMobile.forEach(desc => {
       height.push(desc.clientHeight);
@@ -562,28 +573,36 @@ export default class Home extends React.Component {
       document.body.classList.remove('menu_open');
 
       // REENABLE SLIDER
-      if (this.slider.offline === null) this.slider.offline.mount();
-      if (this.slider.online === null) this.slider.online.mount();
+      if(onlineslider.classList.contains('nomobileslider') && this.slider.online === null && this.sliderStatus.online === 'DESTROYED') {
+        this.slider.online = new Glide('#onlineslider', this.glidesetting).mount();
+        this.sliderStatus.online = 'MOUNTED';
+      }
+      if(offlineslider.classList.contains('nomobileslider') && this.slider.offline === null &&this.sliderStatus.offline === 'DESTROYED') {
+        this.slider.offline = new Glide('#offlineslider', this.glidesetting).mount();
+        this.slider.offline.update();
+        this.sliderStatus.offline = 'MOUNTED';
+      }
+      console.log(this.sliderStatus);
     } else {
       // CHECK AND DISABLE SLIDER ON SHOP ON MOBILE
-      const offlineslider = document.querySelector('#offlineshop');
-      const onlineslider = document.querySelector('#onlineshop');
 
       if (
         onlineslider.classList.contains('nomobileslider') &&
-        this.slider.online !== null
+        this.slider.online !== null && this.sliderStatus.online === 'MOUNTED'
       ) {
-        console.log('online slider disable');
         this.slider.online.destroy();
         this.slider.online = null;
+        this.sliderStatus.online = 'DESTROYED';
       }
       if (
         offlineslider.classList.contains('nomobileslider') &&
-        this.slider.offline !== null
+        this.slider.offline !== null &&  this.sliderStatus.offline === 'MOUNTED'
       ) {
         this.slider.offline.destroy();
         this.slider.offline = null;
+        this.sliderStatus.offline = 'DESTROYED';
       }
+      console.log(this.sliderStatus);
     }
     this.inviewRetrigger();
 
@@ -752,7 +771,10 @@ export default class Home extends React.Component {
             offlineshoplayout = 'SINGLE';
           }
           let offlineshopemobileslider = true;
-          if(homeData.offlineshop.offlinedisable_mobileslider) offlineshopemobileslider = false;
+          if (homeData.offlineshop.slider_option === 'NOMOBILE')
+            offlineshopemobileslider = false;
+          if (homeData.offlineshop.slider_option === 'NOSLIDER')
+            offlineshoplayout = 'NOSLIDER';
 
           let onlineshop = [];
           homeData.onlineshop.onlineshoplist.forEach(shop => {
@@ -772,7 +794,10 @@ export default class Home extends React.Component {
             onlineshoplayout = 'SINGLE';
           }
           let onlineshopemobileslider = true;
-          if(homeData.onlineshop.onlinedisable_mobileslider) onlineshopemobileslider = false;
+          if (homeData.onlineshop.slider_option === 'NOMOBILE')
+            onlineshopemobileslider = false;
+          if (homeData.onlineshop.slider_option === 'NOSLIDER')
+            onlineshoplayout = 'NOSLIDER';
 
           let printjournal = [];
 
@@ -1299,15 +1324,14 @@ export default class Home extends React.Component {
                             id='onlineshop'
                             className={`shopSlider ${
                               onlineshop.length === 1 ? ' oneslide' : ''
-                            } ${
-                              onlineshop.length === 2 ? ' twoslide' : ''
-                            } ${!onlineshopemobileslider &&
-                              'nomobileslider'}`}
+                            } ${onlineshop.length === 2 ? ' twoslide' : ''} ${
+                              !onlineshopemobileslider ? 'nomobileslider' : ''
+                            }`}
                           >
                             {
                               {
-                                FLOW: (
-                                  <div className='wrapper not_slider'>
+                                NOSLIDER: (
+                                  <div className='wrapper noslider'>
                                     {onlineshop.map((node, id) => {
                                       return (
                                         <div
@@ -1509,15 +1533,14 @@ export default class Home extends React.Component {
                             id='offlineshop'
                             className={`shopSlider ${
                               offlineshop.length === 1 ? ' oneslide' : ''
-                            } ${
-                              offlineshop.length === 2 ? ' twoslide' : ''
-                            } ${!offlineshopemobileslider &&
-                              'nomobileslider'}`}
+                            } ${offlineshop.length === 2 ? ' twoslide' : ''} ${
+                              !offlineshopemobileslider ? 'nomobileslider' : ''
+                            }`}
                           >
                             {
                               {
-                                FLOW: (
-                                  <div className='wrapper not_slider'>
+                                NOSLIDER: (
+                                  <div className='wrapper noslider'>
                                     {offlineshop.map((node, id) => {
                                       return (
                                         <div
@@ -1888,21 +1911,21 @@ const indexQuery = graphql`
             id
           }
         }
-        onlineshop{
+        onlineshop {
           onlineshoplist {
             image
             link
             background
           }
-          onlinedisable_mobileslider
+          slider_option
         }
-        offlineshop{
+        offlineshop {
           offlineshoplist {
             image
             link
             background
           }
-          offlinedisable_mobileslider
+          slider_option
         }
         translations {
           home {
