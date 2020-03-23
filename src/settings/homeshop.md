@@ -10,9 +10,6 @@ onlineshop:
     - background: transparent
       image: /assets/shop/shopee.png
       link: 'https://shopee.co.id/herbamojo7'
-    - background: transparent
-      image: /assets/shop/shopee.png
-      link: 'https://shopee.co.id/herbamojo7'
   slider_option: NORMAL
 offlineshop:
   offlineshoplist:
