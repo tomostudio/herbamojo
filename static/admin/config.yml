@@ -780,15 +780,15 @@ collections:
                       default: 'transparent',
                     }
               - label: 'Slider Option'
-                name: 'slider_option'
-                widget: 'select'
+                name: slider_option
+                widget: select
+                multiple: false
+                # hint: 'Natural, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
                 options:
-                  - { label: 'Normal', value: 'NATURAL' }
-                  - { label: 'Desktop Only', value: 'NOMOBILE' }
-                  - { label: 'Disable Slider', value: 'NOSLIDER' }
-                default: 'NATURAL'
-                hint: 'Natural, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
-
+                  - { label: 'Normal', value: NATURAL }
+                  - { label: 'Desktop Only', value: NOMOBILE }
+                  - { label: 'Disable Slider', value: NOSLIDER }
+                default: NATURAL
           - label: 'Offline Shop'
             name: 'offlineshop'
             widget: 'object'
@@ -824,15 +824,6 @@ collections:
                       default: 'transparent',
                       required: false,
                     }
-              - label: 'Slider Option'
-                name: 'slider_option'
-                widget: 'select'
-                options:
-                  - { label: 'Normal', value: 'NATURAL' }
-                  - { label: 'Desktop Only', value: 'NOMOBILE' }
-                  - { label: 'Disable Slider', value: 'NOSLIDER' }
-                default: 'NATURAL'
-                hint: 'Natural, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
           - label: 'Translations List'
             name: 'translations'
             widget: 'object'

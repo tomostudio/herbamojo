@@ -91,7 +91,7 @@ onlineshop:
     - background: transparent
       image: /assets/shop/shopee.png
       link: 'https://shopee.co.id/herbamojo7'
-  slider_option: 'NOSLIDER'
+  slider_option: NATURAL
 offlineshop:
   offlineshoplist:
     - background: transparent
@@ -109,7 +109,7 @@ offlineshop:
     - background: transparent
       image: /assets/aeon.png
       link: ''
-  slider_option: 'NOMOBILE'
+  slider_option: NATURAL
 translations:
   home:
     getyours:
