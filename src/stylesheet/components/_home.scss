@@ -1734,7 +1734,6 @@ main.home {
                 }
 
                 & .shop {
-                  border: solid thin white;
                   width: 50%;
                   @include flex-grow(0);
                   position: relative;
