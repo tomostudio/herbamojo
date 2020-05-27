@@ -3,8 +3,8 @@ issetting: false
 contenttype: journal
 indonesia: true
 active: true
-title: Tips-mengurangi-resiko-melemahnya-otot-tubuh-seiring-pertambahan-usia
-slug: 5-tips-sederhana-untuk-berolahraga-di-rumah
+title: Tips mengurangi resiko melemahnya otot tubuh seiring pertambahan usia
+slug: tips-mengurangi-resiko-melemahnya-otot-tubuh-seiring-pertambahan-usia
 date: 2020-04-24T06:16:15.592Z
 seo:
   seo_image: /assets/rsz_topless-man-with-black-ufc-fingerless-gloves-2204251.jpg
@@ -20,7 +20,7 @@ seo:
     dapat dikurangi menjelang hari tua anda. Pada jurnal minggu ini, kami akan
     menjelaskan apa itu sarcopenia dan langkah apa yang dapat dilakukan untuk
     mengurangi perkembangannya.
-altslug: ''
+altslug: how-to-prevent-losing-muscle-mass-caused-by-aging
 listcolorblack: true
 thumbimage: /assets/rsz_topless-man-with-black-ufc-fingerless-gloves-2204251.jpg
 headercolorblack: true
