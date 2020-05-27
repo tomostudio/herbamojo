@@ -19,7 +19,7 @@ altslug: /
 listcolorblack: false
 thumbimage: /assets/rsz_photography-of-laughing-guy-1408196.jpg
 headercolorblack: false
-coverimage: /assets/rsz_topless-man-with-black-ufc-fingerless-gloves-2204251.jpg
+coverimage: /assets/rsz_photography-of-laughing-guy-1408196.jpg
 related:
   - relatedslug: /
 ---
