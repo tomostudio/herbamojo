@@ -20,7 +20,7 @@ altslug: ''
 listcolorblack: true
 thumbimage: /assets/rsz_photography-of-laughing-guy-1408196.jpg
 headercolorblack: true
-coverimage: /assets/rsz_topless-man-with-black-ufc-fingerless-gloves-2204251.jpg
+coverimage: /assets/rsz_photography-of-laughing-guy-1408196.jpg
 ---
 	Setelah sebulan berpuasa, umat Muslim di seluruh dunia merayakan Idul Fitri sebagai tanda berakhirnya bulan suci Ramadhan. Tak jarang, banyak perkumpulan yang terjadi pada perayaan tahunan ini, meski di tahun 2020 kini hal tersebut tidak dapat dilakukan akibat pandemi virus Corona. Meski begitu, tendensi untuk mengonsumsi makanan lebih banyak dari biasanya cenderung dilakukan saat perayaan Idul Fitri. Khususnya bagi orang-orang yang telah berusia 40 tahun ke atas, anda harus berhati-hati dalam memilih dan mengonsumsi makanan, serta memperhatikan kuantitasnya. Pada jurnal minggu ini, kami akan memberikan beberapa tips mengenai konsumsi makanan yang dapat anda lakukan saat perayaan Idul Fitri.
 
