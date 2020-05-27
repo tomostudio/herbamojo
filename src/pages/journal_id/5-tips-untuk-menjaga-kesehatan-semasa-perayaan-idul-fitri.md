@@ -16,7 +16,7 @@ seo:
     sebagai tanda berakhirnya bulan suci Ramadhan. Tak jarang, banyak
     perkumpulan yang terjadi pada perayaan tahunan ini, meski di tahun 2020 kini
     hal tersebut tidak dapat dilakukan akibat pandemi virus Corona
-altslug: ''
+altslug: how-to-keep-yourself-in-shape-during-eid-festivities
 listcolorblack: true
 thumbimage: /assets/rsz_photography-of-laughing-guy-1408196.jpg
 headercolorblack: true
