@@ -12,7 +12,7 @@ seo:
     herbamojo, herbal, ginseng, maca, tribulus, javanese pepper, red ginger,
     purwoceng, pasak bumi, stamina, vitality
   seo_shortdesc: "\tWhen we think about the reasons doctors and nurses use masks prior to COVID-19 pandemic, it is actually used to ensure hygiene, as well as preventing droplets and germs omitted from their mouth and nose. However, with this less-than-normal situation, many governments have rules that impose mandatory mask usage when doing activities outside your home, even though the WHO first stated that masks aren't necessary except when you are caring for COVID patients or are sick yourself. On this week's journal, we will shed light on a number of side effects wearing masks might impose. Treat this article as a personal reminder to judge all situations through your research, observation, as well as common sense. Read on!"
-altslug: /
+altslug: 5-hal-yang-harus-diperhatikan-terkait-penggunaan-masker
 listcolorblack: false
 thumbimage: /assets/rsz_man-person-people-sign-3952244.jpg
 headercolorblack: false
