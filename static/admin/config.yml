@@ -10,7 +10,10 @@ collections:
     label_singular: Journal
     folder: src/pages/journal
     create: true
-    preview_path: '/journal/{{fields.slug}}'
+    show_preview_links: true
+    preview_path: '/journal/{{slug}}'
+    sortableFields: ['title', 'date']
+    summary: "{{date}}, Color: {{headercolorblack}}, Connected to {{altslug}}"
     editor:
       preview: false
     fields:
@@ -160,7 +163,10 @@ collections:
     label_singular: Journal
     folder: src/pages/journal_id
     create: true
-    preview_path: '/id/journal/{{fields.slug}}'
+    show_preview_links: true
+    preview_path: '/id/journal/{{slug}}'
+    sortableFields: ['title', 'date']
+    summary: "{{date}}, Color: {{headercolorblack}}, Connected to {{altslug}}"
     editor:
       preview: false
     fields:
