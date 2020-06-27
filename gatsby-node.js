@@ -6,23 +6,96 @@ let journalslug = 'journal';
 let journalperList = 6;
 let journaldisable = false;
 
-exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
-  const { createRedirect } = actions;
+const get = require('lodash.get');
+
+// SCHEMA EXPERIMENT
+exports.createSchemaCustomization = ({ actions, schema }) => {
+  const splitProxyString = (str) =>
+    str.split('.').reduceRight((acc, chunk) => {
+      return { [chunk]: acc };
+    }, true);
+
+  // FETCH PARENT AUTO
+  actions.createFieldExtension({
+    name: 'proxyResolve',
+    args: {
+      from: { type: 'String!' },
+    },
+    extend: (options, previousFieldConfig) => {
+      return {
+        resolve: async (source, args, context, info) => {
+          await context.nodeModel.prepareNodes(
+            info.parentType, // BlogPostMarkdown
+            splitProxyString(options.from), // querying for html field
+            splitProxyString(options.from), // resolve this field
+            [info.parentType.name] // The types to use are these
+          );
+
+          const newSource = await context.nodeModel.runQuery({
+            type: info.parentType,
+            query: { filter: { id: { eq: source.id } } },
+            firstOnly: true,
+          });
+
+          return get(newSource.__gatsby_resolved, options.from);
+        },
+      };
+    },
+  });
+
+  actions.createTypes([
+    //   `
+    // type  JournalMarkdown implements Node @childOf(type: "MarkdownRemark"){
+    //   id: ID!
+    //   title: String! @proxyResolve(from: "parent.frontmatter.title")
+    //   date: Date @dateformat @proxyResolve(from: "parent.frontmatter.date")
+    //   slug: String!
+    //   indonesia: Boolean! @proxyResolve(from: "parent.frontmatter.indonesia")
+    //   body: String! @proxyResolve(from: "parent.html")
+    //   seo: SeoSet!
+    // }
+    // `,
+
+    `
+  type  JournalMarkdown implements Node @childOf(type: "MarkdownRemark"){
+    id: ID!
+    title: String
+    slug: String
+    test: String
+    body: String @proxyResolve(from: "parent.html")
+    seo: SeoSet!
+  }
+  `,
+    schema.buildObjectType({
+      name: 'SeoSet',
+      fields: {
+        seo_shortdesc: {
+          type: 'String',
+        },
+        seo_keywords: {
+          type: 'String',
+        },
+      },
+    }),
+  ]);
+};
+// SCHEMA EXPERIMENT
+
+exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
+  const { createRedirect, createNodeField } = actions;
 
   if (checkstatus && redirectObject !== null) {
-    redirectObject.redirect.forEach(redirectRequest => {
+    redirectObject.redirect.forEach((redirectRequest) => {
       if (redirectRequest.status) {
         const __from = redirectRequest.from;
         createRedirect({
           fromPath: __from,
           toPath: redirectRequest.to,
-          isPermanent: true
+          isPermanent: true,
         });
       }
     });
   }
-
-  const { createNodeField } = actions;
   if (node.internal.type === `MarkdownRemark`) {
     if (
       node.frontmatter.issetting &&
@@ -35,44 +108,46 @@ exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
         createRedirect({
           fromPath: `/${journalslug}/1`,
           toPath: `/${journalslug}`,
-          isPermanent: true
+          isPermanent: true,
         });
 
         createRedirect({
           fromPath: `/id/${journalslug}/1`,
           toPath: `/id/${journalslug}`,
-          isPermanent: true
+          isPermanent: true,
         });
       }
     }
-  }
-
-  if (node.internal.type === `MarkdownRemark`) {
     if (
       node.frontmatter.issetting &&
-      node.frontmatter.contenttype === 'home_setting'
+      node.frontmatter.contenttype === 'homeshop_setting'
     ) {
       const { offlineshop, onlineshop } = node.frontmatter;
       //AUTOMATICALLY REPLACE BLANK LSIT FOR OFFLINE & ONLINE SHOP
       const blankobject = {
         background: 'transparent',
         image: '',
-        link: ''
+        link: '',
       };
-      if (offlineshop.length === 0) {
-        node.frontmatter.offlineshop.push(blankobject);
+      if (
+        !offlineshop.offlineshoplist ||
+        offlineshop.offlineshoplist === null ||
+        typeof offlineshop.offlineshoplist != 'object'
+      ) {
+        node.frontmatter.offlineshop.offlineshoplist = [blankobject];
       }
-      if (onlineshop.length === 0) {
-        node.frontmatter.onlineshop.push(blankobject);
+      if (
+        !onlineshop.onlineshoplist ||
+        onlineshop.onlineshoplist === null ||
+        typeof onlineshop.onlineshoplist != 'object'
+      ) {
+        node.frontmatter.onlineshop.onlineshoplist = [blankobject];
       }
     }
-  }
-
-  if (node.internal.type === `MarkdownRemark`) {
     const filepath = createFilePath({
       node,
       getNode,
-      basePath: `src`
+      basePath: `src`,
     });
     let slug = node.frontmatter.slug;
     if (!node.frontmatter.indonesia) {
@@ -81,7 +156,7 @@ exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
       createNodeField({
         node,
         name: `slug`,
-        value: slug
+        value: slug,
       });
     } else {
       if (filepath.includes('pages/journal_id/'))
@@ -89,9 +164,27 @@ exports.onCreateNode = ({ graphql, node, getNode, actions }) => {
       createNodeField({
         node,
         name: `slug`,
-        value: slug
+        value: slug,
       });
     }
+    // SCHEMA EXPERIMENT
+    if (
+      !node.frontmatter.issetting &&
+      node.frontmatter.contenttype === 'journal'
+    ) {
+
+      // PUSH POST MANUALLY
+      actions.createNode({
+        id: createNodeId(`Journal-${node.id}`),
+        parent: node.id,
+        slug: node.fields.slug,
+        internal: {
+          type: 'JournalMarkdown',
+          contentDigest: node.internal.contentDigest,
+        },
+      });
+    }
+    // SCHEMA EXPERIMENT
   }
 };
 
@@ -137,7 +230,7 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
-      `).then(result => {
+      `).then((result) => {
         const results = result.data.all.edges;
         if (!journaldisable && results.length > 1) {
           if (result.data.slug_setting) {
@@ -146,14 +239,14 @@ exports.createPages = ({ graphql, actions }) => {
           }
 
           //CREATE LIST PAGE
-          const journalen = results.filter(function(data) {
+          const journalen = results.filter(function (data) {
             return (
               data.node.frontmatter.contenttype === 'journal' &&
               data.node.frontmatter.active === true &&
               data.node.frontmatter.indonesia === false
             );
           });
-          const journalid = results.filter(function(data) {
+          const journalid = results.filter(function (data) {
             return (
               data.node.frontmatter.contenttype === 'journal' &&
               data.node.frontmatter.active === true &&
@@ -181,8 +274,8 @@ exports.createPages = ({ graphql, actions }) => {
                   slug: node.fields.slug,
                   prev: prevslug,
                   next: nextslug,
-                  indo: false
-                }
+                  indo: false,
+                },
               });
             }
           });
@@ -206,8 +299,8 @@ exports.createPages = ({ graphql, actions }) => {
                   slug: node.fields.slug,
                   prev: prevslug,
                   next: nextslug,
-                  indo: true
-                }
+                  indo: true,
+                },
               });
             }
           });
@@ -219,7 +312,7 @@ exports.createPages = ({ graphql, actions }) => {
           //ENGLISH
           if (lengthEN > 0) {
             Array.from({
-              length: lengthEN
+              length: lengthEN,
             }).forEach((_, i) => {
               let listpath;
               if (i === 0) {
@@ -240,8 +333,8 @@ exports.createPages = ({ graphql, actions }) => {
                     indo: false,
                     slug: listpath,
                     total: lengthEN,
-                    alttotal: lengthID
-                  }
+                    alttotal: lengthID,
+                  },
                 });
               }
             });
@@ -250,7 +343,7 @@ exports.createPages = ({ graphql, actions }) => {
           //INDONESIA
           if (lengthID > 0) {
             Array.from({
-              length: lengthID
+              length: lengthID,
             }).forEach((_, i) => {
               let listpath;
               if (i === 0) {
@@ -271,8 +364,8 @@ exports.createPages = ({ graphql, actions }) => {
                     slug: listpath,
                     indo: true,
                     total: lengthID,
-                    alttotal: lengthEN
-                  }
+                    alttotal: lengthEN,
+                  },
                 });
               }
             });
@@ -286,7 +379,7 @@ exports.createPages = ({ graphql, actions }) => {
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
   actions.setWebpackConfig({
     resolve: {
-      modules: [path.resolve(__dirname, 'src'), 'node_modules']
-    }
+      modules: [path.resolve(__dirname, 'src'), 'node_modules'],
+    },
   });
 };

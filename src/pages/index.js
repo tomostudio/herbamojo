@@ -54,12 +54,12 @@ export default class Home extends React.Component {
   // --------------
   slider = {
     online: null,
-    offline: null
+    offline: null,
   };
   sliderStatus = {
     online: 'NOSLIDER',
-    offline: 'NOSLIDER'
-  }
+    offline: 'NOSLIDER',
+  };
   inviewArray = [];
   inviewArrayBenefits = [null, null, null, null];
   scrollpass = [];
@@ -68,23 +68,23 @@ export default class Home extends React.Component {
     {
       id_name: 'benefitstamina',
       anim: null,
-      animeData: AnimDataStamina
+      animeData: AnimDataStamina,
     },
     {
       id_name: 'benefit_energy',
       anim: null,
-      animeData: AnimDataEnergy
+      animeData: AnimDataEnergy,
     },
     {
       id_name: 'BenefitImmune',
       anim: null,
-      animeData: AnimDataImmune
+      animeData: AnimDataImmune,
     },
     {
       id_name: 'BenefitExercise',
       anim: null,
-      animeData: AnimDataExercise
-    }
+      animeData: AnimDataExercise,
+    },
   ];
   HomeScrollSnap = null;
   SnapNav = null;
@@ -97,9 +97,9 @@ export default class Home extends React.Component {
     gap: 0,
     breakpoints: {
       800: {
-        perView: 1
-      }
-    }
+        perView: 1,
+      },
+    },
   };
   // --------------
   IndexLoader = new LoaderClass({
@@ -116,15 +116,15 @@ export default class Home extends React.Component {
           maxduration: 1000,
           responsive_width: 800,
           responsive_height: 500,
-          hasfooter: false
+          hasfooter: false,
         });
       }
       this.SnapNav = document.querySelectorAll(
         `main#${this.MainID} div.overlay .right_nav .snap_nav > *`
       );
 
-      const setNav = i => {
-        this.SnapNav.forEach(nav => {
+      const setNav = (i) => {
+        this.SnapNav.forEach((nav) => {
           nav.classList.remove('active');
         });
         if (i >= 0) {
@@ -149,7 +149,7 @@ export default class Home extends React.Component {
         },
         notpassed: () => {
           document.querySelector('div.bottlewrapper').classList.remove('stuck');
-        }
+        },
       });
 
       // INVIEW SETUP
@@ -164,7 +164,7 @@ export default class Home extends React.Component {
         },
         exit: () => {
           document.querySelector('#ShopButton').classList.remove('hide');
-        }
+        },
       });
       //ABOUT
       this.inviewArray[1] = new InViewportClass({
@@ -173,7 +173,7 @@ export default class Home extends React.Component {
         enter: () => {
           setNav(1);
           document.querySelector('section#about').classList.add('inview');
-        }
+        },
       });
 
       //ABOUT MOBILE
@@ -189,7 +189,7 @@ export default class Home extends React.Component {
           if (MediaCheck.width.mtablet()) {
             document.querySelector('section#about').classList.remove('inview');
           }
-        }
+        },
       });
 
       //BENEFITS
@@ -226,7 +226,7 @@ export default class Home extends React.Component {
           document.querySelector('section#benefits').classList.remove('inview');
           if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
           if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
-        }
+        },
       });
 
       //BENEFITS MOBILE
@@ -235,8 +235,9 @@ export default class Home extends React.Component {
       );
       AllBenefits.forEach((benefit, index) => {
         this.inviewArrayBenefits[index] = new InViewportClass({
-          target: `section#benefits .content.half>div>div:nth-child(${index +
-            1})`,
+          target: `section#benefits .content.half>div>div:nth-child(${
+            index + 1
+          })`,
           visibility: 0.75,
           enter: () => {
             if (MediaCheck.width.mtablet()) {
@@ -249,7 +250,7 @@ export default class Home extends React.Component {
           },
           exit: () => {
             if (MediaCheck.width.mtablet()) benefit.classList.remove('inview');
-          }
+          },
         });
       });
       //INGREDIENTS
@@ -270,7 +271,7 @@ export default class Home extends React.Component {
               .querySelector('section#ingredients')
               .classList.remove('inview');
           }
-        }
+        },
       });
       //INGREDIENTS MOBILE
       this.inviewArray[5] = new InViewportClass({
@@ -289,7 +290,7 @@ export default class Home extends React.Component {
               .querySelector('section#ingredients')
               .classList.remove('inview');
           }
-        }
+        },
       });
       //SHOP
       this.inviewArray[6] = new InViewportClass({
@@ -303,7 +304,7 @@ export default class Home extends React.Component {
         exit: () => {
           if (!MediaCheck.width.mtablet())
             document.querySelector('section#shop').classList.remove('inview');
-        }
+        },
       });
       //SHOP MOBILE
       this.inviewArray[7] = new InViewportClass({
@@ -316,7 +317,7 @@ export default class Home extends React.Component {
         exit: () => {
           if (MediaCheck.width.mtablet())
             document.querySelector('section#shop').classList.remove('inview');
-        }
+        },
       });
 
       this.inviewArray[8] = new InViewportClass({
@@ -330,7 +331,7 @@ export default class Home extends React.Component {
         },
         exit: () => {
           document.querySelector('section#journal').classList.remove('inview');
-        }
+        },
       });
 
       this.inviewArray[9] = new InViewportClass({
@@ -343,29 +344,29 @@ export default class Home extends React.Component {
         exit: () => {
           document.querySelector('div.overlay').classList.remove('stuck');
           setNav(this.SnapNav.length - 1);
-        }
+        },
       });
 
       // SCROLLAX
       this.scrollaxArray[0] = new Scrollax({
         target: 'img.paralax1',
-        move_right: 0.25
+        move_right: 0.25,
       });
       this.scrollaxArray[1] = new Scrollax({
         target: 'img.paralax2',
-        move_left: 0.25
+        move_left: 0.25,
       });
       this.scrollaxArray[2] = new Scrollax({
         target: '#ing_bg',
-        move_top: 0.35
+        move_top: 0.35,
       });
       this.scrollaxArray[3] = new Scrollax({
         target: 'img.mobile.prlx',
-        move_bottom: 0.3
+        move_bottom: 0.3,
       });
       this.scrollaxArray[4] = new Scrollax({
         target: '#about .content .bottle > img',
-        move_bottom: 0.3
+        move_bottom: 0.3,
       });
 
       //INGREDIENTS SET
@@ -375,11 +376,14 @@ export default class Home extends React.Component {
 
       // SHOP GLIDE SLIDER
       if (typeof document !== `undefined`) {
-        if (document.querySelector('#onlineslider')){
-          this.slider.online = new Glide('#onlineslider', this.glidesetting).mount();
+        if (document.querySelector('#onlineslider')) {
+          this.slider.online = new Glide(
+            '#onlineslider',
+            this.glidesetting
+          ).mount();
           this.sliderStatus.online = 'MOUNTED';
         }
-        if (document.querySelector('#offlineslider')){
+        if (document.querySelector('#offlineslider')) {
           this.slider.offline = new Glide(
             '#offlineslider',
             this.glidesetting
@@ -412,7 +416,7 @@ export default class Home extends React.Component {
         if (this.LoadAnimationTimeout !== null)
           clearTimeout(this.LoadAnimationTimeout);
       }, this.LoadAnimationDelay);
-    }
+    },
   });
   componentDidMount() {
     if (typeof document !== `undefined`) {
@@ -438,7 +442,7 @@ export default class Home extends React.Component {
         renderer: 'svg',
         loop: false,
         autoplay: _ap,
-        animationData: this.AnimObject[index].animeData
+        animationData: this.AnimObject[index].animeData,
       });
       this.AnimObject[index].anim.goToAndStop(0);
     });
@@ -564,7 +568,7 @@ export default class Home extends React.Component {
     const offlineslider = document.querySelector('#offlineshop');
     const onlineslider = document.querySelector('#onlineshop');
     let height = [];
-    ingDescMobile.forEach(desc => {
+    ingDescMobile.forEach((desc) => {
       height.push(desc.clientHeight);
       desc.parentNode.style.height = desc.clientHeight.toString() + 'px';
     });
@@ -573,14 +577,34 @@ export default class Home extends React.Component {
       document.body.classList.remove('menu_open');
 
       // REENABLE SLIDER
-      if(onlineslider.classList.contains('nomobileslider') && this.slider.online === null && this.sliderStatus.online === 'DESTROYED') {
-        this.slider.online = new Glide('#onlineslider', this.glidesetting).mount();
-        this.sliderStatus.online = 'MOUNTED';
+
+      if (onlineslider) {
+        if (
+          onlineslider.classList.contains('nomobileslider') &&
+          this.slider.online === null &&
+          this.sliderStatus.online === 'DESTROYED'
+        ) {
+          this.slider.online = new Glide(
+            '#onlineslider',
+            this.glidesetting
+          ).mount();
+          this.sliderStatus.online = 'MOUNTED';
+        }
       }
-      if(offlineslider.classList.contains('nomobileslider') && this.slider.offline === null &&this.sliderStatus.offline === 'DESTROYED') {
-        this.slider.offline = new Glide('#offlineslider', this.glidesetting).mount();
-        this.slider.offline.update();
-        this.sliderStatus.offline = 'MOUNTED';
+
+      if (offlineslider) {
+        if (
+          offlineslider.classList.contains('nomobileslider') &&
+          this.slider.offline === null &&
+          this.sliderStatus.offline === 'DESTROYED'
+        ) {
+          this.slider.offline = new Glide(
+            '#offlineslider',
+            this.glidesetting
+          ).mount();
+          this.slider.offline.update();
+          this.sliderStatus.offline = 'MOUNTED';
+        }
       }
       console.log(this.sliderStatus);
     } else {
@@ -588,7 +612,8 @@ export default class Home extends React.Component {
 
       if (
         onlineslider.classList.contains('nomobileslider') &&
-        this.slider.online !== null && this.sliderStatus.online === 'MOUNTED'
+        this.slider.online !== null &&
+        this.sliderStatus.online === 'MOUNTED'
       ) {
         this.slider.online.destroy();
         this.slider.online = null;
@@ -596,7 +621,8 @@ export default class Home extends React.Component {
       }
       if (
         offlineslider.classList.contains('nomobileslider') &&
-        this.slider.offline !== null &&  this.sliderStatus.offline === 'MOUNTED'
+        this.slider.offline !== null &&
+        this.sliderStatus.offline === 'MOUNTED'
       ) {
         this.slider.offline.destroy();
         this.slider.offline = null;
@@ -660,7 +686,7 @@ export default class Home extends React.Component {
       while ((child = child.previousSibling) != null) index++;
       let change = {
         number: index,
-        desc: target.parentNode.dataset.desc
+        desc: target.parentNode.dataset.desc,
       };
 
       const displayContainer = document.querySelector('#ing_display');
@@ -671,7 +697,7 @@ export default class Home extends React.Component {
       const ingredientsButtons = document.querySelectorAll('#ing_sel > *');
       const ingredientsBg = document.querySelectorAll('#ing_bg > *');
 
-      ingredientsButtons.forEach(btn => {
+      ingredientsButtons.forEach((btn) => {
         btn.classList.remove('active');
       });
 
@@ -692,7 +718,7 @@ export default class Home extends React.Component {
         displayDesc.innerHTML = change.desc;
         displayContainer.classList.remove('transition');
 
-        ingredientsBg.forEach(bg => {
+        ingredientsBg.forEach((bg) => {
           bg.classList.remove('active');
         });
         ingredientsBg[change.number - 1].classList.add('active');
@@ -740,7 +766,7 @@ export default class Home extends React.Component {
     return (
       <StaticQuery
         query={indexQuery}
-        render={data => {
+        render={(data) => {
           const generalData = data.general.frontmatter;
           const homeData = data.home.frontmatter;
           const shopData = data.shop.frontmatter;
@@ -755,7 +781,7 @@ export default class Home extends React.Component {
 
           // ONLINE AND OFFLINE SHOP VALIDITY CHECKER
           let offlineshop = [];
-          shopData.offlineshop.offlineshoplist.forEach(shop => {
+          shopData.offlineshop.offlineshoplist.forEach((shop) => {
             if (
               shop.image !== null &&
               shop.image !== '' &&
@@ -778,7 +804,7 @@ export default class Home extends React.Component {
             offlineshoplayout = 'NOSLIDER';
 
           let onlineshop = [];
-          shopData.onlineshop.onlineshoplist.forEach(shop => {
+          shopData.onlineshop.onlineshoplist.forEach((shop) => {
             if (
               shop.image !== null &&
               shop.image !== '' &&
@@ -830,7 +856,10 @@ export default class Home extends React.Component {
               <MobileHomeHeader indonesia={this.langID} />
               <div id='MobileNavigation'>
                 <div>
-                  <div className='menubutton' onClick={e => this.menuToggle(e)}>
+                  <div
+                    className='menubutton'
+                    onClick={(e) => this.menuToggle(e)}
+                  >
                     <span />
                     <span />
                     <span />
@@ -840,7 +869,7 @@ export default class Home extends React.Component {
                   <div>
                     <div
                       className='closebutton'
-                      onClick={e => this.menuToggle(e)}
+                      onClick={(e) => this.menuToggle(e)}
                     >
                       <span />
                       <span />
@@ -848,34 +877,34 @@ export default class Home extends React.Component {
                   </div>
                   <div className='fitheight'>
                     <div>
-                      <span onClick={e => this.mobileScroll(e)}>
+                      <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
                           ? transData.home.title.id
                           : transData.home.title.en}
                       </span>
-                      <span onClick={e => this.mobileScroll(e)}>
+                      <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
                           ? transData.about.title.id
                           : transData.about.title.en}
                       </span>
-                      <span onClick={e => this.mobileScroll(e)}>
+                      <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
                           ? transData.benefits.title.id
                           : transData.benefits.title.en}
                       </span>
-                      <span onClick={e => this.mobileScroll(e)}>
+                      <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
                           ? transData.ingredients.title.id
                           : transData.ingredients.title.en}
                       </span>
-                      <span onClick={e => this.mobileScroll(e)}>
+                      <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
                           ? transData.shop.title.id
                           : transData.shop.title.en}
                       </span>
 
                       {!data.general.frontmatter.journaldisable && (
-                        <span onClick={e => this.mobileScroll(e)}>
+                        <span onClick={(e) => this.mobileScroll(e)}>
                           {this.langID
                             ? transData.journal.title.id
                             : transData.journal.title.en}
@@ -1265,7 +1294,7 @@ export default class Home extends React.Component {
                                 this.langID ? node.desc.id : node.desc.en
                               }
                             >
-                              <div onClick={e => this.ingredientClick(e)}>
+                              <div onClick={(e) => this.ingredientClick(e)}>
                                 <span>
                                   {this.langID ? node.title.id : node.title.en}
                                 </span>
@@ -1349,7 +1378,7 @@ export default class Home extends React.Component {
                                                 background:
                                                   node.background !== null
                                                     ? node.background
-                                                    : 'transparent'
+                                                    : 'transparent',
                                               }}
                                               aria-label='Shop Slider'
                                             >
@@ -1364,7 +1393,7 @@ export default class Home extends React.Component {
                                                 background:
                                                   node.background !== null
                                                     ? node.background
-                                                    : 'transparent'
+                                                    : 'transparent',
                                               }}
                                             >
                                               <img
@@ -1402,7 +1431,7 @@ export default class Home extends React.Component {
                                                   background:
                                                     node.background !== null
                                                       ? node.background
-                                                      : 'transparent'
+                                                      : 'transparent',
                                                 }}
                                                 aria-label='Shop Slider'
                                               >
@@ -1417,7 +1446,7 @@ export default class Home extends React.Component {
                                                   background:
                                                     node.background !== null
                                                       ? node.background
-                                                      : 'transparent'
+                                                      : 'transparent',
                                                 }}
                                               >
                                                 <img
@@ -1474,7 +1503,7 @@ export default class Home extends React.Component {
                                                       background:
                                                         node.background !== null
                                                           ? node.background
-                                                          : 'transparent'
+                                                          : 'transparent',
                                                     }}
                                                     aria-label='Shop Slider'
                                                   >
@@ -1489,7 +1518,7 @@ export default class Home extends React.Component {
                                                       background:
                                                         node.background !== null
                                                           ? node.background
-                                                          : 'transparent'
+                                                          : 'transparent',
                                                     }}
                                                   >
                                                     <img
@@ -1515,7 +1544,7 @@ export default class Home extends React.Component {
                                       <ArrowSmaller classProps='mobile' />
                                     </div>
                                   </>
-                                )
+                                ),
                               }[onlineshoplayout]
                             }
                           </div>
@@ -1558,7 +1587,7 @@ export default class Home extends React.Component {
                                                 background:
                                                   node.background !== null
                                                     ? node.background
-                                                    : 'transparent'
+                                                    : 'transparent',
                                               }}
                                               aria-label='Shop Slider'
                                             >
@@ -1573,7 +1602,7 @@ export default class Home extends React.Component {
                                                 background:
                                                   node.background !== null
                                                     ? node.background
-                                                    : 'transparent'
+                                                    : 'transparent',
                                               }}
                                             >
                                               <img
@@ -1611,7 +1640,7 @@ export default class Home extends React.Component {
                                                   background:
                                                     node.background !== null
                                                       ? node.background
-                                                      : 'transparent'
+                                                      : 'transparent',
                                                 }}
                                                 aria-label='Shop Slider'
                                               >
@@ -1626,7 +1655,7 @@ export default class Home extends React.Component {
                                                   background:
                                                     node.background !== null
                                                       ? node.background
-                                                      : 'transparent'
+                                                      : 'transparent',
                                                 }}
                                               >
                                                 <img
@@ -1683,7 +1712,7 @@ export default class Home extends React.Component {
                                                       background:
                                                         node.background !== null
                                                           ? node.background
-                                                          : 'transparent'
+                                                          : 'transparent',
                                                     }}
                                                     aria-label='Shop Slider'
                                                   >
@@ -1698,7 +1727,7 @@ export default class Home extends React.Component {
                                                       background:
                                                         node.background !== null
                                                           ? node.background
-                                                          : 'transparent'
+                                                          : 'transparent',
                                                     }}
                                                   >
                                                     <img
@@ -1724,7 +1753,7 @@ export default class Home extends React.Component {
                                       <ArrowSmaller classProps='mobile' />
                                     </div>
                                   </>
-                                )
+                                ),
                               }[offlineshoplayout]
                             }
                           </div>

@@ -39,7 +39,7 @@ export default class Journal extends React.Component {
           document
             .querySelector('section#MobileNav')
             .classList.remove('inview');
-        }
+        },
       });
 
       this.inviewArray[1] = new InViewportClass({
@@ -50,9 +50,9 @@ export default class Journal extends React.Component {
         },
         exit: () => {
           document.querySelector('section#Related').classList.remove('inview');
-        }
+        },
       });
-    }
+    },
   });
   componentDidMount() {
     if (typeof document !== `undefined`) {
@@ -95,7 +95,7 @@ export default class Journal extends React.Component {
 
     const seo = {
       desc: content.seo.seo_shortdesc,
-      keywords: content.seo.seo_keywords
+      keywords: content.seo.seo_keywords,
     };
 
     if (content.seo.seo_image !== '' && content.seo.seo_image !== undefined) {
@@ -159,10 +159,10 @@ export default class Journal extends React.Component {
     const alljournals = this.props.data.alljournals;
     let related = [];
     if (content.related && content.related.length > 0) {
-      content.related.forEach(_r => {
+      content.related.forEach((_r) => {
         if (_r.relatedslug !== '/' && _r.relatedslug !== '') {
           const compareslug = _r.relatedslug;
-          alljournals.edges.forEach(_j => {
+          alljournals.edges.forEach((_j) => {
             if (_j.node.frontmatter.slug === _r.relatedslug) {
               // console.log(_r.relatedslug, _j);
               related.push(_j);
@@ -248,7 +248,7 @@ export default class Journal extends React.Component {
               <div
                 className='markupstyle'
                 dangerouslySetInnerHTML={{
-                  __html: this.props.data.content.html
+                  __html: this.props.data.content.html,
                 }}
               />
             </div>
