@@ -178,6 +178,7 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
         id: createNodeId(`Journal-${node.id}`),
         parent: node.id,
         slug: node.fields.slug,
+        seo: node.frontmatter.seo,
         internal: {
           type: 'JournalMarkdown',
           contentDigest: node.internal.contentDigest,
