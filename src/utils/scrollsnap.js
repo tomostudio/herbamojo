@@ -571,7 +571,7 @@ export class ScrollSnapClass {
     },
     touchend: evt => {
       if (this.v.snap.enable) {
-        console.log('touch end', evt);
+        // console.log('touch end', evt);
       }
     }
   };

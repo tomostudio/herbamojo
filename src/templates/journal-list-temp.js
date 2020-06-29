@@ -20,7 +20,7 @@ export default class JournalList extends React.Component {
     parent: `#${this.MainID}`,
     default_delay: 250,
     postload: () => {
-      console.log('postload en');
+      // console.log('postload en');
       if (typeof document !== `undefined`) {
         document.body.classList.add('loaded');
       }

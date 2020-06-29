@@ -40,11 +40,11 @@ class Transition extends React.PureComponent {
             enter: timeout,
             exit: timeout
           }}
-          addEndListener={(node, done) => {
-            console.log('transition end');
-            // // use the css transitionend event to mark the finish of a transition
-            // node.addEventListener('transitionend', done, false);
-          }}
+          // addEndListener={(node, done) => {
+          //   // console.log('transition end');
+          //   // // use the css transitionend event to mark the finish of a transition
+          //   // node.addEventListener('transitionend', done, false);
+          // }}
         >
           {//Application of the styles depending on the status of page(entering, exiting, entered) in the DOM
           status => (

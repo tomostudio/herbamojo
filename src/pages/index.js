@@ -606,7 +606,7 @@ export default class Home extends React.Component {
           this.sliderStatus.offline = 'MOUNTED';
         }
       }
-      console.log(this.sliderStatus);
+      // console.log(this.sliderStatus);
     } else {
       // CHECK AND DISABLE SLIDER ON SHOP ON MOBILE
 
@@ -628,7 +628,7 @@ export default class Home extends React.Component {
         this.slider.offline = null;
         this.sliderStatus.offline = 'DESTROYED';
       }
-      console.log(this.sliderStatus);
+      // console.log(this.sliderStatus);
     }
     this.inviewRetrigger();
 

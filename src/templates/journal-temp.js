@@ -105,7 +105,7 @@ export default class Journal extends React.Component {
     const curURL = this.props.pageContext.slug.toString();
     let englishURL, indonesianURL;
 
-    console.log(content.altslug);
+    // console.log(content.altslug);
 
     if (curURL.substring(0, 3) === '/id') {
       // INDONESIAN URL
