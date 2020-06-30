@@ -9,7 +9,7 @@ let journaldisable = false;
 const get = require('lodash.get');
 
 // SCHEMA EXPERIMENT
-exports.createSchemaCustomization = ({ actions, schema }) => {
+/* exports.createSchemaCustomization = ({ actions, schema }) => {
   const splitProxyString = (str) =>
     str.split('.').reduceRight((acc, chunk) => {
       return { [chunk]: acc };
@@ -78,7 +78,7 @@ exports.createSchemaCustomization = ({ actions, schema }) => {
       },
     }),
   ]);
-};
+}; */
 // SCHEMA EXPERIMENT
 
 exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
@@ -168,7 +168,7 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
       });
     }
     // SCHEMA EXPERIMENT
-    if (
+    /* if (
       !node.frontmatter.issetting &&
       node.frontmatter.contenttype === 'journal'
     ) {
@@ -184,7 +184,7 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
           contentDigest: node.internal.contentDigest,
         },
       });
-    }
+    } */
     // SCHEMA EXPERIMENT
   }
 };

@@ -93,17 +93,16 @@ export default class JournalList extends React.Component {
     if (curindex > 1) {
       let _previndex = curindex - 1;
       if (_previndex === 1) {
-        prevurl = `/${rawjournalurl}`;
+        prevurl = `${this.LangID ? '/id' : ''}${rawjournalurl}`;
       } else {
-        prevurl = `/${rawjournalurl}/${_previndex}`;
+        prevurl = `${this.LangID ? '/id' : ''}${rawjournalurl}/${_previndex}`;
       }
     } else {
       prevurl = '/';
     }
-
     if (curindex < context.total) {
       let _nextindex = curindex + 1;
-      nexturl = `/${rawjournalurl}/${_nextindex}`;
+      nexturl = `${this.LangID ? '/id' : ''}${rawjournalurl}/${_nextindex}`;
     } else {
       nexturl = '/';
     }
