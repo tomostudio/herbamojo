@@ -1,371 +1,376 @@
 body {
-    background: black;
-    color: white;
-    font-family: 'Maison Mono';
+  background: black;
+  color: white;
+  font-family: 'Maison Mono';
 }
-html{
-    height: initial;
+html {
+  height: initial;
 }
 body:not(.loaded) {
-    height: 100vh;
-    overflow: hidden;
-    position: relative;
+  height: 100vh;
+  overflow: hidden;
+  position: relative;
 
-    & main {
-        opacity: 0;
-        @include transition(all 0s);
-    }
+  & main {
+    opacity: 0;
+    @include transition(all 0s);
+  }
 }
 
 body.__disablescroll {
-    touch-action: none;
+  touch-action: none;
 
-    @include respond-to(m_tablet) {
-        & #MainLayout {
-            pointer-events: none;
-            overflow: hidden;
-            height: 100vh;
-        }
+  & main {
+    touch-action: none;
+  }
+  @include respond-to(m_tablet) {
+    & #MainLayout {
+      pointer-events: none;
+      overflow: hidden;
+      height: 100vh;
     }
+  }
 }
 
 #LoaderWrapper {
-    pointer-events: none;
-    opacity: 0;
-    position: fixed;
-    top: 0px;
+  pointer-events: none;
+  opacity: 0;
+  position: fixed;
+  top: 0px;
+  left: 0px;
+  width: 100vw;
+  height: 100vh;
+  background: black;
+  padding: $global-padding;
+  z-index: 100;
+  @include transition(opacity $loading-transition);
+  overflow: hidden;
+
+  & > div:first-child {
+    position: absolute;
+    width: 100%;
+    bottom: 0px;
     left: 0px;
-    width: 100vw;
-    height: 100vh;
-    background: black;
-    padding: $global-padding;
-    z-index: 100;
+    height: 5px;
+
+    @include respond-to(m_tablet) {
+      bottom: auto;
+      top: 0px;
+      left: 0px;
+      right: auto;
+      height: 100%;
+      width: 10px;
+      z-index: 3;
+      @include transform(rotate(180deg));
+    }
+
+    &::after,
+    &::before {
+      @include pseudo();
+      position: absolute;
+      top: 0px;
+      left: 0px;
+      width: 100%;
+      height: 100%;
+    }
+
+    &::before {
+      background: $color_green;
+    }
+
+    &::after {
+      background: white;
+    }
+  }
+
+  & > div:last-child {
+    position: absolute;
+    bottom: $global-padding;
+    left: auto;
+    top: auto;
+    font-family: 'Amarillo';
+    color: $color_green;
+    font-size: $font-size-title;
+    line-height: $lineheight-title;
+    @include transition(all $loading-transition);
+    right: -20px;
+
+    @include respond-to(m_tablet) {
+      // right: auto;
+      // left: auto;
+      // right: $globalmobile-padding + 10px - 100px;
+      right: auto;
+      left: $globalmobile-padding + 10px - 100px;
+      font-size: 25vh;
+      line-height: 70%;
+      bottom: auto;
+      top: $globalmobile-padding - 5px;
+      z-index: 2;
+      @include left-safe($globalmobile-padding + 10px - 100px);
+      @include transform(rotate(90deg) translate(0%, -100%));
+      @include transform-origin(top left);
+    }
+  }
+
+  body:not(.loaded) & {
+    opacity: 1;
     @include transition(opacity $loading-transition);
-    overflow: hidden;
 
-    &>div:first-child {
-        position: absolute;
-        width: 100%;
-        bottom: 0px;
-        left: 0px;
-        height: 5px;
+    & > div:last-child {
+      right: $global-padding;
+      @include transition(all 0s);
+
+      @include respond-to(m_tablet) {
+        right: auto;
+        left: $globalmobile-padding + 10px;
+        @include left-safe($globalmobile-padding + 10px);
+        // right: $globalmobile-padding + 10px;
+      }
+    }
+
+    & > div:first-child {
+      &::before {
+        @include animation(loadingbefore 3s ease infinite forwards);
+
+        @include respond-to(tablet) {
+          @include animation(loadingbefore 2s ease infinite forwards);
+        }
 
         @include respond-to(m_tablet) {
-            bottom: auto;
-            top: 0px;
-            left: 0px;
-            right: auto;
-            height: 100%;
-            width: 10px;
-            z-index: 3;
-            @include transform(rotate(180deg));
+          @include animation(loadingbeforemobile 1.5s ease infinite forwards);
         }
+      }
 
-        &::after,
-        &::before {
-            @include pseudo();
-            position: absolute;
-            top: 0px;
-            left: 0px;
-            width: 100%;
-            height: 100%;
+      &::after {
+        @include animation(loadingafter 3s ease infinite forwards);
+
+        @include respond-to(tablet) {
+          @include animation(loadingafter 3s ease infinite forwards);
         }
-
-        &::before {
-            background: $color_green;
-        }
-
-        &::after {
-            background: white;
-        }
-    }
-
-    &>div:last-child {
-        position: absolute;
-        bottom: $global-padding;
-        left: auto;
-        top: auto;
-        font-family: 'Amarillo';
-        color: $color_green;
-        font-size: $font-size-title;
-        line-height: $lineheight-title;
-        @include transition(all $loading-transition);
-        right: -20px;
 
         @include respond-to(m_tablet) {
-            // right: auto;
-            // left: auto;
-            // right: $globalmobile-padding + 10px - 100px;
-            right: auto;
-            left: $globalmobile-padding + 10px - 100px;
-            font-size: 25vh;
-            line-height: 70%;
-            bottom: auto;
-            top: $globalmobile-padding - 5px;
-            z-index: 2;
-            @include left-safe($globalmobile-padding + 10px - 100px);
-            @include transform(rotate(90deg) translate(0%, -100%));
-            @include transform-origin(top left);
+          @include animation(loadingaftermobile 1.5s ease infinite forwards);
         }
+      }
     }
-
-    body:not(.loaded) & {
-        opacity: 1;
-        @include transition(opacity $loading-transition);
-
-        &>div:last-child {
-            right: $global-padding;
-            @include transition(all 0s);
-
-            @include respond-to(m_tablet) {
-                right: auto;
-                left: $globalmobile-padding + 10px;
-                @include left-safe($globalmobile-padding + 10px);
-                // right: $globalmobile-padding + 10px;
-            }
-        }
-
-        &>div:first-child {
-            &::before {
-                @include animation(loadingbefore 3s ease infinite forwards);
-
-                @include respond-to(tablet) {
-                    @include animation(loadingbefore 2s ease infinite forwards);
-                }
-
-                @include respond-to(m_tablet) {
-                    @include animation(loadingbeforemobile 1.5s ease infinite forwards);
-                }
-            }
-
-            &::after {
-                @include animation(loadingafter 3s ease infinite forwards);
-
-                @include respond-to(tablet) {
-                    @include animation(loadingafter 3s ease infinite forwards);
-                }
-
-                @include respond-to(m_tablet) {
-                    @include animation(loadingaftermobile 1.5s ease infinite forwards);
-                }
-            }
-        }
-    }
+  }
 }
 
 body.loaded main {
-    @include transition(opacity $loading-transition);
+  @include transition(opacity $loading-transition);
 }
 
 .hidden {
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
+  position: absolute;
+  top: 0px;
+  left: 0px;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
 }
 
 main {
-    display: block;
+  display: block;
+  position: relative;
+//   touch-action: none;
+
+  & .overlay {
+    position: fixed;
+    width: 100vw;
+    height: 100vh;
+    top: 0px;
+    left: 0px;
+    pointer-events: none;
+    padding: $global-padding;
+
+    & > .wrapper {
+      position: relative;
+      margin: 0px auto;
+      width: 100%;
+      // border: solid thin rgba(255, 255, 255, 0.25);
+      max-width: $global-maxwidth - ($global-padding * 2);
+
+      & > *:first-child {
+        display: block;
+
+        & > a {
+          pointer-events: auto;
+          font-family: 'Amarillo';
+          font-size: $font-size-button;
+          line-height: $lineheight-button;
+          vertical-align: top;
+          color: white;
+          @include transition(color $global-transition);
+          display: inline-block;
+
+          body.onhover &:hover,
+          &.disable {
+            color: $color_green;
+            cursor: pointer;
+          }
+
+          &.disable {
+            pointer-events: none;
+          }
+
+          &:first-child {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+
+  & section {
     position: relative;
-    touch-action: none;
+    width: 100%;
+    padding: $global-padding (100px + $global-padding);
+    margin: 0px auto;
 
-    & .overlay {
-        position: fixed;
-        width: 100vw;
-        height: 100vh;
-        top: 0px;
-        left: 0px;
-        pointer-events: none;
-        padding: $global-padding;
-
-        &>.wrapper {
-            position: relative;
-            margin: 0px auto;
-            width: 100%;
-            // border: solid thin rgba(255, 255, 255, 0.25);
-            max-width: $global-maxwidth - ($global-padding * 2);
-
-            &>*:first-child {
-                display: block;
-
-                &>a {
-                    pointer-events: auto;
-                    font-family: 'Amarillo';
-                    font-size: $font-size-button;
-                    line-height: $lineheight-button;
-                    vertical-align: top;
-                    color: white;
-                    @include transition(color $global-transition);
-                    display: inline-block;
-
-                    body.onhover &:hover,
-                    &.disable {
-                        color: $color_green;
-                        cursor: pointer;
-                    }
-
-                    &.disable {
-                        pointer-events: none;
-                    }
-
-                    &:first-child {
-                        margin-right: 10px;
-                    }
-                }
-            }
-        }
+    & > .wrapper {
+      margin: 0px auto;
+      width: 100%;
+      max-width: $global-maxwidth - ((100px + $global-padding) * 2);
     }
 
-    & section {
-        position: relative;
-        width: 100%;
-        padding: $global-padding (100px + $global-padding);
+    @include respond-to(tablet) {
+      padding: $global-padding (75px + $global-padding);
+      & > .wrapper {
+        max-width: $global-maxwidth - ((75px + $global-padding) * 2);
+      }
+    }
+    @include respond-to(m_tablet) {
+      padding: $globalmobile-padding;
+
+      & > .wrapper {
         margin: 0px auto;
+        width: 100%;
+        max-width: $global-maxwidth - ($global-padding * 2);
+      }
+    }
+  }
 
-        &>.wrapper {
-            margin: 0px auto;
-            width: 100%;
-            max-width: $global-maxwidth - ((100px + $global-padding) * 2);
-        }
+  & section.footer {
+    height: 150px;
+    background: $color_green;
 
-        @include respond-to(tablet) {
-            padding: $global-padding (75px + $global-padding);
-            &>.wrapper {
-                max-width: $global-maxwidth - ((75px + $global-padding) * 2);
-            }
-        }
-        @include respond-to(m_tablet) {
-            padding: $globalmobile-padding;
-
-            &>.wrapper {
-                margin: 0px auto;
-                width: 100%;
-                max-width: $global-maxwidth - ($global-padding * 2);
-            }
-        }
+    @include respond-to(m_tablet) {
+      height: calc(
+        #{$tabletSocialMedia + ($globalmobile-padding * 2)} + (env(safe-area-inset-bottom))
+      );
+      @include padding-safe-bottom($globalmobile-padding);
     }
 
-    & section.footer {
-        height: 150px;
-        background: $color_green;
+    & > .wrapper {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr;
+      grid-template-areas: 'left right';
+
+      & > *:first-child {
+        font-family: 'Amarillo';
+        font-size: 24px;
+        line-height: 100%;
+        grid-area: left;
+        justify-self: start;
+        @include setflex(column, nowrap, center, center, flex-start);
 
         @include respond-to(m_tablet) {
-            height: calc(#{$tabletSocialMedia + ($globalmobile-padding * 2)} + (env(safe-area-inset-bottom)));
-            @include padding-safe-bottom($globalmobile-padding);
+          font-size: $font-size-button-m;
         }
 
-        &>.wrapper {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            grid-template-rows: 1fr;
-            grid-template-areas: "left right";
+        & > a {
+          height: 30px;
+          line-height: 30px;
+          display: inline-block;
+          color: black;
+          @include transition(color $global-transition);
 
-            &>*:first-child {
-                font-family: 'Amarillo';
-                font-size: 24px;
-                line-height: 100%;
-                grid-area: left;
-                justify-self: start;
-                @include setflex(column, nowrap, center, center, flex-start);
+          @include respond-to(m_tablet) {
+            height: 18px;
+            line-height: 18px;
+          }
 
-                @include respond-to(m_tablet) {
-                    font-size: $font-size-button-m;
-                }
-
-                &>a {
-                    height: 30px;
-                    line-height: 30px;
-                    display: inline-block;
-                    color: black;
-                    @include transition(color $global-transition);
-
-                    @include respond-to(m_tablet) {
-                        height: 18px;
-                        line-height: 18px;
-                    }
-
-                    body.onhover &:hover {
-                        color: white;
-                    }
-                }
-            }
-
-            &>*:last-child {
-                @include setflex(row, nowrap, flex-end, center, center);
-                grid-area: right;
-                justify-self: end;
-
-                &>a {
-                    height: 50px;
-                    margin-left: 15px;
-                    display: block;
-                    @include transition(opacity $global-transition);
-
-                    @include respond-to(m_tablet) {
-                        height: $tabletSocialMedia;
-                        margin-left: 15px;
-                    }
-                    @include respond-to(mobile) {
-                        height: $mobileSocialMedia;
-                        margin-left: 10px;
-                    }
-                    &.svg>svg {
-                        height: 100%;
-                        width: auto;
-                    }
-
-                    &>img {
-                        height: 100%;
-                    }
-
-                    body.onhover &:hover {
-                        opacity: $global_opacity;
-                    }
-
-                    &.svg {
-                        @include transition(opacity 0s);
-
-                        body.onhover &:hover {
-                            opacity: 1;
-                        }
-                    }
-                }
-            }
+          body.onhover &:hover {
+            color: white;
+          }
         }
+      }
+
+      & > *:last-child {
+        @include setflex(row, nowrap, flex-end, center, center);
+        grid-area: right;
+        justify-self: end;
+
+        & > a {
+          height: 50px;
+          margin-left: 15px;
+          display: block;
+          @include transition(opacity $global-transition);
+
+          @include respond-to(m_tablet) {
+            height: $tabletSocialMedia;
+            margin-left: 15px;
+          }
+          @include respond-to(mobile) {
+            height: $mobileSocialMedia;
+            margin-left: 10px;
+          }
+          &.svg > svg {
+            height: 100%;
+            width: auto;
+          }
+
+          & > img {
+            height: 100%;
+          }
+
+          body.onhover &:hover {
+            opacity: $global_opacity;
+          }
+
+          &.svg {
+            @include transition(opacity 0s);
+
+            body.onhover &:hover {
+              opacity: 1;
+            }
+          }
+        }
+      }
     }
+  }
 }
 
 .wrapper {
-    min-height: 100%;
+  min-height: 100%;
 }
 
 a.svg {
-    @include transition(opacity 0s);
+  @include transition(opacity 0s);
 
-    & svg {
-        width: 100%;
-        height: 100%;
+  & svg {
+    width: 100%;
+    height: 100%;
 
-        & .fill {
-            @include transition(fill $global-transition);
-        }
-
-        & .stroke {
-            @include transition(stroke $global-transition);
-        }
+    & .fill {
+      @include transition(fill $global-transition);
     }
 
-    body.onhover &:hover {
-        opacity: 1;
-
-        & svg .fill {
-            fill: white;
-        }
-
-        & svg .stroke {
-            stroke: white;
-        }
+    & .stroke {
+      @include transition(stroke $global-transition);
     }
+  }
+
+  body.onhover &:hover {
+    opacity: 1;
+
+    & svg .fill {
+      fill: white;
+    }
+
+    & svg .stroke {
+      stroke: white;
+    }
+  }
 }
