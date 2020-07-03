@@ -28,6 +28,7 @@ module.exports = {
         theme_color: '#15C87F',
         display: 'standalone',
         icon: 'src/images/icon/icon.png',
+        cache_busting_mode: 'none',
       },
     },
     {
@@ -37,7 +38,15 @@ module.exports = {
         path: `${__dirname}/src/`,
       },
     },
-    `gatsby-plugin-offline`,
+    {
+      resolve: `gatsby-plugin-offline`,
+      options: {
+        precachePages: [`/`, `/journal/*`, `id/journal/*`],
+        workboxConfig: {
+          globPatterns: ['**/*'],
+        },
+      },
+    },
     // `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-react-helmet`,

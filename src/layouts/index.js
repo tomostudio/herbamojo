@@ -1,5 +1,4 @@
 import React from 'react';
-import Transition from 'components/transition';
 
 class Loader extends React.Component {
   render() {
@@ -15,7 +14,6 @@ const Layout = ({ children, location }) => (
   <div id='MainLayout'>
     <Loader />
     {children}
-    {/* <Transition location={location}>{children}</Transition> */}
   </div>
 );
 
