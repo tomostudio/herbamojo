@@ -5,6 +5,7 @@ let redirectObject = null;
 let journalslug = 'journal';
 let journalperList = 6;
 let journaldisable = false;
+const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 
 const get = require('lodash.get');
 
@@ -83,6 +84,8 @@ const get = require('lodash.get');
 
 exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
   const { createRedirect, createNodeField } = actions;
+
+  fmImagesToRelative(node);
 
   if (checkstatus && redirectObject !== null) {
     redirectObject.redirect.forEach((redirectRequest) => {

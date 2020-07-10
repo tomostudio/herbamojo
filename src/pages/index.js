@@ -3,6 +3,7 @@ import { StaticQuery, Link, graphql } from 'gatsby';
 import lottie from 'lottie-web';
 import { Helmet } from 'react-helmet';
 import Glide from '@glidejs/glide';
+import Img from "gatsby-image"
 
 //UTILS
 import { ScrollSnapClass } from 'utils/scrollsnap';
@@ -1063,7 +1064,7 @@ export default class Home extends React.Component {
                     <div>
                       <picture>
                         <source srcSet={BottleImgWebP} type='image/webp' />
-                        <source srcSet={BottleImg} type='image/jpeg' />
+                        <source srcSet={BottleImg} type='image/png' />
                         <img src={BottleImg} alt='Herbamojo' />
                       </picture>
                       <span
@@ -1788,7 +1789,7 @@ export default class Home extends React.Component {
                                   <span>{journal.node.frontmatter.date}</span>
                                   <h2>{journal.node.frontmatter.title}</h2>
                                 </div>
-                                <picture>
+                                {/* <picture>
                                   <source
                                     srcSet={journal.node.frontmatter.thumbimage}
                                     type='image/jpeg'
@@ -1797,7 +1798,8 @@ export default class Home extends React.Component {
                                     src={journal.node.frontmatter.thumbimage}
                                     alt='Herbamojo'
                                   />
-                                </picture>
+                                </picture> */}
+                                <Img fluid={journal.node.frontmatter.thumbimage.childImageSharp.fluid} />
                               </Link>
                             );
                           })}
@@ -1854,7 +1856,13 @@ const indexQuery = graphql`
             title
             date(formatString: "DD/MM/YY")
             listcolorblack
-            thumbimage
+            thumbimage {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
           fields {
             slug
@@ -1882,7 +1890,13 @@ const indexQuery = graphql`
             title
             date(formatString: "DD/MM/YY")
             listcolorblack
-            thumbimage
+            thumbimage {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
           fields {
             slug

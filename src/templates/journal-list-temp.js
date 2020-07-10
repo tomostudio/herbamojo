@@ -3,6 +3,7 @@ import Layout from 'components/layout';
 import Footer from 'components/footer';
 import JournalHeader from 'components/journalheader';
 import { Link, graphql } from 'gatsby';
+import Img from 'gatsby-image';
 
 //UTILS
 import { LoaderClass } from 'utils/loader';
@@ -25,7 +26,7 @@ export default class JournalList extends React.Component {
         document.body.classList.add('loaded');
       }
       if (this.disableScrollBody !== null) this.disableScrollBody.enable();
-    }
+    },
   });
   componentDidMount() {
     if (typeof document !== `undefined`) {
@@ -161,7 +162,13 @@ export default class JournalList extends React.Component {
                           <span>{journal.node.frontmatter.date}</span>
                           <h2>{journal.node.frontmatter.title}</h2>
                         </div>
-                        <picture>
+                        <Img
+                          fluid={
+                            journal.node.frontmatter.thumbimage.childImageSharp
+                              .fluid
+                          }
+                        />
+                        {/* <picture>
                           <source
                             srcSet={journal.node.frontmatter.thumbimage}
                             type='image/jpeg'
@@ -170,7 +177,7 @@ export default class JournalList extends React.Component {
                             src={journal.node.frontmatter.thumbimage}
                             alt='Herbamojo'
                           />
-                        </picture>
+                        </picture> */}
                       </Link>
                     );
                   })}
@@ -241,7 +248,13 @@ export const query = graphql`
             title
             date(formatString: "DD/MM/YY")
             listcolorblack
-            thumbimage
+            thumbimage {
+              childImageSharp {
+                fluid {
+                  ...GatsbyImageSharpFluid
+                }
+              }
+            }
           }
           fields {
             slug

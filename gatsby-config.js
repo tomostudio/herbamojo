@@ -18,6 +18,8 @@ module.exports = {
         name: 'assets',
       },
     },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -70,6 +72,7 @@ module.exports = {
       options: {
         trackingId: 'UA-97840044-2',
         exclude: ['/@deploystatus'],
+        defer: true,
       },
     },
     {
@@ -81,12 +84,26 @@ module.exports = {
     {
       resolve: `gatsby-transformer-remark`,
       options: {
-        plugins: [`gatsby-remark-unwrap-images`],
+        plugins: [
+          `gatsby-remark-unwrap-images`,
+          `gatsby-remark-relative-images`,
+        ],
       },
     },
     {
       resolve: `gatsby-plugin-netlify`,
       options: {
+        headers: {
+          '/*': ['Cache-Control: max-age=31536000'],
+          '/assets/*': [
+            // matching headers (by type) are replaced by Netlify with more specific routes
+            'Cache-Control: max-age=31536000',
+          ],
+          '/journal/*': [
+            // matching headers (by type) are replaced by Netlify with more specific routes
+            'Cache-Control: no-cache',
+          ],
+        },
         generateMatchPathRewrites: false, // boolean to turn off automatic creation of redirect rules for client only paths
       },
     },
