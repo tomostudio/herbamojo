@@ -122,6 +122,13 @@ export default class JournalList extends React.Component {
     if (curindex > 1) {
       printTitle = `${printTitle} ${curindex}`;
     }
+
+    let getColorstat = journal.node.frontmatter.listcolorblack;
+    if (typeof journal.node.frontmatter.listcolorblack === 'string') {
+      getColorstat =
+        journal.node.frontmatter.listcolorblack === 'true' ? true : false;
+    }
+
     return (
       <Layout
         titleText={printTitle}
@@ -154,9 +161,7 @@ export default class JournalList extends React.Component {
                       <Link
                         key={journal.node.id}
                         to={journal.node.fields.slug}
-                        className={
-                          journal.node.frontmatter.listcolorblack ? 'black' : ''
-                        }
+                        className={getColorstat ? 'black' : ''}
                       >
                         <div>
                           <span>{journal.node.frontmatter.date}</span>

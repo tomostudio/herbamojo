@@ -173,6 +173,11 @@ export default class Journal extends React.Component {
       });
     }
 
+    let getHeaderColor = content.headercolorblack;
+    if (typeof content.headercolorblack === 'string') {
+      getColorstat = content.headercolorblack === 'true' ? true : false;
+    }
+
     return (
       <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
         {seo && (
@@ -190,13 +195,13 @@ export default class Journal extends React.Component {
           indonesia={this.LangID}
           urltarget={englishURL}
           urltargetid={indonesianURL}
-          black={content.headercolorblack}
+          black={getHeaderColor}
           journallist={false}
         />
         <div className='sectionWrapper'>
           <section
             className={`journalcover ${
-              content.headercolorblack ? 'black' : ''
+              getHeaderColor ? 'black' : ''
             }`}
           >
             <div>
@@ -474,7 +479,7 @@ export const query = graphql`
         seo {
           seo_shortdesc
           seo_keywords
-          seo_image{
+          seo_image {
             publicURL
           }
         }

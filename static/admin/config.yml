@@ -15,7 +15,7 @@ collections:
     show_preview_links: true
     preview_path: '/journal/{{slug}}'
     sortableFields: ['title', 'date']
-    summary: "{{year}}-{{month}}-{{day}}, {{title}}"
+    summary: '{{year}}-{{month}}-{{day}}, {{title}}'
     editor:
       preview: false
     fields:
@@ -83,7 +83,8 @@ collections:
               name: 'seo_image',
               label: 'Image',
               widget: 'image',
-              pattern: [\.(jpe?g|png)$],
+              pattern:
+                ['\.(jpe?g|png)$', 'Invalid Image File, only PNG & JPEG'],
               hint: 'width: 1200px, height: 600px',
               default: '',
               required: false,
@@ -103,13 +104,13 @@ collections:
         widget: 'select'
         default: false
         options:
-          - { label: 'White', value: false }
-          - { label: 'Black', value: true }
+          - { label: 'White', value: 'false' }
+          - { label: 'Black', value: 'true' }
       - {
           name: 'thumbimage',
           label: 'Thumbnail Image',
           widget: 'image',
-          pattern: [\.(jpe?g|png)$],
+          pattern: ['\.(jpe?g|png)$', 'Invalid Image File, only PNG & JPEG'],
           hint: '750x250 | Picture will be adjusted according to the Window | JPG/PNG',
           required: true,
         }
@@ -118,13 +119,13 @@ collections:
         widget: 'select'
         default: false
         options:
-          - { label: 'White', value: false }
-          - { label: 'Black', value: true }
+          - { label: 'White', value: 'false' }
+          - { label: 'Black', value: 'true' }
       - {
           name: 'coverimage',
           label: 'Cover Image',
           widget: 'image',
-          pattern: [\.(jpe?g|png)$],
+          pattern: ['\.(jpe?g|png)$', 'Invalid Image File, only PNG & JPEG'],
           hint: 'Minimum 1440x800 | Picture will be adjusted according to the Window | JPG/PNG',
           required: true,
         }
@@ -168,7 +169,7 @@ collections:
     show_preview_links: true
     preview_path: '/id/journal/{{slug}}'
     sortableFields: ['title', 'date']
-    summary: "{{year}}-{{month}}-{{day}}, {{title}}"
+    summary: '{{year}}-{{month}}-{{day}}, {{title}}'
     editor:
       preview: false
     fields:
@@ -236,7 +237,8 @@ collections:
               name: 'seo_image',
               label: 'Image',
               widget: 'image',
-              pattern: [\.(jpe?g|png)$],
+              pattern:
+                ['\.(jpe?g|png)$', 'Invalid Image File, only PNG & JPEG'],
               hint: 'width: 1200px, height: 600px',
               default: '',
               required: false,
@@ -256,13 +258,13 @@ collections:
         widget: 'select'
         default: false
         options:
-          - { label: 'White', value: false }
-          - { label: 'Black', value: true }
+          - { label: 'White', value: 'false' }
+          - { label: 'Black', value: 'true' }
       - {
           name: 'thumbimage',
           label: 'Thumbnail Image',
           widget: 'image',
-          pattern: [\.(jpe?g|png)$],
+          pattern: ['\.(jpe?g|png)$', 'Invalid Image File, only PNG & JPEG'],
           hint: '750x250 | Picture will be adjusted according to the Window | JPG/PNG',
           required: true,
         }
@@ -271,13 +273,13 @@ collections:
         widget: 'select'
         default: false
         options:
-          - { label: 'White', value: false }
-          - { label: 'Black', value: true }
+          - { label: 'White', value: 'false' }
+          - { label: 'Black', value: 'true' }
       - {
           name: 'coverimage',
           label: 'Cover Image',
           widget: 'image',
-          pattern: [\.(jpe?g|png)$],
+          pattern: ['\.(jpe?g|png)$', 'Invalid Image File, only PNG & JPEG'],
           hint: 'Minimum 1440x800 | Picture will be adjusted according to the Window | JPG/PNG',
           required: true,
         }
@@ -388,7 +390,8 @@ collections:
                   name: 'seo_image',
                   label: 'Image',
                   widget: 'image',
-                  pattern: [\.(jpe?g|png)$],
+                  pattern:
+                    ['\.(jpe?g|png)$', 'Invalid Image File, only PNG & JPEG'],
                   hint: 'width: 1200px, height: 600px | JPEG / PNG / GIF',
                   default: '',
                   required: false,
@@ -653,7 +656,11 @@ collections:
                   name: 'background',
                   label: 'Background',
                   widget: 'image',
-                  pattern: [\.(jpe?g|png|gif)$],
+                  pattern:
+                    [
+                      '\.(jpe?g|png|gif)$',
+                      'Invlaid Image, Only JPEG, PNG and GIF',
+                    ],
                   hint: 'Minimum Resolution: 1500px x 1500px | JPEG / PNG / GIF',
                   default: '',
                   required: true,
@@ -662,7 +669,11 @@ collections:
                   name: 'backgroundmobile',
                   label: 'Mobile Background',
                   widget: 'image',
-                  pattern: [\.(jpe?g|png|gif)$],
+                  pattern:
+                    [
+                      '\.(jpe?g|png|gif)$',
+                      'Invlaid Image, Only JPEG, PNG and GIF',
+                    ],
                   hint: 'Minimum Resolution: 1500px x 1500px | JPEG / PNG / GIF',
                   default: '',
                   required: true,
@@ -676,7 +687,11 @@ collections:
                   name: 'background',
                   label: 'Background',
                   widget: 'image',
-                  pattern: [\.(jpe?g|png|gif)$],
+                  pattern:
+                    [
+                      '\.(jpe?g|png|gif)$',
+                      'Invlaid Image, Only JPEG, PNG and GIF',
+                    ],
                   hint: 'Minimum Resolution: 1500px x 1500px | JPEG / PNG / GIF',
                   default: '',
                   required: true,
@@ -1380,12 +1395,9 @@ collections:
                 widget: select
                 hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
                 options:
-                  - label: 'Normal'
-                    value: 'NORMAL'
-                  - label: 'Desktop Only'
-                    value: 'NOMOBILE'
-                  - label: 'Disable Slider'
-                    value: 'NOSLIDER'
+                  - { label: 'Normal', value: 'NORMAL' }
+                  - { label: 'Desktop Only', value: 'NOMOBILE' }
+                  - { label: 'Disable Slider', value: 'NOSLIDER' }
                 default: 'NORMAL'
               - label: 'Online Shop List'
                 name: 'onlineshoplist'
@@ -1396,7 +1408,11 @@ collections:
                       name: 'image',
                       label: 'Image',
                       widget: 'image',
-                      pattern: [\.(jpe?g|png|gif)$],
+                      pattern:
+                        [
+                          '\.(jpe?g|png|gif)$',
+                          'Invlaid Image, Only JPEG, PNG and GIF',
+                        ],
                       hint: 'Minimum Resolution: 2000px x 1500px | JPEG / PNG / GIF',
                       required: false,
                       default: '',
@@ -1426,12 +1442,9 @@ collections:
                 widget: select
                 hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
                 options:
-                  - label: 'Normal'
-                    value: 'NORMAL'
-                  - label: 'Desktop Only'
-                    value: 'NOMOBILE'
-                  - label: 'Disable Slider'
-                    value: 'NOSLIDER'
+                  - { label: 'Normal', value: 'NORMAL' }
+                  - { label: 'Desktop Only', value: 'NOMOBILE' }
+                  - { label: 'Disable Slider', value: 'NOSLIDER' }
                 default: 'NORMAL'
               - label: 'Offline Shop List'
                 name: 'offlineshoplist'
@@ -1442,7 +1455,11 @@ collections:
                       name: 'image',
                       label: 'Image',
                       widget: 'image',
-                      pattern: [\.(jpe?g|png|gif)$],
+                      pattern:
+                        [
+                          '\.(jpe?g|png|gif)$',
+                          'Invlaid Image, Only JPEG, PNG and GIF',
+                        ],
                       hint: 'Minimum Resolution: 500px x 200px | JPEG / PNG / GIF',
                       required: false,
                       default: '',
@@ -1503,10 +1520,8 @@ collections:
                   hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: "redirect-to-google"',
                   pattern:
                     [
-                      [
-                        '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
-                        'Invalid Characters',
-                      ],
+                      '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+                      'Invalid Characters',
                     ],
                 }
               - {
@@ -1516,10 +1531,8 @@ collections:
                   hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: External URL "https://google.com", Internal: "google"',
                   pattern:
                     [
-                      [
-                        '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
-                        'Invalid Characters',
-                      ],
+                      '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+                      'Invalid Characters',
                     ],
                 }
               - {
