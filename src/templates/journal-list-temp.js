@@ -123,6 +123,12 @@ export default class JournalList extends React.Component {
       printTitle = `${printTitle} ${curindex}`;
     }
 
+    let getColorstat = journal.node.frontmatter.listcolorblack;
+    if (typeof journal.node.frontmatter.listcolorblack === 'string') {
+      getColorstat =
+        journal.node.frontmatter.listcolorblack === 'true' ? true : false;
+    }
+
     return (
       <Layout
         titleText={printTitle}
@@ -151,16 +157,6 @@ export default class JournalList extends React.Component {
               <div className='content'>
                 <div className='__journalcontainer'>
                   {journals.edges.map((journal, id) => {
-                    let getColorstat = journal.node.frontmatter.listcolorblack;
-                    if (
-                      typeof journal.node.frontmatter.listcolorblack ===
-                      'string'
-                    ) {
-                      getColorstat =
-                        journal.node.frontmatter.listcolorblack === 'true'
-                          ? true
-                          : false;
-                    }
                     return (
                       <Link
                         key={journal.node.id}

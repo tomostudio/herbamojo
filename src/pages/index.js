@@ -1873,24 +1873,12 @@ export default class Home extends React.Component {
                       <div className='content flex'>
                         <div className='__journalcontainer'>
                           {printjournal.edges.map((journal, id) => {
-                            let getColorstat =
-                              journal.node.frontmatter.listcolorblack;
-                            if (
-                              typeof journal.node.frontmatter.listcolorblack ===
-                              'string'
-                            ) {
-                              getColorstat =
-                                journal.node.frontmatter.listcolorblack ===
-                                'true'
-                                  ? true
-                                  : false;
-                            }
                             return (
                               <Link
                                 key={journal.node.id}
                                 to={journal.node.fields.slug}
                                 className={
-                                  getColorstat
+                                  journal.node.frontmatter.listcolorblack
                                     ? 'black'
                                     : ''
                                 }
