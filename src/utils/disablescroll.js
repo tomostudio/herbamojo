@@ -12,7 +12,7 @@ export class DisableScroll {
     this.disable();
   }
   disable() {
-    console.log('scroll disable trigger', this.scrolldisabled);
+    // console.log('scroll disable trigger', this.scrolldisabled);
     if (!this.scrolldisabled) {
       // console.log('scroll disable', this.scrolldisabled);
       this.scrolldisabled = true;
@@ -79,7 +79,7 @@ export class DisableScroll {
     }
   }
   enable = () => {
-    console.log('scroll enable trigger', this.scrolldisabled);
+    // console.log('scroll enable trigger', this.scrolldisabled);
     this.scrolldisabled = false;
     if (this.target === null) {
       // console.log('scroll enable', this.scrolldisabled);

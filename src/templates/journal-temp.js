@@ -99,8 +99,8 @@ export default class Journal extends React.Component {
       keywords: content.seo.seo_keywords,
     };
 
-    if (content.seo.seo_image !== '' && content.seo.seo_image !== undefined) {
-      seo.image = `https://herbamojo.id${content.seo.seo_image}`;
+    if (content.seo.seo_image !== '' || content.seo.seo_image !== undefined) {
+      seo.image = `https://herbamojo.id${content.seo.seo_image.publicURL}`;
     }
 
     const curURL = this.props.pageContext.slug.toString();
@@ -367,7 +367,7 @@ export const query = graphql`
             thumbimage {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }
@@ -401,7 +401,7 @@ export const query = graphql`
             thumbimage {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }
@@ -474,7 +474,9 @@ export const query = graphql`
         seo {
           seo_shortdesc
           seo_keywords
-          seo_image
+          seo_image{
+            publicURL
+          }
         }
       }
     }

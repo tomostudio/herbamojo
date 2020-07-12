@@ -1,6 +1,6 @@
 ## #CHANGELOG
 
-## 2020-07-10
+## 2020-07-12
 
 ### version 1.1.0
 
@@ -8,6 +8,10 @@
 - Added Partial Gatsby Image Support for Blog Cover & Thumbnail
 - [Gatsby Image not detecting nested Value (in Object or Array)]
 - Fix Bug not scrolling
+- Added Editorial Workflow
+- Added Entlify Setting
+- Fix Gatsby Image not finding images because it query the src first and not the assets.
+- Adjust CSS and Structure to Gatsby Image
 
 ## 2019-08-08
 

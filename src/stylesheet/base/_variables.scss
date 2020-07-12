@@ -85,7 +85,7 @@ $font-size-subbody: 20px;
 
     75%,
     100% {
-        @include transform(translate(0px, 0%));
+        @include transform(translate(50px, 0%));
         opacity: 0;
     }
 }

@@ -476,9 +476,11 @@ main.journal {
       @include respond-to(mobile) {
         padding-top: 12 / 16 * 100%;
       }
+      & > div.gatsby-image-wrapper,
       & > picture {
         width: 100%;
-        position: absolute;
+        z-index: 1 !important;
+        position: absolute !important;
         top: 0px;
         left: 0px;
         height: 100%;
@@ -488,13 +490,13 @@ main.journal {
           object-fit: cover;
         }
       }
-      & > div {
+      & > div:not(.gatsby-image-wrapper) {
         width: 100%;
         position: absolute;
         top: 0px;
         left: 0px;
         height: 100%;
-        z-index: 2;
+        z-index: 5;
         padding: $global-padding;
         padding-top: 80px;
         @include respond-to(m_tablet) {
@@ -773,7 +775,10 @@ main.journal {
             @include transition(opacity 0.5s, color $global-transition);
             opacity: 0;
             body.loaded & {
-              @include transition(opacity $_transition #{$eachdelay * 3}, color $global-transition);
+              @include transition(
+                opacity $_transition #{$eachdelay * 3},
+                color $global-transition
+              );
               opacity: 1;
             }
           }
@@ -1057,9 +1062,9 @@ section.journallist {
           @include setflex(column, nowrap);
           padding-top: 10px;
           padding-bottom: 40px;
-          @include bp-max(1000px) {
+          @include bp-max(1200px) {
             padding: $globalmobile-padding;
-            padding-bottom: 25px;
+            padding-bottom: 30px;
           }
           @include respond-to(mobile) {
             padding: $globalmobile-padding;
@@ -1081,12 +1086,13 @@ section.journallist {
             font-size: $font-size-heading2;
             line-height: $lineheight-heading2;
             text-align: center;
-            @include bp-max(950px) {
+            @include bp-max(1200px) {
+              margin-top: 10px;
               font-size: $font-size-heading2-m;
               line-height: $lineheight-heading2-m;
             }
             @include respond-to(m_tablet) {
-              margin-top: 10px;
+              margin-top: 5px;
               font-size: $font-size-heading2-m;
               line-height: $lineheight-heading2-m;
             }
@@ -1097,8 +1103,9 @@ section.journallist {
             }
           }
         }
+        & > div.gatsby-image-wrapper,
         & > picture {
-          position: absolute;
+          position: absolute !important;
           width: 100%;
           height: 100%;
           top: 0px;

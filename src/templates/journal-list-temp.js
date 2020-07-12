@@ -251,7 +251,7 @@ export const query = graphql`
             thumbimage {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }

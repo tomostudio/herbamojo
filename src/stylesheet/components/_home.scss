@@ -184,7 +184,8 @@ main.home {
               }
             }
 
-            & > img {
+            & > img,
+            & > div.gatsby-image-wrapper {
               height: 100%;
             }
 
@@ -569,7 +570,8 @@ main.home {
           overflow: hidden;
         }
 
-        & > img {
+        & > img,
+        & > div.gatsby-image-wrapper {
           position: relative;
           height: 100%;
 
@@ -579,6 +581,10 @@ main.home {
             margin: auto;
             object-fit: contain;
             object-position: center;
+            & img {
+              object-fit: contain;
+              object-position: center;
+            }
             top: auto;
 
             @include respond-to(m_tablet) {
@@ -588,9 +594,14 @@ main.home {
 
           &:not(.mobile) {
             width: 125%;
-            @include transform(translate(-12.5%, 0%));
+            // @include transform(translate(-12.5%, 0%));
+            left: -12.5%;
             object-fit: cover;
             object-position: right;
+            & img {
+              object-fit: cover;
+              object-position: right;
+            }
 
             @include respond-to(m_tablet) {
               display: none;
@@ -712,14 +723,21 @@ main.home {
         @include respond-to(m_tablet) {
           display: none;
         }
-
-        & > img {
-          @include transform(translate(-25%, 0%));
+        & > .wrapper {
           position: relative;
-          width: 150%;
+          width: 100%;
           height: 100%;
-          object-fit: cover;
-          object-position: center;
+          @include transform(translate(0%, 0%));
+          & > img,
+          & > div.gatsby-image-wrapper {
+            // @include transform(translate(-25%, 0%));
+            margin-left: -25%;
+            position: relative;
+            width: 200%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+          }
         }
       }
 
@@ -755,7 +773,8 @@ main.home {
             max-width: 300px;
           }
 
-          & > img {
+          & > img,
+          & > div.gatsby-image-wrapper {
             width: 100%;
           }
         }
@@ -772,18 +791,29 @@ main.home {
             position: relative;
             z-index: 20;
 
-            & > img {
+            & > img,
+            & > picture,
+            & > div.gatsby-image-wrapper {
               pointer-events: auto;
               position: relative;
               width: 75%;
               max-width: 250px;
               margin: 0px auto;
+              & > img {
+                width: 100%;
+                max-width: 250px;
+                height: auto;
+                object-fit: contain;
+                object-position: center;
+              }
               @include transform(translate(0, 8vh));
             }
           }
 
           @include respond-to(mobile) {
-            & > img {
+            & > img,
+            & > picture,
+            & > div.gatsby-image-wrapper {
               max-width: 175px;
             }
           }
@@ -873,7 +903,8 @@ main.home {
               margin: 0px;
             }
 
-            & > img {
+            & > img,
+            & > div.gatsby-image-wrapper {
               width: 100%;
             }
 
@@ -920,9 +951,9 @@ main.home {
         }
       }
 
-      & > .bg > img {
+      & > .bg > .wrapper {
         opacity: 0;
-        @include transform(translate(-15%, 0%));
+        @include transform(translate(-25%, 0%));
       }
 
       body.loaded &.inview {
@@ -978,13 +1009,15 @@ main.home {
           }
         }
 
-        & > .bg > img {
-          opacity: 1;
-          @include transform(translate(-25%, 0%));
-          @include transition(
-            transform $_transition #{$initdelay + (3 * $eachdelay)},
-            opacity $_transition #{$initdelay + (3 * $eachdelay)}
-          );
+        & > .bg {
+          & .wrapper {
+            opacity: 1;
+            @include transform(translate(-35%, 0%));
+            @include transition(
+              opacity $_transition #{$initdelay + (3 * $eachdelay)},
+              transform $_transition #{$initdelay + (3 * $eachdelay)}
+            );
+          }
         }
       }
     }
@@ -1046,8 +1079,11 @@ main.home {
               width: 100%;
             }
 
-            & > div:first-child > img {
-              width: 100%;
+            & > div:first-child {
+              & > img,
+              & > div.gatsby-image-wrapper {
+                width: 100%;
+              }
             }
 
             & > div:last-child {
@@ -1428,76 +1464,81 @@ main.home {
               @include animation(ingbg_transitionoutm 0.4s 0s ease-in 1 both);
             }
           }
-        }
 
-        & img {
-          max-width: 100%;
-          min-height: 50vh;
-          max-height: 100vh;
-          position: absolute;
-          top: 50%;
-          right: 0px;
-          @include transform(translate(0%, -50%));
-
-          left: auto;
-          object-fit: scale-down;
-          object-position: right center;
-          display: none;
-
-          &.active {
-            display: block;
-          }
-
-          &:nth-child(1),
-          &:nth-child(7) {
-            max-width: 80%;
-            max-height: 70vh;
-          }
-
-          &:nth-child(6),
-          &:nth-child(4) {
+          & > img,
+          & > div.gatsby-image-wrapper {
             max-width: 100%;
-            max-height: 80vh;
-          }
+            min-height: 50vh;
+            max-height: 100vh;
+            position: absolute;
+            top: 50%;
+            right: 0px;
+            @include transform(translate(0%, -50%));
 
-          &:nth-child(2) {
-            right: -10%;
-            max-width: 90%;
-            max-height: 90vh;
-          }
+            left: auto;
+            object-fit: scale-down;
+            object-position: right center;
+            display: none;
+            & img {
+              object-fit: scale-down;
+              object-position: right center;
+            }
 
-          &:nth-child(3) {
-            width: 100%;
-            max-width: 550px;
-          }
-
-          @include respond-to(m_tablet) {
-            min-height: 30vh;
-            max-height: 75vh !important;
-            max-width: none !important;
-            width: 150% !important;
-            left: 50%;
-            right: auto;
-            @include transform(translate(-50%, -50%));
-            object-position: center center;
-
-            &:nth-child(5),
-            &:nth-child(2) {
-              @include transform(translate(-30%, -50%));
+            &.active {
+              display: block;
             }
 
             &:nth-child(1),
-            &:nth-child(6),
-            &:nth-child(3) {
-              @include transform(translate(-70%, -50%));
-            }
-
             &:nth-child(7) {
-              width: 120% !important;
+              max-width: 80%;
+              max-height: 70vh;
+            }
+
+            &:nth-child(6),
+            &:nth-child(4) {
+              max-width: 100%;
+              max-height: 80vh;
+            }
+
+            &:nth-child(2) {
+              right: -10%;
+              max-width: 90%;
+              max-height: 90vh;
             }
 
             &:nth-child(3) {
-              width: 100% !important;
+              width: 100%;
+              max-width: 550px;
+            }
+
+            @include respond-to(m_tablet) {
+              min-height: 30vh;
+              max-height: 75vh !important;
+              max-width: none !important;
+              width: 150% !important;
+              left: 50%;
+              right: auto;
+              @include transform(translate(-50%, -50%));
+              object-position: center center;
+
+              &:nth-child(5),
+              &:nth-child(2) {
+                @include transform(translate(-30%, -50%));
+              }
+
+              &:nth-child(1),
+              &:nth-child(6),
+              &:nth-child(3) {
+                @include transform(translate(-70%, -50%));
+              }
+
+              &:nth-child(7) {
+                width: 120% !important;
+              }
+
+              &:nth-child(3) {
+                width: 100% !important;
+              }
             }
           }
         }
@@ -1505,11 +1546,8 @@ main.home {
 
       &:not(.inview) {
         & > .bg {
+          opacity: 0;
           @include transition(opacity 0.5s);
-
-          @include respond-to(m_tablet) {
-            opacity: 0;
-          }
         }
 
         & > .wrapper {
@@ -1532,8 +1570,7 @@ main.home {
 
       &.inview {
         & > .bg {
-          @include transition(opacity 0.4s);
-
+          @include transition(opacity 1s);
           @include respond-to(m_tablet) {
             @include transition(opacity 1.5s 1s);
           }
@@ -1620,7 +1657,7 @@ main.home {
                   & .glide .glide__track {
                     & .glide__slides {
                       @include setflex(row nowrap);
-                      & > *{
+                      & > * {
                         width: 100%;
                         @include flex-grow(1);
                       }
@@ -1742,6 +1779,7 @@ main.home {
                   & > * {
                     width: 100%;
                     height: 150px;
+                    position: relative;
 
                     @include respond-to(m_tablet) {
                       height: 200px;
@@ -1753,12 +1791,18 @@ main.home {
 
                     display: block;
 
-                    & > img {
-                      object-fit: scale-down;
-                      width: 100%;
+                    & > img,
+                    & > div.gatsby-image-wrapper {
+                      object-fit: contain;
+                      width: 100% !important;
                       margin: auto;
                       display: block;
-                      height: 100%;
+                      height: 100% !important;
+                      & > picture,
+                      & > picture > img {
+                        width: 100%;
+                        height: 100%;
+                      }
                     }
                   }
 
@@ -1771,12 +1815,12 @@ main.home {
                     }
                   }
                 }
-                &.noslider{
+                &.noslider {
                   margin: 0px 54px;
                   @include setflex(row, wrap);
                   @include respond-to(m_tablet) {
                     margin: 0px auto;
-                    & .shop{
+                    & .shop {
                       width: 100%;
                     }
                   }
@@ -2005,7 +2049,8 @@ main.home {
         }
 
         & > picture,
-        & > img {
+        & > img,
+        & > div.gatsby-image-wrapper {
           width: 100%;
           height: auto;
           max-height: calc(100vh - (80px * 2));
@@ -2323,7 +2368,8 @@ main.home {
                   display: block;
                 }
 
-                & > img {
+                & > img,
+                & > div.gatsby-image-wrapper {
                   height: 100%;
                 }
 
@@ -2398,7 +2444,8 @@ main.home {
         height: 40px;
         pointer-events: auto;
         @include transition(opacity $global-transition);
-        & > img {
+        & > img,
+        & > div.gatsby-image-wrapper {
           height: 100%;
         }
       }

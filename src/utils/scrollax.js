@@ -6,14 +6,14 @@ export class Scrollax {
     left: 0,
     right: 0,
     top: 0,
-    bottom: 0
+    bottom: 0,
   };
   transform = {
     x: 0,
-    y: 0
+    y: 0,
   };
   center = {
-    y: 0
+    y: 0,
   };
   constructor(obj) {
     this.scrollmovement =
@@ -65,7 +65,7 @@ export class Scrollax {
         top: 0,
         bottom: 0,
         x: 0,
-        y: 0
+        y: 0,
       };
 
       if (this.move.right > 0) {
@@ -101,31 +101,23 @@ export class Scrollax {
         );
         this.scrolltarget.style.bottom = movement.bottom.toString() + 'px';
       }
+      if (this.transform.x !== 0 || this.transform.y !== 0) {
+        const getScrollMovement =
+          this.scrolltarget.getBoundingClientRect().y / windowH;
 
-      if (this.transform.x > 0 || this.transform.y > 0) {
         movement.x =
-          this.transform.x > 0
-            ? Math.round(
-                (this.scrolltarget.getBoundingClientRect().y / windowH) *
-                  100 *
-                  this.transform.x
-              )
-            : 0;
+          Math.round(getScrollMovement * Math.abs(this.transform.x) * 500000) /
+          1000;
         movement.y =
-          this.transform.y > 0
-            ? Math.round(
-                (this.scrolltarget.getBoundingClientRect().y / windowH) *
-                  100 *
-                  this.transform.y
-              )
-            : 0;
-        this.scrolltarget.style.transform = `transform(${movement.x}%, ${
-          movement.y
-        }%)`;
+          Math.round(getScrollMovement * Math.abs(this.transform.y) * 500000) /
+          1000;
+        this.scrolltarget.style.transform = `translate(${
+          movement.x * Math.sign(this.transform.x)
+        }px, ${movement.y * Math.sign(this.transform.y)}px)`;
       }
     }
   }
-  scrollevent = e => {
+  scrollevent = (e) => {
     this.trigger();
   };
 }

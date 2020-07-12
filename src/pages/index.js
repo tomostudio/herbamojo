@@ -3,7 +3,7 @@ import { StaticQuery, Link, graphql } from 'gatsby';
 import lottie from 'lottie-web';
 import { Helmet } from 'react-helmet';
 import Glide from '@glidejs/glide';
-import Img from "gatsby-image"
+import Img from 'gatsby-image';
 
 //UTILS
 import { ScrollSnapClass } from 'utils/scrollsnap';
@@ -44,6 +44,25 @@ import AnimDataEnergy from 'animationdata/energy.json';
 import AnimDataImmune from 'animationdata/immune.json';
 import AnimDataStamina from 'animationdata/stamina.json';
 import AnimDataExercise from 'animationdata/exercise.json';
+
+const ShopImages = ({ fluid }) => {
+  return (
+    <Img
+      imgStyle={{
+        objectFit: 'contain',
+        objectPosition: 'center',
+        width: 'inherit',
+        height: 'inherit',
+      }}
+      fluid={fluid}
+      loading={'auto'}
+      durationFadeIn={10}
+      fadeIn={false}
+      backgroundColor='#000000'
+      alt='herbamojo'
+    />
+  );
+};
 
 export default class Home extends React.Component {
   // --------------
@@ -350,24 +369,29 @@ export default class Home extends React.Component {
 
       // SCROLLAX
       this.scrollaxArray[0] = new Scrollax({
-        target: 'img.paralax1',
-        move_right: 0.25,
+        target: '.paralax1',
+        // move_right: 0.25,
+        transform_x: -0.25,
       });
       this.scrollaxArray[1] = new Scrollax({
-        target: 'img.paralax2',
-        move_left: 0.25,
+        target: '.paralax2',
+        // move_left: 0.25,
+        transform_x: 0.25,
       });
       this.scrollaxArray[2] = new Scrollax({
-        target: '#ing_bg',
-        move_top: 0.35,
+        target: '#ingredients > .bg',
+        // move_top: 0.35,
+        transform_y: 0.15,
       });
       this.scrollaxArray[3] = new Scrollax({
-        target: 'img.mobile.prlx',
-        move_bottom: 0.3,
+        target: '.mobile.prlx',
+        // move_bottom: 0.3,
+        transform_y: -0.3,
       });
       this.scrollaxArray[4] = new Scrollax({
-        target: '#about .content .bottle > img',
-        move_bottom: 0.3,
+        target: '#about .content .bottle',
+        // move_bottom: 0.3,
+        transform_y: -0.3,
       });
 
       //INGREDIENTS SET
@@ -1108,14 +1132,36 @@ export default class Home extends React.Component {
                       </div>
                     </div>
                     <div className='bg'>
-                      <img
+                      {/* <img
                         className='paralax1'
                         src={homeData.home.background}
                         alt='herbamojo'
+                      /> */}
+                      <Img
+                        className='paralax1'
+                        fluid={homeData.home.background.childImageSharp.fluid}
+                        alt='herbamojo'
+                        imgStyle={{
+                          objectFit: 'cover',
+                          objectPosition: 'right',
+                        }}
+                        loading='eager'
                       />
-                      <img
+                      {/* <img
                         className='mobile prlx'
                         src={homeData.home.backgroundmobile}
+                        alt='herbamojo'
+                      /> */}
+                      <Img
+                        className='mobile prlx'
+                        imgStyle={{
+                          objectFit: 'contain',
+                          objectPosition: 'center',
+                        }}
+                        fluid={
+                          homeData.home.backgroundmobile.childImageSharp.fluid
+                        }
+                        loading='eager'
                         alt='herbamojo'
                       />
                     </div>
@@ -1132,7 +1178,11 @@ export default class Home extends React.Component {
                           <img src={HerbamojoLogo} alt='herbamojo' />
                         </div>
                         <div className='bottle'>
-                          <img src={BottleImg} alt='herbamojo' />
+                          <picture>
+                            <source srcSet={BottleImgWebP} type='image/webp' />
+                            <source srcSet={BottleImg} type='image/png' />
+                            <img src={BottleImg} alt='Herbamojo' />
+                          </picture>
                         </div>
                         <div className='description'>
                           {this.langID
@@ -1196,11 +1246,26 @@ export default class Home extends React.Component {
                       </div>
                     </div>
                     <div className='bg'>
-                      <img
+                      {/* <img
                         className='paralax2'
                         src={homeData.about.background}
                         alt='herbamojo'
-                      />
+                      /> */}
+
+                      <div className='wrapper'>
+                        <Img
+                          className='paralax2'
+                          imgStyle={{
+                            objectFit: 'cover',
+                            objectPosition: 'center',
+                          }}
+                          fluid={
+                            homeData.about.background.childImageSharp.fluid
+                          }
+                          alt='herbamojo'
+                          loading='eager'
+                        />
+                      </div>
                     </div>
                   </section>
                   <section id='benefits'>
@@ -1326,9 +1391,18 @@ export default class Home extends React.Component {
                   </div>
                   <div className='bg'>
                     <div id='ing_bg'>
+                      {/* <img key={id} src={node.image} alt='herbamojo' /> */}
                       {homeData.ingredients.map((node, id) => {
                         return (
-                          <img key={id} src={node.image} alt='herbamojo' />
+                          <Img
+                            imgStyle={{
+                              objectFit: 'scale-down',
+                              objectPosition: 'right center',
+                            }}
+                            key={id}
+                            fluid={node.image.childImageSharp.fluid}
+                            alt='herbamojo'
+                          />
                         );
                       })}
                     </div>
@@ -1383,9 +1457,11 @@ export default class Home extends React.Component {
                                               }}
                                               aria-label='Shop Slider'
                                             >
-                                              <img
-                                                src={node.image}
-                                                alt='herbamojo'
+                                              <ShopImages
+                                                fluid={
+                                                  node.image.childImageSharp
+                                                    .fluid
+                                                }
                                               />
                                             </a>
                                           ) : (
@@ -1397,9 +1473,11 @@ export default class Home extends React.Component {
                                                     : 'transparent',
                                               }}
                                             >
-                                              <img
-                                                src={node.image}
-                                                alt='herbamojo'
+                                              <ShopImages
+                                                fluid={
+                                                  node.image.childImageSharp
+                                                    .fluid
+                                                }
                                               />
                                             </div>
                                           )}
@@ -1436,9 +1514,11 @@ export default class Home extends React.Component {
                                                 }}
                                                 aria-label='Shop Slider'
                                               >
-                                                <img
-                                                  src={node.image}
-                                                  alt='herbamojo'
+                                                <ShopImages
+                                                  fluid={
+                                                    node.image.childImageSharp
+                                                      .fluid
+                                                  }
                                                 />
                                               </a>
                                             ) : (
@@ -1450,9 +1530,11 @@ export default class Home extends React.Component {
                                                       : 'transparent',
                                                 }}
                                               >
-                                                <img
-                                                  src={node.image}
-                                                  alt='herbamojo'
+                                                <ShopImages
+                                                  fluid={
+                                                    node.image.childImageSharp
+                                                      .fluid
+                                                  }
                                                 />
                                               </div>
                                             )}
@@ -1508,9 +1590,11 @@ export default class Home extends React.Component {
                                                     }}
                                                     aria-label='Shop Slider'
                                                   >
-                                                    <img
-                                                      src={node.image}
-                                                      alt='herbamojo'
+                                                    <ShopImages
+                                                      fluid={
+                                                        node.image
+                                                          .childImageSharp.fluid
+                                                      }
                                                     />
                                                   </a>
                                                 ) : (
@@ -1522,9 +1606,11 @@ export default class Home extends React.Component {
                                                           : 'transparent',
                                                     }}
                                                   >
-                                                    <img
-                                                      src={node.image}
-                                                      alt='herbamojo'
+                                                    <ShopImages
+                                                      fluid={
+                                                        node.image
+                                                          .childImageSharp.fluid
+                                                      }
                                                     />
                                                   </div>
                                                 )}
@@ -1592,9 +1678,11 @@ export default class Home extends React.Component {
                                               }}
                                               aria-label='Shop Slider'
                                             >
-                                              <img
-                                                src={node.image}
-                                                alt='herbamojo'
+                                              <ShopImages
+                                                fluid={
+                                                  node.image.childImageSharp
+                                                    .fluid
+                                                }
                                               />
                                             </a>
                                           ) : (
@@ -1606,9 +1694,11 @@ export default class Home extends React.Component {
                                                     : 'transparent',
                                               }}
                                             >
-                                              <img
-                                                src={node.image}
-                                                alt='herbamojo'
+                                              <ShopImages
+                                                fluid={
+                                                  node.image.childImageSharp
+                                                    .fluid
+                                                }
                                               />
                                             </div>
                                           )}
@@ -1645,9 +1735,11 @@ export default class Home extends React.Component {
                                                 }}
                                                 aria-label='Shop Slider'
                                               >
-                                                <img
-                                                  src={node.image}
-                                                  alt='herbamojo'
+                                                <ShopImages
+                                                  fluid={
+                                                    node.image.childImageSharp
+                                                      .fluid
+                                                  }
                                                 />
                                               </a>
                                             ) : (
@@ -1659,9 +1751,11 @@ export default class Home extends React.Component {
                                                       : 'transparent',
                                                 }}
                                               >
-                                                <img
-                                                  src={node.image}
-                                                  alt='herbamojo'
+                                                <ShopImages
+                                                  fluid={
+                                                    node.image.childImageSharp
+                                                      .fluid
+                                                  }
                                                 />
                                               </div>
                                             )}
@@ -1717,9 +1811,11 @@ export default class Home extends React.Component {
                                                     }}
                                                     aria-label='Shop Slider'
                                                   >
-                                                    <img
-                                                      src={node.image}
-                                                      alt='herbamojo'
+                                                    <ShopImages
+                                                      fluid={
+                                                        node.image
+                                                          .childImageSharp.fluid
+                                                      }
                                                     />
                                                   </a>
                                                 ) : (
@@ -1731,9 +1827,11 @@ export default class Home extends React.Component {
                                                           : 'transparent',
                                                     }}
                                                   >
-                                                    <img
-                                                      src={node.image}
-                                                      alt='herbamojo'
+                                                    <ShopImages
+                                                      fluid={
+                                                        node.image
+                                                          .childImageSharp.fluid
+                                                      }
                                                     />
                                                   </div>
                                                 )}
@@ -1799,7 +1897,12 @@ export default class Home extends React.Component {
                                     alt='Herbamojo'
                                   />
                                 </picture> */}
-                                <Img fluid={journal.node.frontmatter.thumbimage.childImageSharp.fluid} />
+                                <Img
+                                  fluid={
+                                    journal.node.frontmatter.thumbimage
+                                      .childImageSharp.fluid
+                                  }
+                                />
                               </Link>
                             );
                           })}
@@ -1859,7 +1962,7 @@ const indexQuery = graphql`
             thumbimage {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }
@@ -1893,7 +1996,7 @@ const indexQuery = graphql`
             thumbimage {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid
+                  ...GatsbyImageSharpFluid_withWebp
                 }
               }
             }
@@ -1934,7 +2037,13 @@ const indexQuery = graphql`
       frontmatter {
         onlineshop {
           onlineshoplist {
-            image
+            image {
+              childImageSharp {
+                fluid(maxWidth: 500, quality: 100) {
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
+                }
+              }
+            }
             link
             background
           }
@@ -1942,7 +2051,13 @@ const indexQuery = graphql`
         }
         offlineshop {
           offlineshoplist {
-            image
+            image {
+              childImageSharp {
+                fluid(maxWidth: 500, quality: 100) {
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
+                }
+              }
+            }
             link
             background
           }
@@ -1959,18 +2074,42 @@ const indexQuery = graphql`
       frontmatter {
         title
         home {
-          background
-          backgroundmobile
+          background {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
+          backgroundmobile {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
         }
         about {
-          background
+          background {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp
+              }
+            }
+          }
           desc {
             en
             id
           }
         }
         ingredients {
-          image
+          image {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp_noBase64
+              }
+            }
+          }
           title {
             en
             id

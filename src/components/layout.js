@@ -20,26 +20,28 @@ export default class Layout extends React.Component {
                 seo {
                   seo_keywords
                   seo_shortdesc
-                  seo_image
+                  seo_image {
+                    publicURL
+                  }
                 }
               }
             }
           }
         `}
-        render={data => {
+        render={(data) => {
           const fm_data = data.markdownRemark.frontmatter;
           const web_name = fm_data.web_name;
 
           let seo_image = '';
           if (fm_data.seo.seo_image) {
-            seo_image = `${fm_data.seo.seo_image}`;
+            seo_image = `${fm_data.seo.seo_image.publicURL}`;
           }
 
           const seo = {
             desc: fm_data.seo.seo_shortdesc,
             keywords: fm_data.seo.seo_keywords,
             image: `https://herbamojo.id${seo_image}`,
-            url: 'https://herbamojo.id'
+            url: 'https://herbamojo.id',
           };
 
           const props = this.props;

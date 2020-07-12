@@ -5,21 +5,19 @@ module.exports = {
   },
   plugins: [
     {
+      resolve: 'gatsby-source-filesystem',
+      options: {
+        name: 'assets',
+        path: `${__dirname}/static/assets`,
+      },
+    },
+    {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `settings`,
         path: `${__dirname}/src/settings`,
       },
     },
-    {
-      resolve: 'gatsby-source-filesystem',
-      options: {
-        path: `${__dirname}/static/assets`,
-        name: 'assets',
-      },
-    },
-    `gatsby-plugin-sharp`,
-    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
@@ -81,12 +79,14 @@ module.exports = {
         pixelId: '1710911005709446',
       },
     },
+    `gatsby-plugin-sharp`,
+    `gatsby-transformer-sharp`,
     {
       resolve: `gatsby-transformer-remark`,
       options: {
         plugins: [
-          `gatsby-remark-unwrap-images`,
           `gatsby-remark-relative-images`,
+          `gatsby-remark-unwrap-images`,
         ],
       },
     },
