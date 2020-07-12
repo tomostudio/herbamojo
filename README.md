@@ -11,7 +11,7 @@ Website URL `herbamojo.id`
 - Netlify CMS
 
 ### SERVER
-This website is hosted on Netlify
+This website is hosted on Netlify with Gitlab LFS set
 
 ### INITIALISING
 

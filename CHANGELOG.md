@@ -13,6 +13,7 @@
 - Fix Gatsby Image not finding images because it query the src first and not the assets.
 - Adjust CSS and Structure to Gatsby Image
 - Update Color Toggle from Select to Boolean Toggle.
+- Initiate Git LFS [Improve Storage]
 
 ## 2019-08-08
 
