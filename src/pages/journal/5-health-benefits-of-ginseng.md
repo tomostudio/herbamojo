@@ -17,9 +17,9 @@ seo:
     can bring you tremendous health benefits which we will be discussing on this
     week's journal.
 altslug: /
-listcolorblack: "false"
+listcolorblack: false
 thumbimage: /assets/rsz_ginseng.png
-headercolorblack: "true"
+headercolorblack: true
 coverimage: /assets/rsz_ginseng.png
 related:
   - relatedslug: /
