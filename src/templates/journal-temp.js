@@ -98,7 +98,8 @@ export default class Journal extends React.Component {
       desc: content.seo.seo_shortdesc,
       keywords: content.seo.seo_keywords,
     };
-    
+
+    console.log(content.seo.seo_image);
     if (content.seo.seo_image !== '' || content.seo.seo_image !== undefined) {
       seo.image = `https://herbamojo.id${content.seo.seo_image.publicURL}`;
     }
@@ -199,11 +200,7 @@ export default class Journal extends React.Component {
           journallist={false}
         />
         <div className='sectionWrapper'>
-          <section
-            className={`journalcover ${
-              getHeaderColor ? 'black' : ''
-            }`}
-          >
+          <section className={`journalcover ${getHeaderColor ? 'black' : ''}`}>
             <div>
               <div>
                 <div>{content.date}</div>
