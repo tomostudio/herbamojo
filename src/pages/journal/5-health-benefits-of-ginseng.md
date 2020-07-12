@@ -8,18 +8,20 @@ slug: 5-health-benefits-of-ginseng
 date: 2019-09-13T06:05:59.657Z
 seo:
   seo_image: /assets/rsz_ginseng.png
-  seo_keywords: herbamojo, herbal, ginseng, maca, tribulus, javanese pepper, red
-    ginger, purwoceng, pasak bumi, stamina, vitality
-  seo_shortdesc: As an adaptogen, ginseng packs a lot of benefits for the body in
-    order to run smoothly. From stress and fatigue reduction to maintaining
-    sexual health, this herb is widely used in East Asia, and for a good reason.
+  seo_keywords: >-
+    herbamojo, herbal, ginseng, maca, tribulus, javanese pepper, red ginger,
+    purwoceng, pasak bumi, stamina, vitality
+  seo_shortdesc: >-
+    As an adaptogen, ginseng packs a lot of benefits for the body in order to
+    run smoothly. From stress and fatigue reduction to maintaining sexual
+    health, this herb is widely used in East Asia, and for a good reason.
     Ginseng is also one of the ingredients found in Herbamojo's concoction and
     can bring you tremendous health benefits which we will be discussing on this
     week's journal.
 altslug: /
-listcolorblack: "false"
+listcolorblack: false
 thumbimage: /assets/rsz_ginseng.png
-headercolorblack: "true"
+headercolorblack: true
 coverimage: /assets/rsz_ginseng.png
 related:
   - relatedslug: /
