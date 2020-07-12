@@ -12,6 +12,7 @@
 - Added Entlify Setting
 - Fix Gatsby Image not finding images because it query the src first and not the assets.
 - Adjust CSS and Structure to Gatsby Image
+- Update Color Toggle from Select to Boolean Toggle.
 
 ## 2019-08-08
 
