@@ -98,7 +98,7 @@ export default class Journal extends React.Component {
       desc: content.seo.seo_shortdesc,
       keywords: content.seo.seo_keywords,
     };
-
+    
     if (content.seo.seo_image !== '' || content.seo.seo_image !== undefined) {
       seo.image = `https://herbamojo.id${content.seo.seo_image.publicURL}`;
     }
