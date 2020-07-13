@@ -1,8 +1,8 @@
 {
   "name": "herbamojo",
   "private": true,
-  "description": "Herbamojo.id",
-  "version": "1.1.0",
+  "description": "Package Herbamojo.id",
+  "version": "1.1.1",
   "license": "MIT",
   "scripts": {
     "develop": "gatsby develop",

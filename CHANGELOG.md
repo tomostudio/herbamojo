@@ -1,8 +1,17 @@
 ## #CHANGELOG
 
 ## TO DO
+- CLEAN
+
+## 2020-07-13
+
+### version 1.1.1
 
 - ScrollSnap not triggering on MBP 13
+- Remove Broken Netlify Plugin [Validate]
+- Added Gatsby Plugin Remove Trailing Slashes
+- Fix bug on Scroll Snap not working [Additonal Style Spaces]
+- Added Pretty URL at Netlify build command.
 
 ## 2020-07-12
 
