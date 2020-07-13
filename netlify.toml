@@ -1,4 +1,4 @@
-S# Settings in the [build] context are global and are applied to all contexts
+# Settings in the [build] context are global and are applied to all contexts
 # unless otherwise overridden by more specific contexts.
 [build]
 # Directory to change to before starting a build.
@@ -24,7 +24,7 @@ GIT_LFS_FETCH_INCLUDE = "true"
 NODE_OPTIONS = "--max-old-space-size=4096"
 NODE_VERSION = "lts/*"
 
-np[build.processing.html]
+[build.processing.html]
 pretty_urls = true
 
 [[plugins]]
