@@ -78,6 +78,7 @@ module.exports = {
         pixelId: '1710911005709446',
       },
     },
+    `gatsby-plugin-remove-trailing-slashes`,
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
