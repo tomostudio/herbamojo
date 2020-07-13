@@ -99,13 +99,13 @@ collections:
         default: '/'
         required: false
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
-      - name: 'listcolorblack'
-        label: 'Text Color on Journal List Thumbnail'
-        widget: 'select'
-        default: false
-        options:
-          - { label: 'White', value: 'false' }
-          - { label: 'Black', value: 'true' }
+      - {
+          name: 'listcolorblack',
+          label: 'Black Text Color on Journal List Thumbnail',
+          widget: 'boolean',
+          hint: 'Toggle it off to set the color to White',
+          default: false,
+        }
       - {
           name: 'thumbimage',
           label: 'Thumbnail Image',
@@ -114,13 +114,13 @@ collections:
           hint: '750x250 | Picture will be adjusted according to the Window | JPG/PNG',
           required: true,
         }
-      - name: 'headercolorblack'
-        label: 'Text Color on Cover and Header'
-        widget: 'select'
-        default: false
-        options:
-          - { label: 'White', value: 'false' }
-          - { label: 'Black', value: 'true' }
+      - {
+          name: 'headercolorblack',
+          label: 'Black Text Color on Cover and Header',
+          widget: 'boolean',
+          hint: 'Toggle it off to set the color to White',
+          default: false,
+        }
       - {
           name: 'coverimage',
           label: 'Cover Image',
@@ -253,13 +253,13 @@ collections:
         default: '/'
         required: false
         hint: 'Displaying Slug and Title. It takes a few second to load the current value.'
-      - name: 'listcolorblack'
-        label: 'Text Color on Journal List Thumbnail'
-        widget: 'select'
-        default: false
-        options:
-          - { label: 'White', value: 'false' }
-          - { label: 'Black', value: 'true' }
+      - {
+          name: 'listcolorblack',
+          label: 'Black Text Color on Journal List Thumbnail',
+          widget: 'boolean',
+          hint: 'Toggle it off to set the color to White',
+          default: false,
+        }
       - {
           name: 'thumbimage',
           label: 'Thumbnail Image',
@@ -268,13 +268,13 @@ collections:
           hint: '750x250 | Picture will be adjusted according to the Window | JPG/PNG',
           required: true,
         }
-      - name: 'headercolorblack'
-        label: 'Text Color on Cover and Header'
-        widget: 'select'
-        default: false
-        options:
-          - { label: 'White', value: 'false' }
-          - { label: 'Black', value: 'true' }
+      - {
+          name: 'headercolorblack',
+          label: 'Black Text Color on Cover and Header',
+          widget: 'boolean',
+          hint: 'Toggle it off to set the color to White',
+          default: false,
+        }
       - {
           name: 'coverimage',
           label: 'Cover Image',

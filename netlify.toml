@@ -20,6 +20,7 @@ command = "gatsby build"
 [build.environment]
 
 GIT_LFS_ENABLED = "true"
+GIT_LFS_FETCH_INCLUDE = "true"
 NODE_OPTIONS = "--max-old-space-size=4096"
 NODE_VERSION = "lts/*"
 
