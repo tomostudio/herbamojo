@@ -6,23 +6,23 @@ export class ScrollSnapClass {
     hasFooter: false,
     responsiveWidth: {
       treshold: 0,
-      enable: true
+      enable: true,
     },
     responsiveHeight: {
       treshold: 0,
-      enable: true
+      enable: true,
     },
     sections: {
       identifier: '',
       all: null,
       length: 0,
       current: 0,
-      targets: null
+      targets: null,
     },
     snap: {
       enable: true,
       pause: false,
-      treshold: 400
+      treshold: 400,
     },
     nav: {
       identifier: '',
@@ -33,7 +33,7 @@ export class ScrollSnapClass {
       hideonfooter: true,
       hideoncover: false,
       customnav: false,
-      activeClass: 'active'
+      activeClass: 'active',
     },
     scroll: {
       snapping: false,
@@ -43,12 +43,12 @@ export class ScrollSnapClass {
       delay: 400,
       sensitivity: 20,
       minduration: 300,
-      maxduration: 1500
+      maxduration: 1500,
     },
     listener: {
       init: false,
-      inittriggered: false
-    }
+      inittriggered: false,
+    },
   };
   common = {
     windowHeight: () => {
@@ -67,11 +67,11 @@ export class ScrollSnapClass {
     },
     scrollPosition: () => {
       return window.pageYOffset || document.documentElement.scrollTop;
-    }
+    },
   };
   scrollEvent = {
     before: () => {},
-    after: () => {}
+    after: () => {},
   };
   constructor(obj) {
     this.kill();
@@ -165,13 +165,22 @@ export class ScrollSnapClass {
       let checkheight = false;
       // CHECK IF THERE IS A NAV ATTR ON SECTION
       let navAtrCheck = true;
-      this.v.sections.all.forEach(each => {
+      this.v.sections.all.forEach((each) => {
+        // CHECK HEIGHT HERE
         if (
           each.clientHeight > this.common.windowHeight() ||
           this.common.windowHeight() < this.v.responsiveHeight.treshold
         ) {
           checkheight = true;
         }
+
+        // console.log(
+        //   'height check',
+        //   each.id,
+        //   each.clientHeight,
+        //   this.common.windowHeight(),
+        //   checkheight
+        // );
 
         //CHECK CUSTOM NAV POSITIONING
         if (each.getAttribute('nav') != null) {
@@ -295,7 +304,7 @@ export class ScrollSnapClass {
         }
       }
     },
-    to: target => {
+    to: (target) => {
       if (
         !this.v.scroll.snapping &&
         !this.scrollit.scrolling &&
@@ -376,7 +385,7 @@ export class ScrollSnapClass {
           this.v.scroll.snapping = false;
         }, duration + this.v.scroll.delay);
       }
-    }
+    },
   };
   event = {
     init: () => {
@@ -387,13 +396,13 @@ export class ScrollSnapClass {
         this.v.listener.init = true;
         if (window.addEventListener) {
           window.addEventListener('DOMMouseScroll', this.event.scroll, {
-            pasive: false
+            pasive: false,
           });
           window.addEventListener('wheel', this.event.scroll, {
-            passive: false
+            passive: false,
           });
           window.addEventListener('mousewheel', this.event.scroll, {
-            passive: false
+            passive: false,
           });
           window.addEventListener('keydown', this.event.keydown, false);
         }
@@ -413,13 +422,13 @@ export class ScrollSnapClass {
       if (this.v.listener.init) {
         if (window.addEventListener) {
           window.removeEventListener('DOMMouseScroll', this.event.scroll, {
-            pasive: false
+            pasive: false,
           });
           window.removeEventListener('wheel', this.event.scroll, {
-            passive: false
+            passive: false,
           });
           window.removeEventListener('mousewheel', this.event.scroll, {
-            passive: false
+            passive: false,
           });
           window.removeEventListener('keydown', this.event.keydown, false);
         }
@@ -458,9 +467,9 @@ export class ScrollSnapClass {
     scrolling: false,
     scrollStatus: {
       direction: null,
-      lastDeltaY: 0
+      lastDeltaY: 0,
     },
-    scroll: e => {
+    scroll: (e) => {
       // console.log(e.deltaY);
       if (this.v.snap.enable) {
         e = e || window.event;
@@ -510,7 +519,7 @@ export class ScrollSnapClass {
         // console.log(e.deltaY, _l, this.event.scrollStatus.direction, this.event.scrolling );
       }
     },
-    keydown: e => {
+    keydown: (e) => {
       if (this.v.snap.enable) {
         if (e.which === 38 || e.which === 40 || e.which === 32) {
           e = e || window.event;
@@ -531,14 +540,14 @@ export class ScrollSnapClass {
         }
       }
     },
-    touchstart: evt => {
+    touchstart: (evt) => {
       if (this.v.snap.enable) {
         this.v.xDown = evt.touches[0].clientX;
         this.v.yDown = evt.touches[0].clientY;
       }
       evt.preventDefault();
     },
-    touchmove: evt => {
+    touchmove: (evt) => {
       if (this.v.snap.enable) {
         if (!this.v.xDown || !this.v.yDown) {
           return;
@@ -569,15 +578,15 @@ export class ScrollSnapClass {
         evt.preventDefault();
       }
     },
-    touchend: evt => {
+    touchend: (evt) => {
       if (this.v.snap.enable) {
         // console.log('touch end', evt);
       }
-    }
+    },
   };
   nav = {
     // GO TO NAV
-    set: nav => {
+    set: (nav) => {
       if (
         this.v.nav.identifier !== '' &&
         document.querySelector(this.v.nav.identifier)
@@ -635,7 +644,7 @@ export class ScrollSnapClass {
           }
         }
       }
-    }
+    },
   };
   scrollit = {
     scrolling: false,
@@ -683,7 +692,7 @@ export class ScrollSnapClass {
           return t < 0.5
             ? 16 * t * t * t * t * t
             : 1 + 16 * --t * t * t * t * t;
-        }
+        },
       };
 
       this.scrollit.scrolling = true;
@@ -748,7 +757,7 @@ export class ScrollSnapClass {
       };
 
       scroll();
-    }
+    },
   };
 }
 
@@ -757,5 +766,5 @@ export const ScrollSnap = new ScrollSnapClass({
   speed: 500,
   maxduration: 1500,
   responsive_width: 650,
-  responsive_height: 500
+  responsive_height: 500,
 });

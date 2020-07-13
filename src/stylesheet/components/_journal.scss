@@ -1018,14 +1018,14 @@ section.journallist {
       & > a {
         display: block;
         width: 100%;
-        height: calc((100vh - 240px - 15px) / 2);
+        height: calc((100vh - 250px - 15px) / 2);
         max-height: 250px;
         position: relative;
         color: white;
         overflow: hidden;
         @include transition(color $global-transition);
         @include respond-to(desktop_more) {
-          height: 250px;
+          height: 225px;
           padding-top: 0px;
         }
         @include bp-max(1050px) {
@@ -1061,10 +1061,10 @@ section.journallist {
           padding: 0px $global-padding;
           @include setflex(column, nowrap);
           padding-top: 10px;
-          padding-bottom: 40px;
+          padding-bottom: 25px;
           @include bp-max(1200px) {
             padding: $globalmobile-padding;
-            padding-bottom: 30px;
+            padding-bottom: 20px;
           }
           @include respond-to(mobile) {
             padding: $globalmobile-padding;

@@ -176,6 +176,8 @@ export default class JournalList extends React.Component {
                             journal.node.frontmatter.thumbimage.childImageSharp
                               .fluid
                           }
+                          fadeIn={false} 
+                          loading="eager"
                         />
                         {/* <picture>
                           <source
@@ -260,7 +262,7 @@ export const query = graphql`
             thumbimage {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid_withWebp
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
                 }
               }
             }

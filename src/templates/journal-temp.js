@@ -249,7 +249,7 @@ export default class Journal extends React.Component {
               <source srcSet={content.coverimage} type='image/jpeg' />
               <img src={content.coverimage} alt='Herbamojo' />
             </picture> */}
-            <Img fluid={content.coverimage.childImageSharp.fluid} />
+            <Img fluid={content.coverimage.childImageSharp.fluid} loading={'eager'} />
           </section>
           <section className='markupcontent'>
             <div className='wrapper'>
@@ -373,7 +373,7 @@ export const query = graphql`
             thumbimage {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid_withWebp
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
                 }
               }
             }
@@ -470,7 +470,7 @@ export const query = graphql`
         coverimage {
           childImageSharp {
             fluid {
-              ...GatsbyImageSharpFluid
+              ...GatsbyImageSharpFluid_withWebp_noBase64
             }
           }
         }

@@ -2,6 +2,9 @@ import React from 'react';
 import { StaticQuery, graphql } from 'gatsby';
 import 'stylesheet/main.scss';
 import { Helmet } from 'react-helmet';
+import maisonMonoBold from 'fonts/MaisonMono-Bold.woff2';
+import maisonMonoItalic from 'fonts/MaisonMono-Italic.woff2';
+import amarilloUSAF from 'fonts/AmarilloUSAF.woff2';
 export default class Layout extends React.Component {
   render() {
     return (
@@ -61,6 +64,28 @@ export default class Layout extends React.Component {
                 <meta name='image' content={seo.image} />
                 <meta name='keywords' content={seo.keywords} />
                 {seo.url && <meta property='og:url' content={seo.url} />}
+
+                <link
+                  rel='prefetch'
+                  href={maisonMonoBold}
+                  as='font'
+                  type='font/woff2'
+                  crossorigin
+                ></link>
+                <link
+                  rel='prefetch'
+                  href={maisonMonoItalic}
+                  as='font'
+                  type='font/woff2'
+                  crossorigin
+                ></link>
+                <link
+                  rel='prefetch'
+                  href={amarilloUSAF}
+                  as='font'
+                  type='font/woff2'
+                  crossorigin
+                ></link>
 
                 {props.titleText ? (
                   <meta

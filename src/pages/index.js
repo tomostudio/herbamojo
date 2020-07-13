@@ -51,11 +51,15 @@ const ShopImages = ({ fluid }) => {
       imgStyle={{
         objectFit: 'contain',
         objectPosition: 'center',
-        width: 'inherit',
-        height: 'inherit',
+        width: '100%',
+        height: '100%',
+      }}
+      style={{
+        width: '100%',
+        height: '100%',
       }}
       fluid={fluid}
-      loading={'auto'}
+      loading={'eager'}
       durationFadeIn={10}
       fadeIn={false}
       backgroundColor='#000000'
@@ -139,6 +143,7 @@ export default class Home extends React.Component {
           hasfooter: false,
         });
       }
+
       this.SnapNav = document.querySelectorAll(
         `main#${this.MainID} div.overlay .right_nav .snap_nav > *`
       );
@@ -420,6 +425,7 @@ export default class Home extends React.Component {
       if (typeof document !== `undefined`) {
         // TRIGGER SCROLL SNAP INIT AND PAUSE
         this.HomeScrollSnap.init();
+
         this.HomeScrollSnap.pause();
         //ADD CLASS LOADED
         document.body.classList.add('loaded');
@@ -438,6 +444,7 @@ export default class Home extends React.Component {
         //ENABLE SCROLL
         if (this.disableScrollBody !== null) this.disableScrollBody.enable();
         this.HomeScrollSnap.play();
+
         if (this.LoadAnimationTimeout !== null)
           clearTimeout(this.LoadAnimationTimeout);
       }, this.LoadAnimationDelay);
@@ -1146,6 +1153,7 @@ export default class Home extends React.Component {
                           objectPosition: 'right',
                         }}
                         loading='eager'
+                        fadeIn={false}
                       />
                       {/* <img
                         className='mobile prlx'
@@ -1162,6 +1170,7 @@ export default class Home extends React.Component {
                           homeData.home.backgroundmobile.childImageSharp.fluid
                         }
                         loading='eager'
+                        fadeIn={false}
                         alt='herbamojo'
                       />
                     </div>
@@ -1264,6 +1273,7 @@ export default class Home extends React.Component {
                           }
                           alt='herbamojo'
                           loading='eager'
+                          fadeIn={false}
                         />
                       </div>
                     </div>
@@ -1402,6 +1412,8 @@ export default class Home extends React.Component {
                             key={id}
                             fluid={node.image.childImageSharp.fluid}
                             alt='herbamojo'
+                            loading='eager'
+                            fadeIn={false} 
                           />
                         );
                       })}
@@ -1895,21 +1907,21 @@ export default class Home extends React.Component {
                                   <span>{journal.node.frontmatter.date}</span>
                                   <h2>{journal.node.frontmatter.title}</h2>
                                 </div>
-                                {/* <picture>
-                                  <source
-                                    srcSet={journal.node.frontmatter.thumbimage}
-                                    type='image/jpeg'
-                                  />
-                                  <img
-                                    src={journal.node.frontmatter.thumbimage}
-                                    alt='Herbamojo'
-                                  />
-                                </picture> */}
                                 <Img
+                                  style={{
+                                    width: '100%',
+                                    height: '100%',
+                                  }}
+                                  imgStyle={{
+                                    width: '100%',
+                                    height: '100%',
+                                  }}
                                   fluid={
                                     journal.node.frontmatter.thumbimage
                                       .childImageSharp.fluid
                                   }
+                                  loading='eager'
+                                  fadeIn={false} 
                                 />
                               </Link>
                             );
@@ -1970,7 +1982,7 @@ const indexQuery = graphql`
             thumbimage {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid_withWebp
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
                 }
               }
             }
@@ -2004,7 +2016,7 @@ const indexQuery = graphql`
             thumbimage {
               childImageSharp {
                 fluid {
-                  ...GatsbyImageSharpFluid_withWebp
+                  ...GatsbyImageSharpFluid_withWebp_noBase64
                 }
               }
             }
@@ -2085,14 +2097,14 @@ const indexQuery = graphql`
           background {
             childImageSharp {
               fluid {
-                ...GatsbyImageSharpFluid_withWebp
+                ...GatsbyImageSharpFluid_withWebp_noBase64
               }
             }
           }
           backgroundmobile {
             childImageSharp {
               fluid {
-                ...GatsbyImageSharpFluid_withWebp
+                ...GatsbyImageSharpFluid_withWebp_noBase64
               }
             }
           }
@@ -2101,7 +2113,7 @@ const indexQuery = graphql`
           background {
             childImageSharp {
               fluid {
-                ...GatsbyImageSharpFluid_withWebp
+                ...GatsbyImageSharpFluid_withWebp_noBase64
               }
             }
           }

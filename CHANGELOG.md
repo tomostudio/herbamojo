@@ -1,5 +1,9 @@
 ## #CHANGELOG
 
+## TO DO
+
+- ScrollSnap not triggering on MBP 13
+
 ## 2020-07-12
 
 ### version 1.1.0

@@ -70,7 +70,6 @@ module.exports = {
       options: {
         trackingId: 'UA-97840044-2',
         exclude: ['/@deploystatus'],
-        defer: true,
       },
     },
     {

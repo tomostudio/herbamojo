@@ -1616,15 +1616,37 @@ main.home {
           }
         }
       }
+      body.__snapon & {
+        & > .wrapper {
+          & > .content {
+            justify-content: stretch;
+          }
+        }
+      }
       & > .wrapper {
         position: relative;
 
         & > .content {
           width: 100%;
-
+          &::before,
+          &::after {
+            content: '';
+            display: block;
+            width: 100%;
+            height: auto;
+            min-height: 25px;
+            height: auto;
+            flex-grow: 1.5;
+            flex-shrink: 1;
+          }
+          &::before {
+            min-height: 0px;
+            flex-grow: 1;
+            flex-shrink: 2;
+          }
           & > div {
             width: 100%;
-            margin-bottom: $global-padding;
+            margin-bottom: $global-padding - 10px;
 
             &:last-child {
               margin-bottom: 0px;
