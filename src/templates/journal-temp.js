@@ -99,11 +99,11 @@ export default class Journal extends React.Component {
       keywords: content.seo.seo_keywords,
     };
 
-    // console.log(content.seo.seo_image);
     if (
-      content.seo.seo_image !== '' ||
-      content.seo.seo_image !== undefined ||
-      content.seo.seo_image !== null
+      content.seo.seo_image !== '' &&
+      content.seo.seo_image !== undefined &&
+      content.seo.seo_image !== null &&
+      typeof content.seo.seo_image !== 'string'
     ) {
       seo.image = `https://herbamojo.id${content.seo.seo_image.publicURL}`;
     }
@@ -249,7 +249,10 @@ export default class Journal extends React.Component {
               <source srcSet={content.coverimage} type='image/jpeg' />
               <img src={content.coverimage} alt='Herbamojo' />
             </picture> */}
-            <Img fluid={content.coverimage.childImageSharp.fluid} loading={'eager'} />
+            <Img
+              fluid={content.coverimage.childImageSharp.fluid}
+              loading={'eager'}
+            />
           </section>
           <section className='markupcontent'>
             <div className='wrapper'>
