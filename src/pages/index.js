@@ -858,6 +858,8 @@ export default class Home extends React.Component {
           if (shopData.onlineshop.slider_option === 'NOSLIDER')
             onlineshoplayout = 'NOSLIDER';
 
+          console.log(onlineshop, offlineshop, shopData);
+
           let printjournal = [];
 
           if (this.langID) {
@@ -1413,7 +1415,7 @@ export default class Home extends React.Component {
                             fluid={node.image.childImageSharp.fluid}
                             alt='herbamojo'
                             loading='eager'
-                            fadeIn={false} 
+                            fadeIn={false}
                           />
                         );
                       })}
@@ -1921,7 +1923,7 @@ export default class Home extends React.Component {
                                       .childImageSharp.fluid
                                   }
                                   loading='eager'
-                                  fadeIn={false} 
+                                  fadeIn={false}
                                 />
                               </Link>
                             );

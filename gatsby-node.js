@@ -1,17 +1,58 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
+const _ = require(`lodash`);
+const cheerio = require(`cheerio`);
+const slash = require(`slash`);
+const deepMap = require('deep-map');
+const polyfill = require(`babel-polyfill`);
+
 let checkstatus = false;
 let redirectObject = null;
 let journalslug = 'journal';
 let journalperList = 6;
 let journaldisable = false;
-const { fmImagesToRelative } = require('gatsby-remark-relative-images');
+// const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 
+const fileNodes = [];
 
 exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
   const { createRedirect, createNodeField } = actions;
 
-  fmImagesToRelative(node);
+  // fmImagesToRelative(node);
+  // CUSTOM 'FM Images to Relative' In case file path is not absolute.
+  fileNodes.push(node);
+  // Only process markdown files
+  if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
+    // Convert paths in frontmatter to relative
+    function makeRelative(value) {
+      if (
+        _.isString(value) &&
+        (value.startsWith('assets') || value.startsWith('/assets'))
+      ) {
+        // Incase if file is not absolute
+        if (!path.isAbsolute(value)) value = `/${value}`;
+
+        if (path.isAbsolute(value)) {
+          let imagePath;
+          const foundImageNode = _.find(fileNodes, (file) => {
+            if (!file.dir) return;
+            imagePath = path.join(file.dir, path.basename(value));
+            return (
+              slash(path.normalize(file.absolutePath)) === slash(imagePath)
+            );
+          });
+          if (foundImageNode) {
+            return slash(
+              path.relative(path.join(node.fileAbsolutePath, '..'), imagePath)
+            );
+          }
+        }
+      }
+      return value;
+    }
+    // Deeply iterate through frontmatter data for absolute paths
+    deepMap(node.frontmatter, makeRelative, { inPlace: true });
+  }
 
   if (checkstatus && redirectObject !== null) {
     redirectObject.redirect.forEach((redirectRequest) => {
