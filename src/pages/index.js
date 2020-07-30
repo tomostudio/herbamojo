@@ -858,7 +858,8 @@ export default class Home extends React.Component {
           if (shopData.onlineshop.slider_option === 'NOSLIDER')
             onlineshoplayout = 'NOSLIDER';
 
-          console.log(onlineshop, offlineshop, shopData);
+          // CHECK OFFLINE & ONLINE SHOP DATA
+          // console.log(onlineshop, offlineshop, shopData);
 
           let printjournal = [];
 
