@@ -6,27 +6,30 @@ onlineshop:
   onlineshoplist:
     - background: transparent
       image: /assets/shop/tokopedia.png
-      link: 'https://www.tokopedia.com/herbamojo'
+      link: https://www.tokopedia.com/herbamojo
     - background: transparent
       image: /assets/shop/shopee.png
-      link: 'https://shopee.co.id/herbamojo7'
+      link: https://shopee.co.id/herbamojo7
+    - image: assets/blibli.png
+      link: https://www.blibli.com/brand/herbamojo?page=1&start=0&intent=true&brandName=herbamojo&multiCategory=true&excludeProductList=true&sort=7
+      background: transparent
   slider_option: NORMAL
 offlineshop:
   offlineshoplist:
     - background: transparent
       image: /assets/watson.png
-      link: ''
+      link: ""
     - background: transparent
       image: /assets/ranch-market.png
-      link: ''
+      link: ""
     - background: transparent
       image: /assets/farmers-market.png
-      link: ''
+      link: ""
     - background: transparent
       image: /assets/apotekroxy.png
-      link: ''
+      link: ""
     - background: transparent
       image: /assets/aeon.png
-      link: ''
+      link: ""
   slider_option: NORMAL
 ---
