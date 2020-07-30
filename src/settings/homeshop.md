@@ -11,7 +11,7 @@ onlineshop:
       image: /assets/shop/shopee.png
       link: https://shopee.co.id/herbamojo7
     - image: assets/blibli.png
-      link: https://www.blibli.com/brand/herbamojo?page=1&start=0&intent=true&brandName=herbamojo&multiCategory=true&excludeProductList=true&sort=7
+      link: https://www.blibli.com/brand/herbamojo
       background: transparent
   slider_option: NORMAL
 offlineshop:
