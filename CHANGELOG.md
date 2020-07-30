@@ -2,6 +2,12 @@
 
 ## TO DO
 - CLEAN
+## 2020-07-3-
+
+### version 1.1.2
+
+- Fix Netlify CMS addign Absolute path
+- Create custom Frontmatter Images to Relative to address string without Absolute path
 
 ## 2020-07-13
 
