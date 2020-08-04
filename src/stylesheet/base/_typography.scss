@@ -1,4 +1,3 @@
-
 // ==========================================================================
 
 // %font_normal_black {
@@ -24,61 +23,61 @@
 // ==========================================================================
 
 @font-face {
-    font-family: 'Amarillo';
-    src: url('../fonts/AmarilloUSAF.eot');
-    src: url('../fonts/AmarilloUSAF.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/AmarilloUSAF.woff2') format('woff2'),
-        url('../fonts/AmarilloUSAF.woff') format('woff'),
-        url('../fonts/AmarilloUSAF.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Amarillo';
+  src: url('../fonts/AmarilloUSAF.eot');
+  src: url('../fonts/AmarilloUSAF.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/AmarilloUSAF.woff2') format('woff2'),
+    url('../fonts/AmarilloUSAF.woff') format('woff');
+  // url('../fonts/AmarilloUSAF.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
 
 @font-face {
-    font-family: 'Maison Mono';
-    src: url('../fonts/MaisonMono-Bold.eot');
-    src: url('../fonts/MaisonMono-Bold.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/MaisonMono-Bold.woff2') format('woff2'),
-        url('../fonts/MaisonMono-Bold.woff') format('woff'),
-        url('../fonts/MaisonMono-Bold.ttf') format('truetype');
-    font-weight: bold;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Maison Mono';
+  src: url('../fonts/MaisonMono-Bold.eot');
+  src: url('../fonts/MaisonMono-Bold.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/MaisonMono-Bold.woff2') format('woff2'),
+    url('../fonts/MaisonMono-Bold.woff') format('woff');
+  // url('../fonts/MaisonMono-Bold.ttf') format('truetype');
+  font-weight: bold;
+  font-style: normal;
+  font-display: block;
 }
 
 @font-face {
-    font-family: 'Maison Mono';
-    src: url('../fonts/MaisonMono-Italic.eot');
-    src: url('../fonts/MaisonMono-Italic.eot?#iefix') format('embedded-opentype'),
-        url('../fonts/MaisonMono-Italic.woff2') format('woff2'),
-        url('../fonts/MaisonMono-Italic.woff') format('woff'),
-        url('../fonts/MaisonMono-Italic.ttf') format('truetype');
-    font-weight: normal;
-    font-style: italic;
-    font-display: swap;
+  font-family: 'Maison Mono';
+  src: url('../fonts/MaisonMono-Italic.eot');
+  src: url('../fonts/MaisonMono-Italic.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/MaisonMono-Italic.woff2') format('woff2'),
+    url('../fonts/MaisonMono-Italic.woff') format('woff');
+  // url('../fonts/MaisonMono-Italic.ttf') format('truetype');
+  font-weight: normal;
+  font-style: italic;
+  font-display: block;
 }
 
 @font-face {
-    font-family: 'Maison Mono';
-    src: url('../fonts/MaisonMono-Light.eot');
-    src: url('../fonts/MaisonMono-Light.eot?#iefix') format('embedded-opentype'),
-        // url('../fonts/MaisonMono-Light.woff2') format('woff2'),
-        url('../fonts/MaisonMono-Light.woff') format('woff'),
-        url('../fonts/MaisonMono-Light.ttf') format('truetype');
-    font-weight: 300;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Maison Mono';
+  src: url('../fonts/MaisonMono-Light.eot');
+  src: url('../fonts/MaisonMono-Light.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/MaisonMono-Light.woff2') format('woff2'),
+    url('../fonts/MaisonMono-Light.woff') format('woff');
+  // url('../fonts/MaisonMono-Light.ttf') format('truetype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: block;
 }
 
 @font-face {
-    font-family: 'Maison Mono';
-    src: url('../fonts/MaisonMono.eot');
-    src: url('../fonts/MaisonMono.eot?#iefix') format('embedded-opentype'),
-        // url('../fonts/MaisonMono.woff2') format('woff2'),
-        url('../fonts/MaisonMono.woff') format('woff'),
-        url('../fonts/MaisonMono.ttf') format('truetype');
-    font-weight: normal;
-    font-style: normal;
-    font-display: swap;
+  font-family: 'Maison Mono';
+  src: url('../fonts/MaisonMono.eot');
+  src: url('../fonts/MaisonMono.eot?#iefix') format('embedded-opentype'),
+    url('../fonts/MaisonMono.woff2') format('woff2'),
+    url('../fonts/MaisonMono.woff') format('woff');
+  // url('../fonts/MaisonMono.ttf') format('truetype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: block;
 }
