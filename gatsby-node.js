@@ -24,7 +24,6 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
   // Only process markdown files
   if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
     // Convert paths in frontmatter to relative
-    if (node.frontmmater) console.log(node.frontmmater);
 
     function makeRelative(value) {
       if (
@@ -33,7 +32,6 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
       ) {
         // Incase if file is not absolute
         if (!path.isAbsolute(value)) value = `/${value}`;
-        console.log('found', value);
         if (path.isAbsolute(value)) {
           let imagePath;
           const foundImageNode = _.find(fileNodes, (file) => {
