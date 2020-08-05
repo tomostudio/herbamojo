@@ -10,7 +10,7 @@ collections:
     identifier_field: title
     label: Journals English
     label_singular: Journal
-    folder: src/pages/journal
+    folder: src/journal
     create: true
     show_preview_links: true
     preview_path: '/journal/{{slug}}'
@@ -164,7 +164,7 @@ collections:
     identifier_field: title
     label: Journals Indonesian
     label_singular: Journal
-    folder: src/pages/journal_id
+    folder: src/journal_id
     create: true
     show_preview_links: true
     preview_path: '/id/journal/{{slug}}'
