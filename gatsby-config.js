@@ -19,6 +19,13 @@ module.exports = {
       },
     },
     {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `src`,
+        path: `${__dirname}/src/`,
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
         name: 'Gatsby Starter',
@@ -29,13 +36,6 @@ module.exports = {
         display: 'standalone',
         icon: 'src/images/icon/icon.png',
         cache_busting_mode: 'none',
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `src`,
-        path: `${__dirname}/src/`,
       },
     },
     {
@@ -110,9 +110,12 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
-      resolve: `gatsby-transformer-remark`,
+      // resolve: `gatsby-transformer-remark`,
+      resolve: `gatsby-plugin-mdx`,
       options: {
-        plugins: [
+        extensions: [`.md`, `.mdx`], // highlight-line
+        gatsbyRemarkPlugins: [
+          // plugins: [
           `gatsby-remark-relative-images`,
           `gatsby-remark-unwrap-images`,
         ],

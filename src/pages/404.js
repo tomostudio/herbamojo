@@ -83,7 +83,7 @@ export default class Journal extends React.Component {
 
 const errorQuery = graphql`
   query {
-    general: markdownRemark(
+    general: mdx(
       frontmatter: {
         issetting: { eq: true }
         contenttype: { eq: "general_setting" }

@@ -24,6 +24,8 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
   // Only process markdown files
   if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
     // Convert paths in frontmatter to relative
+    if (node.frontmmater) console.log(node.frontmmater);
+
     function makeRelative(value) {
       if (
         _.isString(value) &&
@@ -31,7 +33,7 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
       ) {
         // Incase if file is not absolute
         if (!path.isAbsolute(value)) value = `/${value}`;
-
+        console.log('found', value);
         if (path.isAbsolute(value)) {
           let imagePath;
           const foundImageNode = _.find(fileNodes, (file) => {
@@ -66,7 +68,7 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
       }
     });
   }
-  if (node.internal.type === `MarkdownRemark`) {
+  if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
     if (
       node.frontmatter.issetting &&
       node.frontmatter.contenttype === 'general_setting'
@@ -121,7 +123,7 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
     });
     let slug = node.frontmatter.slug;
     if (!node.frontmatter.indonesia) {
-      if (filepath.includes('pages/journal/'))
+      if (filepath.includes('journal/'))
         slug = `/${journalslug}/${node.frontmatter.slug}`;
       createNodeField({
         node,
@@ -129,7 +131,7 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
         value: slug,
       });
     } else {
-      if (filepath.includes('pages/journal_id/'))
+      if (filepath.includes('journal_id/'))
         slug = `/id/${journalslug}/${node.frontmatter.slug}`;
       createNodeField({
         node,
@@ -161,11 +163,12 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
 
 exports.createPages = ({ graphql, actions }) => {
   const { createPage } = actions;
+  // allMarkdownRemark(
   return new Promise((resolve, reject) => {
     resolve(
       graphql(`
         {
-          all: allMarkdownRemark(
+          all: allMdx(
             filter: { frontmatter: { issetting: { eq: false } } }
             sort: { fields: [frontmatter___date], order: DESC }
           ) {
@@ -184,7 +187,7 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-          slug_setting: markdownRemark(
+          slug_setting: mdx(
             frontmatter: {
               issetting: { eq: true }
               contenttype: { eq: "slug_setting" }
@@ -217,6 +220,7 @@ exports.createPages = ({ graphql, actions }) => {
               data.node.frontmatter.indonesia === false
             );
           });
+
           const journalid = results.filter(function (data) {
             return (
               data.node.frontmatter.contenttype === 'journal' &&
@@ -250,6 +254,7 @@ exports.createPages = ({ graphql, actions }) => {
               });
             }
           });
+
           journalid.forEach(({ node }, index) => {
             let nextslug, prevslug;
             if (index === 0) {
@@ -280,7 +285,7 @@ exports.createPages = ({ graphql, actions }) => {
           const lengthEN = Math.ceil(journalen.length / journalperList);
           const lengthID = Math.ceil(journalid.length / journalperList);
 
-          //ENGLISH
+          // LIST ENGLISH
           if (lengthEN > 0) {
             Array.from({
               length: lengthEN,
@@ -311,7 +316,7 @@ exports.createPages = ({ graphql, actions }) => {
             });
           }
 
-          //INDONESIA
+          // LIST INDONESIA
           if (lengthID > 0) {
             Array.from({
               length: lengthID,

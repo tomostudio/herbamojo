@@ -5,6 +5,7 @@ import JournalHeader from 'components/journalheader';
 import { Link, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import Img from 'gatsby-image';
+import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 //UTILS
 import { LoaderClass } from 'utils/loader';
@@ -182,6 +183,7 @@ export default class Journal extends React.Component {
     if (typeof content.headercolorblack === 'string') {
       getColorstat = content.headercolorblack === 'true' ? true : false;
     }
+    console.log(content.coverimage);
 
     return (
       <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
@@ -256,12 +258,15 @@ export default class Journal extends React.Component {
           </section>
           <section className='markupcontent'>
             <div className='wrapper'>
-              <div
+              {/* <div
                 className='markupstyle'
                 dangerouslySetInnerHTML={{
-                  __html: this.props.data.content.html,
+                  __html: this.props.data.content.body,
                 }}
-              />
+              /> */}
+              <div className='markupstyle'>
+                <MDXRenderer>{this.props.data.content.body}</MDXRenderer>
+              </div>
             </div>
           </section>
           {!onlyarticle && (
@@ -352,7 +357,7 @@ export default class Journal extends React.Component {
 
 export const query = graphql`
   query($slug: String!, $indo: Boolean!) {
-    journals: allMarkdownRemark(
+    journals: allMdx(
       limit: 2
       filter: {
         frontmatter: {
@@ -388,7 +393,7 @@ export const query = graphql`
         }
       }
     }
-    alljournals: allMarkdownRemark(
+    alljournals: allMdx(
       filter: {
         frontmatter: {
           issetting: { eq: false }
@@ -423,7 +428,7 @@ export const query = graphql`
         }
       }
     }
-    general: markdownRemark(
+    general: mdx(
       frontmatter: {
         issetting: { eq: true }
         contenttype: { eq: "general_setting" }
@@ -461,8 +466,8 @@ export const query = graphql`
         }
       }
     }
-    content: markdownRemark(fields: { slug: { eq: $slug } }) {
-      html
+    content: mdx(fields: { slug: { eq: $slug } }) {
+      body
       id
       frontmatter {
         indonesia

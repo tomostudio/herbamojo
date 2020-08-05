@@ -223,7 +223,7 @@ export default class JournalList extends React.Component {
 
 export const query = graphql`
   query($skip: Int!, $limit: Int!, $indo: Boolean!) {
-    general: markdownRemark(
+    general: mdx(
       frontmatter: {
         issetting: { eq: true }
         contenttype: { eq: "general_setting" }
@@ -239,7 +239,7 @@ export const query = graphql`
         }
       }
     }
-    journals: allMarkdownRemark(
+    journals: allMdx(
       filter: {
         frontmatter: {
           issetting: { eq: false }
