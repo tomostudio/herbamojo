@@ -183,7 +183,7 @@ export default class Journal extends React.Component {
     if (typeof content.headercolorblack === 'string') {
       getColorstat = content.headercolorblack === 'true' ? true : false;
     }
-    console.log(content.coverimage);
+    // console.log(content.coverimage);
 
     return (
       <Layout mainClass='journal' indonesia={this.LangID} mainID={this.MainID}>
