@@ -12,7 +12,7 @@ base = "/"
 publish = "public/"
 
 # Default build command.
-command = "gatsby build"
+command = "gatsby clean && node --max_old_space_size=4096 ./node_modules/.bin/gatsby build"
 
 # Command Increase Max Processing Space
 # command = "node --max_old_space_size=4096 ./node_modules/.bin/gatsby build"

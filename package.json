@@ -5,10 +5,11 @@
   "version": "1.1.1",
   "license": "MIT",
   "scripts": {
+    "clean": "gatsby clean",
     "develop": "gatsby develop",
     "develop-m": "gatsby develop -H 0.0.0.0 -p 8000",
     "start": "npm run develop",
-    "build": "gatsby build",
+    "build": "npm run clean && gatsby build",
     "serve": "gatsby serve"
   },
   "dependencies": {

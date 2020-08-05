@@ -31,18 +31,24 @@ related:
   - relatedslug: /
 ---
 
-1. Menggunakan deodoran alami
-	Beberapa orang mungkin memilih untuk tidak menggunakan deodoran yang tersedia di pasaran karena mengandung bahan-bahan kimia yang memiliki pengaruh kurang baik bagi kesehatan. Meski begitu, anda dapat menggantinya dengan deodoran alami. Cobalah untuk menggunakan alkohol 70% untuk mengurangi keringat dan melawan bakteri yang berada pada ketiak. Selain itu, anda juga dapat mencoba menggunakan cuka apel yang memiliki kandungan asam alaminya dan antimikroba. Namun, selalu berhati-hatilah dalam menggunakan cairan yang asam sebagai deodoran apabila anda memiliki kulit sensitif. Jangan menggunakannya setelah mencukur atau jika anda memiliki luka terbuka, dan hanya gunakan pada kulit yang bersih dan kering untuk menghindari iritasi.
-	
-2. Atur pola makan anda
-	Makanan yang anda konsumsi juga berpengaruh besar terhadap bau badan. Misalnya, mengonsumsi makanan pedas, kari, maupun makanan yang mengandung bawang putih dapat membuat tubuh memproduksi gas sulfur ketika dicerna. Gas tersebut dapat keluar dari tubuh melalui pori-pori kulit dan menyebabkan bau kurang sedap. Makanan lain seperti daging merah juga dapat mempengaruhi bau badan karena tubuh harus bekerja keras dalam mencernanya. Kandungan asam amino pada daging merah dapat meninggalkan residu dalam usus, dan residu ini harus dicerna oleh enzim, yang kemudian dapat mempengaruhi bau pada tubuh.
-	Pastikan untuk mengonsumsi sayuran hijau seperti bayam dan kale, karena kandungannya dapat melawan penyebab bau badan. Meski begitu, perhatikan konsumsi sayuran seperti brokoli, kol, dan kembang kol karena kandungan sulfurnya dapat terserap oleh tubuh dan dibuang lewat keringat. Selain itu, konsumsi mineral seperti magnesium juga dapat memberikan pengaruh baik bagi tubuh untuk mengurangi penyebab bau badan dari dalam.
+## 1. Menggunakan deodoran alami
 
-3. Menjaga kebersihan diri
-	Kebersihan diri merupakan salah satu faktor penting yang dapat mempengaruhi bau badan. Langkah-langkah untuk menjaga kebersihan diri, apabila dilakukan dengan rutin dan benar, dapat membantu mengurangi jumlah bakteri yang terdapat di permukaan kulit. Misalnya mandi rutin dan mandi setelah berolahraga dapat memberi kesegaran sekaligus mengurangi kuman. Selain itu, mencuci pakaian secara rutin dan selalu menggunakan pakaian bersih setiap kali beraktifitas juga dapat membantu mengurangi potensi bau badan. Langkah ekstra yang mungkin dapat anda lakukan ialah menggunting atau mencukur bulu ketiak untuk mengurangi potensi kelembaban pada daerah tersebut serta mencegah bakteri berkembang biak lebih banyak.
+Beberapa orang mungkin memilih untuk tidak menggunakan deodoran yang tersedia di pasaran karena mengandung bahan-bahan kimia yang memiliki pengaruh kurang baik bagi kesehatan. Meski begitu, anda dapat menggantinya dengan deodoran alami. Cobalah untuk menggunakan alkohol 70% untuk mengurangi keringat dan melawan bakteri yang berada pada ketiak. Selain itu, anda juga dapat mencoba menggunakan cuka apel yang memiliki kandungan asam alaminya dan antimikroba. Namun, selalu berhati-hatilah dalam menggunakan cairan yang asam sebagai deodoran apabila anda memiliki kulit sensitif. Jangan menggunakannya setelah mencukur atau jika anda memiliki luka terbuka, dan hanya gunakan pada kulit yang bersih dan kering untuk menghindari iritasi.
 
-4. Mengurangi konsumsi alkohol
-	Ketika anda mengonsumsi alkohol, tubuh langsung mencerna karena tidak dapat menyimpannya. Alkohol diproses melalui hati, dimana alkohol akan dinetralisir sebelum dibuang keluar tubuh. 90% alkohol diubah menjadi asam asetat, dan 10% sisanya dibuang melalui cara lain, yakni melalui urin, napas ataupun  keringat. Oleh karena itu, selalu ingat untuk menjaga konsumsi alkohol dalam batas normal agar bau badan tidak terjadi.
+## 2. Atur pola makan anda
 
-5. Menggunakan pakaian yang dibuat dari serat alami
-	Pakaian juga merupakan faktor utama apabila anda sedang mencoba untuk mengurangi potensi bau badan. Apabila anda menggunakan pakaian yang tebal, ketat, maupun terbuat dari material seperti spandex, polyester, ataupun kulit, hal ini menyebabkan pori-pori kulit sulit bernapas dan tentu saja dapat menyebabkan biang keringat dan peningkatan resiko bau badan. Oleh karena itu, pilihlah untuk menggunakan pakaian yang longgar dan terbuat dari serat alami, seperti katun atau linen ketika cuaca panas atau ketika anda sedang berolahraga.
+Makanan yang anda konsumsi juga berpengaruh besar terhadap bau badan. Misalnya, mengonsumsi makanan pedas, kari, maupun makanan yang mengandung bawang putih dapat membuat tubuh memproduksi gas sulfur ketika dicerna. Gas tersebut dapat keluar dari tubuh melalui pori-pori kulit dan menyebabkan bau kurang sedap. Makanan lain seperti daging merah juga dapat mempengaruhi bau badan karena tubuh harus bekerja keras dalam mencernanya. Kandungan asam amino pada daging merah dapat meninggalkan residu dalam usus, dan residu ini harus dicerna oleh enzim, yang kemudian dapat mempengaruhi bau pada tubuh.
+
+Pastikan untuk mengonsumsi sayuran hijau seperti bayam dan kale, karena kandungannya dapat melawan penyebab bau badan. Meski begitu, perhatikan konsumsi sayuran seperti brokoli, kol, dan kembang kol karena kandungan sulfurnya dapat terserap oleh tubuh dan dibuang lewat keringat. Selain itu, konsumsi mineral seperti magnesium juga dapat memberikan pengaruh baik bagi tubuh untuk mengurangi penyebab bau badan dari dalam.
+
+## 3. Menjaga kebersihan diri
+
+Kebersihan diri merupakan salah satu faktor penting yang dapat mempengaruhi bau badan. Langkah-langkah untuk menjaga kebersihan diri, apabila dilakukan dengan rutin dan benar, dapat membantu mengurangi jumlah bakteri yang terdapat di permukaan kulit. Misalnya mandi rutin dan mandi setelah berolahraga dapat memberi kesegaran sekaligus mengurangi kuman. Selain itu, mencuci pakaian secara rutin dan selalu menggunakan pakaian bersih setiap kali beraktifitas juga dapat membantu mengurangi potensi bau badan. Langkah ekstra yang mungkin dapat anda lakukan ialah menggunting atau mencukur bulu ketiak untuk mengurangi potensi kelembaban pada daerah tersebut serta mencegah bakteri berkembang biak lebih banyak.
+
+## 4. Mengurangi konsumsi alkohol
+
+Ketika anda mengonsumsi alkohol, tubuh langsung mencerna karena tidak dapat menyimpannya. Alkohol diproses melalui hati, dimana alkohol akan dinetralisir sebelum dibuang keluar tubuh. 90% alkohol diubah menjadi asam asetat, dan 10% sisanya dibuang melalui cara lain, yakni melalui urin, napas ataupun keringat. Oleh karena itu, selalu ingat untuk menjaga konsumsi alkohol dalam batas normal agar bau badan tidak terjadi.
+
+## 5. Menggunakan pakaian yang dibuat dari serat alami
+
+Pakaian juga merupakan faktor utama apabila anda sedang mencoba untuk mengurangi potensi bau badan. Apabila anda menggunakan pakaian yang tebal, ketat, maupun terbuat dari material seperti spandex, polyester, ataupun kulit, hal ini menyebabkan pori-pori kulit sulit bernapas dan tentu saja dapat menyebabkan biang keringat dan peningkatan resiko bau badan. Oleh karena itu, pilihlah untuk menggunakan pakaian yang longgar dan terbuat dari serat alami, seperti katun atau linen ketika cuaca panas atau ketika anda sedang berolahraga.

@@ -828,6 +828,9 @@ main.journal {
   }
   & > * {
     margin: 40px auto;
+    max-width: 100%;
+    white-space: pre-wrap;
+    
     &:first-child {
       margin-top: 0px;
     }
