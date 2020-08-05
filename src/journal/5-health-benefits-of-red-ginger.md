@@ -23,6 +23,7 @@ coverimage: /assets/jahe-merah.png
 related:
   - relatedslug: /
 ---
+
 Ginger is one of the popularly known herbs to maintain digestive health. However, red ginger is one of the particular type to have other less-known health benefits, including improving male vitality. On this week's journal, we will be explaining a number of benefits red ginger may have for your overall health.
 
 ## Prevent digestive problems
