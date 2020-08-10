@@ -5,7 +5,7 @@ indonesia: false
 active: true
 title: Why Protein Intake is Important to Build and Maintain Strong Immunity
 slug: why-protein-intake-is-important-to-build-and-maintain-strong-immunity
-date: 2020-08-10T03:03:01.365Z
+date: 2020-08-07T03:03:01.365Z
 seo:
   seo_shortdesc: >-
     For males, protein is often synonymous with body building and gym/sports
