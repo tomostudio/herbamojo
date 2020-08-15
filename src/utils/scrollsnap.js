@@ -41,7 +41,7 @@ export class ScrollSnapClass {
       direction: true,
       speed: 500,
       delay: 400,
-      sensitivity: 20,
+      sensitivity: 10,
       minduration: 300,
       maxduration: 1500,
     },
@@ -331,7 +331,6 @@ export class ScrollSnapClass {
       }
     },
     scrolling: () => {
-      // console.log('scrolling trigger', this.v.snap);
       if (
         !this.v.scroll.snapping &&
         !this.scrollit.scrolling &&
@@ -469,8 +468,19 @@ export class ScrollSnapClass {
       direction: null,
       lastDeltaY: 0,
     },
+    scrollResetTimeout: null,
+    srtDelay: 500,
     scroll: (e) => {
-      // console.log(e.deltaY);
+      // console.log(
+      //   'scrolling',
+      //   e.offsetY,
+      //   e.wheelDeltaY,
+      //   e.deltaY,
+      //   this.v.scroll.sensitivity,
+      //   this.event.scrolling,
+      //   this.event.scrollStatus.direction
+      // );
+
       if (this.v.snap.enable) {
         e = e || window.event;
         if (e.preventDefault) e.preventDefault();
@@ -480,6 +490,16 @@ export class ScrollSnapClass {
             if (!this.v.snap.pause && !this.event.resizePause) this.snap.up();
             this.event.scrolling = true;
             this.event.scrollStatus.direction = 'UP';
+
+            // SET TIMEOUT TO RESET SCROLL
+            if (this.event.scrollResetTimeout != null) {
+              clearTimeout(this.event.scrollResetTimeout);
+            }
+            this.event.scrollResetTimeout = setTimeout(() => {
+              this.event.scrolling = false;
+              this.event.scrollStatus.direction = null;
+              this.event.scrollResetTimeout = null;
+            }, this.event.srtDelay);
           }
         }
         if (e.deltaY > this.v.scroll.sensitivity) {
@@ -487,6 +507,16 @@ export class ScrollSnapClass {
             if (!this.v.snap.pause && !this.event.resizePause) this.snap.down();
             this.event.scrolling = true;
             this.event.scrollStatus.direction = 'DOWN';
+
+            // SET TIMEOUT TO RESET SCROLL
+            if (this.event.scrollResetTimeout != null) {
+              clearTimeout(this.event.scrollResetTimeout);
+            }
+            this.event.scrollResetTimeout = setTimeout(() => {
+              this.event.scrolling = false;
+              this.event.scrollStatus.direction = null;
+              this.event.scrollResetTimeout = null;
+            }, this.event.srtDelay);
           }
         }
 
@@ -495,10 +525,14 @@ export class ScrollSnapClass {
         // THEN IT WILL DETECT WHEN THE SCROLL SPEED WHEN DOWN OR WHEN THE OTHER DIRECTION, THEN IT WILL ENABLE IT
 
         const _l = this.event.scrollStatus.lastDeltaY;
-
         if (_l > e.deltaY) {
           if (this.event.scrollStatus.direction === 'UP') {
             this.event.scrolling = false;
+            // RESET TIMEOUT
+            if (this.event.scrollResetTimeout != null) {
+              clearTimeout(this.event.scrollResetTimeout);
+              this.event.scrollResetTimeout = null;
+            }
             this.event.scrollStatus.direction = 'DOWN';
           } else {
             this.event.scrollStatus.direction = 'DOWN';
@@ -506,6 +540,11 @@ export class ScrollSnapClass {
         } else if (_l < e.deltaY) {
           if (this.event.scrollStatus.direction === 'DOWN') {
             this.event.scrolling = false;
+            // RESET TIMEOUT
+            if (this.event.scrollResetTimeout != null) {
+              clearTimeout(this.event.scrollResetTimeout);
+              this.event.scrollResetTimeout = null;
+            }
             this.event.scrollStatus.direction = 'UP';
           } else {
             this.event.scrollStatus.direction = 'UP';
@@ -513,6 +552,14 @@ export class ScrollSnapClass {
         } else {
           this.event.scrollStatus.direction = null;
         }
+
+        // console.log(
+        //   'check reset',
+        //   _l,
+        //   e.deltaY,
+        //   this.event.scrolling,
+        //   this.event.scrollStatus.direction
+        // );
 
         this.event.scrollStatus.lastDeltaY = e.deltaY;
         // console.log(e.deltaY,  this.event.scrollStatus.direction );

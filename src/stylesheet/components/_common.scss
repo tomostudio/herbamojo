@@ -16,6 +16,15 @@ body:not(.loaded) {
     @include transition(all 0s);
   }
 }
+*{
+  user-select: none;
+}
+::selection {
+  background: $color_green; /* WebKit/Blink Browsers */
+}
+::-moz-selection {
+  background: $color_green; /* Gecko Browsers */
+}
 
 body.__disablescroll {
   touch-action: none;

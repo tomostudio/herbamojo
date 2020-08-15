@@ -524,6 +524,7 @@ main.journal {
           & > div {
             cursor: default;
             &:first-child {
+              user-select: all;
               font-family: 'Maison Mono';
               font-size: 36px;
               line-height: 40px;
@@ -547,9 +548,10 @@ main.journal {
               }
             }
             &:nth-child(2) {
+              user-select: all;
               font-family: 'Amarillo';
               font-size: 90px;
-              line-height: 85px;
+              line-height: 80px;
               padding-bottom: 60px;
               @include respond-to(tablet) {
                 font-size: 75px;
@@ -826,11 +828,19 @@ main.journal {
   @include respond-to(tablet) {
     padding: 0px;
   }
+  & * {
+    user-select: text;
+  }
   & > * {
     margin: 40px auto;
     max-width: 100%;
     white-space: pre-wrap;
-    
+
+    // user-select: all;
+    // & > * {
+    //   user-select: all;
+    // }
+
     &:first-child {
       margin-top: 0px;
     }
@@ -1063,8 +1073,8 @@ section.journallist {
           z-index: 2;
           padding: 0px $global-padding;
           @include setflex(column, nowrap);
-          padding-top: 10px;
-          padding-bottom: 25px;
+          padding-top: 15px;
+          padding-bottom: 20px;
           @include bp-max(1200px) {
             padding: $globalmobile-padding;
             padding-bottom: 20px;
@@ -1083,7 +1093,7 @@ section.journallist {
           }
           & > h2 {
             margin: 0px;
-            margin-top: 20px;
+            margin-top: 10px;
             display: block;
             font-family: 'Amarillo';
             font-size: $font-size-heading2;

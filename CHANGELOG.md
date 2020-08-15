@@ -1,8 +1,18 @@
 ## #CHANGELOG
 
 ## TO DO
-- CLEAN
-## 2020-07-3-
+*NOTHING YET*
+
+## 2020-07-30
+
+### version 1.1.3
+
+- Regular Update
+- Fix ScrollSnap not working on some windows browser or mouse.
+- Add Green Text Highlight Color
+- Add Custom user select behaviour. User can only select on journal page and they select the whole paragraph.
+
+## 2020-07-30
 
 ### version 1.1.2
 
