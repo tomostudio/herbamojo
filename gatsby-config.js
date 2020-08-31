@@ -96,15 +96,15 @@ module.exports = {
         defaultDataLayer: { platform: 'gatsby' },
 
         // Specify optional GTM environment details.
-        gtmAuth: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING',
-        gtmPreview: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME',
-        dataLayerName: 'dataLayer',
+        // gtmAuth: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_AUTH_STRING',
+        // gtmPreview: 'YOUR_GOOGLE_TAGMANAGER_ENVIRONMENT_PREVIEW_NAME',
+        // dataLayerName: 'dataLayer',
 
         // Name of the event that is triggered
         // on every Gatsby route change.
         //
         // Defaults to gatsby-route-change
-        routeChangeEventName: 'YOUR_ROUTE_CHANGE_EVENT_NAME',
+        // routeChangeEventName: 'YOUR_ROUTE_CHANGE_EVENT_NAME',
       },
     },
     `gatsby-plugin-sharp`,
