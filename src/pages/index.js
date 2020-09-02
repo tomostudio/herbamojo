@@ -949,7 +949,7 @@ export default class Home extends React.Component {
                         <div>
                           {footerData.ig_link !== '' && (
                             <a
-                              className='svg'
+                              className='svg btn-instagram'
                               target='_blank'
                               rel='noopener noreferrer'
                               href={footerData.ig_link}
@@ -961,7 +961,7 @@ export default class Home extends React.Component {
 
                           {footerData.wa_no !== '' && (
                             <a
-                              className='svg'
+                              className='svg btn-wa'
                               target='_blank'
                               rel='noopener noreferrer'
                               href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
@@ -972,7 +972,7 @@ export default class Home extends React.Component {
                           )}
                           {footerData.email !== '' && (
                             <a
-                              className='svg'
+                              className='svg btn-email'
                               target='_blank'
                               rel='noopener noreferrer'
                               href={`mailto:${footerData.email}`}
@@ -1056,7 +1056,7 @@ export default class Home extends React.Component {
                       <div className='social_ctn'>
                         {footerData.ig_link !== '' && (
                           <a
-                            className='svg'
+                            className='svg btn-instagram'
                             target='_blank'
                             rel='noopener noreferrer'
                             href={footerData.ig_link}
@@ -1068,7 +1068,7 @@ export default class Home extends React.Component {
 
                         {footerData.wa_no !== '' && (
                           <a
-                            className='svg'
+                            className='svg btn-wa'
                             target='_blank'
                             rel='noopener noreferrer'
                             href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
@@ -1079,7 +1079,7 @@ export default class Home extends React.Component {
                         )}
                         {footerData.email !== '' && (
                           <a
-                            className='svg'
+                            className='svg btn-email'
                             target='_blank'
                             rel='noopener noreferrer'
                             href={`mailto:${footerData.email}`}

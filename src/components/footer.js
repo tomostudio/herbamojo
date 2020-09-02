@@ -48,7 +48,7 @@ export default class Footer extends React.Component {
                 <div>
                   {footerData.ig_link !== '' && (
                     <a
-                      className='svg'
+                      className='svg btn-instagram'
                       target='_blank'
                       rel='noopener noreferrer'
                       href={footerData.ig_link}
@@ -60,7 +60,7 @@ export default class Footer extends React.Component {
 
                   {footerData.wa_no !== '' && (
                     <a
-                      className='svg'
+                      className='svg btn-wa'
                       target='_blank'
                       rel='noopener noreferrer'
                       href={`https://api.whatsapp.com/send?phone=${
@@ -73,7 +73,7 @@ export default class Footer extends React.Component {
                   )}
                   {footerData.email !== '' && (
                     <a
-                      className='svg'
+                      className='svg btn-email'
                       target='_blank'
                       rel='noopener noreferrer'
                       href={`mailto:${footerData.email}`}
