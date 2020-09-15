@@ -1934,6 +1934,9 @@ main.home {
           }
         }
       }
+      & > .__journalcontainer > a {
+        pointer-events: auto;
+      }
       & .viewall {
         margin: $global-padding auto 0px;
         font-family: 'Amarillo';
