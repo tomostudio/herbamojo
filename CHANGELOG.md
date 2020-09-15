@@ -3,6 +3,12 @@
 ## TO DO
 *NOTHING YET*
 
+## 2020-09-15
+
+### version 1.1.4
+
+- Remove LFS
+
 ## 2020-07-30
 
 ### version 1.1.3
