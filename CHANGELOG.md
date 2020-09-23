@@ -1,7 +1,15 @@
 ## #CHANGELOG
 
 ## TO DO
+- Added Imge Fallback if image is missing build doesnt crash.
 *NOTHING YET*
+
+## 2020-09-23
+
+### version 1.1.5
+
+- Updated Deploy Status to new domain
+- Disabled Editorial Workflow
 
 ## 2020-09-15
 

@@ -13,14 +13,19 @@ export default class Status extends React.Component {
     }
   }
   getStatus() {
-    console.log('checking status');
+    // console.log('checking status');
+
     const client = new NetlifyAPI(
-      'f302a97fa24fc20726bb9db6d53a097c011f8507a9a18f5f5fa50d0816926aca'
+      'OYkkGnPqf9de7DnGPUq1C4LTEgWyIs44AFpGxCjSknE'
     );
+
     async function __getLatestStatus() {
+      // const listSite = await client.listSites();
+      // console.log(listSite);
       const DeployList = await client.listSiteDeploys({
-        siteId: 'b38e55c5-7587-4df0-860f-b2be3035cdeb'
+        siteId: '1c86a3bb-30cc-4b70-a38a-055ef3338287'
       });
+
 
       let count = 0;
       //CHECK IF DEPLOY IS SKIPPED or NEW
