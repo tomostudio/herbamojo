@@ -150,7 +150,6 @@ export default class Home extends React.Component {
     default_delay: 500,
     postload: () => {
       if (typeof window !== undefined) {
-
         this.HomeScrollSnap = new ScrollSnapClass({
           sections_identifier: `main.home#${this.MainID} section`,
           snap_identifier: '',
@@ -480,7 +479,7 @@ export default class Home extends React.Component {
             clearTimeout(this.LoadAnimationTimeout);
           this.LoadAnimationTimeout = setTimeout(() => {
             this.popUpRef.current.classList.add('click');
-            localStorage.notFirstVisit = true;
+            if (typeof window !== undefined) localStorage.notFirstVisit = true;
           }, 500);
         }, this.LoadAnimationDelay + 750);
       }
@@ -911,7 +910,8 @@ export default class Home extends React.Component {
           // GET DATA AND LOCAL STORAGE AND SET POPUP ENABLED OR DISABLED
           // DEFAULT TO DISABLED
           if (this.popupenable) {
-            if (!localStorage.notFirstVisit) this.popupReveal = true;
+            if (typeof window !== undefined && !localStorage.notFirstVisit)
+              this.popupReveal = true;
             if (popupData.always) this.popupReveal = true;
           }
 
