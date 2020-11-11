@@ -32,6 +32,7 @@
 - Aut Reveal Animation
 - SAFARI Slow Speed Fall Back Detection based on Device
 
+
 ## 2020-09-23
 
 ### version 1.1.5
