@@ -1,58 +1,75 @@
 const path = require(`path`);
 const { createFilePath } = require(`gatsby-source-filesystem`);
-const _ = require(`lodash`);
-const cheerio = require(`cheerio`);
-const slash = require(`slash`);
-const deepMap = require('deep-map');
-const polyfill = require(`babel-polyfill`);
+
+// REMARK RELATIVE IMAGE
+const traverse = require('traverse');
+const { defaults, isString, find } = require('lodash');
+
+const slash = (path) => {
+  const isExtendedLengthPath = /^\\\\\?\\/.test(path);
+
+  if (isExtendedLengthPath) {
+    return path;
+  }
+  return path.replace(/\\/g, `/`);
+};
+
+const findMatchingFile = (src, files, options) => {
+  const result = find(files, (file) => {
+    const staticPath = slash(path.join(options.staticFolderName, src));
+    return slash(path.normalize(file.absolutePath)).endsWith(staticPath);
+  });
+  if (!result) {
+    throw `No matching file found for src "${src}" in static folder "${options.staticFolderName}". Please check static folder name and that file exists at "${options.staticFolderName}${src}". This error will probably cause a "GraphQLDocumentError" later in build. All converted field paths MUST resolve to a matching file in the "static" folder.`;
+  }
+  return result;
+};
 
 let checkstatus = false;
 let redirectObject = null;
 let journalslug = 'journal';
 let journalperList = 6;
 let journaldisable = false;
-// const { fmImagesToRelative } = require('gatsby-remark-relative-images');
 
-const fileNodes = [];
+exports.onCreateNode = ({ node, getNode, getNodesByType, actions }) => {
+  // // REMARK RELATIVE IMAGE v2
 
-exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
-  const { createRedirect, createNodeField } = actions;
-
-  // fmImagesToRelative(node);
-  // CUSTOM 'FM Images to Relative' In case file path is not absolute.
-  fileNodes.push(node);
-  // Only process markdown files
   if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
-    // Convert paths in frontmatter to relative
+    const files = getNodesByType(`File`);
 
-    function makeRelative(value) {
-      if (
-        _.isString(value) &&
-        (value.startsWith('assets') || value.startsWith('/assets'))
-      ) {
-        // Incase if file is not absolute
-        if (!path.isAbsolute(value)) value = `/${value}`;
-        if (path.isAbsolute(value)) {
-          let imagePath;
-          const foundImageNode = _.find(fileNodes, (file) => {
-            if (!file.dir) return;
-            imagePath = path.join(file.dir, path.basename(value));
-            return (
-              slash(path.normalize(file.absolutePath)) === slash(imagePath)
-            );
-          });
-          if (foundImageNode) {
-            return slash(
-              path.relative(path.join(node.fileAbsolutePath, '..'), imagePath)
-            );
-          }
-        }
-      }
-      return value;
-    }
+    const directory = path.dirname(node.fileAbsolutePath);
+
+    const options = {
+      staticFolderName: 'static',
+      include: [],
+      exclude: [],
+    };
     // Deeply iterate through frontmatter data for absolute paths
-    deepMap(node.frontmatter, makeRelative, { inPlace: true });
+    traverse(node.frontmatter).forEach(function (value) {
+      if (!isString(value)) return;
+      if (!path.isAbsolute(value) || !path.extname(value)) return;
+
+      let shouldTransform = options.include.length < 1;
+
+      if (options.include.some((a) => paths.includes(a))) {
+        shouldTransform = true;
+      }
+
+      if (options.exclude.some((a) => paths.includes(a))) {
+        shouldTransform = false;
+      }
+
+      if (!shouldTransform) return;
+
+      const file = findMatchingFile(value, files, options);
+      const newValue = path.relative(directory, file.absolutePath);
+      // console.log(file ? `file found ${newValue}` : 'file not found');
+
+      this.update(newValue);
+    });
   }
+
+  const { createRedirect, createNodeField } = actions;
 
   if (checkstatus && redirectObject !== null) {
     redirectObject.redirect.forEach((redirectRequest) => {
@@ -66,6 +83,7 @@ exports.onCreateNode = ({ node, getNode, actions, createNodeId }) => {
       }
     });
   }
+
   if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
     if (
       node.frontmatter.issetting &&

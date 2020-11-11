@@ -16,6 +16,20 @@ about:
       HERBAMOJO adalah formulasi herbal berkualitas untuk meningkatkan stamina
       pria, dengan 7 ekstrak herbal yang berkhasiat untuk meningkatkan energi,
       imun, dan performa secara optimal.
+popup:
+  enable: true
+  always: true
+  image: /assets/popup_bg.png
+  bgimage: /assets/herbamojo_lifestylebg.jpg
+  content:
+    en: Get to know the characteristics of a genuine Herbamojo product right here.
+    id: Kenali ciri-ciri produk resmi Herbamojo di sini.
+  buttontext:
+    en: TO AUTHENTICATION PAGE
+    id: TO AUTHENTICATION PAGE
+  link:
+    en: /authentication
+    id: /id/autentikasi
 ingredients:
   - desc:
       en: 'Ginseng works to support stamina, increase energy and boost immunity.'
@@ -208,4 +222,3 @@ translations:
       en: Shop
       id: Beli
 ---
-

@@ -23,10 +23,13 @@ footer:
 navigation:
   home:
     en: Home
-    id: Homeid
+    id: Home
   journal:
     en: Journal
     id: Jurnal
+  authentication:
+    en: Authentication
+    id: Autentikasi
 journalslug: journal
 journalperlist: 6
 errortranslation:
@@ -50,5 +53,58 @@ journaltranslation:
   relatedjournal:
     en: Related
     id: Terhubung
+auttranslation:
+  section1:
+    en: PACKAGING
+    id: KEMASAN
+  section2:
+    en: PACKAGING
+    id: KEMASAN
+  section3:
+    en: PACKAGING
+    id: KEMASAN
+  section4:
+    en: SEAL
+    id: SEGEL
+  section5:
+    en: CAPSULE
+    id: KAPSUL
+  section1info:
+    info1:
+      en: Hologram Seal
+      id: Segel Hologram
+    info2:
+      en: Contains Jamu Logo
+      id: Memiliki Logo Jamu
+    info3:
+      en: Metallic Color on the Herbamojo Logo
+      id: Warna metalik pada logo hHerbamojo
+    info4:
+      en: Clear and Concise Label Design
+      id: Desain kemasan terlihat Rapi dan Jelas
+  section2info:
+    info1:
+      en: Embedded with BPOM Registration Number
+      id: Memiliki nomor registrasi BPOM
+    info2:
+      en: Production and Expiration Date Attached
+      id: Memiliki kode produksi dan kadaluarsa
+    info3:
+      en: Contains a PT. Deltomed Logo
+      id: Memiliki Logo produsen PT. Deltomed
+  section3info:
+    info1:
+      en: Textured Screw Cap
+      id: Tutup Memiliki Tekstur Bergerigi
+    info2:
+      en: Black Glossy Bottle
+      id: Botol Berwarna Hitam Mengkilap
+  section4info:
+    info1:
+      en: Blank Silver Seal
+      id: Segel polos Berwarna Silver
+  section5info:
+    info1:
+      en: Fine Textured Powder
+      id: Textur Bubuk Lebih halus
 ---
-

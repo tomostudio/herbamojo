@@ -7,8 +7,8 @@ module.exports = {
     {
       resolve: 'gatsby-source-filesystem',
       options: {
-        name: 'assets',
         path: `${__dirname}/static/assets`,
+        name: 'assets',
       },
     },
     {
@@ -21,8 +21,22 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `src`,
-        path: `${__dirname}/src/`,
+        name: `pages`,
+        path: `${__dirname}/src/pages`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `journal`,
+        path: `${__dirname}/src/journal`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `journal_id`,
+        path: `${__dirname}/src/journal_id`,
       },
     },
     {
@@ -38,26 +52,19 @@ module.exports = {
         cache_busting_mode: 'none',
       },
     },
-    {
-      resolve: `gatsby-plugin-offline`,
-      options: {
-        precachePages: [`/`, `/journal/*`, `id/journal/*`],
-        workboxConfig: {
-          globPatterns: ['**/*'],
-        },
-      },
-    },
-    // `gatsby-plugin-remove-serviceworker`,
+    // {
+    //   resolve: `gatsby-plugin-offline`,
+    //   options: {
+    //     precachePages: [`/`, `/journal/*`, `id/journal/*`],
+    //     workboxConfig: {
+    //       globPatterns: ['**/*'],
+    //     },
+    //   },
+    // },
+    `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-react-helmet`,
     `gatsby-plugin-sass`,
-    {
-      resolve: `gatsby-plugin-netlify-cms`,
-      options: {
-        htmlTitle: `Content Manager | HERBAMOJO`,
-        htmlFavicon: `${__dirname}/static/icon.png`,
-      },
-    },
     `gatsby-plugin-layout`,
     {
       resolve: `gatsby-plugin-sitemap`,
@@ -116,9 +123,20 @@ module.exports = {
         extensions: [`.md`, `.mdx`], // highlight-line
         gatsbyRemarkPlugins: [
           // plugins: [
-          `gatsby-remark-relative-images`,
+          {
+            resolve: `gatsby-remark-relative-images`,
+            options: { staticFolderName: 'static/assets' },
+          },
           `gatsby-remark-unwrap-images`,
+          `gatsby-remark-images`,
         ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+      options: {
+        htmlTitle: `Content Manager | HERBAMOJO`,
+        htmlFavicon: `${__dirname}/static/icon.png`,
       },
     },
     {

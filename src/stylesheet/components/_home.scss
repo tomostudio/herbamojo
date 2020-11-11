@@ -1,12 +1,12 @@
 $sectionmobilespacing: 50px;
 
 main.home {
-  & .overlay_wrapper {
+  .overlay_wrapper {
     position: relative;
     overflow-x: hidden;
   }
 
-  & .overlay {
+  .overlay {
     z-index: 10;
 
     &.stuck {
@@ -230,7 +230,7 @@ main.home {
     }
   }
 
-  & section:not(.footer) {
+  section:not(.footer) {
     height: auto;
     min-height: 100vh;
     color: white;
@@ -514,6 +514,7 @@ main.home {
             border: solid 3px $color_green;
             padding: 8px 40px;
             display: inline-block;
+            border: solid 3px $color_green;
             color: $color_green;
             font-size: 30px;
             line-height: 28px;
@@ -797,11 +798,11 @@ main.home {
               pointer-events: auto;
               position: relative;
               width: 75%;
-              max-width: 250px;
+              max-width: 300px;
               margin: 0px auto;
               & > img {
                 width: 100%;
-                max-width: 250px;
+                max-width: 300px;
                 height: auto;
                 object-fit: contain;
                 object-position: center;
@@ -1993,11 +1994,10 @@ main.home {
     }
   }
 
-  & .bottlesection_wrapper {
+  .bottlesection_wrapper {
     position: relative;
     pointer-events: none;
     z-index: 5;
-
     & > section {
       pointer-events: auto;
     }
@@ -2005,11 +2005,11 @@ main.home {
     & .greenline {
       pointer-events: none;
       position: absolute;
-      top: calc(50% + 165px);
+      top: calc(50% + 160px);
       left: calc(50% + #{$home-offcenter});
       @include transform(translate(-50%, -50%));
       width: 3px;
-      height: calc(100% - 100vh + 165px);
+      height: calc(100% - 100vh + 160px);
       background: $color_green;
 
       @include respond-to(height_less) {
@@ -2062,10 +2062,14 @@ main.home {
 
       & > div {
         pointer-events: auto;
-        width: 200px;
+        width: 300px;
         position: absolute;
         z-index: 10;
         top: 50%;
+
+        @include respond-to(height_less) {
+          width: 275px;
+        }
         left: calc(50% + #{$home-offcenter});
         @include transform(translate(-50%, -50%));
 
@@ -2093,7 +2097,7 @@ main.home {
           top: auto;
           left: 50%;
           z-index: 10;
-          bottom: -25px;
+          bottom: 0px;
           @include transform(translate(-50%, 100%));
           font-family: 'Amarillo';
           padding: 6px 25px;
@@ -2109,7 +2113,7 @@ main.home {
           );
 
           @include respond-to(height_less) {
-            bottom: -10px;
+            bottom: 25px;
           }
 
           &.hide {
@@ -2135,7 +2139,7 @@ main.home {
     }
   }
 
-  & #MobileNavigation {
+  #MobileNavigation {
     display: none;
 
     @include respond-to(m_tablet) {
@@ -2417,7 +2421,7 @@ main.home {
     }
   }
 
-  & #MobileHeader {
+  #MobileHeader {
     display: none;
 
     @include respond-to(m_tablet) {
@@ -2489,8 +2493,8 @@ main.home {
     }
   }
 
-  & #MobileHeader,
-  & #MobileNavigation {
+  #MobileHeader,
+  #MobileNavigation {
     opacity: 0;
 
     body.loaded & {
@@ -2498,6 +2502,195 @@ main.home {
         opacity #{$initialTranstionHome} #{$initialAnimDelayHome}
       );
       opacity: 1;
+    }
+  }
+  #PopUpWrapper {
+    pointer-events: none;
+    width: 100%;
+    height: 100vh;
+    position: fixed;
+    z-index: 100;
+    top: 0px;
+    left: 0px;
+    &:not(.popup) {
+      pointer-events: none !important;
+      &::before {
+        opacity: 0;
+        transition: opacity 0.75s 0.25s;
+      }
+      & .container {
+        opacity: 0;
+        transition: opacity 0.5s;
+      }
+    }
+    &.popup.click {
+      pointer-events: auto;
+    }
+    &::before {
+      @include pseudo;
+      position: absolute;
+      width: 100%;
+      height: 100%;
+      top: 0px;
+      left: 0px;
+      z-index: 0;
+      background: rgba(0, 0, 0, 0.5);
+      transition: opacity 0.5s;
+    }
+    .container {
+      position: absolute;
+      width: auto;
+      height: 400px;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      background: black;
+      @include setflex(row, nowrap, stretch, center, center);
+      transition: opacity 1.25s;
+      @include respond-to(m_tablet) {
+        width: Min(100% - #{$globalmobile-padding * 4}, 450px);
+        padding-top: Min(100% - #{$globalmobile-padding * 4}, 450px);
+        height: 0px;
+      }
+      &::before {
+        @include pseudo;
+        position: relative;
+        display: block;
+        width: 400px;
+        height: 400px;
+        @include respond-to(m_tablet) {
+          display: none;
+        }
+      }
+      & > div {
+        display: block;
+        height: 100%;
+        width: auto;
+        @include respond-to(m_tablet) {
+          position: absolute;
+          width: 100%;
+          height: 100%;
+          top: 0px;
+          left: 0px;
+        }
+        &.background {
+          position: absolute;
+          top: 0px;
+          left: 0px;
+          display: block;
+          height: 100%;
+          width: 100%;
+          z-index: 0;
+          flex-grow: 0;
+          & > div.gatsby-image-wrapper {
+            width: 100%;
+            height: 100%;
+          }
+        }
+        &:last-child {
+          width: 30vw;
+          min-width: 350px;
+          max-width: 400px;
+          position: relative;
+          @include respond-to(m_tablet) {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            top: 0px;
+            left: 0px;
+            min-width: 0px;
+            max-width: none;
+          }
+          & > div.content {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            padding: $global-padding / 2;
+            background: rgba(0, 0, 0, 0.6);
+            @include setflex(column, nowrap, center, center, center);
+            text-align: center;
+            & > div:first-child {
+              color: white;
+
+              font-size: $font-size-heading3;
+              line-height: $lineheight-heading3;
+            }
+            & > a {
+              display: block;
+              font-family: 'Amarillo';
+              font-size: 28px;
+              line-height: 28px;
+              padding: 6px 10px;
+              border: solid 2px $color_green;
+              color: $color_green;
+              margin-top: $global-padding;
+              @include transition(
+                border $global-transition,
+                color $global-transition,
+                background $global-transition
+              );
+              body.onhover &:hover {
+                background: $color_green;
+                color: white;
+
+                @include respond-to(m_tablet) {
+                  border-color: $color_green;
+                }
+              }
+            }
+            & > #PopUpClose {
+              position: absolute;
+              top: $global-padding / 2;
+              left: auto;
+              right: $global-padding / 2;
+              width: 25px;
+              height: 25px;
+              &::before,
+              &::after {
+                @include pseudo;
+                width: 30px;
+                height: 4px;
+                background: $color_green;
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                transform: translate(-50%, -50%) rotateZ(45deg);
+                transition: background $global-transition;
+                will-change: background;
+              }
+              &::after {
+                transform: translate(-50%, -50%) rotateZ(135deg);
+              }
+              body.onhover &:hover {
+                cursor: pointer;
+                &::before,
+                &::after {
+                  background: white;
+                }
+              }
+            }
+          }
+          & > div.gatsby-image-wrapper {
+            position: absolute !important;
+            z-index: 1;
+            top: 0px;
+            left: 0px;
+            width: 100%;
+            height: 100%;
+          }
+        }
+      }
+    }
+    &.loading {
+      // opacity: 0.2;
+      pointer-events: none;
+      &::before {
+        opacity: 0;
+      }
+      & .container {
+        opacity: 0;
+      }
     }
   }
 }

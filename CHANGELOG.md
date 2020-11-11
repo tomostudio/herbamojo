@@ -1,8 +1,36 @@
 ## #CHANGELOG
 
-## TO DO
+# TO DO
 - Added Imge Fallback if image is missing build doesnt crash.
-*NOTHING YET*
+- Change Stockist Section
+- Add CMS for Authentication
+- Check Remark Relative Plugin
+
+## 2020-11-02
+
+### version 1.2.0
+
+- Change Bottle Image
+- Setup Authentication Header
+- Setup Footer
+- Gatsby System Upgrade
+- Pop Up Animation (Reveal and Dissapear)
+- Add PopUp on Home Page (Detect Trigger)
+- Pop Up First Visit Only Trigger
+- Setup Authentication Page
+- Added Image Sequence
+- Add ScrollAnimation for Bottle Video (with Lottie or with Canvas)
+- Mobile Video Fallback to Still Image (Mobile & Speed)
+- Add Content Section 1
+- Add Content Section 2
+- Add Content Section 3
+- Add Content Section 4
+- Add Content Section 5
+- Mobile Version for Authentication
+- Clean Up Unused Scroll Animation
+- Slow Speed Fallback
+- Aut Reveal Animation
+- SAFARI Slow Speed Fall Back Detection based on Device
 
 ## 2020-09-23
 

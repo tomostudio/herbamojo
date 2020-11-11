@@ -6,21 +6,21 @@ import { HerbamojoLogo } from 'svg/symbols.js';
 // UTILITIES
 import { MediaCheck } from 'utils/mediacheck';
 
-export default class JournalHeader extends React.Component {
+export default class PageHeader extends React.Component {
   scrollEvent = () => {
     if (typeof window !== `undefined`) {
       const _sp = window.pageYOffset || document.documentElement.scrollTop;
-      const JournalHeader = document.querySelector('#JournalHeader');
+      const PageHeader = document.querySelector('#PageHeader');
       let headerTreshold = 100;
       if (MediaCheck.width.mobile()) {
         headerTreshold = 80;
       }
       //CHECK SCROLl
       if (_sp > headerTreshold) {
-        if (!JournalHeader.classList.contains('stuck'))
-          JournalHeader.classList.add('stuck');
+        if (!PageHeader.classList.contains('stuck'))
+          PageHeader.classList.add('stuck');
       } else {
-        JournalHeader.classList.remove('stuck');
+        PageHeader.classList.remove('stuck');
       }
     }
   };
@@ -54,18 +54,20 @@ export default class JournalHeader extends React.Component {
     }
 
     const blackcolor = this.props.black || false;
-    const onjournallist = this.props.journallist || false;
-
+    const onjournalpage = this.props.journal || false;
+    const hidetitle = this.props.hidetitle || false;
+    const alwaystransparent = this.props.alwaystransparent || false;
     return (
       <StaticQuery
         query={headerQuery}
-        render={data => {
+        render={(data) => {
+          const headertitle = this.props.headertitle || {
+            id: 'INDONESIA',
+            en: 'ENGLISH',
+          };
           return (
-            <div
-              id='JournalHeader'
-              className={`${onjournallist ? 'list' : ''}`}
-            >
-              <div className={`wrapper ${blackcolor && 'black'}`}>
+            <div id='PageHeader' className={`${onjournalpage ? '' : 'list'} ${alwaystransparent ? 'transparent' : ''}`}>
+              <div className={`wrapper ${blackcolor ? 'black' : ''}`}>
                 <Link
                   aria-label='Language Toggle'
                   to={this.props.indonesia ? `${urltarget}` : `${urltargetid}`}
@@ -77,15 +79,7 @@ export default class JournalHeader extends React.Component {
                     ID
                   </span>
                 </Link>
-                {onjournallist ? (
-                  <div>
-                    {`${
-                      !this.props.indonesia
-                        ? data.general.frontmatter.navigation.journal.en
-                        : data.general.frontmatter.navigation.journal.id
-                    }`}
-                  </div>
-                ) : (
+                {!hidetitle ? (onjournalpage ? (
                   <Link
                     aria-label='Back to Journal'
                     to={
@@ -102,13 +96,16 @@ export default class JournalHeader extends React.Component {
                             .journalbacktext.id
                     }`}
                   </Link>
-                )}
+                ) : (
+                  <div>
+                    {`${this.props.indonesia ? headertitle.id : headertitle.en}`}
+                  </div>
+                )) : ''}
                 <Link
                   aria-label='Herbamojo Main Page'
                   to={this.props.indonesia ? '/id' : '/'}
                   className='logo'
                 >
-                  {/* <img src={HerbamojoLogo} alt='herbamojo' /> */}
                   <HerbamojoLogo />
                 </Link>
               </div>
@@ -131,12 +128,6 @@ const headerQuery = graphql`
       frontmatter {
         journaldisable
         journalslug
-        navigation {
-          journal {
-            en
-            id
-          }
-        }
         journaltranslation {
           journalbacktext {
             en

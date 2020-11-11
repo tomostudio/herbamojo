@@ -4,7 +4,7 @@ export class InViewportClass {
     top: 0,
     right: 0,
     bottom: 0,
-    left: 0
+    left: 0,
   };
   scrolltarget = null;
   visibility = 0.1;
@@ -208,7 +208,7 @@ export const PassDetect = (target = null, detectbottom = true) => {
     passed: false,
     target: null,
     margin: 0,
-    detectbottom: true
+    detectbottom: true,
   };
   const vh =
     window.innerHeight ||
@@ -252,7 +252,8 @@ export const InViewportDetect = (
     detected: false,
     visibility: 0,
     targetdistance: null,
-    margin: null
+    margin: null,
+    visibleCoor: null,
   };
   if (target !== null) {
     if (visibility > 1) {
@@ -277,7 +278,7 @@ export const InViewportDetect = (
       right:
         (window.innerWidth || document.documentElement.clientWidth) +
         distance.width * visibleMultipler -
-        right
+        right,
     };
 
     returnobj.margin = margin;
@@ -330,6 +331,13 @@ export const InViewportDetect = (
       visibleTop,
       visibleBottom
     );
+
+    returnobj.visibleCoor = {
+      left: visibleLeft,
+      right: visibleRight,
+      top: visibleTop,
+      bottom: visibleBottom,
+    };
 
     returnobj.visibility = visible;
     returnobj.detected = detected;

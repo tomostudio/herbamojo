@@ -28,8 +28,8 @@ import { Arrow, ArrowSmaller } from 'svg/symbols.js';
 
 //IMAGES
 import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
-import BottleImg from 'images/static/herbamojo_productshot.png';
-import BottleImgWebP from 'images/static/herbamojo_productshot.webp';
+import BottleImg from 'images/static/herbamojo_productshot_2_112020.png';
+import BottleImgWebP from 'images/static/herbamojo_productshot_2_112020.webp';
 
 //SVG CERT
 import CertBPOM from 'images/symbols/bpom.svg';
@@ -88,6 +88,7 @@ export default class Home extends React.Component {
   inviewArrayBenefits = [null, null, null, null];
   scrollpass = [];
   scrollaxArray = [];
+  popupenable = null;
   AnimObject = [
     {
       id_name: 'benefitstamina',
@@ -125,13 +126,30 @@ export default class Home extends React.Component {
       },
     },
   };
+  constructor(props) {
+    super(props);
+
+    this.popUpRef = React.createRef();
+    this.popUpRefContainer = React.createRef();
+    this.popupReveal = false;
+    this.closePopUp = () => {
+      if (
+        this.popUpRef.current.classList.contains('popup') &&
+        this.popupReveal
+      ) {
+        this.popUpReveal = false;
+        this.popUpRef.current.classList.remove('popup');
+        if (this.disableScrollBody !== null) this.disableScrollBody.enable();
+        this.HomeScrollSnap.play();
+      }
+    };
+  }
   // --------------
   IndexLoader = new LoaderClass({
     parent: `#${this.MainID}`,
     default_delay: 500,
     postload: () => {
       if (typeof window !== undefined) {
-        window.scroll(0, 0);
 
         this.HomeScrollSnap = new ScrollSnapClass({
           sections_identifier: `main.home#${this.MainID} section`,
@@ -156,6 +174,7 @@ export default class Home extends React.Component {
           this.SnapNav[i].classList.add('active');
         }
       };
+
       setNav(0);
 
       //SETUP BUTTON
@@ -437,17 +456,34 @@ export default class Home extends React.Component {
       this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
       this.scrollpasRetrigger();
 
-      // SET ANIMATION DELAY
-      if (this.LoadAnimationTimeout !== null)
-        clearTimeout(this.LoadAnimationTimeout);
-      this.LoadAnimationTimeout = setTimeout(() => {
-        //ENABLE SCROLL
-        if (this.disableScrollBody !== null) this.disableScrollBody.enable();
-        this.HomeScrollSnap.play();
-
+      // FUNCTION TRIGGERS
+      if (!this.popupReveal) {
+        // SET ANIMATION DELAY
         if (this.LoadAnimationTimeout !== null)
           clearTimeout(this.LoadAnimationTimeout);
-      }, this.LoadAnimationDelay);
+        this.LoadAnimationTimeout = setTimeout(() => {
+          //ENABLE SCROLL & SNAP IF THERE IS NO POPUP
+          if (this.disableScrollBody !== null) this.disableScrollBody.enable();
+          this.HomeScrollSnap.play();
+
+          if (this.LoadAnimationTimeout !== null)
+            clearTimeout(this.LoadAnimationTimeout);
+        }, this.LoadAnimationDelay);
+      } else {
+        //INIT POP UP
+        if (this.LoadAnimationTimeout !== null)
+          clearTimeout(this.LoadAnimationTimeout);
+        this.LoadAnimationTimeout = setTimeout(() => {
+          this.popUpRef.current.classList.remove('loading');
+
+          if (this.LoadAnimationTimeout !== null)
+            clearTimeout(this.LoadAnimationTimeout);
+          this.LoadAnimationTimeout = setTimeout(() => {
+            this.popUpRef.current.classList.add('click');
+            localStorage.notFirstVisit = true;
+          }, 500);
+        }, this.LoadAnimationDelay + 750);
+      }
     },
   });
   componentDidMount() {
@@ -478,6 +514,7 @@ export default class Home extends React.Component {
       });
       this.AnimObject[index].anim.goToAndStop(0);
     });
+    //CHECK POPUP
   }
   componentWillUnmount() {
     this.inviewArrayBenefits.forEach((benefit, index) => {
@@ -553,6 +590,7 @@ export default class Home extends React.Component {
     if (typeof document !== `undefined`) {
       //RESET MOBILE MENU OPEN
       document.body.classList.remove('menu_open');
+      // document.body.classList.remove('loaded');
       window.removeEventListener('resize', this.resize, false);
     }
   }
@@ -805,6 +843,7 @@ export default class Home extends React.Component {
           const footerData = generalData.footer;
           const transData = data.home.frontmatter.translations;
           const id_seodesc = generalData.seo.seo_shortdesc_id;
+          const popupData = data.home.frontmatter.popup;
 
           let journalslug = generalData.journalslug;
           if (journalslug.substring(0, 1) !== '/') {
@@ -813,6 +852,7 @@ export default class Home extends React.Component {
 
           // ONLINE AND OFFLINE SHOP VALIDITY CHECKER
           let offlineshop = [];
+
           shopData.offlineshop.offlineshoplist.forEach((shop) => {
             if (
               shop.image !== null &&
@@ -858,15 +898,32 @@ export default class Home extends React.Component {
           if (shopData.onlineshop.slider_option === 'NOSLIDER')
             onlineshoplayout = 'NOSLIDER';
 
-          // CHECK OFFLINE & ONLINE SHOP DATA
-          // console.log(onlineshop, offlineshop, shopData);
-
           let printjournal = [];
 
           if (this.langID) {
             printjournal = data.journals_id;
           } else {
             printjournal = data.journals;
+          }
+
+          this.popupenable = popupData.enable;
+
+          // GET DATA AND LOCAL STORAGE AND SET POPUP ENABLED OR DISABLED
+          // DEFAULT TO DISABLED
+          if (this.popupenable) {
+            if (!localStorage.notFirstVisit) this.popupReveal = true;
+            if (popupData.always) this.popupReveal = true;
+          }
+
+          let exLink_PU = false;
+          let popupLink = '';
+
+          if (
+            (this.langID && popupData.link.id !== null) ||
+            (!this.langID && popupData.link.en !== null)
+          ) {
+            popupLink = this.langID ? popupData.link.id : popupData.link.en;
+            if (popupLink.includes('http')) exLink_PU = true;
           }
 
           return (
@@ -1930,7 +1987,7 @@ export default class Home extends React.Component {
                             );
                           })}
                         </div>
-                        {printjournal.edges.length > 4 && (
+                        {printjournal.edges.length >= 4 && (
                           <Link
                             className='viewall'
                             to={
@@ -1953,6 +2010,70 @@ export default class Home extends React.Component {
                 )}
               </div>
               <Footer indonesia={this.langID} />
+              {this.popupReveal && (
+                <div
+                  id='PopUpWrapper'
+                  ref={this.popUpRef}
+                  className={`loading ${this.popupenable ? 'popup' : ''}`}
+                  onClick={(e) => {
+                    if (
+                      !e.currentTarget
+                        .querySelector('.container')
+                        .contains(e.target)
+                    ) {
+                      this.closePopUp();
+                    }
+                  }}
+                >
+                  <div className='container' ref={this.popUpRefContainer}>
+                    <div className='background'>
+                      <Img
+                        fluid={popupData.image.childImageSharp.fluid}
+                        alt='popupimage'
+                        imgStyle={{
+                          objectFit: 'cover',
+                          objectPosition: 'center',
+                          width: '100%',
+                          height: '100%',
+                        }}
+                        loading='eager'
+                      />
+                    </div>
+                    <div>
+                      <div className='content'>
+                        <div className='heading'>
+                          {this.langID
+                            ? popupData.content.id
+                            : popupData.content.en}
+                        </div>
+                        {popupLink ? (
+                          exLink_PU ? (
+                            <a href={popupLink}>
+                              {this.langID
+                                ? popupData.buttontext.id
+                                : popupData.buttontext.en}
+                            </a>
+                          ) : (
+                            <Link to={popupLink}>
+                              {this.langID
+                                ? popupData.buttontext.id
+                                : popupData.buttontext.en}
+                            </Link>
+                          )
+                        ) : (
+                          ''
+                        )}
+
+                        <div
+                          id='PopUpClose'
+                          className='close'
+                          onClick={this.closePopUp}
+                        ></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              )}
             </Layout>
           );
         }}
@@ -2110,6 +2231,36 @@ const indexQuery = graphql`
                 ...GatsbyImageSharpFluid_withWebp_noBase64
               }
             }
+          }
+        }
+        popup {
+          enable
+          always
+          image {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp_noBase64
+              }
+            }
+          }
+          bgimage {
+            childImageSharp {
+              fluid {
+                ...GatsbyImageSharpFluid_withWebp_noBase64
+              }
+            }
+          }
+          content {
+            en
+            id
+          }
+          link {
+            en
+            id
+          }
+          buttontext {
+            en
+            id
           }
         }
         about {
