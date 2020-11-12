@@ -14,6 +14,9 @@ onlineshop:
       link: >-
         https://www.blibli.com/merchant/herbamojo/UMH-60121?page=1&start=0&pickupPointCode=&cnc=&multiCategory=true&excludeProductList=true&sort=7
       background: transparent
+    - image: /assets/bukalapak-1.png
+      link: 'https://www.bukalapak.com/u/herbamojoofficialshop'
+      background: transparent
   slider_option: NORMAL
 offlineshop:
   offlineshoplist:
