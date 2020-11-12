@@ -88,7 +88,8 @@ export default class Home extends React.Component {
   inviewArrayBenefits = [null, null, null, null];
   scrollpass = [];
   scrollaxArray = [];
-  popupenable = null;
+  popupEnable = null;
+  popupAlways = false;
   AnimObject = [
     {
       id_name: 'benefitstamina',
@@ -131,13 +132,14 @@ export default class Home extends React.Component {
 
     this.popUpRef = React.createRef();
     this.popUpRefContainer = React.createRef();
-    this.popupReveal = false;
+    this.state = { popupReveal: false };
+
     this.closePopUp = () => {
       if (
         this.popUpRef.current.classList.contains('popup') &&
-        this.popupReveal
+        this.state.popupReveal
       ) {
-        this.popUpReveal = false;
+        this.setState = { popupReveal: false };
         this.popUpRef.current.classList.remove('popup');
         if (this.disableScrollBody !== null) this.disableScrollBody.enable();
         this.HomeScrollSnap.play();
@@ -170,7 +172,7 @@ export default class Home extends React.Component {
           nav.classList.remove('active');
         });
         if (i >= 0) {
-          this.SnapNav[i].classList.add('active');
+          if (this.SnapNav[i]) this.SnapNav[i].classList.add('active');
         }
       };
 
@@ -456,7 +458,7 @@ export default class Home extends React.Component {
       this.scrollpasRetrigger();
 
       // FUNCTION TRIGGERS
-      if (!this.popupReveal) {
+      if (!this.state.popupReveal) {
         // SET ANIMATION DELAY
         if (this.LoadAnimationTimeout !== null)
           clearTimeout(this.LoadAnimationTimeout);
@@ -479,7 +481,10 @@ export default class Home extends React.Component {
             clearTimeout(this.LoadAnimationTimeout);
           this.LoadAnimationTimeout = setTimeout(() => {
             this.popUpRef.current.classList.add('click');
-            if (typeof window !== undefined) localStorage.notFirstVisit = true;
+
+            // ADD VARIABLE TO INIDCIATE FIRST VISIT
+            if (typeof localStorage !== undefined)
+              localStorage.popupRevealed = true;
           }, 500);
         }, this.LoadAnimationDelay + 750);
       }
@@ -513,7 +518,18 @@ export default class Home extends React.Component {
       });
       this.AnimObject[index].anim.goToAndStop(0);
     });
-    //CHECK POPUP
+    // SET POP UP
+
+    // GET DATA AND LOCAL STORAGE AND SET POPUP ENABLED OR DISABLED
+    // DEFAULT TO DISABLED
+    if (this.popupEnable) {
+      if (typeof window !== undefined) {
+        if (typeof localStorage !== undefined && !localStorage.popupRevealed) {
+          this.setState({ popupReveal: true });
+        }
+      }
+      if (this.popupAlways) this.setState({ popupReveal: true });
+    }
   }
   componentWillUnmount() {
     this.inviewArrayBenefits.forEach((benefit, index) => {
@@ -905,16 +921,6 @@ export default class Home extends React.Component {
             printjournal = data.journals;
           }
 
-          this.popupenable = popupData.enable;
-
-          // GET DATA AND LOCAL STORAGE AND SET POPUP ENABLED OR DISABLED
-          // DEFAULT TO DISABLED
-          if (this.popupenable) {
-            if (typeof window !== undefined && !localStorage.notFirstVisit)
-              this.popupReveal = true;
-            if (popupData.always) this.popupReveal = true;
-          }
-
           let exLink_PU = false;
           let popupLink = '';
 
@@ -925,6 +931,9 @@ export default class Home extends React.Component {
             popupLink = this.langID ? popupData.link.id : popupData.link.en;
             if (popupLink.includes('http')) exLink_PU = true;
           }
+
+          this.popupEnable = popupData.enable;
+          this.popupAlways = popupData.always;
 
           return (
             <Layout
@@ -2010,11 +2019,11 @@ export default class Home extends React.Component {
                 )}
               </div>
               <Footer indonesia={this.langID} />
-              {this.popupReveal && (
+              {this.state.popupReveal && (
                 <div
                   id='PopUpWrapper'
                   ref={this.popUpRef}
-                  className={`loading ${this.popupenable ? 'popup' : ''}`}
+                  className={`loading ${this.popupEnable ? 'popup' : ''}`}
                   onClick={(e) => {
                     if (
                       !e.currentTarget
