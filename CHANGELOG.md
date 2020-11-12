@@ -3,8 +3,9 @@
 # TO DO
 - Added Imge Fallback if image is missing build doesnt crash.
 - Change Stockist Section
+- Add CMS for PopUp
+- Add CMS for Stockist 2.0
 - Add CMS for Authentication
-- Check Remark Relative Plugin
 
 ## 2020-11-02
 
@@ -31,7 +32,8 @@
 - Slow Speed Fallback
 - Aut Reveal Animation
 - SAFARI Slow Speed Fall Back Detection based on Device
-
+- Fix LocalStorage Run Time Issue (Move all Checks to Did Mount and not Render)
+- Convert PopUp Reveal to State for Dynamic HTML
 
 ## 2020-09-23
 
