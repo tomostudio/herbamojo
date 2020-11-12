@@ -32,5 +32,14 @@ offlineshop:
     - background: transparent
       image: /assets/aeon.png
       link: ''
+    - image: /assets/yogya-sumber-sari-junction.png
+      link: ''
+      background: transparent
+    - image: /assets/yogya-riau-junction.png
+      link: ''
+      background: transparent
+    - image: /assets/setiabudhi-supermarket.png
+      link: ''
+      background: transparent
   slider_option: NORMAL
 ---
