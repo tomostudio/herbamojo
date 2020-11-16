@@ -2,6 +2,7 @@
 
 # TO DO
 - Added Imge Fallback if image is missing build doesnt crash.
+- Check Native Remark Relative
 
 
 ## 2020-11-02

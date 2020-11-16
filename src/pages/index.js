@@ -2486,13 +2486,6 @@ const indexQuery = graphql`
               }
             }
           }
-          bgimage {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
-            }
-          }
           content {
             en
             id
