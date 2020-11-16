@@ -1766,6 +1766,25 @@ collections:
                           default: 'Offline',
                           required: true,
                         }
+                  - label: 'Stockist'
+                    name: 'stockist'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Stockist',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Stockist',
+                          required: true,
+                        }
               - label: 'Journal'
                 name: 'journal'
                 widget: 'object'

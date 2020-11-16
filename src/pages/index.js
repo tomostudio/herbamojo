@@ -2026,7 +2026,10 @@ export default class Home extends React.Component {
                         )}
                         {stockistList.length > 0 ? (
                           <div>
-                            <h2>STOCKIST</h2>
+                            <h2>
+                              {this.langID
+                                ? transData.shop.stockist.id
+                                : transData.shop.stockist.en}</h2>
                             <div
                               id='stockist'
                               className={`shopSlider stockist ${
@@ -2650,6 +2653,10 @@ const indexQuery = graphql`
               id
             }
             offline {
+              en
+              id
+            }
+            stockist {
               en
               id
             }

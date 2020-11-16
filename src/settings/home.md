@@ -176,6 +176,9 @@ translations:
     online:
       en: Online
       id: Online
+    stockist:
+      en: Stockist
+      id: Stockist
     title:
       en: Shop
       id: Beli
