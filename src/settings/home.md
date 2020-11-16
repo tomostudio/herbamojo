@@ -8,7 +8,7 @@ popup:
   image: /assets/popup_bg.png
   content:
     en: Get to know the characteristics of a genuine Herbamojo product right here.
-    id: "Kenali ciri-ciri produk resmi Herbamojo di sini "
+    id: Kenali ciri-ciri produk resmi Herbamojo di sini.
   buttontext:
     en: TO AUTHENTICATION PAGE
     id: TO AUTHENTICATION PAGE
