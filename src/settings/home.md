@@ -20,7 +20,6 @@ popup:
   enable: true
   always: true
   image: /assets/popup_bg.png
-  bgimage: /assets/herbamojo_lifestylebg.jpg
   content:
     en: Get to know the characteristics of a genuine Herbamojo product right here.
     id: Kenali ciri-ciri produk resmi Herbamojo di sini.
@@ -94,37 +93,6 @@ ingredients:
     title:
       en: JAVANESE LONG PEPPER
       id: CABE JAWA
-onlineshop_option: NORMAL
-onlineshop:
-  onlineshoplist:
-    - background: transparent
-      image: /assets/shop/tokopedia.png
-      link: 'https://www.tokopedia.com/herbamojo'
-    - background: transparent
-      image: /assets/shop/shopee.png
-      link: 'https://shopee.co.id/herbamojo7'
-    - background: transparent
-      image: /assets/shop/shopee.png
-      link: 'https://shopee.co.id/herbamojo7'
-  slider_option: NORMAL
-offlineshop:
-  offlineshoplist:
-    - background: transparent
-      image: /assets/watson.png
-      link: ''
-    - background: transparent
-      image: /assets/ranch-market.png
-      link: ''
-    - background: transparent
-      image: /assets/farmers-market.png
-      link: ''
-    - background: transparent
-      image: /assets/apotekroxy.png
-      link: ''
-    - background: transparent
-      image: /assets/aeon.png
-      link: ''
-  slider_option: NORMAL
 translations:
   home:
     getyours:

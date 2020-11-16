@@ -59,6 +59,24 @@ main.authentication {
         @include respond-to(m_tablet) {
           display: block;
         }
+        &.jamu {
+          @include respond-to(m_tablet) {
+            @include setflex(row, nowrap);
+          }
+          & > span {
+            max-width: 120px;
+          }
+          & picture {
+            height: 50px;
+            width: 50px;
+            margin-left: 10px;
+            position: relative;
+            & > img {
+              width: 100%;
+              height: 100%;
+            }
+          }
+        }
       }
     }
   }
@@ -715,9 +733,9 @@ main.authentication {
         opacity: 0;
         pointer-events: none;
         & > picture {
-          height: 62.5%;
+          height: 75%;
           @include respond-to(m_tablet) {
-            height: 80%;
+            height: 90%;
           }
         }
       }

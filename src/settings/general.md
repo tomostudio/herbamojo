@@ -23,7 +23,7 @@ footer:
 navigation:
   home:
     en: Home
-    id: Home
+    id: Beranda
   journal:
     en: Journal
     id: Jurnal
@@ -78,7 +78,7 @@ auttranslation:
       id: Memiliki Logo Jamu
     info3:
       en: Metallic Color on the Herbamojo Logo
-      id: Warna metalik pada logo hHerbamojo
+      id: Warna metalik pada logo Herbamojo
     info4:
       en: Clear and Concise Label Design
       id: Desain kemasan terlihat Rapi dan Jelas
@@ -106,5 +106,5 @@ auttranslation:
   section5info:
     info1:
       en: Fine Textured Powder
-      id: Textur Bubuk Lebih halus
+      id: Textur Bubuk lebih Halus
 ---

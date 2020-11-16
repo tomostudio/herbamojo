@@ -24,6 +24,13 @@ import BottleSideImg from 'images/static/aut/herbamojo_bottle_side.jpg';
 import CapsuleImg from 'images/static/aut/capsule.png';
 import JamuImg from 'images/static/aut/jamu.png';
 
+import SealImgWebp from 'images/static/aut/herbamojo_bottle_seal.webp';
+import BottleFrontImgWebp from 'images/static/aut/herbamojo_bottle_front.webp';
+import BottleBackImgWebp from 'images/static/aut/herbamojo_bottle_back.webp';
+import BottleSideImgWebp from 'images/static/aut/herbamojo_bottle_side.webp';
+import CapsuleImgWebp from 'images/static/aut/capsule.webp';
+import JamuImgWebp from 'images/static/aut/jamu.webp';
+
 let SnapNav = null;
 let autDataQuery = null;
 let LoadAnimationDelay = 3500;
@@ -652,10 +659,17 @@ export default function AuthenticationPage(props) {
                       ? autDataQuery.section1info.info1.id
                       : autDataQuery.section1info.info1.en}
                   </div>
-                  <div>
-                    {LangID
-                      ? autDataQuery.section1info.info2.id
-                      : autDataQuery.section1info.info2.en}
+                  <div className='jamu'>
+                    <span>
+                      {LangID
+                        ? autDataQuery.section1info.info2.id
+                        : autDataQuery.section1info.info2.en}
+                    </span>
+                    <picture>
+                      <source srcSet={JamuImgWebp} type='image/webp' />
+                      <source srcSet={JamuImg} type='image/png' />
+                      <img src={JamuImg} alt='Herbamojo' />
+                    </picture>
                   </div>
                   <div>
                     {LangID
@@ -770,7 +784,7 @@ export default function AuthenticationPage(props) {
                           : autDataQuery.section1info.info2.en}
                       </div>
                       <picture>
-                        {/* <source srcSet={BottleImgWebP} type='image/webp' /> */}
+                        <source srcSet={JamuImgWebp} type='image/webp' />
                         <source srcSet={JamuImg} type='image/png' />
                         <img src={JamuImg} alt='Herbamojo' />
                       </picture>
@@ -861,36 +875,36 @@ export default function AuthenticationPage(props) {
               </div>
               <div id='CapsuleImage' className='centerObject'>
                 <picture>
-                  {/* <source srcSet={BottleImgWebP} type='image/webp' /> */}
+                  {/* <source srcSet={CapsuleImgWebp} type='image/webp' /> */}
                   <source srcSet={CapsuleImg} type='image/png' />
                   <img src={CapsuleImg} alt='Herbamojo' />
                 </picture>
               </div>
               <div id='SealImage' className='centerObject'>
                 <picture>
-                  {/* <source srcSet={BottleImgWebP} type='image/webp' /> */}
+                  <source srcSet={SealImgWebp} type='image/webp' />
                   <source srcSet={SealImg} type='image/png' />
                   <img src={SealImg} alt='Herbamojo' />
                 </picture>
               </div>
               <div id='BottleFront' className='centerObject bottleFallback'>
                 <picture>
-                  {/* <source srcSet={BottleImgWebP} type='image/webp' /> */}
-                  <source srcSet={BottleFrontImg} type='image/png' />
+                  <source srcSet={BottleFrontImgWebp} type='image/webp' />
+                  <source srcSet={BottleFrontImg} type='image/jpg' />
                   <img src={BottleFrontImg} alt='Herbamojo' />
                 </picture>
               </div>
               <div id='BottleSide' className='centerObject bottleFallback'>
                 <picture>
-                  {/* <source srcSet={BottleImgWebP} type='image/webp' /> */}
-                  <source srcSet={BottleSideImg} type='image/png' />
+                  <source srcSet={BottleSideImgWebp} type='image/webp' />
+                  <source srcSet={BottleSideImg} type='image/jpg' />
                   <img src={BottleSideImg} alt='Herbamojo' />
                 </picture>
               </div>
               <div id='BottleBack' className='centerObject bottleFallback'>
                 <picture>
-                  {/* <source srcSet={BottleImgWebP} type='image/webp' /> */}
-                  <source srcSet={BottleBackImg} type='image/png' />
+                  <source srcSet={BottleBackImgWebp} type='image/webp' />
+                  <source srcSet={BottleBackImg} type='image/jpg' />
                   <img src={BottleBackImg} alt='Herbamojo' />
                 </picture>
               </div>

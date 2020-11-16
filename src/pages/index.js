@@ -79,10 +79,12 @@ export default class Home extends React.Component {
   slider = {
     online: null,
     offline: null,
+    stockist: null,
   };
   sliderStatus = {
     online: 'NOSLIDER',
     offline: 'NOSLIDER',
+    stockist: 'NOSLIDER',
   };
   inviewArray = [];
   inviewArrayBenefits = [null, null, null, null];
@@ -119,10 +121,16 @@ export default class Home extends React.Component {
   glidesetting = {
     type: 'carousel',
     startAt: 0,
-    perView: 2,
+    perView: 1,
     gap: 0,
+  };
+  glidesetting2 = {
+    type: 'carousel',
+    startAt: 0,
+    perView: 2,
+    gap: 40,
     breakpoints: {
-      800: {
+      900: {
         perView: 1,
       },
     },
@@ -141,7 +149,6 @@ export default class Home extends React.Component {
       ) {
         this.setState = { popupReveal: false };
         this.popUpRef.current.classList.remove('popup');
-        if (this.disableScrollBody !== null) this.disableScrollBody.enable();
         this.HomeScrollSnap.play();
       }
     };
@@ -152,6 +159,7 @@ export default class Home extends React.Component {
     default_delay: 500,
     postload: () => {
       if (typeof window !== undefined) {
+        window.scrollTo(0, 0);
         this.HomeScrollSnap = new ScrollSnapClass({
           sections_identifier: `main.home#${this.MainID} section`,
           snap_identifier: '',
@@ -340,7 +348,7 @@ export default class Home extends React.Component {
       //SHOP
       this.inviewArray[6] = new InViewportClass({
         target: 'section#shop',
-        visibility: 0.55,
+        visibility: 0.25,
         enter: () => {
           setNav(4);
           if (!MediaCheck.width.mtablet())
@@ -367,7 +375,7 @@ export default class Home extends React.Component {
 
       this.inviewArray[8] = new InViewportClass({
         target: 'section#journal',
-        visibility: 0.55,
+        visibility: 0.4,
         enter: () => {
           document.querySelector('section#journal').classList.add('inview');
           if (!MediaCheck.width.mtablet()) {
@@ -433,12 +441,21 @@ export default class Home extends React.Component {
           ).mount();
           this.sliderStatus.online = 'MOUNTED';
         }
+
         if (document.querySelector('#offlineslider')) {
           this.slider.offline = new Glide(
             '#offlineslider',
             this.glidesetting
           ).mount();
           this.sliderStatus.offline = 'MOUNTED';
+        }
+
+        if (document.querySelector('#stockistslider')) {
+          this.slider.stockist = new Glide(
+            '#stockistslider',
+            this.glidesetting2
+          ).mount();
+          this.sliderStatus.stockist = 'MOUNTED';
         }
       }
 
@@ -450,9 +467,6 @@ export default class Home extends React.Component {
         //ADD CLASS LOADED
         document.body.classList.add('loaded');
       }
-
-      // INIT RESIZE
-      this.resize();
 
       this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
       this.scrollpasRetrigger();
@@ -467,6 +481,9 @@ export default class Home extends React.Component {
           if (this.disableScrollBody !== null) this.disableScrollBody.enable();
           this.HomeScrollSnap.play();
 
+          // INIT RESIZE
+          this.resize();
+
           if (this.LoadAnimationTimeout !== null)
             clearTimeout(this.LoadAnimationTimeout);
         }, this.LoadAnimationDelay);
@@ -477,15 +494,15 @@ export default class Home extends React.Component {
         this.LoadAnimationTimeout = setTimeout(() => {
           this.popUpRef.current.classList.remove('loading');
 
-          if (this.LoadAnimationTimeout !== null)
-            clearTimeout(this.LoadAnimationTimeout);
-          this.LoadAnimationTimeout = setTimeout(() => {
-            this.popUpRef.current.classList.add('click');
+          if (this.disableScrollBody !== null) this.disableScrollBody.enable();
+          this.popUpRef.current.classList.add('click');
 
-            // ADD VARIABLE TO INIDCIATE FIRST VISIT
-            if (typeof localStorage !== undefined)
-              localStorage.popupRevealed = true;
-          }, 500);
+          // INIT RESIZE
+          this.resize();
+
+          // ADD VARIABLE TO INDICATE FIRST VISIT
+          if (typeof localStorage !== undefined)
+            localStorage.popupRevealed = true;
         }, this.LoadAnimationDelay + 750);
       }
     },
@@ -579,6 +596,8 @@ export default class Home extends React.Component {
       this.slider.online.destroy();
     if (this.slider.offline !== null && this.slider.offline !== undefined)
       this.slider.offline.destroy();
+    if (this.slider.stockist !== null && this.slider.stockist !== undefined)
+      this.slider.stockist.destroy();
 
     if (this.ForceVH !== null && this.ForceVH !== undefined)
       this.ForceVH.kill();
@@ -662,7 +681,6 @@ export default class Home extends React.Component {
       document.body.classList.remove('menu_open');
 
       // REENABLE SLIDER
-
       if (onlineslider) {
         if (
           onlineslider.classList.contains('nomobileslider') &&
@@ -673,6 +691,7 @@ export default class Home extends React.Component {
             '#onlineslider',
             this.glidesetting
           ).mount();
+          this.slider.online.update();
           this.sliderStatus.online = 'MOUNTED';
         }
       }
@@ -691,7 +710,18 @@ export default class Home extends React.Component {
           this.sliderStatus.offline = 'MOUNTED';
         }
       }
-      // console.log(this.sliderStatus);
+
+      if (
+        this.slider.stockist !== null &&
+        this.sliderStatus.stockist === 'DESTROYED'
+      ) {
+        this.slider.stockist = new Glide(
+          '#stockistslider',
+          this.glidesetting2
+        ).mount();
+        this.slider.stockist.update();
+        this.sliderStatus.stockist = 'MOUNTED';
+      }
     } else {
       // CHECK AND DISABLE SLIDER ON SHOP ON MOBILE
 
@@ -713,31 +743,32 @@ export default class Home extends React.Component {
         this.slider.offline = null;
         this.sliderStatus.offline = 'DESTROYED';
       }
-      // console.log(this.sliderStatus);
-    }
-    this.inviewRetrigger();
 
-    if (this.slider.online !== null) {
-      const _so = document.querySelector('#onlineshop');
-      if (!MediaCheck.width.mtablet()) {
-        if (_so.classList.contains('twoslide')) {
-          this.slider.online.disable();
-        }
-      } else {
-        this.slider.online.enable();
+      if (
+        this.slider.stockist !== null &&
+        this.sliderStatus.stockist === 'MOUNTED'
+      ) {
+        this.slider.stockist.destroy();
+        this.slider.stockist = null;
+        this.sliderStatus.stockist = 'DESTROYED';
       }
     }
-    if (this.slider.offline !== null) {
-      const _so = document.querySelector('#offlineshop');
-      if (!MediaCheck.width.mtablet()) {
-        if (_so.classList.contains('twoslide')) {
-          this.slider.offline.disable();
-        }
-      } else {
-        this.slider.offline.enable();
-      }
-    }
+    if (this.resizeTimeout !== null) clearTimeout(this.resizeTimeout);
+
+    this.resizeTimeout = setTimeout(() => {
+      // DELAYED FUNCTION
+      if (this.sliderStatus.stockist === 'MOUNTED')
+        this.slider.stockist.update();
+
+      if (this.sliderStatus.online === 'MOUNTED') this.slider.online.update();
+
+      if (this.sliderStatus.offline === 'MOUNTED') this.slider.offline.update();
+
+      this.resizeTimeout = null;
+    }, 500);
+    this.inviewRetrigger();
   };
+  resizeTimeout = null;
   gotoShop = () => {
     if (MediaCheck.width.mtablet()) {
       const scrollTarget = document
@@ -866,6 +897,7 @@ export default class Home extends React.Component {
           }
 
           // ONLINE AND OFFLINE SHOP VALIDITY CHECKER
+          // OFFLINE SHOP OPTION
           let offlineshop = [];
 
           shopData.offlineshop.offlineshoplist.forEach((shop) => {
@@ -887,9 +919,14 @@ export default class Home extends React.Component {
           let offlineshopemobileslider = true;
           if (shopData.offlineshop.slider_option === 'NOMOBILE')
             offlineshopemobileslider = false;
-          if (shopData.offlineshop.slider_option === 'NOSLIDER')
+
+          if (
+            shopData.offlineshop.slider_option === 'NOSLIDER' &&
+            shopData.onlineshop.slider_option === 'NOSLIDER'
+          )
             offlineshoplayout = 'NOSLIDER';
 
+          // ONLINE SHOP OPTION
           let onlineshop = [];
           shopData.onlineshop.onlineshoplist.forEach((shop) => {
             if (
@@ -910,8 +947,49 @@ export default class Home extends React.Component {
           let onlineshopemobileslider = true;
           if (shopData.onlineshop.slider_option === 'NOMOBILE')
             onlineshopemobileslider = false;
-          if (shopData.onlineshop.slider_option === 'NOSLIDER')
+          if (
+            shopData.offlineshop.slider_option === 'NOSLIDER' &&
+            shopData.onlineshop.slider_option === 'NOSLIDER'
+          )
             onlineshoplayout = 'NOSLIDER';
+
+          // STOCKIST OPTION
+          let stockistlayout = '';
+          let stockistList = [];
+          shopData.stockist.list.forEach((entry, id) => {
+            if (
+              entry.content !== null &&
+              entry.content !== '' &&
+              entry.content !== undefined
+            ) {
+              // CHECK LENGTH
+              let sectionEntry = stockistList.length;
+              let createNewSection = false;
+
+              if (sectionEntry === 0) {
+                createNewSection = true;
+              } else {
+                if (stockistList[sectionEntry - 1].length >= 5) {
+                  createNewSection = true;
+                }
+              }
+
+              if (createNewSection) {
+                stockistList.push([]);
+              }
+              // ADD TO ENTRY
+              stockistList[stockistList.length - 1].push(entry);
+            }
+          });
+
+          if (stockistList.length > 2) {
+            stockistlayout = 'SLIDER';
+          } else {
+            stockistlayout = 'SINGLE';
+          }
+
+          if (shopData.stockist.slider_option === 'NOSLIDER')
+            stockistlayout = 'NOSLIDER';
 
           let printjournal = [];
 
@@ -1496,85 +1574,27 @@ export default class Home extends React.Component {
                         ? transData.shop.title.id
                         : transData.shop.title.en}
                     </h1>
-                    <div className='content flex'>
-                      {(onlineshop.length > 1 ||
-                        (onlineshop.length === 1 &&
-                          onlineshop[0].image !== '')) && (
-                        <div>
-                          <h2>
-                            {this.langID
-                              ? transData.shop.online.id
-                              : transData.shop.online.en}
-                          </h2>
-                          <div
-                            id='onlineshop'
-                            className={`shopSlider ${
-                              onlineshop.length === 1 ? ' oneslide' : ''
-                            } ${onlineshop.length === 2 ? ' twoslide' : ''} ${
-                              !onlineshopemobileslider ? 'nomobileslider' : ''
-                            }`}
-                          >
-                            {
+                    <div>
+                      <div className='content flex'>
+                        {onlineshop[0].image !== '' && (
+                          <div>
+                            <h2>
+                              {this.langID
+                                ? transData.shop.online.id
+                                : transData.shop.online.en}
+                            </h2>
+                            <div
+                              id='onlineshop'
+                              className={`shopSlider ${
+                                onlineshop.length === 1 ? 'oneslide' : ''
+                              } ${
+                                !onlineshopemobileslider ? 'nomobileslider' : ''
+                              }`}
+                            >
                               {
-                                NOSLIDER: (
-                                  <div className='wrapper noslider'>
-                                    {onlineshop.map((node, id) => {
-                                      return (
-                                        <div
-                                          className='shop'
-                                          key={id}
-                                          dataid={id}
-                                        >
-                                          {node.link ? (
-                                            <a
-                                              target='_blank'
-                                              rel='noopener noreferrer'
-                                              href={node.link}
-                                              style={{
-                                                background:
-                                                  node.background !== null
-                                                    ? node.background
-                                                    : 'transparent',
-                                              }}
-                                              aria-label='Shop Slider'
-                                            >
-                                              <ShopImages
-                                                fluid={
-                                                  node.image.childImageSharp
-                                                    .fluid
-                                                }
-                                              />
-                                            </a>
-                                          ) : (
-                                            <div
-                                              style={{
-                                                background:
-                                                  node.background !== null
-                                                    ? node.background
-                                                    : 'transparent',
-                                              }}
-                                            >
-                                              <ShopImages
-                                                fluid={
-                                                  node.image.childImageSharp
-                                                    .fluid
-                                                }
-                                              />
-                                            </div>
-                                          )}
-                                        </div>
-                                      );
-                                    })}
-                                  </div>
-                                ),
-                                SINGLE: (
-                                  <>
-                                    <div className='arrow'>
-                                      <Arrow />
-                                      <ArrowSmaller classProps='mobile' />
-                                    </div>
-                                    {/* CONTENT */}
-                                    <div className='wrapper'>
+                                {
+                                  NOSLIDER: (
+                                    <div className='wrapper noslider'>
                                       {onlineshop.map((node, id) => {
                                         return (
                                           <div
@@ -1623,179 +1643,183 @@ export default class Home extends React.Component {
                                         );
                                       })}
                                     </div>
-                                    <div className='arrow'>
-                                      <Arrow />
-                                      <ArrowSmaller classProps='mobile' />
-                                    </div>
-                                  </>
-                                ),
-                                SLIDER: (
-                                  <>
-                                    <div
-                                      className='arrow'
-                                      onClick={() => {
-                                        if (this.slider.online)
-                                          this.slider.online.go('<');
-                                      }}
-                                    >
-                                      <Arrow />
-                                      <ArrowSmaller classProps='mobile' />
-                                    </div>
-                                    {/* CONTENT */}
-                                    <div
-                                      id='onlineslider'
-                                      className='glide wrapper'
-                                    >
+                                  ),
+                                  SINGLE: (
+                                    <>
+                                      <div className='arrow'>
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                      {/* CONTENT */}
+                                      <div className='wrapper'>
+                                        {onlineshop.map((node, id) => {
+                                          return (
+                                            <div
+                                              className='shop'
+                                              key={id}
+                                              dataid={id}
+                                            >
+                                              {node.link ? (
+                                                <a
+                                                  target='_blank'
+                                                  rel='noopener noreferrer'
+                                                  href={node.link}
+                                                  style={{
+                                                    background:
+                                                      node.background !== null
+                                                        ? node.background
+                                                        : 'transparent',
+                                                  }}
+                                                  aria-label='Shop Slider'
+                                                >
+                                                  <ShopImages
+                                                    fluid={
+                                                      node.image.childImageSharp
+                                                        .fluid
+                                                    }
+                                                  />
+                                                </a>
+                                              ) : (
+                                                <div
+                                                  style={{
+                                                    background:
+                                                      node.background !== null
+                                                        ? node.background
+                                                        : 'transparent',
+                                                  }}
+                                                >
+                                                  <ShopImages
+                                                    fluid={
+                                                      node.image.childImageSharp
+                                                        .fluid
+                                                    }
+                                                  />
+                                                </div>
+                                              )}
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                      <div className='arrow'>
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                    </>
+                                  ),
+                                  SLIDER: (
+                                    <>
                                       <div
-                                        data-glide-el='track'
-                                        className='glide__track'
+                                        className='arrow'
+                                        onClick={() => {
+                                          if (this.slider.online)
+                                            this.slider.online.go('<');
+                                        }}
                                       >
-                                        <div className='glide__slides '>
-                                          {onlineshop.map((node, id) => {
-                                            return (
-                                              <div
-                                                className='shop glide__slide'
-                                                key={id}
-                                                dataid={id}
-                                              >
-                                                {node.link ? (
-                                                  <a
-                                                    target='_blank'
-                                                    rel='noopener noreferrer'
-                                                    href={node.link}
-                                                    style={{
-                                                      background:
-                                                        node.background !== null
-                                                          ? node.background
-                                                          : 'transparent',
-                                                    }}
-                                                    aria-label='Shop Slider'
-                                                  >
-                                                    <ShopImages
-                                                      fluid={
-                                                        node.image
-                                                          .childImageSharp.fluid
-                                                      }
-                                                    />
-                                                  </a>
-                                                ) : (
-                                                  <div
-                                                    style={{
-                                                      background:
-                                                        node.background !== null
-                                                          ? node.background
-                                                          : 'transparent',
-                                                    }}
-                                                  >
-                                                    <ShopImages
-                                                      fluid={
-                                                        node.image
-                                                          .childImageSharp.fluid
-                                                      }
-                                                    />
-                                                  </div>
-                                                )}
-                                              </div>
-                                            );
-                                          })}
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                      {/* CONTENT */}
+                                      <div
+                                        id='onlineslider'
+                                        className='glide wrapper'
+                                      >
+                                        <div
+                                          data-glide-el='track'
+                                          className='glide__track'
+                                        >
+                                          <div className='glide__slides '>
+                                            {onlineshop.map((node, id) => {
+                                              return (
+                                                <div
+                                                  className='shop glide__slide'
+                                                  key={id}
+                                                  dataid={id}
+                                                >
+                                                  {node.link ? (
+                                                    <a
+                                                      target='_blank'
+                                                      rel='noopener noreferrer'
+                                                      href={node.link}
+                                                      style={{
+                                                        background:
+                                                          node.background !==
+                                                          null
+                                                            ? node.background
+                                                            : 'transparent',
+                                                      }}
+                                                      aria-label='Shop Slider'
+                                                    >
+                                                      <ShopImages
+                                                        fluid={
+                                                          node.image
+                                                            .childImageSharp
+                                                            .fluid
+                                                        }
+                                                      />
+                                                    </a>
+                                                  ) : (
+                                                    <div
+                                                      style={{
+                                                        background:
+                                                          node.background !==
+                                                          null
+                                                            ? node.background
+                                                            : 'transparent',
+                                                      }}
+                                                    >
+                                                      <ShopImages
+                                                        fluid={
+                                                          node.image
+                                                            .childImageSharp
+                                                            .fluid
+                                                        }
+                                                      />
+                                                    </div>
+                                                  )}
+                                                </div>
+                                              );
+                                            })}
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                                    <div
-                                      className='arrow'
-                                      onClick={() => {
-                                        if (this.slider.online)
-                                          this.slider.online.go('>');
-                                      }}
-                                    >
-                                      <Arrow />
-                                      <ArrowSmaller classProps='mobile' />
-                                    </div>
-                                  </>
-                                ),
-                              }[onlineshoplayout]
-                            }
+                                      <div
+                                        className='arrow'
+                                        onClick={() => {
+                                          if (this.slider.online)
+                                            this.slider.online.go('>');
+                                        }}
+                                      >
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                    </>
+                                  ),
+                                }[onlineshoplayout]
+                              }
+                            </div>
                           </div>
-                        </div>
-                      )}
-                      {(offlineshop.length > 1 ||
-                        (offlineshop.length === 1 &&
-                          offlineshop[0].image !== '')) && (
-                        <div>
-                          <h2>
-                            {this.langID
-                              ? transData.shop.offline.id
-                              : transData.shop.offline.en}
-                          </h2>
-                          <div
-                            id='offlineshop'
-                            className={`shopSlider ${
-                              offlineshop.length === 1 ? ' oneslide' : ''
-                            } ${offlineshop.length === 2 ? ' twoslide' : ''} ${
-                              !offlineshopemobileslider ? 'nomobileslider' : ''
-                            }`}
-                          >
-                            {
+                        )}
+                        {offlineshop[0].image !== '' && (
+                          <div>
+                            <h2>
+                              {this.langID
+                                ? transData.shop.offline.id
+                                : transData.shop.offline.en}
+                            </h2>
+                            <div
+                              id='offlineshop'
+                              className={`shopSlider ${
+                                offlineshop.length === 1 ? ' oneslide' : ''
+                              } ${
+                                !offlineshopemobileslider
+                                  ? 'nomobileslider'
+                                  : ''
+                              }`}
+                            >
                               {
-                                NOSLIDER: (
-                                  <div className='wrapper noslider'>
-                                    {offlineshop.map((node, id) => {
-                                      return (
-                                        <div
-                                          className='shop'
-                                          key={id}
-                                          dataid={id}
-                                        >
-                                          {node.link ? (
-                                            <a
-                                              target='_blank'
-                                              rel='noopener noreferrer'
-                                              href={node.link}
-                                              style={{
-                                                background:
-                                                  node.background !== null
-                                                    ? node.background
-                                                    : 'transparent',
-                                              }}
-                                              aria-label='Shop Slider'
-                                            >
-                                              <ShopImages
-                                                fluid={
-                                                  node.image.childImageSharp
-                                                    .fluid
-                                                }
-                                              />
-                                            </a>
-                                          ) : (
-                                            <div
-                                              style={{
-                                                background:
-                                                  node.background !== null
-                                                    ? node.background
-                                                    : 'transparent',
-                                              }}
-                                            >
-                                              <ShopImages
-                                                fluid={
-                                                  node.image.childImageSharp
-                                                    .fluid
-                                                }
-                                              />
-                                            </div>
-                                          )}
-                                        </div>
-                                      );
-                                    })}
-                                  </div>
-                                ),
-                                SINGLE: (
-                                  <>
-                                    <div className='arrow'>
-                                      <Arrow />
-                                      <ArrowSmaller classProps='mobile' />
-                                    </div>
-                                    {/* CONTENT */}
-                                    <div className='wrapper'>
+                                {
+                                  NOSLIDER: (
+                                    <div className='wrapper noslider'>
                                       {offlineshop.map((node, id) => {
                                         return (
                                           <div
@@ -1844,101 +1868,304 @@ export default class Home extends React.Component {
                                         );
                                       })}
                                     </div>
-                                    <div className='arrow'>
-                                      <Arrow />
-                                      <ArrowSmaller classProps='mobile' />
-                                    </div>
-                                  </>
-                                ),
-                                SLIDER: (
-                                  <>
-                                    <div
-                                      className='arrow'
-                                      onClick={() => {
-                                        if (this.slider.offline)
-                                          this.slider.offline.go('<');
-                                      }}
-                                    >
-                                      <Arrow />
-                                      <ArrowSmaller classProps='mobile' />
-                                    </div>
-                                    {/* CONTENT */}
-                                    <div
-                                      id='offlineslider'
-                                      className='glide wrapper'
-                                    >
+                                  ),
+                                  SINGLE: (
+                                    <>
+                                      <div className='arrow'>
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                      {/* CONTENT */}
+                                      <div className='wrapper'>
+                                        {offlineshop.map((node, id) => {
+                                          return (
+                                            <div
+                                              className='shop'
+                                              key={id}
+                                              dataid={id}
+                                            >
+                                              {node.link ? (
+                                                <a
+                                                  target='_blank'
+                                                  rel='noopener noreferrer'
+                                                  href={node.link}
+                                                  style={{
+                                                    background:
+                                                      node.background !== null
+                                                        ? node.background
+                                                        : 'transparent',
+                                                  }}
+                                                  aria-label='Shop Slider'
+                                                >
+                                                  <ShopImages
+                                                    fluid={
+                                                      node.image.childImageSharp
+                                                        .fluid
+                                                    }
+                                                  />
+                                                </a>
+                                              ) : (
+                                                <div
+                                                  style={{
+                                                    background:
+                                                      node.background !== null
+                                                        ? node.background
+                                                        : 'transparent',
+                                                  }}
+                                                >
+                                                  <ShopImages
+                                                    fluid={
+                                                      node.image.childImageSharp
+                                                        .fluid
+                                                    }
+                                                  />
+                                                </div>
+                                              )}
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                      <div className='arrow'>
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                    </>
+                                  ),
+                                  SLIDER: (
+                                    <>
                                       <div
-                                        data-glide-el='track'
-                                        className='glide__track'
+                                        className='arrow'
+                                        onClick={() => {
+                                          if (this.slider.offline)
+                                            this.slider.offline.go('<');
+                                        }}
                                       >
-                                        <div className='glide__slides '>
-                                          {offlineshop.map((node, id) => {
-                                            return (
-                                              <div
-                                                className='shop glide__slide'
-                                                key={id}
-                                                dataid={id}
-                                              >
-                                                {node.link ? (
-                                                  <a
-                                                    target='_blank'
-                                                    rel='noopener noreferrer'
-                                                    href={node.link}
-                                                    style={{
-                                                      background:
-                                                        node.background !== null
-                                                          ? node.background
-                                                          : 'transparent',
-                                                    }}
-                                                    aria-label='Shop Slider'
-                                                  >
-                                                    <ShopImages
-                                                      fluid={
-                                                        node.image
-                                                          .childImageSharp.fluid
-                                                      }
-                                                    />
-                                                  </a>
-                                                ) : (
-                                                  <div
-                                                    style={{
-                                                      background:
-                                                        node.background !== null
-                                                          ? node.background
-                                                          : 'transparent',
-                                                    }}
-                                                  >
-                                                    <ShopImages
-                                                      fluid={
-                                                        node.image
-                                                          .childImageSharp.fluid
-                                                      }
-                                                    />
-                                                  </div>
-                                                )}
-                                              </div>
-                                            );
-                                          })}
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                      {/* CONTENT */}
+                                      <div
+                                        id='offlineslider'
+                                        className='glide wrapper'
+                                      >
+                                        <div
+                                          data-glide-el='track'
+                                          className='glide__track'
+                                        >
+                                          <div className='glide__slides '>
+                                            {offlineshop.map((node, id) => {
+                                              return (
+                                                <div
+                                                  className='shop glide__slide'
+                                                  key={id}
+                                                  dataid={id}
+                                                >
+                                                  {node.link ? (
+                                                    <a
+                                                      target='_blank'
+                                                      rel='noopener noreferrer'
+                                                      href={node.link}
+                                                      style={{
+                                                        background:
+                                                          node.background !==
+                                                          null
+                                                            ? node.background
+                                                            : 'transparent',
+                                                      }}
+                                                      aria-label='Shop Slider'
+                                                    >
+                                                      <ShopImages
+                                                        fluid={
+                                                          node.image
+                                                            .childImageSharp
+                                                            .fluid
+                                                        }
+                                                      />
+                                                    </a>
+                                                  ) : (
+                                                    <div
+                                                      style={{
+                                                        background:
+                                                          node.background !==
+                                                          null
+                                                            ? node.background
+                                                            : 'transparent',
+                                                      }}
+                                                    >
+                                                      <ShopImages
+                                                        fluid={
+                                                          node.image
+                                                            .childImageSharp
+                                                            .fluid
+                                                        }
+                                                      />
+                                                    </div>
+                                                  )}
+                                                </div>
+                                              );
+                                            })}
+                                          </div>
                                         </div>
                                       </div>
-                                    </div>
-                                    <div
-                                      className='arrow'
-                                      onClick={() => {
-                                        if (this.slider.offline)
-                                          this.slider.offline.go('>');
-                                      }}
-                                    >
-                                      <Arrow />
-                                      <ArrowSmaller classProps='mobile' />
-                                    </div>
-                                  </>
-                                ),
-                              }[offlineshoplayout]
-                            }
+                                      <div
+                                        className='arrow'
+                                        onClick={() => {
+                                          if (this.slider.offline)
+                                            this.slider.offline.go('>');
+                                        }}
+                                      >
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                    </>
+                                  ),
+                                }[offlineshoplayout]
+                              }
+                            </div>
                           </div>
-                        </div>
-                      )}
+                        )}
+                        {stockistList.length > 0 ? (
+                          <div>
+                            <h2>STOCKIST</h2>
+                            <div
+                              id='stockist'
+                              className={`shopSlider stockist ${
+                                stockistList.length <= 2 ? ' oneslide' : ''
+                              } ${
+                                !onlineshopemobileslider ? 'nomobileslider' : ''
+                              }`}
+                            >
+                              {
+                                {
+                                  SINGLE: (
+                                    <>
+                                      <div className='arrow'>
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                      {/* CONTENT */}
+                                      <div
+                                        id='stockistslider '
+                                        className='glide wrapper '
+                                      >
+                                        {stockistList.map((section, id) => {
+                                          return (
+                                            <div
+                                              className='stockist glide__slide'
+                                              key={id}
+                                              dataid={id}
+                                            >
+                                              {section.map((entry, entryid) => {
+                                                if (entry.link !== '') {
+                                                  return (
+                                                    <a
+                                                      href={entry.link}
+                                                      key={entryid}
+                                                      dataid={entryid}
+                                                    >
+                                                      {entry.content}
+                                                    </a>
+                                                  );
+                                                } else {
+                                                  return (
+                                                    <span
+                                                      key={entryid}
+                                                      dataid={entryid}
+                                                    >
+                                                      {entry.content}
+                                                    </span>
+                                                  );
+                                                }
+                                              })}
+                                            </div>
+                                          );
+                                        })}
+                                      </div>
+                                      <div className='arrow'>
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                    </>
+                                  ),
+                                  SLIDER: (
+                                    <>
+                                      <div
+                                        className='arrow'
+                                        onClick={() => {
+                                          if (this.slider.stockist)
+                                            this.slider.stockist.go('<');
+                                        }}
+                                      >
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                      {/* CONTENT */}
+                                      <div
+                                        id='stockistslider'
+                                        className='glide wrapper'
+                                      >
+                                        <div
+                                          data-glide-el='track'
+                                          className='glide__track'
+                                        >
+                                          <div className='glide__slides '>
+                                            {stockistList.map((section, id) => {
+                                              return (
+                                                <div
+                                                  className='stockist glide__slide'
+                                                  key={id}
+                                                  dataid={id}
+                                                >
+                                                  {section.map(
+                                                    (entry, entryid) => {
+                                                      if (entry.link !== '') {
+                                                        return (
+                                                          <a
+                                                            href={entry.link}
+                                                            key={entryid}
+                                                            dataid={entryid}
+                                                          >
+                                                            {entry.content}
+                                                          </a>
+                                                        );
+                                                      } else {
+                                                        return (
+                                                          <span
+                                                            key={entryid}
+                                                            dataid={entryid}
+                                                          >
+                                                            {entry.content}
+                                                          </span>
+                                                        );
+                                                      }
+                                                    }
+                                                  )}
+                                                </div>
+                                              );
+                                            })}
+                                          </div>
+                                        </div>
+                                      </div>
+                                      <div
+                                        className='arrow'
+                                        onClick={() => {
+                                          if (this.slider.stockist)
+                                            this.slider.stockist.go('>');
+                                        }}
+                                      >
+                                        <Arrow />
+                                        <ArrowSmaller classProps='mobile' />
+                                      </div>
+                                    </>
+                                  ),
+                                }[stockistlayout]
+                              }
+                            </div>
+                          </div>
+                        ) : (
+                          ''
+                        )}
+                      </div>
                     </div>
                   </div>
                 </section>
@@ -2213,6 +2440,13 @@ const indexQuery = graphql`
             }
             link
             background
+          }
+          slider_option
+        }
+        stockist {
+          list {
+            content
+            link
           }
           slider_option
         }

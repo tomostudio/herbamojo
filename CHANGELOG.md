@@ -2,10 +2,7 @@
 
 # TO DO
 - Added Imge Fallback if image is missing build doesnt crash.
-- Change Stockist Section
-- Add CMS for PopUp
-- Add CMS for Stockist 2.0
-- Add CMS for Authentication
+
 
 ## 2020-11-02
 
@@ -27,6 +24,9 @@
 - Add Content Section 3
 - Add Content Section 4
 - Add Content Section 5
+- Add CMS for PopUp
+- Add CMS for Stockist 2.0
+- Add CMS for Authentication
 - Mobile Version for Authentication
 - Clean Up Unused Scroll Animation
 - Slow Speed Fallback
@@ -34,6 +34,11 @@
 - SAFARI Slow Speed Fall Back Detection based on Device
 - Fix LocalStorage Run Time Issue (Move all Checks to Did Mount and not Render)
 - Convert PopUp Reveal to State for Dynamic HTML
+- Mobile Optimization for Pop Up (Font, Size and Responsiveness)
+- Adjsuted Shop For New Module
+- Add Stockist Slider
+- Stockist Slider Fall Back if there is not enough content to slide
+- Stockist No Slider Option for Mobile
 
 ## 2020-09-23
 

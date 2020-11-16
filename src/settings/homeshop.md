@@ -10,7 +10,7 @@ onlineshop:
     - background: transparent
       image: /assets/shop/shopee.png
       link: 'https://shopee.co.id/herbamojo7'
-    - image: assets/blibli.png
+    - image: /assets/blibli.png
       link: >-
         https://www.blibli.com/merchant/herbamojo/UMH-60121?page=1&start=0&pickupPointCode=&cnc=&multiCategory=true&excludeProductList=true&sort=7
       background: transparent
@@ -32,5 +32,16 @@ offlineshop:
     - background: transparent
       image: /assets/aeon.png
       link: ''
+  slider_option: NORMAL
+stockist:
+  list:
+    - content: 'GOOGLE VERY LONG LOREM IPSUM'
+      link: 'https://google.com'
+    - content: 'GOOGLE'
+      link: 'https://google.com'
+    - content: 'GOOGLE'
+      link: 'https://google.com'
+    - content: 'GOOGLE'
+      link: 'https://google.com'
   slider_option: NORMAL
 ---
