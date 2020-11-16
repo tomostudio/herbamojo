@@ -2,45 +2,42 @@
 issetting: true
 contenttype: home_setting
 title: Home Setting
-home:
-  background: /assets/herbamojo_homebg.jpg
-  backgroundmobile: /assets/herbamojo_productshot3.jpg
-about:
-  background: /assets/herbamojo_lifestylebg.jpg
-  desc:
-    en: >-
-      HERBAMOJO is a high quality herbal formula to support male stamina.
-      HERBAMOJO contains 7 key herbal ingredients that works optimally to help
-      improve energy, immunity and performance.
-    id: >-
-      HERBAMOJO adalah formulasi herbal berkualitas untuk meningkatkan stamina
-      pria, dengan 7 ekstrak herbal yang berkhasiat untuk meningkatkan energi,
-      imun, dan performa secara optimal.
 popup:
   enable: true
   always: true
   image: /assets/popup_bg.png
   content:
     en: Get to know the characteristics of a genuine Herbamojo product right here.
-    id: Kenali ciri-ciri produk resmi Herbamojo di sini.
+    id: "Kenali ciri-ciri produk resmi Herbamojo di sini "
   buttontext:
     en: TO AUTHENTICATION PAGE
     id: TO AUTHENTICATION PAGE
   link:
     en: /authentication
     id: /id/autentikasi
+home:
+  background: /assets/herbamojo_homebg.jpg
+  backgroundmobile: /assets/herbamojo_productshot3.jpg
+about:
+  background: /assets/herbamojo_lifestylebg.jpg
+  desc:
+    en: HERBAMOJO is a high quality herbal formula to support male stamina.
+      HERBAMOJO contains 7 key herbal ingredients that works optimally to help
+      improve energy, immunity and performance.
+    id: HERBAMOJO adalah formulasi herbal berkualitas untuk meningkatkan stamina
+      pria, dengan 7 ekstrak herbal yang berkhasiat untuk meningkatkan energi,
+      imun, dan performa secara optimal.
 ingredients:
   - desc:
-      en: 'Ginseng works to support stamina, increase energy and boost immunity.'
-      id: 'Ginseng berkhasiat untuk meningkatkan stamina, energi dan imun tubuh.'
+      en: Ginseng works to support stamina, increase energy and boost immunity.
+      id: Ginseng berkhasiat untuk meningkatkan stamina, energi dan imun tubuh.
     image: /assets/ginseng.jpg
     title:
       en: GINSENG
       id: GINSENG
   - desc:
       en: Red Ginger works to improve blood circulation and increase energy
-      id: >-
-        Jahe merah berkhasiat untuk melancarkan peredaran darah dan meningkatkan
+      id: Jahe merah berkhasiat untuk melancarkan peredaran darah dan meningkatkan
         energi.
     image: /assets/jahe_merah.jpg
     title:
@@ -54,34 +51,27 @@ ingredients:
       en: TRIBULUS
       id: TRIBULUS
   - desc:
-      en: >-
-        Maca works to increase energy and to support stamina. Also works as an
+      en: Maca works to increase energy and to support stamina. Also works as an
         aphrodisiac.
-      id: >-
-        Maca berkhasiat untuk meningkatkan energi dan stamina dan sebagai
-        afrodisiak
+      id: Maca berkhasiat untuk meningkatkan energi dan stamina dan sebagai afrodisiak
     image: /assets/maca.jpg
     title:
       en: MACA
       id: MACA
   - desc:
-      en: >-
-        Long Jack works to increase energy and to support stamina. Also works as
-        an aphrodisiac.
-      id: >-
-        Pasak bumi berkhasiat untuk meningkatkan energi, menjaga stamina dan
-        sebagai afrodisiak
+      en: Long Jack works to increase energy and to support stamina. Also works as an
+        aphrodisiac.
+      id: Pasak bumi berkhasiat untuk meningkatkan energi, menjaga stamina dan sebagai
+        afrodisiak
     image: /assets/pasak_bumi.jpg
     title:
       en: LONG JACK
       id: PASAK BUMI
   - desc:
-      en: >-
-        Purwoceng works to support stamina and improve muscle health. Also works
-        as an aphrodisiac.
-      id: >-
-        Purwoceng berkhasiat untuk meningkatkan stamina, menjaga kesehatan otot
-        dan sebagai afrodisiak.
+      en: Purwoceng works to support stamina and improve muscle health. Also works as
+        an aphrodisiac.
+      id: Purwoceng berkhasiat untuk meningkatkan stamina, menjaga kesehatan otot dan
+        sebagai afrodisiak.
     image: /assets/purwoceng.jpg
     title:
       en: PURWOCENG
