@@ -5,7 +5,7 @@
 - Check Native Remark Relative
 
 
-## 2020-11-02
+## 2020-11-16
 
 ### version 1.2.0
 
@@ -40,6 +40,7 @@
 - Add Stockist Slider
 - Stockist Slider Fall Back if there is not enough content to slide
 - Stockist No Slider Option for Mobile
+- Added Indonesian Support
 
 ## 2020-09-23
 
