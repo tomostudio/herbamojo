@@ -189,7 +189,7 @@ export default function AuthenticationPage(props) {
             if (typeof window !== undefined) {
               if (speedInKbps > 75 && !document.body.classList.contains('loaded')) AutBottleAnim.disable = false;
             }
-
+            console.log(speedInKbps);
             downloadImgSrc = null;
           };
 
