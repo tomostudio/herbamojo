@@ -160,9 +160,10 @@ export default function AuthenticationPage(props) {
       );
       if (direction !== 0) bottleLottie.setDirection(direction);
     },
-    checkDisable: () => {
+    checkDisable: (afterCheck) => {
       if (ConnectionSpeed() === 'SLOW') {
         AutBottleAnim.disable = true;
+        if (afterCheck && typeof afterCheck === 'function') afterCheck();
       } else if (ConnectionSpeed() === 'ERROR') {
         // DO CHECK BASED ON DEVICE
         if (
@@ -187,10 +188,15 @@ export default function AuthenticationPage(props) {
               ((downloadSize * 8) / (end_time - time_start) / 1024) * 1000;
 
             if (typeof window !== undefined) {
-              if (speedInKbps > 75 && !document.body.classList.contains('loaded')) AutBottleAnim.disable = false;
+              if (
+                speedInKbps > 75 &&
+                !document.body.classList.contains('loaded')
+              )
+                AutBottleAnim.disable = false;
             }
             console.log(speedInKbps);
             downloadImgSrc = null;
+            if (afterCheck && typeof afterCheck === 'function') afterCheck();
           };
 
           time_start = new Date().getTime();
@@ -199,60 +205,61 @@ export default function AuthenticationPage(props) {
       }
     },
     init: (props) => {
-      AutBottleAnim.checkDisable();
-      if (!AutBottleAnim.disable) {
-        if (typeof window !== undefined) {
-          bottleLottie = lottie.loadAnimation({
-            container: document.querySelector(`#LottieContainer`),
-            name: 'Bottle Animation',
-            renderer: 'svg',
-            loop: false,
-            autoplay: false,
-            animationData: BottleJson,
-          });
+      AutBottleAnim.checkDisable(() => {
+        if (!AutBottleAnim.disable) {
+          if (typeof window !== undefined) {
+            bottleLottie = lottie.loadAnimation({
+              container: document.querySelector(`#LottieContainer`),
+              name: 'Bottle Animation',
+              renderer: 'svg',
+              loop: false,
+              autoplay: false,
+              animationData: BottleJson,
+            });
 
-          bottleLottie.setSpeed(2);
+            bottleLottie.setSpeed(2);
 
-          bottleLottie.onEnterFrame = (e) => {
-            AutBottleAnim.refreshDirection();
+            bottleLottie.onEnterFrame = (e) => {
+              AutBottleAnim.refreshDirection();
 
-            const curTime = Math.ceil(e.currentTime);
+              const curTime = Math.ceil(e.currentTime);
 
-            AutBottleAnim.frame.current = curTime;
-            if (
-              curTime === AutBottleAnim.frame.target ||
-              curTime <= 0 ||
-              curTime >= 104
-            ) {
-              bottleLottie.pause();
-              AutBottleAnim.playing = false;
-            }
-          };
+              AutBottleAnim.frame.current = curTime;
+              if (
+                curTime === AutBottleAnim.frame.target ||
+                curTime <= 0 ||
+                curTime >= 104
+              ) {
+                bottleLottie.pause();
+                AutBottleAnim.playing = false;
+              }
+            };
 
-          bottleLottie.addEventListener('data_ready', () => {});
+            bottleLottie.addEventListener('data_ready', () => {});
 
-          bottleLottie.addEventListener('DOMLoaded', () => {
-            // RUN AFTER LOAD AFTER IMAGES ARE LOADED
-            if (
-              props &&
-              props.afterLoad &&
-              typeof props.afterLoad === 'function'
-            )
-              props.afterLoad();
-          });
+            bottleLottie.addEventListener('DOMLoaded', () => {
+              // RUN AFTER LOAD AFTER IMAGES ARE LOADED
+              if (
+                props &&
+                props.afterLoad &&
+                typeof props.afterLoad === 'function'
+              )
+                props.afterLoad();
+            });
 
-          bottleLottie.addEventListener('loaded_images', () => {
-            // BUG NOT FIRING ON SAFARI
-          });
+            bottleLottie.addEventListener('loaded_images', () => {
+              // BUG NOT FIRING ON SAFARI
+            });
+          }
+        } else {
+          // IF BOTTLE ANIMATION IS DISABLED
+          // RUN AFTER LOAD REGARDLESS
+          if (props && props.afterLoad && typeof props.afterLoad === 'function')
+            props.afterLoad();
+
+          document.getElementById('BgContent').classList.add('noAnimation');
         }
-      } else {
-        // IF BOTTLE ANIMATION IS DISABLED
-        // RUN AFTER LOAD REGARDLESS
-        if (props && props.afterLoad && typeof props.afterLoad === 'function')
-          props.afterLoad();
-
-        document.getElementById('BgContent').classList.add('noAnimation');
-      }
+      });
     },
     // NOT REQUIRED
     setFromScroll: () => {
