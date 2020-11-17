@@ -9,6 +9,14 @@
 
 ### version 1.2.0
 
+- Update for Iphone X Support
+- Force Enable Canvas Animation on iOS
+- Added Additional Network Check for Safari or Fallback
+
+## 2020-11-16
+
+### version 1.2.0
+
 - Change Bottle Image
 - Setup Authentication Header
 - Setup Footer

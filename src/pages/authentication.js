@@ -14,6 +14,7 @@ import { LoaderClass } from 'utils/loader';
 import { DisableScroll } from 'utils/disablescroll';
 import { ConnectionSpeed, MediaCheck } from 'utils/mediacheck';
 import { transformValue } from 'utils/mathTransformer';
+import { ResponsiveVH } from 'utils/responsive-vh';
 import BottleJson from 'animationdata/autbottle_split.json';
 // import BottleImages from 'animationdata/autbottle.json';
 
@@ -39,7 +40,7 @@ let LoadAnimationTimeout = null;
 export default function AuthenticationPage(props) {
   let inviewinit = false;
   let bottleLottie = null;
-  let AutScrollSnap;
+  let AutScrollSnap, ForceVH;
   let disableScrollBody = null;
 
   const LangID = props.langID || false;
@@ -120,7 +121,6 @@ export default function AuthenticationPage(props) {
     playing: false,
     disable: false,
     playUntil: (target) => {
-      // console.log('set target', AutBottleAnim.frame.target, target);
       if (AutBottleAnim.frame.target !== target) {
         AutBottleAnim.frame.target = target;
         AutBottleAnim.play();
@@ -166,12 +166,35 @@ export default function AuthenticationPage(props) {
       } else if (ConnectionSpeed() === 'ERROR') {
         // DO CHECK BASED ON DEVICE
         if (
-          /Android|webOS|iPhone|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
+          /Android|webOS|iPhone|iPod|iPad|BlackBerry|IEMobile|Opera Mini/i.test(
             navigator.userAgent
           )
         ) {
           // true for mobile device
           AutBottleAnim.disable = true;
+          // ALTERNATIVE CHECK
+          const userImageLink =
+            '/assets/images/herbamojo_productshot3.jpg' + '?n=' + Math.random();
+          let time_start, end_time;
+
+          // The size in bytes
+          const downloadSize = 93.67 * 1024;
+          let downloadImgSrc = new Image();
+
+          downloadImgSrc.onload = function () {
+            end_time = new Date().getTime();
+            const speedInKbps =
+              ((downloadSize * 8) / (end_time - time_start) / 1024) * 1000;
+
+            if (typeof window !== undefined) {
+              if (speedInKbps > 75 && !document.body.classList.contains('loaded')) AutBottleAnim.disable = false;
+            }
+
+            downloadImgSrc = null;
+          };
+
+          time_start = new Date().getTime();
+          downloadImgSrc.src = userImageLink;
         }
       }
     },
@@ -206,12 +229,9 @@ export default function AuthenticationPage(props) {
             }
           };
 
-          bottleLottie.addEventListener('data_ready', () => {
-            console.log('Data Ready');
-          });
+          bottleLottie.addEventListener('data_ready', () => {});
 
           bottleLottie.addEventListener('DOMLoaded', () => {
-            console.log('DOM loaded');
             // RUN AFTER LOAD AFTER IMAGES ARE LOADED
             if (
               props &&
@@ -222,7 +242,6 @@ export default function AuthenticationPage(props) {
           });
 
           bottleLottie.addEventListener('loaded_images', () => {
-            console.log('iamge loaded');
             // BUG NOT FIRING ON SAFARI
           });
         }
@@ -255,8 +274,9 @@ export default function AuthenticationPage(props) {
   // INIT LOADER
   const AutLoader = new LoaderClass({
     parent: `#${MainID}`,
-    default_delay: 250,
+    default_delay: 0,
     postload: () => {
+      // console.log('postload');
       if (typeof window !== undefined) {
         window.scrollTo(0, 0);
         AutScrollSnap = new ScrollSnapClass({
@@ -291,7 +311,6 @@ export default function AuthenticationPage(props) {
         //SETUP CLICK NAV
         SnapNav.forEach((nav, index) => {
           nav.onclick = () => {
-            console.log('click');
             AutScrollSnap.snap.to(index);
           };
         });
@@ -319,7 +338,6 @@ export default function AuthenticationPage(props) {
           target: '.sectionwrapper > section:nth-child(1)',
           visibility: 0.55,
           enter: () => {
-            // console.log('section 1 enter');
             if (autDataQuery)
               AutTitle.set(
                 LangID ? autDataQuery.section1.id : autDataQuery.section1.en
@@ -354,7 +372,6 @@ export default function AuthenticationPage(props) {
           target: '.sectionwrapper > section:nth-child(2)',
           visibility: 0.55,
           enter: () => {
-            // console.log('section 2 enter');
             if (autDataQuery)
               AutTitle.set(
                 LangID ? autDataQuery.section2.id : autDataQuery.section2.en
@@ -367,6 +384,7 @@ export default function AuthenticationPage(props) {
 
             const infoContainer = document.querySelector('#info2');
             const findSmallest = Math.min(fromTop, fromBtm);
+
             if (findSmallest > InfoRevealTreshold) {
               infoContainer.classList.add('reveal');
             } else {
@@ -385,8 +403,8 @@ export default function AuthenticationPage(props) {
               if (fromBtm < 100) {
                 // ENTER
                 opacityTrans = transformValue({
-                  start: 70,
-                  end: 100,
+                  start: 60,
+                  end: 85,
                   value: fromBtm,
                 });
               }
@@ -410,7 +428,6 @@ export default function AuthenticationPage(props) {
           target: '.sectionwrapper > section:nth-child(3)',
           visibility: 0.55,
           enter: () => {
-            // console.log('section 3 enter');
             if (autDataQuery)
               AutTitle.set(
                 LangID ? autDataQuery.section3.id : autDataQuery.section3.en
@@ -578,8 +595,6 @@ export default function AuthenticationPage(props) {
   }, []);
 
   useEffect(() => {
-    console.log('useeffect mount');
-
     if (typeof document !== `undefined`) {
       window.scrollTo(0, 0);
       if (LangID) {
@@ -765,7 +780,7 @@ export default function AuthenticationPage(props) {
               </div>
             </div>
             <Footer indonesia={LangID} />
-            <div id='BgContent'>
+            <div id='BgContent' className=''>
               <div id='InfoContainer' className='centerObject'>
                 <div id='info1'>
                   <div className='content_info'>
@@ -875,7 +890,7 @@ export default function AuthenticationPage(props) {
               </div>
               <div id='CapsuleImage' className='centerObject'>
                 <picture>
-                  {/* <source srcSet={CapsuleImgWebp} type='image/webp' /> */}
+                  <source srcSet={CapsuleImgWebp} type='image/webp' />
                   <source srcSet={CapsuleImg} type='image/png' />
                   <img src={CapsuleImg} alt='Herbamojo' />
                 </picture>
