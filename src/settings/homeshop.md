@@ -18,33 +18,47 @@ offlineshop:
   offlineshoplist:
     - background: transparent
       image: /assets/watson.png
-      link: ""
+      link: ''
     - background: transparent
       image: /assets/ranch-market.png
-      link: ""
+      link: ''
     - background: transparent
       image: /assets/farmers-market.png
-      link: ""
+      link: ''
     - background: transparent
       image: /assets/apotekroxy.png
-      link: ""
+      link: ''
     - background: transparent
       image: /assets/aeon.png
-      link: ""
+      link: ''
   slider_option: NORMAL
 stockist:
   list:
-    - content: GOOGLE VERY LONG LOREM IPSUM
-      link: https://google.com
-    - content: GOOGLE
-      link: https://google.com
-    - content: GOOGLE
-      link: https://google.com
-    - content: GOOGLE
-      link: https://google.com
-    - link: Something
-      content: ""
-    - link: Something Newer
-      content: ""
+    - link: https://www.tokopedia.com/numicenter/60-kap-herba-mojo-500mg-herbana-relief-sari-brnhrb015-herbana
+      content: Numi Center
+    - link: https://www.tokopedia.com/houseoforganix/herbana-herba-mojo-7-60-kapsul
+      content: House Of Organix
+    - link: https://www.tokopedia.com/aksesorisgreeacc/herbana-herbamojo-60-kapsul-obat-stamina-pria-alami-herba-mojo
+      content: Greeacc / Green Vitamin
+    - link: https://www.tokopedia.com/jagapati/herbamojo-suplemen-kesehatan-pria-peningkat-stamina-alami-herbal
+      content: Jagapati
+    - link: https://tokoorganic.shop/products/2287624/herba-mojo-60capsule-__-herbana
+      content: Toko Organik
+    - link: ''
+      content: Alphabet Indonesia
+    - link: ''
+      content: Peppermint
+    - link: https://www.tokopedia.com/kebunkita/herbamojo-60-kapsul
+      content: Kebun Kita
+    - link: https://www.tokopedia.com/vitamindiskon/herbamojo-untuk-membantu-memelihara-stamina-pria-60-caps
+      content: Karuna
+    - link: https://www.tokopedia.com/vitamindiskon/herbamojo-untuk-membantu-memelihara-stamina-pria-60-caps
+      content: Vitamin Diskon
+    - link: ''
+      content: Naked Inc
+    - link: ''
+      content: Apotek Bugar
+    - link: ''
+      content: Apotek Jaya Sentosa
   slider_option: NORMAL
 ---
