@@ -6,13 +6,12 @@ onlineshop:
   onlineshoplist:
     - background: transparent
       image: /assets/shop/tokopedia.png
-      link: 'https://www.tokopedia.com/herbamojo'
+      link: https://www.tokopedia.com/herbamojo
     - background: transparent
       image: /assets/shop/shopee.png
-      link: 'https://shopee.co.id/herbamojo7'
-    - image: assets/blibli.png
-      link: >-
-        https://www.blibli.com/merchant/herbamojo/UMH-60121?page=1&start=0&pickupPointCode=&cnc=&multiCategory=true&excludeProductList=true&sort=7
+      link: https://shopee.co.id/herbamojo7
+    - image: /assets/blibli.png
+      link: https://www.blibli.com/merchant/herbamojo/UMH-60121?page=1&start=0&pickupPointCode=&cnc=&multiCategory=true&excludeProductList=true&sort=7
       background: transparent
     - image: /assets/bukalapak-1.png
       link: 'https://www.bukalapak.com/u/herbamojoofficialshop'
@@ -44,5 +43,34 @@ offlineshop:
     - image: /assets/setiabudhi-supermarket.png
       link: ''
       background: transparent
+  slider_option: NORMAL
+stockist:
+  list:
+    - link: https://www.tokopedia.com/numicenter/60-kap-herba-mojo-500mg-herbana-relief-sari-brnhrb015-herbana
+      content: Numi Center
+    - link: https://www.tokopedia.com/houseoforganix/herbana-herba-mojo-7-60-kapsul
+      content: House Of Organix
+    - link: https://www.tokopedia.com/aksesorisgreeacc/herbana-herbamojo-60-kapsul-obat-stamina-pria-alami-herba-mojo
+      content: Greeacc / Green Vitamin
+    - link: https://www.tokopedia.com/jagapati/herbamojo-suplemen-kesehatan-pria-peningkat-stamina-alami-herbal
+      content: Jagapati
+    - link: https://tokoorganic.shop/products/2287624/herba-mojo-60capsule-__-herbana
+      content: Toko Organik
+    - link: ''
+      content: Alphabet Indonesia
+    - link: ''
+      content: Peppermint
+    - link: https://www.tokopedia.com/kebunkita/herbamojo-60-kapsul
+      content: Kebun Kita
+    - link: https://www.tokopedia.com/vitamindiskon/herbamojo-untuk-membantu-memelihara-stamina-pria-60-caps
+      content: Karuna
+    - link: https://www.tokopedia.com/vitamindiskon/herbamojo-untuk-membantu-memelihara-stamina-pria-60-caps
+      content: Vitamin Diskon
+    - link: ''
+      content: Naked Inc
+    - link: ''
+      content: Apotek Bugar
+    - link: ''
+      content: Apotek Jaya Sentosa
   slider_option: NORMAL
 ---

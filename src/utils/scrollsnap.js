@@ -22,6 +22,7 @@ export class ScrollSnapClass {
     snap: {
       enable: true,
       pause: false,
+      forceDisable: false,
       treshold: 400,
     },
     nav: {
@@ -78,6 +79,7 @@ export class ScrollSnapClass {
 
     this.v.snap.pause = false;
     this.v.snap.enable = true;
+    this.v.snap.forceDisable = obj.forceDisable || false;
     this.v.sections.identifier =
       typeof obj.sections_identifier === 'string'
         ? obj.sections_identifier
@@ -239,7 +241,7 @@ export class ScrollSnapClass {
       if (this.common.windowWidth() < this.v.responsiveWidth.treshold) {
         this.v.snap.enable = false;
       }
-      if (this.v.snap.enable) {
+      if (this.v.snap.enable && !this.v.snap.forceDisable) {
         // console.log('scrollsnap enable');
         //CHECK CURRENT POSITION AND ADJUST
         let checkcur = Math.floor(
@@ -259,7 +261,11 @@ export class ScrollSnapClass {
         document.body.classList.remove('__snapon');
       }
 
-      if ('ontouchstart' in document.documentElement && this.v.snap.enable) {
+      if (
+        'ontouchstart' in document.documentElement &&
+        this.v.snap.enable &&
+        !this.v.snap.forceDisable
+      ) {
         document.body.classList.add('__snaphastouch');
       } else {
         document.body.classList.remove('__snaphastouch');
@@ -294,7 +300,8 @@ export class ScrollSnapClass {
         this.v.snap.enable &&
         !this.v.scroll.snapping &&
         !this.scrollit.scrolling &&
-        !this.v.snap.pause
+        !this.v.snap.pause &&
+        !this.v.snap.forceDisable
       ) {
         this.v.sections.current++;
         if (this.v.sections.current > this.v.sections.length - 1) {
@@ -320,7 +327,8 @@ export class ScrollSnapClass {
         this.v.snap.enable &&
         !this.v.scroll.snapping &&
         !this.scrollit.scrolling &&
-        !this.v.snap.pause
+        !this.v.snap.pause &&
+        !this.v.snap.forceDisable
       ) {
         this.v.sections.current--;
         if (this.v.sections.current < 0) {
@@ -481,7 +489,7 @@ export class ScrollSnapClass {
       //   this.event.scrollStatus.direction
       // );
 
-      if (this.v.snap.enable) {
+      if (this.v.snap.enable && !this.v.snap.forceDisable) {
         e = e || window.event;
         if (e.preventDefault) e.preventDefault();
         e.returnValue = false;
@@ -567,7 +575,7 @@ export class ScrollSnapClass {
       }
     },
     keydown: (e) => {
-      if (this.v.snap.enable) {
+      if (this.v.snap.enable && !this.v.snap.forceDisable) {
         if (e.which === 38 || e.which === 40 || e.which === 32) {
           e = e || window.event;
           if (e.preventDefault) e.preventDefault();
@@ -588,14 +596,14 @@ export class ScrollSnapClass {
       }
     },
     touchstart: (evt) => {
-      if (this.v.snap.enable) {
+      if (this.v.snap.enable && !this.v.snap.forceDisable) {
         this.v.xDown = evt.touches[0].clientX;
         this.v.yDown = evt.touches[0].clientY;
       }
       evt.preventDefault();
     },
     touchmove: (evt) => {
-      if (this.v.snap.enable) {
+      if (this.v.snap.enable && !this.v.snap.forceDisable) {
         if (!this.v.xDown || !this.v.yDown) {
           return;
         }
@@ -626,8 +634,7 @@ export class ScrollSnapClass {
       }
     },
     touchend: (evt) => {
-      if (this.v.snap.enable) {
-        // console.log('touch end', evt);
+      if (this.v.snap.enable && !this.v.snap.forceDisable) {
       }
     },
   };

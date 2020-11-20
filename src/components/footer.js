@@ -36,6 +36,14 @@ export default class Footer extends React.Component {
                         : navigation.home.en}
                     </Link>
                     <Link
+                      aria-label='Authentication'
+                      to={this.props.indonesia ? `/id/${navigation.authentication.id.toLowerCase()}` : `/${navigation.authentication.en.toLowerCase()}`}
+                    >
+                      {this.props.indonesia
+                        ? navigation.authentication.id
+                        : navigation.authentication.en}
+                    </Link>
+                    <Link
                       aria-label='Journal'
                       to={this.props.indonesia ? `/id${journalslug}` : `${journalslug}`}
                     >
@@ -114,6 +122,10 @@ const footerQuery = graphql`
             id
           }
           journal {
+            en
+            id
+          }
+          authentication {
             en
             id
           }

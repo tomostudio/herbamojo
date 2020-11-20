@@ -1,9 +1,12 @@
 backend:
   name: git-gateway
+  branch: authentication
 
 media_folder: static/assets
-public_folder: '/assets'
+public_folder: /assets
 # publish_mode: editorial_workflow
+
+site_url: https://herbamojo.id
 
 collections:
   - name: journal
@@ -446,7 +449,26 @@ collections:
                       label: 'Indonesian',
                       name: 'id',
                       widget: 'string',
-                      default: 'Home',
+                      default: 'Beranda',
+                      required: false,
+                    }
+              - label: 'Authentication'
+                name: 'authentication'
+                widget: 'object'
+                required: false
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'Authentication',
+                      required: false,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'Autentikasi',
                       required: false,
                     }
               - label: 'Journal'
@@ -620,6 +642,340 @@ collections:
                       default: 'Related',
                       required: true,
                     }
+          - label: 'Translation for Authentication Page'
+            name: 'auttranslation'
+            widget: 'object'
+            required: false
+            fields:
+              - label: 'Section 1 Title'
+                name: 'section1'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'PACKAGING',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'KEMASAN',
+                      required: true,
+                    }
+              - label: 'Section 1 Information'
+                name: 'section1info'
+                widget: 'object'
+                required: true
+                fields:
+                  - label: 'Information 1'
+                    name: 'info1'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Hologram Seal',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Segel Hologram',
+                          required: true,
+                        }
+                  - label: 'Information 2'
+                    name: 'info2'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Contains Jamu Logo',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Memiliki Logo Jamu',
+                          required: true,
+                        }
+                  - label: 'Information 3'
+                    name: 'info3'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Metallic Color on the Herbamojo Logo',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Warna metalik pada logo Herbamojo',
+                          required: true,
+                        }
+                  - label: 'Information 4'
+                    name: 'info4'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Clear and Concise Label Design',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Desain kemasan terlihat Rapi dan Jelas',
+                          required: true,
+                        }
+              - label: 'Section 2 Title'
+                name: 'section2'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'PACKAGING',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'KEMASAN',
+                      required: true,
+                    }
+              - label: 'Section 2 Information'
+                name: 'section2info'
+                widget: 'object'
+                required: true
+                fields:
+                  - label: 'Information 1'
+                    name: 'info1'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Embedded with BPOM Registration Number',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Memiliki nomor registrasi BPOM',
+                          required: true,
+                        }
+                  - label: 'Information 2'
+                    name: 'info2'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Production and Expiration Date Attached',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Memiliki kode produksi dan kadaluarsa',
+                          required: true,
+                        }
+                  - label: 'Information 3'
+                    name: 'info3'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Contains a PT. Deltomed Logo',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Memiliki Logo produsen PT. Deltomed',
+                          required: true,
+                        }
+              - label: 'Section 3 Title'
+                name: 'section3'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'PACKAGING',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'KEMASAN',
+                      required: true,
+                    }
+              - label: 'Section 3 Information'
+                name: 'section3info'
+                widget: 'object'
+                required: true
+                fields:
+                  - label: 'Information 1'
+                    name: 'info1'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Textured Screw Cap',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Tutup Memiliki Tekstur Bergerigi',
+                          required: true,
+                        }
+                  - label: 'Information 2'
+                    name: 'info2'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Black Glossy Bottle',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Botol Berwarna Hitam Mengkilap',
+                          required: true,
+                        }
+              - label: 'Section 4 Title'
+                name: 'section4'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'SEAL',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'SEGEL',
+                      required: true,
+                    }
+              - label: 'Section 4 Information'
+                name: 'section4info'
+                widget: 'object'
+                required: true
+                fields:
+                  - label: 'Information 1'
+                    name: 'info1'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Blank Silver Seal',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Segel polos Berwarna Silver',
+                          required: true,
+                        }
+              - label: 'Section 5 Title'
+                name: 'section5'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: 'CAPSULE',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: 'KAPSUL',
+                      required: true,
+                    }
+              - label: 'Section 5 Information'
+                name: 'section5info'
+                widget: 'object'
+                required: true
+                fields:
+                  - label: 'Information 1'
+                    name: 'info1'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Fine Textured Powder',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Textur Bubuk lebih Halus',
+                          required: true,
+                        }
       - file: 'src/settings/home.md'
         label: 'Home Setting'
         name: 'home'
@@ -647,10 +1003,101 @@ collections:
               default: 'Home Setting',
               required: true,
             }
+          - label: 'Pop Up Setting'
+            name: 'popup'
+            widget: 'object'
+            required: true
+            fields:
+              - {
+                  label: 'Enable Pop Up',
+                  name: 'enable',
+                  widget: 'boolean',
+                  default: true,
+                }
+              - {
+                  label: 'Set Pop Up to Always Show',
+                  name: 'always',
+                  widget: 'boolean',
+                  hint: 'Turning it off will cause the Pop Up to only show on User First Visit',
+                  default: true,
+                }
+              - {
+                  name: 'image',
+                  label: 'Background Image',
+                  widget: 'image',
+                  pattern:
+                    [
+                      '\.(jpe?g|png|gif)$',
+                      'Invlaid Image, Only JPEG, PNG and GIF',
+                    ],
+                  hint: 'Minimum Resolution: 1200px x 600px | JPEG / PNG / GIF',
+                  default: '',
+                  required: true,
+                }
+              - label: 'Content'
+                name: 'content'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'text',
+                      default: '',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'text',
+                      default: '',
+                      required: true,
+                    }
+              - label: 'Button Text'
+                name: 'buttontext'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      hint: 'Input external link starting with https:// or http://, Input local link starting with /',
+                      default: '',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      hint: 'Input external link starting with https:// or http://, Input local link starting with /',
+                      default: '',
+                      required: true,
+                    }
+              - label: 'Button Link'
+                name: 'link'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'string',
+                      default: '',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'string',
+                      default: '',
+                      required: true,
+                    }
           - label: 'Home Section Setting'
             name: 'home'
             widget: 'object'
             required: true
+            collapsed: true
             fields:
               - {
                   name: 'background',
@@ -682,6 +1129,7 @@ collections:
             name: 'about'
             widget: 'object'
             required: true
+            collapsed: true
             fields:
               - {
                   name: 'background',
@@ -720,6 +1168,7 @@ collections:
             widget: 'list'
             allow_add: false
             required: true
+            collapsed: true
             fields:
               - label: 'Title'
                 name: 'title'
@@ -770,6 +1219,7 @@ collections:
           - label: 'Translations List'
             name: 'translations'
             widget: 'object'
+            collapsed: true
             required: true
             fields:
               - label: 'Home'
@@ -1316,6 +1766,25 @@ collections:
                           default: 'Offline',
                           required: true,
                         }
+                  - label: 'Stockist'
+                    name: 'stockist'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Stockist',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Stockist',
+                          required: true,
+                        }
               - label: 'Journal'
                 name: 'journal'
                 widget: 'object'
@@ -1393,7 +1862,7 @@ collections:
               - label: 'Slider Option'
                 name: 'slider_option'
                 widget: select
-                hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
+                hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form (Disable Slider will only be triggered if online and offline is disabled).'
                 options:
                   - { label: 'Normal', value: 'NORMAL' }
                   - { label: 'Desktop Only', value: 'NOMOBILE' }
@@ -1440,7 +1909,7 @@ collections:
               - label: 'Slider Option'
                 name: 'slider_option'
                 widget: select
-                hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form.'
+                hint: 'Normal, enable slider normally. Desktop Only, will remove slider on mobile. Disable slider will disable slider and display the shop in a normal layout form (Disable Slider will only be triggered if online and offline is disabled).'
                 options:
                   - { label: 'Normal', value: 'NORMAL' }
                   - { label: 'Desktop Only', value: 'NOMOBILE' }
@@ -1478,6 +1947,38 @@ collections:
                       widget: 'string',
                       hint: 'Set the Shop Bounding Box Color. Accept Hex code starting with # or transparent command. Defaults to Transparent',
                       default: 'transparent',
+                      required: false,
+                    }
+          - label: 'Stockist'
+            name: 'stockist'
+            widget: 'object'
+            fields:
+              - label: 'Slider Option'
+                name: 'slider_option'
+                widget: select
+                hint: 'Normal, enable slider normally. Disable slider will disable slider and display the shop in a normal layout form.'
+                options:
+                  - { label: 'Normal', value: 'NORMAL' }
+                  - { label: 'Disable Slider', value: 'NOSLIDER' }
+                default: 'NORMAL'
+              - label: 'Stockist List'
+                name: 'list'
+                widget: 'list'
+                allow_add: true
+                fields:
+                  - {
+                      label: 'Link',
+                      name: 'link',
+                      widget: 'string',
+                      hint: 'Input link starting with https:// or http://',
+                      required: false,
+                      default: '',
+                    }
+                  - {
+                      label: 'Content',
+                      name: 'content',
+                      widget: 'string',
+                      default: '',
                       required: false,
                     }
       - file: 'src/settings/slug.md'

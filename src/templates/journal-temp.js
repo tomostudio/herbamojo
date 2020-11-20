@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from 'components/layout';
 import Footer from 'components/footer';
-import JournalHeader from 'components/journalheader';
+import PageHeader from 'components/pageheader';
 import { Link, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import Img from 'gatsby-image';
@@ -198,12 +198,12 @@ export default class Journal extends React.Component {
             {seo.image && <meta name='twitter:image' content={seo.image} />}
           </Helmet>
         )}
-        <JournalHeader
+        <PageHeader
           indonesia={this.LangID}
           urltarget={englishURL}
           urltargetid={indonesianURL}
           black={getHeaderColor}
-          journallist={false}
+          journal={true}
         />
         <div className='sectionWrapper'>
           <section className={`journalcover ${getHeaderColor ? 'black' : ''}`}>

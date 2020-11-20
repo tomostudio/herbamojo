@@ -1,8 +1,54 @@
 ## #CHANGELOG
 
-## TO DO
+# TO DO
 - Added Imge Fallback if image is missing build doesnt crash.
-*NOTHING YET*
+- Check Native Remark Relative
+
+
+## 2020-11-16
+
+### version 1.2.0
+
+- Update for Iphone X Support
+- Force Enable Canvas Animation on iOS
+- Added Additional Network Check for Safari or Fallback
+
+## 2020-11-16
+
+### version 1.2.0
+
+- Change Bottle Image
+- Setup Authentication Header
+- Setup Footer
+- Gatsby System Upgrade
+- Pop Up Animation (Reveal and Dissapear)
+- Add PopUp on Home Page (Detect Trigger)
+- Pop Up First Visit Only Trigger
+- Setup Authentication Page
+- Added Image Sequence
+- Add ScrollAnimation for Bottle Video (with Lottie or with Canvas)
+- Mobile Video Fallback to Still Image (Mobile & Speed)
+- Add Content Section 1
+- Add Content Section 2
+- Add Content Section 3
+- Add Content Section 4
+- Add Content Section 5
+- Add CMS for PopUp
+- Add CMS for Stockist 2.0
+- Add CMS for Authentication
+- Mobile Version for Authentication
+- Clean Up Unused Scroll Animation
+- Slow Speed Fallback
+- Aut Reveal Animation
+- SAFARI Slow Speed Fall Back Detection based on Device
+- Fix LocalStorage Run Time Issue (Move all Checks to Did Mount and not Render)
+- Convert PopUp Reveal to State for Dynamic HTML
+- Mobile Optimization for Pop Up (Font, Size and Responsiveness)
+- Adjsuted Shop For New Module
+- Add Stockist Slider
+- Stockist Slider Fall Back if there is not enough content to slide
+- Stockist No Slider Option for Mobile
+- Added Indonesian Support
 
 ## 2020-09-23
 

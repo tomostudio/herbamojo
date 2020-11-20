@@ -1,7 +1,7 @@
 import React from 'react';
 import Layout from 'components/layout';
 import Footer from 'components/footer';
-import JournalHeader from 'components/journalheader';
+import PageHeader from 'components/pageheader';
 import { Link, graphql } from 'gatsby';
 import Img from 'gatsby-image';
 
@@ -48,6 +48,9 @@ export default class JournalList extends React.Component {
     if (this.disableScrollBody !== null) {
       this.disableScrollBody.enable();
       this.disableScrollBody = null;
+    }
+    if (typeof document !== `undefined`) {
+      // document.body.classList.remove('loaded');
     }
   }
   render() {
@@ -130,11 +133,12 @@ export default class JournalList extends React.Component {
         indonesia={this.LangID}
         mainID={this.MainID}
       >
-        <JournalHeader
+        <PageHeader
           indonesia={this.LangID}
           urltarget={englishURL}
           urltargetid={indonesianURL}
-          journallist={true}
+          journal={false}
+          headertitle={this.props.data.general.frontmatter.navigation.journal}
         />
         <div className='sectionWrapper'>
           <section className='listTitleMobile'>
@@ -176,19 +180,9 @@ export default class JournalList extends React.Component {
                             journal.node.frontmatter.thumbimage.childImageSharp
                               .fluid
                           }
-                          fadeIn={false} 
-                          loading="eager"
+                          fadeIn={false}
+                          loading='eager'
                         />
-                        {/* <picture>
-                          <source
-                            srcSet={journal.node.frontmatter.thumbimage}
-                            type='image/jpeg'
-                          />
-                          <img
-                            src={journal.node.frontmatter.thumbimage}
-                            alt='Herbamojo'
-                          />
-                        </picture> */}
                       </Link>
                     );
                   })}

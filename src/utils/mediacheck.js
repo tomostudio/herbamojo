@@ -7,12 +7,12 @@ export const MediaCheck = {
       mobile: 700,
       mtablet: 800,
       tablet: 1024,
-      desktop: 1280
+      desktop: 1280,
     },
     //HEIGHT
     h: {
-      short: 500
-    }
+      short: 500,
+    },
   },
   width: {
     get: () => {
@@ -44,7 +44,7 @@ export const MediaCheck = {
     mobile: () => MediaCheck.checkWidth(MediaCheck.v.w.mobile),
     mtablet: () => MediaCheck.checkWidth(MediaCheck.v.w.mtablet),
     tablet: () => MediaCheck.checkWidth(MediaCheck.v.w.tablet),
-    desktop: () => MediaCheck.checkWidth(MediaCheck.v.w.desktop)
+    desktop: () => MediaCheck.checkWidth(MediaCheck.v.w.desktop),
   },
   height: {
     get: () => {
@@ -60,10 +60,10 @@ export const MediaCheck = {
         }
       }
     },
-    short: () => MediaCheck.checkHeight(MediaCheck.v.h.short)
+    short: () => MediaCheck.checkHeight(MediaCheck.v.h.short),
   },
   //MAIN CHECKER
-  checkHeight: tresh => {
+  checkHeight: (tresh) => {
     if (typeof window !== `undefined`) {
       const H =
         window.innerHeight ||
@@ -76,7 +76,7 @@ export const MediaCheck = {
       }
     }
   },
-  checkWidth: tresh => {
+  checkWidth: (tresh) => {
     if (typeof window !== `undefined`) {
       const W =
         window.innerWidth ||
@@ -88,5 +88,25 @@ export const MediaCheck = {
         return false;
       }
     }
+  },
+};
+
+export const ConnectionSpeed = () => {
+  const _connection =
+    navigator.connection ||
+    navigator.mozConnection ||
+    navigator.webkitConnection;
+
+  if (_connection) {
+    if (
+      _connection.downlink >= 1 &&
+      !_connection.effectiveType.includes('2g')
+    ) {
+      return 'FAST';
+    }
+    return 'SLOW';
+  } else {
+    //SAFARI FALL BACK
+    return 'ERROR';
   }
 };
