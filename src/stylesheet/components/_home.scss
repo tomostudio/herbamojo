@@ -1623,7 +1623,12 @@ main.home {
           width: 100%;
           @include flex-grow(1);
           @include setflex(column, nowrap, stretch, stretch, center);
-
+          &::before, &::after{
+            @include pseudo;
+            position: relative;
+            width: 100%;
+            @include flex-grow(1);
+          }
           & > .content {
             @include flex-grow(1);
             width: 100%;

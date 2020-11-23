@@ -64,7 +64,12 @@ module.exports = {
     `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-react-helmet`,
-    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-sass`,
+      options: {
+        implementation: require("sass"),
+      },
+    },
     `gatsby-plugin-layout`,
     {
       resolve: `gatsby-plugin-sitemap`,

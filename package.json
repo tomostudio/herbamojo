@@ -47,11 +47,11 @@
     "lottie-web": "^5.7.0",
     "netlify": "^4.3.5",
     "netlify-cms-app": "^2.12.16",
-    "node-sass": "^4.14.1",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-helmet": "^6.1.0",
-    "react-lottie": "^1.2.3"
+    "react-lottie": "^1.2.3",
+    "sass": "^1.29.0"
   },
   "repository": {
     "type": "git",
