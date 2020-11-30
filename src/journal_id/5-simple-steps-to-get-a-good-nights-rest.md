@@ -3,21 +3,23 @@ issetting: false
 contenttype: journal
 indonesia: true
 active: true
-title: 5 Simple Steps to Get a Good Night's Rest
-slug: 5-simple-steps-to-get-a-good-nights-rest
+title: 5 Langkah Sederhana Untuk Mendapatkan Istirahat Malam yang Cukup
+slug: 5-langkah-sederhana-untuk-mendapatkan-istirahat-malam-yang-cukup
 date: 2020-11-30T09:23:10.182Z
 seo:
-  seo_shortdesc: A healthy lifestyle consists of many factors that may help
-    preserve your physical and mental well-being. Aside from what you eat or how
-    active you are during the day, one of the most important, yet often
-    overlooked aspect is your resting habits. It plays such an important role in
-    your lifestyle and needs to be taken seriously. Lack of sleep is closely
-    tied to unhealthy habits like overconsumption of food, affecting your
-    emotional stability, as well as triggering various illnesses in the long
-    run. Therefore, on this week's journal, we will be shedding some light on
-    the easy steps you can implement to get better sleep every night. Read on!
-  seo_keywords: herbamojo, herbal, ginseng, maca, tribulus, javanese pepper, red
-    ginger, purwoceng, pasak bumi, stamina, vitality
+  seo_shortdesc: Gaya hidup sehat tentunya terdiri dari banyak kebiasaan yang
+    membantu anda menjaga kesehatan fisik sekaligus mental. Selain makanan yang
+    anda konsumsi ataupun seberapa sering anda melakukan olahraga
+    sehari-harinya, tidur cukup juga merupakan faktor yang sangat penting bagi
+    kesehatan, meskipun sering disepelekan. Kurang tidur, misalnya, dapat
+    menjadi penyebab ketidakstabilan emosi, kebiasaan makan yang kurang baik,
+    serta dapat memicu berbagai penyakit jika berlangsung terus-menerus. Oleh
+    karena itu, pada jurnal minggu ini, kami akan membahas beberapa langkah
+    mudah yang dapat anda terapkan untuk memperbaiki kebiasaan tidur setiap
+    malam.
+  seo_keywords: herbamojo, herbal, jamu, indonesia, daya tahan tubuh, imunitas,
+    covid, pandemi, imun, maca, pasak bumi, purwaceng, tribulus, jahe merah,
+    ginseng, cabe jawa, kesehatan, pria, stamina, energi, vitalitas
   seo_image: /assets/herbamojo-sleeping.jpg
 altslug: /
 listcolorblack: false
@@ -25,30 +27,32 @@ thumbimage: /assets/herbamojo-sleeping.jpg
 headercolorblack: false
 coverimage: /assets/herbamojo-sleeping.jpg
 ---
-A healthy lifestyle consists of many factors that may help preserve your physical and mental well-being. Aside from what you eat or how active you are during the day, one of the most important, yet often overlooked aspect is your resting habits. It plays such an important role in your lifestyle and needs to be taken seriously. Lack of sleep is closely tied to unhealthy habits like overconsumption of food, affecting your emotional stability, as well as triggering various illnesses in the long run. Therefore, on this week's journal, we will be shedding some light on the easy steps you can implement to get better sleep every night. Read on!
+Gaya hidup sehat tentunya terdiri dari banyak kebiasaan yang membantu anda menjaga kesehatan fisik sekaligus mental. Selain makanan yang anda konsumsi ataupun seberapa sering anda melakukan olahraga sehari-harinya, tidur cukup juga merupakan faktor yang sangat penting bagi kesehatan, meskipun sering disepelekan. Kurang tidur, misalnya, dapat menjadi penyebab ketidakstabilan emosi, kebiasaan makan yang kurang baik, serta dapat memicu berbagai penyakit jika berlangsung terus-menerus. Oleh karena itu, pada jurnal minggu ini, kami akan membahas beberapa langkah mudah yang dapat anda terapkan untuk memperbaiki kebiasaan tidur setiap malam.
 
-## Prepare a proper room to sleep in
-
-Our country's year-round warm climate may be challenging to live in without the aid of an air conditioner. Most people are unable to sleep in a humid condition. Therefore, most of the time it is very recommended to at least install one fan or air conditioning system in your room to tackle the humidity, unless you are living in a cooler vicinity.
-Secondly, some people also see the need of having entertainment system installed inside their bedroom, such as television to even gaming console. While this is mostly about convenience, having these items in your room may also hinder your ability to obtain enough sleep at night. Seemingly harmless habits like watching a movie or finishing a level on your favorite game before bed may seem fun enough until it hinders your ability to function during the day because of lack of sleep.
-
-## Avoid working and limit smartphone usage
+## Siapkan ruangan tidur yang mendukung
 
 
-On this day and age, it's almost impossible to live without technology. Distraction is everywhere and disrupting not only your concentration during working hours, but also your bedtime. As mentioned in the point above, it's important to have self-control over these available distractions in your bedroom, including chatting and shopping through your smartphone. 
-However, with working from home being the new norm nowadays, work can also be an excuse to not getting enough sleep. As the mind is occupied with numerous household matters and juggling with work at the same time, productivity levels may not be optimal, as opposed to working in the office. This explains the reason why working hours may stretch long into the night. Therefore, practicing time management and eliminating distraction can be crucial to ensure a good night's rest. While this habit may sound simple, time discipline not only can help you do more things in a period of time, but also prepares you to be more ready to do next-day tasks and invest in your health long-term.
+Iklim Indonesia yang cenderung panas sepanjang tahun, menyebabkan kehidupan masyarakatnya tergantung pada pendingin ruangan atau biasa disebut AC. Kebanyakan orang memiliki kesulitan tidur dengan hawa yang paans dan lembab. Oleh karena itu, menggunakan AC di ruang tidur telah menjadi salah satu kebutuhan yang dapat menunjang kualitas istirahat anda di malam hari.
+Selain itu, beberapa orang memiliki televisi ataupun perangkat hiburan lainnya di kamar. Hal ini didasari oleh kenyamanan, namun juga dapat mengganggu seberapa nyenyak tidur anda. Kebiasaan menonton TV atau film sebelum tidur, mungkin dapat membantu anda melepas penat. Tetapi, jangan lupakan batasan waktu yang dapat anda terapkan agar tidak mengganggu kualitas tidur anda, sekaligus menjaga kesehatan dengan tidak begadang terus-menerus.
 
-## Be active throughout the day
-
-
-Getting your daily exercise routine is important to maintain a good metabolism and overall health. Moreover, being physically active also has its benefits, including affecting how well you sleep at night. After doing activities the whole day, the body needs to replenish its energy, and one of them is by resting. When you feel physically spent, you will feel more inclined to not do anything else but go to sleep. Therefore, make sure to get at least 30 minutes of exercise every day. However, don't exercise too close to your bedtime, as this might do the opposite and keep you awake all night.
-
-## Don't drink too much water
+## Hindari bekerja dan kurangi penggunaan gawai sebelum tidur
 
 
-Frequently hydrating yourself throughout the day is important to make sure you don't get dehydrated in this warm climate, as well as ensuring your body systems are all doing what they are supposed to do. However, it is probably wiser to not drink too much water before you're about to sleep, as you may wake up in the middle of the night to use the toilet. You can drink a sufficient amount of water, however also remember go to the toilet before bedtime, in order to not disrupt your sleep.
+Dewasa ini, penggunaan teknologi bukan lagi suatu hal mewah, namun telah menjadi sebuah kebutuhan penting. Bersamaan dengan hal tersebut, pertukaran informasi yang cepat juga membuat distraksi semakin banyak dan dapat mengganggu konsentrasi saat bekerja. 
+Penggunaan teknologi juga semakin intens sejak pandemi, dengan banyak perusahaan yang menerapkan work from home (kerja dari rumah). Jika ditilik lebih lanjut, kepraktisan untuk melakukan pekerjaan dimana saja tentunya tersedia. Namun, kondisi pikiran seringkali harus lebih dibiasakan untuk tidak terdistraksi hal-hal yang mungkin terjadi di rumah. Hal ini dapat membuat waktu kerja seringkali berlanjut hingga malam hari, dan berpotensi mengganggu waktu istirahat anda. 
+Seperti telah diutarakan pada poin sebelumnya, penting untuk menerapkan batasan dan memiliki disiplin waktu dalam menggunakan teknologi, termasuk dalam melakukan pekerjaan dari rumah, berkomunikasi melalui media sosial, bermain game, ataupun berbelanja.	
 
-## Have a warm shower before bed
+## Melakukan gaya hidup aktif
 
 
-Lastly, this point may help you relax if you are having a rough day or a hard time at work. When you are stressed, it can overtake your ability to fall asleep and making you more prone to sleeplessness. One of the ways to avoid this, is by having a warm shower. This habit can help ease your tense muscles and mentally relax, in order to be able to have a good night's rest.
+Berolahraga merupakan kegiatan yang penting dilakukan setiap hari untuk menjaga kelancaran metabolisme tubuh. Gaya hidup aktif yang anda terapkan juga mempengaruhi istirahat anda di malam hari. Setelah seharian beraktifitas, tubuh tentunya perlu beristirahat untuk meregenerasi sel-sel tubuh. Jika anda merasa lelah karena aktifitas fisik, tentunya akan lebih mudah untuk tertidur. Oleh karena itu, pastikan untuk melakukan olahraga setidaknya 30 menit sehari, dan kiranya dilakukan di pagi ataupun sore hari. Berolahraga terlalu dekat dengan jam tidur justru dapat memberikan efek sebaliknya, yaitu membuat anda sulit tidur dan terjaga semalaman.
+
+## Hindari minum terlalu banyak air sebelum tidur
+
+
+Mengonsumsi air putih secara rutin selalu direkomendasikan agar anda tidak dehidrasi dan metabolisme tubuh terjaga. Meski begitu, minum air putih sebelum tidur justru dapat membangunkan anda di tengah malam karena ingin buang air kecil. Oleh karena itu, sebaiknya minum air secukupnya dan pastikan anda buang air kecil sebelum pergi tidur.
+
+## Mandi air hangat
+
+
+Terakhir, poin ini dapat membantu tubuh lebih rileks setelah seharian sibuk bekerja. Stress membuat otot-otot pada tubuh menegang dan seringkali menyebabkan rasa pegal atau nyeri. Tentunya, tidur dengan kondisi tubuh seperti demikian tidak akan membuat anda nyaman. Mandilah dengan air hangat sebelum anda pergi tidur, agar otot-otot tubuh lebih rileks sekaligus menenangkan pikiran agar anda dapat istirahat lebih nyenyak.
