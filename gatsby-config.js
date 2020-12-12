@@ -39,6 +39,7 @@ module.exports = {
         path: `${__dirname}/src/journal_id`,
       },
     },
+    `gatsby-plugin-preload-fonts`,
     {
       resolve: `gatsby-plugin-manifest`,
       options: {
