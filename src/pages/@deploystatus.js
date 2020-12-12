@@ -1,6 +1,6 @@
 import React from 'react';
 import 'stylesheet/status.scss';
-import NetlifyAPI from 'netlify';
+// import NetlifyAPI from 'netlify';
 import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
 
@@ -12,68 +12,67 @@ export default class Status extends React.Component {
       document.body.classList.add('loaded');
     }
   }
-  getStatus() {
-    // console.log('checking status');
+  // getStatus() {
 
-    const client = new NetlifyAPI(
-      'OYkkGnPqf9de7DnGPUq1C4LTEgWyIs44AFpGxCjSknE'
-    );
+  //   async function __getLatestStatus() {
+  //     const client = new NetlifyAPI(
+  //       'OYkkGnPqf9de7DnGPUq1C4LTEgWyIs44AFpGxCjSknE'
+  //     );
 
-    async function __getLatestStatus() {
-      // const listSite = await client.listSites();
-      // console.log(listSite);
-      const DeployList = await client.listSiteDeploys({
-        siteId: '1c86a3bb-30cc-4b70-a38a-055ef3338287'
-      });
+  //     const listSite = await client.listSites();
+  //     console.log(listSite);
+  //     const DeployList = await client.listSiteDeploys({
+  //       siteId: '1c86a3bb-30cc-4b70-a38a-055ef3338287',
+  //     });
 
+  //     let count = 0;
+  //     //CHECK IF DEPLOY IS SKIPPED or NEW
+  //     while (count < DeployList.length) {
+  //       if (
+  //         DeployList[count].error_message === 'Skipped' ||
+  //         DeployList[count].state === 'new'
+  //       ) {
+  //         count++;
+  //       } else {
+  //         break;
+  //       }
+  //     }
 
-      let count = 0;
-      //CHECK IF DEPLOY IS SKIPPED or NEW
-      while (count < DeployList.length) {
-        if (DeployList[count].error_message === 'Skipped' || DeployList[count].state === 'new') {
-          count++;
-        } else {
-          break;
-        }
-      }
+  //     const _r = DeployList[count];
+  //     return _r;
+  //   }
 
-      const _r = DeployList[count];
-      return _r;
-    }
+  //   __getLatestStatus().then((_r) => {
+  //     let __printmessage = '';
+  //     switch (_r.state.toString()) {
+  //       case 'ready':
+  //         __printmessage = 'Success';
+  //         document.getElementById('DeployStatus').classList.add('success');
+  //         document.getElementById('DeployStatus').classList.remove('build');
+  //         document.getElementById('DeployStatus').classList.remove('error');
+  //         break;
 
-    __getLatestStatus().then(_r => {
-      let __printmessage = '';
-      switch (_r.state.toString()) {
-        case 'ready':
-          __printmessage = 'Success';
-          document.getElementById('DeployStatus').classList.add('success');
-          document.getElementById('DeployStatus').classList.remove('build');
-          document.getElementById('DeployStatus').classList.remove('error');
-          break;
+  //       case 'building':
+  //         document.getElementById('DeployStatus').classList.remove('success');
+  //         document.getElementById('DeployStatus').classList.remove('error');
+  //         document.getElementById('DeployStatus').classList.add('build');
+  //         __printmessage = 'Building';
+  //         break;
 
-        case 'building':
-          document.getElementById('DeployStatus').classList.remove('success');
-          document.getElementById('DeployStatus').classList.remove('error');
-          document.getElementById('DeployStatus').classList.add('build');
-          __printmessage = 'Building';
-          break;
+  //       default:
+  //         __printmessage = 'Error';
+  //         document.getElementById('DeployStatus').classList.add('error');
+  //         document.getElementById('DeployStatus').classList.remove('build');
+  //         document.getElementById('DeployStatus').classList.remove('success');
+  //         break;
+  //     }
+  //     document.getElementById('DeployStatus').innerHTML = __printmessage;
+  //   });
+  // }
 
-        default:
-          __printmessage = 'Error';
-          document.getElementById('DeployStatus').classList.add('error');
-          document.getElementById('DeployStatus').classList.remove('build');
-          document.getElementById('DeployStatus').classList.remove('success');
-          break;
-      }
-      document.getElementById('DeployStatus').innerHTML = __printmessage;
-    });
-  }
-  statusHTML() {
-    return '<iframe src="https://api.netlify.com/api/v1/badges/b38e55c5-7587-4df0-860f-b2be3035cdeb/deploy-status" frameBorder="0" width="136" height="20" border></iframe>';
-  }
   fetchInterval = null;
   resetSubmitTimeout = null;
-  checkPass = e => {
+  checkPass = (e) => {
     if (this.deployStatusPassword !== null) {
       e.preventDefault();
       const getSubmitBtn = document.querySelector(
@@ -86,8 +85,8 @@ export default class Status extends React.Component {
         // console.log('password correct');
         this.triggerStatus();
         getSubmitBtn.value = 'Accepted';
-				getSubmitBtn.classList.remove('error');
-				getSubmitBtn.classList.add('success');
+        getSubmitBtn.classList.remove('error');
+        getSubmitBtn.classList.add('success');
 
         if (this.resetSubmitTimeout !== null)
           clearTimeout(this.resetSubmitTimeout);
@@ -99,20 +98,20 @@ export default class Status extends React.Component {
             clearTimeout(this.resetSubmitTimeout);
 
           this.resetSubmitTimeout = setTimeout(() => {
-						getSubmitBtn.classList.remove('success');
-						getSubmitBtn.classList.remove('error');
+            getSubmitBtn.classList.remove('success');
+            getSubmitBtn.classList.remove('error');
             getSubmitBtn.value = 'Check Status';
           }, 2500);
         }, 500);
       } else {
         getSubmitBtn.value = 'Incorrect';
-				getSubmitBtn.classList.remove('success');
-				getSubmitBtn.classList.add('error');
+        getSubmitBtn.classList.remove('success');
+        getSubmitBtn.classList.add('error');
         if (this.resetSubmitTimeout !== null)
           clearTimeout(this.resetSubmitTimeout);
         this.resetSubmitTimeout = setTimeout(() => {
-					getSubmitBtn.classList.remove('success');
-					getSubmitBtn.classList.remove('error');
+          getSubmitBtn.classList.remove('success');
+          getSubmitBtn.classList.remove('error');
           getSubmitBtn.value = 'Check Status';
           if (this.resetSubmitTimeout !== null)
             clearTimeout(this.resetSubmitTimeout);
@@ -128,35 +127,36 @@ export default class Status extends React.Component {
     }, 15000);
   }
   render() {
-    if (
-      typeof this.props.data.general.frontmatter.deploy_status_password ===
-      'string'
-    ) {
-      this.deployStatusPassword = this.props.data.general.frontmatter.deploy_status_password;
-    }
+    // if (
+    //   typeof this.props.data.general.frontmatter.deploy_status_password ===
+    //   'string'
+    // ) {
+    //   this.deployStatusPassword = this.props.data.general.frontmatter.deploy_status_password;
+    // }
     return (
-      <main id='status'>
-        <Helmet>
-          <meta charSet='utf-8' />
-          <title>
-            Deploy Status for {this.props.data.general.frontmatter.web_name}
-          </title>
-        </Helmet>
-        <form id='CheckForm'>
-          <input
-            className='password'
-            type='password'
-            name='pass'
-            placeholder='Enter Password'
-          />
-          <input type='submit' value='Check Status' onClick={this.checkPass} />
-        </form>
-        <div id='StatusDisplay'>
-          <span>Deploy Status</span>
-          <span id='DeployStatus'>{this.deployStatus}</span>
-					<span>Status is checked every 15 seconds</span>
-        </div>
-      </main>
+      // <main id='status'>
+      //   <Helmet>
+      //     <meta charSet='utf-8' />
+      //     <title>
+      //       Deploy Status for {this.props.data.general.frontmatter.web_name}
+      //     </title>
+      //   </Helmet>
+      //   <form id='CheckForm'>
+      //     <input
+      //       className='password'
+      //       type='password'
+      //       name='pass'
+      //       placeholder='Enter Password'
+      //     />
+      //     <input type='submit' value='Check Status' onClick={this.checkPass} />
+      //   </form>
+      //   <div id='StatusDisplay'>
+      //     <span>Deploy Status</span>
+      //     <span id='DeployStatus'>{this.deployStatus}</span>
+      //     <span>Status is checked every 15 seconds</span>
+      //   </div>
+      // </main>
+      <div></div>
     );
   }
 }
