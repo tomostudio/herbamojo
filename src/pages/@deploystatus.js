@@ -13,7 +13,6 @@ export default class Status extends React.Component {
     }
   }
   getStatus() {
-
     async function __getLatestStatus() {
       const client = new NetlifyAPI(
         'OYkkGnPqf9de7DnGPUq1C4LTEgWyIs44AFpGxCjSknE'
@@ -127,36 +126,35 @@ export default class Status extends React.Component {
     }, 15000);
   }
   render() {
-    // if (
-    //   typeof this.props.data.general.frontmatter.deploy_status_password ===
-    //   'string'
-    // ) {
-    //   this.deployStatusPassword = this.props.data.general.frontmatter.deploy_status_password;
-    // }
+    if (
+      typeof this.props.data.general.frontmatter.deploy_status_password ===
+      'string'
+    ) {
+      this.deployStatusPassword = this.props.data.general.frontmatter.deploy_status_password;
+    }
     return (
-      // <main id='status'>
-      //   <Helmet>
-      //     <meta charSet='utf-8' />
-      //     <title>
-      //       Deploy Status for {this.props.data.general.frontmatter.web_name}
-      //     </title>
-      //   </Helmet>
-      //   <form id='CheckForm'>
-      //     <input
-      //       className='password'
-      //       type='password'
-      //       name='pass'
-      //       placeholder='Enter Password'
-      //     />
-      //     <input type='submit' value='Check Status' onClick={this.checkPass} />
-      //   </form>
-      //   <div id='StatusDisplay'>
-      //     <span>Deploy Status</span>
-      //     <span id='DeployStatus'>{this.deployStatus}</span>
-      //     <span>Status is checked every 15 seconds</span>
-      //   </div>
-      // </main>
-      <div></div>
+      <main id='status'>
+        <Helmet>
+          <meta charSet='utf-8' />
+          <title>
+            Deploy Status for {this.props.data.general.frontmatter.web_name}
+          </title>
+        </Helmet>
+        <form id='CheckForm'>
+          <input
+            className='password'
+            type='password'
+            name='pass'
+            placeholder='Enter Password'
+          />
+          <input type='submit' value='Check Status' onClick={this.checkPass} />
+        </form>
+        <div id='StatusDisplay'>
+          <span>Deploy Status</span>
+          <span id='DeployStatus'>{this.deployStatus}</span>
+          <span>Status is checked every 15 seconds</span>
+        </div>
+      </main>
     );
   }
 }
