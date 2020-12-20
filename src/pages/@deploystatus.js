@@ -1,6 +1,6 @@
 import React from 'react';
 import 'stylesheet/status.scss';
-// import NetlifyAPI from 'netlify';
+import NetlifyAPI from 'netlify';
 import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
 
@@ -12,63 +12,63 @@ export default class Status extends React.Component {
       document.body.classList.add('loaded');
     }
   }
-  // getStatus() {
+  getStatus() {
 
-  //   async function __getLatestStatus() {
-  //     const client = new NetlifyAPI(
-  //       'OYkkGnPqf9de7DnGPUq1C4LTEgWyIs44AFpGxCjSknE'
-  //     );
+    async function __getLatestStatus() {
+      const client = new NetlifyAPI(
+        'OYkkGnPqf9de7DnGPUq1C4LTEgWyIs44AFpGxCjSknE'
+      );
 
-  //     const listSite = await client.listSites();
-  //     console.log(listSite);
-  //     const DeployList = await client.listSiteDeploys({
-  //       siteId: '1c86a3bb-30cc-4b70-a38a-055ef3338287',
-  //     });
+      const listSite = await client.listSites();
+      console.log(listSite);
+      const DeployList = await client.listSiteDeploys({
+        siteId: '1c86a3bb-30cc-4b70-a38a-055ef3338287',
+      });
 
-  //     let count = 0;
-  //     //CHECK IF DEPLOY IS SKIPPED or NEW
-  //     while (count < DeployList.length) {
-  //       if (
-  //         DeployList[count].error_message === 'Skipped' ||
-  //         DeployList[count].state === 'new'
-  //       ) {
-  //         count++;
-  //       } else {
-  //         break;
-  //       }
-  //     }
+      let count = 0;
+      //CHECK IF DEPLOY IS SKIPPED or NEW
+      while (count < DeployList.length) {
+        if (
+          DeployList[count].error_message === 'Skipped' ||
+          DeployList[count].state === 'new'
+        ) {
+          count++;
+        } else {
+          break;
+        }
+      }
 
-  //     const _r = DeployList[count];
-  //     return _r;
-  //   }
+      const _r = DeployList[count];
+      return _r;
+    }
 
-  //   __getLatestStatus().then((_r) => {
-  //     let __printmessage = '';
-  //     switch (_r.state.toString()) {
-  //       case 'ready':
-  //         __printmessage = 'Success';
-  //         document.getElementById('DeployStatus').classList.add('success');
-  //         document.getElementById('DeployStatus').classList.remove('build');
-  //         document.getElementById('DeployStatus').classList.remove('error');
-  //         break;
+    __getLatestStatus().then((_r) => {
+      let __printmessage = '';
+      switch (_r.state.toString()) {
+        case 'ready':
+          __printmessage = 'Success';
+          document.getElementById('DeployStatus').classList.add('success');
+          document.getElementById('DeployStatus').classList.remove('build');
+          document.getElementById('DeployStatus').classList.remove('error');
+          break;
 
-  //       case 'building':
-  //         document.getElementById('DeployStatus').classList.remove('success');
-  //         document.getElementById('DeployStatus').classList.remove('error');
-  //         document.getElementById('DeployStatus').classList.add('build');
-  //         __printmessage = 'Building';
-  //         break;
+        case 'building':
+          document.getElementById('DeployStatus').classList.remove('success');
+          document.getElementById('DeployStatus').classList.remove('error');
+          document.getElementById('DeployStatus').classList.add('build');
+          __printmessage = 'Building';
+          break;
 
-  //       default:
-  //         __printmessage = 'Error';
-  //         document.getElementById('DeployStatus').classList.add('error');
-  //         document.getElementById('DeployStatus').classList.remove('build');
-  //         document.getElementById('DeployStatus').classList.remove('success');
-  //         break;
-  //     }
-  //     document.getElementById('DeployStatus').innerHTML = __printmessage;
-  //   });
-  // }
+        default:
+          __printmessage = 'Error';
+          document.getElementById('DeployStatus').classList.add('error');
+          document.getElementById('DeployStatus').classList.remove('build');
+          document.getElementById('DeployStatus').classList.remove('success');
+          break;
+      }
+      document.getElementById('DeployStatus').innerHTML = __printmessage;
+    });
+  }
 
   fetchInterval = null;
   resetSubmitTimeout = null;

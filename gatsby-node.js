@@ -373,5 +373,6 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
+    externals: ['@netlify/zip-it-and-ship-it'],
   });
 };
