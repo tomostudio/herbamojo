@@ -132,23 +132,24 @@ exports.onCreateNode = ({ node, getNode, getNodesByType, actions }) => {
         node.frontmatter.onlineshop.onlineshoplist = [blankobject];
       }
     }
+
     const filepath = createFilePath({
       node,
       getNode,
-      basePath: `src`,
+      basePath: 'src/',
     });
+
     let slug = node.frontmatter.slug;
     if (!node.frontmatter.indonesia) {
-      if (filepath.includes('journal/'))
+      if (node.fileAbsolutePath.includes('journal/'))
         slug = `/${journalslug}/${node.frontmatter.slug}`;
-      createNodeField({
-        node,
-        name: `slug`,
-        value: slug,
-      });
     } else {
-      if (filepath.includes('journal_id/'))
+      if (node.fileAbsolutePath.includes('journal_id/'))
         slug = `/id/${journalslug}/${node.frontmatter.slug}`;
+    }
+
+    if (slug) {
+      // console.log('slug', slug);
       createNodeField({
         node,
         name: `slug`,

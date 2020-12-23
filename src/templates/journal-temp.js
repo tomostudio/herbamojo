@@ -156,11 +156,14 @@ export default class Journal extends React.Component {
       // console.log(indonesianURL);
     }
 
-    const { next, prev } = this.props.pageContext;
+    console.log(this.props.pageContext);
+    let { next, prev } = this.props.pageContext;
     let onlyarticle = false;
-    if ((next === null) & (prev === null)) {
+    if (next === null && prev === null) {
       onlyarticle = true;
     }
+    if (next !== null && !next.startsWith('/')) next = `/${next}`;
+    if (prev !== null && !prev.startsWith('/')) prev = `/${prev}`;
 
     // GET RELATED DATA
     const alljournals = this.props.data.alljournals;

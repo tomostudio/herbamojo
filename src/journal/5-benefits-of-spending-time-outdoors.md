@@ -29,13 +29,14 @@ coverimage: /assets/herbamojo-outdoor.jpg
 related:
   - relatedslug: /
 ---
+
 The quarantine period surely have gotten most people bored and uncomfortable, as they were usually doing activities outside of the house and got to travel freely outside of the city or country. When the bans got lifted, people opt to travel domestically, refreshed their mind someplace close by to the city they live in and mostly doing outdoor activities. Before this pandemic took place, most city dwellers spent their time indoors and inside buildings. Now, they increase activities outside of a confined space, including cycling around town. That leads us to a question: what actually are the benefits to spending your time outdoors? On this week's journal, we will shed some light on why outdoor activities are actually good for your health, pandemic or no pandemic.
 
 1. Ensures flow of fresh air
 
 Earlier this year, most people aren't able to go outside of the house as much as they wanted to since most governments are imposing some measures to resolve the pandemic. However, going out, or rather, going outdoors, are important for health since we get the chance to breathe air other than the one we are used to. This benefit doubles when you get to spend time outdoors in a countryside rather than city, since the amount of pollution aren't as prevalent. Regardless, doing things outside of the house, whether it be cycling or just walking your dog around the neighborhood preferably in the morning, can actually give you a dose of fresh air you may need.
 
-2. Builds your immunity 
+2. Builds your immunity
 
 Spending time outdoors is also beneficial to build and nurture immunity. Exposure to sunshine, for instance, can help boost vitamin D intake that is beneficial to maintaining immunity, which in turn may strengthen your response to illnesses caused by bacterial or viral infection.
 
