@@ -194,14 +194,17 @@ export default function AuthenticationPage(props) {
               )
                 AutBottleAnim.disable = false;
             }
-            // console.log(speedInKbps);
+            // ;
             downloadImgSrc = null;
-            if (afterCheck && typeof afterCheck === 'function') afterCheck();
           };
 
           time_start = new Date().getTime();
           downloadImgSrc.src = userImageLink;
+
+          if (afterCheck && typeof afterCheck === 'function') afterCheck();
         }
+      } else {
+        if (afterCheck && typeof afterCheck === 'function') afterCheck();
       }
     },
     init: (props) => {
@@ -236,15 +239,15 @@ export default function AuthenticationPage(props) {
             };
 
             bottleLottie.addEventListener('data_ready', () => {});
-
             bottleLottie.addEventListener('DOMLoaded', () => {
               // RUN AFTER LOAD AFTER IMAGES ARE LOADED
               if (
                 props &&
                 props.afterLoad &&
                 typeof props.afterLoad === 'function'
-              )
+              ) {
                 props.afterLoad();
+              }
             });
 
             bottleLottie.addEventListener('loaded_images', () => {
@@ -254,8 +257,13 @@ export default function AuthenticationPage(props) {
         } else {
           // IF BOTTLE ANIMATION IS DISABLED
           // RUN AFTER LOAD REGARDLESS
-          if (props && props.afterLoad && typeof props.afterLoad === 'function')
+          if (
+            props &&
+            props.afterLoad &&
+            typeof props.afterLoad === 'function'
+          ) {
             props.afterLoad();
+          }
 
           document.getElementById('BgContent').classList.add('noAnimation');
         }
@@ -283,7 +291,6 @@ export default function AuthenticationPage(props) {
     parent: `#${MainID}`,
     default_delay: 0,
     postload: () => {
-      // console.log('postload');
       if (typeof window !== undefined) {
         window.scrollTo(0, 0);
         AutScrollSnap = new ScrollSnapClass({
