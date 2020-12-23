@@ -163,7 +163,6 @@ export default function AuthenticationPage(props) {
     checkDisable: (afterCheck) => {
       if (ConnectionSpeed() === 'SLOW') {
         AutBottleAnim.disable = true;
-        if (afterCheck && typeof afterCheck === 'function') afterCheck();
       } else if (ConnectionSpeed() === 'ERROR') {
         // DO CHECK BASED ON DEVICE
         if (
@@ -183,6 +182,7 @@ export default function AuthenticationPage(props) {
           let downloadImgSrc = new Image();
 
           downloadImgSrc.onload = function () {
+            console.log('image source download');
             end_time = new Date().getTime();
             const speedInKbps =
               ((downloadSize * 8) / (end_time - time_start) / 1024) * 1000;
@@ -200,12 +200,9 @@ export default function AuthenticationPage(props) {
 
           time_start = new Date().getTime();
           downloadImgSrc.src = userImageLink;
-
-          if (afterCheck && typeof afterCheck === 'function') afterCheck();
         }
-      } else {
-        if (afterCheck && typeof afterCheck === 'function') afterCheck();
       }
+      if (afterCheck && typeof afterCheck === 'function') afterCheck();
     },
     init: (props) => {
       AutBottleAnim.checkDisable(() => {
