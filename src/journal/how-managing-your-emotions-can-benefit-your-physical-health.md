@@ -18,12 +18,12 @@ seo:
     from it, so read on!
   seo_keywords: herbamojo, herbal, ginseng, maca, tribulus, javanese pepper, red
     ginger, purwoceng, pasak bumi, stamina, vitality
-  seo_image: /assets/rsz_pexels-jeandaniel-francoeur-1182238.jpg
+  seo_image: /assets/rsz_pexels-damir-mijailovic-5267480.jpg
 altslug: /
 listcolorblack: false
-thumbimage: /assets/rsz_pexels-jeandaniel-francoeur-1182238.jpg
+thumbimage: /assets/rsz_pexels-damir-mijailovic-5267480.jpg
 headercolorblack: false
-coverimage: /assets/rsz_pexels-jeandaniel-francoeur-1182238.jpg
+coverimage: /assets/rsz_pexels-damir-mijailovic-5267480.jpg
 related:
   - relatedslug: /
 ---
