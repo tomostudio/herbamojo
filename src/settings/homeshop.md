@@ -16,6 +16,9 @@ onlineshop:
     - image: /assets/bukalapak-1.png
       link: https://www.bukalapak.com/u/herbamojoofficialshop
       background: transparent
+    - image: /assets/logo-sehatq-01.png
+      link: https://toko.sehatq.com/merchant/herbamojo-official-shop
+      background: transparent
   slider_option: NORMAL
 offlineshop:
   offlineshoplist:
