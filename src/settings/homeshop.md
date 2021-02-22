@@ -46,6 +46,9 @@ offlineshop:
     - image: /assets/setiabudhi-supermarket.png
       link: ""
       background: transparent
+    - image: /assets/growell-logo.png
+      link: https://www.instagram.com/growellwholefoods/?hl=en
+      background: transparent
   slider_option: NORMAL
 stockist:
   list:
