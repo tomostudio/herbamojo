@@ -3,7 +3,7 @@ issetting: true
 contenttype: general_setting
 title: General Setting
 web_name: HERBAMOJO
-journaldisable: false
+journaldisable: true
 deploy_status_password: password
 seo:
   seo_image: /assets/herbamojo_homebg.jpg
@@ -17,7 +17,7 @@ seo:
 footer:
   email: info@herbamojo.id
   ig_link: https://www.instagram.com/herbamojo
-  wa_no: 081292940890
+  wa_no: 81292940890
 navigation:
   home:
     en: Home
