@@ -49,7 +49,7 @@ offlineshop:
     - image: /assets/growell-logo.png
       link: https://www.instagram.com/growellwholefoods/?hl=en
       background: transparent
-  slider_option: NORMAL
+  slider_option: NOSLIDER
 stockist:
   list:
     - link: https://www.tokopedia.com/numicenter/60-kap-herba-mojo-500mg-herbana-relief-sari-brnhrb015-herbana
