@@ -27,7 +27,7 @@ thumbimage: /assets/herbamojo-outdoor.jpg
 headercolorblack: false
 coverimage: /assets/herbamojo-outdoor.jpg
 related:
-  - relatedslug: /
+  - relatedslug: 5-benefits-of-stretching-for-physical-health
 ---
 
 The quarantine period surely have gotten most people bored and uncomfortable, as they were usually doing activities outside of the house and got to travel freely outside of the city or country. When the bans got lifted, people opt to travel domestically, refreshed their mind someplace close by to the city they live in and mostly doing outdoor activities. Before this pandemic took place, most city dwellers spent their time indoors and inside buildings. Now, they increase activities outside of a confined space, including cycling around town. That leads us to a question: what actually are the benefits to spending your time outdoors? On this week's journal, we will shed some light on why outdoor activities are actually good for your health, pandemic or no pandemic.
