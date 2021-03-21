@@ -4,7 +4,7 @@ contenttype: homeshop_setting
 title: Shop in Home Setting
 onlineshop:
   onlineshoplist:
-    - background: transparent
+    - background: "#4169E1"
       image: /assets/shop/tokopedia.png
       link: https://www.tokopedia.com/herbamojo
     - background: transparent
