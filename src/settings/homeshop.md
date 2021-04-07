@@ -78,5 +78,7 @@ stockist:
       content: Apotek Jaya Sentosa
     - link: https://www.tokopedia.com/gragemedherbalstore/herba-mojo-free-gift-bag-meningkatkan-kadar-testosteron-stamina?utm_source=Android&utm_source=Android&utm_medium=Share&utm_medium=Share&utm_campaign=Product%20Share&utm_campaign=Product%20Share&_branch_match_id=859427116951163873
       content: Gragemed
+    - link: https://www.asmaraku.com/collections/herbamojo
+      content: Asmaraku
   slider_option: NORMAL
 ---
