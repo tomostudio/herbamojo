@@ -81,6 +81,6 @@ stockist:
     - link: https://www.asmaraku.com/collections/herbamojo
       content: Asmaraku
     - link: https://www.tokopedia.com/chocoberry7/herbana-herbamojo-60-kapsul-obat-stamina-pria-alami-herba-mojo
-      content: ""
+      content: Chocoberry
   slider_option: NORMAL
 ---
