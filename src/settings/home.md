@@ -9,9 +9,8 @@ popup:
   content:
     en: |
       NEW! Herbamojo Small Pack (30 Capsules)
-    id: |-
+    id: |
       Baru! Herbamojo Small Pack (30 Kapsul)
-      Kenali ciri-ciri produk resmi Herbamojo di sini.
   buttontext:
     en: CLICK HERE TO SHOP ORIGINAL PRODUCT
     id: KLIK DISINI UNTUK BELANJA PRODUK ORIGINAL
