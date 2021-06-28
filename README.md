@@ -9,7 +9,7 @@ Website URL `herbamojo.id`
 - Netlify CMS
 
 ### SERVER
-This website is hosted on Netlify with Gitlab LFS set
+This website is hosted on Netlify
 
 ### INITIALISING
 
@@ -52,5 +52,6 @@ eslint --init
 
 ### CONTRIBUTORS
 Hendhy Hutomo (hello@hendhyhutomo.com)
+TOMO studio (info@tomostudio.id)
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/b38e55c5-7587-4df0-860f-b2be3035cdeb/deploy-status)](https://app.netlify.com/sites/herbamojo/deploys)
