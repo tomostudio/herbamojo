@@ -185,7 +185,7 @@ exports.createPages = ({ graphql, actions }) => {
     resolve(
       graphql(`
         {
-          all: allmarkdownRemark(
+          all: allMarkdownRemark(
             filter: { frontmatter: { issetting: { eq: false } } }
             sort: { fields: [frontmatter___date], order: DESC }
           ) {
