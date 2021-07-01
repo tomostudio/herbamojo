@@ -34,40 +34,40 @@ let journaldisable = false;
 exports.onCreateNode = ({ node, getNode, getNodesByType, actions }) => {
   // // REMARK RELATIVE IMAGE v2
 
-  if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
-    const files = getNodesByType(`File`);
+  // if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
+  //   const files = getNodesByType(`File`);
 
-    const directory = path.dirname(node.fileAbsolutePath);
+  //   const directory = path.dirname(node.fileAbsolutePath);
 
-    const options = {
-      staticFolderName: 'static',
-      include: [],
-      exclude: [],
-    };
-    // Deeply iterate through frontmatter data for absolute paths
-    traverse(node.frontmatter).forEach(function (value) {
-      if (!isString(value)) return;
-      if (!path.isAbsolute(value) || !path.extname(value)) return;
+  //   const options = {
+  //     staticFolderName: 'static',
+  //     include: [],
+  //     exclude: [],
+  //   };
+  //   // Deeply iterate through frontmatter data for absolute paths
+  //   traverse(node.frontmatter).forEach(function (value) {
+  //     if (!isString(value)) return;
+  //     if (!path.isAbsolute(value) || !path.extname(value)) return;
 
-      let shouldTransform = options.include.length < 1;
+  //     let shouldTransform = options.include.length < 1;
 
-      if (options.include.some((a) => paths.includes(a))) {
-        shouldTransform = true;
-      }
+  //     if (options.include.some((a) => paths.includes(a))) {
+  //       shouldTransform = true;
+  //     }
 
-      if (options.exclude.some((a) => paths.includes(a))) {
-        shouldTransform = false;
-      }
+  //     if (options.exclude.some((a) => paths.includes(a))) {
+  //       shouldTransform = false;
+  //     }
 
-      if (!shouldTransform) return;
+  //     if (!shouldTransform) return;
 
-      const file = findMatchingFile(value, files, options);
-      const newValue = path.relative(directory, file.absolutePath);
-      // console.log(file ? `file found ${newValue}` : 'file not found');
+  //     const file = findMatchingFile(value, files, options);
+  //     const newValue = path.relative(directory, file.absolutePath);
+  //     // console.log(file ? `file found ${newValue}` : 'file not found');
 
-      this.update(newValue);
-    });
-  }
+  //     this.update(newValue);
+  //   });
+  // }
 
   const { createRedirect, createNodeField } = actions;
 

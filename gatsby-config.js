@@ -14,29 +14,8 @@ module.exports = {
     {
       resolve: `gatsby-source-filesystem`,
       options: {
-        name: `settings`,
-        path: `${__dirname}/src/settings`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `pages`,
-        path: `${__dirname}/src/pages`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `journal`,
-        path: `${__dirname}/src/journal`,
-      },
-    },
-    {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `journal_id`,
-        path: `${__dirname}/src/journal_id`,
+        name: `content`,
+        path: `${__dirname}/src`,
       },
     },
     `gatsby-plugin-preload-fonts`,
@@ -53,15 +32,6 @@ module.exports = {
         cache_busting_mode: 'none',
       },
     },
-    // {
-    //   resolve: `gatsby-plugin-offline`,
-    //   options: {
-    //     precachePages: [`/`, `/journal/*`, `id/journal/*`],
-    //     workboxConfig: {
-    //       globPatterns: ['**/*'],
-    //     },
-    //   },
-    // },
     `gatsby-plugin-remove-serviceworker`,
     `gatsby-plugin-react-helmet`,
     {
@@ -73,9 +43,6 @@ module.exports = {
     `gatsby-plugin-layout`,
     {
       resolve: `gatsby-plugin-sitemap`,
-      options: {
-        exclude: [`/@deploystatus`],
-      },
     },
     {
       resolve: `gatsby-plugin-google-analytics`,
@@ -119,29 +86,17 @@ module.exports = {
         // routeChangeEventName: 'YOUR_ROUTE_CHANGE_EVENT_NAME',
       },
     },
-    `gatsby-plugin-sharp`,
+    `gatsby-plugin-image`,
     `gatsby-transformer-sharp`,
+    `gatsby-plugin-sharp`,
     {
       resolve: `gatsby-transformer-remark`,
-      // resolve: `gatsby-plugin-mdx`,
       options: {
-        // extensions: [`.md`, `.mdx`], // highlight-line
-        // gatsbyRemarkPlugins: [
-          plugins: [
-          {
-            resolve: `gatsby-remark-relative-images`,
-            options: { staticFolderName: 'static' },
-          },
+        plugins: [
+          `gatsby-remark-relative-images`,
           `gatsby-remark-unwrap-images`,
           `gatsby-remark-images`,
         ],
-      },
-    },
-    {
-      resolve: `gatsby-plugin-netlify-cms`,
-      options: {
-        htmlTitle: `Content Manager | HERBAMOJO`,
-        htmlFavicon: `${__dirname}/static/icon.png`,
       },
     },
     {
@@ -159,6 +114,13 @@ module.exports = {
           ],
         },
         generateMatchPathRewrites: false, // boolean to turn off automatic creation of redirect rules for client only paths
+      },
+    },
+    {
+      resolve: `gatsby-plugin-netlify-cms`,
+      options: {
+        htmlTitle: `Content Manager | HERBAMOJO`,
+        htmlFavicon: `${__dirname}/static/icon.png`,
       },
     },
   ],
