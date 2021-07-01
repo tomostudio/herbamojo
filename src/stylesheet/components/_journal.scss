@@ -93,7 +93,7 @@ main.journal {
       height: 0px;
       max-height: 75vh;
       padding: 0px;
-      padding-top: 9 / 16 * 100%;
+      padding-top: math.div(9,16) * 100%;
       color: white;
       &.black {
         color: black;
@@ -103,10 +103,10 @@ main.journal {
         padding-top: 0px;
       }
       @include respond-to(m_tablet) {
-        padding-top: 10 / 16 * 100%;
+        padding-top: math.div(10,16) * 100%;
       }
       @include respond-to(mobile) {
-        padding-top: 12 / 16 * 100%;
+        padding-top: math.div(12,16) * 100%;
       }
       & > div.gatsby-image-wrapper,
       & > picture {
@@ -683,7 +683,7 @@ section.journallist {
         }
         @include respond-to(m_tablet) {
           height: 0px;
-          padding-top: 9 / 16 * 100%;
+          padding-top: math.div(9,16) * 100%;
           min-height: 200px;
           max-height: 250px;
         }

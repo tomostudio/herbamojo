@@ -4,7 +4,7 @@ import Footer from 'components/footer';
 import PageHeader from 'components/pageheader';
 import { Link, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
-import Img from 'gatsby-image';
+import { GatsbyImage } from "gatsby-plugin-image";
 import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 //UTILS
@@ -254,10 +254,9 @@ export default class Journal extends React.Component {
               <source srcSet={content.coverimage} type='image/jpeg' />
               <img src={content.coverimage} alt='Herbamojo' />
             </picture> */}
-            <Img
-              fluid={content.coverimage.childImageSharp.fluid}
-              loading={'eager'}
-            />
+            <GatsbyImage
+              image={content.coverimage.childImageSharp.gatsbyImageData}
+              loading={'eager'} />
           </section>
           <section className='markupcontent'>
             <div className='wrapper'>
@@ -327,12 +326,8 @@ export default class Journal extends React.Component {
                             <span>{journal.node.frontmatter.date}</span>
                             <h2>{journal.node.frontmatter.title}</h2>
                           </div>
-                          <Img
-                            fluid={
-                              journal.node.frontmatter.thumbimage
-                                .childImageSharp.fluid
-                            }
-                          />
+                          <GatsbyImage
+                            image={journal.node.frontmatter.thumbimage.childImageSharp.gatsbyImageData} />
                           {/* <picture>
                             <source
                               srcSet={journal.node.frontmatter.thumbimage}
@@ -358,144 +353,119 @@ export default class Journal extends React.Component {
   }
 }
 
-export const query = graphql`
-  query($slug: String!, $indo: Boolean!) {
-    journals: allMdx(
-      limit: 2
-      filter: {
-        frontmatter: {
-          issetting: { eq: false }
-          contenttype: { eq: "journal" }
-          active: { eq: true }
-          indonesia: { eq: $indo }
+export const query = graphql`query ($slug: String!, $indo: Boolean!) {
+  journals: allMdx(
+    limit: 2
+    filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, active: {eq: true}, indonesia: {eq: $indo}}, fields: {slug: {ne: $slug}}}
+    sort: {fields: [frontmatter___date], order: DESC}
+  ) {
+    totalCount
+    edges {
+      node {
+        id
+        frontmatter {
+          title
+          date(formatString: "DD/MM/YY")
+          listcolorblack
+          thumbimage {
+            childImageSharp {
+              gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+            }
+          }
         }
-        fields: { slug: { ne: $slug } }
+        fields {
+          slug
+        }
+        excerpt
       }
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      totalCount
-      edges {
-        node {
+    }
+  }
+  alljournals: allMdx(
+    filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, active: {eq: true}, indonesia: {eq: $indo}}}
+    sort: {fields: [frontmatter___date], order: DESC}
+  ) {
+    totalCount
+    edges {
+      node {
+        id
+        frontmatter {
+          title
+          date(formatString: "DD/MM/YY")
+          listcolorblack
+          thumbimage {
+            childImageSharp {
+              gatsbyImageData(layout: FULL_WIDTH)
+            }
+          }
+          slug
+        }
+        fields {
+          slug
+        }
+        excerpt
+      }
+    }
+  }
+  general: mdx(
+    frontmatter: {issetting: {eq: true}, contenttype: {eq: "general_setting"}}
+  ) {
+    frontmatter {
+      journalslug
+      navigation {
+        journal {
+          en
           id
-          frontmatter {
-            title
-            date(formatString: "DD/MM/YY")
-            listcolorblack
-            thumbimage {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
-          }
-          fields {
-            slug
-          }
-          excerpt
         }
       }
-    }
-    alljournals: allMdx(
-      filter: {
-        frontmatter: {
-          issetting: { eq: false }
-          contenttype: { eq: "journal" }
-          active: { eq: true }
-          indonesia: { eq: $indo }
-        }
-      }
-      sort: { fields: [frontmatter___date], order: DESC }
-    ) {
-      totalCount
-      edges {
-        node {
+      journaltranslation {
+        nextjournal {
+          en
           id
-          frontmatter {
-            title
-            date(formatString: "DD/MM/YY")
-            listcolorblack
-            thumbimage {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
-            }
-            slug
-          }
-          fields {
-            slug
-          }
-          excerpt
         }
-      }
-    }
-    general: mdx(
-      frontmatter: {
-        issetting: { eq: true }
-        contenttype: { eq: "general_setting" }
-      }
-    ) {
-      frontmatter {
-        journalslug
-        navigation {
-          journal {
-            en
-            id
-          }
+        previousjournal {
+          en
+          id
         }
-        journaltranslation {
-          nextjournal {
-            en
-            id
-          }
-          previousjournal {
-            en
-            id
-          }
-          nextjournalmobile {
-            en
-            id
-          }
-          previousjournalmobile {
-            en
-            id
-          }
-          relatedjournal {
-            en
-            id
-          }
+        nextjournalmobile {
+          en
+          id
         }
-      }
-    }
-    content: mdx(fields: { slug: { eq: $slug } }) {
-      body
-      id
-      frontmatter {
-        indonesia
-        title
-        date(formatString: "DD/MM/YY")
-        altslug
-        headercolorblack
-        coverimage {
-          childImageSharp {
-            fluid {
-              ...GatsbyImageSharpFluid_withWebp_noBase64
-            }
-          }
+        previousjournalmobile {
+          en
+          id
         }
-        related {
-          relatedslug
-        }
-        seo {
-          seo_shortdesc
-          seo_keywords
-          seo_image {
-            publicURL
-          }
+        relatedjournal {
+          en
+          id
         }
       }
     }
   }
+  content: mdx(fields: {slug: {eq: $slug}}) {
+    body
+    id
+    frontmatter {
+      indonesia
+      title
+      date(formatString: "DD/MM/YY")
+      altslug
+      headercolorblack
+      coverimage {
+        childImageSharp {
+          gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+        }
+      }
+      related {
+        relatedslug
+      }
+      seo {
+        seo_shortdesc
+        seo_keywords
+        seo_image {
+          publicURL
+        }
+      }
+    }
+  }
+}
 `;

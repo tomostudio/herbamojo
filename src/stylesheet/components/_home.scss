@@ -320,7 +320,7 @@ main.home {
           @include respond-to(m_tablet) {
             width: calc(100% - #{$globalmobile-padding * 2});
             margin: $sectionmobilespacing auto 0px;
-            padding-bottom: $sectionmobilespacing / 2;
+            padding-bottom: math.div($sectionmobilespacing,2);
           }
           @include respond-to(height_less) {
             @include setflex(
@@ -347,11 +347,11 @@ main.home {
       }
 
       & > .content.half {
-        width: calc(50% + #{$home-offcenter / 2});
-        padding-right: $global-padding / 2;
+        width: calc(50% + math.div($home-offcenter,2));
+        padding-right: math.div($global-padding,2);
 
         @include respond-to(tablet) {
-          width: calc(50% + #{$home-offcenter-t / 2});
+          width: calc(50% + math.div($home-offcenter-t,2));
         }
 
         @include respond-to(m_tablet) {
@@ -1332,7 +1332,7 @@ main.home {
                     & > span:nth-child(1) {
                       opacity: 0;
                       @include transition(
-                        opacity $global-transition #{$global-transition / 3}
+                        opacity $global-transition math.div($global-transition,3)
                       );
                     }
 
@@ -1681,7 +1681,7 @@ main.home {
 
               & > div.shopSlider {
                 width: 100%;
-                margin-top: $global-padding / 2;
+                margin-top: math.div($global-padding,2);
                 @include setflex(row, nowrap, space-between, center, center);
 
                 @include respond-to(m_tablet) {
@@ -1790,7 +1790,7 @@ main.home {
                   margin: 0px #{$global-padding};
                   @include respond-to(tablet) {
                     width: calc(100% - #{$arrowwidth * 2} - #{$global-padding});
-                    margin: 0px #{$global-padding / 2};
+                    margin: 0px math.div($global-padding,2);
                   }
                   @include respond-to(m_tablet) {
                     margin: 0px #{$globalmobile-padding + 40px};
@@ -1859,7 +1859,7 @@ main.home {
 
                 &.stockist {
                   align-self: stretch;
-                  margin-top: $global-padding / 2;
+                  margin-top: math.div($global-padding,2);
                   // border: solid thin red;
                   @include respond-to(m_tablet) {
                     .arrow {
@@ -1887,7 +1887,7 @@ main.home {
 
                     & .stockist {
                       position: relative;
-                      padding: #{$global-padding / 2} 0px;
+                      padding: math.div($global-padding,2) 0px;
                       // border: solid thin green;
                       font-size: 20px;
                       line-height: 120%;
@@ -2123,7 +2123,7 @@ main.home {
       body.loaded & {
         @include transition(
           opacity #{$initialTranstionHome} #{$initialAnimDelayHome + (
-              $initialTranstionHome / 2
+              math.div($initialTranstionHome,2)
             )}
         );
         opacity: 1;
@@ -2708,7 +2708,7 @@ main.home {
             z-index: 2;
             width: 100%;
             height: 100%;
-            padding: $global-padding / 2;
+            padding: math.div($global-padding,2);
             background: rgba(0, 0, 0, 0.6);
             @include setflex(column, nowrap, center, center, center);
             text-align: center;
@@ -2770,9 +2770,9 @@ main.home {
             }
             & > #PopUpClose {
               position: absolute;
-              top: $global-padding / 2;
+              top: math.div($global-padding,2);
               left: auto;
-              right: $global-padding / 2;
+              right: math.div($global-padding,2);
               width: 25px;
               height: 25px;
               &::before,

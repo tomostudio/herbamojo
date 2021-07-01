@@ -3,7 +3,7 @@ import { StaticQuery, Link, graphql } from 'gatsby';
 import lottie from 'lottie-web';
 import { Helmet } from 'react-helmet';
 import Glide from '@glidejs/glide';
-import Img from 'gatsby-image';
+import { GatsbyImage } from "gatsby-plugin-image";
 
 //UTILS
 import { ScrollSnapClass } from 'utils/scrollsnap';
@@ -47,7 +47,8 @@ import AnimDataExercise from 'animationdata/exercise.json';
 
 const ShopImages = ({ fluid }) => {
   return (
-    <Img
+    <GatsbyImage
+      image={fluid}
       imgStyle={{
         objectFit: 'contain',
         objectPosition: 'center',
@@ -58,13 +59,11 @@ const ShopImages = ({ fluid }) => {
         width: '100%',
         height: '100%',
       }}
-      fluid={fluid}
       loading={'eager'}
       durationFadeIn={10}
       fadeIn={false}
       backgroundColor='#000000'
-      alt='herbamojo'
-    />
+      alt='herbamojo' />
   );
 };
 
@@ -1291,35 +1290,31 @@ export default class Home extends React.Component {
                         src={homeData.home.background}
                         alt='herbamojo'
                       /> */}
-                      <Img
+                      <GatsbyImage
+                        image={homeData.home.background.childImageSharp.gatsbyImageData}
                         className='paralax1'
-                        fluid={homeData.home.background.childImageSharp.fluid}
                         alt='herbamojo'
                         imgStyle={{
                           objectFit: 'cover',
                           objectPosition: 'right',
                         }}
                         loading='eager'
-                        fadeIn={false}
-                      />
+                        fadeIn={false} />
                       {/* <img
                         className='mobile prlx'
                         src={homeData.home.backgroundmobile}
                         alt='herbamojo'
                       /> */}
-                      <Img
+                      <GatsbyImage
+                        image={homeData.home.backgroundmobile.childImageSharp.gatsbyImageData}
                         className='mobile prlx'
                         imgStyle={{
                           objectFit: 'contain',
                           objectPosition: 'center',
                         }}
-                        fluid={
-                          homeData.home.backgroundmobile.childImageSharp.fluid
-                        }
                         loading='eager'
                         fadeIn={false}
-                        alt='herbamojo'
-                      />
+                        alt='herbamojo' />
                     </div>
                   </section>
                   <section id='about'>
@@ -1409,19 +1404,16 @@ export default class Home extends React.Component {
                       /> */}
 
                       <div className='wrapper'>
-                        <Img
+                        <GatsbyImage
+                          image={homeData.about.background.childImageSharp.gatsbyImageData}
                           className='paralax2'
                           imgStyle={{
                             objectFit: 'cover',
                             objectPosition: 'center',
                           }}
-                          fluid={
-                            homeData.about.background.childImageSharp.fluid
-                          }
                           alt='herbamojo'
                           loading='eager'
-                          fadeIn={false}
-                        />
+                          fadeIn={false} />
                       </div>
                     </div>
                   </section>
@@ -1551,17 +1543,16 @@ export default class Home extends React.Component {
                       {/* <img key={id} src={node.image} alt='herbamojo' /> */}
                       {homeData.ingredients.map((node, id) => {
                         return (
-                          <Img
+                          <GatsbyImage
+                            image={node.image.childImageSharp.gatsbyImageData}
                             imgStyle={{
                               objectFit: 'scale-down',
                               objectPosition: 'right center',
                             }}
                             key={id}
-                            fluid={node.image.childImageSharp.fluid}
                             alt='herbamojo'
                             loading='eager'
-                            fadeIn={false}
-                          />
+                            fadeIn={false} />
                         );
                       })}
                     </div>
@@ -1617,8 +1608,7 @@ export default class Home extends React.Component {
                                               >
                                                 <ShopImages
                                                   fluid={
-                                                    node.image.childImageSharp
-                                                      .fluid
+                                                    node.image.childImageSharp.gatsbyImageData
                                                   }
                                                 />
                                               </a>
@@ -1633,8 +1623,7 @@ export default class Home extends React.Component {
                                               >
                                                 <ShopImages
                                                   fluid={
-                                                    node.image.childImageSharp
-                                                      .fluid
+                                                    node.image.childImageSharp.gatsbyImageData
                                                   }
                                                 />
                                               </div>
@@ -1674,8 +1663,7 @@ export default class Home extends React.Component {
                                                 >
                                                   <ShopImages
                                                     fluid={
-                                                      node.image.childImageSharp
-                                                        .fluid
+                                                      node.image.childImageSharp.gatsbyImageData
                                                     }
                                                   />
                                                 </a>
@@ -1690,8 +1678,7 @@ export default class Home extends React.Component {
                                                 >
                                                   <ShopImages
                                                     fluid={
-                                                      node.image.childImageSharp
-                                                        .fluid
+                                                      node.image.childImageSharp.gatsbyImageData
                                                     }
                                                   />
                                                 </div>
@@ -1752,8 +1739,7 @@ export default class Home extends React.Component {
                                                       <ShopImages
                                                         fluid={
                                                           node.image
-                                                            .childImageSharp
-                                                            .fluid
+                                                            .childImageSharp.gatsbyImageData
                                                         }
                                                       />
                                                     </a>
@@ -1770,8 +1756,7 @@ export default class Home extends React.Component {
                                                       <ShopImages
                                                         fluid={
                                                           node.image
-                                                            .childImageSharp
-                                                            .fluid
+                                                            .childImageSharp.gatsbyImageData
                                                         }
                                                       />
                                                     </div>
@@ -1842,8 +1827,7 @@ export default class Home extends React.Component {
                                               >
                                                 <ShopImages
                                                   fluid={
-                                                    node.image.childImageSharp
-                                                      .fluid
+                                                    node.image.childImageSharp.gatsbyImageData
                                                   }
                                                 />
                                               </a>
@@ -1858,8 +1842,7 @@ export default class Home extends React.Component {
                                               >
                                                 <ShopImages
                                                   fluid={
-                                                    node.image.childImageSharp
-                                                      .fluid
+                                                    node.image.childImageSharp.gatsbyImageData
                                                   }
                                                 />
                                               </div>
@@ -1899,8 +1882,7 @@ export default class Home extends React.Component {
                                                 >
                                                   <ShopImages
                                                     fluid={
-                                                      node.image.childImageSharp
-                                                        .fluid
+                                                      node.image.childImageSharp.gatsbyImageData
                                                     }
                                                   />
                                                 </a>
@@ -1915,8 +1897,7 @@ export default class Home extends React.Component {
                                                 >
                                                   <ShopImages
                                                     fluid={
-                                                      node.image.childImageSharp
-                                                        .fluid
+                                                      node.image.childImageSharp.gatsbyImageData
                                                     }
                                                   />
                                                 </div>
@@ -1977,8 +1958,7 @@ export default class Home extends React.Component {
                                                       <ShopImages
                                                         fluid={
                                                           node.image
-                                                            .childImageSharp
-                                                            .fluid
+                                                            .childImageSharp.gatsbyImageData
                                                         }
                                                       />
                                                     </a>
@@ -1995,8 +1975,7 @@ export default class Home extends React.Component {
                                                       <ShopImages
                                                         fluid={
                                                           node.image
-                                                            .childImageSharp
-                                                            .fluid
+                                                            .childImageSharp.gatsbyImageData
                                                         }
                                                       />
                                                     </div>
@@ -2206,7 +2185,8 @@ export default class Home extends React.Component {
                                   <span>{journal.node.frontmatter.date}</span>
                                   <h2>{journal.node.frontmatter.title}</h2>
                                 </div>
-                                <Img
+                                <GatsbyImage
+                                  image={journal.node.frontmatter.thumbimage.childImageSharp.gatsbyImageData}
                                   style={{
                                     width: '100%',
                                     height: '100%',
@@ -2215,13 +2195,8 @@ export default class Home extends React.Component {
                                     width: '100%',
                                     height: '100%',
                                   }}
-                                  fluid={
-                                    journal.node.frontmatter.thumbimage
-                                      .childImageSharp.fluid
-                                  }
                                   loading='eager'
-                                  fadeIn={false}
-                                />
+                                  fadeIn={false} />
                               </Link>
                             );
                           })}
@@ -2266,8 +2241,8 @@ export default class Home extends React.Component {
                 >
                   <div className='container' ref={this.popUpRefContainer}>
                     <div className='background'>
-                      <Img
-                        fluid={popupData.image.childImageSharp.fluid}
+                      <GatsbyImage
+                        image={popupData.image.childImageSharp.gatsbyImageData}
                         alt='popupimage'
                         imgStyle={{
                           objectFit: 'cover',
@@ -2275,8 +2250,7 @@ export default class Home extends React.Component {
                           width: '100%',
                           height: '100%',
                         }}
-                        loading='eager'
-                      />
+                        loading='eager' />
                     </div>
                     <div>
                       <div className='content'>
@@ -2321,358 +2295,326 @@ export default class Home extends React.Component {
   }
 }
 
-const indexQuery = graphql`
-  query {
-    journals: allMdx(
-      filter: {
-        frontmatter: {
-          issetting: { eq: false }
-          contenttype: { eq: "journal" }
-          indonesia: { eq: false }
-          active: { eq: true }
-        }
-      }
-      sort: { fields: [frontmatter___date], order: DESC }
-      limit: 4
-    ) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            date(formatString: "DD/MM/YY")
-            listcolorblack
-            thumbimage {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
-          }
-          fields {
-            slug
-          }
-          excerpt
-        }
-      }
-    }
-    journals_id: allMdx(
-      filter: {
-        frontmatter: {
-          issetting: { eq: false }
-          contenttype: { eq: "journal" }
-          indonesia: { eq: true }
-          active: { eq: true }
-        }
-      }
-      sort: { fields: [frontmatter___date], order: DESC }
-      limit: 4
-    ) {
-      edges {
-        node {
-          id
-          frontmatter {
-            title
-            date(formatString: "DD/MM/YY")
-            listcolorblack
-            thumbimage {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
-          }
-          fields {
-            slug
-          }
-          excerpt
-        }
-      }
-    }
-    general: mdx(
-      frontmatter: {
-        issetting: { eq: true }
-        contenttype: { eq: "general_setting" }
-      }
-    ) {
-      frontmatter {
-        web_name
-        journaldisable
-        journalslug
-        seo {
-          seo_shortdesc_id
-        }
-        footer {
-          email
-          ig_link
-          wa_no
-        }
-      }
-    }
-    shop: mdx(
-      frontmatter: {
-        issetting: { eq: true }
-        contenttype: { eq: "homeshop_setting" }
-      }
-    ) {
-      frontmatter {
-        onlineshop {
-          onlineshoplist {
-            image {
-              childImageSharp {
-                fluid(maxWidth: 500, quality: 100) {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
-            link
-            background
-          }
-          slider_option
-        }
-        offlineshop {
-          offlineshoplist {
-            image {
-              childImageSharp {
-                fluid(maxWidth: 500, quality: 100) {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
-            link
-            background
-          }
-          slider_option
-        }
-        stockist {
-          list {
-            content
-            link
-          }
-          slider_option
-        }
-      }
-    }
-    home: mdx(
-      frontmatter: {
-        issetting: { eq: true }
-        contenttype: { eq: "home_setting" }
-      }
-    ) {
-      frontmatter {
-        title
-        home {
-          background {
+const indexQuery = graphql`{
+  journals: allMdx(
+    filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, indonesia: {eq: false}, active: {eq: true}}}
+    sort: {fields: [frontmatter___date], order: DESC}
+    limit: 4
+  ) {
+    edges {
+      node {
+        id
+        frontmatter {
+          title
+          date(formatString: "DD/MM/YY")
+          listcolorblack
+          thumbimage {
             childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
-            }
-          }
-          backgroundmobile {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
+              gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
             }
           }
         }
-        popup {
-          enable
-          always
+        fields {
+          slug
+        }
+        excerpt
+      }
+    }
+  }
+  journals_id: allMdx(
+    filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, indonesia: {eq: true}, active: {eq: true}}}
+    sort: {fields: [frontmatter___date], order: DESC}
+    limit: 4
+  ) {
+    edges {
+      node {
+        id
+        frontmatter {
+          title
+          date(formatString: "DD/MM/YY")
+          listcolorblack
+          thumbimage {
+            childImageSharp {
+              gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+            }
+          }
+        }
+        fields {
+          slug
+        }
+        excerpt
+      }
+    }
+  }
+  general: mdx(
+    frontmatter: {issetting: {eq: true}, contenttype: {eq: "general_setting"}}
+  ) {
+    frontmatter {
+      web_name
+      journaldisable
+      journalslug
+      seo {
+        seo_shortdesc_id
+      }
+      footer {
+        email
+        ig_link
+        wa_no
+      }
+    }
+  }
+  shop: mdx(
+    frontmatter: {issetting: {eq: true}, contenttype: {eq: "homeshop_setting"}}
+  ) {
+    frontmatter {
+      onlineshop {
+        onlineshoplist {
           image {
             childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
+              gatsbyImageData(
+                width: 500
+                quality: 100
+                placeholder: NONE
+                layout: CONSTRAINED
+              )
             }
           }
-          content {
+          link
+          background
+        }
+        slider_option
+      }
+      offlineshop {
+        offlineshoplist {
+          image {
+            childImageSharp {
+              gatsbyImageData(
+                width: 500
+                quality: 100
+                placeholder: NONE
+                layout: CONSTRAINED
+              )
+            }
+          }
+          link
+          background
+        }
+        slider_option
+      }
+      stockist {
+        list {
+          content
+          link
+        }
+        slider_option
+      }
+    }
+  }
+  home: mdx(
+    frontmatter: {issetting: {eq: true}, contenttype: {eq: "home_setting"}}
+  ) {
+    frontmatter {
+      title
+      home {
+        background {
+          childImageSharp {
+            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+          }
+        }
+        backgroundmobile {
+          childImageSharp {
+            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+          }
+        }
+      }
+      popup {
+        enable
+        always
+        image {
+          childImageSharp {
+            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+          }
+        }
+        content {
+          en
+          id
+        }
+        link {
+          en
+          id
+        }
+        buttontext {
+          en
+          id
+        }
+      }
+      about {
+        background {
+          childImageSharp {
+            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+          }
+        }
+        desc {
+          en
+          id
+        }
+      }
+      ingredients {
+        image {
+          childImageSharp {
+            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+          }
+        }
+        title {
+          en
+          id
+        }
+        desc {
+          en
+          id
+        }
+      }
+      translations {
+        home {
+          title {
             en
             id
           }
-          link {
+          kys {
+            en {
+              know
+              your
+              strength
+            }
+            id {
+              know
+              your
+              strength
+            }
+          }
+          getyours {
             en
             id
           }
-          buttontext {
+          shopfloat {
             en
             id
           }
         }
         about {
-          background {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
-            }
-          }
-          desc {
-            en
-            id
-          }
-        }
-        ingredients {
-          image {
-            childImageSharp {
-              fluid {
-                ...GatsbyImageSharpFluid_withWebp_noBase64
-              }
-            }
-          }
           title {
             en
             id
           }
-          desc {
+          cert {
+            natural {
+              en
+              id
+            }
+            bpom {
+              en
+              id
+            }
+            halal {
+              en
+              id
+            }
+            quality {
+              en
+              id
+            }
+            expert {
+              en
+              id
+            }
+            quadra {
+              en
+              id
+            }
+          }
+        }
+        benefits {
+          title {
+            en
+            id
+          }
+          stamina {
+            en {
+              line1
+              line2
+            }
+            id {
+              line1
+              line2
+            }
+          }
+          increases {
+            en {
+              line1
+              line2
+            }
+            id {
+              line1
+              line2
+            }
+          }
+          immune {
+            en {
+              line1
+              line2
+            }
+            id {
+              line1
+              line2
+            }
+          }
+          enhance {
+            en {
+              line1
+              line2
+            }
+            id {
+              line1
+              line2
+            }
+          }
+        }
+        ingredients {
+          title {
             en
             id
           }
         }
-        translations {
-          home {
-            title {
-              en
-              id
-            }
-            kys {
-              en {
-                know
-                your
-                strength
-              }
-              id {
-                know
-                your
-                strength
-              }
-            }
-            getyours {
-              en
-              id
-            }
-            shopfloat {
-              en
-              id
-            }
+        shop {
+          title {
+            en
+            id
           }
-          about {
-            title {
-              en
-              id
-            }
-            cert {
-              natural {
-                en
-                id
-              }
-              bpom {
-                en
-                id
-              }
-              halal {
-                en
-                id
-              }
-              quality {
-                en
-                id
-              }
-              expert {
-                en
-                id
-              }
-              quadra {
-                en
-                id
-              }
-            }
+          online {
+            en
+            id
           }
-          benefits {
-            title {
-              en
-              id
-            }
-            stamina {
-              en {
-                line1
-                line2
-              }
-              id {
-                line1
-                line2
-              }
-            }
-            increases {
-              en {
-                line1
-                line2
-              }
-              id {
-                line1
-                line2
-              }
-            }
-            immune {
-              en {
-                line1
-                line2
-              }
-              id {
-                line1
-                line2
-              }
-            }
-            enhance {
-              en {
-                line1
-                line2
-              }
-              id {
-                line1
-                line2
-              }
-            }
+          offline {
+            en
+            id
           }
-          ingredients {
-            title {
-              en
-              id
-            }
+          stockist {
+            en
+            id
           }
-          shop {
-            title {
-              en
-              id
-            }
-            online {
-              en
-              id
-            }
-            offline {
-              en
-              id
-            }
-            stockist {
-              en
-              id
-            }
+        }
+        journal {
+          title {
+            en
+            id
           }
-          journal {
-            title {
-              en
-              id
-            }
-            viewall {
-              en
-              id
-            }
+          viewall {
+            en
+            id
           }
         }
       }
     }
   }
+}
 `;
