@@ -125,12 +125,12 @@ module.exports = {
       resolve: `gatsby-transformer-remark`,
       // resolve: `gatsby-plugin-mdx`,
       options: {
-        extensions: [`.md`, `.mdx`], // highlight-line
-        gatsbyRemarkPlugins: [
-          // plugins: [
+        // extensions: [`.md`, `.mdx`], // highlight-line
+        // gatsbyRemarkPlugins: [
+          plugins: [
           {
             resolve: `gatsby-remark-relative-images`,
-            options: { staticFolderName: 'static/assets' },
+            options: { staticFolderName: 'static' },
           },
           `gatsby-remark-unwrap-images`,
           `gatsby-remark-images`,
