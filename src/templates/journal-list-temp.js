@@ -240,7 +240,7 @@ export const query = graphql`query ($skip: Int!, $limit: Int!, $indo: Boolean!) 
           listcolorblack
           thumbimage {
             childImageSharp {
-              gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
             }
           }
         }

@@ -263,7 +263,7 @@ export default class Journal extends React.Component {
               <div
                 className='markupstyle'
                 dangerouslySetInnerHTML={{
-                  __html: this.props.data.content.body,
+                  __html: this.props.data.content.html,
                 }}
               />
               {/* <div className='markupstyle'>
@@ -369,7 +369,7 @@ export const query = graphql`query ($slug: String!, $indo: Boolean!) {
           listcolorblack
           thumbimage {
             childImageSharp {
-              gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
             }
           }
         }
@@ -442,7 +442,7 @@ export const query = graphql`query ($slug: String!, $indo: Boolean!) {
     }
   }
   content: markdownRemark(fields: {slug: {eq: $slug}}) {
-    body
+    html
     id
     frontmatter {
       indonesia
@@ -452,7 +452,7 @@ export const query = graphql`query ($slug: String!, $indo: Boolean!) {
       headercolorblack
       coverimage {
         childImageSharp {
-          gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+          gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
         }
       }
       related {

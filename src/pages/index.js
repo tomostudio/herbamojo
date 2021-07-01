@@ -2310,7 +2310,7 @@ const indexQuery = graphql`{
           listcolorblack
           thumbimage {
             childImageSharp {
-              gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
             }
           }
         }
@@ -2335,7 +2335,7 @@ const indexQuery = graphql`{
           listcolorblack
           thumbimage {
             childImageSharp {
-              gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
             }
           }
         }
@@ -2374,7 +2374,7 @@ const indexQuery = graphql`{
               gatsbyImageData(
                 width: 500
                 quality: 100
-                placeholder: NONE
+                placeholder: BLURRED
                 layout: CONSTRAINED
               )
             }
@@ -2391,7 +2391,7 @@ const indexQuery = graphql`{
               gatsbyImageData(
                 width: 500
                 quality: 100
-                placeholder: NONE
+                placeholder: BLURRED
                 layout: CONSTRAINED
               )
             }
@@ -2418,12 +2418,12 @@ const indexQuery = graphql`{
       home {
         background {
           childImageSharp {
-            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
           }
         }
         backgroundmobile {
           childImageSharp {
-            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
           }
         }
       }
@@ -2432,7 +2432,7 @@ const indexQuery = graphql`{
         always
         image {
           childImageSharp {
-            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
           }
         }
         content {
@@ -2451,7 +2451,7 @@ const indexQuery = graphql`{
       about {
         background {
           childImageSharp {
-            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
           }
         }
         desc {
@@ -2462,7 +2462,7 @@ const indexQuery = graphql`{
       ingredients {
         image {
           childImageSharp {
-            gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
           }
         }
         title {
