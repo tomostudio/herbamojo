@@ -7,14 +7,16 @@ popup:
   always: true
   image: /assets/popup_bg.png
   content:
-    en: Get to know the characteristics of a genuine Herbamojo product right here.
-    id: Kenali ciri-ciri produk resmi Herbamojo di sini.
+    en: |
+      NEW! Herbamojo Small Pack (30 Capsules)
+    id: |
+      Baru! Herbamojo Small Pack (30 Kapsul)
   buttontext:
-    en: TO AUTHENTICATION PAGE
-    id: TO AUTHENTICATION PAGE
+    en: CLICK HERE TO SHOP ORIGINAL PRODUCT
+    id: KLIK DISINI UNTUK BELANJA PRODUK ORIGINAL
   link:
-    en: /authentication
-    id: /id/autentikasi
+    en: https://herbamojo.id/
+    id: https://herbamojo.id/
 home:
   background: /assets/herbamojo_homebg.jpg
   backgroundmobile: /assets/herbamojo_productshot3.jpg

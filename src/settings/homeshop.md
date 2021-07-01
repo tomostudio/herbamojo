@@ -16,6 +16,9 @@ onlineshop:
     - image: /assets/bukalapak-1.png
       link: https://www.bukalapak.com/u/herbamojoofficialshop
       background: transparent
+    - image: /assets/logo-sehatq-01.png
+      link: https://toko.sehatq.com/merchant/herbamojo-official-shop
+      background: transparent
   slider_option: NORMAL
 offlineshop:
   offlineshoplist:
@@ -43,7 +46,10 @@ offlineshop:
     - image: /assets/setiabudhi-supermarket.png
       link: ""
       background: transparent
-  slider_option: NORMAL
+    - image: /assets/growell-logo.png
+      link: https://www.instagram.com/growellwholefoods/?hl=en
+      background: transparent
+  slider_option: NOSLIDER
 stockist:
   list:
     - link: https://www.tokopedia.com/numicenter/60-kap-herba-mojo-500mg-herbana-relief-sari-brnhrb015-herbana
@@ -56,21 +62,17 @@ stockist:
       content: Jagapati
     - link: https://tokoorganic.shop/products/2287624/herba-mojo-60capsule-__-herbana
       content: Toko Organik
-    - link: ""
-      content: Peppermint
     - link: https://www.tokopedia.com/kebunkita/herbamojo-60-kapsul
       content: Kebun Kita
     - link: https://www.tokopedia.com/vitamindiskon/herbamojo-untuk-membantu-memelihara-stamina-pria-60-caps
       content: Karuna
     - link: https://www.tokopedia.com/vitamindiskon/herbamojo-untuk-membantu-memelihara-stamina-pria-60-caps
       content: Vitamin Diskon
-    - link: ""
-      content: Naked Inc
-    - link: ""
-      content: Apotek Bugar
-    - link: ""
-      content: Apotek Jaya Sentosa
     - link: https://www.tokopedia.com/gragemedherbalstore/herba-mojo-free-gift-bag-meningkatkan-kadar-testosteron-stamina?utm_source=Android&utm_source=Android&utm_medium=Share&utm_medium=Share&utm_campaign=Product%20Share&utm_campaign=Product%20Share&_branch_match_id=859427116951163873
       content: Gragemed
+    - link: https://www.asmaraku.com/collections/herbamojo
+      content: Asmaraku
+    - link: https://www.tokopedia.com/chocoberry7/herbana-herbamojo-60-kapsul-obat-stamina-pria-alami-herba-mojo
+      content: Chocoberry
   slider_option: NORMAL
 ---

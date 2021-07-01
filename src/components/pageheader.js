@@ -119,7 +119,7 @@ export default class PageHeader extends React.Component {
 
 const headerQuery = graphql`
   query HeaderQuery {
-    general: mdx(
+    general: markdownRemark(
       frontmatter: {
         issetting: { eq: true }
         contenttype: { eq: "general_setting" }

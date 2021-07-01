@@ -161,7 +161,7 @@ export default class Status extends React.Component {
 
 export const query = graphql`
   query {
-    general: mdx(
+    general: markdownRemark(
       frontmatter: {
         issetting: { eq: true }
         contenttype: { eq: "general_setting" }

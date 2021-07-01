@@ -3,7 +3,7 @@ import Layout from 'components/layout';
 import Footer from 'components/footer';
 import PageHeader from 'components/pageheader';
 import { Link, graphql } from 'gatsby';
-import Img from 'gatsby-image';
+import { GatsbyImage } from "gatsby-plugin-image";
 
 //UTILS
 import { LoaderClass } from 'utils/loader';
@@ -175,14 +175,10 @@ export default class JournalList extends React.Component {
                           <span>{journal.node.frontmatter.date}</span>
                           <h2>{journal.node.frontmatter.title}</h2>
                         </div>
-                        <Img
-                          fluid={
-                            journal.node.frontmatter.thumbimage.childImageSharp
-                              .fluid
-                          }
+                        <GatsbyImage
+                          image={journal.node.frontmatter.thumbimage.childImageSharp.gatsbyImageData}
                           fadeIn={false}
-                          loading='eager'
-                        />
+                          loading='eager' />
                       </Link>
                     );
                   })}
@@ -215,58 +211,45 @@ export default class JournalList extends React.Component {
   }
 }
 
-export const query = graphql`
-  query($skip: Int!, $limit: Int!, $indo: Boolean!) {
-    general: mdx(
-      frontmatter: {
-        issetting: { eq: true }
-        contenttype: { eq: "general_setting" }
-      }
-    ) {
-      frontmatter {
-        journalslug
-        navigation {
-          journal {
-            en
-            id
-          }
-        }
-      }
-    }
-    journals: allMdx(
-      filter: {
-        frontmatter: {
-          issetting: { eq: false }
-          contenttype: { eq: "journal" }
-          indonesia: { eq: $indo }
-          active: { eq: true }
-        }
-      }
-      sort: { fields: [frontmatter___date], order: DESC }
-      limit: $limit
-      skip: $skip
-    ) {
-      edges {
-        node {
+export const query = graphql`query ($skip: Int!, $limit: Int!, $indo: Boolean!) {
+  general: markdownRemark(
+    frontmatter: {issetting: {eq: true}, contenttype: {eq: "general_setting"}}
+  ) {
+    frontmatter {
+      journalslug
+      navigation {
+        journal {
+          en
           id
-          frontmatter {
-            title
-            date(formatString: "DD/MM/YY")
-            listcolorblack
-            thumbimage {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp_noBase64
-                }
-              }
-            }
-          }
-          fields {
-            slug
-          }
-          excerpt
         }
       }
     }
   }
+  journals: allMarkdownRemark(
+    filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, indonesia: {eq: $indo}, active: {eq: true}}}
+    sort: {fields: [frontmatter___date], order: DESC}
+    limit: $limit
+    skip: $skip
+  ) {
+    edges {
+      node {
+        id
+        frontmatter {
+          title
+          date(formatString: "DD/MM/YY")
+          listcolorblack
+          thumbimage {
+            childImageSharp {
+              gatsbyImageData(placeholder: NONE, layout: FULL_WIDTH)
+            }
+          }
+        }
+        fields {
+          slug
+        }
+        excerpt
+      }
+    }
+  }
+}
 `;
