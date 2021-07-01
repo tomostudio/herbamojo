@@ -11,7 +11,7 @@ export default class Layout extends React.Component {
       <StaticQuery
         query={graphql`
           query LayoutQuery {
-            mdx(
+            markdownRemark(
               frontmatter: {
                 issetting: { eq: true }
                 contenttype: { eq: "general_setting" }
@@ -32,7 +32,7 @@ export default class Layout extends React.Component {
           }
         `}
         render={(data) => {
-          const fm_data = data.mdx.frontmatter;
+          const fm_data = data.markdownRemark.frontmatter;
           const web_name = fm_data.web_name;
 
           let seo_image = '';

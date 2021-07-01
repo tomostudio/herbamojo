@@ -945,7 +945,7 @@ export default function AuthenticationPage(props) {
 
 const autQuery = graphql`
   query {
-    general: mdx(
+    general: markdownRemark(
       frontmatter: {
         issetting: { eq: true }
         contenttype: { eq: "general_setting" }

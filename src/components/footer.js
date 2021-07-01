@@ -102,7 +102,7 @@ export default class Footer extends React.Component {
 
 const footerQuery = graphql`
   query FooterQuery {
-    general: mdx(
+    general: markdownRemark(
       frontmatter: {
         issetting: { eq: true }
         contenttype: { eq: "general_setting" }

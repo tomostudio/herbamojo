@@ -63,7 +63,6 @@ module.exports = {
     //   },
     // },
     `gatsby-plugin-remove-serviceworker`,
-    `gatsby-plugin-netlify-cache`,
     `gatsby-plugin-react-helmet`,
     {
       resolve: `gatsby-plugin-sass`,
@@ -123,8 +122,8 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     {
-      // resolve: `gatsby-transformer-remark`,
-      resolve: `gatsby-plugin-mdx`,
+      resolve: `gatsby-transformer-remark`,
+      // resolve: `gatsby-plugin-mdx`,
       options: {
         extensions: [`.md`, `.mdx`], // highlight-line
         gatsbyRemarkPlugins: [

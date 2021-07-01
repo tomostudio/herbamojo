@@ -27,7 +27,6 @@
     "gatsby-plugin-manifest": "^3.8.0",
     "gatsby-plugin-mdx": "^2.8.0",
     "gatsby-plugin-netlify": "^3.8.0",
-    "gatsby-plugin-netlify-cache": "^2.0.0",
     "gatsby-plugin-netlify-cms": "^5.8.0",
     "gatsby-plugin-offline": "^4.8.0",
     "gatsby-plugin-preload-fonts": "^2.8.0",

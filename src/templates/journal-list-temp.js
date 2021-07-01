@@ -212,7 +212,7 @@ export default class JournalList extends React.Component {
 }
 
 export const query = graphql`query ($skip: Int!, $limit: Int!, $indo: Boolean!) {
-  general: mdx(
+  general: markdownRemark(
     frontmatter: {issetting: {eq: true}, contenttype: {eq: "general_setting"}}
   ) {
     frontmatter {
@@ -225,7 +225,7 @@ export const query = graphql`query ($skip: Int!, $limit: Int!, $indo: Boolean!) 
       }
     }
   }
-  journals: allMdx(
+  journals: allMarkdownRemark(
     filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, indonesia: {eq: $indo}, active: {eq: true}}}
     sort: {fields: [frontmatter___date], order: DESC}
     limit: $limit

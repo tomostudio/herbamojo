@@ -185,7 +185,7 @@ exports.createPages = ({ graphql, actions }) => {
     resolve(
       graphql(`
         {
-          all: allMdx(
+          all: allmarkdownRemark(
             filter: { frontmatter: { issetting: { eq: false } } }
             sort: { fields: [frontmatter___date], order: DESC }
           ) {
@@ -204,7 +204,7 @@ exports.createPages = ({ graphql, actions }) => {
               }
             }
           }
-          slug_setting: mdx(
+          slug_setting: markdownRemark(
             frontmatter: {
               issetting: { eq: true }
               contenttype: { eq: "slug_setting" }

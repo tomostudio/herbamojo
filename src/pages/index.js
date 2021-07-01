@@ -2296,7 +2296,7 @@ export default class Home extends React.Component {
 }
 
 const indexQuery = graphql`{
-  journals: allMdx(
+  journals: allMarkdownRemark(
     filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, indonesia: {eq: false}, active: {eq: true}}}
     sort: {fields: [frontmatter___date], order: DESC}
     limit: 4
@@ -2321,7 +2321,7 @@ const indexQuery = graphql`{
       }
     }
   }
-  journals_id: allMdx(
+  journals_id: allMarkdownRemark(
     filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, indonesia: {eq: true}, active: {eq: true}}}
     sort: {fields: [frontmatter___date], order: DESC}
     limit: 4
@@ -2346,7 +2346,7 @@ const indexQuery = graphql`{
       }
     }
   }
-  general: mdx(
+  general: markdownRemark(
     frontmatter: {issetting: {eq: true}, contenttype: {eq: "general_setting"}}
   ) {
     frontmatter {
@@ -2363,7 +2363,7 @@ const indexQuery = graphql`{
       }
     }
   }
-  shop: mdx(
+  shop: markdownRemark(
     frontmatter: {issetting: {eq: true}, contenttype: {eq: "homeshop_setting"}}
   ) {
     frontmatter {
@@ -2410,7 +2410,7 @@ const indexQuery = graphql`{
       }
     }
   }
-  home: mdx(
+  home: markdownRemark(
     frontmatter: {issetting: {eq: true}, contenttype: {eq: "home_setting"}}
   ) {
     frontmatter {

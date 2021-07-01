@@ -260,15 +260,15 @@ export default class Journal extends React.Component {
           </section>
           <section className='markupcontent'>
             <div className='wrapper'>
-              {/* <div
+              <div
                 className='markupstyle'
                 dangerouslySetInnerHTML={{
                   __html: this.props.data.content.body,
                 }}
-              /> */}
-              <div className='markupstyle'>
+              />
+              {/* <div className='markupstyle'>
                 <MDXRenderer>{this.props.data.content.body}</MDXRenderer>
-              </div>
+              </div> */}
             </div>
           </section>
           {!onlyarticle && (
@@ -354,7 +354,7 @@ export default class Journal extends React.Component {
 }
 
 export const query = graphql`query ($slug: String!, $indo: Boolean!) {
-  journals: allMdx(
+  journals: allMarkdownRemark(
     limit: 2
     filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, active: {eq: true}, indonesia: {eq: $indo}}, fields: {slug: {ne: $slug}}}
     sort: {fields: [frontmatter___date], order: DESC}
@@ -380,7 +380,7 @@ export const query = graphql`query ($slug: String!, $indo: Boolean!) {
       }
     }
   }
-  alljournals: allMdx(
+  alljournals: allMarkdownRemark(
     filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, active: {eq: true}, indonesia: {eq: $indo}}}
     sort: {fields: [frontmatter___date], order: DESC}
   ) {
@@ -406,7 +406,7 @@ export const query = graphql`query ($slug: String!, $indo: Boolean!) {
       }
     }
   }
-  general: mdx(
+  general: markdownRemark(
     frontmatter: {issetting: {eq: true}, contenttype: {eq: "general_setting"}}
   ) {
     frontmatter {
@@ -441,7 +441,7 @@ export const query = graphql`query ($slug: String!, $indo: Boolean!) {
       }
     }
   }
-  content: mdx(fields: {slug: {eq: $slug}}) {
+  content: markdownRemark(fields: {slug: {eq: $slug}}) {
     body
     id
     frontmatter {
