@@ -69,8 +69,8 @@ auttranslation:
     id: KAPSUL
   section1info:
     info1:
-      en: Hologram Seal
-      id: Segel Hologram
+      en: Hologram Seal (with deltomed logo pattern)
+      id: Segel Hologram (dengan pola logo deltomed)
     info2:
       en: Contains Jamu Logo
       id: Memiliki Logo Jamu
