@@ -21,7 +21,7 @@ main.home {
       display: grid;
       grid-template-columns: 1fr 1fr;
       grid-template-rows: 1fr;
-      grid-template-areas: 'left right';
+      grid-template-areas: "left right";
       pointer-events: none;
 
       & > *:first-child {
@@ -67,18 +67,13 @@ main.home {
             }
             @include respond-to(height_mid) {
               // margin-bottom: 25px;
-              margin-bottom: calc(
-                (100vh - (36px * 6) - (#{$global-padding} * 2.5) - (55px * 3)) /
-                  5
-              );
+              margin-bottom: calc((100vh - (36px * 6) - (#{$global-padding} * 2.5) - (55px * 3)) / 5);
               &:last-child {
                 margin-bottom: 0px;
               }
             }
             @include respond-to(height_less) {
-              margin-bottom: calc(
-                (100vh - (36px * 6) - (#{$global-padding} * 2)) / 5
-              );
+              margin-bottom: calc((100vh - (36px * 6) - (#{$global-padding} * 2)) / 5);
               &:last-child {
                 margin-bottom: 0px;
               }
@@ -116,7 +111,7 @@ main.home {
               line-height: $lineheight-button;
               text-align: right;
               position: absolute;
-              font-family: 'Amarillo';
+              font-family: "Amarillo";
               pointer-events: none;
               top: 50%;
               left: auto;
@@ -223,9 +218,7 @@ main.home {
     opacity: 0;
 
     body.loaded & {
-      @include transition(
-        opacity #{$initialTranstionHome} #{$initialAnimDelayHome}
-      );
+      @include transition(opacity #{$initialTranstionHome} #{$initialAnimDelayHome});
       opacity: 1;
     }
   }
@@ -264,7 +257,7 @@ main.home {
         margin: 0px;
         font-size: $font-size-title;
         letter-spacing: $letterspacing-title;
-        font-family: 'Amarillo';
+        font-family: "Amarillo";
         line-height: $lineheight-title;
 
         @include respond-to(m_tablet) {
@@ -283,7 +276,7 @@ main.home {
       & h2 {
         margin: 0px;
         font-size: $font-size-heading2;
-        font-family: 'Amarillo';
+        font-family: "Amarillo";
         line-height: $lineheight-heading2;
 
         @include respond-to(m_tablet) {
@@ -320,16 +313,10 @@ main.home {
           @include respond-to(m_tablet) {
             width: calc(100% - #{$globalmobile-padding * 2});
             margin: $sectionmobilespacing auto 0px;
-            padding-bottom: math.div($sectionmobilespacing,2);
+            padding-bottom: math.div($sectionmobilespacing, 2);
           }
           @include respond-to(height_less) {
-            @include setflex(
-              column,
-              nowrap,
-              flex-start,
-              flex-start,
-              flex-start
-            );
+            @include setflex(column, nowrap, flex-start, flex-start, flex-start);
             &::after {
               display: none;
             }
@@ -347,11 +334,11 @@ main.home {
       }
 
       & > .content.half {
-        width: calc(50% + math.div($home-offcenter,2));
-        padding-right: math.div($global-padding,2);
+        width: calc(50% + #{math.div($home-offcenter, 2)});
+        padding-right: math.div($global-padding, 2);
 
         @include respond-to(tablet) {
-          width: calc(50% + math.div($home-offcenter-t,2));
+          width: calc(50% + #{math.div($home-offcenter-t, 2)});
         }
 
         @include respond-to(m_tablet) {
@@ -468,7 +455,7 @@ main.home {
 
           & > span {
             display: inline-block;
-            font-family: 'Amarillo';
+            font-family: "Amarillo";
             margin-right: 10px;
             font-size: 120px;
             line-height: 90%;
@@ -505,7 +492,7 @@ main.home {
           }
 
           & #GetButton {
-            font-family: 'Amarillo';
+            font-family: "Amarillo";
             position: absolute;
             left: 0px;
             cursor: pointer;
@@ -518,11 +505,7 @@ main.home {
             color: $color_green;
             font-size: 30px;
             line-height: 28px;
-            @include transition(
-              border $global-transition,
-              color $global-transition,
-              background $global-transition
-            );
+            @include transition(border $global-transition, color $global-transition, background $global-transition);
 
             @include respond-to(m_tablet) {
               position: relative;
@@ -650,15 +633,11 @@ main.home {
         & > .wrapper > .content {
           @for $i from 1 through 3 {
             & > span:nth-child(#{$i}) {
-              @include transition(
-                opacity $_transition #{$initdelay + ($i * $eachdelay)}
-              );
+              @include transition(opacity $_transition #{$initdelay + ($i * $eachdelay)});
               opacity: 1;
 
               @include respond-to(m_tablet) {
-                @include transition(
-                  opacity $_transition #{$initdelaymobile + ($i * $eachdelay)}
-                );
+                @include transition(opacity $_transition #{$initdelaymobile + ($i * $eachdelay)});
               }
             }
           }
@@ -692,9 +671,7 @@ main.home {
           @include transform(translate(0, 0));
 
           @include respond-to(m_tablet) {
-            @include transition(
-              opacity $_transition #{$initdelaymobile + (5 * $eachdelay)}
-            );
+            @include transition(opacity $_transition #{$initdelaymobile + (5 * $eachdelay)});
           }
         }
       }
@@ -824,7 +801,7 @@ main.home {
           display: block;
           margin-top: 35px;
           color: white;
-          font-family: 'Maison Mono';
+          font-family: "Maison Mono";
           font-size: 15px;
           line-height: 180%;
 
@@ -914,7 +891,7 @@ main.home {
               display: block;
               margin-top: 10px;
               text-align: center;
-              font-family: 'Amarillo';
+              font-family: "Amarillo";
               font-size: 9px;
               line-height: 140%;
               color: white;
@@ -965,47 +942,33 @@ main.home {
         & .content.half {
           & > .logo {
             opacity: 1;
-            @include transition(
-              opacity $_transition #{$initdelay + (0 * $eachdelay)}
-            );
+            @include transition(opacity $_transition #{$initdelay + (0 * $eachdelay)});
           }
 
           & > .bottle {
             opacity: 1;
-            @include transition(
-              opacity $_transition #{$initdelay + (0 * $eachdelay)}
-            );
+            @include transition(opacity $_transition #{$initdelay + (0 * $eachdelay)});
 
             @include respond-to(m_tablet) {
-              @include transition(
-                opacity $_transition #{$initdelay + (1 * $eachdelay)}
-              );
+              @include transition(opacity $_transition #{$initdelay + (1 * $eachdelay)});
             }
           }
 
           & > .description {
             opacity: 1;
-            @include transition(
-              opacity $_transition #{$initdelay + (1 * $eachdelay)}
-            );
+            @include transition(opacity $_transition #{$initdelay + (1 * $eachdelay)});
 
             @include respond-to(m_tablet) {
-              @include transition(
-                opacity $_transition #{$initdelay + (2 * $eachdelay)}
-              );
+              @include transition(opacity $_transition #{$initdelay + (2 * $eachdelay)});
             }
           }
 
           & > .certification {
             opacity: 1;
-            @include transition(
-              opacity $_transition #{$initdelay + (2 * $eachdelay)}
-            );
+            @include transition(opacity $_transition #{$initdelay + (2 * $eachdelay)});
 
             @include respond-to(m_tablet) {
-              @include transition(
-                opacity $_transition #{$initdelay + (3 * $eachdelay)}
-              );
+              @include transition(opacity $_transition #{$initdelay + (3 * $eachdelay)});
             }
           }
         }
@@ -1031,13 +994,7 @@ main.home {
       & .content.half {
         &.flex {
           @media only screen and (max-height: 800px) {
-            @include setflex(
-              column,
-              nowrap,
-              flex-start,
-              flex-start,
-              flex-start
-            );
+            @include setflex(column, nowrap, flex-start, flex-start, flex-start);
             &::after {
               display: none;
               height: 0px;
@@ -1088,7 +1045,7 @@ main.home {
             }
 
             & > div:last-child {
-              font-family: 'Amarillo';
+              font-family: "Amarillo";
               text-align: left;
               color: white;
 
@@ -1147,15 +1104,11 @@ main.home {
             @include respond-to(not_tablet_m) {
               & > div:nth-child(#{$n + 2}),
               & > div:nth-child(#{$n + 1}) {
-                @include transition(
-                  opacity $global-transition #{($i * $eachdelay)}
-                );
+                @include transition(opacity $global-transition #{($i * $eachdelay)});
                 opacity: 1;
 
                 & > div:last-child {
-                  @include transition(
-                    opacity $_transition #{$initdelay + ($i * $eachdelay)}
-                  );
+                  @include transition(opacity $_transition #{$initdelay + ($i * $eachdelay)});
                   opacity: 1;
                 }
               }
@@ -1212,13 +1165,7 @@ main.home {
           }
           &.flex {
             @media only screen and (max-height: 800px) {
-              @include setflex(
-                column,
-                nowrap,
-                flex-start,
-                flex-start,
-                flex-start
-              );
+              @include setflex(column, nowrap, flex-start, flex-start, flex-start);
               &::after {
                 display: none;
                 height: 0px;
@@ -1235,7 +1182,7 @@ main.home {
             }
 
             &:first-child {
-              font-family: 'Amarillo';
+              font-family: "Amarillo";
               text-align: left;
               @include flex-grow(0);
               @include flex-shrink(0);
@@ -1299,7 +1246,7 @@ main.home {
                   @include respond-to(m_tablet) {
                     display: block;
                     width: 100%;
-                    font-family: 'Maison Mono';
+                    font-family: "Maison Mono";
                     font-size: 14px;
                     line-height: 120%;
                     text-align: center;
@@ -1331,9 +1278,7 @@ main.home {
                   & > div:first-child:hover {
                     & > span:nth-child(1) {
                       opacity: 0;
-                      @include transition(
-                        opacity $global-transition math.div($global-transition,3)
-                      );
+                      @include transition(opacity $global-transition #{math.div($global-transition, 3)});
                     }
 
                     & > span:nth-child(2) {
@@ -1398,7 +1343,7 @@ main.home {
               width: 100%;
 
               &:first-child {
-                font-family: 'Amarillo';
+                font-family: "Amarillo";
                 font-size: 350px;
                 line-height: 250px;
                 color: $color_green;
@@ -1407,7 +1352,7 @@ main.home {
 
               &:nth-child(2) {
                 margin-top: $global-padding;
-                font-family: 'Maison Mono';
+                font-family: "Maison Mono";
                 font-size: 18px;
                 line-height: 28px;
                 text-align: center;
@@ -1623,7 +1568,8 @@ main.home {
           width: 100%;
           @include flex-grow(1);
           @include setflex(column, nowrap, stretch, stretch, center);
-          &::before, &::after{
+          &::before,
+          &::after {
             @include pseudo;
             position: relative;
             width: 100%;
@@ -1635,9 +1581,7 @@ main.home {
             margin-top: 40px;
 
             display: grid;
-            grid-template-columns: calc((100% - #{$global-padding}) / 2) calc(
-                (100% - #{$global-padding}) / 2
-              );
+            grid-template-columns: calc((100% - #{$global-padding}) / 2) calc((100% - #{$global-padding}) / 2);
             grid-template-rows: auto 1fr;
             grid-gap: $global-padding;
             justify-items: stretch;
@@ -1681,7 +1625,7 @@ main.home {
 
               & > div.shopSlider {
                 width: 100%;
-                margin-top: math.div($global-padding,2);
+                margin-top: #{math.div($global-padding, 2)};
                 @include setflex(row, nowrap, space-between, center, center);
 
                 @include respond-to(m_tablet) {
@@ -1784,29 +1728,20 @@ main.home {
                 & .wrapper {
                   position: relative;
 
-                  width: calc(
-                    100% - #{$arrowwidth * 2} - #{$global-padding * 2}
-                  );
+                  width: calc(100% - #{$arrowwidth * 2} - #{$global-padding * 2});
                   margin: 0px #{$global-padding};
                   @include respond-to(tablet) {
                     width: calc(100% - #{$arrowwidth * 2} - #{$global-padding});
-                    margin: 0px math.div($global-padding,2);
+                    margin: 0px math.div($global-padding, 2);
                   }
                   @include respond-to(m_tablet) {
                     margin: 0px #{$globalmobile-padding + 40px};
-                    width: calc(
-                      100% - #{($mobilearrowwidth + 5px) * 2} - 40px - #{(
-                          $globalmobile-padding + 20px
-                        ) * 2}
-                    );
+                    width: calc(100% - #{($mobilearrowwidth + 5px) * 2} - 40px - #{($globalmobile-padding + 20px) * 2});
                   }
 
                   @include respond-to(mobile) {
                     margin: 0px #{$globalmobile-padding + 20px};
-                    width: calc(
-                      100% - #{$mobilearrowwidth * 2} - 40px - #{$globalmobile-padding *
-                        2}
-                    );
+                    width: calc(100% - #{$mobilearrowwidth * 2} - 40px - #{$globalmobile-padding * 2});
                   }
 
                   & *:focus {
@@ -1859,7 +1794,7 @@ main.home {
 
                 &.stockist {
                   align-self: stretch;
-                  margin-top: math.div($global-padding,2);
+                  margin-top: math.div($global-padding, 2);
                   // border: solid thin red;
                   @include respond-to(m_tablet) {
                     .arrow {
@@ -1887,7 +1822,7 @@ main.home {
 
                     & .stockist {
                       position: relative;
-                      padding: math.div($global-padding,2) 0px;
+                      padding: math.div($global-padding, 2) 0px;
                       // border: solid thin green;
                       font-size: 20px;
                       line-height: 120%;
@@ -1992,14 +1927,10 @@ main.home {
         & > .wrapper > div > .content {
           @for $i from 1 to 4 {
             & > div:nth-child(#{$i}) {
-              @include transition(
-                opacity $_transition #{(((($i - 1) * 2)) * $eachdelay)}
-              );
+              @include transition(opacity $_transition #{(((($i - 1) * 2)) * $eachdelay)});
               opacity: 1;
               @include respond-to(m_tablet) {
-                @include transition(
-                  opacity $_transition #{.2s}
-                );
+                @include transition(opacity $_transition #{0.2s});
               }
             }
           }
@@ -2031,7 +1962,7 @@ main.home {
       }
       & .viewall {
         margin: $global-padding auto 0px;
-        font-family: 'Amarillo';
+        font-family: "Amarillo";
         font-size: $font-size-button;
         line-height: $lineheight-button;
         color: white;
@@ -2122,9 +2053,7 @@ main.home {
 
       body.loaded & {
         @include transition(
-          opacity #{$initialTranstionHome} #{$initialAnimDelayHome + (
-              math.div($initialTranstionHome,2)
-            )}
+          opacity #{$initialTranstionHome} #{$initialAnimDelayHome + (math.div($initialTranstionHome, 2))}
         );
         opacity: 1;
       }
@@ -2190,7 +2119,7 @@ main.home {
           z-index: 10;
           bottom: 0px;
           @include transform(translate(-50%, 100%));
-          font-family: 'Amarillo';
+          font-family: "Amarillo";
           padding: 6px 25px;
           display: inline-block;
           color: $color_green;
@@ -2198,10 +2127,7 @@ main.home {
           line-height: 28px;
           background: $color_green;
           color: black;
-          @include transition(
-            opacity $globalslow-transition,
-            color $global-transition
-          );
+          @include transition(opacity $globalslow-transition, color $global-transition);
 
           @include respond-to(height_less) {
             bottom: 25px;
@@ -2222,9 +2148,7 @@ main.home {
       opacity: 0;
 
       body.loaded & {
-        @include transition(
-          opacity #{$initialTranstionHome} #{$initialAnimDelayHome}
-        );
+        @include transition(opacity #{$initialTranstionHome} #{$initialAnimDelayHome});
         opacity: 1;
       }
     }
@@ -2285,21 +2209,15 @@ main.home {
             @include transition(background 0s $transitionspeed);
 
             &:nth-child(1)::after {
-              @include animation(
-                mobilemenuin1 $transitionspeed ease 1 forwards
-              );
+              @include animation(mobilemenuin1 $transitionspeed ease 1 forwards);
             }
 
             &:nth-child(2)::after {
-              @include animation(
-                mobilemenuin2 $transitionspeed ease 1 forwards
-              );
+              @include animation(mobilemenuin2 $transitionspeed ease 1 forwards);
             }
 
             &:nth-child(3)::after {
-              @include animation(
-                mobilemenuin3 $transitionspeed ease 1 forwards
-              );
+              @include animation(mobilemenuin3 $transitionspeed ease 1 forwards);
             }
           }
         }
@@ -2363,16 +2281,10 @@ main.home {
               height: 100%;
               background: white;
               z-index: 5;
-              @include transition(
-                background $global-transition,
-                width $globalslow-transition 0.2s
-              );
+              @include transition(background $global-transition, width $globalslow-transition 0.2s);
 
               body:not(.menu_open) & {
-                @include transition(
-                  background $global-transition,
-                  width 0s 0.5s
-                );
+                @include transition(background $global-transition, width 0s 0.5s);
                 width: 0%;
               }
             }
@@ -2381,16 +2293,10 @@ main.home {
               @include transform(translate(-50%, -50%) rotate(-45deg));
 
               &::after {
-                @include transition(
-                  background $global-transition,
-                  width $globalslow-transition 0.4s
-                );
+                @include transition(background $global-transition, width $globalslow-transition 0.4s);
 
                 body:not(.menu_open) & {
-                  @include transition(
-                    background $global-transition,
-                    width 0s 0.5s
-                  );
+                  @include transition(background $global-transition, width 0s 0.5s);
                 }
               }
             }
@@ -2423,7 +2329,7 @@ main.home {
           // @include padding-safe-top(50px);
           font-size: 48px;
           line-height: 64px;
-          font-family: 'Amarillo';
+          font-family: "Amarillo";
           height: 100%;
           width: 100%;
           max-height: 800px;
@@ -2535,7 +2441,7 @@ main.home {
 
         & > * {
           pointer-events: auto;
-          font-family: 'Amarillo';
+          font-family: "Amarillo";
           font-size: $font-size-button;
           line-height: $lineheight-button;
           color: white;
@@ -2589,9 +2495,7 @@ main.home {
     opacity: 0;
 
     body.loaded & {
-      @include transition(
-        opacity #{$initialTranstionHome} #{$initialAnimDelayHome}
-      );
+      @include transition(opacity #{$initialTranstionHome} #{$initialAnimDelayHome});
       opacity: 1;
     }
   }
@@ -2708,7 +2612,7 @@ main.home {
             z-index: 2;
             width: 100%;
             height: 100%;
-            padding: math.div($global-padding,2);
+            padding: math.div($global-padding, 2);
             background: rgba(0, 0, 0, 0.6);
             @include setflex(column, nowrap, center, center, center);
             text-align: center;
@@ -2741,7 +2645,7 @@ main.home {
             }
             & > a {
               display: block;
-              font-family: 'Amarillo';
+              font-family: "Amarillo";
               font-size: 28px;
               line-height: 28px;
               padding: 6px 10px;
@@ -2754,11 +2658,7 @@ main.home {
                 font-size: $font-size-heading3-m;
                 line-height: $lineheight-heading3-m;
               }
-              @include transition(
-                border $global-transition,
-                color $global-transition,
-                background $global-transition
-              );
+              @include transition(border $global-transition, color $global-transition, background $global-transition);
               body.onhover &:hover {
                 background: $color_green;
                 color: white;
@@ -2770,9 +2670,9 @@ main.home {
             }
             & > #PopUpClose {
               position: absolute;
-              top: math.div($global-padding,2);
+              top: math.div($global-padding, 2);
               left: auto;
-              right: math.div($global-padding,2);
+              right: math.div($global-padding, 2);
               width: 25px;
               height: 25px;
               &::before,

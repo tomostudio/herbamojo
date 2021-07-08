@@ -5,7 +5,6 @@ import PageHeader from 'components/pageheader';
 import { Link, graphql } from 'gatsby';
 import { Helmet } from 'react-helmet';
 import { GatsbyImage } from "gatsby-plugin-image";
-import { MDXRenderer } from 'gatsby-plugin-mdx';
 
 //UTILS
 import { LoaderClass } from 'utils/loader';
@@ -155,8 +154,6 @@ export default class Journal extends React.Component {
       }
       // console.log(indonesianURL);
     }
-
-    console.log(this.props.pageContext);
     let { next, prev } = this.props.pageContext;
     let onlyarticle = false;
     if (next === null && prev === null) {
@@ -266,9 +263,6 @@ export default class Journal extends React.Component {
                   __html: this.props.data.content.html,
                 }}
               />
-              {/* <div className='markupstyle'>
-                <MDXRenderer>{this.props.data.content.body}</MDXRenderer>
-              </div> */}
             </div>
           </section>
           {!onlyarticle && (

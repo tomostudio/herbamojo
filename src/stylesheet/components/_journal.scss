@@ -46,14 +46,10 @@ main.journal {
         &.journallist {
           & .__navcontainer,
           & .__journalcontainer {
-            @include transition(
-              opacity $_transition #{$initdelay + ($eachdelay)}
-            );
+            @include transition(opacity $_transition #{$initdelay + ($eachdelay)});
             opacity: 1;
             @include respond-to(m_tablet) {
-              @include transition(
-                opacity $_transition2 #{$initdelay + ($eachdelay * 1.5)}
-              );
+              @include transition(opacity $_transition2 #{$initdelay + ($eachdelay * 1.5)});
             }
           }
         }
@@ -74,7 +70,7 @@ main.journal {
             letter-spacing: $letterspacing-title-m;
             line-height: $lineheight-title-m;
             word-break: break-word;
-            font-family: 'Amarillo';
+            font-family: "Amarillo";
             margin: 0px;
           }
         }
@@ -93,7 +89,7 @@ main.journal {
       height: 0px;
       max-height: 75vh;
       padding: 0px;
-      padding-top: math.div(9,16) * 100%;
+      padding-top: math.div(9, 16) * 100%;
       color: white;
       &.black {
         color: black;
@@ -103,10 +99,10 @@ main.journal {
         padding-top: 0px;
       }
       @include respond-to(m_tablet) {
-        padding-top: math.div(10,16) * 100%;
+        padding-top: math.div(10, 16) * 100%;
       }
       @include respond-to(mobile) {
-        padding-top: math.div(12,16) * 100%;
+        padding-top: math.div(12, 16) * 100%;
       }
       & > div.gatsby-image-wrapper,
       & > picture {
@@ -157,7 +153,7 @@ main.journal {
             cursor: default;
             &:first-child {
               user-select: all;
-              font-family: 'Maison Mono';
+              font-family: "Maison Mono";
               font-size: 36px;
               line-height: 40px;
               font-weight: 300;
@@ -181,7 +177,7 @@ main.journal {
             }
             &:nth-child(2) {
               user-select: all;
-              font-family: 'Amarillo';
+              font-family: "Amarillo";
               font-size: 90px;
               line-height: 80px;
               padding-bottom: 60px;
@@ -210,7 +206,7 @@ main.journal {
               top: 50%;
               max-width: 150px;
               display: block;
-              font-family: 'Amarillo';
+              font-family: "Amarillo";
               font-size: 28px;
               line-height: 28px;
               text-align: center;
@@ -263,7 +259,7 @@ main.journal {
         }
         & h1 {
           color: inherit;
-          font-family: 'Amarillo';
+          font-family: "Amarillo";
           font-size: 48px;
           line-height: 48px;
           text-align: center;
@@ -323,10 +319,7 @@ main.journal {
             padding: 7px 25px;
             border: solid 2px $color_green;
             color: $color_green;
-            @include transition(
-              background $global-transition,
-              color $global-transition
-            );
+            @include transition(background $global-transition, color $global-transition);
             @include setflex(row, nowrap, center, center, center);
             @include respond-to(mobile) {
               min-width: 105px;
@@ -339,7 +332,7 @@ main.journal {
             }
             & > span:not(.arrow) {
               margin-right: 15px;
-              font-family: 'Amarillo';
+              font-family: "Amarillo";
               text-transform: uppercase;
               font-size: 24px;
               line-height: 24px;
@@ -409,10 +402,7 @@ main.journal {
             @include transition(opacity 0.5s, color $global-transition);
             opacity: 0;
             body.loaded & {
-              @include transition(
-                opacity $_transition #{$eachdelay * 3},
-                color $global-transition
-              );
+              @include transition(opacity $_transition #{$eachdelay * 3}, color $global-transition);
               opacity: 1;
             }
           }
@@ -490,7 +480,7 @@ main.journal {
     }
   }
   & p {
-    font-family: 'Maison Mono';
+    font-family: "Maison Mono";
     font-size: 20px;
     line-height: 34px;
     @include respond-to(tablet) {
@@ -510,7 +500,7 @@ main.journal {
   }
   & ul,
   & ol {
-    font-family: 'Maison Mono';
+    font-family: "Maison Mono";
     font-size: 20px;
     line-height: 34px;
     @include respond-to(tablet) {
@@ -567,7 +557,7 @@ main.journal {
     }
   }
   & h1 {
-    font-family: 'Amarillo';
+    font-family: "Amarillo";
     font-size: 48px;
     line-height: 48px;
     @include respond-to(mobile) {
@@ -576,7 +566,7 @@ main.journal {
     }
   }
   & h2 {
-    font-family: 'Amarillo';
+    font-family: "Amarillo";
     font-size: 40px;
     line-height: 50px;
     // margin: 40px auto;
@@ -596,7 +586,7 @@ main.journal {
     }
   }
   & blockquote {
-    font-family: 'Maison Mono';
+    font-family: "Maison Mono";
     font-style: italic;
     font-size: 24px;
     line-height: 34px;
@@ -683,7 +673,7 @@ section.journallist {
         }
         @include respond-to(m_tablet) {
           height: 0px;
-          padding-top: math.div(9,16) * 100%;
+          padding-top: math.div(9, 16) * 100%;
           min-height: 200px;
           max-height: 250px;
         }
@@ -717,7 +707,7 @@ section.journallist {
           & > span {
             margin-top: 0px;
             display: block;
-            font-family: 'Maison Mono';
+            font-family: "Maison Mono";
             font-weight: 300;
             font-size: 13px;
             line-height: 16px;
@@ -727,7 +717,7 @@ section.journallist {
             margin: 0px;
             margin-top: 10px;
             display: block;
-            font-family: 'Amarillo';
+            font-family: "Amarillo";
             font-size: $font-size-heading2;
             line-height: $lineheight-heading2;
             text-align: center;

@@ -121,6 +121,7 @@ module.exports = {
       options: {
         htmlTitle: `Content Manager | HERBAMOJO`,
         htmlFavicon: `${__dirname}/static/icon.png`,
+        includeRobots: false,
       },
     },
   ],

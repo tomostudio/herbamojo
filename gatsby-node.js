@@ -1,29 +1,4 @@
 const path = require(`path`);
-const { createFilePath } = require(`gatsby-source-filesystem`);
-
-// REMARK RELATIVE IMAGE
-const traverse = require('traverse');
-const { defaults, isString, find } = require('lodash');
-
-const slash = (path) => {
-  const isExtendedLengthPath = /^\\\\\?\\/.test(path);
-
-  if (isExtendedLengthPath) {
-    return path;
-  }
-  return path.replace(/\\/g, `/`);
-};
-
-const findMatchingFile = (src, files, options) => {
-  const result = find(files, (file) => {
-    const staticPath = slash(path.join(options.staticFolderName, src));
-    return slash(path.normalize(file.absolutePath)).endsWith(staticPath);
-  });
-  if (!result) {
-    throw `No matching file found for src "${src}" in static folder "${options.staticFolderName}". Please check static folder name and that file exists at "${options.staticFolderName}${src}". This error will probably cause a "GraphQLDocumentError" later in build. All converted field paths MUST resolve to a matching file in the "static" folder.`;
-  }
-  return result;
-};
 
 let checkstatus = false;
 let redirectObject = null;
@@ -31,43 +6,9 @@ let journalslug = 'journal';
 let journalperList = 6;
 let journaldisable = false;
 
-exports.onCreateNode = ({ node, getNode, getNodesByType, actions }) => {
-  // // REMARK RELATIVE IMAGE v2
-
-  // if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
-  //   const files = getNodesByType(`File`);
-
-  //   const directory = path.dirname(node.fileAbsolutePath);
-
-  //   const options = {
-  //     staticFolderName: 'static',
-  //     include: [],
-  //     exclude: [],
-  //   };
-  //   // Deeply iterate through frontmatter data for absolute paths
-  //   traverse(node.frontmatter).forEach(function (value) {
-  //     if (!isString(value)) return;
-  //     if (!path.isAbsolute(value) || !path.extname(value)) return;
-
-  //     let shouldTransform = options.include.length < 1;
-
-  //     if (options.include.some((a) => paths.includes(a))) {
-  //       shouldTransform = true;
-  //     }
-
-  //     if (options.exclude.some((a) => paths.includes(a))) {
-  //       shouldTransform = false;
-  //     }
-
-  //     if (!shouldTransform) return;
-
-  //     const file = findMatchingFile(value, files, options);
-  //     const newValue = path.relative(directory, file.absolutePath);
-  //     // console.log(file ? `file found ${newValue}` : 'file not found');
-
-  //     this.update(newValue);
-  //   });
-  // }
+exports.onCreateNode = (args) => {
+  const { node, getNode, getNodesByType, actions } = args;
+  // console.log(args);
 
   const { createRedirect, createNodeField } = actions;
 
@@ -133,12 +74,6 @@ exports.onCreateNode = ({ node, getNode, getNodesByType, actions }) => {
       }
     }
 
-    const filepath = createFilePath({
-      node,
-      getNode,
-      basePath: 'src/',
-    });
-
     let slug = node.frontmatter.slug;
     if (!node.frontmatter.indonesia) {
       if (node.fileAbsolutePath.includes('journal/'))
@@ -156,34 +91,11 @@ exports.onCreateNode = ({ node, getNode, getNodesByType, actions }) => {
         value: slug,
       });
     }
-    // SCHEMA EXPERIMENT
-    /* if (
-      !node.frontmatter.issetting &&
-      node.frontmatter.contenttype === 'journal'
-    ) {
-
-      // PUSH POST MANUALLY
-      actions.createNode({
-        id: createNodeId(`Journal-${node.id}`),
-        parent: node.id,
-        slug: node.fields.slug,
-        seo: node.frontmatter.seo,
-        internal: {
-          type: 'JournalMarkdown',
-          contentDigest: node.internal.contentDigest,
-        },
-      });
-    } */
-    // SCHEMA EXPERIMENT
   }
 };
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions;
-  // allMarkdownRemark(
-  return new Promise((resolve, reject) => {
-    resolve(
-      graphql(`
+exports.createPages = async ({ graphql, actions, reporter }) => {
+  const result = await graphql(`
         {
           all: allMarkdownRemark(
             filter: { frontmatter: { issetting: { eq: false } } }
@@ -221,152 +133,162 @@ exports.createPages = ({ graphql, actions }) => {
             }
           }
         }
-      `).then((result) => {
-        const results = result.data.all.edges;
-        if (!journaldisable && results.length > 1) {
-          if (result.data.slug_setting) {
-            redirectObject = result.data.slug_setting.frontmatter;
-            checkstatus = true;
-          }
+      `)
 
-          //CREATE LIST PAGE
-          const journalen = results.filter(function (data) {
-            return (
-              data.node.frontmatter.contenttype === 'journal' &&
-              data.node.frontmatter.active === true &&
-              data.node.frontmatter.indonesia === false
-            );
-          });
 
-          const journalid = results.filter(function (data) {
-            return (
-              data.node.frontmatter.contenttype === 'journal' &&
-              data.node.frontmatter.active === true &&
-              data.node.frontmatter.indonesia === true
-            );
-          });
+  if (result.errors) {
+    reporter.panicOnBuild(
+      `There was an error loading your blog posts`,
+      result.errors
+    )
+    return
+  }
 
-          journalen.forEach(({ node }, index) => {
-            let nextslug, prevslug;
-            if (index === 0) {
-              prevslug = null;
-            } else {
-              prevslug = journalen[index - 1].node.fields.slug;
-            }
-            if (index >= journalen.length - 1) {
-              nextslug = null;
-            } else {
-              nextslug = journalen[index + 1].node.fields.slug;
-            }
-            if (!journaldisable) {
-              createPage({
-                path: node.fields.slug,
-                component: path.resolve(`./src/templates/journal-temp.js`),
-                context: {
-                  slug: node.fields.slug,
-                  prev: prevslug,
-                  next: nextslug,
-                  indo: false,
-                },
-              });
-            }
-          });
+  const allResults = result.data.all.edges;
 
-          journalid.forEach(({ node }, index) => {
-            let nextslug, prevslug;
-            if (index === 0) {
-              prevslug = null;
-            } else {
-              prevslug = journalid[index - 1].node.fields.slug;
-            }
-            if (index >= journalid.length - 1) {
-              nextslug = null;
-            } else {
-              nextslug = journalid[index + 1].node.fields.slug;
-            }
-            if (!journaldisable) {
-              createPage({
-                path: node.fields.slug,
-                component: path.resolve(`./src/templates/journal-temp.js`),
-                context: {
-                  slug: node.fields.slug,
-                  prev: prevslug,
-                  next: nextslug,
-                  indo: true,
-                },
-              });
-            }
-          });
+  if (!journaldisable && allResults.length > 1) {
+    if (result.data.slug_setting) {
+      redirectObject = result.data.slug_setting.frontmatter;
+      checkstatus = true;
+    }
 
-          //GET PAGE NUMBER
-          const lengthEN = Math.ceil(journalen.length / journalperList);
-          const lengthID = Math.ceil(journalid.length / journalperList);
+    //CREATE LIST PAGE
+    const journalen = allResults.filter(function (data) {
+      return (
+        data.node.frontmatter.contenttype === 'journal' &&
+        data.node.frontmatter.active === true &&
+        data.node.frontmatter.indonesia === false
+      );
+    });
 
-          // LIST ENGLISH
-          if (lengthEN > 0) {
-            Array.from({
-              length: lengthEN,
-            }).forEach((_, i) => {
-              let listpath;
-              if (i === 0) {
-                listpath = `/${journalslug}`;
-              } else {
-                listpath = `/${journalslug}/${i + 1}`;
-              }
-              if (!journaldisable) {
-                createPage({
-                  path: listpath,
-                  component: path.resolve(
-                    './src/templates/journal-list-temp.js'
-                  ),
-                  context: {
-                    limit: journalperList,
-                    skip: i * journalperList,
-                    index: i,
-                    indo: false,
-                    slug: listpath,
-                    total: lengthEN,
-                    alttotal: lengthID,
-                  },
-                });
-              }
-            });
-          }
+    const journalid = allResults.filter(function (data) {
+      return (
+        data.node.frontmatter.contenttype === 'journal' &&
+        data.node.frontmatter.active === true &&
+        data.node.frontmatter.indonesia === true
+      );
+    });
 
-          // LIST INDONESIA
-          if (lengthID > 0) {
-            Array.from({
-              length: lengthID,
-            }).forEach((_, i) => {
-              let listpath;
-              if (i === 0) {
-                listpath = `/id/${journalslug}`;
-              } else {
-                listpath = `/id/${journalslug}/${i + 1}`;
-              }
-              if (!journaldisable) {
-                createPage({
-                  path: listpath,
-                  component: path.resolve(
-                    './src/templates/journal-list-temp.js'
-                  ),
-                  context: {
-                    limit: journalperList,
-                    skip: i * journalperList,
-                    index: i,
-                    slug: listpath,
-                    indo: true,
-                    total: lengthID,
-                    alttotal: lengthEN,
-                  },
-                });
-              }
-            });
-          }
+    journalen.forEach(({ node }, index) => {
+      let nextslug, prevslug;
+      if (index === 0) {
+        prevslug = null;
+      } else {
+        prevslug = journalen[index - 1].node.fields.slug;
+      }
+      if (index >= journalen.length - 1) {
+        nextslug = null;
+      } else {
+        nextslug = journalen[index + 1].node.fields.slug;
+      }
+      if (!journaldisable) {
+        actions.createPage({
+          path: node.fields.slug,
+          component: path.resolve(`./src/templates/journal-temp.js`),
+          context: {
+            slug: node.fields.slug,
+            prev: prevslug,
+            next: nextslug,
+            indo: false,
+          },
+        });
+      }
+    });
+
+    journalid.forEach(({ node }, index) => {
+      let nextslug, prevslug;
+      if (index === 0) {
+        prevslug = null;
+      } else {
+        prevslug = journalid[index - 1].node.fields.slug;
+      }
+      if (index >= journalid.length - 1) {
+        nextslug = null;
+      } else {
+        nextslug = journalid[index + 1].node.fields.slug;
+      }
+      if (!journaldisable) {
+        actions.createPage({
+          path: node.fields.slug,
+          component: path.resolve(`./src/templates/journal-temp.js`),
+          context: {
+            slug: node.fields.slug,
+            prev: prevslug,
+            next: nextslug,
+            indo: true,
+          },
+        });
+      }
+    });
+
+    //GET PAGE NUMBER
+    const lengthEN = Math.ceil(journalen.length / journalperList);
+    const lengthID = Math.ceil(journalid.length / journalperList);
+
+    // LIST ENGLISH
+    if (lengthEN > 0) {
+      Array.from({
+        length: lengthEN,
+      }).forEach((_, i) => {
+        let listpath;
+        if (i === 0) {
+          listpath = `/${journalslug}`;
+        } else {
+          listpath = `/${journalslug}/${i + 1}`;
         }
-      })
-    );
-  });
+        if (!journaldisable) {
+          actions.createPage({
+            path: listpath,
+            component: path.resolve(
+              './src/templates/journal-list-temp.js'
+            ),
+            context: {
+              limit: journalperList,
+              skip: i * journalperList,
+              index: i,
+              indo: false,
+              slug: listpath,
+              total: lengthEN,
+              alttotal: lengthID,
+            },
+          });
+        }
+      });
+    }
+
+    // LIST INDONESIA
+    if (lengthID > 0) {
+      Array.from({
+        length: lengthID,
+      }).forEach((_, i) => {
+        let listpath;
+        if (i === 0) {
+          listpath = `/id/${journalslug}`;
+        } else {
+          listpath = `/id/${journalslug}/${i + 1}`;
+        }
+        if (!journaldisable) {
+          actions.createPage({
+            path: listpath,
+            component: path.resolve(
+              './src/templates/journal-list-temp.js'
+            ),
+            context: {
+              limit: journalperList,
+              skip: i * journalperList,
+              index: i,
+              slug: listpath,
+              indo: true,
+              total: lengthID,
+              alttotal: lengthEN,
+            },
+          });
+        }
+      });
+    }
+  }
+
+
 };
 
 exports.onCreateWebpackConfig = ({ stage, actions }) => {

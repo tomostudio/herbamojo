@@ -1,3 +1,5 @@
+@use "sass:math";
+
 //MEDIA MIXIN
 @mixin respond-to($media) {
     //	WIDTH BREAK
@@ -5,69 +7,47 @@
         @media only screen and (max-width: $break-small) {
             @content;
         }
-    }
-
-    @else if $media==not_mobile {
+    } @else if $media==not_mobile {
         @media only screen and (min-width: $break-small) {
             @content;
         }
-    }
-
-    @else if $media==smaller {
+    } @else if $media==smaller {
         @media only screen and (max-width: $break-smaller) {
             @content;
         }
-    }
-
-    @else if $media==not_tablet {
+    } @else if $media==not_tablet {
         @media only screen and (min-width: $break-medium) {
             @content;
         }
-    }
-    @else if $media==not_tablet_m {
+    } @else if $media==not_tablet_m {
         @media only screen and (min-width: $break-middle) {
             @content;
         }
-    }
-
-
-    @else if $media==m_tablet {
+    } @else if $media==m_tablet {
         @media only screen and (max-width: $break-middle) {
             @content;
         }
-    }
-
-    @else if $media==tablet {
+    } @else if $media==tablet {
         @media only screen and (max-width: $break-medium) {
             @content;
         }
-    }
-
-    @else if $media==tablet_portrait {
+    } @else if $media==tablet_portrait {
         @media only screen and (max-width: $break-medium) and (orientation: portrait) {
             @content;
         }
-    }
-
-    @else if $media==tablet_only {
+    } @else if $media==tablet_only {
         @media only screen and (min-width: $break-small + 1) and (max-width: $break-medium + 1) {
             @content;
         }
-    }
-
-    @else if $media==desktop {
+    } @else if $media==desktop {
         @media only screen and (min-width: $break-medium + 1) and (max-width: $break-large - 1) {
             @content;
         }
-    }
-
-    @else if $media==desktop_less {
+    } @else if $media==desktop_less {
         @media only screen and (max-width: $break-large) {
             @content;
         }
-    }
-
-    @else if $media==desktop_more {
+    } @else if $media==desktop_more {
         @media only screen and (min-width: $break-large) {
             @content;
         }
@@ -75,7 +55,6 @@
 
     //	RETINA BREAK
     @else if $media==retina {
-
         @media only screen and (-webkit-min-device-pixel-ratio: 1.5),
             only screen and (min--moz-device-pixel-ratio: 1.5),
             only screen and (-o-min-device-pixel-ratio: 2/1),
@@ -84,24 +63,18 @@
             only screen and (min-resolution: 1.5dppx) {
             @content;
         }
-    }
-
-    @else if $media==retina_mobile {
-
+    } @else if $media==retina_mobile {
         @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (max-width: $break-small),
-            only screen and (min--moz-device-pixel-ratio: 1.5) and (max-width:$break-small),
+            only screen and (min--moz-device-pixel-ratio: 1.5) and (max-width: $break-small),
             only screen and (-o-min-device-pixel-ratio: 2/1) and (max-width: $break-small),
             only screen and (min-device-pixel-ratio: 1.5) and (max-width: $break-small),
             only screen and (min-resolution: 144dpi) and (max-width: $break-small),
             only screen and (min-resolution: 1.5dppx) and (max-width: $break-small) {
             @content;
         }
-    }
-
-    @else if $media==retina_not_mobile {
-
+    } @else if $media==retina_not_mobile {
         @media only screen and (-webkit-min-device-pixel-ratio: 1.5) and (min-width: $break-small),
-            only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width:$break-small),
+            only screen and (min--moz-device-pixel-ratio: 1.5) and (min-width: $break-small),
             only screen and (-o-min-device-pixel-ratio: 2/1) and (min-width: $break-small),
             only screen and (min-device-pixel-ratio: 1.5) and (min-width: $break-small),
             only screen and (min-resolution: 144dpi) and (min-width: $break-small),
@@ -127,7 +100,6 @@
             @content;
         }
     }
-
 }
 
 //BREAKPOINT SCSS
@@ -143,7 +115,8 @@
     }
 }
 
-@mixin safarionly() {}
+@mixin safarionly() {
+}
 
 @mixin transition($args...) {
     -webkit-transition: $args;
@@ -299,7 +272,7 @@
 }
 
 // rotate
-@mixin rotate ($deg) {
+@mixin rotate($deg) {
     @include transform(rotate(#{$deg}deg));
 }
 
@@ -309,17 +282,17 @@
 }
 
 // translate
-@mixin translate ($x, $y) {
+@mixin translate($x, $y) {
     @include transform(translate($x, $y));
 }
 
 // skew
-@mixin skew ($x, $y) {
+@mixin skew($x, $y) {
     @include transform(skew(#{$x}deg, #{$y}deg));
 }
 
 //transform origin
-@mixin transform-origin ($origin) {
+@mixin transform-origin($origin) {
     moz-transform-origin: $origin;
     -o-transform-origin: $origin;
     -ms-transform-origin: $origin;
@@ -329,7 +302,7 @@
 
 @mixin animation($animate...) {
     $max: length($animate);
-    $animations: '';
+    $animations: "";
 
     @for $i from 1 through $max {
         $animations: #{$animations + nth($animate, $i)};
@@ -371,11 +344,11 @@
 }
 
 @mixin filter($filter-type, $filter-amount) {
-    -webkit-filter: $filter-type+unquote('(#{$filter-amount})');
-    -moz-filter: $filter-type+unquote('(#{$filter-amount})');
-    -ms-filter: $filter-type+unquote('(#{$filter-amount})');
-    -o-filter: $filter-type+unquote('(#{$filter-amount})');
-    filter: $filter-type+unquote('(#{$filter-amount})');
+    -webkit-filter: $filter-type + unquote("(#{$filter-amount})");
+    -moz-filter: $filter-type + unquote("(#{$filter-amount})");
+    -ms-filter: $filter-type + unquote("(#{$filter-amount})");
+    -o-filter: $filter-type + unquote("(#{$filter-amount})");
+    filter: $filter-type + unquote("(#{$filter-amount})");
 }
 
 %clearfix {
@@ -400,23 +373,22 @@
     @include flex-flow(column nowrap);
 }
 
-$asset-base-path: '../';
+$asset-base-path: "../";
 
 @function asset($type, $file) {
-    @return url($asset-base-path + '/' + $type + '/' + $file);
+    @return url($asset-base-path + "/" + $type + "/" + $file);
 }
 
 @function image($file) {
-    @return asset('images', $file);
+    @return asset("images", $file);
 }
 
 @function font($file) {
-    @return asset('fonts', $file);
+    @return asset("fonts", $file);
 }
 
-
 @function formulate_time($time) {
-    @return $time+'s';
+    @return $time + "s";
 }
 
 //CUSTOM DEFAULT
@@ -438,7 +410,7 @@ $asset-base-path: '../';
     position: sticky;
 }
 
-@mixin pseudo($display: block, $pos: absolute, $content: '') {
+@mixin pseudo($display: block, $pos: absolute, $content: "") {
     content: $content;
     display: $display;
     position: $pos;
@@ -446,7 +418,7 @@ $asset-base-path: '../';
 }
 
 @mixin responsive-ratio($x, $y, $pseudo: false) {
-    $padding: unquote(($y / $x) * 100 + '%');
+    $padding: unquote((math.div($y, $x)) * 100 + "%");
 
     @if $pseudo {
         &::before {
@@ -454,9 +426,7 @@ $asset-base-path: '../';
             width: 100%;
             padding-top: $padding;
         }
-    }
-
-    @else {
+    } @else {
         padding-top: $padding;
     }
 }
@@ -525,7 +495,6 @@ $asset-base-path: '../';
     &::-webkit-scrollbar {
         display: none;
     }
-
 }
 
 //ANIMATION

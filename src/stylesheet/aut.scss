@@ -428,7 +428,7 @@ main.authentication {
                 position: relative;
               }
               &:first-child {
-                padding: 0px math.div($global-padding, 2);
+                padding: 0px #{math.div($global-padding, 2)};
                 text-align: right;
                 height: auto;
                 max-width: 250px;
