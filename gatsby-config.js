@@ -4,6 +4,18 @@ module.exports = {
     siteUrl: `https://herbamojo.id`,
   },
   plugins: [
+
+    {
+      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
+      options: {
+        excludeAssets: [`/admin`],
+        devMode: true,
+        generateStatsFile: true,
+        statsOptions: {
+          exclude: [`/admin`],
+        }
+      },
+    },
     {
       resolve: 'gatsby-source-filesystem',
       options: {
@@ -57,7 +69,6 @@ module.exports = {
         pixelId: '1710911005709446',
       },
     },
-    `gatsby-plugin-remove-trailing-slashes`,
     {
       resolve: 'gatsby-plugin-google-tagmanager',
       options: {
