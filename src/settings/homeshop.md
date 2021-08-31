@@ -76,5 +76,7 @@ stockist:
       content: Chocoberry
     - link: https://www.tokopedia.com/nutrihouseid/herbamojo-herba-mojo-meningkatkan-stamina-energi-pria-original-30-pcs
       content: ""
+    - link: https://www.tokopedia.com/warunglebaran/herbamojo-memelihara-vitalitas-stamina-pria-60-vcaps
+      content: ""
   slider_option: NORMAL
 ---
