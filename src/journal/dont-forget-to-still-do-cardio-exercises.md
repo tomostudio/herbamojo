@@ -3,8 +3,8 @@ issetting: false
 contenttype: journal
 indonesia: false
 active: true
-title: Don't forget to still do cardio exercises
-slug: dont-forget-to-still-do-cardio-exercises
+title: 5 Surefire Way to Lose Fat Gradually
+slug: 5-surefire-way-to-lose-fat-gradually
 date: 2022-01-17T03:05:09.884Z
 seo:
   seo_shortdesc: One of the many ways to maintain health is by managing your
