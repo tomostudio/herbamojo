@@ -12,7 +12,7 @@ exports.onCreateNode = (args) => {
 
   const { createRedirect, createNodeField } = actions;
 
-  if (checkstatus && redirectObject !== null && redirectObject.redirect) {
+  if (checkstatus && redirectObject !== null && redirectObject.redirectgit ) {
     redirectObject.redirect.forEach((redirectRequest) => {
       if (redirectRequest.status) {
         const __from = redirectRequest.from;
