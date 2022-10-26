@@ -2020,7 +2020,7 @@ collections:
                   hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: "redirect-to-google"',
                   pattern:
                     [
-                      '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+                      '^([a-z0-9]+(?:(-|\/)[a-z0-9]+)*){3,}$',
                       'Invalid Characters',
                     ],
                 }
@@ -2031,7 +2031,7 @@ collections:
                   hint: 'Lower Characters (a-z), Numericals (0-9), dash (-), forwardslash (/) and must not start with a /, Minimum 3 Characters, eg: External URL "https://google.com", Internal: "google"',
                   pattern:
                     [
-                      '^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$',
+                      '^([a-z0-9]+(?:(-|\.|\/)[a-z0-9]+)*){3,}$',
                       'Invalid Characters',
                     ],
                 }

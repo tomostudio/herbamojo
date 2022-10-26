@@ -12,7 +12,7 @@ exports.onCreateNode = (args) => {
 
   const { createRedirect, createNodeField } = actions;
 
-  if (checkstatus && redirectObject !== null) {
+  if (checkstatus && redirectObject !== null && redirectObject.redirect) {
     redirectObject.redirect.forEach((redirectRequest) => {
       if (redirectRequest.status) {
         const __from = redirectRequest.from;
@@ -96,52 +96,51 @@ exports.onCreateNode = (args) => {
 
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(`
-        {
-          all: allMarkdownRemark(
-            filter: { frontmatter: { issetting: { eq: false } } }
-            sort: { fields: [frontmatter___date], order: DESC }
-          ) {
-            edges {
-              node {
-                fields {
-                  slug
-                }
-                frontmatter {
-                  date
-                  issetting
-                  contenttype
-                  active
-                  indonesia
-                }
-              }
+    {
+      all: allMarkdownRemark(
+        filter: { frontmatter: { issetting: { eq: false } } }
+        sort: { fields: [frontmatter___date], order: DESC }
+      ) {
+        edges {
+          node {
+            fields {
+              slug
             }
-          }
-          slug_setting: markdownRemark(
-            frontmatter: {
-              issetting: { eq: true }
-              contenttype: { eq: "slug_setting" }
-            }
-          ) {
             frontmatter {
-              title
+              date
               issetting
-              redirect {
-                from
-                to
-                status
-              }
+              contenttype
+              active
+              indonesia
             }
           }
         }
-      `)
-
+      }
+      slug_setting: markdownRemark(
+        frontmatter: {
+          issetting: { eq: true }
+          contenttype: { eq: "slug_setting" }
+        }
+      ) {
+        frontmatter {
+          title
+          issetting
+          redirect {
+            from
+            to
+            status
+          }
+        }
+      }
+    }
+  `);
 
   if (result.errors) {
     reporter.panicOnBuild(
       `There was an error loading your blog posts`,
       result.errors
-    )
-    return
+    );
+    return;
   }
 
   const allResults = result.data.all.edges;
@@ -239,9 +238,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         if (!journaldisable) {
           actions.createPage({
             path: listpath,
-            component: path.resolve(
-              './src/templates/journal-list-temp.js'
-            ),
+            component: path.resolve('./src/templates/journal-list-temp.js'),
             context: {
               limit: journalperList,
               skip: i * journalperList,
@@ -270,9 +267,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         if (!journaldisable) {
           actions.createPage({
             path: listpath,
-            component: path.resolve(
-              './src/templates/journal-list-temp.js'
-            ),
+            component: path.resolve('./src/templates/journal-list-temp.js'),
             context: {
               limit: journalperList,
               skip: i * journalperList,
@@ -287,8 +282,6 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
       });
     }
   }
-
-
 };
 
 exports.onCreateWebpackConfig = ({ stage, actions }) => {
