@@ -2,5 +2,8 @@
 issetting: true
 contenttype: slug_setting
 title: URL Redirect
-redirect: []
+redirect: 
+- from: herbamojo
+  to: https://herbamojo.id
+  status: false
 ---
