@@ -19,6 +19,9 @@ onlineshop:
     - image: /assets/logo-sehatq-01.png
       link: https://toko.sehatq.com/merchant/herbamojo-official-shop
       background: transparent
+    - image: /assets/favo-logo-09-1-1-.png
+      link: https://favo.id/collections/herbamojo
+      background: transparent
   slider_option: NORMAL
 offlineshop:
   offlineshoplist:
@@ -70,8 +73,8 @@ stockist:
       content: Vitamin Diskon
     - link: https://www.tokopedia.com/gragemedherbalstore/herba-mojo-free-gift-bag-meningkatkan-kadar-testosteron-stamina?utm_source=Android&utm_source=Android&utm_medium=Share&utm_medium=Share&utm_campaign=Product%20Share&utm_campaign=Product%20Share&_branch_match_id=859427116951163873
       content: Gragemed
-    - link: https://www.asmaraku.com/collections/herbamojo
-      content: Asmaraku
+    - link: https://favo.id/collections/herbamojo
+      content: Favo
     - link: https://www.tokopedia.com/chocoberry7/herbana-herbamojo-60-kapsul-obat-stamina-pria-alami-herba-mojo
       content: Chocoberry
     - link: https://www.tokopedia.com/nutrihouseid/herbamojo-herba-mojo-meningkatkan-stamina-energi-pria-original-30-pcs
