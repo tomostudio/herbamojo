@@ -7,10 +7,9 @@ popup:
   always: true
   image: /assets/popup_bg.png
   content:
-    en: |
-      NEW! Herbamojo Small Pack (30 Capsules)
+    en: Shop Original Herbamojo + Special Promo
     id: |
-      Baru! Herbamojo Small Pack (30 Kapsul)
+      Beli Herbamojo Original + Promo Spesial
   buttontext:
     en: CLICK HERE TO SHOP ORIGINAL PRODUCT
     id: KLIK DISINI UNTUK BELANJA PRODUK ORIGINAL
