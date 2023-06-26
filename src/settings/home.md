@@ -14,8 +14,8 @@ popup:
     en: CLICK HERE TO SHOP ORIGINAL PRODUCT
     id: KLIK DISINI UNTUK BELANJA PRODUK ORIGINAL
   link:
-    en: https://herbamojo.id/
-    id: https://herbamojo.id/
+    en: https://www.tokopedia.com/herbamojo
+    id: https://www.tokopedia.com/herbamojo
 home:
   background: /assets/herbamojo_homebg.jpg
   backgroundmobile: /assets/herbamojo_productshot3.jpg
