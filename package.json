@@ -10,6 +10,7 @@
     "gatsby": "^3.9.0",
     "gatsby-plugin-facebook-pixel": "^1.0.8",
     "gatsby-plugin-google-analytics": "^3.9.0",
+    "gatsby-plugin-google-gtag": "^5.11.0",
     "gatsby-plugin-google-tagmanager": "^3.9.0",
     "gatsby-plugin-image": "^1.9.0",
     "gatsby-plugin-layout": "^2.9.0",

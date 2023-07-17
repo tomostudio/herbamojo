@@ -4,7 +4,6 @@ module.exports = {
     siteUrl: `https://herbamojo.id`,
   },
   plugins: [
-
     {
       resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
       options: {
@@ -13,7 +12,7 @@ module.exports = {
         generateStatsFile: true,
         statsOptions: {
           exclude: [`/admin`],
-        }
+        },
       },
     },
     {
@@ -49,7 +48,7 @@ module.exports = {
     {
       resolve: `gatsby-plugin-sass`,
       options: {
-        implementation: require("sass"),
+        implementation: require('sass'),
       },
     },
     `gatsby-plugin-layout`,
@@ -57,10 +56,12 @@ module.exports = {
       resolve: `gatsby-plugin-sitemap`,
     },
     {
-      resolve: `gatsby-plugin-google-analytics`,
+      resolve: `gatsby-plugin-google-gtag`,
       options: {
-        trackingId: 'G-YEZH9B3PDQ',
-        exclude: ['/@deploystatus'],
+        trackingId: ['G-YEZH9B3PDQ'],
+        pluginConfig: {
+          exclude: ['/@deploystatus'],
+        },
       },
     },
     {
