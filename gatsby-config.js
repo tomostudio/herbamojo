@@ -61,6 +61,7 @@ module.exports = {
         trackingId: ['G-YEZH9B3PDQ'],
         pluginConfig: {
           exclude: ['/@deploystatus'],
+          head: true,
         },
       },
     },
