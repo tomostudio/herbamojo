@@ -30,56 +30,63 @@ about:
       imun, dan performa secara optimal.
 ingredients:
   - desc:
-      en: Ginseng works to support stamina, increase energy and boost immunity.
-      id: Ginseng berkhasiat untuk meningkatkan stamina, energi dan imun tubuh.
+      en: Ginseng works to support stamina, increase energy and boost immunity - 100
+        mg Ginseng Extract
+      id: "Ginseng berkhasiat untuk meningkatkan stamina, energi dan imun tubuh - 100
+        mg Ekstrak Ginseng "
     image: /assets/ginseng.jpg
     title:
       en: GINSENG
       id: GINSENG
   - desc:
-      en: Red Ginger works to improve blood circulation and increase energy
+      en: Red Ginger works to improve blood circulation and increase energy - 25 mg
+        Red Ginger Extract
       id: Jahe merah berkhasiat untuk melancarkan peredaran darah dan meningkatkan
-        energi.
+        energi - 25 mg Ekstrak Jahe Merah
     image: /assets/jahe_merah.jpg
     title:
       en: RED GINGER
       id: JAHE MERAH
   - desc:
-      en: Tribulus works to support male stamina.
-      id: Tribulus berkhasiat untuk meningkatkan stamina pria.
+      en: Tribulus works to support male stamina - 100 mg Tribulus Extract
+      id: "Tribulus berkhasiat untuk meningkatkan stamina pria - 100 mg Ekstrak
+        Tribulus "
     image: /assets/tribulus.jpg
     title:
       en: TRIBULUS
       id: TRIBULUS
   - desc:
       en: Maca works to increase energy and to support stamina. Also works as an
-        aphrodisiac.
-      id: Maca berkhasiat untuk meningkatkan energi dan stamina dan sebagai afrodisiak
+        aphrodisiac - 100 mg Maca Extract
+      id: "Maca berkhasiat untuk meningkatkan energi dan stamina dan sebagai
+        afrodisiak - 100 mg Ekstrak Maca "
     image: /assets/maca.jpg
     title:
       en: MACA
       id: MACA
   - desc:
       en: Long Jack works to increase energy and to support stamina. Also works as an
-        aphrodisiac.
+        aphrodisiac - 50 mg Long Jack Extract
       id: Pasak bumi berkhasiat untuk meningkatkan energi, menjaga stamina dan sebagai
-        afrodisiak
+        afrodisiak - 50 mg Ekstrak Pasak Bumi/Tongkat Ali
     image: /assets/pasak_bumi.jpg
     title:
       en: LONG JACK
       id: PASAK BUMI
   - desc:
       en: Purwoceng works to support stamina and improve muscle health. Also works as
-        an aphrodisiac.
+        an aphrodisiac - 50 mg Purwoceng Extract
       id: Purwoceng berkhasiat untuk meningkatkan stamina, menjaga kesehatan otot dan
-        sebagai afrodisiak.
+        sebagai afrodisiak - 50 mg Ekstrak Purwoceng
     image: /assets/purwoceng.jpg
     title:
       en: PURWOCENG
       id: PURWOCENG
   - desc:
-      en: Javanese Long Pepper works to increase stamina and as an aphrodisiac.
-      id: Cabe Jawa berkhasiat untuk melancarkan peredaran darah.
+      en: Javanese Long Pepper works to increase stamina and as an aphrodisiac - 25 mg
+        Javanese Long Pepper Extract
+      id: Cabe Jawa berkhasiat untuk melancarkan peredaran darah - 25 mg Ekstrak Cabe
+        Jawa
     image: /assets/cabe.jpg
     title:
       en: JAVANESE LONG PEPPER
