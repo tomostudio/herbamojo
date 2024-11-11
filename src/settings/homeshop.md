@@ -81,5 +81,7 @@ stockist:
       content: ""
     - link: https://www.tokopedia.com/warunglebaran/herbamojo-memelihara-vitalitas-stamina-pria-60-vcaps
       content: ""
+    - link: ""
+      content: Apotek Cempaka (Pekanbaru)
   slider_option: NORMAL
 ---
