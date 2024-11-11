@@ -65,6 +65,8 @@ stockist:
       content: Jagapati
     - link: https://tokoorganic.shop/products/2287624/herba-mojo-60capsule-__-herbana
       content: Toko Organik
+    - link: ""
+      content: Apotek Cempaka (Pekanbaru)
     - link: https://www.tokopedia.com/kebunkita/herbamojo-60-kapsul
       content: Kebun Kita
     - link: https://www.tokopedia.com/vitamindiskon/herbamojo-untuk-membantu-memelihara-stamina-pria-60-caps
@@ -81,7 +83,5 @@ stockist:
       content: ""
     - link: https://www.tokopedia.com/warunglebaran/herbamojo-memelihara-vitalitas-stamina-pria-60-vcaps
       content: ""
-    - link: ""
-      content: Apotek Cempaka (Pekanbaru)
   slider_option: NORMAL
 ---
