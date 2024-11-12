@@ -1,6 +1,8 @@
 import React from 'react';
 import { StaticQuery, Link, graphql } from 'gatsby';
-import lottie from 'lottie-web';
+if (typeof window !== 'undefined') {
+  var lottie = require('lottie-web');
+}
 import { Helmet } from 'react-helmet';
 import Glide from '@glidejs/glide';
 import { GatsbyImage } from "gatsby-plugin-image";

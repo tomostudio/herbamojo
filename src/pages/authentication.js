@@ -1,6 +1,8 @@
 import React, { useEffect, useState, useLayoutEffect } from 'react';
 import { StaticQuery, Link, graphql } from 'gatsby';
-import lottie from 'lottie-web';
+if (typeof window !== 'undefined') {
+  var lottie = require('lottie-web');
+}
 import Layout from 'components/layout';
 import Footer from 'components/footer';
 import 'stylesheet/aut.scss';
