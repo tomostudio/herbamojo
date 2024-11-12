@@ -522,18 +522,20 @@ export default class Home extends React.Component {
     }
 
     // SETUP LOTTIE
-    const _ap = false;
-    this.AnimObject.forEach((obj, index) => {
-      this.AnimObject[index].anim = lottie.loadAnimation({
-        container: document.querySelector(`#${this.AnimObject[index].id_name}`),
-        name: this.AnimObject[index].id_name,
-        renderer: 'svg',
-        loop: false,
-        autoplay: _ap,
-        animationData: this.AnimObject[index].animeData,
+    if (typeof window !== undefined) {
+      const _ap = false;
+      this.AnimObject.forEach((obj, index) => {
+          this.AnimObject[index].anim = lottie.loadAnimation({
+            container: document.querySelector(`#${this.AnimObject[index].id_name}`),
+            name: this.AnimObject[index].id_name,
+            renderer: 'svg',
+            loop: false,
+            autoplay: _ap,
+            animationData: this.AnimObject[index].animeData,
+          });
+          this.AnimObject[index].anim.goToAndStop(0);
       });
-      this.AnimObject[index].anim.goToAndStop(0);
-    });
+    }
     // SET POP UP
 
     // GET DATA AND LOCAL STORAGE AND SET POPUP ENABLED OR DISABLED
