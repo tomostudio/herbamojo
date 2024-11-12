@@ -207,7 +207,7 @@ export default function AuthenticationPage(props) {
     init: (props) => {
       AutBottleAnim.checkDisable(() => {
         if (!AutBottleAnim.disable) {
-          if (typeof window !== undefined) {
+          if (typeof window !== 'undefined' && typeof document !== 'undefined') {
             bottleLottie = lottie.loadAnimation({
               container: document.querySelector(`#LottieContainer`),
               name: 'Bottle Animation',
