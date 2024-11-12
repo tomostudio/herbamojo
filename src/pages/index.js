@@ -522,7 +522,7 @@ export default class Home extends React.Component {
     }
 
     // SETUP LOTTIE
-    if (typeof window !== undefined) {
+    if (typeof window !== "undefined") {
       const _ap = false;
       this.AnimObject.forEach((obj, index) => {
           this.AnimObject[index].anim = lottie.loadAnimation({
