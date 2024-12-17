@@ -55,6 +55,8 @@ offlineshop:
   slider_option: NOSLIDER
 stockist:
   list:
+    - link: https://garudagrosir.tokoa.id/produk/herbamojo-blister/1058902
+      content: Garuda Grosir Kediri
     - link: https://www.tokopedia.com/numicenter/60-kap-herba-mojo-500mg-herbana-relief-sari-brnhrb015-herbana
       content: Numi Center
     - link: https://www.tokopedia.com/houseoforganix/herbana-herba-mojo-7-60-kapsul
@@ -85,7 +87,5 @@ stockist:
       content: Warung Lebaran
     - link: https://shopee.co.id/apotekmandjur
       content: Apotek Mandjur
-    - link: https://garudagrosir.tokoa.id/produk/herbamojo-blister/1058902
-      content: Garuda Grosir Kediri
   slider_option: NORMAL
 ---
