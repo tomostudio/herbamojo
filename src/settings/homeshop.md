@@ -85,5 +85,7 @@ stockist:
       content: Warung Lebaran
     - link: https://shopee.co.id/apotekmandjur
       content: Apotek Mandjur
+    - link: https://garudagrosir.tokoa.id/produk/herbamojo-blister/1058902
+      content: Garuda Grosir Kediri
   slider_option: NORMAL
 ---
