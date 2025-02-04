@@ -3,7 +3,7 @@ issetting: false
 contenttype: journal
 indonesia: false
 active: true
-title: 5 Helpful Habits to Prevent Mental Fatigue in The New Yea
+title: 5 Helpful Habits to Prevent Mental Fatigue in The New Year
 slug: 5-helpful-habits-to-prevent-mental-fatigue-in-the-new-year
 date: 2022-01-17T03:22:23.196Z
 seo:
