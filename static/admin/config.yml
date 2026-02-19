@@ -1162,6 +1162,22 @@ collections:
                       default: '',
                       required: true,
                     }
+              - label: 'POM Info'
+                name: 'pomInfo'
+                widget: 'object'
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'text',
+                      default: '',
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'text',
+                      default: '',
+                    } 
           - label: 'Ingredients Section Setting'
             name: 'ingredients'
             widget: 'list'
