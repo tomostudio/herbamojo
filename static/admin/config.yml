@@ -1167,44 +1167,20 @@ collections:
                 widget: 'object'
                 required: true
                 fields:
-                  - label: 'English'
-                    name: 'en'
-                    widget: 'object'
-                    required: true
-                    fields:
-                    - {
-                        label: 'Row 1',
-                        name: 'row1',
-                        widget: 'text',
-                        default: '',
-                        required: true,
-                      }
-                    - {
-                        label: 'Row 2',
-                        name: 'row2',
-                        widget: 'text',
-                        default: '',
-                        required: true,
-                      } 
-                  - label: 'Indonesian'
-                    name: 'id'
-                    widget: 'object'
-                    required: true
-                    fields:
-                    - {
-                        label: 'Row 1',
-                        name: 'row1',
-                        widget: 'text',
-                        default: '',
-                        required: true,
-                      }
-                    - {
-                        label: 'Row 2',
-                        name: 'row2',
-                        widget: 'text',
-                        default: '',
-                        required: true,
-                      } 
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'text',
+                      default: '',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'text',
+                      default: '',
+                      required: true,
+                    } 
           - label: 'Ingredients Section Setting'
             name: 'ingredients'
             widget: 'list'
