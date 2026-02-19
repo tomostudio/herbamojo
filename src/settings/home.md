@@ -22,12 +22,9 @@ home:
 about:
   background: /assets/herbamojo_lifestylebg.jpg
   desc:
-    en: HERBAMOJO is a high quality herbal formula to support male stamina.
-      HERBAMOJO contains 7 key herbal ingredients that works optimally to help
-      improve energy, immunity and performance.
+    en: HERBAMOJO is a high quality herbal formula to mantain male stamina.
     id: HERBAMOJO adalah formulasi herbal berkualitas untuk meningkatkan stamina
-      pria, dengan 7 ekstrak herbal yang berkhasiat untuk meningkatkan energi,
-      imun, dan performa secara optimal.
+      pria.
 ingredients:
   - desc:
       en: Ginseng works to support stamina, increase energy and boost immunity - 100
