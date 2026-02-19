@@ -25,6 +25,13 @@ about:
     en: HERBAMOJO is a high quality herbal formula to mantain male stamina.
     id: HERBAMOJO adalah formulasi herbal berkualitas untuk meningkatkan stamina
       pria.
+  pomInfo:
+    id:
+      rowTwo: Baca aturan pakai, Baca peringatan perhatian.
+      rowOne: POM TR 182322231, POM TR 212347371
+    en:
+      rowOne: POM TR 182322231, POM TR 212347371
+      rowTwo: Read warnings and precautions before use.
 ingredients:
   - desc:
       en: Ginseng works to support stamina - 100 mg Ginseng Extract
