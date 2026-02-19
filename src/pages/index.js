@@ -1074,7 +1074,9 @@ export default class Home extends React.Component {
                           : transData.about.title.en}
                       </span>
                       <span onClick={(e) => this.mobileScroll(e)}>
-                        {this.langID ? "MANFAAT" : "BENEFITS"}
+                        {this.langID
+                              ? transData.benefits.title.id
+                              : transData.benefits.title.en}
                       </span>
                       <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
@@ -1173,7 +1175,9 @@ export default class Home extends React.Component {
                         </span>
                         <span>
                           <span>
-                            {this.langID ? "MANFAAT" : "BENEFITS"}
+                            {this.langID
+                              ? transData.benefits.title.id
+                              : transData.benefits.title.en}
                           </span>
                         </span>
                         <span>
@@ -1432,10 +1436,14 @@ export default class Home extends React.Component {
                             <div id={this.AnimObject[0].id_name} />
                             <div>
                               <span>
-                                MEMELIHARA
+                                {this.langID
+                                  ? transData.benefits.stamina.id.line1
+                                  : transData.benefits.stamina.en.line1}
                               </span>
                               <span>
-                                STAMINA PRIA
+                                {this.langID
+                                  ? transData.benefits.stamina.id.line2
+                                  : transData.benefits.stamina.en.line2}
                               </span>
                             </div>
                           </div>
@@ -2489,6 +2497,22 @@ const indexQuery = graphql`{
             quadra {
               en
               id
+            }
+          }
+        }
+        benefits {
+          title {
+            en
+            id
+          }
+          stamina {
+            en {
+              line1
+              line2
+            }
+            id {
+              line1
+              line2
             }
           }
         }
