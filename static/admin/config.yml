@@ -1162,6 +1162,25 @@ collections:
                       default: '',
                       required: true,
                     }
+              - label: 'POM Info'
+                name: 'pomInfo'
+                widget: 'object'
+                required: true
+                fields:
+                  - {
+                      label: 'English',
+                      name: 'en',
+                      widget: 'text',
+                      default: '',
+                      required: true,
+                    }
+                  - {
+                      label: 'Indonesian',
+                      name: 'id',
+                      widget: 'text',
+                      default: '',
+                      required: true,
+                    } 
           - label: 'Ingredients Section Setting'
             name: 'ingredients'
             widget: 'list'
@@ -1198,25 +1217,6 @@ collections:
                 }
               - label: 'Description'
                 name: 'desc'
-                widget: 'object'
-                required: true
-                fields:
-                  - {
-                      label: 'English',
-                      name: 'en',
-                      widget: 'text',
-                      default: '',
-                      required: true,
-                    }
-                  - {
-                      label: 'Indonesian',
-                      name: 'id',
-                      widget: 'text',
-                      default: '',
-                      required: true,
-                    }
-              - label: 'POM Info'
-                name: 'pomInfo'
                 widget: 'object'
                 required: true
                 fields:
