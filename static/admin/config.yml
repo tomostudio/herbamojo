@@ -1162,6 +1162,49 @@ collections:
                       default: '',
                       required: true,
                     }
+              - label: 'POM Info'
+                name: 'pomInfo'
+                widget: 'object'
+                required: true
+                fields:
+                  - label: 'English'
+                    name: 'en'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'Row One',
+                          name: 'rowOne',
+                          widget: 'text',
+                          default: '',
+                          required: true,
+                        }
+                      - {
+                          label: 'rowTwo',
+                          name: 'rowTwo',
+                          widget: 'text',
+                          default: '',
+                          required: true,
+                        }
+                  - label: 'Indonesian'
+                    name: 'id'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'Row One',
+                          name: 'rowOne',
+                          widget: 'text',
+                          default: '',
+                          required: true,
+                        }
+                      - {
+                          label: 'rowTwo',
+                          name: 'rowTwo',
+                          widget: 'text',
+                          default: '',
+                          required: true,
+                        }
           - label: 'Ingredients Section Setting'
             name: 'ingredients'
             widget: 'list'
@@ -1215,49 +1258,6 @@ collections:
                       default: '',
                       required: true,
                     }
-              - label: 'POM Info'
-                name: 'pomInfo'
-                widget: 'object'
-                required: true
-                fields:
-                  - label: 'English'
-                    name: 'en'
-                    widget: 'object'
-                    required: true
-                    fields:
-                      - {
-                          label: 'Row One',
-                          name: 'rowOne',
-                          widget: 'text',
-                          default: '',
-                          required: true,
-                        }
-                      - {
-                          label: 'rowTwo',
-                          name: 'rowTwo',
-                          widget: 'text',
-                          default: '',
-                          required: true,
-                        }
-                  - label: 'Indonesian'
-                    name: 'id'
-                    widget: 'object'
-                    required: true
-                    fields:
-                      - {
-                          label: 'Row One',
-                          name: 'rowOne',
-                          widget: 'text',
-                          default: '',
-                          required: true,
-                        }
-                      - {
-                          label: 'rowTwo',
-                          name: 'rowTwo',
-                          widget: 'text',
-                          default: '',
-                          required: true,
-                        }
           - label: 'Translations List'
             name: 'translations'
             widget: 'object'
