@@ -27,19 +27,16 @@ about:
       pria.
 ingredients:
   - desc:
-      en: Ginseng works to support stamina, increase energy and boost immunity - 100
-        mg Ginseng Extract
-      id: "Ginseng berkhasiat untuk meningkatkan stamina, energi dan imun tubuh - 100
-        mg Ekstrak Ginseng "
+      en: Ginseng works to support stamina - 100 mg Ginseng Extract
+      id: Ginseng berkhasiat untuk meningkatkan stamina - 100 mg Ekstrak Ginseng
     image: /assets/ginseng.jpg
     title:
       en: GINSENG
       id: GINSENG
   - desc:
-      en: Red Ginger works to improve blood circulation and increase energy - 25 mg
-        Red Ginger Extract
-      id: Jahe merah berkhasiat untuk melancarkan peredaran darah dan meningkatkan
-        energi - 25 mg Ekstrak Jahe Merah
+      en: Red Ginger works to improve blood circulation - 25 mg Red Ginger Extract
+      id: Jahe merah berkhasiat untuk melancarkan peredaran darah - 25 mg Ekstrak Jahe
+        Merah
     image: /assets/jahe_merah.jpg
     title:
       en: RED GINGER
@@ -53,28 +50,28 @@ ingredients:
       en: TRIBULUS
       id: TRIBULUS
   - desc:
-      en: Maca works to increase energy and to support stamina. Also works as an
-        aphrodisiac - 100 mg Maca Extract
-      id: "Maca berkhasiat untuk meningkatkan energi dan stamina dan sebagai
-        afrodisiak - 100 mg Ekstrak Maca "
+      en: Maca works to support stamina and works as an aphrodisiac - 100 mg Maca
+        Extract
+      id: Maca berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak - 100 mg
+        Ekstrak Maca
     image: /assets/maca.jpg
     title:
       en: MACA
       id: MACA
   - desc:
-      en: Long Jack works to increase energy and to support stamina. Also works as an
-        aphrodisiac - 50 mg Long Jack Extract
-      id: Pasak bumi berkhasiat untuk meningkatkan energi, menjaga stamina dan sebagai
-        afrodisiak - 50 mg Ekstrak Pasak Bumi/Tongkat Ali
+      en: Long Jack works to support stamina and works as an aphrodisiac - 50 mg Long
+        Jack Extract
+      id: Pasak bumi berkhasiat untuk menjaga stamina dan sebagai afrodisiak - 50 mg
+        Ekstrak Pasak Bumi/Tongkat Ali
     image: /assets/pasak_bumi.jpg
     title:
       en: LONG JACK
       id: PASAK BUMI
   - desc:
-      en: Purwoceng works to support stamina and improve muscle health. Also works as
-        an aphrodisiac - 50 mg Purwoceng Extract
-      id: Purwoceng berkhasiat untuk meningkatkan stamina, menjaga kesehatan otot dan
-        sebagai afrodisiak - 50 mg Ekstrak Purwoceng
+      en: Purwoceng works to support stamina and works as an aphrodisiac - 50 mg
+        Purwoceng Extract
+      id: Purwoceng berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak - 50
+        mg Ekstrak Purwoceng
     image: /assets/purwoceng.jpg
     title:
       en: PURWOCENG
@@ -111,8 +108,8 @@ translations:
   about:
     cert:
       bpom:
-        en: BPOM Approved
-        id: Sertifikasi BPOM
+        en: BPOM
+        id: BPOM
       expert:
         en: Expertly Researched
         id: Penelitian Ahli
@@ -120,8 +117,8 @@ translations:
         en: Halal
         id: Halal
       natural:
-        en: 100% Natural
-        id: 100% Natural
+        en: Natural
+        id: Natural
       quadra:
         en: Quadra Extraction System
         id: Quadra Extraction System
