@@ -8,12 +8,8 @@ deploy_status_password: password
 seo:
   seo_image: /assets/herbamojo_homebg.jpg
   seo_keywords: Herbamojo, Herbana, Herbal, Deltomed, Male, Suplement
-  seo_shortdesc: HERBAMOJO is a high quality herbal formula to support male
-    stamina. HERBAMOJO contains 7 key herbal ingredients that works optimally to
-    help improve energy, immunity and performance.
-  seo_shortdesc_id: HERBAMOJO adalah formulasi herbal berkualitas untuk
-    meningkatkan stamina pria, dengan 7 ekstrak herbal yang berkhasiat untuk
-    meningkatkan energi, imun, dan performa secara optimal.
+  seo_shortdesc: HERBAMOJO is a high quality herbal formula to maintain male stamina.
+  seo_shortdesc_id: HERBAMOJO adalah formulasi herbal berkualitas untuk memelihara stamina pria.
 footer:
   email: info@herbamojo.id
   ig_link: https://www.instagram.com/herbamojo
