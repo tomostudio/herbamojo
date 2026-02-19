@@ -88,10 +88,33 @@ export default class Home extends React.Component {
     stockist: 'NOSLIDER',
   };
   inviewArray = [];
+  inviewArrayBenefits = [null];
   scrollpass = [];
   scrollaxArray = [];
   popupEnable = null;
   popupAlways = false;
+  AnimObject = [
+    {
+      id_name: 'benefitstamina',
+      anim: null,
+      animeData: AnimDataStamina,
+    },
+    {
+      id_name: 'benefit_energy',
+      anim: null,
+      animeData: AnimDataEnergy,
+    },
+    {
+      id_name: 'BenefitImmune',
+      anim: null,
+      animeData: AnimDataImmune,
+    },
+    {
+      id_name: 'BenefitExercise',
+      anim: null,
+      animeData: AnimDataExercise,
+    },
+  ];
   HomeScrollSnap = null;
   SnapNav = null;
   ForceVH = null;
@@ -221,6 +244,68 @@ export default class Home extends React.Component {
             document.querySelector('section#about').classList.remove('inview');
           }
         },
+      });
+
+      //BENEFITS
+      let BenefitAnimTimeout1 = null,
+        BenefitAnimTimeout2 = null;
+      this.inviewArray[3] = new InViewportClass({
+        target: 'section#benefits',
+        visibility: 0.55,
+        enter: () => {
+          setNav(2);
+          if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
+          if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
+          if (!MediaCheck.width.mtablet()) {
+            this.AnimObject.forEach((obj, index) => {
+              if (this.AnimObject[index].anim)
+                this.AnimObject[index].anim.goToAndStop(0);
+            });
+            document.querySelector('section#benefits').classList.add('inview');
+            BenefitAnimTimeout1 = setTimeout(() => {
+              if (this.AnimObject[0].anim)
+                this.AnimObject[0].anim.goToAndPlay(0);
+              if (this.AnimObject[1].anim)
+                this.AnimObject[1].anim.goToAndPlay(0);
+            }, 250);
+            BenefitAnimTimeout2 = setTimeout(() => {
+              if (this.AnimObject[2].anim)
+                this.AnimObject[2].anim.goToAndPlay(0);
+              if (this.AnimObject[3].anim)
+                this.AnimObject[3].anim.goToAndPlay(0);
+            }, 750);
+          }
+        },
+        exit: () => {
+          document.querySelector('section#benefits').classList.remove('inview');
+          if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
+          if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
+        },
+      });
+
+      //BENEFITS MOBILE
+      const AllBenefits = document.querySelectorAll(
+        'section#benefits .content.half>div>div'
+      );
+      AllBenefits.forEach((benefit, index) => {
+        this.inviewArrayBenefits[index] = new InViewportClass({
+          target: `section#benefits .content.half>div>div:nth-child(${
+            index + 1
+          })`,
+          visibility: 0.75,
+          enter: () => {
+            if (MediaCheck.width.mtablet()) {
+              if (!benefit.classList.contains('inview')) {
+                benefit.classList.add('inview');
+                if (this.AnimObject[index].anim)
+                  this.AnimObject[index].anim.goToAndPlay(0);
+              }
+            }
+          },
+          exit: () => {
+            if (MediaCheck.width.mtablet()) benefit.classList.remove('inview');
+          },
+        });
       });
 
       //INGREDIENTS
@@ -439,6 +524,22 @@ export default class Home extends React.Component {
       this.disableScrollBody = new DisableScroll();
     }
 
+    // SETUP LOTTIE
+    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+      const _ap = false;
+      this.AnimObject.forEach((obj, index) => {
+          this.AnimObject[index].anim = lottie.loadAnimation({
+            container: document.querySelector(`#${this.AnimObject[index].id_name}`),
+            name: this.AnimObject[index].id_name,
+            renderer: 'svg',
+            loop: false,
+            autoplay: _ap,
+            animationData: this.AnimObject[index].animeData,
+          });
+          this.AnimObject[index].anim.goToAndStop(0);
+      });
+    }
+
     // SET POP UP
 
     // GET DATA AND LOCAL STORAGE AND SET POPUP ENABLED OR DISABLED
@@ -453,6 +554,16 @@ export default class Home extends React.Component {
     }
   }
   componentWillUnmount() {
+    this.inviewArrayBenefits.forEach((benefit, index) => {
+      if (
+        this.inviewArrayBenefits[index] !== null &&
+        this.inviewArrayBenefits[index] !== undefined
+      ) {
+        this.inviewArrayBenefits[index].kill();
+        this.inviewArrayBenefits[index] = null;
+      }
+    });
+    
     this.inviewArray.forEach((each, index) => {
       if (
         this.inviewArray[index] !== null &&
@@ -502,6 +613,16 @@ export default class Home extends React.Component {
     )
       clearTimeout(this.LoadAnimationTimeout);
 
+    this.AnimObject.forEach((obj, index) => {
+      if (
+        this.AnimObject[index].anim !== null &&
+        this.AnimObject[index].anim !== undefined
+      ) {
+        this.AnimObject[index].anim.stop();
+        this.AnimObject[index].anim = null;
+      }
+    });
+
     this.SnapNav.forEach((nav, index) => {
       nav.onClick = null;
     });
@@ -514,6 +635,14 @@ export default class Home extends React.Component {
     }
   }
   inviewRetrigger() {
+    this.inviewArrayBenefits.forEach((benefit, index) => {
+      if (
+        this.inviewArrayBenefits[index] !== null &&
+        this.inviewArrayBenefits[index] !== undefined
+      )
+        this.inviewArrayBenefits[index].trigger();
+    });
+
     this.inviewArray.forEach((each, index) => {
       if (
         this.inviewArray[index] !== null &&
@@ -945,6 +1074,9 @@ export default class Home extends React.Component {
                           : transData.about.title.en}
                       </span>
                       <span onClick={(e) => this.mobileScroll(e)}>
+                        {this.langID ? "MANFAAT" : "BENEFITS"}
+                      </span>
+                      <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
                           ? transData.ingredients.title.id
                           : transData.ingredients.title.en}
@@ -1037,6 +1169,11 @@ export default class Home extends React.Component {
                             {this.langID
                               ? transData.about.title.id
                               : transData.about.title.en}
+                          </span>
+                        </span>
+                        <span>
+                          <span>
+                            {this.langID ? "MANFAAT" : "BENEFITS"}
                           </span>
                         </span>
                         <span>
@@ -1281,6 +1418,28 @@ export default class Home extends React.Component {
                           alt='herbamojo'
                           loading='eager'
                           fadeIn={false} />
+                      </div>
+                    </div>
+                  </section>
+                  <section id='benefits'>
+                    <div className='wrapper'>
+                      <h1>
+                        {this.langID ? "MANFAAT" : "BENEFITS"}
+                      </h1>
+                      <div className='content half flex'>
+                        <div>
+                          <div>
+                            <div id={this.AnimObject[0].id_name} />
+                            <div>
+                              <span>
+                                MEMELIHARA
+                              </span>
+                              <span>
+                                STAMINA PRIA
+                              </span>
+                            </div>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </section>

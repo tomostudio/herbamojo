@@ -1507,6 +1507,73 @@ collections:
                               default: 'Quadra Extraction System',
                               required: true,
                             }
+              - label: 'Benefits'
+                name: 'benefits'
+                widget: 'object'
+                required: true
+                fields:
+                  - label: 'Title'
+                    name: 'title'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - {
+                          label: 'English',
+                          name: 'en',
+                          widget: 'string',
+                          default: 'Benefits',
+                          required: true,
+                        }
+                      - {
+                          label: 'Indonesian',
+                          name: 'id',
+                          widget: 'string',
+                          default: 'Benefits',
+                          required: true,
+                        }
+                  - label: 'Benefit 1 Supports Male Stamina'
+                    name: 'stamina'
+                    widget: 'object'
+                    required: true
+                    fields:
+                      - label: 'English'
+                        name: 'en'
+                        widget: 'object'
+                        required: true
+                        fields:
+                          - {
+                              label: 'Line 1',
+                              name: 'line1',
+                              widget: 'string',
+                              default: 'Supports',
+                              required: true,
+                            }
+                          - {
+                              label: 'Line 2',
+                              name: 'line2',
+                              widget: 'string',
+                              default: 'Male Stamina',
+                              required: true,
+                            }
+                      - label: 'Indonesian'
+                        name: 'id'
+                        widget: 'object'
+                        required: true
+                        fields:
+                          - {
+                              label: 'Line 1',
+                              name: 'line1',
+                              widget: 'string',
+                              default: 'Memelihara',
+                              required: true,
+                            }
+                          - {
+                              label: 'Line 2',
+                              name: 'line2',
+                              widget: 'string',
+                              default: 'Stamina Pria',
+                              required: true,
+                            }
               - label: 'Ingredients'
                 name: 'ingredients'
                 widget: 'object'

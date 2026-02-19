@@ -1024,6 +1024,156 @@ main.home {
       }
     }
 
+        &#benefits {
+      @include respond-to(m_tablet) {
+        min-height: 0px;
+      }
+
+      & .content.half {
+        &.flex {
+          @media only screen and (max-height: 800px) {
+            @include setflex(column, nowrap, flex-start, flex-start, flex-start);
+            &::after {
+              display: none;
+              height: 0px;
+            }
+          }
+        }
+        & > div {
+          width: 100%;
+          display: grid;
+          grid-template: auto auto / auto auto;
+
+          grid-gap: 10px;
+          max-width: 500px;
+
+          @include respond-to(m_tablet) {
+            // max-width: 600px;
+            margin: 0px auto;
+            grid-gap: 20px;
+            justify-items: center;
+            align-items: center;
+          }
+
+          @include respond-to(mobile) {
+            max-width: $mobileinnersection-maxwidth - 100px;
+            grid-template: auto auto auto auto / auto;
+          }
+
+          & > * {
+            width: 150px;
+            padding-bottom: 20px;
+
+            @include respond-to(m_tablet) {
+              width: 100%;
+              padding: 0px $globalmobile-padding;
+              border: solid thin transparent;
+              @include transition(all $global-transition);
+            }
+
+            & > div {
+              width: 100%;
+            }
+
+            & > div:first-child {
+              & > img,
+              & > div.gatsby-image-wrapper {
+                width: 100%;
+              }
+            }
+
+            & > div:last-child {
+              font-family: "Amarillo";
+              text-align: left;
+              color: white;
+
+              & > span:first-child {
+                font-size: 31px;
+                line-height: 29px;
+                display: block;
+              }
+
+              & > span:nth-child(2) {
+                margin-top: 5px;
+                display: block;
+                font-size: 21px;
+                line-height: 100%;
+              }
+
+              @include respond-to(m_tablet) {
+                text-align: center;
+
+                & > span:first-child {
+                  font-size: 40px;
+                  line-height: 27px;
+                }
+
+                & > span:nth-child(2) {
+                  margin-top: 10px;
+                  font-size: 17px;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      & .content.half > div {
+        & > div {
+          @include transition(opacity 0.5s);
+          opacity: 0;
+
+          & > div:last-child {
+            @include transition(opacity 0.5s);
+            opacity: 0;
+          }
+        }
+      }
+
+      body.loaded &.inview {
+        $_transition: 1s;
+        $eachdelay: 0.5;
+        $initdelay: 1s;
+
+        & .content.half > div {
+          @for $i from 0 through 1 {
+            $n: $i * 2;
+
+            @include respond-to(not_tablet_m) {
+              & > div:nth-child(#{$n + 2}),
+              & > div:nth-child(#{$n + 1}) {
+                @include transition(opacity $global-transition #{($i * $eachdelay)});
+                opacity: 1;
+
+                & > div:last-child {
+                  @include transition(opacity $_transition #{$initdelay + ($i * $eachdelay)});
+                  opacity: 1;
+                }
+              }
+            }
+          }
+        }
+      }
+
+      body.loaded & {
+        $_transition: 1s;
+
+        @include respond-to(m_tablet) {
+          & .content.half > div {
+            & > div.inview {
+              @include transition(opacity $_transition);
+              opacity: 1;
+
+              & > div:last-child {
+                @include transition(opacity $_transition 1s);
+                opacity: 1;
+              }
+            }
+          }
+        }
+      }
+    }
+
     &#ingredients {
       position: relative;
 
