@@ -1208,8 +1208,9 @@ export default class Home extends React.Component {
                             : homeData.about.desc.en}
                         </div>
                         <div className='pom-info'>
-                          POM TR 182322231, POM TR 212347371<br/>
-                          Read warnings and precautions before use.
+                          {this.langID
+                            ? homeData.about.pomInfo.id
+                            : homeData.about.pomInfo.en}
                         </div>
                         <div className='certification'>
                           <div>
@@ -2245,6 +2246,10 @@ const indexQuery = graphql`{
           }
         }
         desc {
+          en
+          id
+        }
+        pomInfo {
           en
           id
         }

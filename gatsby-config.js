@@ -116,10 +116,12 @@ module.exports = {
       resolve: `gatsby-plugin-netlify`,
       options: {
         headers: {
-          '/*': ['Cache-Control: max-age=31536000'],
+          '/*': ['Cache-Control: public, max-age=0, must-revalidate'],
+          '/page-data/*': ['Cache-Control: public, max-age=0, must-revalidate'],
+          '/static/*': ['Cache-Control: public, max-age=31536000, immutable'],
           '/assets/*': [
             // matching headers (by type) are replaced by Netlify with more specific routes
-            'Cache-Control: max-age=31536000',
+            'Cache-Control: public, max-age=31536000, immutable',
           ],
           '/journal/*': [
             // matching headers (by type) are replaced by Netlify with more specific routes
