@@ -1208,9 +1208,12 @@ export default class Home extends React.Component {
                             : homeData.about.desc.en}
                         </div>
                         <div className='pom-info'>
-                          {/* {this.langID
-                            ? homeData.about.pomInfo.id
-                            : homeData.about.pomInfo.en} */}
+                          {this.langID
+                            ? homeData.about.pomInfo.en.rowOne
+                            : homeData.about.pomInfo.en.rowOne}<br/>
+                          {this.langID
+                            ? homeData.about.pomInfo.id.rowTwo
+                            : homeData.about.pomInfo.id.rowTwo}
                         </div>
                         <div className='certification'>
                           <div>
@@ -2248,6 +2251,16 @@ const indexQuery = graphql`{
         desc {
           en
           id
+        }
+        pomInfo {
+          en {
+            rowOne
+            rowTwo
+          }
+          id {
+            rowOne
+            rowTwo
+          }
         }
       }
       ingredients {
