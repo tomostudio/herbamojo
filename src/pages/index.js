@@ -1208,9 +1208,9 @@ export default class Home extends React.Component {
                             : homeData.about.desc.en}
                         </div>
                         <div className='pom-info'>
-                          {this.langID
+                          {/* {this.langID
                             ? homeData.about.pomInfo.id
-                            : homeData.about.pomInfo.en}
+                            : homeData.about.pomInfo.en} */}
                         </div>
                         <div className='certification'>
                           <div>
@@ -2246,10 +2246,6 @@ const indexQuery = graphql`{
           }
         }
         desc {
-          en
-          id
-        }
-        pomInfo {
           en
           id
         }
