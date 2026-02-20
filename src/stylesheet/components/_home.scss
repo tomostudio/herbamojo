@@ -1024,7 +1024,7 @@ main.home {
       }
     }
 
-        &#benefits {
+    &#benefits {
       @include respond-to(m_tablet) {
         min-height: 0px;
       }
@@ -1041,8 +1041,6 @@ main.home {
         }
         & > div {
           width: 100%;
-          display: grid;
-          grid-template: auto auto / auto auto;
 
           grid-gap: 10px;
           max-width: 500px;
@@ -1055,13 +1053,7 @@ main.home {
             align-items: center;
           }
 
-          @include respond-to(mobile) {
-            max-width: $mobileinnersection-maxwidth - 100px;
-            grid-template: auto auto auto auto / auto;
-          }
-
           & > * {
-            width: 150px;
             padding-bottom: 20px;
 
             @include respond-to(m_tablet) {
@@ -1087,30 +1079,21 @@ main.home {
               text-align: left;
               color: white;
 
-              & > span:first-child {
-                font-size: 31px;
-                line-height: 29px;
+              & > span {
                 display: block;
-              }
+                font-family: "Amarillo";
+                margin-right: 10px;
+                font-size: 80px;
+                line-height: 90%;
 
-              & > span:nth-child(2) {
-                margin-top: 5px;
-                display: block;
-                font-size: 21px;
-                line-height: 100%;
-              }
-
-              @include respond-to(m_tablet) {
-                text-align: center;
-
-                & > span:first-child {
-                  font-size: 40px;
-                  line-height: 27px;
+                @include respond-to(m_tablet) {
+                  text-align: center;
+                  font-size: 60px;
                 }
 
-                & > span:nth-child(2) {
-                  margin-top: 10px;
-                  font-size: 17px;
+                @include respond-to(mobile) {
+                  text-align: center;
+                  font-size: 30px;
                 }
               }
             }

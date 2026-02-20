@@ -1433,7 +1433,6 @@ export default class Home extends React.Component {
                       <div className='content half flex'>
                         <div>
                           <div>
-                            <div id={this.AnimObject[0].id_name} />
                             <div>
                               <span>
                                 {this.langID
