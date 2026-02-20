@@ -22,9 +22,9 @@ home:
 about:
   background: /assets/herbamojo_lifestylebg.jpg
   desc:
-    en: HERBAMOJO is a high quality herbal formula to mantain male stamina.
-    id: HERBAMOJO adalah formulasi herbal berkualitas untuk meningkatkan stamina
-      pria.
+    en: Herbamojo, is a 7 high-quality herbal formula to support male stamina
+    id: Herbamojo adalah formulasi 7 ekstrak herbal berkualitas untuk memelihara
+      stamina pria
   pomInfo:
     id:
       rowTwo: Baca aturan pakai, Baca peringatan perhatian.
