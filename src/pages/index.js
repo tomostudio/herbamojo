@@ -1,78 +1,79 @@
-import React from 'react';
-import { StaticQuery, Link, graphql } from 'gatsby';
-if (typeof window !== 'undefined') {
-  var lottie = require('lottie-web');
+import React from "react";
+import { StaticQuery, Link, graphql } from "gatsby";
+if (typeof window !== "undefined") {
+  var lottie = require("lottie-web");
 }
-import { Helmet } from 'react-helmet';
-import Glide from '@glidejs/glide';
+import { Helmet } from "react-helmet";
+import Glide from "@glidejs/glide";
 import { GatsbyImage } from "gatsby-plugin-image";
 
 //UTILS
-import { ScrollSnapClass } from 'utils/scrollsnap';
-import { Scrollax } from 'utils/scrollax';
-import { ScrollIt } from 'utils/scrollit';
-import { LoaderClass } from 'utils/loader';
-import { InViewportClass, ScrollPassClass } from 'utils/inviewport';
-import { MediaCheck } from 'utils/mediacheck';
-import { ResponsiveVH } from 'utils/responsive-vh';
-import { DisableScroll } from 'utils/disablescroll';
+import { ScrollSnapClass } from "utils/scrollsnap";
+import { Scrollax } from "utils/scrollax";
+import { ScrollIt } from "utils/scrollit";
+import { LoaderClass } from "utils/loader";
+import { InViewportClass, ScrollPassClass } from "utils/inviewport";
+import { MediaCheck } from "utils/mediacheck";
+import { ResponsiveVH } from "utils/responsive-vh";
+import { DisableScroll } from "utils/disablescroll";
 
 //COMPONENTS
-import Layout from 'components/layout';
-import Footer from 'components/footer';
-import MobileHomeHeader from 'components/mobilehomeheader';
+import Layout from "components/layout";
+import Footer from "components/footer";
+import MobileHomeHeader from "components/mobilehomeheader";
 
 //JS SVG
-import InstagramSVG from 'svg/instagram.js';
-import EmailSVG from 'svg/email.js';
-import WhatsappSVG from 'svg/whatsapp.js';
-import { Arrow, ArrowSmaller } from 'svg/symbols.js';
+import InstagramSVG from "svg/instagram.js";
+import EmailSVG from "svg/email.js";
+import WhatsappSVG from "svg/whatsapp.js";
+import { Arrow, ArrowSmaller } from "svg/symbols.js";
 
 //IMAGES
-import HerbamojoLogo from 'images/symbols/herbamojologo.svg';
-import BottleImg from 'images/static/herbamojo_productshot_2_112020.png';
-import BottleImgWebP from 'images/static/herbamojo_productshot_2_112020.webp';
+import HerbamojoLogo from "images/symbols/herbamojologo.svg";
+import BottleImg from "images/static/herbamojo_productshot_2_112020.png";
+import BottleImgWebP from "images/static/herbamojo_productshot_2_112020.webp";
 
 //SVG CERT
-import CertBPOM from 'images/symbols/bpom.svg';
-import CertNatural from 'images/symbols/natural.svg';
-import CertQuality from 'images/symbols/quality.svg';
-import CertResearch from 'images/symbols/research.svg';
-import CertQuadra from 'images/symbols/quadra.svg';
-import CertHalal from 'images/symbols/halal.svg';
+import CertBPOM from "images/symbols/bpom.svg";
+import CertNatural from "images/symbols/natural.svg";
+import CertQuality from "images/symbols/quality.svg";
+import CertResearch from "images/symbols/research.svg";
+import CertQuadra from "images/symbols/quadra.svg";
+import CertHalal from "images/symbols/halal.svg";
 
 //ANIMATION DATA FOR BENEFIT
-import AnimDataEnergy from 'animationdata/energy.json';
-import AnimDataImmune from 'animationdata/immune.json';
-import AnimDataStamina from 'animationdata/stamina.json';
-import AnimDataExercise from 'animationdata/exercise.json';
+import AnimDataEnergy from "animationdata/energy.json";
+import AnimDataImmune from "animationdata/immune.json";
+import AnimDataStamina from "animationdata/stamina.json";
+import AnimDataExercise from "animationdata/exercise.json";
 
 const ShopImages = ({ fluid }) => {
   return (
     <GatsbyImage
       image={fluid}
       imgStyle={{
-        objectFit: 'contain',
-        objectPosition: 'center',
-        width: '100%',
-        height: '100%',
+        objectFit: "contain",
+        objectPosition: "center",
+        width: "100%",
+        height: "100%",
       }}
       style={{
-        width: '100%',
-        height: '100%',
+        width: "100%",
+        height: "100%",
       }}
-      loading={'eager'}
+      loading={"eager"}
       durationFadeIn={10}
       fadeIn={false}
-      backgroundColor='#000000'
-      alt='herbamojo' />
+      backgroundColor="#000000"
+      alt="herbamojo"
+    />
   );
 };
 
 export default class Home extends React.Component {
   // --------------
   langID = this.props.langID || false;
-  MainID = this.langID ? 'homeID' : 'homeEN';
+  MainID = this.langID ? "homeID" : "homeEN";
   LoadAnimationDelay = 2000;
   LoadAnimationTimeout = null;
   // VARIABLES
@@ -83,9 +84,9 @@ export default class Home extends React.Component {
     stockist: null,
   };
   sliderStatus = {
-    online: 'NOSLIDER',
-    offline: 'NOSLIDER',
-    stockist: 'NOSLIDER',
+    online: "NOSLIDER",
+    offline: "NOSLIDER",
+    stockist: "NOSLIDER",
   };
   inviewArray = [];
   inviewArrayBenefits = [null];
@@ -95,22 +96,22 @@ export default class Home extends React.Component {
   popupAlways = false;
   AnimObject = [
     {
-      id_name: 'benefitstamina',
+      id_name: "benefitstamina",
       anim: null,
       animeData: AnimDataStamina,
     },
     {
-      id_name: 'benefit_energy',
+      id_name: "benefit_energy",
       anim: null,
       animeData: AnimDataEnergy,
     },
     {
-      id_name: 'BenefitImmune',
+      id_name: "BenefitImmune",
       anim: null,
       animeData: AnimDataImmune,
     },
     {
-      id_name: 'BenefitExercise',
+      id_name: "BenefitExercise",
       anim: null,
       animeData: AnimDataExercise,
     },
@@ -120,13 +121,13 @@ export default class Home extends React.Component {
   ForceVH = null;
   //SLIDER SETTING (GLIDE)
   glidesetting = {
-    type: 'carousel',
+    type: "carousel",
     startAt: 0,
     perView: 1,
     gap: 0,
   };
   glidesetting2 = {
-    type: 'carousel',
+    type: "carousel",
     startAt: 0,
     perView: 2,
     gap: 40,
@@ -145,11 +146,11 @@ export default class Home extends React.Component {
 
     this.closePopUp = () => {
       if (
-        this.popUpRef.current.classList.contains('popup') &&
+        this.popUpRef.current.classList.contains("popup") &&
         this.state.popupReveal
       ) {
         this.setState = { popupReveal: false };
-        this.popUpRef.current.classList.remove('popup');
+        this.popUpRef.current.classList.remove("popup");
         this.HomeScrollSnap.play();
       }
     };
@@ -163,7 +164,7 @@ export default class Home extends React.Component {
         window.scrollTo(0, 0);
         this.HomeScrollSnap = new ScrollSnapClass({
           sections_identifier: `main.home#${this.MainID} section`,
-          snap_identifier: '',
+          snap_identifier: "",
           speed: 500,
           maxduration: 1000,
           responsive_width: 800,
@@ -173,15 +174,15 @@ export default class Home extends React.Component {
       }
 
       this.SnapNav = document.querySelectorAll(
-        `main#${this.MainID} div.overlay .right_nav .snap_nav > *`
+        `main#${this.MainID} div.overlay .right_nav .snap_nav > *`,
       );
 
       const setNav = (i) => {
         this.SnapNav.forEach((nav) => {
-          nav.classList.remove('active');
+          nav.classList.remove("active");
         });
         if (i >= 0) {
-          if (this.SnapNav[i]) this.SnapNav[i].classList.add('active');
+          if (this.SnapNav[i]) this.SnapNav[i].classList.add("active");
         }
       };
 
@@ -196,52 +197,52 @@ export default class Home extends React.Component {
 
       // SCROLL PASS FOR BOTTLE FLOAT
       this.scrollpass[0] = new ScrollPassClass({
-        target: '.bottlesection_wrapper',
+        target: ".bottlesection_wrapper",
         detectbottom: true,
         passed: () => {
-          document.querySelector('div.bottlewrapper').classList.add('stuck');
+          document.querySelector("div.bottlewrapper").classList.add("stuck");
         },
         notpassed: () => {
-          document.querySelector('div.bottlewrapper').classList.remove('stuck');
+          document.querySelector("div.bottlewrapper").classList.remove("stuck");
         },
       });
 
       // INVIEW SETUP
       // HOME
       this.inviewArray[0] = new InViewportClass({
-        target: 'section#home',
+        target: "section#home",
         visibility: 0.55,
         enter: () => {
-          document.querySelector('#ShopButton').classList.add('hide');
-          document.querySelector('section#home').classList.add('inview');
+          document.querySelector("#ShopButton").classList.add("hide");
+          document.querySelector("section#home").classList.add("inview");
           setNav(0);
         },
         exit: () => {
-          document.querySelector('#ShopButton').classList.remove('hide');
+          document.querySelector("#ShopButton").classList.remove("hide");
         },
       });
       //ABOUT
       this.inviewArray[1] = new InViewportClass({
-        target: 'section#about',
+        target: "section#about",
         visibility: 0.55,
         enter: () => {
           setNav(1);
-          document.querySelector('section#about').classList.add('inview');
+          document.querySelector("section#about").classList.add("inview");
         },
       });
 
       //ABOUT MOBILE
       this.inviewArray[2] = new InViewportClass({
-        target: 'section#about',
+        target: "section#about",
         visibility: 0.25,
         enter: () => {
           if (MediaCheck.width.mtablet()) {
-            document.querySelector('section#about').classList.add('inview');
+            document.querySelector("section#about").classList.add("inview");
           }
         },
         exit: () => {
           if (MediaCheck.width.mtablet()) {
-            document.querySelector('section#about').classList.remove('inview');
+            document.querySelector("section#about").classList.remove("inview");
           }
         },
       });
@@ -250,7 +251,7 @@ export default class Home extends React.Component {
       let BenefitAnimTimeout1 = null,
         BenefitAnimTimeout2 = null;
       this.inviewArray[3] = new InViewportClass({
-        target: 'section#benefits',
+        target: "section#benefits",
         visibility: 0.55,
         enter: () => {
           setNav(2);
@@ -261,7 +262,7 @@ export default class Home extends React.Component {
               if (this.AnimObject[index].anim)
                 this.AnimObject[index].anim.goToAndStop(0);
             });
-            document.querySelector('section#benefits').classList.add('inview');
+            document.querySelector("section#benefits").classList.add("inview");
             BenefitAnimTimeout1 = setTimeout(() => {
               if (this.AnimObject[0].anim)
                 this.AnimObject[0].anim.goToAndPlay(0);
@@ -277,7 +278,7 @@ export default class Home extends React.Component {
           }
         },
         exit: () => {
-          document.querySelector('section#benefits').classList.remove('inview');
+          document.querySelector("section#benefits").classList.remove("inview");
           if (BenefitAnimTimeout1 !== null) clearTimeout(BenefitAnimTimeout1);
           if (BenefitAnimTimeout2 !== null) clearTimeout(BenefitAnimTimeout2);
         },
@@ -285,7 +286,7 @@ export default class Home extends React.Component {
 
       //BENEFITS MOBILE
       const AllBenefits = document.querySelectorAll(
-        'section#benefits .content.half>div>div'
+        "section#benefits .content.half>div>div",
       );
       AllBenefits.forEach((benefit, index) => {
         this.inviewArrayBenefits[index] = new InViewportClass({
@@ -295,169 +296,169 @@ export default class Home extends React.Component {
           visibility: 0.75,
           enter: () => {
             if (MediaCheck.width.mtablet()) {
-              if (!benefit.classList.contains('inview')) {
-                benefit.classList.add('inview');
+              if (!benefit.classList.contains("inview")) {
+                benefit.classList.add("inview");
                 if (this.AnimObject[index].anim)
                   this.AnimObject[index].anim.goToAndPlay(0);
               }
             }
           },
           exit: () => {
-            if (MediaCheck.width.mtablet()) benefit.classList.remove('inview');
+            if (MediaCheck.width.mtablet()) benefit.classList.remove("inview");
           },
         });
       });
 
       //INGREDIENTS
       this.inviewArray[4] = new InViewportClass({
-        target: 'section#ingredients',
+        target: "section#ingredients",
         visibility: 0.55,
         enter: () => {
           setNav(3);
           if (!MediaCheck.width.mtablet()) {
             document
-              .querySelector('section#ingredients')
-              .classList.add('inview');
+              .querySelector("section#ingredients")
+              .classList.add("inview");
           }
         },
         exit: () => {
           if (!MediaCheck.width.mtablet()) {
             document
-              .querySelector('section#ingredients')
-              .classList.remove('inview');
+              .querySelector("section#ingredients")
+              .classList.remove("inview");
           }
         },
       });
       //INGREDIENTS MOBILE
       this.inviewArray[5] = new InViewportClass({
-        target: 'section#ingredients',
+        target: "section#ingredients",
         visibility: 0.25,
         enter: () => {
           if (MediaCheck.width.mtablet()) {
             document
-              .querySelector('section#ingredients')
-              .classList.add('inview');
+              .querySelector("section#ingredients")
+              .classList.add("inview");
           }
         },
         exit: () => {
           if (MediaCheck.width.mtablet()) {
             document
-              .querySelector('section#ingredients')
-              .classList.remove('inview');
+              .querySelector("section#ingredients")
+              .classList.remove("inview");
           }
         },
       });
       //SHOP
       this.inviewArray[6] = new InViewportClass({
-        target: 'section#shop',
+        target: "section#shop",
         visibility: 0.25,
         enter: () => {
           setNav(4);
           if (!MediaCheck.width.mtablet())
-            document.querySelector('section#shop').classList.add('inview');
+            document.querySelector("section#shop").classList.add("inview");
         },
         exit: () => {
           if (!MediaCheck.width.mtablet())
-            document.querySelector('section#shop').classList.remove('inview');
+            document.querySelector("section#shop").classList.remove("inview");
         },
       });
       //SHOP MOBILE
       this.inviewArray[7] = new InViewportClass({
-        target: 'section#shop',
+        target: "section#shop",
         visibility: 0.1,
         enter: () => {
           if (MediaCheck.width.mtablet())
-            document.querySelector('section#shop').classList.add('inview');
+            document.querySelector("section#shop").classList.add("inview");
         },
         exit: () => {
           if (MediaCheck.width.mtablet())
-            document.querySelector('section#shop').classList.remove('inview');
+            document.querySelector("section#shop").classList.remove("inview");
         },
       });
 
       this.inviewArray[8] = new InViewportClass({
-        target: 'section#journal',
+        target: "section#journal",
         visibility: 0.4,
         enter: () => {
-          document.querySelector('section#journal').classList.add('inview');
+          document.querySelector("section#journal").classList.add("inview");
           if (!MediaCheck.width.mtablet()) {
             setNav(5);
           }
         },
         exit: () => {
-          document.querySelector('section#journal').classList.remove('inview');
+          document.querySelector("section#journal").classList.remove("inview");
         },
       });
 
       this.inviewArray[9] = new InViewportClass({
-        target: 'section.footer',
+        target: "section.footer",
         visibility: 0.05,
         enter: () => {
-          document.querySelector('div.overlay').classList.add('stuck');
+          document.querySelector("div.overlay").classList.add("stuck");
           setNav(-1);
         },
         exit: () => {
-          document.querySelector('div.overlay').classList.remove('stuck');
+          document.querySelector("div.overlay").classList.remove("stuck");
           setNav(this.SnapNav.length - 1);
         },
       });
 
       // SCROLLAX
       this.scrollaxArray[0] = new Scrollax({
-        target: '.paralax1',
+        target: ".paralax1",
         // move_right: 0.25,
         transform_x: -0.25,
       });
       this.scrollaxArray[1] = new Scrollax({
-        target: '.paralax2',
+        target: ".paralax2",
         // move_left: 0.25,
         transform_x: 0.25,
       });
       this.scrollaxArray[2] = new Scrollax({
-        target: '#ingredients > .bg',
+        target: "#ingredients > .bg",
         // move_top: 0.35,
         transform_y: 0.15,
       });
       this.scrollaxArray[3] = new Scrollax({
-        target: '.mobile.prlx',
+        target: ".mobile.prlx",
         // move_bottom: 0.3,
         transform_y: -0.3,
       });
       this.scrollaxArray[4] = new Scrollax({
-        target: '#about .content .bottle',
+        target: "#about .content .bottle",
         // move_bottom: 0.3,
         transform_y: -0.3,
       });
 
       //INGREDIENTS SET
       this.ingredientToggle(
-        document.querySelector('#ing_sel > *:nth-child(1) > div:first-child')
+        document.querySelector("#ing_sel > *:nth-child(1) > div:first-child"),
       );
 
       // SHOP GLIDE SLIDER
       if (typeof document !== `undefined`) {
-        if (document.querySelector('#onlineslider')) {
+        if (document.querySelector("#onlineslider")) {
           this.slider.online = new Glide(
-            '#onlineslider',
-            this.glidesetting
+            "#onlineslider",
+            this.glidesetting,
           ).mount();
-          this.sliderStatus.online = 'MOUNTED';
+          this.sliderStatus.online = "MOUNTED";
         }
 
-        if (document.querySelector('#offlineslider')) {
+        if (document.querySelector("#offlineslider")) {
           this.slider.offline = new Glide(
-            '#offlineslider',
-            this.glidesetting
+            "#offlineslider",
+            this.glidesetting,
           ).mount();
-          this.sliderStatus.offline = 'MOUNTED';
+          this.sliderStatus.offline = "MOUNTED";
         }
 
-        if (document.querySelector('#stockistslider')) {
+        if (document.querySelector("#stockistslider")) {
           this.slider.stockist = new Glide(
-            '#stockistslider',
-            this.glidesetting2
+            "#stockistslider",
+            this.glidesetting2,
           ).mount();
-          this.sliderStatus.stockist = 'MOUNTED';
+          this.sliderStatus.stockist = "MOUNTED";
         }
       }
 
@@ -467,10 +468,10 @@ export default class Home extends React.Component {
 
         this.HomeScrollSnap.pause();
         //ADD CLASS LOADED
-        document.body.classList.add('loaded');
+        document.body.classList.add("loaded");
       }
 
-      this.ForceVH = new ResponsiveVH({ target: '.fitheight' });
+      this.ForceVH = new ResponsiveVH({ target: ".fitheight" });
       this.scrollpasRetrigger();
 
       // FUNCTION TRIGGERS
@@ -494,10 +495,10 @@ export default class Home extends React.Component {
         if (this.LoadAnimationTimeout !== null)
           clearTimeout(this.LoadAnimationTimeout);
         this.LoadAnimationTimeout = setTimeout(() => {
-          this.popUpRef.current.classList.remove('loading');
+          this.popUpRef.current.classList.remove("loading");
 
           if (this.disableScrollBody !== null) this.disableScrollBody.enable();
-          this.popUpRef.current.classList.add('click');
+          this.popUpRef.current.classList.add("click");
 
           // INIT RESIZE
           this.resize();
@@ -511,32 +512,34 @@ export default class Home extends React.Component {
   });
   componentDidMount() {
     if (typeof document !== `undefined`) {
-      document.body.classList.remove('loaded');
+      document.body.classList.remove("loaded");
       if (this.langID) {
-        document.querySelector('html').setAttribute('lang', 'id');
+        document.querySelector("html").setAttribute("lang", "id");
       } else {
-        document.querySelector('html').setAttribute('lang', 'en');
+        document.querySelector("html").setAttribute("lang", "en");
       }
     }
     this.IndexLoader.mountload();
-    if (!document.body.classList.contains('loaded')) {
+    if (!document.body.classList.contains("loaded")) {
       //DISABLE SCROLL ON MAIN WINDOW
       this.disableScrollBody = new DisableScroll();
     }
 
     // SETUP LOTTIE
-    if (typeof window !== 'undefined' && typeof document !== 'undefined') {
+    if (typeof window !== "undefined" && typeof document !== "undefined") {
       const _ap = false;
       this.AnimObject.forEach((obj, index) => {
-          this.AnimObject[index].anim = lottie.loadAnimation({
-            container: document.querySelector(`#${this.AnimObject[index].id_name}`),
-            name: this.AnimObject[index].id_name,
-            renderer: 'svg',
-            loop: false,
-            autoplay: _ap,
-            animationData: this.AnimObject[index].animeData,
-          });
-          this.AnimObject[index].anim.goToAndStop(0);
+        this.AnimObject[index].anim = lottie.loadAnimation({
+          container: document.querySelector(
+            `#${this.AnimObject[index].id_name}`,
+          ),
+          name: this.AnimObject[index].id_name,
+          renderer: "svg",
+          loop: false,
+          autoplay: _ap,
+          animationData: this.AnimObject[index].animeData,
+        });
+        this.AnimObject[index].anim.goToAndStop(0);
       });
     }
 
@@ -563,7 +566,7 @@ export default class Home extends React.Component {
         this.inviewArrayBenefits[index] = null;
       }
     });
-    
+
     this.inviewArray.forEach((each, index) => {
       if (
         this.inviewArray[index] !== null &&
@@ -629,9 +632,9 @@ export default class Home extends React.Component {
 
     if (typeof document !== `undefined`) {
       //RESET MOBILE MENU OPEN
-      document.body.classList.remove('menu_open');
+      document.body.classList.remove("menu_open");
       // document.body.classList.remove('loaded');
-      window.removeEventListener('resize', this.resize, false);
+      window.removeEventListener("resize", this.resize, false);
     }
   }
   inviewRetrigger() {
@@ -674,102 +677,102 @@ export default class Home extends React.Component {
   resize = () => {
     //ADJUST INGREDIENTS DESCRIPTION MOBILE HEIGHT
     const ingDescMobile = document.querySelectorAll(
-      '#ing_sel > span > div:last-child > div'
+      "#ing_sel > span > div:last-child > div",
     );
-    const offlineslider = document.querySelector('#offlineshop');
-    const onlineslider = document.querySelector('#onlineshop');
+    const offlineslider = document.querySelector("#offlineshop");
+    const onlineslider = document.querySelector("#onlineshop");
     let height = [];
     ingDescMobile.forEach((desc) => {
       height.push(desc.clientHeight);
-      desc.parentNode.style.height = desc.clientHeight.toString() + 'px';
+      desc.parentNode.style.height = desc.clientHeight.toString() + "px";
     });
     if (!MediaCheck.width.mtablet()) {
       // REMOVE MENU OPEN WHEN IT IS NOT MOBILE
-      document.body.classList.remove('menu_open');
+      document.body.classList.remove("menu_open");
 
       // REENABLE SLIDER
       if (onlineslider) {
         if (
-          onlineslider.classList.contains('nomobileslider') &&
+          onlineslider.classList.contains("nomobileslider") &&
           this.slider.online === null &&
-          this.sliderStatus.online === 'DESTROYED'
+          this.sliderStatus.online === "DESTROYED"
         ) {
           this.slider.online = new Glide(
-            '#onlineslider',
-            this.glidesetting
+            "#onlineslider",
+            this.glidesetting,
           ).mount();
           this.slider.online.update();
-          this.sliderStatus.online = 'MOUNTED';
+          this.sliderStatus.online = "MOUNTED";
         }
       }
 
       if (offlineslider) {
         if (
-          offlineslider.classList.contains('nomobileslider') &&
+          offlineslider.classList.contains("nomobileslider") &&
           this.slider.offline === null &&
-          this.sliderStatus.offline === 'DESTROYED'
+          this.sliderStatus.offline === "DESTROYED"
         ) {
           this.slider.offline = new Glide(
-            '#offlineslider',
-            this.glidesetting
+            "#offlineslider",
+            this.glidesetting,
           ).mount();
           this.slider.offline.update();
-          this.sliderStatus.offline = 'MOUNTED';
+          this.sliderStatus.offline = "MOUNTED";
         }
       }
 
       if (
         this.slider.stockist !== null &&
-        this.sliderStatus.stockist === 'DESTROYED'
+        this.sliderStatus.stockist === "DESTROYED"
       ) {
         this.slider.stockist = new Glide(
-          '#stockistslider',
-          this.glidesetting2
+          "#stockistslider",
+          this.glidesetting2,
         ).mount();
         this.slider.stockist.update();
-        this.sliderStatus.stockist = 'MOUNTED';
+        this.sliderStatus.stockist = "MOUNTED";
       }
     } else {
       // CHECK AND DISABLE SLIDER ON SHOP ON MOBILE
 
       if (
-        onlineslider.classList.contains('nomobileslider') &&
+        onlineslider.classList.contains("nomobileslider") &&
         this.slider.online !== null &&
-        this.sliderStatus.online === 'MOUNTED'
+        this.sliderStatus.online === "MOUNTED"
       ) {
         this.slider.online.destroy();
         this.slider.online = null;
-        this.sliderStatus.online = 'DESTROYED';
+        this.sliderStatus.online = "DESTROYED";
       }
       if (
-        offlineslider.classList.contains('nomobileslider') &&
+        offlineslider.classList.contains("nomobileslider") &&
         this.slider.offline !== null &&
-        this.sliderStatus.offline === 'MOUNTED'
+        this.sliderStatus.offline === "MOUNTED"
       ) {
         this.slider.offline.destroy();
         this.slider.offline = null;
-        this.sliderStatus.offline = 'DESTROYED';
+        this.sliderStatus.offline = "DESTROYED";
       }
 
       if (
         this.slider.stockist !== null &&
-        this.sliderStatus.stockist === 'MOUNTED'
+        this.sliderStatus.stockist === "MOUNTED"
       ) {
         this.slider.stockist.destroy();
         this.slider.stockist = null;
-        this.sliderStatus.stockist = 'DESTROYED';
+        this.sliderStatus.stockist = "DESTROYED";
       }
     }
     if (this.resizeTimeout !== null) clearTimeout(this.resizeTimeout);
 
     this.resizeTimeout = setTimeout(() => {
       // DELAYED FUNCTION
-      if (this.sliderStatus.stockist === 'MOUNTED')
+      if (this.sliderStatus.stockist === "MOUNTED")
         this.slider.stockist.update();
 
-      if (this.sliderStatus.online === 'MOUNTED') this.slider.online.update();
+      if (this.sliderStatus.online === "MOUNTED") this.slider.online.update();
 
-      if (this.sliderStatus.offline === 'MOUNTED') this.slider.offline.update();
+      if (this.sliderStatus.offline === "MOUNTED") this.slider.offline.update();
 
       this.resizeTimeout = null;
     }, 500);
@@ -779,14 +782,14 @@ export default class Home extends React.Component {
   gotoShop = () => {
     if (MediaCheck.width.mtablet()) {
       const scrollTarget = document
-        .querySelector('section#shop')
+        .querySelector("section#shop")
         .getBoundingClientRect().top;
       const curScrollPos =
         window.pageYOffset || document.documentElement.scrollTop;
       const wH =
         window.innerHeight ||
         document.documentElement.clientHeight ||
-        document.getElementsByTagName('body')[0].clientHeight;
+        document.getElementsByTagName("body")[0].clientHeight;
       const dist = Math.abs(scrollTarget - curScrollPos);
       let duration = (dist / wH) * 500;
       if (duration < 250) duration = 250;
@@ -812,25 +815,25 @@ export default class Home extends React.Component {
         desc: target.parentNode.dataset.desc,
       };
 
-      const displayContainer = document.querySelector('#ing_display');
-      const displayNumber = document.querySelector('#ing_display_number');
-      const displayDesc = document.querySelector('#ing_display_description');
-      const displayBg = document.querySelector('#ing_bg');
+      const displayContainer = document.querySelector("#ing_display");
+      const displayNumber = document.querySelector("#ing_display_number");
+      const displayDesc = document.querySelector("#ing_display_description");
+      const displayBg = document.querySelector("#ing_bg");
 
-      const ingredientsButtons = document.querySelectorAll('#ing_sel > *');
-      const ingredientsBg = document.querySelectorAll('#ing_bg > *');
+      const ingredientsButtons = document.querySelectorAll("#ing_sel > *");
+      const ingredientsBg = document.querySelectorAll("#ing_bg > *");
 
       ingredientsButtons.forEach((btn) => {
-        btn.classList.remove('active');
+        btn.classList.remove("active");
       });
 
-      target.parentNode.classList.add('active');
+      target.parentNode.classList.add("active");
 
       // ADD BACKGROUND TRANSITION;
       if (!this.ingredientChanging) {
         this.ingredientChanging = true;
-        displayBg.classList.add('transition');
-        displayContainer.classList.add('transition');
+        displayBg.classList.add("transition");
+        displayContainer.classList.add("transition");
       }
 
       if (this.ingredientChangeTimeout != null)
@@ -839,24 +842,24 @@ export default class Home extends React.Component {
         this.ingredientChanging = false;
         displayNumber.innerHTML = change.number;
         displayDesc.innerHTML = change.desc;
-        displayContainer.classList.remove('transition');
+        displayContainer.classList.remove("transition");
 
         ingredientsBg.forEach((bg) => {
-          bg.classList.remove('active');
+          bg.classList.remove("active");
         });
-        ingredientsBg[change.number - 1].classList.add('active');
+        ingredientsBg[change.number - 1].classList.add("active");
 
-        displayBg.classList.remove('transition');
+        displayBg.classList.remove("transition");
         this.ingredientChangeTimeout = null;
       }, delay);
     }
   }
   menuToggle() {
     if (typeof document !== `undefined`) {
-      if (document.body.classList.contains('menu_open')) {
-        document.body.classList.remove('menu_open');
+      if (document.body.classList.contains("menu_open")) {
+        document.body.classList.remove("menu_open");
       } else {
-        document.body.classList.add('menu_open');
+        document.body.classList.add("menu_open");
       }
     }
   }
@@ -865,7 +868,7 @@ export default class Home extends React.Component {
       let child = e.currentTarget;
       let index = 0;
       while ((child = child.previousSibling) != null) index++;
-      const sections = document.querySelectorAll('main.home section');
+      const sections = document.querySelectorAll("main.home section");
       if (sections != null && sections[index]) {
         const elTop = sections[index].getBoundingClientRect().top;
         const scrollTop =
@@ -883,7 +886,7 @@ export default class Home extends React.Component {
     this.IndexLoader.renderload();
 
     if (typeof document !== `undefined`) {
-      window.addEventListener('resize', this.resize, false);
+      window.addEventListener("resize", this.resize, false);
     }
 
     return (
@@ -899,7 +902,7 @@ export default class Home extends React.Component {
           const popupData = data.home.frontmatter.popup;
 
           let journalslug = generalData.journalslug;
-          if (journalslug.substring(0, 1) !== '/') {
+          if (journalslug.substring(0, 1) !== "/") {
             journalslug = `/${journalslug}`;
           }
 
@@ -910,63 +913,63 @@ export default class Home extends React.Component {
           shopData.offlineshop.offlineshoplist.forEach((shop) => {
             if (
               shop.image !== null &&
-              shop.image !== '' &&
+              shop.image !== "" &&
               shop.image !== undefined
             ) {
               offlineshop.push(shop);
             }
           });
 
-          let offlineshoplayout = ''; // SINGLE, SLIDER, FLOW
+          let offlineshoplayout = ""; // SINGLE, SLIDER, FLOW
           if (offlineshop.length > 1) {
-            offlineshoplayout = 'SLIDER';
+            offlineshoplayout = "SLIDER";
           } else {
-            offlineshoplayout = 'SINGLE';
+            offlineshoplayout = "SINGLE";
           }
           let offlineshopemobileslider = true;
-          if (shopData.offlineshop.slider_option === 'NOMOBILE')
+          if (shopData.offlineshop.slider_option === "NOMOBILE")
             offlineshopemobileslider = false;
 
           if (
-            shopData.offlineshop.slider_option === 'NOSLIDER' &&
-            shopData.onlineshop.slider_option === 'NOSLIDER'
+            shopData.offlineshop.slider_option === "NOSLIDER" &&
+            shopData.onlineshop.slider_option === "NOSLIDER"
           )
-            offlineshoplayout = 'NOSLIDER';
+            offlineshoplayout = "NOSLIDER";
 
           // ONLINE SHOP OPTION
           let onlineshop = [];
           shopData.onlineshop.onlineshoplist.forEach((shop) => {
             if (
               shop.image !== null &&
-              shop.image !== '' &&
+              shop.image !== "" &&
               shop.image !== undefined
             ) {
               onlineshop.push(shop);
             }
           });
 
-          let onlineshoplayout = ''; // SINGLE, SLIDER, FLOW
+          let onlineshoplayout = ""; // SINGLE, SLIDER, FLOW
           if (onlineshop.length > 1) {
-            onlineshoplayout = 'SLIDER';
+            onlineshoplayout = "SLIDER";
           } else {
-            onlineshoplayout = 'SINGLE';
+            onlineshoplayout = "SINGLE";
           }
           let onlineshopemobileslider = true;
-          if (shopData.onlineshop.slider_option === 'NOMOBILE')
+          if (shopData.onlineshop.slider_option === "NOMOBILE")
             onlineshopemobileslider = false;
           if (
-            shopData.offlineshop.slider_option === 'NOSLIDER' &&
-            shopData.onlineshop.slider_option === 'NOSLIDER'
+            shopData.offlineshop.slider_option === "NOSLIDER" &&
+            shopData.onlineshop.slider_option === "NOSLIDER"
           )
-            onlineshoplayout = 'NOSLIDER';
+            onlineshoplayout = "NOSLIDER";
 
           // STOCKIST OPTION
-          let stockistlayout = '';
+          let stockistlayout = "";
           let stockistList = [];
           shopData.stockist.list.forEach((entry, id) => {
             if (
               entry.content !== null &&
-              entry.content !== '' &&
+              entry.content !== "" &&
               entry.content !== undefined
             ) {
               // CHECK LENGTH
@@ -990,13 +993,13 @@ export default class Home extends React.Component {
           });
 
           if (stockistList.length > 2) {
-            stockistlayout = 'SLIDER';
+            stockistlayout = "SLIDER";
           } else {
-            stockistlayout = 'SINGLE';
+            stockistlayout = "SINGLE";
           }
 
-          if (shopData.stockist.slider_option === 'NOSLIDER')
-            stockistlayout = 'NOSLIDER';
+          if (shopData.stockist.slider_option === "NOSLIDER")
+            stockistlayout = "NOSLIDER";
 
           let printjournal = [];
 
@@ -1007,14 +1010,14 @@ export default class Home extends React.Component {
           }
 
           let exLink_PU = false;
-          let popupLink = '';
+          let popupLink = "";
 
           if (
             (this.langID && popupData.link.id !== null) ||
             (!this.langID && popupData.link.en !== null)
           ) {
             popupLink = this.langID ? popupData.link.id : popupData.link.en;
-            if (popupLink.includes('http')) exLink_PU = true;
+            if (popupLink.includes("http")) exLink_PU = true;
           }
 
           this.popupEnable = popupData.enable;
@@ -1022,28 +1025,28 @@ export default class Home extends React.Component {
 
           return (
             <Layout
-              mainClass='home'
+              mainClass="home"
               indonesia={this.langID}
               mainID={this.MainID}
             >
               {this.langID && (
                 <Helmet>
                   {id_seodesc && (
-                    <meta name='description' content={id_seodesc} />
+                    <meta name="description" content={id_seodesc} />
                   )}
                   {id_seodesc && (
-                    <meta property='og:description' content={id_seodesc} />
+                    <meta property="og:description" content={id_seodesc} />
                   )}
                   {id_seodesc && (
-                    <meta name='twitter:description' content={id_seodesc} />
+                    <meta name="twitter:description" content={id_seodesc} />
                   )}
                 </Helmet>
               )}
               <MobileHomeHeader indonesia={this.langID} />
-              <div id='MobileNavigation'>
+              <div id="MobileNavigation">
                 <div>
                   <div
-                    className='menubutton'
+                    className="menubutton"
                     onClick={(e) => this.menuToggle(e)}
                   >
                     <span />
@@ -1054,14 +1057,14 @@ export default class Home extends React.Component {
                 <div>
                   <div>
                     <div
-                      className='closebutton'
+                      className="closebutton"
                       onClick={(e) => this.menuToggle(e)}
                     >
                       <span />
                       <span />
                     </div>
                   </div>
-                  <div className='fitheight'>
+                  <div className="fitheight">
                     <div>
                       <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
@@ -1075,8 +1078,8 @@ export default class Home extends React.Component {
                       </span>
                       <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
-                              ? transData.benefits.title.id
-                              : transData.benefits.title.en}
+                          ? transData.benefits.title.id
+                          : transData.benefits.title.en}
                       </span>
                       <span onClick={(e) => this.mobileScroll(e)}>
                         {this.langID
@@ -1098,36 +1101,36 @@ export default class Home extends React.Component {
                       )}
                       <div>
                         <div>
-                          {footerData.ig_link !== '' && (
+                          {footerData.ig_link !== "" && (
                             <a
-                              className='svg btn-instagram'
-                              target='_blank'
-                              rel='noopener noreferrer'
+                              className="svg btn-instagram"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               href={footerData.ig_link}
-                              aria-label='Instagram'
+                              aria-label="Instagram"
                             >
                               <InstagramSVG />
                             </a>
                           )}
 
-                          {footerData.wa_no !== '' && (
+                          {footerData.wa_no !== "" && (
                             <a
-                              className='svg btn-wa'
-                              target='_blank'
-                              rel='noopener noreferrer'
+                              className="svg btn-wa"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
-                              aria-label='Whatsapp'
+                              aria-label="Whatsapp"
                             >
                               <WhatsappSVG />
                             </a>
                           )}
-                          {footerData.email !== '' && (
+                          {footerData.email !== "" && (
                             <a
-                              className='svg btn-email'
-                              target='_blank'
-                              rel='noopener noreferrer'
+                              className="svg btn-email"
+                              target="_blank"
+                              rel="noopener noreferrer"
                               href={`mailto:${footerData.email}`}
-                              aria-label='Email'
+                              aria-label="Email"
                             >
                               <EmailSVG />
                             </a>
@@ -1138,27 +1141,27 @@ export default class Home extends React.Component {
                   </div>
                 </div>
               </div>
-              <div className='overlay_wrapper'>
-                <div className='overlay'>
-                  <div className='wrapper'>
+              <div className="overlay_wrapper">
+                <div className="overlay">
+                  <div className="wrapper">
                     <div>
                       <Link
-                        aria-label='English'
-                        className={`${!this.props.langID && 'disable'}`}
-                        to='/'
+                        aria-label="English"
+                        className={`${!this.props.langID && "disable"}`}
+                        to="/"
                       >
                         EN
                       </Link>
                       <Link
-                        aria-label='Indonesia'
-                        className={`${this.props.langID && 'disable'}`}
-                        to='/id'
+                        aria-label="Indonesia"
+                        className={`${this.props.langID && "disable"}`}
+                        to="/id"
                       >
                         ID
                       </Link>
                     </div>
-                    <div className='right_nav'>
-                      <div className='snap_nav'>
+                    <div className="right_nav">
+                      <div className="snap_nav">
                         <span>
                           <span>
                             {this.langID
@@ -1166,7 +1169,7 @@ export default class Home extends React.Component {
                               : transData.home.title.en}
                           </span>
                         </span>
-                        <span className='active'>
+                        <span className="active">
                           <span>
                             {this.langID
                               ? transData.about.title.id
@@ -1204,37 +1207,37 @@ export default class Home extends React.Component {
                           </span>
                         )}
                       </div>
-                      <div className='social_ctn'>
-                        {footerData.ig_link !== '' && (
+                      <div className="social_ctn">
+                        {footerData.ig_link !== "" && (
                           <a
-                            className='svg btn-instagram'
-                            target='_blank'
-                            rel='noopener noreferrer'
+                            className="svg btn-instagram"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             href={footerData.ig_link}
-                            aria-label='Instagram'
+                            aria-label="Instagram"
                           >
                             <InstagramSVG />
                           </a>
                         )}
 
-                        {footerData.wa_no !== '' && (
+                        {footerData.wa_no !== "" && (
                           <a
-                            className='svg btn-wa'
-                            target='_blank'
-                            rel='noopener noreferrer'
+                            className="svg btn-wa"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             href={`https://api.whatsapp.com/send?phone=${footerData.wa_no}`}
-                            aria-label='Whatsapp'
+                            aria-label="Whatsapp"
                           >
                             <WhatsappSVG />
                           </a>
                         )}
-                        {footerData.email !== '' && (
+                        {footerData.email !== "" && (
                           <a
-                            className='svg btn-email'
-                            target='_blank'
-                            rel='noopener noreferrer'
+                            className="svg btn-email"
+                            target="_blank"
+                            rel="noopener noreferrer"
                             href={`mailto:${footerData.email}`}
-                            aria-label='Email'
+                            aria-label="Email"
                           >
                             <EmailSVG />
                           </a>
@@ -1243,18 +1246,18 @@ export default class Home extends React.Component {
                     </div>
                   </div>
                 </div>
-                <div className='bottlesection_wrapper'>
-                  <div className='greenline' />
-                  <div className='bottlewrapper'>
+                <div className="bottlesection_wrapper">
+                  <div className="greenline" />
+                  <div className="bottlewrapper">
                     <div>
                       <picture>
-                        <source srcSet={BottleImgWebP} type='image/webp' />
-                        <source srcSet={BottleImg} type='image/png' />
-                        <img src={BottleImg} alt='Herbamojo' />
+                        <source srcSet={BottleImgWebP} type="image/webp" />
+                        <source srcSet={BottleImg} type="image/png" />
+                        <img src={BottleImg} alt="Herbamojo" />
                       </picture>
                       <span
-                        id='ShopButton'
-                        className='hide'
+                        id="ShopButton"
+                        className="hide"
                         onClick={this.gotoShop}
                       >
                         {this.langID
@@ -1263,13 +1266,13 @@ export default class Home extends React.Component {
                       </span>
                     </div>
                   </div>
-                  <section id='home'>
-                    <div className='wrapper'>
-                      <h1 className='hidden'>{generalData.web_name}</h1>
-                      <span className='logo'>
-                        <img src={HerbamojoLogo} alt='herbamojo' />
+                  <section id="home">
+                    <div className="wrapper">
+                      <h1 className="hidden">{generalData.web_name}</h1>
+                      <span className="logo">
+                        <img src={HerbamojoLogo} alt="herbamojo" />
                       </span>
-                      <div className='content'>
+                      <div className="content">
                         <span>
                           {this.langID
                             ? transData.home.kys.id.know
@@ -1285,80 +1288,89 @@ export default class Home extends React.Component {
                             ? transData.home.kys.id.strength
                             : transData.home.kys.en.strength}
                         </span>
-                        <span id='GetButton' onClick={this.gotoShop}>
+                        <span id="GetButton" onClick={this.gotoShop}>
                           {this.langID
                             ? transData.home.getyours.id
                             : transData.home.getyours.en}
                         </span>
                       </div>
                     </div>
-                    <div className='bg'>
+                    <div className="bg">
                       {/* <img
                         className='paralax1'
                         src={homeData.home.background}
                         alt='herbamojo'
                       /> */}
                       <GatsbyImage
-                        image={homeData.home.background.childImageSharp.gatsbyImageData}
-                        className='paralax1'
-                        alt='herbamojo'
+                        image={
+                          homeData.home.background.childImageSharp
+                            .gatsbyImageData
+                        }
+                        className="paralax1"
+                        alt="herbamojo"
                         imgStyle={{
-                          objectFit: 'cover',
-                          objectPosition: 'right',
+                          objectFit: "cover",
+                          objectPosition: "right",
                         }}
-                        loading='eager'
-                        fadeIn={false} />
+                        loading="eager"
+                        fadeIn={false}
+                      />
                       {/* <img
                         className='mobile prlx'
                         src={homeData.home.backgroundmobile}
                         alt='herbamojo'
                       /> */}
                       <GatsbyImage
-                        image={homeData.home.backgroundmobile.childImageSharp.gatsbyImageData}
-                        className='mobile prlx'
+                        image={
+                          homeData.home.backgroundmobile.childImageSharp
+                            .gatsbyImageData
+                        }
+                        className="mobile prlx"
                         imgStyle={{
-                          objectFit: 'contain',
-                          objectPosition: 'center',
+                          objectFit: "contain",
+                          objectPosition: "center",
                         }}
-                        loading='eager'
+                        loading="eager"
                         fadeIn={false}
-                        alt='herbamojo' />
+                        alt="herbamojo"
+                      />
                     </div>
                   </section>
-                  <section id='about'>
-                    <div className='wrapper'>
+                  <section id="about">
+                    <div className="wrapper">
                       <h1>
                         {this.langID
                           ? transData.about.title.id
                           : transData.about.title.en}
                       </h1>
-                      <div className='content half flex '>
-                        <div className='logo'>
-                          <img src={HerbamojoLogo} alt='herbamojo' />
+                      <div className="content half flex ">
+                        <div className="logo">
+                          <img src={HerbamojoLogo} alt="herbamojo" />
                         </div>
-                        <div className='bottle'>
+                        <div className="bottle">
                           <picture>
-                            <source srcSet={BottleImgWebP} type='image/webp' />
-                            <source srcSet={BottleImg} type='image/png' />
-                            <img src={BottleImg} alt='Herbamojo' />
+                            <source srcSet={BottleImgWebP} type="image/webp" />
+                            <source srcSet={BottleImg} type="image/png" />
+                            <img src={BottleImg} alt="Herbamojo" />
                           </picture>
                         </div>
-                        <div className='description'>
+                        <div className="description">
                           {this.langID
                             ? homeData.about.desc.id
                             : homeData.about.desc.en}
                         </div>
-                        <div className='pom-info'>
-                          {this.langID
+                        <div className="pom-info">
+                          {/* {this.langID
                             ? homeData.about.pomInfo.en.rowOne
-                            : homeData.about.pomInfo.en.rowOne}<br/>
+                            : homeData.about.pomInfo.en.rowOne}
+                          <br /> */}
                           {this.langID
                             ? homeData.about.pomInfo.id.rowTwo
                             : homeData.about.pomInfo.id.rowTwo}
                         </div>
-                        <div className='certification'>
+                        <div className="certification">
                           <div>
-                            <img src={CertNatural} alt='herbamojo' />
+                            <img src={CertNatural} alt="herbamojo" />
                             <span>
                               {this.langID
                                 ? transData.about.cert.natural.id
@@ -1366,17 +1378,17 @@ export default class Home extends React.Component {
                             </span>
                           </div>
 
-                          <div>
+                          {/* <div>
                             <img src={CertBPOM} alt='herbamojo' />
                             <span>
                               {this.langID
                                 ? transData.about.cert.bpom.id
                                 : transData.about.cert.bpom.en}
                             </span>
-                          </div>
+                          </div> */}
 
                           <div>
-                            <img src={CertHalal} alt='herbamojo' />
+                            <img src={CertHalal} alt="herbamojo" />
                             <span>
                               {this.langID
                                 ? transData.about.cert.halal.id
@@ -1385,7 +1397,7 @@ export default class Home extends React.Component {
                           </div>
 
                           <div>
-                            <img src={CertQuality} alt='herbamojo' />
+                            <img src={CertQuality} alt="herbamojo" />
                             <span>
                               {this.langID
                                 ? transData.about.cert.quality.id
@@ -1394,7 +1406,7 @@ export default class Home extends React.Component {
                           </div>
 
                           <div>
-                            <img src={CertQuadra} alt='herbamojo' />
+                            <img src={CertQuadra} alt="herbamojo" />
                             <span>
                               {this.langID
                                 ? transData.about.cert.quadra.id
@@ -1404,33 +1416,35 @@ export default class Home extends React.Component {
                         </div>
                       </div>
                     </div>
-                    <div className='bg'>
+                    <div className="bg">
                       {/* <img
                         className='paralax2'
                         src={homeData.about.background}
                         alt='herbamojo'
                       /> */}
 
-                      <div className='wrapper'>
+                      <div className="wrapper">
                         <GatsbyImage
-                          image={homeData.about.background.childImageSharp.gatsbyImageData}
-                          className='paralax2'
+                          image={
+                            homeData.about.background.childImageSharp
+                              .gatsbyImageData
+                          }
+                          className="paralax2"
                           imgStyle={{
-                            objectFit: 'cover',
-                            objectPosition: 'center',
+                            objectFit: "cover",
+                            objectPosition: "center",
                           }}
-                          alt='herbamojo'
-                          loading='eager'
-                          fadeIn={false} />
+                          alt="herbamojo"
+                          loading="eager"
+                          fadeIn={false}
+                        />
                       </div>
                     </div>
                   </section>
-                  <section id='benefits'>
-                    <div className='wrapper'>
-                      <h1>
-                        {this.langID ? "MANFAAT" : "BENEFITS"}
-                      </h1>
-                      <div className='content half flex'>
+                  <section id="benefits">
+                    <div className="wrapper">
+                      <h1>{this.langID ? "MANFAAT" : "BENEFITS"}</h1>
+                      <div className="content half flex">
                         <div>
                           <div>
                             <div>
@@ -1451,20 +1465,20 @@ export default class Home extends React.Component {
                     </div>
                   </section>
                 </div>
-                <section id='ingredients'>
-                  <div className='wrapper'>
+                <section id="ingredients">
+                  <div className="wrapper">
                     <h1>
                       {this.langID
                         ? transData.ingredients.title.id
                         : transData.ingredients.title.en}
                     </h1>
-                    <div className='content flex'>
-                      <div id='ing_sel'>
+                    <div className="content flex">
+                      <div id="ing_sel">
                         {homeData.ingredients.map((node, id) => {
                           return (
                             <span
                               key={id}
-                              className='active'
+                              className="active"
                               data-desc={
                                 this.langID ? node.desc.id : node.desc.en
                               }
@@ -1488,9 +1502,9 @@ export default class Home extends React.Component {
                       </div>
                     </div>
                     <div>
-                      <div id='ing_display'>
-                        <div id='ing_display_number'>1</div>
-                        <div id='ing_display_description'>
+                      <div id="ing_display">
+                        <div id="ing_display_number">1</div>
+                        <div id="ing_display_description">
                           {this.langID
                             ? homeData.ingredients[0].desc.id
                             : homeData.ingredients[0].desc.en}
@@ -1498,36 +1512,37 @@ export default class Home extends React.Component {
                       </div>
                     </div>
                   </div>
-                  <div className='bg'>
-                    <div id='ing_bg'>
+                  <div className="bg">
+                    <div id="ing_bg">
                       {/* <img key={id} src={node.image} alt='herbamojo' /> */}
                       {homeData.ingredients.map((node, id) => {
                         return (
                           <GatsbyImage
                             image={node.image.childImageSharp.gatsbyImageData}
                             imgStyle={{
-                              objectFit: 'scale-down',
-                              objectPosition: 'right center',
+                              objectFit: "scale-down",
+                              objectPosition: "right center",
                             }}
                             key={id}
-                            alt='herbamojo'
-                            loading='eager'
-                            fadeIn={false} />
+                            alt="herbamojo"
+                            loading="eager"
+                            fadeIn={false}
+                          />
                         );
                       })}
                     </div>
                   </div>
                 </section>
-                <section id='shop'>
-                  <div className='wrapper'>
+                <section id="shop">
+                  <div className="wrapper">
                     <h1>
                       {this.langID
                         ? transData.shop.title.id
                         : transData.shop.title.en}
                     </h1>
                     <div>
-                      <div className='content flex'>
-                        {onlineshop[0].image !== '' && (
+                      <div className="content flex">
+                        {onlineshop[0].image !== "" && (
                           <div>
                             <h2>
                               {this.langID
@@ -1535,40 +1550,41 @@ export default class Home extends React.Component {
                                 : transData.shop.online.en}
                             </h2>
                             <div
-                              id='onlineshop'
+                              id="onlineshop"
                               className={`shopSlider ${
-                                onlineshop.length === 1 ? 'oneslide' : ''
+                                onlineshop.length === 1 ? "oneslide" : ""
                               } ${
-                                !onlineshopemobileslider ? 'nomobileslider' : ''
+                                !onlineshopemobileslider ? "nomobileslider" : ""
                               }`}
                             >
                               {
                                 {
                                   NOSLIDER: (
-                                    <div className='wrapper noslider'>
+                                    <div className="wrapper noslider">
                                       {onlineshop.map((node, id) => {
                                         return (
                                           <div
-                                            className='shop'
+                                            className="shop"
                                             key={id}
                                             dataid={id}
                                           >
                                             {node.link ? (
                                               <a
-                                                target='_blank'
-                                                rel='noopener noreferrer'
+                                                target="_blank"
+                                                rel="noopener noreferrer"
                                                 href={node.link}
                                                 style={{
                                                   background:
                                                     node.background !== null
                                                       ? node.background
-                                                      : 'transparent',
+                                                      : "transparent",
                                                 }}
-                                                aria-label='Shop Slider'
+                                                aria-label="Shop Slider"
                                               >
                                                 <ShopImages
                                                   fluid={
-                                                    node.image.childImageSharp.gatsbyImageData
+                                                    node.image.childImageSharp
+                                                      .gatsbyImageData
                                                   }
                                                 />
                                               </a>
@@ -1578,12 +1594,13 @@ export default class Home extends React.Component {
                                                   background:
                                                     node.background !== null
                                                       ? node.background
-                                                      : 'transparent',
+                                                      : "transparent",
                                                 }}
                                               >
                                                 <ShopImages
                                                   fluid={
-                                                    node.image.childImageSharp.gatsbyImageData
+                                                    node.image.childImageSharp
+                                                      .gatsbyImageData
                                                   }
                                                 />
                                               </div>
@@ -1595,35 +1612,36 @@ export default class Home extends React.Component {
                                   ),
                                   SINGLE: (
                                     <>
-                                      <div className='arrow'>
+                                      <div className="arrow">
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                       {/* CONTENT */}
-                                      <div className='wrapper'>
+                                      <div className="wrapper">
                                         {onlineshop.map((node, id) => {
                                           return (
                                             <div
-                                              className='shop'
+                                              className="shop"
                                               key={id}
                                               dataid={id}
                                             >
                                               {node.link ? (
                                                 <a
-                                                  target='_blank'
-                                                  rel='noopener noreferrer'
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
                                                   href={node.link}
                                                   style={{
                                                     background:
                                                       node.background !== null
                                                         ? node.background
-                                                        : 'transparent',
+                                                        : "transparent",
                                                   }}
-                                                  aria-label='Shop Slider'
+                                                  aria-label="Shop Slider"
                                                 >
                                                   <ShopImages
                                                     fluid={
-                                                      node.image.childImageSharp.gatsbyImageData
+                                                      node.image.childImageSharp
+                                                        .gatsbyImageData
                                                     }
                                                   />
                                                 </a>
@@ -1633,12 +1651,13 @@ export default class Home extends React.Component {
                                                     background:
                                                       node.background !== null
                                                         ? node.background
-                                                        : 'transparent',
+                                                        : "transparent",
                                                   }}
                                                 >
                                                   <ShopImages
                                                     fluid={
-                                                      node.image.childImageSharp.gatsbyImageData
+                                                      node.image.childImageSharp
+                                                        .gatsbyImageData
                                                     }
                                                   />
                                                 </div>
@@ -1647,59 +1666,60 @@ export default class Home extends React.Component {
                                           );
                                         })}
                                       </div>
-                                      <div className='arrow'>
+                                      <div className="arrow">
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                     </>
                                   ),
                                   SLIDER: (
                                     <>
                                       <div
-                                        className='arrow'
+                                        className="arrow"
                                         onClick={() => {
                                           if (this.slider.online)
-                                            this.slider.online.go('<');
+                                            this.slider.online.go("<");
                                         }}
                                       >
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                       {/* CONTENT */}
                                       <div
-                                        id='onlineslider'
-                                        className='glide wrapper'
+                                        id="onlineslider"
+                                        className="glide wrapper"
                                       >
                                         <div
-                                          data-glide-el='track'
-                                          className='glide__track'
+                                          data-glide-el="track"
+                                          className="glide__track"
                                         >
-                                          <div className='glide__slides '>
+                                          <div className="glide__slides ">
                                             {onlineshop.map((node, id) => {
                                               return (
                                                 <div
-                                                  className='shop glide__slide'
+                                                  className="shop glide__slide"
                                                   key={id}
                                                   dataid={id}
                                                 >
                                                   {node.link ? (
                                                     <a
-                                                      target='_blank'
-                                                      rel='noopener noreferrer'
+                                                      target="_blank"
+                                                      rel="noopener noreferrer"
                                                       href={node.link}
                                                       style={{
                                                         background:
                                                           node.background !==
                                                           null
                                                             ? node.background
-                                                            : 'transparent',
+                                                            : "transparent",
                                                       }}
-                                                      aria-label='Shop Slider'
+                                                      aria-label="Shop Slider"
                                                     >
                                                       <ShopImages
                                                         fluid={
                                                           node.image
-                                                            .childImageSharp.gatsbyImageData
+                                                            .childImageSharp
+                                                            .gatsbyImageData
                                                         }
                                                       />
                                                     </a>
@@ -1710,13 +1730,14 @@ export default class Home extends React.Component {
                                                           node.background !==
                                                           null
                                                             ? node.background
-                                                            : 'transparent',
+                                                            : "transparent",
                                                       }}
                                                     >
                                                       <ShopImages
                                                         fluid={
                                                           node.image
-                                                            .childImageSharp.gatsbyImageData
+                                                            .childImageSharp
+                                                            .gatsbyImageData
                                                         }
                                                       />
                                                     </div>
@@ -1728,14 +1749,14 @@ export default class Home extends React.Component {
                                         </div>
                                       </div>
                                       <div
-                                        className='arrow'
+                                        className="arrow"
                                         onClick={() => {
                                           if (this.slider.online)
-                                            this.slider.online.go('>');
+                                            this.slider.online.go(">");
                                         }}
                                       >
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                     </>
                                   ),
@@ -1744,7 +1765,7 @@ export default class Home extends React.Component {
                             </div>
                           </div>
                         )}
-                        {offlineshop[0].image !== '' && (
+                        {offlineshop[0].image !== "" && (
                           <div>
                             <h2>
                               {this.langID
@@ -1752,42 +1773,43 @@ export default class Home extends React.Component {
                                 : transData.shop.offline.en}
                             </h2>
                             <div
-                              id='offlineshop'
+                              id="offlineshop"
                               className={`shopSlider ${
-                                offlineshop.length === 1 ? ' oneslide' : ''
+                                offlineshop.length === 1 ? " oneslide" : ""
                               } ${
                                 !offlineshopemobileslider
-                                  ? 'nomobileslider'
-                                  : ''
+                                  ? "nomobileslider"
+                                  : ""
                               }`}
                             >
                               {
                                 {
                                   NOSLIDER: (
-                                    <div className='wrapper noslider'>
+                                    <div className="wrapper noslider">
                                       {offlineshop.map((node, id) => {
                                         return (
                                           <div
-                                            className='shop'
+                                            className="shop"
                                             key={id}
                                             dataid={id}
                                           >
                                             {node.link ? (
                                               <a
-                                                target='_blank'
-                                                rel='noopener noreferrer'
+                                                target="_blank"
+                                                rel="noopener noreferrer"
                                                 href={node.link}
                                                 style={{
                                                   background:
                                                     node.background !== null
                                                       ? node.background
-                                                      : 'transparent',
+                                                      : "transparent",
                                                 }}
-                                                aria-label='Shop Slider'
+                                                aria-label="Shop Slider"
                                               >
                                                 <ShopImages
                                                   fluid={
-                                                    node.image.childImageSharp.gatsbyImageData
+                                                    node.image.childImageSharp
+                                                      .gatsbyImageData
                                                   }
                                                 />
                                               </a>
@@ -1797,12 +1819,13 @@ export default class Home extends React.Component {
                                                   background:
                                                     node.background !== null
                                                       ? node.background
-                                                      : 'transparent',
+                                                      : "transparent",
                                                 }}
                                               >
                                                 <ShopImages
                                                   fluid={
-                                                    node.image.childImageSharp.gatsbyImageData
+                                                    node.image.childImageSharp
+                                                      .gatsbyImageData
                                                   }
                                                 />
                                               </div>
@@ -1814,35 +1837,36 @@ export default class Home extends React.Component {
                                   ),
                                   SINGLE: (
                                     <>
-                                      <div className='arrow'>
+                                      <div className="arrow">
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                       {/* CONTENT */}
-                                      <div className='wrapper'>
+                                      <div className="wrapper">
                                         {offlineshop.map((node, id) => {
                                           return (
                                             <div
-                                              className='shop'
+                                              className="shop"
                                               key={id}
                                               dataid={id}
                                             >
                                               {node.link ? (
                                                 <a
-                                                  target='_blank'
-                                                  rel='noopener noreferrer'
+                                                  target="_blank"
+                                                  rel="noopener noreferrer"
                                                   href={node.link}
                                                   style={{
                                                     background:
                                                       node.background !== null
                                                         ? node.background
-                                                        : 'transparent',
+                                                        : "transparent",
                                                   }}
-                                                  aria-label='Shop Slider'
+                                                  aria-label="Shop Slider"
                                                 >
                                                   <ShopImages
                                                     fluid={
-                                                      node.image.childImageSharp.gatsbyImageData
+                                                      node.image.childImageSharp
+                                                        .gatsbyImageData
                                                     }
                                                   />
                                                 </a>
@@ -1852,12 +1876,13 @@ export default class Home extends React.Component {
                                                     background:
                                                       node.background !== null
                                                         ? node.background
-                                                        : 'transparent',
+                                                        : "transparent",
                                                   }}
                                                 >
                                                   <ShopImages
                                                     fluid={
-                                                      node.image.childImageSharp.gatsbyImageData
+                                                      node.image.childImageSharp
+                                                        .gatsbyImageData
                                                     }
                                                   />
                                                 </div>
@@ -1866,59 +1891,60 @@ export default class Home extends React.Component {
                                           );
                                         })}
                                       </div>
-                                      <div className='arrow'>
+                                      <div className="arrow">
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                     </>
                                   ),
                                   SLIDER: (
                                     <>
                                       <div
-                                        className='arrow'
+                                        className="arrow"
                                         onClick={() => {
                                           if (this.slider.offline)
-                                            this.slider.offline.go('<');
+                                            this.slider.offline.go("<");
                                         }}
                                       >
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                       {/* CONTENT */}
                                       <div
-                                        id='offlineslider'
-                                        className='glide wrapper'
+                                        id="offlineslider"
+                                        className="glide wrapper"
                                       >
                                         <div
-                                          data-glide-el='track'
-                                          className='glide__track'
+                                          data-glide-el="track"
+                                          className="glide__track"
                                         >
-                                          <div className='glide__slides '>
+                                          <div className="glide__slides ">
                                             {offlineshop.map((node, id) => {
                                               return (
                                                 <div
-                                                  className='shop glide__slide'
+                                                  className="shop glide__slide"
                                                   key={id}
                                                   dataid={id}
                                                 >
                                                   {node.link ? (
                                                     <a
-                                                      target='_blank'
-                                                      rel='noopener noreferrer'
+                                                      target="_blank"
+                                                      rel="noopener noreferrer"
                                                       href={node.link}
                                                       style={{
                                                         background:
                                                           node.background !==
                                                           null
                                                             ? node.background
-                                                            : 'transparent',
+                                                            : "transparent",
                                                       }}
-                                                      aria-label='Shop Slider'
+                                                      aria-label="Shop Slider"
                                                     >
                                                       <ShopImages
                                                         fluid={
                                                           node.image
-                                                            .childImageSharp.gatsbyImageData
+                                                            .childImageSharp
+                                                            .gatsbyImageData
                                                         }
                                                       />
                                                     </a>
@@ -1929,13 +1955,14 @@ export default class Home extends React.Component {
                                                           node.background !==
                                                           null
                                                             ? node.background
-                                                            : 'transparent',
+                                                            : "transparent",
                                                       }}
                                                     >
                                                       <ShopImages
                                                         fluid={
                                                           node.image
-                                                            .childImageSharp.gatsbyImageData
+                                                            .childImageSharp
+                                                            .gatsbyImageData
                                                         }
                                                       />
                                                     </div>
@@ -1947,14 +1974,14 @@ export default class Home extends React.Component {
                                         </div>
                                       </div>
                                       <div
-                                        className='arrow'
+                                        className="arrow"
                                         onClick={() => {
                                           if (this.slider.offline)
-                                            this.slider.offline.go('>');
+                                            this.slider.offline.go(">");
                                         }}
                                       >
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                     </>
                                   ),
@@ -1968,37 +1995,38 @@ export default class Home extends React.Component {
                             <h2>
                               {this.langID
                                 ? transData.shop.stockist.id
-                                : transData.shop.stockist.en}</h2>
+                                : transData.shop.stockist.en}
+                            </h2>
                             <div
-                              id='stockist'
+                              id="stockist"
                               className={`shopSlider stockist ${
-                                stockistList.length <= 2 ? ' oneslide' : ''
+                                stockistList.length <= 2 ? " oneslide" : ""
                               } ${
-                                !onlineshopemobileslider ? 'nomobileslider' : ''
+                                !onlineshopemobileslider ? "nomobileslider" : ""
                               }`}
                             >
                               {
                                 {
                                   SINGLE: (
                                     <>
-                                      <div className='arrow'>
+                                      <div className="arrow">
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                       {/* CONTENT */}
                                       <div
-                                        id='stockistslider '
-                                        className='glide wrapper '
+                                        id="stockistslider "
+                                        className="glide wrapper "
                                       >
                                         {stockistList.map((section, id) => {
                                           return (
                                             <div
-                                              className='stockist glide__slide'
+                                              className="stockist glide__slide"
                                               key={id}
                                               dataid={id}
                                             >
                                               {section.map((entry, entryid) => {
-                                                if (entry.link !== '') {
+                                                if (entry.link !== "") {
                                                   return (
                                                     <a
                                                       href={entry.link}
@@ -2023,44 +2051,44 @@ export default class Home extends React.Component {
                                           );
                                         })}
                                       </div>
-                                      <div className='arrow'>
+                                      <div className="arrow">
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                     </>
                                   ),
                                   SLIDER: (
                                     <>
                                       <div
-                                        className='arrow'
+                                        className="arrow"
                                         onClick={() => {
                                           if (this.slider.stockist)
-                                            this.slider.stockist.go('<');
+                                            this.slider.stockist.go("<");
                                         }}
                                       >
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                       {/* CONTENT */}
                                       <div
-                                        id='stockistslider'
-                                        className='glide wrapper'
+                                        id="stockistslider"
+                                        className="glide wrapper"
                                       >
                                         <div
-                                          data-glide-el='track'
-                                          className='glide__track'
+                                          data-glide-el="track"
+                                          className="glide__track"
                                         >
-                                          <div className='glide__slides '>
+                                          <div className="glide__slides ">
                                             {stockistList.map((section, id) => {
                                               return (
                                                 <div
-                                                  className='stockist glide__slide'
+                                                  className="stockist glide__slide"
                                                   key={id}
                                                   dataid={id}
                                                 >
                                                   {section.map(
                                                     (entry, entryid) => {
-                                                      if (entry.link !== '') {
+                                                      if (entry.link !== "") {
                                                         return (
                                                           <a
                                                             href={entry.link}
@@ -2080,7 +2108,7 @@ export default class Home extends React.Component {
                                                           </span>
                                                         );
                                                       }
-                                                    }
+                                                    },
                                                   )}
                                                 </div>
                                               );
@@ -2089,14 +2117,14 @@ export default class Home extends React.Component {
                                         </div>
                                       </div>
                                       <div
-                                        className='arrow'
+                                        className="arrow"
                                         onClick={() => {
                                           if (this.slider.stockist)
-                                            this.slider.stockist.go('>');
+                                            this.slider.stockist.go(">");
                                         }}
                                       >
                                         <Arrow />
-                                        <ArrowSmaller classProps='mobile' />
+                                        <ArrowSmaller classProps="mobile" />
                                       </div>
                                     </>
                                   ),
@@ -2105,33 +2133,33 @@ export default class Home extends React.Component {
                             </div>
                           </div>
                         ) : (
-                          ''
+                          ""
                         )}
                       </div>
                     </div>
                   </div>
                 </section>
                 {!data.general.frontmatter.journaldisable && (
-                  <section id='journal' className='journallist'>
-                    <div className='wrapper'>
+                  <section id="journal" className="journallist">
+                    <div className="wrapper">
                       <h1>
                         {this.langID
                           ? transData.journal.title.id
                           : transData.journal.title.en}
                       </h1>
 
-                      <div className='content flex'>
-                        <div className='__journalcontainer'>
+                      <div className="content flex">
+                        <div className="__journalcontainer">
                           {printjournal.edges.map((journal, id) => {
                             let getColorstat =
                               journal.node.frontmatter.listcolorblack;
                             if (
                               typeof journal.node.frontmatter.listcolorblack ===
-                              'string'
+                              "string"
                             ) {
                               getColorstat =
                                 journal.node.frontmatter.listcolorblack ===
-                                'true'
+                                "true"
                                   ? true
                                   : false;
                             }
@@ -2139,37 +2167,41 @@ export default class Home extends React.Component {
                               <Link
                                 key={journal.node.id}
                                 to={journal.node.fields.slug}
-                                className={getColorstat ? 'black' : ''}
+                                className={getColorstat ? "black" : ""}
                               >
                                 <div>
                                   <span>{journal.node.frontmatter.date}</span>
                                   <h2>{journal.node.frontmatter.title}</h2>
                                 </div>
                                 <GatsbyImage
-                                  image={journal.node.frontmatter.thumbimage.childImageSharp.gatsbyImageData}
+                                  image={
+                                    journal.node.frontmatter.thumbimage
+                                      .childImageSharp.gatsbyImageData
+                                  }
                                   style={{
-                                    width: '100%',
-                                    height: '100%',
+                                    width: "100%",
+                                    height: "100%",
                                   }}
                                   imgStyle={{
-                                    width: '100%',
-                                    height: '100%',
+                                    width: "100%",
+                                    height: "100%",
                                   }}
-                                  loading='eager'
-                                  fadeIn={false} />
+                                  loading="eager"
+                                  fadeIn={false}
+                                />
                               </Link>
                             );
                           })}
                         </div>
                         {printjournal.edges.length >= 4 && (
                           <Link
-                            className='viewall'
+                            className="viewall"
                             to={
                               this.langID
                                 ? `/id${journalslug}`
                                 : `${journalslug}`
                             }
-                            aria-label='Go to Journal'
+                            aria-label="Go to Journal"
                           >
                             <span>
                               {this.langID
@@ -2186,35 +2218,36 @@ export default class Home extends React.Component {
               <Footer indonesia={this.langID} />
               {this.state.popupReveal && (
                 <div
-                  id='PopUpWrapper'
+                  id="PopUpWrapper"
                   ref={this.popUpRef}
-                  className={`loading ${this.popupEnable ? 'popup' : ''}`}
+                  className={`loading ${this.popupEnable ? "popup" : ""}`}
                   onClick={(e) => {
                     if (
                       !e.currentTarget
-                        .querySelector('.container')
+                        .querySelector(".container")
                         .contains(e.target)
                     ) {
                       this.closePopUp();
                     }
                   }}
                 >
-                  <div className='container' ref={this.popUpRefContainer}>
-                    <div className='background'>
+                  <div className="container" ref={this.popUpRefContainer}>
+                    <div className="background">
                       <GatsbyImage
                         image={popupData.image.childImageSharp.gatsbyImageData}
-                        alt='popupimage'
+                        alt="popupimage"
                         imgStyle={{
-                          objectFit: 'cover',
-                          objectPosition: 'center',
-                          width: '100%',
-                          height: '100%',
+                          objectFit: "cover",
+                          objectPosition: "center",
+                          width: "100%",
+                          height: "100%",
                         }}
-                        loading='eager' />
+                        loading="eager"
+                      />
                     </div>
                     <div>
-                      <div className='content'>
-                        <div className='heading'>
+                      <div className="content">
+                        <div className="heading">
                           {this.langID
                             ? popupData.content.id
                             : popupData.content.en}
@@ -2234,12 +2267,12 @@ export default class Home extends React.Component {
                             </Link>
                           )
                         ) : (
-                          ''
+                          ""
                         )}
 
                         <div
-                          id='PopUpClose'
-                          className='close'
+                          id="PopUpClose"
+                          className="close"
                           onClick={this.closePopUp}
                         ></div>
                       </div>
@@ -2255,302 +2288,326 @@ export default class Home extends React.Component {
   }
 }
 
-const indexQuery = graphql`{
-  journals: allMarkdownRemark(
-    filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, indonesia: {eq: false}, active: {eq: true}}}
-    sort: {fields: [frontmatter___date], order: DESC}
-    limit: 4
-  ) {
-    edges {
-      node {
-        id
-        frontmatter {
-          title
-          date(formatString: "DD/MM/YY")
-          listcolorblack
-          thumbimage {
-            childImageSharp {
-              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+const indexQuery = graphql`
+  {
+    journals: allMarkdownRemark(
+      filter: {
+        frontmatter: {
+          issetting: { eq: false }
+          contenttype: { eq: "journal" }
+          indonesia: { eq: false }
+          active: { eq: true }
+        }
+      }
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 4
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "DD/MM/YY")
+            listcolorblack
+            thumbimage {
+              childImageSharp {
+                gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+              }
             }
           }
+          fields {
+            slug
+          }
+          excerpt
         }
-        fields {
-          slug
-        }
-        excerpt
       }
     }
-  }
-  journals_id: allMarkdownRemark(
-    filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, indonesia: {eq: true}, active: {eq: true}}}
-    sort: {fields: [frontmatter___date], order: DESC}
-    limit: 4
-  ) {
-    edges {
-      node {
-        id
-        frontmatter {
-          title
-          date(formatString: "DD/MM/YY")
-          listcolorblack
-          thumbimage {
-            childImageSharp {
-              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+    journals_id: allMarkdownRemark(
+      filter: {
+        frontmatter: {
+          issetting: { eq: false }
+          contenttype: { eq: "journal" }
+          indonesia: { eq: true }
+          active: { eq: true }
+        }
+      }
+      sort: { fields: [frontmatter___date], order: DESC }
+      limit: 4
+    ) {
+      edges {
+        node {
+          id
+          frontmatter {
+            title
+            date(formatString: "DD/MM/YY")
+            listcolorblack
+            thumbimage {
+              childImageSharp {
+                gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+              }
             }
           }
+          fields {
+            slug
+          }
+          excerpt
         }
-        fields {
-          slug
-        }
-        excerpt
       }
     }
-  }
-  general: markdownRemark(
-    frontmatter: {issetting: {eq: true}, contenttype: {eq: "general_setting"}}
-  ) {
-    frontmatter {
-      web_name
-      journaldisable
-      journalslug
-      seo {
-        seo_shortdesc_id
+    general: markdownRemark(
+      frontmatter: {
+        issetting: { eq: true }
+        contenttype: { eq: "general_setting" }
       }
-      footer {
-        email
-        ig_link
-        wa_no
+    ) {
+      frontmatter {
+        web_name
+        journaldisable
+        journalslug
+        seo {
+          seo_shortdesc_id
+        }
+        footer {
+          email
+          ig_link
+          wa_no
+        }
       }
     }
-  }
-  shop: markdownRemark(
-    frontmatter: {issetting: {eq: true}, contenttype: {eq: "homeshop_setting"}}
-  ) {
-    frontmatter {
-      onlineshop {
-        onlineshoplist {
-          image {
-            childImageSharp {
-              gatsbyImageData(
-                width: 500
-                quality: 100
-                placeholder: BLURRED
-                layout: CONSTRAINED
-              )
+    shop: markdownRemark(
+      frontmatter: {
+        issetting: { eq: true }
+        contenttype: { eq: "homeshop_setting" }
+      }
+    ) {
+      frontmatter {
+        onlineshop {
+          onlineshoplist {
+            image {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 500
+                  quality: 100
+                  placeholder: BLURRED
+                  layout: CONSTRAINED
+                )
+              }
             }
+            link
+            background
           }
-          link
-          background
+          slider_option
         }
-        slider_option
-      }
-      offlineshop {
-        offlineshoplist {
-          image {
-            childImageSharp {
-              gatsbyImageData(
-                width: 500
-                quality: 100
-                placeholder: BLURRED
-                layout: CONSTRAINED
-              )
+        offlineshop {
+          offlineshoplist {
+            image {
+              childImageSharp {
+                gatsbyImageData(
+                  width: 500
+                  quality: 100
+                  placeholder: BLURRED
+                  layout: CONSTRAINED
+                )
+              }
             }
+            link
+            background
           }
-          link
-          background
+          slider_option
         }
-        slider_option
-      }
-      stockist {
-        list {
-          content
-          link
+        stockist {
+          list {
+            content
+            link
+          }
+          slider_option
         }
-        slider_option
       }
     }
-  }
-  home: markdownRemark(
-    frontmatter: {issetting: {eq: true}, contenttype: {eq: "home_setting"}}
-  ) {
-    frontmatter {
-      title
-      home {
-        background {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-          }
-        }
-        backgroundmobile {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-          }
-        }
+    home: markdownRemark(
+      frontmatter: {
+        issetting: { eq: true }
+        contenttype: { eq: "home_setting" }
       }
-      popup {
-        enable
-        always
-        image {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-          }
-        }
-        content {
-          en
-          id
-        }
-        link {
-          en
-          id
-        }
-        buttontext {
-          en
-          id
-        }
-      }
-      about {
-        background {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-          }
-        }
-        desc {
-          en
-          id
-        }
-        pomInfo {
-          en {
-            rowOne
-            rowTwo
-          }
-          id {
-            rowOne
-            rowTwo
-          }
-        }
-      }
-      ingredients {
-        image {
-          childImageSharp {
-            gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
-          }
-        }
-        title {
-          en
-          id
-        }
-        desc {
-          en
-          id
-        }
-      }
-      translations {
+    ) {
+      frontmatter {
+        title
         home {
-          title {
+          background {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+            }
+          }
+          backgroundmobile {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+            }
+          }
+        }
+        popup {
+          enable
+          always
+          image {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+            }
+          }
+          content {
             en
             id
           }
-          kys {
-            en {
-              know
-              your
-              strength
-            }
-            id {
-              know
-              your
-              strength
-            }
-          }
-          getyours {
+          link {
             en
             id
           }
-          shopfloat {
+          buttontext {
             en
             id
           }
         }
         about {
-          title {
+          background {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+            }
+          }
+          desc {
             en
             id
           }
-          cert {
-            natural {
-              en
-              id
-            }
-            bpom {
-              en
-              id
-            }
-            halal {
-              en
-              id
-            }
-            quality {
-              en
-              id
-            }
-            quadra {
-              en
-              id
-            }
-          }
-        }
-        benefits {
-          title {
-            en
-            id
-          }
-          stamina {
+          pomInfo {
             en {
-              line1
-              line2
+              rowOne
+              rowTwo
             }
             id {
-              line1
-              line2
+              rowOne
+              rowTwo
             }
           }
         }
         ingredients {
+          image {
+            childImageSharp {
+              gatsbyImageData(placeholder: BLURRED, layout: FULL_WIDTH)
+            }
+          }
           title {
+            en
+            id
+          }
+          desc {
             en
             id
           }
         }
-        shop {
-          title {
-            en
-            id
+        translations {
+          home {
+            title {
+              en
+              id
+            }
+            kys {
+              en {
+                know
+                your
+                strength
+              }
+              id {
+                know
+                your
+                strength
+              }
+            }
+            getyours {
+              en
+              id
+            }
+            shopfloat {
+              en
+              id
+            }
           }
-          online {
-            en
-            id
+          about {
+            title {
+              en
+              id
+            }
+            cert {
+              natural {
+                en
+                id
+              }
+              bpom {
+                en
+                id
+              }
+              halal {
+                en
+                id
+              }
+              quality {
+                en
+                id
+              }
+              quadra {
+                en
+                id
+              }
+            }
           }
-          offline {
-            en
-            id
+          benefits {
+            title {
+              en
+              id
+            }
+            stamina {
+              en {
+                line1
+                line2
+              }
+              id {
+                line1
+                line2
+              }
+            }
           }
-          stockist {
-            en
-            id
+          ingredients {
+            title {
+              en
+              id
+            }
           }
-        }
-        journal {
-          title {
-            en
-            id
+          shop {
+            title {
+              en
+              id
+            }
+            online {
+              en
+              id
+            }
+            offline {
+              en
+              id
+            }
+            stockist {
+              en
+              id
+            }
           }
-          viewall {
-            en
-            id
+          journal {
+            title {
+              en
+              id
+            }
+            viewall {
+              en
+              id
+            }
           }
         }
       }
     }
   }
-}
 `;
