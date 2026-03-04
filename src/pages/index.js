@@ -1360,13 +1360,13 @@ export default class Home extends React.Component {
                             : homeData.about.desc.en}
                         </div>
                         <div className="pom-info">
-                          {/* {this.langID
-                            ? homeData.about.pomInfo.en.rowOne
+                          {this.langID
+                            ? homeData.about.pomInfo.id.rowOne
                             : homeData.about.pomInfo.en.rowOne}
-                          <br /> */}
+                          <br />
                           {this.langID
                             ? homeData.about.pomInfo.id.rowTwo
-                            : homeData.about.pomInfo.id.rowTwo}
+                            : homeData.about.pomInfo.en.rowTwo}
                         </div>
                         <div className="certification">
                           <div>
