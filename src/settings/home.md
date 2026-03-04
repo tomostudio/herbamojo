@@ -31,7 +31,7 @@ about:
       rowOne: POM TR 182322231, POM TR 212347371
     en:
       rowOne: POM TR 182322231, POM TR 212347371
-      rowTwo: Read warnings and precautions before use.
+      rowTwo: Read directions and warnings before use.
 ingredients:
   - desc:
       en: Ginseng works to support stamina - 100 mg Ginseng Extract
