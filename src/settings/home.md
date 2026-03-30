@@ -159,10 +159,10 @@ translations:
         line2: Energi
     stamina:
       en:
-        line1: Supports
+        line1: Help Supports
         line2: Male Stamina
       id:
-        line1: Memelihara
+        line1: Membantu Memelihara
         line2: Stamina Pria
     title:
       en: Benefits
