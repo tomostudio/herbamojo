@@ -7,9 +7,9 @@ popup:
   always: true
   image: /assets/popup_bg.png
   content:
-    en: Shop Original Herbamojo + Special Promo
+    en: Shop Original Herbamojo
     id: |
-      Beli Herbamojo Original + Promo Spesial
+      Belanja Herbamojo Original
   buttontext:
     en: CLICK HERE TO SHOP ORIGINAL PRODUCT
     id: KLIK DISINI UNTUK BELANJA PRODUK ORIGINAL
@@ -34,60 +34,57 @@ about:
       rowTwo: Read directions and warnings before use.
 ingredients:
   - desc:
-      en: Ginseng works to support stamina - 100 mg Ginseng Extract
-      id: Ginseng berkhasiat untuk meningkatkan stamina - 100 mg Ekstrak Ginseng
+      en: Ginseng works to help support stamina - 100 mg Ginseng Extract
+      id: Ginseng berkhasiat untuk membantu memelihara stamina - 100 mg Ekstrak
+        Ginseng
     image: /assets/ginseng.jpg
     title:
       en: GINSENG
       id: GINSENG
   - desc:
-      en: Red Ginger works to improve blood circulation - 25 mg Red Ginger Extract
-      id: Jahe merah berkhasiat untuk melancarkan peredaran darah - 25 mg Ekstrak Jahe
-        Merah
+      en: Red Ginger helps support stamina recovery - 25 mg Red Ginger Extract
+      id: Jahe merah berkhasiat untuk membantu dalam pemulihan stamina - 25 mg Ekstrak
+        Jahe Merah
     image: /assets/jahe_merah.jpg
     title:
       en: RED GINGER
       id: JAHE MERAH
   - desc:
-      en: Tribulus works to support male stamina - 100 mg Tribulus Extract
-      id: "Tribulus berkhasiat untuk meningkatkan stamina pria - 100 mg Ekstrak
+      en: Tribulus works to help maintain stamina - 100 mg Tribulus Extract
+      id: "Tribulus berkhasiat untuk membantu memelihara stamina - 100 mg Ekstrak
         Tribulus "
     image: /assets/tribulus.jpg
     title:
       en: TRIBULUS
       id: TRIBULUS
   - desc:
-      en: Maca works to support stamina and works as an aphrodisiac - 100 mg Maca
-        Extract
-      id: Maca berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak - 100 mg
-        Ekstrak Maca
+      en: Maca works to help maintain male stamina - 100 mg Maca Extract
+      id: Maca berkhasiat untuk membantu memelihara stamina pria - 100 mg Ekstrak Maca
     image: /assets/maca.jpg
     title:
       en: MACA
       id: MACA
   - desc:
-      en: Long Jack works to support stamina and works as an aphrodisiac - 50 mg Long
-        Jack Extract
-      id: Pasak bumi berkhasiat untuk menjaga stamina dan sebagai afrodisiak - 50 mg
-        Ekstrak Pasak Bumi/Tongkat Ali
+      en: Pasak Bumi works to help maintain male stamina - 50 mg Pasak Bumi/Tongkat
+        Ali Extract
+      id: Pasak bumi berkhasiat untuk membantu memelihara stamina pria - 50 mg Ekstrak
+        Pasak Bumi/Tongkat Ali
     image: /assets/pasak_bumi.jpg
     title:
-      en: LONG JACK
+      en: PASAK BUMI
       id: PASAK BUMI
   - desc:
-      en: Purwoceng works to support stamina and works as an aphrodisiac - 50 mg
-        Purwoceng Extract
-      id: Purwoceng berkhasiat untuk meningkatkan stamina dan sebagai afrodisiak - 50
-        mg Ekstrak Purwoceng
+      en: Purwoceng works to help maintain male stamina - 50 mg Purwoceng Extract
+      id: Purwoceng berkhasiat untuk membantu memelihara stamina pria - 50 mg Ekstrak
+        Purwoceng
     image: /assets/purwoceng.jpg
     title:
       en: PURWOCENG
       id: PURWOCENG
   - desc:
-      en: Javanese Long Pepper works to increase stamina and as an aphrodisiac - 25 mg
-        Javanese Long Pepper Extract
-      id: Cabe Jawa berkhasiat untuk melancarkan peredaran darah - 25 mg Ekstrak Cabe
-        Jawa
+      en: Cabe Jawa works to help maintain male stamina - 25 mg Cabe Jawa Extract
+      id: Cabe Jawa berkhasiat untuk membantu memelihara stamina pria - 25 mg Ekstrak
+        Cabe Jawa
     image: /assets/cabe.jpg
     title:
       en: JAVANESE LONG PEPPER
