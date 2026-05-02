@@ -1,8 +1,10 @@
 import React from 'react';
 import 'stylesheet/status.scss';
-import NetlifyAPI from 'netlify';
 import { Helmet } from 'react-helmet';
 import { graphql } from 'gatsby';
+
+const NETLIFY_ACCESS_TOKEN = 'OYkkGnPqf9de7DnGPUq1C4LTEgWyIs44AFpGxCjSknE';
+const NETLIFY_SITE_ID = '1c86a3bb-30cc-4b70-a38a-055ef3338287';
 
 export default class Status extends React.Component {
   deployStatus = 'Loading';
@@ -14,15 +16,23 @@ export default class Status extends React.Component {
   }
   getStatus() {
     async function __getLatestStatus() {
-      const client = new NetlifyAPI(
-        'OYkkGnPqf9de7DnGPUq1C4LTEgWyIs44AFpGxCjSknE'
+      const response = await fetch(
+        `https://api.netlify.com/api/v1/sites/${NETLIFY_SITE_ID}/deploys`,
+        {
+          headers: {
+            Authorization: `Bearer ${NETLIFY_ACCESS_TOKEN}`,
+          },
+        }
       );
 
-      const listSite = await client.listSites();
-      console.log(listSite);
-      const DeployList = await client.listSiteDeploys({
-        siteId: '1c86a3bb-30cc-4b70-a38a-055ef3338287',
-      });
+      if (!response.ok) {
+        throw new Error(`Netlify deploy status request failed: ${response.status}`);
+      }
+
+      const DeployList = await response.json();
+      if (!Array.isArray(DeployList) || DeployList.length === 0) {
+        throw new Error('Netlify deploy status response is empty');
+      }
 
       let count = 0;
       //CHECK IF DEPLOY IS SKIPPED or NEW

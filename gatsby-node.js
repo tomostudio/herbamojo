@@ -6,6 +6,50 @@ let journalslug = 'journal';
 let journalperList = 6;
 let journaldisable = false;
 
+const normalizeFrontmatterAssetPaths = (value) => {
+  if (Array.isArray(value)) {
+    return value.map(normalizeFrontmatterAssetPaths);
+  }
+
+  if (value && typeof value === 'object') {
+    Object.keys(value).forEach((key) => {
+      value[key] = normalizeFrontmatterAssetPaths(value[key]);
+    });
+    return value;
+  }
+
+  if (typeof value === 'string' && value.startsWith('/assets/')) {
+    return `../../static${value}`;
+  }
+
+  return value;
+};
+
+const resolveStaticAssetFile = (source, args, context, info) => {
+  const fieldValue = source[info.fieldName];
+  if (!fieldValue) return null;
+
+  let absolutePath;
+  if (fieldValue.startsWith('/assets/')) {
+    absolutePath = path.join(__dirname, 'static', fieldValue.replace(/^\//, ''));
+  } else if (fieldValue.startsWith('../../static/')) {
+    absolutePath = path.resolve(__dirname, 'src/settings', fieldValue);
+  } else {
+    absolutePath = path.resolve(__dirname, fieldValue);
+  }
+
+  return context.nodeModel.findOne({
+    query: {
+      filter: {
+        absolutePath: {
+          eq: absolutePath,
+        },
+      },
+    },
+    type: 'File',
+  });
+};
+
 exports.onCreateNode = (args) => {
   const { node, getNode, getNodesByType, actions } = args;
   // console.log(args);
@@ -26,6 +70,8 @@ exports.onCreateNode = (args) => {
   }
 
   if (node.internal.type === `MarkdownRemark` || node.internal.type === `Mdx`) {
+    node.frontmatter = normalizeFrontmatterAssetPaths(node.frontmatter);
+
     if (
       node.frontmatter.issetting &&
       node.frontmatter.contenttype === 'general_setting'
@@ -94,12 +140,72 @@ exports.onCreateNode = (args) => {
   }
 };
 
+exports.createSchemaCustomization = ({ actions }) => {
+  const { createTypes } = actions;
+
+  createTypes(`
+    type MarkdownRemarkFrontmatterHome {
+      background: File
+      backgroundmobile: File
+    }
+
+    type MarkdownRemarkFrontmatterAbout {
+      background: File
+    }
+
+    type MarkdownRemarkFrontmatterIngredients {
+      image: File
+    }
+
+    type MarkdownRemarkFrontmatterPopup {
+      image: File
+    }
+
+    type MarkdownRemarkFrontmatterOnlineshopOnlineshoplist {
+      image: File
+    }
+
+    type MarkdownRemarkFrontmatterOfflineshopOfflineshoplist {
+      image: File
+    }
+  `);
+};
+
+exports.createResolvers = ({ createResolvers }) => {
+  const assetFileResolver = {
+    type: 'File',
+    resolve: resolveStaticAssetFile,
+  };
+
+  createResolvers({
+    MarkdownRemarkFrontmatterHome: {
+      background: assetFileResolver,
+      backgroundmobile: assetFileResolver,
+    },
+    MarkdownRemarkFrontmatterAbout: {
+      background: assetFileResolver,
+    },
+    MarkdownRemarkFrontmatterIngredients: {
+      image: assetFileResolver,
+    },
+    MarkdownRemarkFrontmatterPopup: {
+      image: assetFileResolver,
+    },
+    MarkdownRemarkFrontmatterOnlineshopOnlineshoplist: {
+      image: assetFileResolver,
+    },
+    MarkdownRemarkFrontmatterOfflineshopOfflineshoplist: {
+      image: assetFileResolver,
+    },
+  });
+};
+
 exports.createPages = async ({ graphql, actions, reporter }) => {
   const result = await graphql(`
     {
       all: allMarkdownRemark(
         filter: { frontmatter: { issetting: { eq: false } } }
-        sort: { fields: [frontmatter___date], order: DESC }
+        sort: { frontmatter: { date: DESC } }
       ) {
         edges {
           node {
@@ -289,6 +395,5 @@ exports.onCreateWebpackConfig = ({ stage, actions }) => {
     resolve: {
       modules: [path.resolve(__dirname, 'src'), 'node_modules'],
     },
-    externals: ['@netlify/zip-it-and-ship-it'],
   });
 };

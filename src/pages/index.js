@@ -2299,7 +2299,7 @@ const indexQuery = graphql`
           active: { eq: true }
         }
       }
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 4
     ) {
       edges {
@@ -2331,7 +2331,7 @@ const indexQuery = graphql`
           active: { eq: true }
         }
       }
-      sort: { fields: [frontmatter___date], order: DESC }
+      sort: { frontmatter: { date: DESC } }
       limit: 4
     ) {
       edges {

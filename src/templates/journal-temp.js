@@ -351,7 +351,7 @@ export const query = graphql`query ($slug: String!, $indo: Boolean!) {
   journals: allMarkdownRemark(
     limit: 2
     filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, active: {eq: true}, indonesia: {eq: $indo}}, fields: {slug: {ne: $slug}}}
-    sort: {fields: [frontmatter___date], order: DESC}
+    sort: {frontmatter: {date: DESC}}
   ) {
     totalCount
     edges {
@@ -376,7 +376,7 @@ export const query = graphql`query ($slug: String!, $indo: Boolean!) {
   }
   alljournals: allMarkdownRemark(
     filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, active: {eq: true}, indonesia: {eq: $indo}}}
-    sort: {fields: [frontmatter___date], order: DESC}
+    sort: {frontmatter: {date: DESC}}
   ) {
     totalCount
     edges {

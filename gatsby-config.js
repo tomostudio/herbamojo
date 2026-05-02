@@ -5,17 +5,6 @@ module.exports = {
   },
   plugins: [
     {
-      resolve: 'gatsby-plugin-webpack-bundle-analyser-v2',
-      options: {
-        excludeAssets: [`/admin`],
-        devMode: true,
-        generateStatsFile: true,
-        statsOptions: {
-          exclude: [`/admin`],
-        },
-      },
-    },
-    {
       resolve: 'gatsby-source-filesystem',
       options: {
         path: `${__dirname}/static/assets`,
@@ -49,6 +38,7 @@ module.exports = {
       resolve: `gatsby-plugin-sass`,
       options: {
         implementation: require('sass'),
+        sassOptions: { silenceDeprecations: ["legacy-js-api", "import", "global-builtin"] },
       },
     },
     `gatsby-plugin-layout`,
@@ -132,7 +122,7 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-plugin-netlify-cms`,
+      resolve: `gatsby-plugin-decap-cms`,
       options: {
         htmlTitle: `Content Manager | HERBAMOJO`,
         htmlFavicon: `${__dirname}/static/icon.png`,

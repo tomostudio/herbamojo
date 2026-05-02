@@ -227,7 +227,7 @@ export const query = graphql`query ($skip: Int!, $limit: Int!, $indo: Boolean!) 
   }
   journals: allMarkdownRemark(
     filter: {frontmatter: {issetting: {eq: false}, contenttype: {eq: "journal"}, indonesia: {eq: $indo}, active: {eq: true}}}
-    sort: {fields: [frontmatter___date], order: DESC}
+    sort: {frontmatter: {date: DESC}}
     limit: $limit
     skip: $skip
   ) {
