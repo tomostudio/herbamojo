@@ -5,6 +5,7 @@ indonesia: true
 active: true
 title: Suplemen Herbal Harian untuk Stamina Pria yang Aktif
 slug: artikel/suplemen-herbal-stamina-pria
+date: 2026-07-28T16:17:58.210+07:00
 seo:
   seo_shortdesc: jaga stamina & vitalitas pria tiap hari dengan Herbamojo — 7
     ekstrak herbal alami, BPOM & Halal.
