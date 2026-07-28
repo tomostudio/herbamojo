@@ -12,7 +12,15 @@ base = "/"
 publish = "public/"
 
 # Default build command.
-command = "yarn run server-build"
+#
+# Trailing `rm -rf` is a workaround for the legacy @netlify/plugin-gatsby build
+# plugin (installed from the Netlify UI, so it cannot be disabled from here).
+# Its onPostBuild copies .cache/ into the build cache with `cpy`, which crashes
+# with EISDIR on the bin symlinks that gatsby-adapter-netlify writes to
+# .cache/adapters/node_modules/.bin/. Those are npm install-script shims, unused
+# at runtime and by function bundling, so dropping them is safe. Remove this
+# once the plugin is uninstalled -- Gatsby 5.12+ handles Netlify via the adapter.
+command = "yarn run server-build && rm -rf .cache/adapters/node_modules/.bin"
 
 # Command Increase Max Processing Space
 # command = "node --max_old_space_size=4096 ./node_modules/.bin/gatsby build"
