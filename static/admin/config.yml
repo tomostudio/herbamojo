@@ -59,7 +59,15 @@ collections:
             ['^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$', 'Invalid Characters'],
           required: true,
         }
-      - { name: 'date', label: 'Date', widget: 'date', required: true }
+      - {
+          name: 'date',
+          label: 'Date',
+          widget: 'datetime',
+          date_format: 'DD/MM/YYYY',
+          time_format: false,
+          format: 'YYYY-MM-DDTHH:mm:ss.SSSZ',
+          required: true,
+        }
       - label: 'META INFO'
         name: 'seo'
         widget: 'object'
@@ -213,7 +221,15 @@ collections:
             ['^([a-z0-9]+(?:(-|/)[a-z0-9]+)*){3,}$', 'Invalid Characters'],
           required: true,
         }
-      - { name: 'date', label: 'Date', widget: 'date', required: true }
+      - {
+          name: 'date',
+          label: 'Date',
+          widget: 'datetime',
+          date_format: 'DD/MM/YYYY',
+          time_format: false,
+          format: 'YYYY-MM-DDTHH:mm:ss.SSSZ',
+          required: true,
+        }
       - label: 'META INFO'
         name: 'seo'
         widget: 'object'
