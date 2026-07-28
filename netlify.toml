@@ -13,14 +13,18 @@ publish = "public/"
 
 # Default build command.
 #
-# Trailing `rm -rf` is a workaround for the legacy @netlify/plugin-gatsby build
+# Trailing `find` is a workaround for the legacy @netlify/plugin-gatsby build
 # plugin (installed from the Netlify UI, so it cannot be disabled from here).
 # Its onPostBuild copies .cache/ into the build cache with `cpy`, which crashes
-# with EISDIR on the bin symlinks that gatsby-adapter-netlify writes to
-# .cache/adapters/node_modules/.bin/. Those are npm install-script shims, unused
-# at runtime and by function bundling, so dropping them is safe. Remove this
-# once the plugin is uninstalled -- Gatsby 5.12+ handles Netlify via the adapter.
-command = "yarn run server-build && rm -rf .cache/adapters/node_modules/.bin"
+# with EISDIR on the bin symlinks that gatsby-adapter-netlify writes under
+# .cache/adapters/ -- both at the top level and nested inside transitive deps
+# (e.g. node_modules/builtins/node_modules/.bin/semver), hence the recursive
+# sweep. Those are npm install-script shims, unused at runtime and by function
+# bundling, so dropping them is safe. `|| true` keeps a failed sweep from
+# failing the deploy; a failed build still propagates through the `&&`.
+# Remove this once the plugin is uninstalled -- Gatsby 5.12+ handles Netlify
+# natively via the adapter.
+command = "yarn run server-build && (find .cache -type d -name .bin -prune -exec rm -rf {} + || true)"
 
 # Command Increase Max Processing Space
 # command = "node --max_old_space_size=4096 ./node_modules/.bin/gatsby build"
