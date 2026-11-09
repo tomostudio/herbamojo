@@ -3,7 +3,14 @@ exports.onRouteUpdate = ({
 }) => {
 }
 exports.onClientEntry = () => {
-    // console.log("First Time Site is loaded")
+    // Netlify Identity emails link to the site root with the token in the hash.
+    // gatsby-plugin-decap-cms@4.0.4 should load the widget here, but its compiled
+    // require(variable) makes webpack bundle an empty module, so it always throws.
+    // /admin/ loads the widget itself, so hand the token over to it.
+    const { hash } = window.location;
+    if (/(confirmation|invite|recovery|email_change)_token=|access_token=|error=access_denied&error_description=403/.test(hash)) {
+        window.location.replace(`/admin/${hash}`);
+    }
 }
 
 exports.onPreRouteUpdate = ({ location }) => {
