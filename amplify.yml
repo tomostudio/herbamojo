@@ -1,0 +1,29 @@
+version: 1
+frontend:
+  phases:
+    preBuild:
+      commands:
+        - nvm use
+        - npm ci
+    build:
+      commands:
+        # Amplify exposes the console's environment variables to the build, but
+        # not to the SSR runtime that serves the site afterwards. Next reads
+        # NEXT_PUBLIC_* at build time so those already work; SANITY_API_READ_TOKEN
+        # and SANITY_REVALIDATE_SECRET are read per request, and without this
+        # they are simply undefined there — revalidation fails and the webhook
+        # answers "SANITY_REVALIDATE_SECRET is not set".
+        #
+        # Writing them into .env.production carries them into the deployment,
+        # which is the documented way round this. The file is git-ignored, and
+        # lives outside public/, so it is never served.
+        - env | grep -E '^(NEXT_PUBLIC_|SANITY_)' >> .env.production
+        - npm run build
+  artifacts:
+    baseDirectory: .next
+    files:
+      - '**/*'
+  cache:
+    paths:
+      - node_modules/**/*
+      - .next/cache/**/*

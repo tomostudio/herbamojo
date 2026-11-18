@@ -1,0 +1,49 @@
+@font-face {
+  font-family: "Maison Mono";
+  src:
+    url("../public/fonts/MaisonMono.woff2") format("woff2"),
+    url("../public/fonts/MaisonMono.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maison Mono";
+  src:
+    url("../public/fonts/MaisonMono-Light.woff2") format("woff2"),
+    url("../public/fonts/MaisonMono-Light.woff") format("woff");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maison Mono";
+  src:
+    url("../public/fonts/MaisonMono-Bold.woff2") format("woff2"),
+    url("../public/fonts/MaisonMono-Bold.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Maison Mono";
+  src:
+    url("../public/fonts/MaisonMono-Italic.woff2") format("woff2"),
+    url("../public/fonts/MaisonMono-Italic.woff") format("woff");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Amarillo USAF";
+  src:
+    url("../public/fonts/AmarilloUSAF.woff2") format("woff2"),
+    url("../public/fonts/AmarilloUSAF.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}

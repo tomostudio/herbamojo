@@ -1,0 +1,12 @@
+{
+  "name": "Herbamojo",
+  "short_name": "Herbamojo",
+  "start_url": "/",
+  "background_color": "#000000",
+  "theme_color": "#15C87F",
+  "display": "standalone",
+  "icons": [
+    { "src": "/android-icon-192x192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/android-icon-512x512.png", "sizes": "512x512", "type": "image/png" }
+  ]
+}

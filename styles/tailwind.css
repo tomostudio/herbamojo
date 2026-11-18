@@ -1,0 +1,327 @@
+@import "tailwindcss";
+/* The shop and stockist carousels. Layered so the utilities on the slider
+   markup can still override it. */
+@import "@glidejs/glide/dist/css/glide.core.css" layer(components);
+
+@theme {
+  --color-green: rgb(41 203 126);
+  --color-paper: #f2f2f2;
+
+  --font-maison-mono: "Maison Mono", ui-monospace, monospace;
+  --font-amarillo: "Amarillo USAF", sans-serif;
+
+  /* The site is built desktop-first, so these are mostly read through
+     max-*: (max-mtablet:hidden = narrower than 800px). The default scale is
+     kept, in px so every breakpoint sorts on one unit. */
+  --breakpoint-*: initial;
+  --breakpoint-smaller: 450px;
+  --breakpoint-sm: 640px;
+  --breakpoint-mobile: 700px;
+  --breakpoint-md: 768px;
+  --breakpoint-mtablet: 800px;
+  --breakpoint-lg: 1024px;
+  --breakpoint-tablet: 1024px;
+  --breakpoint-desktop: 1240px;
+  --breakpoint-xl: 1280px;
+  --breakpoint-2xl: 1536px;
+
+  /* The original's $global-transition. */
+  --default-transition-duration: 250ms;
+  --default-transition-timing-function: ease;
+}
+
+/* Hover only applies on devices without touch: app/wrapper.tsx puts
+   `onhover` on the body when there is no touch support. */
+@custom-variant hover (&:where(body.onhover *):hover);
+
+/* Page state the loaders and scroll helpers write onto the body. Each also
+   works negated, e.g. not-loaded: */
+@custom-variant loaded (&:where(body.loaded *));
+@custom-variant revealed (&:where(body.revealed *));
+@custom-variant snapon (&:where(body.__snapon *));
+@custom-variant menu-open (&:where(body.menu_open *));
+
+/* Height breakpoints; h-less is declared last so it wins over h-mid. */
+@custom-variant h-mid (@media only screen and (max-height: 700px));
+@custom-variant h-less (@media only screen and (max-height: 500px));
+
+@layer base {
+  html {
+    /* normalize.css's value, which every unset line-height on the site was
+       designed against. */
+    line-height: 1.15;
+  }
+
+  body {
+    background: black;
+    color: white;
+    font-family: var(--font-maison-mono);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  /* Preflight makes these block-level and caps images at their container.
+     The layouts were built on normalize.css, where neither is true. */
+  img,
+  svg,
+  video,
+  canvas,
+  audio,
+  iframe,
+  embed,
+  object {
+    display: inline;
+    vertical-align: baseline;
+  }
+
+  img,
+  video {
+    max-width: none;
+  }
+
+  * {
+    user-select: none;
+  }
+
+  ::selection {
+    background: var(--color-green);
+  }
+}
+
+@keyframes ingbg-transitionout {
+  0%,
+  1% {
+    transform: translate(100px, 0%);
+    opacity: 1;
+  }
+  75%,
+  100% {
+    transform: translate(50px, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes ingbg-transitionin {
+  0%,
+  25% {
+    transform: translate(200px, 0%);
+    opacity: 0;
+  }
+  90%,
+  100% {
+    transform: translate(100px, 0%);
+    opacity: 1;
+  }
+}
+
+@keyframes ingbg-transitionoutm {
+  0%,
+  25% {
+    transform: translate(0px, 0%);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-100px, 0%);
+    opacity: 0;
+  }
+}
+
+@keyframes ingbg-transitioninm {
+  0%,
+  1% {
+    transform: translate(100px, 0%);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0px, 0%);
+    opacity: 1;
+  }
+}
+
+@keyframes mobilemenuout {
+  0% {
+    width: 100%;
+    right: 0px;
+    left: auto;
+  }
+  100% {
+    width: 0%;
+    right: 0px;
+    left: auto;
+  }
+}
+
+@keyframes mobilemenuin1 {
+  0% {
+    width: 0%;
+    left: 0px;
+    right: auto;
+  }
+  50%,
+  100% {
+    width: 100%;
+    left: 0px;
+    right: auto;
+  }
+}
+
+@keyframes mobilemenuin2 {
+  0%,
+  25% {
+    width: 0%;
+    left: 0px;
+    right: auto;
+  }
+  75%,
+  100% {
+    width: 100%;
+    left: 0px;
+    right: auto;
+  }
+}
+
+@keyframes mobilemenuin3 {
+  0%,
+  50% {
+    width: 0%;
+    left: 0px;
+    right: auto;
+  }
+  100% {
+    width: 100%;
+    left: 0px;
+    right: auto;
+  }
+}
+
+@keyframes loadingbefore {
+  0% {
+    width: 0%;
+    left: 0px;
+    right: auto;
+  }
+  33% {
+    width: 100%;
+    left: 0px;
+    right: auto;
+  }
+  66% {
+    width: 100%;
+    left: 0px;
+    right: auto;
+  }
+  66.5% {
+    width: 100%;
+    right: 0px;
+    left: auto;
+  }
+  99% {
+    width: 0%;
+    right: 0px;
+    left: auto;
+  }
+  100% {
+    width: 0%;
+    left: 0px;
+    right: auto;
+  }
+}
+
+@keyframes loadingbeforemobile {
+  0% {
+    height: 0%;
+    top: 0px;
+    bottom: auto;
+  }
+  33% {
+    height: 100%;
+    top: 0px;
+    bottom: auto;
+  }
+  66% {
+    height: 100%;
+    top: 0px;
+    bottom: auto;
+  }
+  66.5% {
+    height: 100%;
+    bottom: 0px;
+    top: auto;
+  }
+  99% {
+    height: 0%;
+    bottom: 0px;
+    top: auto;
+  }
+  100% {
+    height: 0%;
+    top: 0px;
+    bottom: auto;
+  }
+}
+
+@keyframes loadingafter {
+  0% {
+    width: 0%;
+    left: 0px;
+    right: auto;
+  }
+  33% {
+    width: 0%;
+    left: 0px;
+    right: auto;
+  }
+  66% {
+    width: 100%;
+    left: 0px;
+    right: auto;
+  }
+  66.5% {
+    width: 100%;
+    right: 0px;
+    left: auto;
+  }
+  99% {
+    width: 0%;
+    right: 0px;
+    left: auto;
+  }
+  100% {
+    width: 0%;
+    left: 0px;
+    right: auto;
+  }
+}
+
+@keyframes loadingaftermobile {
+  0% {
+    height: 0%;
+    top: 0px;
+    bottom: auto;
+  }
+  33% {
+    height: 0%;
+    top: 0px;
+    bottom: auto;
+  }
+  66% {
+    height: 100%;
+    top: 0px;
+    bottom: auto;
+  }
+  66.5% {
+    height: 100%;
+    bottom: 0px;
+    top: auto;
+  }
+  99% {
+    height: 0%;
+    bottom: 0px;
+    top: auto;
+  }
+  100% {
+    height: 0%;
+    top: 0px;
+    bottom: auto;
+  }
+}
