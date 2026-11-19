@@ -38,7 +38,7 @@ export const JOURNAL_DETAIL_QUERY = (language: Locale, slug: string) => ({
   "body": body.${language},
   "excerpt": excerpt.${language},
   "altSlug": slug.${language === "id" ? "en" : "id"}.current,
-  "related": related[defined(@->slug.${language}.current)]->{ ${JOURNAL_CARD_PROJECTION(language)} }
+  "related": coalesce(related[defined(@->slug.${language}.current)]->{ ${JOURNAL_CARD_PROJECTION(language)} }, [])
 }`,
   params: { slug },
 })
