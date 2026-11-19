@@ -8,8 +8,8 @@ import {
 } from "../shared/fields"
 
 /**
- * One journal entry holds both languages, English on the left and Indonesian
- * on the right. A language is published once its title is filled in; a
+ * One journal entry holds both languages, English above Indonesian in each
+ * field. A language is published once its title is filled in; a
  * journal may be written in only one of them.
  */
 const LANGUAGES = [
@@ -26,7 +26,7 @@ type PostDocument = {
 const hasTitle = (document: unknown, language: Language) =>
   Boolean((document as PostDocument | undefined)?.title?.[language])
 
-type SideBySideOptions = {
+type PerLanguageOptions = {
   name: string
   title: string
   description?: string
@@ -35,19 +35,18 @@ type SideBySideOptions = {
   field: (language: Language) => Record<string, unknown>
 }
 
-const sideBySide = ({
+const perLanguage = ({
   name,
   title,
   description,
   group,
   field,
-}: SideBySideOptions) => ({
+}: PerLanguageOptions) => ({
   name,
   title,
   ...(description ? { description } : {}),
   type: "object",
   ...(group ? { group } : {}),
-  options: { columns: 2 },
   fields: LANGUAGES.map((language) => ({
     name: language.name,
     title: language.title,
@@ -65,7 +64,7 @@ export default defineType({
     SEO_GROUP,
   ],
   fields: [
-    sideBySide({
+    perLanguage({
       name: "title",
       title: "Title",
       description:
@@ -73,7 +72,7 @@ export default defineType({
       group: "content",
       field: () => ({ type: "string" }),
     }),
-    sideBySide({
+    perLanguage({
       name: "slug",
       title: "Slug",
       description:
@@ -106,7 +105,7 @@ export default defineType({
       type: "number",
       group: "content",
     },
-    sideBySide({
+    perLanguage({
       name: "excerpt",
       title: "Excerpt",
       description:
@@ -114,7 +113,7 @@ export default defineType({
       group: "content",
       field: () => ({ type: "text", rows: 3 }),
     }),
-    sideBySide({
+    perLanguage({
       name: "body",
       title: "Body",
       description: "The article itself.",
@@ -147,7 +146,7 @@ export default defineType({
       group: "display",
       required: true,
     }),
-    sideBySide({
+    perLanguage({
       name: "listColorBlack",
       title: "Black Text on Thumbnail",
       description:
@@ -163,7 +162,7 @@ export default defineType({
       group: "display",
       required: true,
     }),
-    sideBySide({
+    perLanguage({
       name: "headerColorBlack",
       title: "Black Text on Cover",
       description:
@@ -181,14 +180,14 @@ export default defineType({
       type: "object",
       group: "seo",
       fields: [
-        sideBySide({
+        perLanguage({
           name: "seo_description",
           title: "Description",
           description:
             "Up to 400 characters, shown below the title on search engines and when the journal is shared.",
           field: () => ({ type: "text", rows: 3 }),
         }),
-        sideBySide({
+        perLanguage({
           name: "seo_keywords",
           title: "Keywords",
           description: "Keywords describing this journal, separated by commas.",
