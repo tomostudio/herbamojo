@@ -1,79 +1,102 @@
+import type { Rule, SlugValue } from "sanity"
 import { defineType } from "sanity"
 
 import {
   createImageField,
-  createSeoField,
   JOURNAL_SEO_IMAGE_DESCRIPTION,
   SEO_GROUP,
 } from "../shared/fields"
+
+/**
+ * One journal entry holds both languages, English on the left and Indonesian
+ * on the right. A language is published once its title is filled in; a
+ * journal may be written in only one of them.
+ */
+const LANGUAGES = [
+  { name: "en", title: "English" },
+  { name: "id", title: "Indonesian" },
+] as const
+
+type Language = (typeof LANGUAGES)[number]["name"]
+
+type PostDocument = {
+  title?: Partial<Record<Language, string>>
+}
+
+const hasTitle = (document: unknown, language: Language) =>
+  Boolean((document as PostDocument | undefined)?.title?.[language])
+
+type SideBySideOptions = {
+  name: string
+  title: string
+  description?: string
+  // Fields nested in another object, such as the SEO ones, take no group.
+  group?: string
+  field: (language: Language) => Record<string, unknown>
+}
+
+const sideBySide = ({
+  name,
+  title,
+  description,
+  group,
+  field,
+}: SideBySideOptions) => ({
+  name,
+  title,
+  ...(description ? { description } : {}),
+  type: "object",
+  ...(group ? { group } : {}),
+  options: { columns: 2 },
+  fields: LANGUAGES.map((language) => ({
+    name: language.name,
+    title: language.title,
+    ...field(language.name),
+  })),
+})
 
 export default defineType({
   name: "post",
   title: "Journal",
   type: "document",
   groups: [
-    SEO_GROUP,
-    { name: "content", title: "Content" },
+    { name: "content", title: "Content", default: true },
     { name: "display", title: "Display" },
+    SEO_GROUP,
   ],
   fields: [
-    createSeoField({
-      group: "seo",
-      description:
-        "Data for search engines and how this journal appears when shared. Without a description here the Excerpt is used; other fields left empty use the Default Metadata from General Settings.",
-      imageDescription: JOURNAL_SEO_IMAGE_DESCRIPTION,
-    }),
-    {
-      name: "language",
-      title: "Language",
-      description:
-        "Which version of the site this journal appears on. Each language is its own journal entry.",
-      type: "string",
-      group: "content",
-      options: {
-        list: [
-          { title: "English", value: "en" },
-          { title: "Indonesian", value: "id" },
-        ],
-        layout: "radio",
-      },
-      initialValue: "en",
-      validation: (Rule) => Rule.required(),
-    },
-    {
+    sideBySide({
       name: "title",
       title: "Title",
       description:
-        "Main title, shown on the journal card and over the cover image.",
-      type: "string",
+        "Main title, shown on the journal card and over the cover image. Fill in one language to publish the journal only on that version of the site.",
       group: "content",
-      validation: (Rule) => Rule.required(),
-    },
-    {
+      field: () => ({ type: "string" }),
+    }),
+    sideBySide({
       name: "slug",
       title: "Slug",
       description:
-        "Part of a page’s URL that comes after the domain name and identifies the page. It is generated from the page title using lowercase letters (a–z), numbers (0–9), and dashes (-), must be at least three characters long, and must not start with a slash (/).",
-      type: "slug",
+        "Part of a page’s URL that comes after the domain name and identifies the page. It is generated from the title using lowercase letters (a–z), numbers (0–9), and dashes (-), must be at least three characters long, and must not start with a slash (/).",
       group: "content",
-      options: { source: "title", maxLength: 96 },
-      validation: (Rule) => Rule.required(),
-    },
-    {
-      name: "altSlug",
-      title: "Alternate Language Slug",
-      description:
-        "Slug of this same journal in the other language, so the EN/ID toggle lands on its translation. Leave empty to send the toggle to the journal list.",
-      type: "string",
-      group: "content",
-    },
+      field: (language) => ({
+        type: "slug",
+        options: { source: `title.${language}`, maxLength: 96 },
+        validation: (rule: Rule) =>
+          rule.custom((value: SlugValue | undefined, context) =>
+            hasTitle(context.document, language) && !value?.current
+              ? "Required when this language has a title"
+              : true,
+          ),
+      }),
+    }),
     {
       name: "date",
       title: "Publish Date",
       description: "Journals are listed newest first by this date.",
       type: "datetime",
       group: "content",
-      validation: (Rule) => Rule.required(),
+      validation: (rule) => rule.required(),
     },
     {
       name: "listOrder",
@@ -83,27 +106,26 @@ export default defineType({
       type: "number",
       group: "content",
     },
-    {
+    sideBySide({
       name: "excerpt",
       title: "Excerpt",
       description:
         "Short summary of the journal, used as its description on search engines and when shared.",
-      type: "text",
-      rows: 3,
       group: "content",
-    },
-    {
+      field: () => ({ type: "text", rows: 3 }),
+    }),
+    sideBySide({
       name: "body",
       title: "Body",
       description: "The article itself.",
-      type: "blockContent",
       group: "content",
-    },
+      field: () => ({ type: "blockContent" }),
+    }),
     {
       name: "related",
       title: "Related Journals",
       description:
-        "Journals suggested at the end of this one, in the order listed here.",
+        "Journals suggested at the end of this one, in the order listed here. Each language only shows the ones written in it.",
       type: "array",
       group: "content",
       of: [{ type: "reference", to: [{ type: "post" }] }],
@@ -125,15 +147,14 @@ export default defineType({
       group: "display",
       required: true,
     }),
-    {
+    sideBySide({
       name: "listColorBlack",
       title: "Black Text on Thumbnail",
       description:
         "Use black instead of white for the title on the card, for light thumbnails.",
-      type: "boolean",
       group: "display",
-      initialValue: false,
-    },
+      field: () => ({ type: "boolean", initialValue: false }),
+    }),
     createImageField({
       name: "coverImage",
       title: "Cover Image",
@@ -142,16 +163,51 @@ export default defineType({
       group: "display",
       required: true,
     }),
-    {
+    sideBySide({
       name: "headerColorBlack",
       title: "Black Text on Cover",
       description:
         "Use black instead of white for the title and header over the cover, for light cover images.",
-      type: "boolean",
       group: "display",
-      initialValue: false,
+      field: () => ({ type: "boolean", initialValue: false }),
+    }),
+    {
+      // Not createSeoField: its description and keywords are shared or must be
+      // filled in both languages, and a journal may be written in only one.
+      name: "seo",
+      title: SEO_GROUP.title,
+      description:
+        "Data for search engines and how this journal appears when shared. Without a description here the Excerpt is used; other fields left empty use the Default Metadata from General Settings.",
+      type: "object",
+      group: "seo",
+      fields: [
+        sideBySide({
+          name: "seo_description",
+          title: "Description",
+          description:
+            "Up to 400 characters, shown below the title on search engines and when the journal is shared.",
+          field: () => ({ type: "text", rows: 3 }),
+        }),
+        sideBySide({
+          name: "seo_keywords",
+          title: "Keywords",
+          description: "Keywords describing this journal, separated by commas.",
+          field: () => ({ type: "string" }),
+        }),
+        createImageField({
+          name: "seo_image",
+          title: "Image",
+          description: JOURNAL_SEO_IMAGE_DESCRIPTION,
+        }),
+      ],
     },
   ],
+  validation: (rule) =>
+    rule.custom((document) =>
+      hasTitle(document, "en") || hasTitle(document, "id")
+        ? true
+        : "Fill in the title in at least one language",
+    ),
   orderings: [
     {
       title: "Publish Date, New to Old",
@@ -161,14 +217,19 @@ export default defineType({
   ],
   preview: {
     select: {
-      title: "title",
+      titleEn: "title.en",
+      titleId: "title.id",
       date: "date",
-      language: "language",
       media: "thumbImage",
     },
-    prepare: ({ title, date, language, media }) => ({
-      title,
-      subtitle: `${language?.toUpperCase()} · ${date ? new Date(date).toLocaleDateString() : ""}`,
+    prepare: ({ titleEn, titleId, date, media }) => ({
+      title: titleEn || titleId,
+      subtitle: [
+        [titleEn && "EN", titleId && "ID"].filter(Boolean).join(" + "),
+        date ? new Date(date).toLocaleDateString() : "",
+      ]
+        .filter(Boolean)
+        .join(" · "),
       media,
     }),
   },

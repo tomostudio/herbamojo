@@ -15,13 +15,11 @@ import { revalidateSecret } from "@/sanity/env"
 type WebhookBody = {
   _type?: string
   _id?: string
-  slug?: string
-  language?: "en" | "id"
 }
 
 /** Which routes a document of each type can appear on. */
 function pathsFor(body: WebhookBody): { path: string; layout?: boolean }[] {
-  const { _type, slug, language } = body
+  const { _type } = body
 
   switch (_type) {
     // These sit in the root layout, so every page shows them.
@@ -32,18 +30,18 @@ function pathsFor(body: WebhookBody): { path: string; layout?: boolean }[] {
     case "home":
       return [{ path: "/" }, { path: "/id" }]
 
-    case "post": {
-      const base = language === "id" ? "/id/journal" : "/journal"
+    // One journal document holds both languages, so a change can show on
+    // either site: each journal section (its posts, list and pagination), each
+    // home page's journal strip, and the sitemap that lists them.
+    case "post":
       return [
-        // The post itself, the list it appears in and its pagination, the home
-        // page's journal strip, and the sitemap that lists it.
-        ...(slug ? [{ path: `${base}/${slug}` }] : []),
-        { path: base, layout: true },
-        { path: language === "id" ? "/id" : "/" },
+        { path: "/journal", layout: true },
+        { path: "/id/journal", layout: true },
+        { path: "/" },
+        { path: "/id" },
         { path: "/sitemap.xml" },
         { path: "/sitemap-0.xml" },
       ]
-    }
 
     default:
       return [{ path: "/", layout: true }]

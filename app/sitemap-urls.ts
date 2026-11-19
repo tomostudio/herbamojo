@@ -4,12 +4,13 @@ import { SITE_URL } from "@/utils/fetchMetadata"
 import { fetchPageData } from "@/utils/fetchPageData"
 
 const POST_PATHS_QUERY = `*[_type == "post" && active == true]{
-  "slug": slug.current, language
+  "en": slug.en.current, "id": slug.id.current
 }`
 
 const STATIC_PATHS = ["/", "/id/", "/authentication/", "/id/autentikasi/"]
 
-type PostPath = { slug: string; language: "en" | "id" }
+/** A journal's slug in each language it is written in. */
+type PostPath = { en?: string; id?: string }
 
 /** Every page the site serves, in the order the original lists them. */
 export async function sitemapPaths(): Promise<string[]> {
@@ -26,13 +27,13 @@ export async function sitemapPaths(): Promise<string[]> {
     ["en", "/journal"],
     ["id", "/id/journal"],
   ] as const) {
-    const inLanguage = all.filter((post) => post.language === language)
+    const inLanguage = all.flatMap((post) => post[language] ?? [])
     paths.push(`${base}/`)
     // The list is paginated by path, and every one of those pages is its own
     // entry in the original's sitemap.
     const pageCount = Math.ceil(inLanguage.length / perPage)
     for (let page = 2; page <= pageCount; page++) paths.push(`${base}/${page}/`)
-    for (const post of inLanguage) paths.push(`${base}/${post.slug}/`)
+    for (const slug of inLanguage) paths.push(`${base}/${slug}/`)
   }
 
   return paths

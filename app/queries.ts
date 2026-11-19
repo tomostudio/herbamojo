@@ -1,3 +1,6 @@
+import { JOURNAL_CARD_PROJECTION } from "@/app/journal/queries"
+import type { Locale } from "@/types"
+
 /** The lists default to empty so a home document without them renders. */
 export const HOME_QUERY = `*[_type == "home"][0]{
   ...,
@@ -14,7 +17,7 @@ export const HOME_QUERY = `*[_type == "home"][0]{
  * fetchMetadata can fall back to the general settings. */
 export const HOME_SEO_QUERY = `*[_type == "home"][0].seo`
 
-export const HOME_JOURNALS_QUERY = (language: "en" | "id") => `
-*[_type == "post" && language == "${language}" && active == true] | order(date desc) [0...4]{
-  _id, title, date, slug, listColorBlack, thumbImage
+export const HOME_JOURNALS_QUERY = (language: Locale) => `
+*[_type == "post" && active == true && defined(slug.${language}.current)] | order(date desc) [0...4]{
+  ${JOURNAL_CARD_PROJECTION(language)}
 }`
