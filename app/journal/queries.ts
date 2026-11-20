@@ -13,7 +13,8 @@ export const IN_LANGUAGE = (language: Locale) =>
   `${SHOWN_ON(language)} && active == true`
 
 export const JOURNAL_CARD_PROJECTION = (language: Locale) => `
-  _id, date, thumbImage,
+  _id, thumbImage,
+  "date": date.${language},
   "title": title.${language},
   "slug": slug.${language},
   "listColorBlack": coalesce(listColorBlack.${language}, false)`
@@ -24,7 +25,7 @@ export const JOURNAL_LIST_QUERY = (
   limit: number,
 ) => `
 {
-  "items": *[${IN_LANGUAGE(language)}] | order(date desc, listOrder asc) [${skip}...${skip + limit}]{
+  "items": *[${IN_LANGUAGE(language)}] | order(date.${language} desc, listOrder.${language} asc) [${skip}...${skip + limit}]{
     ${JOURNAL_CARD_PROJECTION(language)}
   },
   "total": count(*[${IN_LANGUAGE(language)}])
@@ -39,7 +40,8 @@ const OTHER_LANGUAGE = { en: "id", id: "en" } as const
 export const JOURNAL_DETAIL_QUERY = (language: Locale, slug: string) => ({
   query: `
 *[${SHOWN_ON(language)} && slug.${language}.current == $slug][0]{
-  _id, date, coverImage,
+  _id, coverImage,
+  "date": date.${language},
   "title": title.${language},
   "slug": slug.${language},
   "headerColorBlack": coalesce(headerColorBlack.${language}, false),
@@ -76,4 +78,4 @@ export const JOURNAL_SEO_QUERY = (language: Locale, slug: string) => ({
  */
 export const JOURNAL_SLUGS_QUERY = (language: Locale) => `
 *[${IN_LANGUAGE(language)}]
-  | order(date desc, listOrder asc){ "slug": slug.${language}.current }`
+  | order(date.${language} desc, listOrder.${language} asc){ "slug": slug.${language}.current }`

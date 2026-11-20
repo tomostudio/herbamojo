@@ -116,22 +116,25 @@ export default defineType({
         validation: requiredWhenShown(language),
       }),
     }),
-    {
+    perLanguage({
       name: "date",
       title: "Publish Date",
-      description: "Journals are listed newest first by this date.",
-      type: "datetime",
+      description:
+        "Shown on the journal, and each site lists its journals newest first by it.",
       group: "content",
-      validation: (rule) => rule.required(),
-    },
-    {
+      field: (language) => ({
+        type: "datetime",
+        validation: requiredWhenShown(language),
+      }),
+    }),
+    perLanguage({
       name: "listOrder",
       title: "List Order",
       description:
         "Breaks ties when two journals share a publish date. Lower comes first.",
-      type: "number",
       group: "content",
-    },
+      field: () => ({ type: "number" }),
+    }),
     perLanguage({
       name: "excerpt",
       title: "Excerpt",
@@ -230,9 +233,14 @@ export default defineType({
   ],
   orderings: [
     {
-      title: "Publish Date, New to Old",
-      name: "dateDesc",
-      by: [{ field: "date", direction: "desc" }],
+      title: "English Publish Date, New to Old",
+      name: "dateEnDesc",
+      by: [{ field: "date.en", direction: "desc" }],
+    },
+    {
+      title: "Indonesian Publish Date, New to Old",
+      name: "dateIdDesc",
+      by: [{ field: "date.id", direction: "desc" }],
     },
   ],
   preview: {
@@ -241,15 +249,18 @@ export default defineType({
       titleId: "title.id",
       showEn: "showOn.en",
       showId: "showOn.id",
-      date: "date",
+      dateEn: "date.en",
+      dateId: "date.id",
       media: "thumbImage",
     },
-    prepare: ({ titleEn, titleId, showEn, showId, date, media }) => ({
+    prepare: ({ titleEn, titleId, showEn, showId, dateEn, dateId, media }) => ({
       title: (showEn && titleEn) || (showId && titleId) || titleEn || titleId,
       subtitle: [
         [showEn && "EN", showId && "ID"].filter(Boolean).join(" + ") ||
           "Hidden",
-        date ? new Date(date).toLocaleDateString() : "",
+        (showEn && dateEn) || (showId && dateId)
+          ? new Date((showEn && dateEn) || dateId).toLocaleDateString()
+          : "",
       ]
         .filter(Boolean)
         .join(" · "),

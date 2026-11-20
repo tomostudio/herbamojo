@@ -18,6 +18,6 @@ export const HOME_QUERY = `*[_type == "home"][0]{
 export const HOME_SEO_QUERY = `*[_type == "home"][0].seo`
 
 export const HOME_JOURNALS_QUERY = (language: Locale) => `
-*[${IN_LANGUAGE(language)}] | order(date desc) [0...4]{
+*[${IN_LANGUAGE(language)}] | order(date.${language} desc) [0...4]{
   ${JOURNAL_CARD_PROJECTION(language)}
 }`
