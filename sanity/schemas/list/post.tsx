@@ -78,7 +78,7 @@ export default defineType({
       name: "showOn",
       title: "Show On",
       description:
-        "Which versions of the site this journal appears on. A language switched off has its fields hidden below.",
+        "Which versions of the site this journal appears on. A language switched off has its fields hidden below. With both off the journal is kept but appears on neither site.",
       type: "object",
       group: "content",
       options: { columns: 2 },
@@ -88,10 +88,6 @@ export default defineType({
         type: "boolean",
       })),
       initialValue: { en: true, id: true },
-      validation: (rule) =>
-        rule.custom((value?: Partial<Record<Language, boolean>>) =>
-          value?.en || value?.id ? true : "Turn on at least one language",
-        ),
     },
     perLanguage({
       name: "title",
