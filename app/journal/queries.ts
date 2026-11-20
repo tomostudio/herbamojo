@@ -1,13 +1,16 @@
 import type { Locale } from "@/types"
 
 /**
- * One journal document holds both languages side by side (title.en,
- * title.id, …). A journal is on a language's site once it has a slug in that
- * language, so these pick that language's half and flatten it back into the
- * single-language shape the pages read.
+ * One journal document holds both languages (title.en, title.id, …). Its
+ * showOn switches decide which sites it is on, so these pick that language's
+ * half and flatten it back into the single-language shape the pages read.
  */
-const IN_LANGUAGE = (language: Locale) =>
-  `_type == "post" && active == true && defined(slug.${language}.current)`
+const SHOWN_ON = (language: Locale) =>
+  `_type == "post" && showOn.${language} == true && defined(slug.${language}.current)`
+
+/** Journals listed on a language's site: shown there, and active. */
+export const IN_LANGUAGE = (language: Locale) =>
+  `${SHOWN_ON(language)} && active == true`
 
 export const JOURNAL_CARD_PROJECTION = (language: Locale) => `
   _id, date, thumbImage,
@@ -27,18 +30,23 @@ export const JOURNAL_LIST_QUERY = (
   "total": count(*[${IN_LANGUAGE(language)}])
 }`
 
-/** `altSlug` is the same journal's slug in the other language, for the EN/ID toggle. */
+const OTHER_LANGUAGE = { en: "id", id: "en" } as const
+
+/**
+ * `altSlug` is the same journal's slug in the other language, for the EN/ID
+ * toggle — null when it is not shown there, so the toggle goes to that list.
+ */
 export const JOURNAL_DETAIL_QUERY = (language: Locale, slug: string) => ({
   query: `
-*[_type == "post" && slug.${language}.current == $slug][0]{
+*[${SHOWN_ON(language)} && slug.${language}.current == $slug][0]{
   _id, date, coverImage,
   "title": title.${language},
   "slug": slug.${language},
   "headerColorBlack": coalesce(headerColorBlack.${language}, false),
   "body": body.${language},
   "excerpt": excerpt.${language},
-  "altSlug": slug.${language === "id" ? "en" : "id"}.current,
-  "related": coalesce(related[defined(@->slug.${language}.current)]->{ ${JOURNAL_CARD_PROJECTION(language)} }, [])
+  "altSlug": select(showOn.${OTHER_LANGUAGE[language]} == true => slug.${OTHER_LANGUAGE[language]}.current),
+  "related": coalesce(related[@->showOn.${language} == true && defined(@->slug.${language}.current)]->{ ${JOURNAL_CARD_PROJECTION(language)} }, [])
 }`,
   params: { slug },
 })
@@ -50,7 +58,7 @@ export const JOURNAL_DETAIL_QUERY = (language: Locale, slug: string) => ({
  */
 export const JOURNAL_SEO_QUERY = (language: Locale, slug: string) => ({
   query: `
-*[_type == "post" && slug.${language}.current == $slug][0]{
+*[${SHOWN_ON(language)} && slug.${language}.current == $slug][0]{
   "seo_description": { "en": coalesce(seo.seo_description.${language}, excerpt.${language}) },
   "seo_keywords": seo.seo_keywords.${language},
   "seo_image": seo.seo_image

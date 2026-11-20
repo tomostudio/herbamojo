@@ -9,8 +9,8 @@ import {
 
 /**
  * One journal entry holds both languages, English above Indonesian in each
- * field. A language is published once its title is filled in; a
- * journal may be written in only one of them.
+ * field. The "Show On" switches decide which versions of the site it appears
+ * on; the fields of a language that is switched off are hidden.
  */
 const LANGUAGES = [
   { name: "en", title: "English" },
@@ -20,11 +20,19 @@ const LANGUAGES = [
 type Language = (typeof LANGUAGES)[number]["name"]
 
 type PostDocument = {
-  title?: Partial<Record<Language, string>>
+  showOn?: Partial<Record<Language, boolean>>
 }
 
-const hasTitle = (document: unknown, language: Language) =>
-  Boolean((document as PostDocument | undefined)?.title?.[language])
+const isShownOn = (document: unknown, language: Language) =>
+  Boolean((document as PostDocument | undefined)?.showOn?.[language])
+
+const requiredWhenShown = (language: Language) => (rule: Rule) =>
+  rule.custom((value: unknown, context) =>
+    isShownOn(context.document, language) &&
+    !(typeof value === "object" ? (value as SlugValue)?.current : value)
+      ? "Required while this journal is shown on this language's site"
+      : true,
+  )
 
 type PerLanguageOptions = {
   name: string
@@ -50,6 +58,8 @@ const perLanguage = ({
   fields: LANGUAGES.map((language) => ({
     name: language.name,
     title: language.title,
+    hidden: ({ document }: { document?: unknown }) =>
+      !isShownOn(document, language.name),
     ...field(language.name),
   })),
 })
@@ -64,13 +74,35 @@ export default defineType({
     SEO_GROUP,
   ],
   fields: [
+    {
+      name: "showOn",
+      title: "Show On",
+      description:
+        "Which versions of the site this journal appears on. A language switched off has its fields hidden below.",
+      type: "object",
+      group: "content",
+      options: { columns: 2 },
+      fields: LANGUAGES.map((language) => ({
+        name: language.name,
+        title: `${language.title} site`,
+        type: "boolean",
+      })),
+      initialValue: { en: true, id: true },
+      validation: (rule) =>
+        rule.custom((value?: Partial<Record<Language, boolean>>) =>
+          value?.en || value?.id ? true : "Turn on at least one language",
+        ),
+    },
     perLanguage({
       name: "title",
       title: "Title",
       description:
-        "Main title, shown on the journal card and over the cover image. Fill in one language to publish the journal only on that version of the site.",
+        "Main title, shown on the journal card and over the cover image.",
       group: "content",
-      field: () => ({ type: "string" }),
+      field: (language) => ({
+        type: "string",
+        validation: requiredWhenShown(language),
+      }),
     }),
     perLanguage({
       name: "slug",
@@ -81,12 +113,7 @@ export default defineType({
       field: (language) => ({
         type: "slug",
         options: { source: `title.${language}`, maxLength: 96 },
-        validation: (rule: Rule) =>
-          rule.custom((value: SlugValue | undefined, context) =>
-            hasTitle(context.document, language) && !value?.current
-              ? "Required when this language has a title"
-              : true,
-          ),
+        validation: requiredWhenShown(language),
       }),
     }),
     {
@@ -201,12 +228,6 @@ export default defineType({
       ],
     },
   ],
-  validation: (rule) =>
-    rule.custom((document) =>
-      hasTitle(document, "en") || hasTitle(document, "id")
-        ? true
-        : "Fill in the title in at least one language",
-    ),
   orderings: [
     {
       title: "Publish Date, New to Old",
@@ -218,13 +239,16 @@ export default defineType({
     select: {
       titleEn: "title.en",
       titleId: "title.id",
+      showEn: "showOn.en",
+      showId: "showOn.id",
       date: "date",
       media: "thumbImage",
     },
-    prepare: ({ titleEn, titleId, date, media }) => ({
-      title: titleEn || titleId,
+    prepare: ({ titleEn, titleId, showEn, showId, date, media }) => ({
+      title: (showEn && titleEn) || (showId && titleId) || titleEn || titleId,
       subtitle: [
-        [titleEn && "EN", titleId && "ID"].filter(Boolean).join(" + "),
+        [showEn && "EN", showId && "ID"].filter(Boolean).join(" + ") ||
+          "Hidden",
         date ? new Date(date).toLocaleDateString() : "",
       ]
         .filter(Boolean)

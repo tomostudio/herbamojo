@@ -4,12 +4,13 @@ import { SITE_URL } from "@/utils/fetchMetadata"
 import { fetchPageData } from "@/utils/fetchPageData"
 
 const POST_PATHS_QUERY = `*[_type == "post" && active == true]{
-  "en": slug.en.current, "id": slug.id.current
+  "en": select(showOn.en == true => slug.en.current),
+  "id": select(showOn.id == true => slug.id.current)
 }`
 
 const STATIC_PATHS = ["/", "/id/", "/authentication/", "/id/autentikasi/"]
 
-/** A journal's slug in each language it is written in. */
+/** A journal's slug on each site it is shown on. */
 type PostPath = { en?: string; id?: string }
 
 /** Every page the site serves, in the order the original lists them. */
