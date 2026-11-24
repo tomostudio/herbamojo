@@ -9,13 +9,14 @@ import { resolveSeo } from "./helpers"
 import type { FetchMetadataOptions, GeneralSettingsDoc, SeoDoc } from "./types"
 
 export { SITE_URL } from "./constants"
+export { languageAlternates } from "./helpers"
 
 export async function fetchMetadata(
   query: OptionalQueryEntry,
   fallbackTitle: string,
   locale: "en" | "id" = "en",
   isHome = false,
-  { perFieldFallback = false }: FetchMetadataOptions = {},
+  { perFieldFallback = false, alternates }: FetchMetadataOptions = {},
 ): Promise<Metadata> {
   const [settings, pageSeo] = await Promise.all([
     sanityFetch<GeneralSettingsDoc>(SETTINGS_QUERY),
@@ -42,6 +43,7 @@ export async function fetchMetadata(
     title,
     description,
     keywords,
+    alternates,
     // The original also emits a plain <meta name="image">.
     other: imageUrl ? { image: imageUrl } : undefined,
     openGraph: {

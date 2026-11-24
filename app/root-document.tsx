@@ -1,9 +1,9 @@
 import type { Metadata, Viewport } from "next"
-import Script from "next/script"
+import type { ReactNode } from "react"
 
 import Analytics, { AnalyticsNoScript } from "@/components/atoms/analytics"
 import TOMOStudioHead from "@/components/atoms/tomo-head"
-import type { FooterSettings, GeneralSettings } from "@/types"
+import type { FooterSettings, GeneralSettings, Locale } from "@/types"
 import { SITE_URL } from "@/utils/fetchMetadata"
 import { fetchPageData } from "@/utils/fetchPageData"
 
@@ -11,23 +11,26 @@ import Wrapper from "./wrapper"
 import "@/styles/main.scss"
 import "@/styles/tailwind.css"
 
-// Sets the correct html[lang] before first paint, without making every route
-// dynamic the way reading the pathname from headers() in this shared layout
-// would (that would break static generation/ISR for the whole site).
-const SET_LANG_SCRIPT = `document.documentElement.lang=/^\\/id(\\/|$)/.test(location.pathname)?"id":"en"`
+/*
+ * The document both root layouts render: app/(en)/layout.tsx for the English
+ * site and app/(id)/layout.tsx for /id. They are separate root layouts so each
+ * can serve its own <html lang> in the static HTML — one shared layout could
+ * only learn the language from headers(), which makes every route dynamic.
+ * The cost is that switching language is a full page load.
+ */
 
 const APPLE_ICON_SIZES = [57, 60, 72, 76, 114, 120, 144, 152, 180]
 const FAVICON_SIZES = [16, 32, 96]
 
 // The original emits two viewport tags; this is the first one. The second,
 // which the pages actually scroll by, is written out in <head> below.
-export const viewport: Viewport = {
+export const ROOT_VIEWPORT: Viewport = {
   initialScale: 1,
   viewportFit: "cover",
   themeColor: "#15C87F",
 }
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function rootMetadata(): Promise<Metadata> {
   const { settingAPI } = await fetchPageData<{ settingAPI: GeneralSettings }>()
   return {
     // Lets every page give Next relative URLs and have them resolved against
@@ -37,9 +40,6 @@ export async function generateMetadata(): Promise<Metadata> {
     description: settingAPI?.seo?.seo_description?.en,
     authors: [{ name: "Hendhy Hutomo | hendhyhutomo.com" }],
     manifest: "/manifest.json",
-    alternates: {
-      languages: { en: "/", id: "/id" },
-    },
     icons: {
       icon: [
         { url: "/favicon.ico", sizes: "any" },
@@ -70,7 +70,12 @@ export async function generateMetadata(): Promise<Metadata> {
   }
 }
 
-export default async function RootLayout({ children }: LayoutProps<"/">) {
+type RootDocumentProps = { locale: Locale; children: ReactNode }
+
+export default async function RootDocument({
+  locale,
+  children,
+}: RootDocumentProps) {
   const { settingAPI, footerAPI } = await fetchPageData<{
     settingAPI: GeneralSettings
     footerAPI: FooterSettings
@@ -104,14 +109,7 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
   }
 
   return (
-    <html
-      lang="en"
-      data-scroll-behavior="smooth"
-      className="h-[initial]"
-      // SET_LANG_SCRIPT corrects `lang` before React hydrates, so on /id the
-      // attribute differs from the server HTML on purpose.
-      suppressHydrationWarning
-    >
+    <html lang={locale} data-scroll-behavior="smooth" className="h-[initial]">
       <head>
         {/* These have no Metadata-API equivalent, so they are written out
             verbatim, in the order the original's html.js emits them. */}
@@ -137,9 +135,6 @@ export default async function RootLayout({ children }: LayoutProps<"/">) {
       </head>
       <body>
         <AnalyticsNoScript ids={analytics} />
-        <Script id="set-lang" strategy="beforeInteractive">
-          {SET_LANG_SCRIPT}
-        </Script>
         <Analytics ids={analytics} />
         <Wrapper>{children}</Wrapper>
       </body>

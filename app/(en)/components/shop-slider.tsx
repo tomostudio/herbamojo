@@ -4,7 +4,7 @@ import Glide from "@glidejs/glide"
 import Link from "next/link"
 import { useEffect, useId, useRef } from "react"
 
-import type { ShopItem, ShopLayout } from "@/app/types"
+import type { ShopItem, ShopLayout } from "@/app/(en)/types"
 import SanityImage from "@/components/atoms/sanity-image"
 import { cn } from "@/utils/cn"
 

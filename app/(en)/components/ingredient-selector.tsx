@@ -8,8 +8,8 @@ import {
   HOME_H1,
   HOME_SECTION,
   HOME_WRAPPER,
-} from "@/app/settings"
-import type { HomeDoc } from "@/app/types"
+} from "@/app/(en)/settings"
+import type { HomeDoc } from "@/app/(en)/types"
 import SanityImage from "@/components/atoms/sanity-image"
 import type { Locale } from "@/types"
 import { cn } from "@/utils/cn"

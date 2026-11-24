@@ -1,15 +1,16 @@
 import type { Metadata } from "next"
 import { notFound } from "next/navigation"
 
-import JournalList from "@/app/journal"
-import JournalPost from "@/app/journal/[slug]"
-import { JOURNAL_SEO_QUERY } from "@/app/journal/queries"
+import JournalList from "@/app/(en)/journal"
+import JournalPost from "@/app/(en)/journal/[slug]"
+import { JOURNAL_SEO_QUERY } from "@/app/(en)/journal/queries"
 import {
+  getJournalAlternates,
   getJournalListData,
   getJournalPostData,
   getJournalStaticParams,
   isListPage,
-} from "@/app/journal/utils"
+} from "@/app/(en)/journal/utils"
 import { fetchMetadata } from "@/utils/fetchMetadata"
 
 export const revalidate = 60
@@ -23,9 +24,12 @@ export async function generateMetadata({
   params,
 }: PageProps<"/journal/[slug]">): Promise<Metadata> {
   const { slug } = await params
-  if (isListPage(slug)) return fetchMetadata(null, `Journal ${slug}`, "en")
+  const alternates = await getJournalAlternates("en", slug)
+  if (isListPage(slug))
+    return fetchMetadata(null, `Journal ${slug}`, "en", false, { alternates })
   return fetchMetadata(JOURNAL_SEO_QUERY("en", slug), "Journal", "en", false, {
     perFieldFallback: true,
+    alternates,
   })
 }
 

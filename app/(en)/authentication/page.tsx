@@ -1,14 +1,19 @@
 import type { Metadata } from "next"
 
-import AuthenticationView from "@/app/authentication"
+import AuthenticationView from "@/app/(en)/authentication"
 import type { FooterSettings, GeneralSettings } from "@/types"
-import { fetchMetadata } from "@/utils/fetchMetadata"
+import { fetchMetadata, languageAlternates } from "@/utils/fetchMetadata"
 import { fetchPageData } from "@/utils/fetchPageData"
 
 export const revalidate = 3600
 
 export async function generateMetadata(): Promise<Metadata> {
-  return fetchMetadata(null, "Authentication", "en")
+  return fetchMetadata(null, "Authentication", "en", false, {
+    alternates: languageAlternates("en", {
+      en: "/authentication/",
+      id: "/id/autentikasi/",
+    }),
+  })
 }
 
 export default async function AuthenticationPage() {

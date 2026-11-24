@@ -15,6 +15,11 @@ const nextConfig: NextConfig = {
   // Turbopack's dev server otherwise refuses to load — taking the Studio,
   // and every route compiled after it, down with a 500.
   transpilePackages: ["@sanity/workbench"],
+  experimental: {
+    // There is a root layout per language (app/(en), app/(id)), so URLs that
+    // match no route are rendered by app/global-not-found.tsx instead.
+    globalNotFound: true,
+  },
   images: {
     remotePatterns: [
       {

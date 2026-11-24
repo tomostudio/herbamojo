@@ -1,8 +1,8 @@
 import type { Metadata } from "next"
 
-import AuthenticationView from "@/app/authentication"
+import AuthenticationView from "@/app/(en)/authentication"
 import type { FooterSettings, GeneralSettings } from "@/types"
-import { fetchMetadata } from "@/utils/fetchMetadata"
+import { fetchMetadata, languageAlternates } from "@/utils/fetchMetadata"
 import { fetchPageData } from "@/utils/fetchPageData"
 
 export const revalidate = 3600
@@ -10,7 +10,12 @@ export const revalidate = 3600
 export async function generateMetadata(): Promise<Metadata> {
   // The original only swaps in the Indonesian description on the home page;
   // every other page keeps the English one.
-  return fetchMetadata(null, "Autentikasi", "en")
+  return fetchMetadata(null, "Autentikasi", "en", false, {
+    alternates: languageAlternates("id", {
+      en: "/authentication/",
+      id: "/id/autentikasi/",
+    }),
+  })
 }
 
 export default async function AuthenticationPageId() {

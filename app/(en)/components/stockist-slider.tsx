@@ -4,7 +4,7 @@ import Glide from "@glidejs/glide"
 import Link from "next/link"
 import { useEffect, useRef } from "react"
 
-import type { StockistItem } from "@/app/types"
+import type { StockistItem } from "@/app/(en)/types"
 import { cn } from "@/utils/cn"
 import { MediaCheck } from "@/utils/interactions"
 

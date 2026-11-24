@@ -1,15 +1,20 @@
 import type { Metadata } from "next"
 
-import JournalList from "@/app/journal"
-import { getJournalListData } from "@/app/journal/utils"
-import { fetchMetadata } from "@/utils/fetchMetadata"
+import JournalList from "@/app/(en)/journal"
+import { getJournalListData } from "@/app/(en)/journal/utils"
+import { fetchMetadata, languageAlternates } from "@/utils/fetchMetadata"
 
 export const revalidate = 60
 
 export async function generateMetadata(): Promise<Metadata> {
   // The original only swaps in the Indonesian description on the home page;
   // every other page keeps the English one.
-  return fetchMetadata(null, "Jurnal", "en")
+  return fetchMetadata(null, "Jurnal", "en", false, {
+    alternates: languageAlternates("id", {
+      en: "/journal/",
+      id: "/id/journal/",
+    }),
+  })
 }
 
 export default async function JournalPageId() {

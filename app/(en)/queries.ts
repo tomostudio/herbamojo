@@ -1,4 +1,7 @@
-import { IN_LANGUAGE, JOURNAL_CARD_PROJECTION } from "@/app/journal/queries"
+import {
+  IN_LANGUAGE,
+  JOURNAL_CARD_PROJECTION,
+} from "@/app/(en)/journal/queries"
 import type { Locale } from "@/types"
 
 /** The lists default to empty so a home document without them renders. */

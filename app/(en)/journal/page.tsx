@@ -1,14 +1,19 @@
 import type { Metadata } from "next"
 
-import JournalList from "@/app/journal"
-import { fetchMetadata } from "@/utils/fetchMetadata"
+import JournalList from "@/app/(en)/journal"
+import { fetchMetadata, languageAlternates } from "@/utils/fetchMetadata"
 
 import { getJournalListData } from "./utils"
 
 export const revalidate = 60
 
 export async function generateMetadata(): Promise<Metadata> {
-  return fetchMetadata(null, "Journal", "en")
+  return fetchMetadata(null, "Journal", "en", false, {
+    alternates: languageAlternates("en", {
+      en: "/journal/",
+      id: "/id/journal/",
+    }),
+  })
 }
 
 export default async function JournalPage() {
