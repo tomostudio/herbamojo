@@ -30,7 +30,8 @@ export async function fetchMetadata(
   )
   const webTitle = settings?.webTitle ?? fallbackTitle
 
-  const title = isHome ? webTitle : `${fallbackTitle} | ${webTitle}`
+  const pageTitle = pageSeo?.title || fallbackTitle
+  const title = isHome ? webTitle : `${pageTitle} | ${webTitle}`
   const description = seo?.seo_description?.[locale] ?? undefined
   const keywords = seo?.seo_keywords ?? undefined
   const imageUrl = seo?.seo_image?.asset

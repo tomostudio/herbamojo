@@ -54,13 +54,15 @@ export const JOURNAL_DETAIL_QUERY = (language: Locale, slug: string) => ({
 })
 
 /**
- * A post's SEO in the shape fetchMetadata reads. A description written in the
+ * A post's SEO in the shape fetchMetadata reads. Its title becomes the page
+ * title ("{title} | HERBAMOJO"). A description written in the
  * SEO group wins, then the excerpt. It is filed under "en" because the
  * original falls back to the English site description on both languages.
  */
 export const JOURNAL_SEO_QUERY = (language: Locale, slug: string) => ({
   query: `
 *[${SHOWN_ON(language)} && slug.${language}.current == $slug][0]{
+  "title": title.${language},
   "seo_description": { "en": coalesce(seo.seo_description.${language}, excerpt.${language}) },
   "seo_keywords": seo.seo_keywords.${language},
   "seo_image": seo.seo_image

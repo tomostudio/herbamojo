@@ -1,6 +1,8 @@
 import type { SanityImage } from "@/types"
 
 export type SeoDoc = {
+  /** The page's own title; when set it replaces `fallbackTitle`. */
+  title?: string
   seo_description?: { en?: string; id?: string }
   seo_keywords?: string
   seo_image?: SanityImage

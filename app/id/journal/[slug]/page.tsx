@@ -24,9 +24,7 @@ export async function generateMetadata({
 }: PageProps<"/id/journal/[slug]">): Promise<Metadata> {
   const { slug } = await params
   if (isListPage(slug)) return fetchMetadata(null, `Jurnal ${slug}`, "en")
-  // The original journal template passes no page title, so the document
-  // title is just the site name.
-  return fetchMetadata(JOURNAL_SEO_QUERY("id", slug), "Jurnal", "en", true, {
+  return fetchMetadata(JOURNAL_SEO_QUERY("id", slug), "Jurnal", "en", false, {
     perFieldFallback: true,
   })
 }
