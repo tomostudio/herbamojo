@@ -19,7 +19,7 @@ const FloatingBottle = ({ label, onShop }: FloatingBottleProps) => (
         <Image
           src={productShot}
           alt="Herbamojo"
-          priority
+          sizes="300px"
           className="h-auto max-h-[calc(100vh-160px)] w-full object-contain"
         />
         <span

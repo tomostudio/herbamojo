@@ -201,7 +201,7 @@ const JournalDetail = ({
             image={post.coverImage}
             alt=""
             sizes="100vw"
-            priority
+            preload
             className="absolute top-0 left-0 z-1 h-full w-full [&>img]:object-cover"
           />
         </section>

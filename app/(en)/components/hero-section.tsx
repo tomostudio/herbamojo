@@ -95,14 +95,14 @@ const HeroSection = ({
         image={hero.background}
         alt="herbamojo"
         sizes="100vw"
-        priority
+        fetchPriority="high"
       />
       <SanityImage
         className="mobile prlx relative top-auto m-auto hidden h-full w-[calc(100vw-80px)] max-mtablet:block [&_img]:object-contain [&_img]:object-center"
         image={hero.backgroundMobile}
         alt="herbamojo"
         sizes="100vw"
-        priority
+        fetchPriority="high"
       />
     </div>
   </section>

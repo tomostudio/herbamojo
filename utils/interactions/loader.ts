@@ -158,9 +158,18 @@ export class LoaderClass {
               console.log("fail to load", e.target)
               this.imageloadfinish()
             }
-            // Check if image is already loaded or set to lazy.
+            // Waited on: eager images, and lazy ones on the first screen —
+            // those are switched to eager so they are sure to load. Skipped:
+            // images already loaded, lazy ones further down, and any this
+            // viewport does not render (display:none), which may never load.
+            const rendered = image.getClientRects().length > 0
+            const onFirstScreen =
+              rendered && image.getBoundingClientRect().top < window.innerHeight
+            if (image.loading === "lazy" && onFirstScreen)
+              image.loading = "eager"
             if (
               image.complete ||
+              !rendered ||
               image.loading === "lazy" ||
               image.ariaHidden
             ) {

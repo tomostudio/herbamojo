@@ -31,10 +31,16 @@ type SanityImageProps = {
   alt: string
   className?: string
   sizes?: string
-  /** Above-the-fold images the loader waits on before revealing the page. */
-  priority?: boolean
-  /** "eager" loads without also preloading, matching the original's images. */
+  /**
+   * Lazy by default. The page loader still waits on a lazy image that is on
+   * the first screen, so only images that must load wherever they sit need
+   * "eager".
+   */
   loading?: "eager" | "lazy"
+  /** "high" for first-screen images that are not preloaded. */
+  fetchPriority?: "high" | "low" | "auto"
+  /** Only for a page's single LCP image, such as a journal cover. */
+  preload?: boolean
   style?: CSSProperties
 }
 
@@ -48,8 +54,9 @@ const SanityImage = ({
   alt,
   className,
   sizes = "100vw",
-  priority = false,
   loading,
+  fetchPriority,
+  preload = false,
   style,
 }: SanityImageProps) => {
   if (!image?.asset) return null
@@ -71,8 +78,9 @@ const SanityImage = ({
         alt={alt}
         fill
         sizes={sizes}
-        priority={priority}
         loading={loading}
+        fetchPriority={fetchPriority}
+        preload={preload}
         style={style}
       />
     </div>

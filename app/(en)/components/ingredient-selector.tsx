@@ -231,7 +231,6 @@ const IngredientSelector = ({
               image={node.image}
               alt="herbamojo"
               sizes="(min-width: 900px) 50vw, 100vw"
-              loading="eager"
               className={cn(
                 "absolute top-1/2 right-0 left-auto hidden max-h-screen min-h-[50vh] w-full max-w-full [transform:translate(0%,-50%)] [&.active]:block [&_img]:object-scale-down [&_img]:object-[right_center]",
                 "max-mtablet:right-auto max-mtablet:left-1/2 max-mtablet:max-h-[75vh]! max-mtablet:min-h-[30vh] max-mtablet:w-[150%]! max-mtablet:max-w-none! max-mtablet:[transform:translate(-50%,-50%)]",

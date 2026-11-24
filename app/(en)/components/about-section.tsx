@@ -127,7 +127,6 @@ const AboutSection = ({ about, locale, sectionRef }: AboutSectionProps) => (
           image={about.background}
           alt="herbamojo"
           sizes="100vw"
-          priority
         />
       </div>
     </div>

@@ -1,6 +1,6 @@
 "use client"
 
-import Glide from "@glidejs/glide"
+import type Glide from "@glidejs/glide"
 import Link from "next/link"
 import { useEffect, useId, useRef } from "react"
 
@@ -56,15 +56,22 @@ const ShopSlider = ({
 
   useEffect(() => {
     if (layout !== "SLIDER" || !trackRef.current) return
-    glideRef.current = new Glide(`#${sliderId}`, {
-      type: "carousel",
-      startAt: 0,
-      perView,
-      gap: perView > 1 ? 40 : 0,
-      breakpoints: { 900: { perView: 1 } },
-    }).mount()
+    // The sliders sit at the bottom of the home page, so Glide is fetched
+    // here rather than shipped in the page's first bundle.
+    let cancelled = false
+    import("@glidejs/glide").then(({ default: Glide }) => {
+      if (cancelled) return
+      glideRef.current = new Glide(`#${sliderId}`, {
+        type: "carousel",
+        startAt: 0,
+        perView,
+        gap: perView > 1 ? 40 : 0,
+        breakpoints: { 900: { perView: 1 } },
+      }).mount()
+    })
 
     return () => {
+      cancelled = true
       glideRef.current?.destroy()
       glideRef.current = null
     }
@@ -144,7 +151,6 @@ const ShopEntry = ({ item }: { item: ShopItem }) => {
       image={item.image}
       alt="herbamojo"
       sizes="125px"
-      loading="eager"
       className="m-auto block h-full w-full"
       style={{ width: "100%", height: "100%", objectFit: "contain" }}
     />

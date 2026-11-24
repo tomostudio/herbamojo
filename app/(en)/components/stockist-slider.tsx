@@ -1,6 +1,6 @@
 "use client"
 
-import Glide from "@glidejs/glide"
+import type Glide from "@glidejs/glide"
 import Link from "next/link"
 import { useEffect, useRef } from "react"
 
@@ -48,13 +48,19 @@ const StockistSlider = ({
     // should be.
     if (groups.length === 0) return
 
+    // Fetched on mount, like the shop slider's, to keep it out of the first
+    // bundle.
+    let GlideClass: typeof Glide | null = null
+    let cancelled = false
+
     const sync = () => {
+      if (!GlideClass) return
       const mobile = MediaCheck.width.mtablet()
       if (mobile && glideRef.current) {
         glideRef.current.destroy()
         glideRef.current = null
       } else if (!mobile && !glideRef.current) {
-        glideRef.current = new Glide("#stockistslider", {
+        glideRef.current = new GlideClass("#stockistslider", {
           type: "carousel",
           startAt: 0,
           perView: 2,
@@ -64,9 +70,14 @@ const StockistSlider = ({
       }
     }
 
-    sync()
+    import("@glidejs/glide").then(({ default: loaded }) => {
+      if (cancelled) return
+      GlideClass = loaded
+      sync()
+    })
     window.addEventListener("resize", sync, false)
     return () => {
+      cancelled = true
       window.removeEventListener("resize", sync, false)
       glideRef.current?.destroy()
       glideRef.current = null
